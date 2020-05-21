@@ -1,0 +1,21 @@
+# all validation in this fixture will use literal validation
+mode: 'literal'
+# just a label for the tests
+label: 'simple literal'
+# literal validation options
+options:
+  ignoreOrder: false
+tests: [
+  { 
+    correct: '5'
+    # label: just 5 - a label is optional - if not it'll be the correct + value
+    yes: '5.0'
+    no: '1'
+  }
+  {
+    correct: '0.25'
+    yes: ['.25', '0.250000', '0000.250000', '0.250001']
+    no: '0.24'
+  }
+]
+

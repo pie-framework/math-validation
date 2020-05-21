@@ -1,0 +1,16 @@
+# all validation in this fixture will use literal validation
+mode: 'symbolic'
+# just a label for the tests
+label: 'simple symbolic'
+# literal validation options
+# options:
+tests: [
+  { 
+    correct: '''\frac{x}{12}\times7\text{dollars}'''
+    label: 'E257939 fails'
+    # only: true
+    # label: just 5 - a label is optional - if not it'll be the correct + value
+    yes: [ '''\frac{7x}{12}''' , '''x \times \frac{1}{12} \times 7''', 'x * 1/12 * 7']
+  }
+]
+
