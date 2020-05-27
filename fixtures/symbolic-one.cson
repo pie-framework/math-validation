@@ -11,6 +11,14 @@ tests: [
     # only: true
     # label: just 5 - a label is optional - if not it'll be the correct + value
     yes: [ '''\frac{7x}{12}''' , '''x \times \frac{1}{12} \times 7''', 'x * 1/12 * 7']
+  },
+
+  {
+
+    label: 'E214558',
+    correct: '''y=250\sin\left(\frac{2\pi}{5}x\right)+2500''',
+    yes: ['''correct_answer_one'''],
+    no: ['no']
   }
 ]
 

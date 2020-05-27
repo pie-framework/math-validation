@@ -1,14 +1,19 @@
 {
   "name": "math-validation",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "New math validation",
+  "module": "esm/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "yarn jest"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cson": "^7.5.0"
+    "@types/jest": "^25.2.3",
+    "glob": "^7.1.6",
+    "cson": "^7.5.0",
+    "jest": "^26.0.1",
+    "ts-jest": "^26.0.0",
+    "typescript": "^3.9.3"
   }
 }
