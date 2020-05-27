@@ -1,0 +1,18 @@
+
+# all validation in this fixture will use literal validation
+mode: 'symbolic'
+# just a label for the tests
+label: 'CH6456'
+# literal validation options
+# options:
+tests: [
+  { 
+    target: '-12.5%'
+    # only: true
+    # label: just 5 - a label is optional - if not it'll be the correct + value
+    eq: [ '-12.5%', '-12.5\\%']
+    ne: [ '-11.5%']
+  }
+
+]
+
