@@ -13,7 +13,6 @@ const fixtures = sync(`fixtures/${b}/*.cson`, {
 fixtures.forEach((f) => {
   const raw = readFileSync(f, "utf-8");
   const data = CSON.parse(raw);
-  console.log(JSON.stringify(data, null, "  "));
 
   const td = Object.keys(data).reduce((acc, k) => {
     acc.push([k, data[k]]);
