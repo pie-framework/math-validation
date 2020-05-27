@@ -8,8 +8,6 @@ label: 'CH6456'
 tests: [
    { 
      target: '-12.5%'
-     # only: true
-     # label: just 5 - a label is optional - if not it'll be the correct + value
      eq: [ '-12.5%', '-12.5\\%']
      ne: [ '-11.5%']
    },
@@ -17,12 +15,6 @@ tests: [
       target: '\\frac{2}{4} -12.5%',
       eq: ['\\frac{1}{2} - 12.5%', '\\frac{10}{20}-12.5\\%']
   }
-#   describe('ch6456 - latex', () => {
-#     assertLatexEqual('percent')('\\frac{1}{2} -12.5%', '\\frac{2}{4} -12.5%');
-#     assertLatexEqual('percent')('\\frac{1}{2} -12.5%', '\\frac{2}{4} -12.5\\%');
-#     assertLatexNotEqual('percent')('\\frac{4}{2} -12.5%', '\\frac{2}{4} -12.5\\%');
-#     assertLatexNotEqual('percent')('\\frac{2}{2} -12.5%', '\\frac{2}{4} -12.5\\%');
-#   });
 
 ]
 
