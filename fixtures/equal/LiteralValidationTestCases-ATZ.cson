@@ -1,0 +1,38 @@
+mode: 'literal'
+
+label: 'alllowTrailingZeros'
+# Test cases for allow trailing zeros
+# alllowTrailingZeros: true
+# ignoreOrder: false
+
+tests:
+[
+ {
+   target: '64\\ \\text{cm}^3',
+   eq: [ '64.0\\ \\text{cm}^3', '64.00\\ \\text{cm}^3', '64.000\\ \\text{cm}^3' ]
+ },
+ {
+   target: '6.25\\times10^3',
+   eq: [ '6.250\\times10^3', '6.2500\\cdot10^3' ]
+ },
+ {
+   target: '3\\times10+9\\times.01+4\\times.001',
+   eq: [ '3\\times10+9\\times0.010+4\\times0.001', '3\\times10+9\\times0.010+4\\times0.0010' ]
+ },
+ {
+   target: '2.5\\ \\text{hours}',
+   eq: [ '2.50\\ \\text{hours}', '2.500\\ \\text{hours}' ]
+ },
+ {
+   target: '\\text{$}12\\text{per}\\text{hour}',
+   eq: [ '\\text{$}12.00\\text{per}\\text{hour}' ]
+ },
+ {
+   target: '\\text{$}0.17\\text{per}\\text{bottle}',
+   eq: [ '\\text{$}0.170\\text{per}\\text{bottle}', '\\text{$}.17\\text{per}\\text{bottle}' ]
+ },
+ {
+   target: '4,000\\ \\text{grams}',
+   eq: [ '4,000.0\\ \\text{grams}', '4000\\ \\text{grams}', '4000.0\\ \\text{grams}' ]
+ }
+]

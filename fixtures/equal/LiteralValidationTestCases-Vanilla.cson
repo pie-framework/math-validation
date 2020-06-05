@@ -1,0 +1,58 @@
+mode: 'literal'
+
+label: 'vanilla'
+# Vanilla test cases -- no special configurations
+# alllowTrailingZeros: false
+# ignoreOrder: false
+
+tests:
+[
+ {
+   target: '61184',
+   eq: [ '61,184' ],
+   ne: [ '61,184.0', '61184.0' ]
+ },
+ {
+   target: '5356',
+   eq: [ '5,356' ],
+   ne: [ '5,356.0', '5356.0' ]
+ },
+ {
+   target: '1400\\ \\text{meters}',
+   eq: [ '1,400\\ \\text{meters}' ],
+   ne: [ '1,400.0\\ \\text{meters}', '1400.0\\ \\text{meters}' ]
+ },
+ {
+   target: '300000+8000+90+4',
+   eq: [ '300,000+8,000+90+4', '300,000+8000+90+4', '300000+8,000+90+4' ],
+   ne: [ '300000+8000+90+4.0' ]
+ },
+ {
+   target: '5\\times100+6\\times10+9\\times1+2\\times0.01',
+   eq: [ '5\\times100+6\\times10+9\\times1+2\\times.01' ]
+ },
+ {
+   target: '-0.03x^2+4x-6000=0',
+   eq: [ '-.03x^2+4x-6,000=0', '-0.03x^2+4x-6,000=0', '-.03x^2+4x-6000=0' ]
+ },
+ {
+   target: 't=\\frac{11+\\sqrt{5689}}{32}',
+   eq: [ 't=\\frac{11+\\sqrt{5,689}}{32}' ]
+ },
+ {
+   target: '\\measuredangle\\theta=\\sin^{-1}\\ \\frac{41}{990}',
+   eq: [ '\\measuredangle\\theta=\\sin^{-1}\\left(\\frac{41}{990}\\right)' ]
+ },
+ {
+   target: '\\frac{1449}{16}\\text{square}\\text{feet}',
+   eq: [ '\\frac{1,449}{16}\\text{square}\\text{feet}' ]
+ },
+ {
+   target: '58,603',
+   eq: [ '58603' ]
+ },
+ {
+   target: '2700+4100=6800',
+   eq: [ '2,700+4,100=6,800', '2,700+4,100=6800', '2700+4100=6,800' ]
+ }
+]

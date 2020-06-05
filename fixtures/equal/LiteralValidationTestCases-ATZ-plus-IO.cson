@@ -1,0 +1,14 @@
+mode: 'literal'
+label: 'Allow Trailing Zeros AND Ignore Order'
+# Test cases for when both Allow Trailing Zeros and Ignore Order are true
+# alllowTrailingZeros: true
+# ignoreOrder: true
+
+tests:
+
+[
+ {
+   target: '0.17+0.14+0.05=0.36\\ \\text{meters}',
+   eq: [ '.17+0.14+0.05=.36\\ \\text{meters}', '.140+.17+.05=.36\\ \\text{meters}', '0.14+.050+0.17=.36\\ \\text{meters}', '.05+0.14+0.17=.360\\ \\text{meters}', '0.050+0.170+.140=.360\\ \\text{meters}' ]
+ }
+]
