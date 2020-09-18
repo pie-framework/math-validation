@@ -1,4 +1,4 @@
-import { latexToText } from "../src/index";
+import { latexToText } from "../index";
 import { sync } from "glob";
 
 import { resolve, basename } from "path";

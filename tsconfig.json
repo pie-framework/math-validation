@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es2019",
+    "module": "es2020",
+    "strict": false,
+    "esModuleInterop": true,
+    "declaration": true,
+    "rootDir": "src",
+    "outDir": "lib",
+    "moduleResolution": "Node",
+    "sourceMap": true
+  },
+  "exclude": ["node_modules", "lib", "**/__tests__/**"]
+}
