@@ -1,5 +1,5 @@
 import { sync } from "glob";
-import { resolve } from "path";
+import { resolve, relative, basename } from "path";
 import { equal } from "../index";
 import minimist from "minimist";
 
@@ -9,33 +9,20 @@ const args = minimist(
   process.argv.slice(doubleDashIndex ? doubleDashIndex + 1 : 2)
 );
 
-const fixtures = sync(args.t, {
+const fixtures = sync(args.t || "fixtures/equal/**.ts", {
   cwd: resolve(__dirname),
 });
-
-type CsonError = {
-  location: any;
-  code: string;
-  filename: string;
-  toString: () => string;
-};
-
-const isCsonError = (a: any): a is CsonError =>
-  a.toString && a.code && a.location;
 
 let testData = [];
 
 try {
   testData = fixtures.map((f) => {
-    console.log("f:", f);
-    const data = require(f).default;
+    const data = require(`./${f}`).default;
     return { data, filename: f };
   });
 } catch (e) {
   console.error(e);
 }
-
-console.log("test data:", testData);
 
 testData.forEach((d) => {
   describe(d.filename, () => {
@@ -44,7 +31,7 @@ testData.forEach((d) => {
         const eq = t.eq ? (Array.isArray(t.eq) ? t.eq : [t.eq]) : [];
         eq.forEach((y) => {
           it(` == ${y}`, () => {
-            expect(equal(t.target, y, { foo: true })).toEqual(true);
+            expect(equal(t.target, y, { legacy: false })).toEqual(true);
           });
         });
 
@@ -52,7 +39,7 @@ testData.forEach((d) => {
 
         ne.forEach((y) => {
           it(`!= ${y}`, () => {
-            expect(equal(t.target, y, { foo: true })).not.toEqual(true);
+            expect(equal(t.target, y, { legacy: true })).not.toEqual(true);
           });
         });
       });
