@@ -1,6 +1,6 @@
 import { i } from "mathjs";
 import * as legacy from "./legacy";
-
+import * as n from "./new";
 export type Opts = {
   legacy: boolean;
 };
@@ -14,7 +14,7 @@ export const latexEqual = (a: string, b: string, opts: Opts) => {
     return legacy.default(a, b, { isLatex: true, allowDecimals: true });
   } else {
     console.log("!! => new impl!");
-    return true;
+    return n.latexEqual(a, b, opts);
   }
 };
 
