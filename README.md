@@ -21,3 +21,10 @@ yarn jest -t fixtures/equal/percent-ch6456.cson
 # TODO:
 
 - https://github.com/kulshekhar/ts-jest/issues/436 - wrong error line in jest - cson-parser issue?
+
+
+## explore
+
+* c/c++ evaluator as wasm? any better/faster?
+* sane input checking?
+* better latex parser than math-expressions?
