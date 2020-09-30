@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2019",
-    "module": "es2020",
+    "module": "commonjs",
     "strict": false,
     "esModuleInterop": true,
     "declaration": true,
@@ -10,5 +10,5 @@
     "moduleResolution": "Node",
     "sourceMap": true
   },
-  "exclude": ["node_modules", "lib", "**/__tests__/**"]
+  "exclude": ["node_modules", "lib", "**/__tests__/**", "playground" ]
 }

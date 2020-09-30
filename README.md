@@ -25,6 +25,14 @@ yarn jest -t fixtures/equal/percent-ch6456.cson
 
 ## explore
 
+
+* is a different math evaluator faster than mathjs? eg in wasm?
 * c/c++ evaluator as wasm? any better/faster?
 * sane input checking?
 * better latex parser than math-expressions?
+
+
+
+## exprtk
+
+* set up emscripten build to see if it works? then run node test case against it and mathjs?

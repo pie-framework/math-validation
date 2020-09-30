@@ -4,11 +4,12 @@ import { equal } from "../index";
 import minimist from "minimist";
 
 const doubleDashIndex = process.argv.indexOf("--");
-const splitArgv = process.argv.slice(doubleDashIndex);
+// const splitArgv = process.argv.slice(doubleDashIndex);
 const args = minimist(
   process.argv.slice(doubleDashIndex ? doubleDashIndex + 1 : 2)
 );
 
+console.log(args);
 const fixtures = sync(args.t || "fixtures/equal/**.ts", {
   cwd: resolve(__dirname),
 });
@@ -30,7 +31,10 @@ testData.forEach((d) => {
       describe(t.label || t.target, () => {
         const eq = t.eq ? (Array.isArray(t.eq) ? t.eq : [t.eq]) : [];
         eq.forEach((y) => {
-          it(` == ${y}`, () => {
+          it(`legacy == ${y}`, () => {
+            expect(equal(t.target, y, { legacy: true })).toEqual(true);
+          });
+          it(`new == ${y}`, () => {
             expect(equal(t.target, y, { legacy: false })).toEqual(true);
           });
         });
@@ -39,7 +43,7 @@ testData.forEach((d) => {
 
         ne.forEach((y) => {
           it(`!= ${y}`, () => {
-            expect(equal(t.target, y, { legacy: true })).not.toEqual(true);
+            expect(equal(t.target, y, { legacy: false })).not.toEqual(true);
           });
         });
       });

@@ -13,7 +13,7 @@ export const latexEqual = (a: string, b: string, opts: Opts) => {
   if (opts.legacy) {
     return legacy.default(a, b, { isLatex: true, allowDecimals: true });
   } else {
-    console.log("!! => new impl!");
+    // console.log("!! => new impl!");
     return n.latexEqual(a, b, opts);
   }
 };
