@@ -4,6 +4,7 @@ import { AstToMathJs } from "./ast-to-mathjs";
 import {
   simplify as ms,
   rationalize,
+  derivative,
   parse,
   parser,
   MathNode,
@@ -17,6 +18,7 @@ const SIMPLIFY_RULES = [
   { l: "(n^2) + n", r: "n * (n + 1)" },
   { l: "((n^n1) + n)/n", r: "n^(n1-1)+1" },
   { l: "(n^2) + 2n", r: "n * (n + 2)" },
+  // { l: "(n/n1) * n2", r: "t" },
   // perfect square formula:
   // { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
   // { l: "(n^2) + 4n + 4", r: "(n^2) + (2n * 2) + (2^2)" },
@@ -93,6 +95,12 @@ export const latexEqual = (a: string, b: string, opts: any) => {
 export const normalize = (a: string | MathNode) => {
   // console.time(`rationalize:${a.toString()}`);
 
+  console.log(
+    a,
+    " - derivative ->",
+    derivative(a, "x").toString(),
+    derivative(a, "x")
+  );
   let r: string | MathNode = a;
   try {
     r = rationalize(a, {}, true).expression;
@@ -111,6 +119,14 @@ export const normalize = (a: string | MathNode) => {
 
 export const isMathEqual = (a: MathNode, b: MathNode) => {
   // console.log("bmo:", bmo);
+
+  // NOTE: A temporary naive fix by checking derivatives
+  const ad = derivative(a, "x");
+  const bd = derivative(b, "x");
+
+  if (ad.equals(bd)) {
+    return true;
+  }
 
   const as = normalize(a);
   const bs = normalize(b);
