@@ -9,7 +9,7 @@ const args = minimist(
   process.argv.slice(doubleDashIndex ? doubleDashIndex + 1 : 2)
 );
 
-console.log(args);
+// console.log(args);
 const fixtures = sync(args.t || "fixtures/equal/**.ts", {
   cwd: resolve(__dirname),
 });

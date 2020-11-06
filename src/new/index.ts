@@ -34,7 +34,7 @@ const atm = new AstToMathJs();
 const toMathNode = (latex: string): MathNode => {
   const ast = lta.convert(latex);
 
-  console.log(latex, "=> ", ast);
+  console.log(latex, "=> ", JSON.stringify(ast));
   return atm.convert(ast);
 };
 

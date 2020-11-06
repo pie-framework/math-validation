@@ -31,7 +31,7 @@ function prepareExpression(string, isLatex) {
         unknownCommands: "passthrough",
       }).toString();
 
-  console.log("returnValue:", returnValue);
+  // console.log("returnValue:", returnValue);
   returnValue = returnValue.replace("=", "==");
   return rationalizeAllPossibleSubNodes(returnValue);
 }
