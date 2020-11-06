@@ -36,3 +36,9 @@ yarn jest -t fixtures/equal/percent-ch6456.cson
 ## exprtk
 
 * set up emscripten build to see if it works? then run node test case against it and mathjs?
+
+
+## references
+
+https://www.symbolab.com/solver/simplify-calculator - good math simplifier
+https://mathjs.org/docs/expressions/algebra.html - mathjs docs

@@ -95,6 +95,7 @@ export const latexEqual = (a: string, b: string, opts: any) => {
 export const normalize = (a: string | MathNode) => {
   // console.time(`rationalize:${a.toString()}`);
 
+  console.log("a:", a.toString());
   console.log(
     a,
     " - derivative ->",
