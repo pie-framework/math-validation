@@ -122,12 +122,12 @@ export const isMathEqual = (a: MathNode, b: MathNode) => {
   // console.log("bmo:", bmo);
 
   // NOTE: A temporary naive fix by checking derivatives
-  const ad = derivative(a, "x");
-  const bd = derivative(b, "x");
+  // const ad = derivative(a, "x");
+  // const bd = derivative(b, "x");
 
-  if (ad.equals(bd)) {
-    return true;
-  }
+  // if (ad.equals(bd)) {
+  //   return true;
+  // }
 
   const as = normalize(a);
   const bs = normalize(b);

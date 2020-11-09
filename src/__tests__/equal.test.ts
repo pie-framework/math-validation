@@ -42,7 +42,10 @@ testData.forEach((d) => {
         const ne = t.ne ? (Array.isArray(t.ne) ? t.ne : [t.ne]) : [];
 
         ne.forEach((y) => {
-          it(`!= ${y}`, () => {
+          it(`legacy != ${y}`, () => {
+            expect(equal(t.target, y, { legacy: true })).not.toEqual(true);
+          });
+          it(`new != ${y}`, () => {
             expect(equal(t.target, y, { legacy: false })).not.toEqual(true);
           });
         });

@@ -42,3 +42,10 @@ yarn jest -t fixtures/equal/percent-ch6456.cson
 
 https://www.symbolab.com/solver/simplify-calculator - good math simplifier
 https://mathjs.org/docs/expressions/algebra.html - mathjs docs
+
+
+
+wip 
+
+* use of derivitives for equality testing?
+* look at at tests where we mention bad ast generation

@@ -27,17 +27,34 @@ export default {
     //   ],
     // },
     {
-      "6pi/x": "6(pi/x)",
-      target: "\\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second}",
-      eq: [
-        // "\\frac{1}{x}\\left(6\\pi \\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-        // "\\frac{6}{x}\\pi \\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-
-        // TODO: the ast is wrong here - we get [+, 6, [/, pi, x]]
-        "6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-        // "6\\pi \\left(\\frac{1}{x}\\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-      ],
+      target: "6 \\frac{1}{2}",
+      eq: ["6 + \\frac{1}{2}"],
+      ne: ["6 * \\frac{1}{2}"],
     },
+    // {
+    //   target: "\\frac{6\\pi}{x}",
+    //   eq: [
+    //     "\\frac{1}{x}\\left(6\\pi \\right)",
+    //     "\\frac{6}{x}\\pi",
+    //     // >>> TODO: the ast is wrong here - we get [+, 6, [/, pi, x]]
+    //     "6 * \\frac{\\pi }{x}",
+    //     "\\left(6\\right) \\frac{\\pi }{x}",
+    //     // "6 \\frac{\\pi }{x}",
+    //     // "6\\pi \\left(\\frac{1}{x}\\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
+    //   ],
+    // },
+    // {
+    //   "6pi/x": "6(pi/x)",
+    //   target: "\\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second}",
+    //   eq: [
+    //     // "\\frac{1}{x}\\left(6\\pi \\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
+    //     // "\\frac{6}{x}\\pi \\ \\text{radians}\\ \\text{per}\\ \\text{second}",
+
+    //     // >>> TODO: the ast is wrong here - we get [+, 6, [/, pi, x]]
+    //     "6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
+    //     // "6\\pi \\left(\\frac{1}{x}\\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
+    //   ],
+    // },
     // {
     //   target: "\\frac{d}{240}+4\\ \\text{years}",
     //   eq: [
