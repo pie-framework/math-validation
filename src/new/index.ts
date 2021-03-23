@@ -36,7 +36,7 @@ const atm = new AstToMathJs();
 const toMathNode = (latex: string): MathNode => {
   const ast = lta.convert(latex);
 
-  console.log(latex, "=> ", JSON.stringify(ast));
+  // console.log(latex, "=> ", JSON.stringify(ast));
   return atm.convert(ast);
 };
 
@@ -95,19 +95,19 @@ export const latexEqual = (a: string, b: string, opts: any) => {
 export const normalize = (a: string | MathNode) => {
   // console.time(`rationalize:${a.toString()}`);
 
-  console.log("a:", a.toString());
-  console.log(
-    a,
-    " - derivative ->",
-    derivative(a, "x").toString(),
-    derivative(a, "x")
-  );
+  // console.log("a:", a.toString());
+  // console.log(
+  //   a,
+  //   " - derivative ->",
+  //   derivative(a, "x").toString(),
+  //   derivative(a, "x")
+  // );
   let r: string | MathNode = a;
-  try {
-    r = rationalize(a, {}, true).expression;
-  } catch (e) {
-    // ok;
-  }
+  // try {
+  r = rationalize(a, {}, true).expression;
+  // } catch (e) {
+  // ok;
+  // }
   // const r = rationalize(a, {}, true);
   // console.log("r:", r.toString());
   // console.timeEnd(`rationalize:${a.toString()}`);
@@ -118,27 +118,91 @@ export const normalize = (a: string | MathNode) => {
   return s;
 };
 
+export const getSymbols = (n: MathNode): string[] => {
+  const symbols = [];
+  n.traverse((node, path, parent) => {
+    if (node.isSymbolNode && !symbols.includes(node.name)) {
+      symbols.push(node.name);
+    }
+  });
+  return symbols.sort();
+};
+
+const arraysEqual = (a, b) => {
+  if (a === b) return true;
+  if (a == null || b == null) return false;
+  if (a.length !== b.length) return false;
+
+  // If you don't care about the order of the elements inside
+  // the array, you should sort both arrays here.
+  // Please note that calling sort on an array will modify that array.
+  // you might want to clone your array first.
+
+  for (var i = 0; i < a.length; ++i) {
+    if (a[i] !== b[i]) return false;
+  }
+  return true;
+};
+
 export const isMathEqual = (a: MathNode, b: MathNode) => {
   // console.log("bmo:", bmo);
 
   // NOTE: A temporary naive fix by checking derivatives
+
+  const as = normalize(a);
+  const bs = normalize(b);
+
+  console.log("as:", as, as.toString());
+  console.log("bs:", bs, bs.toString());
+
+  console.log("equal? ", as.equals(bs));
+  if (as.equals(bs)) {
+    return true;
+  }
+
+  const aSymbols = getSymbols(a);
+  const bSymbols = getSymbols(b);
+
+  console.log("aSymbols:", aSymbols);
+  console.log("bSymbols:", bSymbols);
+
+  if (!arraysEqual(aSymbols, bSymbols)) {
+    return false;
+  }
+
+  if (aSymbols.length === 0) {
+    return false;
+  }
+
+  const results = aSymbols.map((sym) => {
+    const ad = derivative(a, sym);
+    const bd = derivative(b, sym);
+
+    // console.log("sym:", sym);
+    // console.log(ad.toString());
+    // console.log(bd.toString());
+
+    return {
+      symbol: sym,
+      equal: ad.equals(bd),
+    };
+  });
+
+  const notEqual = results.filter((r) => !r.equal);
+
+  if (notEqual.length > 0) {
+    console.log(notEqual);
+    return false;
+  } else {
+    return true;
+  }
+
   // const ad = derivative(a, "x");
   // const bd = derivative(b, "x");
 
   // if (ad.equals(bd)) {
   //   return true;
   // }
-
-  const as = normalize(a);
-  const bs = normalize(b);
-
-  // console.log("as:", as);
-  // console.log("bs:", bs);
-
-  if (as.equals(bs)) {
-    return true;
-  }
-
   // console.warn("FALLING BACK TO EXPRESSION EVALUATION");
 
   // const result = evaluate(as, bs);

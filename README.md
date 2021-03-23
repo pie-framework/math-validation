@@ -49,3 +49,8 @@ wip
 
 * use of derivitives for equality testing?
 * look at at tests where we mention bad ast generation
+
+http://maxima.sourceforge.net/documentation.html
+http://derivative-calculator.net
+https://mathnotepad.com/
+https://www.symbolab.com/solver/partial-derivative-calculator/%5Cfrac%7B%5Cpartial%7D%7B%5Cpartial%20x%7D%5Cleft(x%5E%7B2%7D%20%2B%20y%5E%7B2%7D%5Cright)

@@ -2,30 +2,30 @@ export default {
   mode: "symbolic",
 
   tests: [
-    // {
-    //   "x/12 * 7": "7/12 * x",
-    //   target: "\\frac{x}{12}\\times7\\text{dollars}",
-    //   eq: [
-    //     "\\frac{7x}{12}\\ \\text{dollars}",
-    //     "x\\times \\frac{1}{12}\\times 7\\ \\text{dollars}",
-    //     "x\\times 7\\times \\frac{1}{12}\\ \\text{dollars}",
-    //     "\\frac{1}{12}\\times x\\times 7\\ \\text{dollars}",
-    //     "\\frac{7}{12}\\times x\\ \\text{dollars}",
-    //     "\\frac{1}{12}x\\times 7\\ \\text{dollars}",
-    //     "\\frac{1}{12}\\left(7x\\right)\\ \\text{dollars}",
-    //     "\\frac{1}{12}\\left(x\\times 7\\right)\\ \\text{dollars}",
-    //   ],
-    // },
-    // {
-    //   target: "\\frac{n-5}{6}",
-    //   eq: [
-    //     "\\frac{-5+n}{6}",
-    //     "\\frac{n}{6}-\\frac{5}{6}",
-    //     "-\\frac{5}{6}+\\frac{n}{6}",
-    //     "\\frac{1}{6}\\left(n-5\\right)",
-    //     "\\frac{1}{6}\\left(-5+n\\right)",
-    //   ],
-    // },
+    {
+      "x/12 * 7": "7/12 * x",
+      target: "\\frac{x}{12}\\times7\\text{dollars}",
+      eq: [
+        "\\frac{7x}{12}\\ \\text{dollars}",
+        "x\\times \\frac{1}{12}\\times 7\\ \\text{dollars}",
+        "x\\times 7\\times \\frac{1}{12}\\ \\text{dollars}",
+        "\\frac{1}{12}\\times x\\times 7\\ \\text{dollars}",
+        "\\frac{7}{12}\\times x\\ \\text{dollars}",
+        "\\frac{1}{12}x\\times 7\\ \\text{dollars}",
+        "\\frac{1}{12}\\left(7x\\right)\\ \\text{dollars}",
+        "\\frac{1}{12}\\left(x\\times 7\\right)\\ \\text{dollars}",
+      ],
+    },
+    {
+      target: "\\frac{n-5}{6}",
+      eq: [
+        "\\frac{-5+n}{6}",
+        "\\frac{n}{6}-\\frac{5}{6}",
+        "-\\frac{5}{6}+\\frac{n}{6}",
+        "\\frac{1}{6}\\left(n-5\\right)",
+        "\\frac{1}{6}\\left(-5+n\\right)",
+      ],
+    },
     {
       target: "6 \\frac{1}{2}",
       eq: ["6 + \\frac{1}{2}"],
@@ -34,6 +34,8 @@ export default {
 
     // from master
     {
+      skip: true,
+      //GEORGE QUESTION
       target: "\\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second}",
       eq: [
         // "\\frac{1}{x}\\left(6\\pi \\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
@@ -43,6 +45,8 @@ export default {
       ],
     },
     {
+      skip: true,
+      //GEORGE QUESTION
       target: "\\frac{6\\pi}{x}",
       eq: [
         "\\frac{1}{x}\\left(6\\pi \\right)",
@@ -52,49 +56,52 @@ export default {
         "\\left(6\\right) \\frac{\\pi }{x}",
 
         // see above a number followed by a fraction is seen as addition not multiplication
-        "6 \\frac{\\pi }{x}",
+        //"6 \\frac{\\pi }{x}",
+        "6\\pi \\left(\\frac{1}{x}\\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
+      ],
+    },
+    {
+      note: "GEORGE QUESTION",
+      skip: true,
+      "6pi/x": "6(pi/x)",
+      target: "\\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second}",
+      eq: [
+        // "\\frac{1}{x}\\left(6\\pi \\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
+        // "\\frac{6}{x}\\pi \\ \\text{radians}\\ \\text{per}\\ \\text{second}",
+
+        // >>> TODO: the ast is wrong here - we get [+, 6, [/, pi, x]]
+        "6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
         // "6\\pi \\left(\\frac{1}{x}\\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
       ],
     },
-    // {
-    //   "6pi/x": "6(pi/x)",
-    //   target: "\\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second}",
-    //   eq: [
-    //     // "\\frac{1}{x}\\left(6\\pi \\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-    //     // "\\frac{6}{x}\\pi \\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-
-    //     // >>> TODO: the ast is wrong here - we get [+, 6, [/, pi, x]]
-    //     "6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-    //     // "6\\pi \\left(\\frac{1}{x}\\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-    //   ],
-    // },
-    // {
-    //   target: "\\frac{d}{240}+4\\ \\text{years}",
-    //   eq: [
-    //     "4+\\frac{d}{240}\\ \\text{years}",
-    //     "4+\\frac{1}{240}d\\ \\text{years}",
-    //     "4+d\\left(\\frac{1}{240}\\right)\\ \\text{years}",
-    //     "d\\left(\\frac{1}{240}\\right)+4\\ \\text{years}",
-    //     "\\frac{1}{240}d+4\\ \\text{years}",
-    //   ],
-    // },
-    // {
-    //   target: "0.65x",
-    //   eq: [
-    //     "\\frac{65}{100}x",
-    //     "\\frac{13}{20}x",
-    //     "\\frac{65x}{100}",
-    //     "\\frac{13x}{20}",
-    //   ],
-    // },
-    // {
-    //   target: "\\frac{a+c}{2}+\\frac{b+d}{2}i",
-    //   eq: [
-    //     "\\frac{c+a}{2}+\\frac{b+d}{2}i",
-    //     "\\frac{c+a}{2}+\\frac{d+b}{2}i",
-    //     "\\frac{a+c}{2}+\\frac{d+b}{2}i",
-    //   ],
-    // },
+    {
+      target: "\\frac{d}{240}+4\\ \\text{years}",
+      eq: [
+        "4+\\frac{d}{240}\\ \\text{years}",
+        "4+\\frac{1}{240}d\\ \\text{years}",
+        "4+d\\left(\\frac{1}{240}\\right)\\ \\text{years}",
+        "d\\left(\\frac{1}{240}\\right)+4\\ \\text{years}",
+        "\\frac{1}{240}d+4\\ \\text{years}",
+      ],
+    },
+    {
+      target: "0.65x",
+      eq: [
+        "\\frac{65}{100}x",
+        "\\frac{13}{20}x",
+        "\\frac{65x}{100}",
+        "\\frac{13x}{20}",
+      ],
+    },
+    {
+      only: true,
+      target: "\\frac{a+c}{2}+\\frac{b+d}{2}i",
+      eq: [
+        // "\\frac{c+a}{2}+\\frac{b+d}{2}i",
+        "\\frac{c+a}{2}+\\frac{d+b}{2}i",
+        // "\\frac{a+c}{2}+\\frac{d+b}{2}i",
+      ],
+    },
     // {
     //   target: "\\frac{10}{12}\\pi\\ \\text{radians}",
     //   eq: [

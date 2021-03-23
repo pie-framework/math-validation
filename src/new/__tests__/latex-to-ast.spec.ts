@@ -10,8 +10,8 @@ const fixtures = [
     // we were getting: [+, 6, [/, pi, x]]
     // "6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
     //"6\\frac{\\pi }{x}", //\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-    "6 \\frac{1}{2}", //\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-    ["*", "6", ["/", "pi", "x"]],
+    "6 \\frac{\\pi}{x}", //\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
+    ["+", 6, ["/", "pi", "x"]],
   ],
 
   //   [
@@ -36,14 +36,14 @@ describe("bugs in lta", () => {
     // let doc = parse(input, { generator: generator });
     // console.timeEnd("latex.js");
 
-    console.time("katexParse");
-    const kt = k.__parse(input);
-    console.timeEnd("katexParse");
-    console.log("kt:", kt);
+    // console.time("katexParse");
+    // const kt = k.__parse(input);
+    // console.timeEnd("katexParse");
+    // console.log("kt:", kt);
     console.time("lta");
     const out = lta.convert(input);
-    console.log("out", out);
-    console.timeEnd("lta");
+    // console.log("out", out);
+    // console.timeEnd("lta");
     expect(out).toEqual(expected);
   });
 });

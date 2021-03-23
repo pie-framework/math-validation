@@ -28,12 +28,13 @@ try {
 testData.forEach((d) => {
   describe(d.filename, () => {
     d.data.tests.forEach((t) => {
-      describe(t.label || t.target, () => {
+      const dfn = t.skip ? describe.skip : t.only ? describe.only : describe;
+      dfn(t.label || t.target, () => {
         const eq = t.eq ? (Array.isArray(t.eq) ? t.eq : [t.eq]) : [];
         eq.forEach((y) => {
-          it(`legacy == ${y}`, () => {
-            expect(equal(t.target, y, { legacy: true })).toEqual(true);
-          });
+          // it(`legacy == ${y}`, () => {
+          //   expect(equal(t.target, y, { legacy: true })).toEqual(true);
+          // });
           it(`new == ${y}`, () => {
             expect(equal(t.target, y, { legacy: false })).toEqual(true);
           });
@@ -42,9 +43,9 @@ testData.forEach((d) => {
         const ne = t.ne ? (Array.isArray(t.ne) ? t.ne : [t.ne]) : [];
 
         ne.forEach((y) => {
-          it(`legacy != ${y}`, () => {
-            expect(equal(t.target, y, { legacy: true })).not.toEqual(true);
-          });
+          // it(`legacy != ${y}`, () => {
+          //   expect(equal(t.target, y, { legacy: true })).not.toEqual(true);
+          // });
           it(`new != ${y}`, () => {
             expect(equal(t.target, y, { legacy: false })).not.toEqual(true);
           });
