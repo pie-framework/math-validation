@@ -3,6 +3,7 @@ export default {
 
   tests: [
     {
+      // only: true,
       "x/12 * 7": "7/12 * x",
       target: "\\frac{x}{12}\\times7\\text{dollars}",
       eq: [
@@ -94,7 +95,8 @@ export default {
       ],
     },
     {
-      only: false,
+      // TODO: working on this...
+      skip: true,
       target: "\\frac{a+c}{2}+\\frac{b+d}{2}i",
       eq: [
         // "\\frac{c+a}{2}+\\frac{b+d}{2}i",

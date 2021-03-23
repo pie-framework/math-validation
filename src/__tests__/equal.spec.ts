@@ -2,6 +2,7 @@ import { sync } from "glob";
 import { resolve, relative, basename } from "path";
 import { equal } from "../index";
 import minimist from "minimist";
+import { pathExists } from "fs-extra";
 
 const doubleDashIndex = process.argv.indexOf("--");
 // const splitArgv = process.argv.slice(doubleDashIndex);
@@ -9,16 +10,18 @@ const args = minimist(
   process.argv.slice(doubleDashIndex ? doubleDashIndex + 1 : 2)
 );
 
-// console.log(args);
-const fixtures = sync(args.t || "fixtures/equal/**.ts", {
-  cwd: resolve(__dirname),
+const cwd = resolve(__dirname, "../..");
+
+const fixtures = sync(args.t || "src/__tests__/fixtures/equal/**.ts", {
+  cwd: resolve(__dirname, "../.."),
 });
 
 let testData = [];
 
 try {
   testData = fixtures.map((f) => {
-    const data = require(`./${f}`).default;
+    const r = relative(__dirname, f);
+    const data = require(`./${r}`).default;
     return { data, filename: f };
   });
 } catch (e) {
@@ -43,9 +46,9 @@ testData.forEach((d) => {
         const ne = t.ne ? (Array.isArray(t.ne) ? t.ne : [t.ne]) : [];
 
         ne.forEach((y) => {
-          // it(`legacy != ${y}`, () => {
-          //   expect(equal(t.target, y, { legacy: true })).not.toEqual(true);
-          // });
+          it(`legacy != ${y}`, () => {
+            expect(equal(t.target, y, { legacy: true })).not.toEqual(true);
+          });
           it(`new != ${y}`, () => {
             expect(equal(t.target, y, { legacy: false })).not.toEqual(true);
           });

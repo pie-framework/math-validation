@@ -20,6 +20,8 @@
  */
 
 import * as mjs from "mathjs";
+import { logger } from "./log";
+const log = logger("mv:ast-to-math");
 const m: any = mjs;
 
 const operators = {
@@ -99,8 +101,8 @@ export class AstToMathJs {
     const operands = tree.slice(1);
 
     if (operator === "apply") {
-      console.log("operands:", operands);
-      console.log("0", operands[0]);
+      log("operands:", operands);
+      log("0", operands[0]);
       if (typeof operands[0] !== "string")
         throw Error(
           "Non string functions not implemented for conversion to mathjs"

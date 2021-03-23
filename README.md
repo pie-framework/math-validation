@@ -6,21 +6,20 @@
 
 ## tests
 
-The tests use some fixture data
 
-```shell
+```shell 
 yarn jest
 ```
 
-The fixture files are used as the describe name so you can filter using `-t`:
+Runs all the tests
+
+There is one test that runs fixture data located here: `src/__tests__fixtures/equal/*.ts`. To filter the fixtures you run here you can use the `-t` flag:
 
 ```shell
-yarn jest -t fixtures/equal/percent-ch6456.cson
+yarn jest src/__tests__/equal.spec.ts -t src/__tests__/fixtures/equal/a.ts
 ```
 
-# TODO:
-
-- https://github.com/kulshekhar/ts-jest/issues/436 - wrong error line in jest - cson-parser issue?
+All the fixtures that george added are in the `fixtures` directory, we are in the process of converting them to typescript.
 
 
 ## explore

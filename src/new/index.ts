@@ -1,15 +1,12 @@
 import { LatexToAst } from "./latex-to-ast";
 import { AstToMathJs } from "./ast-to-mathjs";
+import { logger } from "./log";
+import { MathNode, Parser, create, all } from "mathjs";
+const mathjs = create(all, { number: "Fraction" });
 
-import {
-  simplify as ms,
-  rationalize,
-  derivative,
-  parse,
-  parser,
-  MathNode,
-  Parser,
-} from "mathjs";
+const { simplify: ms, rationalize, derivative, parse, parser } = mathjs;
+
+const log = logger("mv");
 
 const SIMPLIFY_RULES = [
   { l: "n1^(1/n2)", r: "nthRoot(n1, n2)" },
@@ -26,8 +23,8 @@ const SIMPLIFY_RULES = [
 
 const simplify = (v) => {
   const rules = SIMPLIFY_RULES.concat((ms as any).rules);
-  // console.log("v:", v);
-  // console.log("rules:", rules);
+  // log("v:", v);
+  // log("rules:", rules);
   return ms(v, rules); //.concat(SIMPLIFY_RULES));
 };
 
@@ -36,7 +33,7 @@ const atm = new AstToMathJs();
 const toMathNode = (latex: string): MathNode => {
   const ast = lta.convert(latex);
 
-  // console.log(latex, "=> ", JSON.stringify(ast));
+  // log(latex, "=> ", JSON.stringify(ast));
   return atm.convert(ast);
 };
 
@@ -62,8 +59,10 @@ export const evaluate = (a: MathNode, b: MathNode) => {
   const pa = mkExtra(a);
   const pb = mkExtra(b);
 
-  console.log("pa", pa);
-  console.log("pb", pb);
+  log("pa", pa, pa.toString());
+  log("pb", pb, pb.toString()) /
+    log("symbols:pa", pa.symbols, "pb:", pb.symbols);
+  log("o:pa", pa.node.toString(), "pb:", pb.node.toString());
   if (pa.symbols.join(",") !== pb.symbols.join(",")) {
     return false;
   }
@@ -75,19 +74,27 @@ export const evaluate = (a: MathNode, b: MathNode) => {
 
   const aResult = prsr.evaluate(a.toString());
   const bResult = prsr.evaluate(b.toString());
-  return aResult === bResult;
+  log("aResult:", aResult, typeof aResult);
+  log("bResult:", bResult, typeof bResult);
+
+  if (typeof aResult !== typeof bResult) {
+    return false;
+  }
+
+  return parse(aResult.toString()).equals(parse(bResult.toString()));
+  // return aResult.equals(bResult);
   // return true;
 };
 
 export const latexEqual = (a: string, b: string, opts: any) => {
-  // console.log("this is the new latexEqual function");
+  // log("this is the new latexEqual function");
 
   if (a === b) {
     return true;
   }
 
   const amo = toMathNode(a);
-  // console.log("amo:", amo);
+  // log("amo:", amo);
   const bmo = toMathNode(b);
   return isMathEqual(amo, bmo);
 };
@@ -95,25 +102,25 @@ export const latexEqual = (a: string, b: string, opts: any) => {
 export const normalize = (a: string | MathNode) => {
   // console.time(`rationalize:${a.toString()}`);
 
-  // console.log("a:", a.toString());
-  // console.log(
+  // log("a:", a.toString());
+  // log(
   //   a,
   //   " - derivative ->",
   //   derivative(a, "x").toString(),
   //   derivative(a, "x")
   // );
   let r: string | MathNode = a;
-  // try {
-  r = rationalize(a, {}, true).expression;
-  // } catch (e) {
-  // ok;
-  // }
+  try {
+    r = rationalize(a, {}, true).expression;
+  } catch (e) {
+    // ok;
+  }
   // const r = rationalize(a, {}, true);
-  // console.log("r:", r.toString());
+  // log("r:", r.toString());
   // console.timeEnd(`rationalize:${a.toString()}`);
   // console.time(`simplify:${r.toString()}`);
   const s = simplify(r);
-  // console.log("s:", s.toString());
+  // log("s:", s.toString());
   // console.timeEnd(`simplify:${r.toString()}`);
   return s;
 };
@@ -145,17 +152,21 @@ const arraysEqual = (a, b) => {
 };
 
 export const isMathEqual = (a: MathNode, b: MathNode) => {
-  // console.log("bmo:", bmo);
+  // log("bmo:", bmo);
 
   // NOTE: A temporary naive fix by checking derivatives
 
+  log(a.toString());
+  log(b.toString());
   const as = normalize(a);
   const bs = normalize(b);
+  log(as.toString());
+  log(bs.toString());
 
-  console.log("as:", as, as.toString());
-  console.log("bs:", bs, bs.toString());
+  log("as:", as.toString());
+  log("bs:", bs.toString());
 
-  console.log("equal? ", as.equals(bs));
+  log("equal? ", as.equals(bs));
   if (as.equals(bs)) {
     return true;
   }
@@ -163,8 +174,8 @@ export const isMathEqual = (a: MathNode, b: MathNode) => {
   const aSymbols = getSymbols(a);
   const bSymbols = getSymbols(b);
 
-  console.log("aSymbols:", aSymbols);
-  console.log("bSymbols:", bSymbols);
+  log("aSymbols:", aSymbols);
+  log("bSymbols:", bSymbols);
 
   if (!arraysEqual(aSymbols, bSymbols)) {
     return false;
@@ -175,12 +186,15 @@ export const isMathEqual = (a: MathNode, b: MathNode) => {
   }
 
   const results = aSymbols.map((sym) => {
-    const ad = derivative(a, sym);
-    const bd = derivative(b, sym);
+    const ad = derivative(as, sym);
+    const bd = derivative(bs, sym);
 
-    // console.log("sym:", sym);
-    // console.log(ad.toString());
-    // console.log(bd.toString());
+    log("as:", as.toString());
+    log("bs:", bs.toString());
+
+    log("sym:", sym);
+    log("a derivative:", ad, as.toString());
+    log("b derivative:", bd, bs.toString());
 
     return {
       symbol: sym,
@@ -190,11 +204,18 @@ export const isMathEqual = (a: MathNode, b: MathNode) => {
 
   const notEqual = results.filter((r) => !r.equal);
 
+  log("notEqual", notEqual);
   if (notEqual.length > 0) {
-    console.log(notEqual);
+    log(notEqual);
     return false;
   } else {
-    return true;
+    const result = evaluate(as, bs);
+    log("result:", result);
+    if (result) {
+      return true;
+    }
+
+    return false;
   }
 
   // const ad = derivative(a, "x");
@@ -214,20 +235,20 @@ export const isMathEqual = (a: MathNode, b: MathNode) => {
   return false;
 
   // const n = parse("(x^2)/2");
-  // console.log("n:", n);
+  // log("n:", n);
   // const sn = simplify(n);
-  // console.log("sn:", sn);
+  // log("sn:", sn);
   // const sbmo = simplify(bmo);
-  // console.log("sbmo", sbmo);
+  // log("sbmo", sbmo);
   // const r = me.fromLatex(a).equals(me.fromLatex(b));
   // const am = me.fromLatex(a);
   // const bm = me.fromLatex(b);
-  // console.log("am:", am);
-  // console.log("bm:", bm, bm.simplify());
-  // console.log("r:", r);
+  // log("am:", am);
+  // log("bm:", bm, bm.simplify());
+  // log("r:", r);
   // const at = latexToText(a);
   // const bt = latexToText(b);
-  // console.log("at:", at);
-  // console.log("bt:", bt);
+  // log("at:", at);
+  // log("bt:", bt);
   // return true;
 };
