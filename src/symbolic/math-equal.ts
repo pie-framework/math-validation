@@ -1,4 +1,4 @@
-import { logger } from "./log";
+import { logger } from "../log";
 import { MathNode, create, all } from "mathjs";
 
 const log = logger("mv:math-equal");
@@ -40,67 +40,68 @@ export const isMathEqual = (
   b: MathNode,
   opts?: { mode?: "symbolic" | "literal" }
 ) => {
-  // NOTE: A temporary naive fix by checking derivatives
-
-  log(a.toString(), "==", b.toString(), "?");
   const as = normalize(a);
   const bs = normalize(b);
-  // log(as.toString());
-  // log(bs.toString());
+  return evaluate(as, bs);
+  // NOTE: A temporary naive fix by checking derivatives
 
-  // log("as:", as.toString());
-  // log("bs:", bs.toString());
+  // log(a.toString(), "==", b.toString(), "?");
+  // // log(as.toString());
+  // // log(bs.toString());
 
-  // log("equal? ", as.equals(bs));
-  if (as.equals(bs)) {
-    return true;
-  }
+  // // log("as:", as.toString());
+  // // log("bs:", bs.toString());
 
-  const aSymbols = getSymbols(a);
-  const bSymbols = getSymbols(b);
+  // // log("equal? ", as.equals(bs));
+  // if (as.equals(bs)) {
+  //   return true;
+  // }
 
-  // log("aSymbols:", aSymbols);
-  // log("bSymbols:", bSymbols);
+  // const aSymbols = getSymbols(a);
+  // const bSymbols = getSymbols(b);
 
-  if (!arraysEqual(aSymbols, bSymbols)) {
-    return false;
-  }
+  // // log("aSymbols:", aSymbols);
+  // // log("bSymbols:", bSymbols);
 
-  if (aSymbols.length === 0) {
-    return false;
-  }
+  // if (!arraysEqual(aSymbols, bSymbols)) {
+  //   return false;
+  // }
 
-  const results = aSymbols.map((sym) => {
-    const ad = derivative(as, sym);
-    const bd = derivative(bs, sym);
+  // if (aSymbols.length === 0) {
+  //   return false;
+  // }
 
-    log("as:", as.toString());
-    log("bs:", bs.toString());
+  // const results = aSymbols.map((sym) => {
+  //   const ad = derivative(as, sym);
+  //   const bd = derivative(bs, sym);
 
-    log("sym:", sym);
-    log("a derivative:", ad, as.toString());
-    log("b derivative:", bd, bs.toString());
+  //   log("as:", as.toString());
+  //   log("bs:", bs.toString());
 
-    return {
-      symbol: sym,
-      equal: ad.equals(bd),
-    };
-  });
+  //   log("sym:", sym);
+  //   log("a derivative:", ad, as.toString());
+  //   log("b derivative:", bd, bs.toString());
 
-  const notEqual = results.filter((r) => !r.equal);
+  //   return {
+  //     symbol: sym,
+  //     equal: ad.equals(bd),
+  //   };
+  // });
 
-  log("notEqual", notEqual);
-  if (notEqual.length > 0) {
-    log(notEqual);
-    return false;
-  } else {
-    const result = evaluate(as, bs);
-    log("result:", result);
-    if (result) {
-      return true;
-    }
-    return false;
-  }
+  // const notEqual = results.filter((r) => !r.equal);
+
+  // log("notEqual", notEqual);
+  // if (notEqual.length > 0) {
+  //   log(notEqual);
+  //   return false;
+  // } else {
+  //   const result = evaluate(as, bs);
+  //   log("result:", result);
+  //   if (result) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 };
 
 const mkExtra = (n: MathNode) => {

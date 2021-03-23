@@ -1,7 +1,7 @@
-import { LatexToAst } from "./latex-to-ast";
-import { AstToMathJs } from "./ast-to-mathjs";
+import { LatexToAst } from "./conversion/latex-to-ast";
+import { AstToMathJs } from "./conversion/ast-to-mathjs";
 import { MathNode } from "mathjs";
-import { isMathEqual } from "./math-equal";
+import { isMathEqual } from "./symbolic/math-equal";
 
 export type Latex = string;
 
@@ -27,5 +27,9 @@ export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {
 
   const amo = toMathNode(a);
   const bmo = toMathNode(b);
-  return isMathEqual(amo, bmo);
+  if (opts.mode === "symbolic") {
+    return isMathEqual(amo, bmo);
+  } else {
+    throw new Error("not ready yet");
+  }
 };

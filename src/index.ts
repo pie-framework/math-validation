@@ -27,6 +27,6 @@ export const latexEqual = (
       }
     });
   } else {
-    return le(a, b, opts);
+    return Promise.resolve(le(a, b, opts));
   }
 };
