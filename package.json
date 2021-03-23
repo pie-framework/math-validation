@@ -1,20 +1,21 @@
 {
-  "name": "math-validation",
+  "name": "@pie-framework/math-validation",
   "version": "1.0.0",
   "description": "New math validation",
-  "module": "esm/index.js",
+  "module": "src/index.ts",
+  "main": "lib/index.js",
   "scripts": {
     "test": "yarn jest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@pie-framework/math-expressions": "^3.1.0",
     "jsesc": "^3.0.1",
     "mathjs": "^9.3.0",
     "lodash": "^4.17.20"
   },
   "devDependencies": {
+    "@pie-framework/math-expressions": "^3.1.0",
     "@types/fs-extra": "^9.0.1",
     "@types/glob": "^7.1.3",
     "@types/jest": "^26.0.14",

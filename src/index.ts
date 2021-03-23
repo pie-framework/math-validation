@@ -1,25 +1,32 @@
-import * as legacy from "./legacy";
-import * as n from "./new";
+import legacyEquals from "./legacy";
+import { latexEqual as le } from "./latex-equal";
+export type Latex = string;
+
 export type Opts = {
-  legacy: boolean;
+  mode?: "symbolic" | "literal";
+  allowThousandsSeparator?: boolean;
+  /** only for development - to be removed */
+  legacy?: boolean;
 };
 
-export const latexEqual = (a: string, b: string, opts: Opts) => {
-  /** port notes:
-   * allowDecimals: Its intended purpose was to allow the use of commas as thousands separators, so that 1,000 and 1000 would be treated the same. The decision that has been made is that we want to ALWAYS allow commas as thousands separators, so we don't need that flag
-   */
-  opts = { legacy: true, ...opts };
+/**
+ * For dev purposes allow legacy to be called for comparison.
+ * Eventually we'll remove this.
+ */
+export const latexEqual = (
+  a: Latex,
+  b: Latex,
+  opts: Opts
+): Promise<boolean> => {
   if (opts.legacy) {
-    return legacy.default(a, b, { isLatex: true, allowDecimals: true });
+    return new Promise((resolve, reject) => {
+      try {
+        resolve(legacyEquals(a, b, { ...opts, isLatex: true }));
+      } catch (e) {
+        reject(e);
+      }
+    });
   } else {
-    // console.log("!! => new impl!");
-    return n.latexEqual(a, b, opts);
+    return le(a, b, opts);
   }
-};
-
-// equal is really asking is latex equal
-export const equal = latexEqual;
-
-export const latexToText = (input: string): string => {
-  return legacy.latexToText(input);
 };

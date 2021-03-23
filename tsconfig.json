@@ -10,5 +10,5 @@
     "moduleResolution": "Node",
     "sourceMap": true
   },
-  "exclude": ["node_modules", "lib", "**/__tests__/**", "playground", "old-stuff" ]
+  "exclude": ["node_modules", "lib", "**/__tests__/**", "src/fixtures", "playground", "old-stuff", "wip-src" ]
 }
