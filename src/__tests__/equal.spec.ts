@@ -1,11 +1,10 @@
 import { sync } from "glob";
-import { resolve, relative, basename } from "path";
+import { resolve, relative } from "path";
 import { equal } from "../index";
 import minimist from "minimist";
-import { pathExists } from "fs-extra";
 
 const doubleDashIndex = process.argv.indexOf("--");
-// const splitArgv = process.argv.slice(doubleDashIndex);
+
 const args = minimist(
   process.argv.slice(doubleDashIndex ? doubleDashIndex + 1 : 2)
 );
@@ -13,7 +12,7 @@ const args = minimist(
 const cwd = resolve(__dirname, "../..");
 
 const fixtures = sync(args.t || "src/__tests__/fixtures/equal/**.ts", {
-  cwd: resolve(__dirname, "../.."),
+  cwd,
 });
 
 let testData = [];

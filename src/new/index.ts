@@ -30,10 +30,9 @@ const simplify = (v) => {
 
 const lta = new LatexToAst();
 const atm = new AstToMathJs();
+
 const toMathNode = (latex: string): MathNode => {
   const ast = lta.convert(latex);
-
-  // log(latex, "=> ", JSON.stringify(ast));
   return atm.convert(ast);
 };
 
@@ -74,6 +73,7 @@ export const evaluate = (a: MathNode, b: MathNode) => {
 
   const aResult = prsr.evaluate(a.toString());
   const bResult = prsr.evaluate(b.toString());
+
   log("aResult:", aResult, typeof aResult);
   log("bResult:", bResult, typeof bResult);
 

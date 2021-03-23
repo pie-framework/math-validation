@@ -21,16 +21,18 @@ yarn jest src/__tests__/equal.spec.ts -t src/__tests__/fixtures/equal/a.ts
 
 All the fixtures that george added are in the `fixtures` directory, we are in the process of converting them to typescript.
 
+## TODO
+
+* set up api that is compatible w/ ui component options 
+* start going through the tests, build up literal + symbolic a bit att the start
+* derivatives kind of work and kind of not how to use?
+* sane input checking?
+
 
 ## explore
-
-
 * is a different math evaluator faster than mathjs? eg in wasm?
 * c/c++ evaluator as wasm? any better/faster?
-* sane input checking?
 * better latex parser than math-expressions?
-
-
 
 ## exprtk
 
