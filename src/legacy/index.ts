@@ -1,4 +1,9 @@
 /* eslint-disable no-console */
+
+/**
+ * This is the old implementation that we had in pie-lib.
+ * Used as a reference against new impl. Not to be worked on.
+ */
 import * as mathjs from "mathjs";
 import me from "@pie-framework/math-expressions";
 

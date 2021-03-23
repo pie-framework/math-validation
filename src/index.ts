@@ -1,4 +1,3 @@
-import { i } from "mathjs";
 import * as legacy from "./legacy";
 import * as n from "./new";
 export type Opts = {
