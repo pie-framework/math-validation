@@ -94,7 +94,7 @@ export default {
       ],
     },
     {
-      only: true,
+      only: false,
       target: "\\frac{a+c}{2}+\\frac{b+d}{2}i",
       eq: [
         // "\\frac{c+a}{2}+\\frac{b+d}{2}i",
