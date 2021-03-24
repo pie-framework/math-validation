@@ -10,6 +10,10 @@
 //   Second element: the token type
 
 //   Third element (optional): replacement for actual string matched
+
+import { logger } from "../log";
+
+const log = logger("mv:lexer");
 export type TokenRule = [RegExp, string, string?];
 
 export type Token = {
@@ -68,22 +72,24 @@ class lexer {
   }
 
   advance({ remove_initial_space = true } = {}): Token {
+    log("[advance] input: ", this.input);
     // Find next token at beginning of input and delete from input.
     // Update location to be the position in original input corresponding
     // to end of match.
     // Return token, which is an array of token type and matched string
 
+    // if(this.input.(",")){}
     let result = this.whitespace.exec(this.input);
     const m = this.input.match(this.whitespace);
-    // console.log(this.whitespace, this.input, 'result:', result, m)
+    log("input:", this.input, "result:", result, m);
 
-    // console.log('ws result:', result);
+    log("ws result:", result);
     if (result) {
       //first find any initial whitespace and adjust location
       let n_whitespace = result[0].length;
       this.input = this.input.slice(n_whitespace);
       this.location += n_whitespace;
-
+      log("location:", this.location, "input now:", this.input);
       // don't remove initial space, return it as next token
       if (!remove_initial_space) {
         return {
@@ -128,7 +134,7 @@ class lexer {
       };
     }
 
-    // console.log('rule:', rule);
+    // log("rule:", rule);
     // found a match, set token
     if (rule.length > 2) {
       // overwrite text by third element of rule
@@ -139,7 +145,7 @@ class lexer {
       };
       return out;
     } else {
-      // console.log('result: 0:', result[0])
+      // log("result: 0:", result[0]);
       return {
         token_type: rule[1],
         token_text: result[0],

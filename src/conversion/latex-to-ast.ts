@@ -1,7 +1,9 @@
 import { ParseError } from "./error";
 import lexer, { Token } from "./lexer";
 import { flatten } from "./flatten";
+import { logger } from "../log";
 
+const log = logger("mv:latex-to-ast");
 // UPDATETHIS: Delete or change to new license & package name
 
 /*
@@ -153,8 +155,8 @@ const sci_notat_exp_regex =
 // const latex_rules = [["\\\\neq(?![a-zA-Z])", "NE"]];
 export const latex_rules = [
   ["[0-9]+\\s*\\\\frac(?![a-zA-Z])", "MIXED_NUMBER"],
-  ["[0-9]+(\\.[0-9]*)?" + sci_notat_exp_regex, "NUMBER"],
-  ["\\.[0-9]+" + sci_notat_exp_regex, "NUMBER"],
+  ["[0-9|,]+(\\.[0-9]*)?" + sci_notat_exp_regex, "NUMBER"],
+  ["\\.[0-9|,]+" + sci_notat_exp_regex, "NUMBER"],
   ["\\*", "*"],
   ["\\/", "/"],
   ["%", "PERCENT"],
@@ -219,7 +221,7 @@ export const latex_rules = [
   ["\\\\div(?![a-zA-Z])", "/"],
   ["\\\\times(?![a-zA-Z])", "*"],
   ["\\\\frac(?![a-zA-Z])", "FRAC"],
-  [",", ","],
+  // [",", ","],
   [":", ":"],
   ["\\\\mid", "MID"],
 
@@ -1041,8 +1043,9 @@ export class LatexToAst {
     }
 
     if (this.token.token_type === "NUMBER") {
+      log("?", this.token.token_text);
       // @ts-ignore
-      result = parseFloat(this.token.token_text);
+      result = parseFloat(this.token.token_text.replace(/,/g, ""));
       this.advance();
     } else if (this.token.token_type === "INFINITY") {
       // @ts-ignore

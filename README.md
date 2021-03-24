@@ -52,7 +52,7 @@ The equals test can to run the legacy tests.  Set `LEGACY` env var to `true`.
 * `@babel/runtime` is a devDependency if you ever need to link this repo to another package for testing
 
 ## TODO
-
+* strip logs on compile
 * set up api that is compatible w/ ui component options 
 * start going through the tests, build up literal + symbolic a bit att the start
 * derivatives kind of work and kind of not how to use?

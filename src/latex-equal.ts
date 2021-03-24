@@ -38,11 +38,11 @@ export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {
    * Say limit to 3 times the size of correct string?
    */
 
+  const amo = toMathNode(a);
+  const bmo = toMathNode(b);
   if (opts.mode === "symbolic") {
-    const amo = toMathNode(a);
-    const bmo = toMathNode(b);
     return isMathEqual(amo, bmo);
   } else {
-    return isLiteralEqual(a, b);
+    return isLiteralEqual(amo, bmo);
   }
 };

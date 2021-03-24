@@ -5,14 +5,16 @@ import { LatexToAst } from "../latex-to-ast";
 const fixtures = [
   // we were getting [ [ '^', 'f', [ '-', 1 ] ], 'x' ]
   // ["f^{-1}\\left(x\\right)", ["*", ["^", ["f", "-1"]], "x"]],
-
-  [
-    // we were getting: [+, 6, [/, pi, x]]
-    // "6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-    //"6\\frac{\\pi }{x}", //\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-    "6 \\frac{\\pi}{x}", //\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-    ["+", 6, ["/", "pi", "x"]],
-  ],
+  // ["1000", 1000],
+  ["1,000", 1000],
+  ["1,000,000", 1000000],
+  // [
+  // we were getting: [+, 6, [/, pi, x]]
+  // "6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
+  //"6\\frac{\\pi }{x}", //\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
+  // "6 \\frac{\\pi}{x}", //\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
+  // ["+", 6, ["/", "pi", "x"]],
+  // ],
 
   //   [
   //     `
