@@ -6,7 +6,6 @@
 
 ## tests
 
-
 ```shell 
 yarn jest
 ```
@@ -20,6 +19,37 @@ yarn jest src/__tests__/equal.spec.ts -t src/__tests__/fixtures/equal/a.ts
 ```
 
 All the fixtures that george added are in the `fixtures` directory, we are in the process of converting them to typescript.
+
+
+## Goals 
+
+* we parse from latex -> ast -> mathjs, legacy was latex -> ast -> math_string -> mathjs (done)
+* clean up symbolic evaluation (in progress)
+* avoid the use of string manipulation/regex (in progress)
+* more advanced literal validation (todo)
+* block input that is clearly too large/unrelated (eg: a user can type in gobbledy-gook - we should just abort if we see that)
+
+### things that'd be great (but we may have to park until we have more time)
+
+* a faster latex parser
+* faster math evaluation
+
+## modes 
+
+There are 2 modes - literal and symbolic
+
+Literal needs to more advanced than the legacy literal implementation which was essentially a string check.
+
+Symbolic 
+
+
+### legacy tests comparison 
+
+The equals test can to run the legacy tests.  Set `LEGACY` env var to `true`. 
+
+### Notes
+
+* `@babel/runtime` is a devDependency if you ever need to link this repo to another package for testing
 
 ## TODO
 
@@ -37,7 +67,6 @@ All the fixtures that george added are in the `fixtures` directory, we are in th
 ## exprtk
 
 * set up emscripten build to see if it works? then run node test case against it and mathjs?
-
 
 ## references
 

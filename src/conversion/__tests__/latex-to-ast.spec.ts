@@ -1,6 +1,6 @@
 import { LatexToAst } from "../latex-to-ast";
-const k = require("katex");
-import { latexParser } from "latex-utensils";
+// const k = require("katex");
+// import { latexParser } from "latex-utensils";
 
 const fixtures = [
   // we were getting [ [ '^', 'f', [ '-', 1 ] ], 'x' ]

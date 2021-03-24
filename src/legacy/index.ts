@@ -133,7 +133,108 @@ const SIMPLIFY_RULES = [
 const simplify = (v) =>
   mathjs.simplify(v, SIMPLIFY_RULES.concat((mathjs.simplify as any).rules)); //.concat(SIMPLIFY_RULES));
 
-const areValuesEqual = (valueOne, valueTwo, options: any = {}) => {
+// const log = debug('@pie-element:math-inline:controller');
+// const decimalRegex = /\.|,/g;
+// const decimalCommaRegex = /,/g;
+const textRegex = /\\text\{([^{}]+)\}/g;
+// const decimalWithThousandSeparatorNumberRegex = /^(?!0+\.00)(?=.{1,9}(\.|$))(?!0(?!\.))\d{1,3}(,\d{3})*(\.\d+)?$/;
+
+const stripTargets = [
+  /{/g,
+  /}/g,
+  /\[/g,
+  /]/g,
+  /\\ /g,
+  /\\/g,
+  /\\s/g,
+  /left/g,
+  /right/g,
+  / /g,
+];
+
+function stripForStringCompare(answer = "") {
+  let stripped = answer;
+
+  stripTargets.forEach((stripTarget) => {
+    return (stripped = stripped.replace(stripTarget, ""));
+  });
+
+  return stripped;
+}
+
+function handleStringBasedCheck(acceptedValues, answerItem) {
+  let answerValueToUse = processAnswerItem(answerItem, true);
+  let answerCorrect = false;
+
+  for (let i = 0; i < acceptedValues.length; i++) {
+    let acceptedValueToUse = processAnswerItem(acceptedValues[i], true);
+
+    answerCorrect = answerValueToUse === acceptedValueToUse;
+
+    if (answerCorrect === true) {
+      break;
+    }
+  }
+
+  return answerCorrect;
+}
+
+/**
+ * TODO:
+ *
+ * We have `stringCheck` which if true disabled 'literal' and 'symbolic' so really it should be a validation method. And if it is what's the difference between it and 'literal'?
+ *
+ * We should support a equivalence option per correct response like:
+ * responses: [ { answer: '..', validation: 'symbolic', alternates: [{ value: '..', validation: 'stringCompare'}, 'abc'] } ]
+ *
+ * if option is a string it is turned into an object w/ inherited opts.
+ *
+ * This would override any shared setting at the root.
+ */
+
+function processAnswerItem(answerItem = "", isLiteral) {
+  // looks confusing, but we're replacing U+002D and U+2212 (minus and hyphen) so we have the same symbol everywhere consistently
+  // further processing is to be added here if needed
+  let newAnswerItem = answerItem.replace("−", "-");
+
+  newAnswerItem = newAnswerItem.replace(/\\cdot/g, "\\times");
+
+  // also ignore text nodes, just swap out with empty string
+
+  newAnswerItem = newAnswerItem.replace(textRegex, "");
+
+  newAnswerItem = newAnswerItem.replace(/\\ /g, "").replace(/ /g, "");
+
+  // eslint-disable-next-line no-useless-escape
+  newAnswerItem = newAnswerItem.replace(/\\%/g, "").replace(/%/g, "");
+
+  return isLiteral ? stripForStringCompare(newAnswerItem) : newAnswerItem;
+}
+
+export const literalEquals = (valueOne, valueTwo, opts: any) => {
+  let answerValueToUse = processAnswerItem(valueOne, true);
+  let acceptedValueToUse = processAnswerItem(valueTwo, true);
+
+  if (opts.allowThousandsSeparator) {
+    if (
+      containsDecimal(answerValueToUse) &&
+      decimalWithThousandSeparatorNumberRegex.test(answerValueToUse)
+    ) {
+      answerValueToUse = answerValueToUse.replace(decimalCommaRegex, "");
+    }
+
+    if (
+      containsDecimal(acceptedValueToUse) &&
+      decimalWithThousandSeparatorNumberRegex.test(acceptedValueToUse)
+    ) {
+      acceptedValueToUse = acceptedValueToUse.replace(decimalCommaRegex, "");
+    }
+  }
+
+  return acceptedValueToUse === answerValueToUse;
+};
+
+export const symbolicEquals = (valueOne, valueTwo, options: any = {}) => {
   const {
     // if explicitly set to false, having a decimal value in either side will result in a false equality
     // regardless of mathematical correctness
@@ -142,6 +243,7 @@ const areValuesEqual = (valueOne, valueTwo, options: any = {}) => {
     inverse, // returns inverse for the comparison result
   } = options;
 
+  console.log("SSS");
   let valueOneToUse = valueOne;
   let valueTwoToUse = valueTwo;
 
@@ -180,6 +282,8 @@ const areValuesEqual = (valueOne, valueTwo, options: any = {}) => {
 
   const equals = one.equals(two);
 
+  console.log("?? equals", equals);
+
   return inverse ? !equals : equals;
 };
 
@@ -191,5 +295,3 @@ export const ave = (a, b) => {
   const brm = simplify(bm);
   return arm.equals(brm);
 };
-
-export default areValuesEqual;

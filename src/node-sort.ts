@@ -1,5 +1,12 @@
 import { MathNode } from "mathjs";
 
+/**
+ * The plan with node sort was to sort all the nodes in an expression where possible
+ * This means any commutative operators aka + and *.
+ *
+ * With symbols sorted - we shoud be able to call `node.equals(other)` and avoid having to call evaluate.
+ */
+
 const _f = (op: string) => (acc: any[], param: any): any => {
   if (Array.isArray(param)) {
     if (param[0] === op) {
@@ -63,15 +70,15 @@ export const flatten = (tree: any[]): any[] => {
 };
 
 const compareNodes = (a: MathNode, b: MathNode): number => {
-  console.log(
-    "[compareNodes]: a '",
-    a.toString(),
-    "', b: '",
-    b.toString(),
-    "'"
-  );
+  // console.log(
+  //   "[compareNodes]: a '",
+  //   a.toString(),
+  //   "', b: '",
+  //   b.toString(),
+  //   "'"
+  // );
   if (a.type === "SymbolNode" && b.type === "SymbolNode") {
-    console.log(a.name, "> ", b.name);
+    // console.log(a.name, "> ", b.name);
     return a.name.localeCompare(b.name);
   }
 
@@ -93,7 +100,7 @@ const compareNodes = (a: MathNode, b: MathNode): number => {
 };
 
 export const sort = (node: MathNode): MathNode => {
-  console.log("[sort] :", JSON.stringify(node, null, "  "));
+  // console.log("[sort] :", JSON.stringify(node, null, "  "));
 
   if (node.isParenthesisNode) {
     node.content = sort(node.content);

@@ -1,4 +1,7 @@
-import legacyEquals from "./legacy";
+import {
+  symbolicEquals as legacySymbolic,
+  literalEquals as legacyLiteral,
+} from "./legacy";
 import { latexEqual as le } from "./latex-equal";
 export type Latex = string;
 
@@ -13,20 +16,12 @@ export type Opts = {
  * For dev purposes allow legacy to be called for comparison.
  * Eventually we'll remove this.
  */
-export const latexEqual = (
-  a: Latex,
-  b: Latex,
-  opts: Opts
-): Promise<boolean> => {
+export const latexEqual = (a: Latex, b: Latex, opts: Opts): boolean => {
   if (opts.legacy) {
-    return new Promise((resolve, reject) => {
-      try {
-        resolve(legacyEquals(a, b, { ...opts, isLatex: true }));
-      } catch (e) {
-        reject(e);
-      }
-    });
+    return opts.mode === "literal"
+      ? legacyLiteral(a, b, { ...opts, isLatex: true })
+      : legacySymbolic(a, b, { ...opts, isLatex: true });
   } else {
-    return Promise.resolve(le(a, b, opts));
+    return le(a, b, opts);
   }
 };

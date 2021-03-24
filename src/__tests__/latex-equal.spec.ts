@@ -28,18 +28,28 @@ try {
 }
 
 testData.forEach((d) => {
+  // console.log("d.data", d.data);
   describe(d.filename, () => {
     d.data.tests.forEach((t) => {
-      const dfn = t.skip ? describe.skip : t.only ? describe.only : describe;
+      const skip = d.data.skip !== undefined ? d.data.skip : t.skip;
+      const only = d.data.only !== undefined ? d.data.only : t.only;
+      // console.log("skip?", skip, "only?", only);
+      const dfn = skip ? describe.skip : only ? describe.only : describe;
       dfn(t.label || t.target, () => {
         const eq = t.eq ? (Array.isArray(t.eq) ? t.eq : [t.eq]) : [];
+
+        // console.log(t.label || t.target, "eq.length", eq.length);
+        const mode = t.mode || d.data.mode;
+        // console.log("mode!!", mode);
         eq.forEach((y) => {
-          // it(`legacy == ${y}`, async () => {
-          //   const l = await latexEqual(t.target, y, { legacy: true });
-          //   expect(l).toEqual(true);
-          // });
-          it(`new == ${y}`, async () => {
-            const l = await latexEqual(t.target, y, { legacy: false });
+          if (process.env.LEGACY === "true") {
+            it(`legacy == ${y}`, () => {
+              const l = latexEqual(t.target, y, { legacy: true, mode });
+              expect(l).toEqual(true);
+            });
+          }
+          it(`new == ${y}`, () => {
+            const l = latexEqual(t.target, y, { legacy: false, mode });
             // console.log(l);
             expect(l).toEqual(true);
           });
@@ -48,12 +58,14 @@ testData.forEach((d) => {
         const ne = t.ne ? (Array.isArray(t.ne) ? t.ne : [t.ne]) : [];
 
         ne.forEach((y) => {
-          it(`legacy != ${y}`, async () => {
-            const l = await latexEqual(t.target, y, { legacy: true });
-            expect(l).toEqual(false);
-          });
-          it(`new != ${y}`, async () => {
-            const l = await latexEqual(t.target, y, { legacy: false });
+          if (process.env.LEGACY === "true") {
+            it(`legacy != ${y}`, () => {
+              const l = latexEqual(t.target, y, { legacy: true, mode });
+              expect(l).toEqual(false);
+            });
+          }
+          it(`new != ${y}`, () => {
+            const l = latexEqual(t.target, y, { legacy: false, mode });
             expect(l).toEqual(false);
           });
         });

@@ -15,6 +15,7 @@
     "lodash": "^4.17.20"
   },
   "devDependencies": {
+    "@babel/runtime": "^7.13.10",
     "@pie-framework/math-expressions": "^3.1.0",
     "@types/fs-extra": "^9.0.1",
     "@types/glob": "^7.1.3",

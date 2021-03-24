@@ -42,6 +42,10 @@ export const isMathEqual = (
 ) => {
   const as = normalize(a);
   const bs = normalize(b);
+
+  if (as.equals(bs)) {
+    return true;
+  }
   return evaluate(as, bs);
   // NOTE: A temporary naive fix by checking derivatives
 
