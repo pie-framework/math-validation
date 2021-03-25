@@ -26,89 +26,9 @@
     "unmatched": 0,
     "updated": 0
   },
-  "startTime": 1616674645930,
+  "startTime": 1616674768847,
   "success": false,
   "testResults": [
-    {
-      "leaks": false,
-      "numFailingTests": 0,
-      "numPassingTests": 4,
-      "numPendingTests": 0,
-      "numTodoTests": 0,
-      "openHandles": [],
-      "perfStats": {
-        "end": 1616674646830,
-        "runtime": 855,
-        "slow": false,
-        "start": 1616674645975
-      },
-      "skipped": false,
-      "snapshot": {
-        "added": 0,
-        "fileDeleted": false,
-        "matched": 0,
-        "unchecked": 0,
-        "unmatched": 0,
-        "updated": 0,
-        "uncheckedKeys": []
-      },
-      "testFilePath": "/home/ede/dev/github/pie-framework/math-validation/src/__tests__/node-sort.spec.ts",
-      "testResults": [
-        {
-          "ancestorTitles": [
-            "'b + a' => 'a + b'"
-          ],
-          "duration": 19,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'b + a' => 'a + b' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'b + c + a' => 'a + b + c'"
-          ],
-          "duration": 13,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'b + c + a' => 'a + b + c' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'b + a + c' => 'a + b + c'"
-          ],
-          "duration": 10,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'b + a + c' => 'a + b + c' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'c + b + a' => 'a + b + c'"
-          ],
-          "duration": 10,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'c + b + a' => 'a + b + c' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        }
-      ],
-      "failureMessage": null
-    },
     {
       "leaks": false,
       "numFailingTests": 0,
@@ -117,10 +37,10 @@
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1616674646956,
-        "runtime": 109,
+        "end": 1616674769497,
+        "runtime": 417,
         "slow": false,
-        "start": 1616674646847
+        "start": 1616674769080
       },
       "skipped": false,
       "snapshot": {
@@ -138,7 +58,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 5,
+          "duration": 4,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta 1,000 => 1000",
@@ -165,16 +85,96 @@
     },
     {
       "leaks": false,
+      "numFailingTests": 0,
+      "numPassingTests": 4,
+      "numPendingTests": 0,
+      "numTodoTests": 0,
+      "openHandles": [],
+      "perfStats": {
+        "end": 1616674770036,
+        "runtime": 954,
+        "slow": false,
+        "start": 1616674769082
+      },
+      "skipped": false,
+      "snapshot": {
+        "added": 0,
+        "fileDeleted": false,
+        "matched": 0,
+        "unchecked": 0,
+        "unmatched": 0,
+        "updated": 0,
+        "uncheckedKeys": []
+      },
+      "testFilePath": "/home/ede/dev/github/pie-framework/math-validation/src/__tests__/node-sort.spec.ts",
+      "testResults": [
+        {
+          "ancestorTitles": [
+            "'b + a' => 'a + b'"
+          ],
+          "duration": 21,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "'b + a' => 'a + b' sorts",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "sorts"
+        },
+        {
+          "ancestorTitles": [
+            "'b + c + a' => 'a + b + c'"
+          ],
+          "duration": 12,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "'b + c + a' => 'a + b + c' sorts",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "sorts"
+        },
+        {
+          "ancestorTitles": [
+            "'b + a + c' => 'a + b + c'"
+          ],
+          "duration": 8,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "'b + a + c' => 'a + b + c' sorts",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "sorts"
+        },
+        {
+          "ancestorTitles": [
+            "'c + b + a' => 'a + b + c'"
+          ],
+          "duration": 14,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "'c + b + a' => 'a + b + c' sorts",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "sorts"
+        }
+      ],
+      "failureMessage": null
+    },
+    {
+      "leaks": false,
       "numFailingTests": 48,
       "numPassingTests": 174,
       "numPendingTests": 0,
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1616674651347,
-        "runtime": 4372,
+        "end": 1616674772748,
+        "runtime": 3667,
         "slow": false,
-        "start": 1616674646975
+        "start": 1616674769081
       },
       "skipped": false,
       "snapshot": {
@@ -193,7 +193,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 22,
+          "duration": 25,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} == 4.5",
@@ -207,7 +207,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 11,
+          "duration": 18,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} == 3.2 + 1.3",
@@ -221,7 +221,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 16,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} == (4 - \\frac{4}{5}) + 1.3",
@@ -235,7 +235,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 10,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} == \\frac{9}{2}",
@@ -263,7 +263,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 11,
+          "duration": 8,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} == \\frac{10}{2} - 0.5",
@@ -277,7 +277,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 16,
+          "duration": 15,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} != 4.55",
@@ -305,7 +305,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 11,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 == 50 + 50",
@@ -319,7 +319,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 8,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 == 25 * 4",
@@ -347,7 +347,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 8,
+          "duration": 7,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 == 20 * 5",
@@ -375,7 +375,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 5,
+          "duration": 6,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 == 10 * 10",
@@ -403,7 +403,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 7,
+          "duration": 8,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 != 44 + 57",
@@ -417,7 +417,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 15,
+          "duration": 17,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 != 100 - 0.001",
@@ -445,7 +445,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] x"
           ],
-          "duration": 12,
+          "duration": 13,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] x == x+0",
@@ -459,7 +459,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] x"
           ],
-          "duration": 11,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] x == (x-2)+2",
@@ -473,7 +473,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] x"
           ],
-          "duration": 18,
+          "duration": 16,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] x == ((x^2 + x) / x) - 1",
@@ -487,7 +487,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] x"
           ],
-          "duration": 11,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] x == 2x/2",
@@ -501,7 +501,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] x"
           ],
-          "duration": 15,
+          "duration": 16,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] x == ((x^2 + x) / x) - 1",
@@ -529,7 +529,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] x"
           ],
-          "duration": 12,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] x != x + 1",
@@ -543,65 +543,9 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] (x + 2)^2"
           ],
-          "duration": 24,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 == x^2 + 4x + 4",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "== x^2 + 4x + 4"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/basic-symbolic.ts",
-            "[symbolic] (x + 2)^2"
-          ],
-          "duration": 24,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 == x^2 + 4(x+1)",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "== x^2 + 4(x+1)"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/basic-symbolic.ts",
-            "[symbolic] (x + 2)^2"
-          ],
-          "duration": 26,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 == x^2 + 8 ((x+1) / 2)",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "== x^2 + 8 ((x+1) / 2)"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/basic-symbolic.ts",
-            "[symbolic] (x + 2)^2"
-          ],
           "duration": 25,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 == (2 + x)^2",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "== (2 + x)^2"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/basic-symbolic.ts",
-            "[symbolic] (x + 2)^2"
-          ],
-          "duration": 20,
-          "failureDetails": [],
-          "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 == x^2 + 4x + 4",
           "location": null,
           "numPassingAsserts": 0,
@@ -613,7 +557,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] (x + 2)^2"
           ],
-          "duration": 20,
+          "duration": 29,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 == x^2 + 4(x+1)",
@@ -641,7 +585,63 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] (x + 2)^2"
           ],
-          "duration": 20,
+          "duration": 27,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 == (2 + x)^2",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== (2 + x)^2"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/basic-symbolic.ts",
+            "[symbolic] (x + 2)^2"
+          ],
+          "duration": 23,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 == x^2 + 4x + 4",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== x^2 + 4x + 4"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/basic-symbolic.ts",
+            "[symbolic] (x + 2)^2"
+          ],
+          "duration": 24,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 == x^2 + 4(x+1)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== x^2 + 4(x+1)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/basic-symbolic.ts",
+            "[symbolic] (x + 2)^2"
+          ],
+          "duration": 25,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 == x^2 + 8 ((x+1) / 2)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== x^2 + 8 ((x+1) / 2)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/basic-symbolic.ts",
+            "[symbolic] (x + 2)^2"
+          ],
+          "duration": 23,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 != x^2 + 4(x+2)",
@@ -655,7 +655,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] breaks - not sure why > (x + 2)^2"
           ],
-          "duration": 21,
+          "duration": 23,
           "failureDetails": [
             {
               "actual": "",
@@ -671,11 +671,11 @@
               "matcherName": "",
               "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m",
               "passed": false,
-              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:109:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41"
+              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:109:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
             }
           ],
           "failureMessages": [
-            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:109:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41"
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:109:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
           ],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] breaks - not sure why > (x + 2)^2 != x^3 + 4x + 4",
           "location": null,
@@ -688,7 +688,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] y^(2 x)"
           ],
-          "duration": 6,
+          "duration": 5,
           "failureDetails": [
             {
               "actual": "",
@@ -704,11 +704,11 @@
               "matcherName": "",
               "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
               "passed": false,
-              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41"
+              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
             }
           ],
           "failureMessages": [
-            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41"
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
           ],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] y^(2 x) == y^(x+x)",
           "location": null,
@@ -721,7 +721,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] \\sqrt{4x}"
           ],
-          "duration": 17,
+          "duration": 18,
           "failureDetails": [
             {
               "actual": "",
@@ -803,7 +803,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] tan(x)"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] tan(x) == tan(x)",
@@ -817,7 +817,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] f^{-1}\\left(x\\right)=\\sqrt{x-1}+3"
           ],
-          "duration": 7,
+          "duration": 6,
           "failureDetails": [
             {
               "actual": "",
@@ -843,7 +843,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 72\\div12=6\\text{eggs}"
           ],
-          "duration": 4,
+          "duration": 5,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 72\\div12=6\\text{eggs} == 72\\div12=(3+3)\\text{eggs}",
@@ -857,7 +857,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] \\left(x\\right)^{ \\frac{1}{\\left(y + 3\\right)}}"
           ],
-          "duration": 9,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] \\left(x\\right)^{ \\frac{1}{\\left(y + 3\\right)}} == \\sqrt[\\left(y + 3\\right)]{x}",
@@ -871,7 +871,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] \\left(x\\right)^{\\frac{1}{3}}"
           ],
-          "duration": 8,
+          "duration": 7,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] \\left(x\\right)^{\\frac{1}{3}} == \\sqrt[3]{x}",
@@ -885,7 +885,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] \\left(x\\right)^{\\frac{1}{n}}"
           ],
-          "duration": 5,
+          "duration": 4,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] \\left(x\\right)^{\\frac{1}{n}} == \\sqrt[n]{x}",
@@ -913,7 +913,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] \\left(x\\right)^{\\frac{1}{2}}"
           ],
-          "duration": 5,
+          "duration": 4,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] \\left(x\\right)^{\\frac{1}{2}} == \\sqrt{x}",
@@ -927,7 +927,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] \\left(x-1\\right)^{\\frac{1}{2}}+3"
           ],
-          "duration": 7,
+          "duration": 8,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] \\left(x-1\\right)^{\\frac{1}{2}}+3 == \\sqrt{x-1}+3",
@@ -967,7 +967,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{x}{12}\\times7\\text{dollars}"
           ],
-          "duration": 15,
+          "duration": 16,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{x}{12}\\times7\\text{dollars} == \\frac{7x}{12}\\ \\text{dollars}",
@@ -981,7 +981,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{x}{12}\\times7\\text{dollars}"
           ],
-          "duration": 15,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{x}{12}\\times7\\text{dollars} == x\\times \\frac{1}{12}\\times 7\\ \\text{dollars}",
@@ -995,7 +995,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{x}{12}\\times7\\text{dollars}"
           ],
-          "duration": 14,
+          "duration": 13,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{x}{12}\\times7\\text{dollars} == x\\times 7\\times \\frac{1}{12}\\ \\text{dollars}",
@@ -1009,7 +1009,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{x}{12}\\times7\\text{dollars}"
           ],
-          "duration": 12,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{x}{12}\\times7\\text{dollars} == \\frac{1}{12}\\times x\\times 7\\ \\text{dollars}",
@@ -1023,7 +1023,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{x}{12}\\times7\\text{dollars}"
           ],
-          "duration": 14,
+          "duration": 18,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{x}{12}\\times7\\text{dollars} == \\frac{7}{12}\\times x\\ \\text{dollars}",
@@ -1051,7 +1051,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{x}{12}\\times7\\text{dollars}"
           ],
-          "duration": 13,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{x}{12}\\times7\\text{dollars} == \\frac{1}{12}\\left(7x\\right)\\ \\text{dollars}",
@@ -1093,7 +1093,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{n-5}{6}"
           ],
-          "duration": 18,
+          "duration": 16,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{n-5}{6} == \\frac{n}{6}-\\frac{5}{6}",
@@ -1107,7 +1107,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{n-5}{6}"
           ],
-          "duration": 17,
+          "duration": 18,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{n-5}{6} == -\\frac{5}{6}+\\frac{n}{6}",
@@ -1135,7 +1135,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{n-5}{6}"
           ],
-          "duration": 46,
+          "duration": 51,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{n-5}{6} == \\frac{1}{6}\\left(-5+n\\right)",
@@ -1149,7 +1149,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] 6 \\frac{1}{2}"
           ],
-          "duration": 5,
+          "duration": 4,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] 6 \\frac{1}{2} == 6 + \\frac{1}{2}",
@@ -1163,7 +1163,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] 6 \\frac{1}{2}"
           ],
-          "duration": 4,
+          "duration": 5,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] 6 \\frac{1}{2} != 6 * \\frac{1}{2}",
@@ -1191,7 +1191,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second}"
           ],
-          "duration": 13,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second} == \\frac{6}{x}\\pi \\ \\text{radians}\\ \\text{per}\\ \\text{second}",
@@ -1205,7 +1205,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second}"
           ],
-          "duration": 16,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second} == 6\\pi \\left(\\frac{1}{x}\\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
@@ -1219,7 +1219,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{6\\pi}{x}"
           ],
-          "duration": 13,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{6\\pi}{x} == \\frac{1}{x}\\left(6\\pi \\right)",
@@ -1233,7 +1233,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{6\\pi}{x}"
           ],
-          "duration": 13,
+          "duration": 16,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{6\\pi}{x} == \\frac{6}{x}\\pi",
@@ -1247,7 +1247,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{6\\pi}{x}"
           ],
-          "duration": 14,
+          "duration": 16,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{6\\pi}{x} == 6 * \\frac{\\pi }{x}",
@@ -1261,7 +1261,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{6\\pi}{x}"
           ],
-          "duration": 12,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{6\\pi}{x} == \\left(6\\right) \\frac{\\pi }{x}",
@@ -1289,7 +1289,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
           ],
-          "duration": 16,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == 4+\\frac{d}{240}\\ \\text{years}",
@@ -1303,7 +1303,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
           ],
-          "duration": 17,
+          "duration": 16,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == 4+\\frac{1}{240}d\\ \\text{years}",
@@ -1311,48 +1311,6 @@
           "numPassingAsserts": 0,
           "status": "passed",
           "title": "== 4+\\frac{1}{240}d\\ \\text{years}"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/fractions-symbolic.ts",
-            "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
-          ],
-          "duration": 15,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == 4+d\\left(\\frac{1}{240}\\right)\\ \\text{years}",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "== 4+d\\left(\\frac{1}{240}\\right)\\ \\text{years}"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/fractions-symbolic.ts",
-            "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
-          ],
-          "duration": 14,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == d\\left(\\frac{1}{240}\\right)+4\\ \\text{years}",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "== d\\left(\\frac{1}{240}\\right)+4\\ \\text{years}"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/fractions-symbolic.ts",
-            "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
-          ],
-          "duration": 14,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == \\frac{1}{240}d+4\\ \\text{years}",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "== \\frac{1}{240}d+4\\ \\text{years}"
         },
         {
           "ancestorTitles": [
@@ -1360,34 +1318,6 @@
             "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
           ],
           "duration": 16,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == 4+\\frac{d}{240}\\ \\text{years}",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "== 4+\\frac{d}{240}\\ \\text{years}"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/fractions-symbolic.ts",
-            "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
-          ],
-          "duration": 14,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == 4+\\frac{1}{240}d\\ \\text{years}",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "== 4+\\frac{1}{240}d\\ \\text{years}"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/fractions-symbolic.ts",
-            "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
-          ],
-          "duration": 15,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == 4+d\\left(\\frac{1}{240}\\right)\\ \\text{years}",
@@ -1416,6 +1346,76 @@
             "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
           ],
           "duration": 14,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == \\frac{1}{240}d+4\\ \\text{years}",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\frac{1}{240}d+4\\ \\text{years}"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/fractions-symbolic.ts",
+            "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
+          ],
+          "duration": 15,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == 4+\\frac{d}{240}\\ \\text{years}",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 4+\\frac{d}{240}\\ \\text{years}"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/fractions-symbolic.ts",
+            "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
+          ],
+          "duration": 14,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == 4+\\frac{1}{240}d\\ \\text{years}",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 4+\\frac{1}{240}d\\ \\text{years}"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/fractions-symbolic.ts",
+            "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
+          ],
+          "duration": 16,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == 4+d\\left(\\frac{1}{240}\\right)\\ \\text{years}",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 4+d\\left(\\frac{1}{240}\\right)\\ \\text{years}"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/fractions-symbolic.ts",
+            "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
+          ],
+          "duration": 18,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == d\\left(\\frac{1}{240}\\right)+4\\ \\text{years}",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== d\\left(\\frac{1}{240}\\right)+4\\ \\text{years}"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/fractions-symbolic.ts",
+            "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
+          ],
+          "duration": 13,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == \\frac{1}{240}d+4\\ \\text{years}",
@@ -1443,7 +1443,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] 0.65x"
           ],
-          "duration": 10,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] 0.65x == \\frac{13}{20}x",
@@ -1457,7 +1457,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] 0.65x"
           ],
-          "duration": 13,
+          "duration": 15,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] 0.65x == \\frac{65x}{100}",
@@ -1499,7 +1499,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{a+c}{2}+\\frac{b+d}{2}i"
           ],
-          "duration": 27,
+          "duration": 24,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{a+c}{2}+\\frac{b+d}{2}i == \\frac{c+a}{2}+\\frac{d+b}{2}i",
@@ -1527,7 +1527,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{10}{12}\\pi\\ \\text{radians}"
           ],
-          "duration": 12,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{10}{12}\\pi\\ \\text{radians} == \\frac{5}{6}\\pi \\ \\text{radians}",
@@ -1541,7 +1541,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{10}{12}\\pi\\ \\text{radians}"
           ],
-          "duration": 13,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{10}{12}\\pi\\ \\text{radians} == \\frac{10\\pi }{12}\\ \\text{radians}",
@@ -1555,7 +1555,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{10}{12}\\pi\\ \\text{radians}"
           ],
-          "duration": 13,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{10}{12}\\pi\\ \\text{radians} == \\frac{5\\pi }{6}\\ \\text{radians}",
@@ -1569,7 +1569,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{10}{12}\\pi\\ \\text{radians}"
           ],
-          "duration": 12,
+          "duration": 13,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{10}{12}\\pi\\ \\text{radians} == \\frac{50\\pi }{60}\\ \\text{radians}",
@@ -1583,7 +1583,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{10}{12}\\pi\\ \\text{radians}"
           ],
-          "duration": 11,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{10}{12}\\pi\\ \\text{radians} == \\frac{50}{60}\\pi \\ \\text{radians}",
@@ -1597,7 +1597,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{3V}{B}"
           ],
-          "duration": 7,
+          "duration": 8,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{3V}{B} == h=3\\frac{V}{B}",
@@ -1611,7 +1611,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{3V}{B}"
           ],
-          "duration": 10,
+          "duration": 8,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{3V}{B} == h=\\frac{\\left(3\\times V\\right)}{B}",
@@ -1625,7 +1625,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{3V}{B}"
           ],
-          "duration": 10,
+          "duration": 8,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{3V}{B} == h=\\left(3V\\right)\\div B",
@@ -1639,7 +1639,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{3V}{B}"
           ],
-          "duration": 8,
+          "duration": 9,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{3V}{B} == h=\\left(3\\times V\\right)\\div B",
@@ -1653,7 +1653,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] r=\\sqrt{\\frac{V}{\\pi h}}"
           ],
-          "duration": 9,
+          "duration": 8,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] r=\\sqrt{\\frac{V}{\\pi h}} == r=\\left(\\frac{V}{\\pi h}\\right)^{\\frac{1}{2}}",
@@ -1681,7 +1681,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] r=\\sqrt{\\frac{V}{\\pi h}}"
           ],
-          "duration": 7,
+          "duration": 8,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] r=\\sqrt{\\frac{V}{\\pi h}} == r=\\sqrt{\\frac{V}{\\pi \\times h}}",
@@ -1723,7 +1723,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] c=-\\frac{b}{m}"
           ],
-          "duration": 8,
+          "duration": 7,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] c=-\\frac{b}{m} == c=\\left(-b\\right)\\left(\\frac{1}{m}\\right)",
@@ -1737,7 +1737,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] c=-\\frac{b}{m}"
           ],
-          "duration": 6,
+          "duration": 8,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] c=-\\frac{b}{m} == c=\\frac{-b}{m}",
@@ -1765,7 +1765,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] c=\\frac{\\pi}{b}"
           ],
-          "duration": 7,
+          "duration": 5,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] c=\\frac{\\pi}{b} == c=\\pi \\div b",
@@ -1779,7 +1779,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] c=\\frac{\\pi}{b}"
           ],
-          "duration": 6,
+          "duration": 7,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] c=\\frac{\\pi}{b} == c=\\pi \\times \\frac{1}{b}",
@@ -1793,7 +1793,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] c=\\frac{\\pi}{b}"
           ],
-          "duration": 6,
+          "duration": 5,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] c=\\frac{\\pi}{b} == c=\\pi \\left(\\frac{1}{b}\\right)",
@@ -1807,7 +1807,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] c=\\frac{\\pi}{b}"
           ],
-          "duration": 5,
+          "duration": 6,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] c=\\frac{\\pi}{b} == c=\\left(\\frac{1}{b}\\right)\\pi ",
@@ -1821,7 +1821,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] V\\left(t\\right)=750\\left(1.5\\right)^t"
           ],
-          "duration": 9,
+          "duration": 8,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] V\\left(t\\right)=750\\left(1.5\\right)^t == V(t)\\ =\\ 750\\left(\\frac{3}{2}\\right)^t",
@@ -1835,7 +1835,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] V\\left(t\\right)=750\\left(1.5\\right)^t"
           ],
-          "duration": 10,
+          "duration": 9,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] V\\left(t\\right)=750\\left(1.5\\right)^t == V(t)\\ =\\ 750\\left(1+0.5\\right)^t",
@@ -1905,7 +1905,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] g\\left(x\\right)=\\sqrt[3]{x-2}"
           ],
-          "duration": 8,
+          "duration": 7,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] g\\left(x\\right)=\\sqrt[3]{x-2} == g\\left(x\\right)\\ =\\ \\sqrt[3]{-2+x}",
@@ -1919,7 +1919,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] g\\left(x\\right)=\\sqrt[3]{x-2}"
           ],
-          "duration": 8,
+          "duration": 7,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] g\\left(x\\right)=\\sqrt[3]{x-2} == g\\left(x\\right)\\ =\\ \\left(x-2\\right)^{\\frac{1}{3}}",
@@ -1933,7 +1933,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] g\\left(x\\right)=\\sqrt[3]{x-2}"
           ],
-          "duration": 9,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] g\\left(x\\right)=\\sqrt[3]{x-2} == g\\left(x\\right)\\ =\\ \\left(-2+x\\right)^{\\frac{1}{3}}",
@@ -1947,7 +1947,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{da}{c}"
           ],
-          "duration": 7,
+          "duration": 6,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{da}{c} == h=\\frac{ad}{c}",
@@ -1961,7 +1961,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{da}{c}"
           ],
-          "duration": 9,
+          "duration": 8,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{da}{c} == h=\\frac{a\\times d}{c}",
@@ -2003,7 +2003,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{da}{c}"
           ],
-          "duration": 8,
+          "duration": 7,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{da}{c} == h=\\left(a\\times d\\right)\\div c",
@@ -2017,7 +2017,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{da}{c}"
           ],
-          "duration": 10,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{da}{c} == h=d\\left(\\frac{a}{c}\\right)",
@@ -2045,7 +2045,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{da}{c}"
           ],
-          "duration": 7,
+          "duration": 8,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{da}{c} == h=a\\left(d\\div c\\right)",
@@ -2059,7 +2059,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{da}{c}"
           ],
-          "duration": 8,
+          "duration": 7,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{da}{c} == h=a\\left(\\frac{d}{c}\\right)",
@@ -2073,7 +2073,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] x=\\frac{c-by}{a}"
           ],
-          "duration": 11,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] x=\\frac{c-by}{a} == x=\\frac{1}{a}\\left(c-by\\right)",
@@ -2101,7 +2101,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] x=\\frac{c-by}{a}"
           ],
-          "duration": 11,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] x=\\frac{c-by}{a} == x=\\frac{1}{a}\\left(-by+c\\right)",
@@ -2115,7 +2115,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] x=\\frac{c-by}{a}"
           ],
-          "duration": 9,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] x=\\frac{c-by}{a} == x=\\frac{\\left(-by+c\\right)}{a}",
@@ -2129,7 +2129,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] x=\\frac{c-by}{a}"
           ],
-          "duration": 9,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] x=\\frac{c-by}{a} == x=\\frac{-by+c}{a}",
@@ -2143,7 +2143,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] x=\\frac{c-by}{a}"
           ],
-          "duration": 11,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] x=\\frac{c-by}{a} == x=\\left(-by+c\\right)\\div a",
@@ -2157,7 +2157,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] x=\\frac{c-by}{a}"
           ],
-          "duration": 10,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] x=\\frac{c-by}{a} == x=\\frac{\\left(c-by\\right)}{a}",
@@ -2171,7 +2171,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] x=\\frac{c-by}{a}"
           ],
-          "duration": 13,
+          "duration": 15,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] x=\\frac{c-by}{a} == x=\\frac{c}{a}-\\frac{by}{a}",
@@ -2185,7 +2185,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] x=\\frac{c-by}{a}"
           ],
-          "duration": 15,
+          "duration": 13,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] x=\\frac{c-by}{a} == x=\\frac{1}{a}c-\\frac{1}{a}by",
@@ -2291,7 +2291,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] f\\left(x\\right)=x\\left(3x+16\\right)"
           ],
-          "duration": 11,
+          "duration": 9,
           "failureDetails": [
             {
               "actual": "",
@@ -2317,7 +2317,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] f\\left(x\\right)=x\\left(3x+16\\right)"
           ],
-          "duration": 10,
+          "duration": 8,
           "failureDetails": [
             {
               "actual": "",
@@ -2383,7 +2383,7 @@
             "src/fixtures/latex-equal/old-literal.ts",
             "[literal] 1.00"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/old-literal.ts [literal] 1.00 == 1",
@@ -2439,7 +2439,7 @@
             "src/fixtures/latex-equal/old-literal.ts",
             "[literal] 72\\div12=6\\text{eggs}"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/old-literal.ts [literal] 72\\div12=6\\text{eggs} ==  72 \\div 12= 6 \\text{eggs} ",
@@ -2467,7 +2467,7 @@
             "src/fixtures/latex-equal/PD-282.ts",
             "[literal] 1"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-282.ts [literal] 1 != 1.01",
@@ -2495,7 +2495,7 @@
             "src/fixtures/latex-equal/PD-282.ts",
             "[literal] 1"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [
             {
               "actual": "",
@@ -2511,11 +2511,11 @@
               "matcherName": "",
               "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m",
               "passed": false,
-              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:109:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41"
+              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:109:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
             }
           ],
           "failureMessages": [
-            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:109:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41"
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:109:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
           ],
           "fullName": "src/fixtures/latex-equal/PD-282.ts [literal] 1 != 1.0",
           "location": null,
@@ -2544,11 +2544,11 @@
               "matcherName": "",
               "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
               "passed": false,
-              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41"
+              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
             }
           ],
           "failureMessages": [
-            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41"
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
           ],
           "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 == a+10+b",
           "location": null,
@@ -2577,17 +2577,50 @@
               "matcherName": "",
               "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
               "passed": false,
-              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41"
+              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
             }
           ],
           "failureMessages": [
-            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41"
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
           ],
           "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 == 10+a+b",
           "location": null,
           "numPassingAsserts": 0,
           "status": "failed",
           "title": "== 10+a+b"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] a+b+10"
+          ],
+          "duration": 1,
+          "failureDetails": [
+            {
+              "actual": "",
+              "error": {
+                "matcherResult": {
+                  "actual": false,
+                  "expected": true,
+                  "name": "toEqual",
+                  "pass": false
+                }
+              },
+              "expected": "",
+              "matcherName": "",
+              "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+              "passed": false,
+              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
+            }
+          ],
+          "failureMessages": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
+          ],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 == 10+b+a",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "failed",
+          "title": "== 10+b+a"
         },
         {
           "ancestorTitles": [
@@ -2610,44 +2643,11 @@
               "matcherName": "",
               "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
               "passed": false,
-              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41"
+              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
             }
           ],
           "failureMessages": [
-            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41"
-          ],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 == 10+b+a",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "failed",
-          "title": "== 10+b+a"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/PD-283.ts",
-            "[literal] a+b+10"
-          ],
-          "duration": 1,
-          "failureDetails": [
-            {
-              "actual": "",
-              "error": {
-                "matcherResult": {
-                  "actual": false,
-                  "expected": true,
-                  "name": "toEqual",
-                  "pass": false
-                }
-              },
-              "expected": "",
-              "matcherName": "",
-              "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
-              "passed": false,
-              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41"
-            }
-          ],
-          "failureMessages": [
-            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41"
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
           ],
           "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 == b+a+10",
           "location": null,
@@ -2676,11 +2676,11 @@
               "matcherName": "",
               "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
               "passed": false,
-              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41"
+              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
             }
           ],
           "failureMessages": [
-            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41"
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
           ],
           "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 == b+a+10",
           "location": null,
@@ -2693,7 +2693,7 @@
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] a+b+10"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 != a+10+b",
@@ -2707,7 +2707,7 @@
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] a+b+10"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 != 10+a+b",
@@ -2735,7 +2735,7 @@
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] a+b+10"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 != b+a+10",
@@ -2763,7 +2763,7 @@
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] 0<x≤4"
           ],
-          "duration": 11,
+          "duration": 10,
           "failureDetails": [
             {
               "actual": "",
@@ -2943,7 +2943,7 @@
             "src/fixtures/latex-equal/symbolic-a.ts",
             "[symbolic] \\left(\\frac{2\\sqrt{2}}{3},\\frac{1}{3}\\right)"
           ],
-          "duration": 5,
+          "duration": 4,
           "failureDetails": [
             {
               "actual": "",
@@ -2969,7 +2969,7 @@
             "src/fixtures/latex-equal/symbolic-a.ts",
             "[symbolic] \\left(\\frac{2\\sqrt{2}}{3},\\frac{1}{3}\\right)"
           ],
-          "duration": 4,
+          "duration": 5,
           "failureDetails": [
             {
               "actual": "",
@@ -2995,7 +2995,7 @@
             "src/fixtures/latex-equal/symbolic-a.ts",
             "[symbolic] \\left(\\frac{2\\sqrt{2}}{3},\\frac{1}{3}\\right)"
           ],
-          "duration": 9,
+          "duration": 7,
           "failureDetails": [
             {
               "actual": "",
@@ -3021,7 +3021,7 @@
             "src/fixtures/latex-equal/symbolic-a.ts",
             "[symbolic] \\left(\\frac{2\\sqrt{2}}{3},\\frac{1}{3}\\right)"
           ],
-          "duration": 4,
+          "duration": 5,
           "failureDetails": [
             {
               "actual": "",
@@ -3047,7 +3047,7 @@
             "src/fixtures/latex-equal/symbolic-a.ts",
             "[symbolic] f\\left[\\left(x,y\\right)\\right]=\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right)"
           ],
-          "duration": 39,
+          "duration": 33,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-a.ts [symbolic] f\\left[\\left(x,y\\right)\\right]=\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right) == f\\left[\\left(x,y\\right)\\right]=(\\frac{1}{3}\\left(x-3\\right),\\frac{1}{3}\\left(y-2\\right))",
@@ -3075,7 +3075,7 @@
             "src/fixtures/latex-equal/symbolic-a.ts",
             "[symbolic] f\\left[\\left(x,y\\right)\\right]=\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right)"
           ],
-          "duration": 31,
+          "duration": 28,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-a.ts [symbolic] f\\left[\\left(x,y\\right)\\right]=\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right) == f\\left[\\left(x,y\\right)\\right]=(\\frac{-3+x}{3},\\frac{-2+y}{3})",
@@ -3115,7 +3115,7 @@
             "src/fixtures/latex-equal/symbolic-a.ts",
             "[symbolic] f\\left[\\left(x,y\\right)\\right]=\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right)"
           ],
-          "duration": 32,
+          "duration": 30,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-a.ts [symbolic] f\\left[\\left(x,y\\right)\\right]=\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right) == f\\left[\\left(x,y\\right)\\right]=(\\frac{-3+x}{3},\\frac{-2+y}{3})",
@@ -3129,7 +3129,7 @@
             "src/fixtures/latex-equal/symbolic-a.ts",
             "[symbolic] -\\frac{3\\pi}{4}\\le x\\le\\frac{\\pi}{4}"
           ],
-          "duration": 15,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-a.ts [symbolic] -\\frac{3\\pi}{4}\\le x\\le\\frac{\\pi}{4} == -\\frac{3}{4}\\pi\\ \\le\\ x\\le\\ \\ \\frac{1}{4}\\pi",
@@ -3143,7 +3143,7 @@
             "src/fixtures/latex-equal/symbolic-b.ts",
             "[symbolic] m=50\\cos\\left(\\frac{2\\pi}{30}d\\right)+50"
           ],
-          "duration": 19,
+          "duration": 13,
           "failureDetails": [
             {
               "actual": "",
@@ -3169,7 +3169,7 @@
             "src/fixtures/latex-equal/symbolic-b.ts",
             "[symbolic] m=50\\cos\\left(\\frac{2\\pi}{30}d\\right)+50"
           ],
-          "duration": 22,
+          "duration": 17,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-b.ts [symbolic] m=50\\cos\\left(\\frac{2\\pi}{30}d\\right)+50 == m=50\\cos\\left(\\frac{1}{15}\\pi\\ d\\right)+50",
@@ -3183,7 +3183,7 @@
             "src/fixtures/latex-equal/symbolic-b.ts",
             "[symbolic] m=50\\cos\\left(\\frac{2\\pi}{30}d\\right)+50"
           ],
-          "duration": 14,
+          "duration": 12,
           "failureDetails": [
             {
               "actual": "",
@@ -3199,11 +3199,11 @@
               "matcherName": "",
               "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
               "passed": false,
-              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41"
+              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
             }
           ],
           "failureMessages": [
-            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41"
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/home/ede/dev/github/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /home/ede/dev/github/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
           ],
           "fullName": "src/fixtures/latex-equal/symbolic-b.ts [symbolic] m=50\\cos\\left(\\frac{2\\pi}{30}d\\right)+50 == m=50\\cos\\left(d\\right)+50",
           "location": null,
@@ -3216,7 +3216,7 @@
             "src/fixtures/latex-equal/symbolic-b.ts",
             "[symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500"
           ],
-          "duration": 22,
+          "duration": 20,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-b.ts [symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500 == y=250\\sin\\left(\\frac{2}{5}\\pi\\ x\\right)+2500",
@@ -3230,7 +3230,7 @@
             "src/fixtures/latex-equal/symbolic-b.ts",
             "[symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500"
           ],
-          "duration": 22,
+          "duration": 21,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-b.ts [symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500 == y=250\\sin\\left(\\left(\\frac{2}{5}\\pi\\ \\right)x\\right)+2500",
@@ -3244,7 +3244,7 @@
             "src/fixtures/latex-equal/symbolic-b.ts",
             "[symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500"
           ],
-          "duration": 21,
+          "duration": 20,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-b.ts [symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500 == y=250\\sin\\left(\\left(\\frac{2\\pi\\ }{5}\\right)x\\right)+2500",
@@ -3272,7 +3272,7 @@
             "src/fixtures/latex-equal/symbolic-b.ts",
             "[symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500"
           ],
-          "duration": 22,
+          "duration": 23,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-b.ts [symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500 == y=250\\sin\\left(\\frac{2}{5}\\pi\\ x\\right)+2,500",
@@ -3286,7 +3286,7 @@
             "src/fixtures/latex-equal/symbolic-b.ts",
             "[symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500"
           ],
-          "duration": 33,
+          "duration": 32,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-b.ts [symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500 == y=250\\sin\\left(\\left(\\frac{2}{5}\\pi\\ \\right)x\\right)+2,500",
@@ -3300,7 +3300,7 @@
             "src/fixtures/latex-equal/symbolic-b.ts",
             "[symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500"
           ],
-          "duration": 27,
+          "duration": 29,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-b.ts [symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500 == y=250\\sin\\left(\\left(\\frac{2\\pi\\ }{5}\\right)x\\right)+2,500",
@@ -3340,7 +3340,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] f\\left(y\\right)=26000\\left(0.83\\right)^y"
           ],
-          "duration": 9,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/to-be-fixed.ts [symbolic] f\\left(y\\right)=26000\\left(0.83\\right)^y == f\\left(y\\right)=26000\\left(1-0.17\\right)^y",
@@ -3368,7 +3368,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] f\\left(y\\right)=26000\\left(0.83\\right)^y"
           ],
-          "duration": 10,
+          "duration": 9,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/to-be-fixed.ts [symbolic] f\\left(y\\right)=26000\\left(0.83\\right)^y == f\\left(y\\right)=26,000\\left(0.83\\right)^y",
@@ -3408,7 +3408,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] f^{-1}\\left(x\\right)=-\\frac{12}{x}+8"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [
             {
               "actual": "",
@@ -3434,7 +3434,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] f^{-1}\\left(x\\right)=-\\frac{12}{x}+8"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [
             {
               "actual": "",
@@ -3460,7 +3460,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] f^{-1}\\left(x\\right)=-\\frac{12}{x}+8"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [
             {
               "actual": "",
@@ -3486,7 +3486,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] f^{-1}\\left(x\\right)=-\\frac{12}{x}+8"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [
             {
               "actual": "",
@@ -3512,7 +3512,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] f\\left(x\\right)=1.1x+8"
           ],
-          "duration": 12,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/to-be-fixed.ts [symbolic] f\\left(x\\right)=1.1x+8 == f(x)\\ =\\ 8+1.1x",
@@ -3554,7 +3554,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] f\\left(x\\right)=1.1x+8"
           ],
-          "duration": 12,
+          "duration": 10,
           "failureDetails": [
             {
               "actual": "",
@@ -3580,7 +3580,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] f\\left(x\\right)=1.1x+8"
           ],
-          "duration": 14,
+          "duration": 10,
           "failureDetails": [
             {
               "actual": "",
@@ -3632,7 +3632,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] f\\left(x\\right)=1.1x+8"
           ],
-          "duration": 12,
+          "duration": 10,
           "failureDetails": [
             {
               "actual": "",
@@ -3658,7 +3658,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] f\\left(x\\right)=1.1x+8"
           ],
-          "duration": 11,
+          "duration": 12,
           "failureDetails": [
             {
               "actual": "",
@@ -3712,7 +3712,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] x=\\frac{20,000}{r^2}\\text{radians}"
           ],
-          "duration": 9,
+          "duration": 7,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/to-be-fixed.ts [symbolic] x=\\frac{20,000}{r^2}\\text{radians} == x=\\frac{1}{r^2}\\times 20000\\ \\text{radians}",
@@ -3740,7 +3740,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] x=\\frac{20,000}{r^2}\\text{radians}"
           ],
-          "duration": 8,
+          "duration": 7,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/to-be-fixed.ts [symbolic] x=\\frac{20,000}{r^2}\\text{radians} == x=20000\\left(\\frac{1}{r^2}\\right)\\ \\text{radians}",
@@ -3954,7 +3954,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] 100"
           ],
-          "duration": 8,
+          "duration": 7,
           "failureDetails": [
             {
               "actual": "",
