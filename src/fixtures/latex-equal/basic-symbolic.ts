@@ -36,6 +36,7 @@ export default {
         "x^2 + 4x + 4",
         "(2 + x)^2",
         "x^2 + 4(x+1)",
+        //TRIAGE:two-rounds-of-normalization
         "x^2 + 8 ((x+1) / 2)",
       ],
       ne: ["x^2 + 4(x+2)"],

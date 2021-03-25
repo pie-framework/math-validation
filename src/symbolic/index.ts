@@ -1,14 +1,11 @@
 import { logger } from "../log";
-import { mathjs } from "../mathjs";
+import { mathjs, MathNode } from "../mathjs";
 
-type MathNode = any;
 const log = logger("mv:symbolic");
 
 export type SymbolicOpts = {};
 
-// const mathjs = create(all, { number: "Fraction" });
-
-const { simplify: ms, rationalize, derivative, parse, parser, json } = mathjs;
+const { simplify: ms, rationalize } = mathjs;
 
 const SIMPLIFY_RULES = [
   { l: "n1^(1/n2)", r: "nthRoot(n1, n2)" },
@@ -41,11 +38,7 @@ const normalize = (a: string | MathNode) => {
   return s;
 };
 
-export const isMathEqual = (
-  a: MathNode,
-  b: MathNode,
-  opts?: { mode?: "symbolic" | "literal" }
-) => {
+export const isMathEqual = (a: MathNode, b: MathNode, opts?: SymbolicOpts) => {
   const as = normalize(a);
   const bs = normalize(b);
 
