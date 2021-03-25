@@ -1,5 +1,3 @@
-import { trueDependencies } from "mathjs";
-
 export default {
   mode: "symbolic",
 
