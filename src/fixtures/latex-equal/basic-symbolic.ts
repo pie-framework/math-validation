@@ -29,7 +29,6 @@ export default {
       ne: ["y", "x + 1"],
     },
     {
-      skip: false,
       target: "(x + 2)^2",
       eq: [
         "x^2 + 4x + 4",
@@ -40,7 +39,13 @@ export default {
         "x^2 + 4(x+1)",
         "x^2 + 8 ((x+1) / 2)",
       ],
-      ne: ["x^3 + 4x + 4", "x^2 + 4(x+2)"],
+      ne: ["x^2 + 4(x+2)"],
+    },
+    {
+      label: "breaks - not sure why > $target",
+      skip: false,
+      target: "(x + 2)^2",
+      ne: ["x^3 + 4x + 4"],
     },
 
     {
