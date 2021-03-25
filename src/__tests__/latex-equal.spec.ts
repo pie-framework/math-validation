@@ -48,7 +48,7 @@ testData.forEach((d) => {
               expect(l).toEqual(true);
             });
           }
-          it(`new == ${y}`, () => {
+          it(`== ${y}`, () => {
             const l = latexEqual(t.target, y, { legacy: false, mode });
             // console.log(l);
             expect(l).toEqual(true);
@@ -64,7 +64,7 @@ testData.forEach((d) => {
               expect(l).toEqual(false);
             });
           }
-          it(`new != ${y}`, () => {
+          it(`!= ${y}`, () => {
             const l = latexEqual(t.target, y, { legacy: false, mode });
             expect(l).toEqual(false);
           });

@@ -1,3 +1,5 @@
+import { trueDependencies } from "mathjs";
+
 export default {
   mode: "symbolic",
 
@@ -29,23 +31,28 @@ export default {
       ne: ["y", "x + 1"],
     },
     {
+      skip: false,
       target: "(x + 2)^2",
-      eq: ["x^2 + 4x + 4", "x^2 + 4(x+1)", "x^2 + 8 ((x+1) / 2)"],
+      eq: [
+        "x^2 + 4x + 4",
+        "x^2 + 4(x+1)",
+        "x^2 + 8 ((x+1) / 2)",
+        "(2 + x)^2",
+        "x^2 + 4x + 4",
+        "x^2 + 4(x+1)",
+        "x^2 + 8 ((x+1) / 2)",
+      ],
       ne: ["x^3 + 4x + 4", "x^2 + 4(x+2)"],
     },
 
     {
-      target: "(x + 2)^2",
-      eq: ["(2 + x)^2", "x^2 + 4x + 4", "x^2 + 4(x+1)", "x^2 + 8 ((x+1) / 2)"],
-      ne: ["x^3 + 4x + 4", "x^2 + 4(x+2)"],
-    },
-
-    {
+      skip: true,
       target: "y^(2 x)",
       eq: ["y^(x+x)"],
     },
 
     {
+      skip: true,
       target: "\\sqrt{4x}",
       eq: ["\\sqrt{3x + 1x}"],
     },
@@ -57,6 +64,7 @@ export default {
     { target: "sin(x)", eq: "sin(x)" },
     { target: "tan(x)", eq: "tan(x)" },
     {
+      skip: true,
       target: "f^{-1}\\left(x\\right)=\\sqrt{x-1}+3",
       eq: "f^{-1}\\left(x\\right)=\\sqrt{x-1}+4-1",
     },
@@ -89,6 +97,7 @@ export default {
       eq: "\\sqrt{x-1}+3",
     },
     {
+      skip: true,
       target: "f^{-1}\\left(x\\right)=\\left(x-1\\right)^{\\frac{1}{2}}+3",
       eq: "f^{-1}\\left(x\\right)=\\sqrt{x-1}+3",
     },

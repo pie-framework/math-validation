@@ -3,6 +3,8 @@ import { MathNode, create, all } from "mathjs";
 
 const log = logger("mv:math-equal");
 
+export type SymbolicOpts = {};
+
 const mathjs = create(all, { number: "Fraction" });
 const { simplify: ms, rationalize, derivative, parse, parser } = mathjs;
 

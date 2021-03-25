@@ -194,6 +194,7 @@ export default {
       ],
     },
     {
+      skip: true,
       target: "f\\left(x\\right)=x\\left(3x+16\\right)",
       eq: [
         "f\\left(x\\right)\\ =\\ \\left(3x+16\\right)x",

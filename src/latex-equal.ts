@@ -1,14 +1,20 @@
 import { LatexToAst } from "./conversion/latex-to-ast";
 import { AstToMathJs } from "./conversion/ast-to-mathjs";
 import { MathNode } from "mathjs";
-import { isMathEqual } from "./symbolic/math-equal";
-import { isMathEqual as isLiteralEqual } from "./literal";
+import { isMathEqual as isSymbolicEqual, SymbolicOpts } from "./symbolic";
+import { isMathEqual as isLiteralEqual, LiteralOpts } from "./literal";
 
 export type Latex = string;
 
 export type Opts = {
   mode?: "symbolic" | "literal";
-  allowThousandsSeparator?: boolean;
+  literal?: LiteralOpts;
+  symbolic?: SymbolicOpts;
+
+  /**
+   *  this is to be removed - no point adding it: https://illuminate.atlassian.net/browse/PD-1031
+   * allowThousandsSeparator?: boolean;
+   */
   /** only for development - to be removed */
   legacy?: boolean;
 };
@@ -40,9 +46,9 @@ export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {
 
   const amo = toMathNode(a);
   const bmo = toMathNode(b);
-  if (opts.mode === "symbolic") {
-    return isMathEqual(amo, bmo);
+  if (opts.mode === "literal") {
+    return isLiteralEqual(amo, bmo, opts.literal);
   } else {
-    return isLiteralEqual(amo, bmo);
+    return isSymbolicEqual(amo, bmo, opts.symbolic);
   }
 };

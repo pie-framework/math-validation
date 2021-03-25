@@ -1,8 +1,10 @@
 export default {
   mode: "symbolic",
   label: "CH6456",
+  skip: true,
   tests: [
     {
+      label: "we have percent support in math-expressions - port",
       target: "-12.5%",
       eq: ["-12.5%", "-12.5\\%"],
       ne: ["-11.5%"],
