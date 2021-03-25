@@ -18,6 +18,23 @@ There is one test that runs fixture data located here: `src/fixtures/latex-equal
 yarn jest src/__tests__/latex-equal.spec.ts -t src/fixtures/latex-equal/7119.ts --reporters default
 ```
 
+## Next Steps
+
+* Check that we have a test case for any outstanding jira tickets relating to math-validation.
+* Check that api we expose will support what is needed.
+* Do triage on the test failures, add a note to failing test so we can build a picture of the work needed
+
+
+## Test failure triage
+
+| theme                      | notes                                                                  |
+|----------------------------|------------------------------------------------------------------------|
+| latex parsing              | seems like we aren't able to parse all the inputs in the test cases    |
+| math evaluation            | math.js is not seeing things as being equal - need more detail on that |
+| incomplete literal support | we haven't really set up literal options support yet                   |
+| incorrect test data        | sometimes the test data is not quite right                             |
+
+
 ## Goals 
 
 * we parse from latex -> ast -> mathjs, legacy was latex -> ast -> math_string -> mathjs (done)

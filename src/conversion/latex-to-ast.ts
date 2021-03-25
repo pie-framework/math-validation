@@ -1043,7 +1043,7 @@ export class LatexToAst {
     }
 
     if (this.token.token_type === "NUMBER") {
-      log("?", this.token.token_text);
+      /** TODO: this is a bit primitive, should try and parse commas in numbers correctly */
       // @ts-ignore
       result = parseFloat(this.token.token_text.replace(/,/g, ""));
       this.advance();
