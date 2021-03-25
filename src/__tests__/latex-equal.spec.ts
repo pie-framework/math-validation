@@ -75,21 +75,20 @@ testData.forEach((d) => {
       const dfn = skip ? describe.skip : only ? describe.only : describe;
 
       const label = getLabel(t);
-      dfn(label, () => {
+      const mode = t.mode || d.data.mode;
+      dfn(`[${mode}] ${label}`, () => {
         const eq = t.eq ? (Array.isArray(t.eq) ? t.eq : [t.eq]) : [];
 
         // console.log(t.label || t.target, "eq.length", eq.length);
-        const mode = t.mode || d.data.mode;
-        const mk = mode == "literal" ? "L" : "S";
         // console.log("mode!!", mode);
         eq.forEach((y) => {
           if (process.env.LEGACY === "true") {
-            it(`[legacy][${mk}] == ${y}`, () => {
+            it(`[legacy] == ${y}`, () => {
               const l = latexEqual(t.target, y, { legacy: true, mode });
               expect(l).toEqual(true);
             });
           }
-          it(`[${mk}] == ${y}`, () => {
+          it(`== ${y}`, () => {
             const l = latexEqual(t.target, y, { legacy: false, mode });
             // console.log(l);
             expect(l).toEqual(true);
@@ -100,12 +99,12 @@ testData.forEach((d) => {
 
         ne.forEach((y) => {
           if (process.env.LEGACY === "true") {
-            it(`[legacy][${mk}] != ${y}`, () => {
+            it(`[legacy] != ${y}`, () => {
               const l = latexEqual(t.target, y, { legacy: true, mode });
               expect(l).toEqual(false);
             });
           }
-          it(`[${mk}] != ${y}`, () => {
+          it(`!= ${y}`, () => {
             const l = latexEqual(t.target, y, { legacy: false, mode });
             expect(l).toEqual(false);
           });
