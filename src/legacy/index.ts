@@ -243,7 +243,6 @@ export const symbolicEquals = (valueOne, valueTwo, options: any = {}) => {
     inverse, // returns inverse for the comparison result
   } = options;
 
-  console.log("SSS");
   let valueOneToUse = valueOne;
   let valueTwoToUse = valueTwo;
 
@@ -281,8 +280,6 @@ export const symbolicEquals = (valueOne, valueTwo, options: any = {}) => {
   two = simplify(two);
 
   const equals = one.equals(two);
-
-  console.log("?? equals", equals);
 
   return inverse ? !equals : equals;
 };
