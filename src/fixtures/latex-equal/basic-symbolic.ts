@@ -29,13 +29,12 @@ export default {
       ne: ["y", "x + 1"],
     },
     {
+      // only: true,
       target: "(x + 2)^2",
       eq: [
+        /** when simplified w/ perfect square formula - should be this */
         "x^2 + 4x + 4",
-        "x^2 + 4(x+1)",
-        "x^2 + 8 ((x+1) / 2)",
         "(2 + x)^2",
-        "x^2 + 4x + 4",
         "x^2 + 4(x+1)",
         "x^2 + 8 ((x+1) / 2)",
       ],
@@ -43,19 +42,16 @@ export default {
     },
     {
       label: "breaks - not sure why > $target",
-      skip: false,
       target: "(x + 2)^2",
       ne: ["x^3 + 4x + 4"],
     },
 
     {
-      skip: true,
       target: "y^(2 x)",
       eq: ["y^(x+x)"],
     },
 
     {
-      skip: true,
       target: "\\sqrt{4x}",
       eq: ["\\sqrt{3x + 1x}"],
     },

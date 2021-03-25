@@ -1,12 +1,26 @@
 import { logger } from "../log";
-import { MathNode, create, all } from "mathjs";
+/** works
+ * 
+import {
+  MathNode,
+  rationalize,
+  json,
+  simplify as ms,
+  parse,
+  parser,
+} from "mathjs";
+*/
+// import { create, all } from "mathjs";
+import { mathjs } from "../mathjs";
 
-const log = logger("mv:math-equal");
+type MathNode = any;
+const log = logger("mv:symbolic");
 
 export type SymbolicOpts = {};
 
-const mathjs = create(all, { number: "Fraction" });
-const { simplify: ms, rationalize, derivative, parse, parser } = mathjs;
+// const mathjs = create(all, { number: "Fraction" });
+
+const { simplify: ms, rationalize, derivative, parse, parser, json } = mathjs;
 
 const SIMPLIFY_RULES = [
   { l: "n1^(1/n2)", r: "nthRoot(n1, n2)" },
@@ -17,7 +31,7 @@ const SIMPLIFY_RULES = [
   { l: "(n^2) + 2n", r: "n * (n + 2)" },
   // { l: "(n/n1) * n2", r: "t" },
   // perfect square formula:
-  // { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
+  { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
   // { l: "(n^2) + 4n + 4", r: "(n^2) + (2n * 2) + (2^2)" },
 ];
 
@@ -34,6 +48,8 @@ const normalize = (a: string | MathNode) => {
     // ok;
   }
   const s = simplify(r);
+
+  log("[normalize] input: ", a.toString(), "output: ", s.toString());
   return s;
 };
 
@@ -45,10 +61,41 @@ export const isMathEqual = (
   const as = normalize(a);
   const bs = normalize(b);
 
-  if (as.equals(bs)) {
+  log("[isMathEqual]", as.toString(), "==?", bs.toString());
+
+  // log(
+  //   "je?",
+  //   //@ts-ignore
+  //   JSON.stringify(as, json, "  ") ===
+  //     //@ts-ignore
+  //     JSON.stringify(bs, json, "  ")
+  // );
+  // //@ts-ignore
+  // log(
+  //   "[isMathEqual]",
+  //   //@ts-ignore
+  //   JSON.stringify(as, json, "  "),
+  //   //@ts-ignore
+  //   JSON.stringify(bs, json, "  ")
+  // );
+
+  // if (as.equals(bs)) {
+  //   return true;
+  // }
+  // return evaluate(as, bs);
+  const firstTest = as.equals(bs);
+  if (firstTest) {
     return true;
   }
-  return evaluate(as, bs);
+
+  /**
+   * Note: this seems very dodgy that we have to try a 2nd round of normalization here.
+   * Why is this necessary and try and remove it.
+   */
+  const at = normalize(as);
+  const bt = normalize(bs);
+
+  return at.equals(bt);
   // NOTE: A temporary naive fix by checking derivatives
 
   // log(a.toString(), "==", b.toString(), "?");
