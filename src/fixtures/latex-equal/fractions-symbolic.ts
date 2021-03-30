@@ -1,3 +1,5 @@
+import { Triage } from "../triage";
+
 export default {
   mode: "symbolic",
   tests: [
@@ -18,6 +20,7 @@ export default {
 
     {
       target: "\\frac{n-5}{6}",
+      triage: [Triage.NODE_SORT, Triage.IDENTITY_PROPERTY, Triage.FRACTIONS_PROPERTIES],
       eq: [
         "\\frac{-5+n}{6}",
         "\\frac{n}{6}-\\frac{5}{6}",
@@ -89,6 +92,7 @@ export default {
     },
     {
       target: "\\frac{a+c}{2}+\\frac{b+d}{2}i",
+       triage: Triage.NODE_SORT,
       eq: [
         "\\frac{c+a}{2}+\\frac{b+d}{2}i",
         "\\frac{c+a}{2}+\\frac{d+b}{2}i",
@@ -107,6 +111,7 @@ export default {
     },
     {
       target: "h=\\frac{3V}{B}",
+      triage: Triage.FRACTIONS_PROPERTIES,
       eq: [
         "h=3\\frac{V}{B}",
         "h=\\frac{\\left(3\\times V\\right)}{B}",
@@ -124,6 +129,7 @@ export default {
     },
     {
       target: "c=-\\frac{b}{m}",
+      triage: Triage.COMMON_FACTOR,
       eq: [
         "c=-b\\div m",
         "c=-b\\times \\frac{1}{m}",
@@ -167,6 +173,7 @@ export default {
     },
     {
       target: "h=\\frac{da}{c}",
+      triage: Triage.NODE_SORT,
       eq: [
         "h=\\frac{ad}{c}",
         "h=\\frac{a\\times d}{c}",
@@ -181,6 +188,7 @@ export default {
     },
     {
       target: "x=\\frac{c-by}{a}",
+      triage: [Triage.COMMON_DENOMINATOR, Triage.IDENTITY_PROPERTY],
       eq: [
         "x=\\frac{1}{a}\\left(c-by\\right)",
         "x=\\left(c-by\\right)\\div a",
