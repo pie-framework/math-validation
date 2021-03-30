@@ -7,7 +7,6 @@ export type Latex = string;
 
 export type Opts = {
   mode?: "symbolic" | "literal";
-  allowThousandsSeparator?: boolean;
   /** only for development - to be removed */
   legacy?: boolean;
 };

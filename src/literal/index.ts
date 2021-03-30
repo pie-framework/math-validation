@@ -4,7 +4,11 @@ import { logger } from "../log";
 export type LiteralOpts = {
   allowTrailingZeros?: boolean;
   ignoreOrder?: boolean;
-  allowSpaces?: boolean;
+
+  /** For future implementation, per PD-304
+   * If a response matches an "exception", it is incorrect, even if it also matches one of the correct answers
+   */
+  exception?: boolean;
 };
 
 const log = logger("mv:literal");
