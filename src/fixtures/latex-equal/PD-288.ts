@@ -15,6 +15,7 @@ export default {
     },
     {
       target: "ab",
+      triage: Triage.NODE_SORT,
       eq: [
         "a*b",
         "a(b)",
@@ -30,6 +31,7 @@ export default {
     },
     {
       target: "a/b",
+      triage: Triage.LATEX_PARSE_ERROR,
       eq: "a÷b",
     },
     {
@@ -50,9 +52,10 @@ export default {
     eq("8.5x", "8.5000x"),
     {
       target: "-(a/b)",
+      triage: [Triage.NODE_SORT, Triage.IDENTITY_PROPERTY],
       eq: ["(-a)/b", "a/(-b)"],
     },
-    { target: "ab(x+y)", eq: "a(bx+by)" },
+    { target: "ab(x+y)", eq: ["a(bx+by)", "(abx+aby)", "abx+aby", "abx + aby"], triage:Triage.DISTRIBUTIVE_PROPERTY },
     { target: "88%", eq: "0.88", triage: Triage.PERCENT_SUPPORT },
   ],
 };
