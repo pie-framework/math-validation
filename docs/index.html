@@ -127,11 +127,11 @@
         <div id="accordion">
             <div class="d-none" id="test-results">{
   &quot;numFailedTestSuites&quot;: 1,
-  &quot;numFailedTests&quot;: 64,
+  &quot;numFailedTests&quot;: 30,
   &quot;numPassedTestSuites&quot;: 2,
   &quot;numPassedTests&quot;: 187,
   &quot;numPendingTestSuites&quot;: 0,
-  &quot;numPendingTests&quot;: 0,
+  &quot;numPendingTests&quot;: 80,
   &quot;numRuntimeErrorTestSuites&quot;: 0,
   &quot;numTodoTests&quot;: 0,
   &quot;numTotalTestSuites&quot;: 3,
@@ -179,7 +179,7 @@
         &quot;updated&quot;: 0,
         &quot;uncheckedKeys&quot;: []
       },
-      &quot;testFilePath&quot;: &quot;&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;__tests__&#x2F;latex-equal.spec.ts&quot;,
+      &quot;testFilePath&quot;: &quot;&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;__tests__&#x2F;latex-equal.spec.ts&quot;,
       &quot;testResults&quot;: [
         {
           &quot;ancestorTitles&quot;: [
@@ -242,7 +242,7 @@
             &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;7119.ts&quot;,
             &quot;[symbolic] 4 \\frac{1}{2}&quot;
           ],
-          &quot;duration&quot;: 0,
+          &quot;duration&quot;: 1,
           &quot;failureDetails&quot;: [],
           &quot;failureMessages&quot;: [],
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;7119.ts [symbolic] 4 \\frac{1}{2} &#x3D;&#x3D; 4 \\frac{1}{2}&quot;,
@@ -690,7 +690,7 @@
             &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;basic-symbolic.ts&quot;,
             &quot;[symbolic] sin(x)&quot;
           ],
-          &quot;duration&quot;: 0,
+          &quot;duration&quot;: 1,
           &quot;failureDetails&quot;: [],
           &quot;failureMessages&quot;: [],
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;basic-symbolic.ts [symbolic] sin(x) &#x3D;&#x3D; sin(x)&quot;,
@@ -736,7 +736,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;basic-symbolic.ts [symbolic] f^{-1}\\left(x\\right)&#x3D;\\sqrt{x-1}+3 &#x3D;&#x3D; f^{-1}\\left(x\\right)&#x3D;\\sqrt{x-1}+4-1&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f^{-1}\\left(x\\right)&#x3D;\\sqrt{x-1}+4-1&quot;
         },
         {
@@ -842,25 +842,13 @@
             &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;basic-symbolic.ts&quot;,
             &quot;[symbolic] f^{-1}\\left(x\\right)&#x3D;\\left(x-1\\right)^{\\frac{1}{2}}+3&quot;
           ],
-          &quot;duration&quot;: 1,
-          &quot;failureDetails&quot;: [
-            {
-              &quot;actual&quot;: &quot;&quot;,
-              &quot;error&quot;: {},
-              &quot;expected&quot;: &quot;&quot;,
-              &quot;matcherName&quot;: &quot;&quot;,
-              &quot;message&quot;: &quot;Error: Non string functions not implemented for conversion to mathjs&quot;,
-              &quot;passed&quot;: false,
-              &quot;stack&quot;: &quot;Error: Non string functions not implemented for conversion to mathjs\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:107:15)\n    at AstToMathJs.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:184:23)\n    at Array.map (&lt;anonymous&gt;)\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:182:32)\n    at toMathNode (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:27:14)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:47:15)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;index.ts:25:12)\n    at Object.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;__tests__&#x2F;latex-equal.spec.ts:92:23)\n    at Object.asyncJestTest (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;jasmineAsyncInstall.js:106:37)\n    at &#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:45:12&quot;
-            }
-          ],
-          &quot;failureMessages&quot;: [
-            &quot;Error: Non string functions not implemented for conversion to mathjs\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:107:15)\n    at AstToMathJs.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:184:23)\n    at Array.map (&lt;anonymous&gt;)\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:182:32)\n    at toMathNode (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:27:14)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:47:15)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;index.ts:25:12)\n    at Object.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;__tests__&#x2F;latex-equal.spec.ts:92:23)\n    at Object.asyncJestTest (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;jasmineAsyncInstall.js:106:37)\n    at &#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:45:12&quot;
-          ],
+          &quot;duration&quot;: 0,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;basic-symbolic.ts [symbolic] f^{-1}\\left(x\\right)&#x3D;\\left(x-1\\right)^{\\frac{1}{2}}+3 &#x3D;&#x3D; f^{-1}\\left(x\\right)&#x3D;\\sqrt{x-1}+3&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f^{-1}\\left(x\\right)&#x3D;\\sqrt{x-1}+3&quot;
         },
         {
@@ -1967,7 +1955,7 @@
             &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;fractions-symbolic.ts&quot;,
             &quot;[symbolic] g\\left(x\\right)&#x3D;\\sqrt[3]{x-2}&quot;
           ],
-          &quot;duration&quot;: 7,
+          &quot;duration&quot;: 11,
           &quot;failureDetails&quot;: [],
           &quot;failureMessages&quot;: [],
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;fractions-symbolic.ts [symbolic] g\\left(x\\right)&#x3D;\\sqrt[3]{x-2} &#x3D;&#x3D; g\\left(x\\right)\\ &#x3D;\\ \\left(-2+x\\right)^{\\frac{1}{3}}&quot;,
@@ -2061,7 +2049,7 @@
             &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;fractions-symbolic.ts&quot;,
             &quot;[symbolic] h&#x3D;\\frac{da}{c}&quot;
           ],
-          &quot;duration&quot;: 7,
+          &quot;duration&quot;: 9,
           &quot;failureDetails&quot;: [],
           &quot;failureMessages&quot;: [],
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;fractions-symbolic.ts [symbolic] h&#x3D;\\frac{da}{c} &#x3D;&#x3D; h&#x3D;\\left(d\\times a\\right)\\div c&quot;,
@@ -2391,7 +2379,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;fractions-symbolic.ts [symbolic] f\\left(x\\right)&#x3D;x\\left(3x+16\\right) &#x3D;&#x3D; f\\left(x\\right)\\ &#x3D;\\ \\left(3x+16\\right)x&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f\\left(x\\right)\\ &#x3D;\\ \\left(3x+16\\right)x&quot;
         },
         {
@@ -2405,15 +2393,15 @@
               &quot;actual&quot;: &quot;&quot;,
               &quot;error&quot;: {
                 &quot;matcherResult&quot;: {
-                  &quot;actual&quot;: false,
-                  &quot;expected&quot;: true,
+                  &quot;actual&quot;: true,
+                  &quot;expected&quot;: false,
                   &quot;name&quot;: &quot;toEqual&quot;,
                   &quot;pass&quot;: false
                 }
               },
               &quot;expected&quot;: &quot;&quot;,
               &quot;matcherName&quot;: &quot;&quot;,
-              &quot;message&quot;: &quot;Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) &#x2F;&#x2F; deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m&quot;,
+              &quot;message&quot;: &quot;Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) &#x2F;&#x2F; deep equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m&quot;,
               &quot;passed&quot;: false,
               &quot;stack&quot;: &quot;Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) &#x2F;&#x2F; deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;__tests__&#x2F;latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;jasmineAsyncInstall.js:106:37)\n    at &#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:45:12\n    at new Promise (&lt;anonymous&gt;)\n    at mapper (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:28:19)\n    at &#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:75:41&quot;
             }
@@ -2421,16 +2409,16 @@
           &quot;failureMessages&quot;: [
             &quot;Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) &#x2F;&#x2F; deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;__tests__&#x2F;latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;jasmineAsyncInstall.js:106:37)\n    at &#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:45:12\n    at new Promise (&lt;anonymous&gt;)\n    at mapper (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:28:19)\n    at &#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:75:41&quot;
           ],
-          &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;fractions-symbolic.ts [symbolic] f\\left(x\\right)&#x3D;x\\left(3x+16\\right) &#x3D;&#x3D; f\\left(x\\right)\\ &#x3D;\\ \\left(3x+16\\right)\\left(x\\right)&quot;,
+          &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;literal.ts [literal] 12.00 !&#x3D; 12.000000&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
           &quot;status&quot;: &quot;failed&quot;,
-          &quot;title&quot;: &quot;&#x3D;&#x3D; f\\left(x\\right)\\ &#x3D;\\ \\left(3x+16\\right)\\left(x\\right)&quot;
+          &quot;title&quot;: &quot;!&#x3D; 12.000000&quot;
         },
         {
           &quot;ancestorTitles&quot;: [
-            &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;fractions-symbolic.ts&quot;,
-            &quot;[symbolic] f\\left(x\\right)&#x3D;x\\left(3x+16\\right)&quot;
+            &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;literal.ts&quot;,
+            &quot;[literal] 2 + 3&quot;
           ],
           &quot;duration&quot;: 16,
           &quot;failureDetails&quot;: [
@@ -2454,30 +2442,30 @@
           &quot;failureMessages&quot;: [
             &quot;Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) &#x2F;&#x2F; deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;__tests__&#x2F;latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;jasmineAsyncInstall.js:106:37)\n    at &#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:45:12\n    at new Promise (&lt;anonymous&gt;)\n    at mapper (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:28:19)\n    at &#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:75:41&quot;
           ],
-          &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;fractions-symbolic.ts [symbolic] f\\left(x\\right)&#x3D;x\\left(3x+16\\right) &#x3D;&#x3D; f\\left(x\\right)\\ &#x3D;\\ \\left(16+3x\\right)\\left(x\\right)&quot;,
+          &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;literal.ts [literal] 2 + 3 &#x3D;&#x3D; 3 + 2&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
           &quot;status&quot;: &quot;failed&quot;,
-          &quot;title&quot;: &quot;&#x3D;&#x3D; f\\left(x\\right)\\ &#x3D;\\ \\left(16+3x\\right)\\left(x\\right)&quot;
+          &quot;title&quot;: &quot;&#x3D;&#x3D; 3 + 2&quot;
         },
         {
           &quot;ancestorTitles&quot;: [
-            &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;fractions-symbolic.ts&quot;,
-            &quot;[symbolic] f\\left(x\\right)&#x3D;x\\left(3x+16\\right)&quot;
+            &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;literal.ts&quot;,
+            &quot;[literal] 2 + 3&quot;
           ],
           &quot;duration&quot;: 9,
           &quot;failureDetails&quot;: [],
           &quot;failureMessages&quot;: [],
-          &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;fractions-symbolic.ts [symbolic] f\\left(x\\right)&#x3D;x\\left(3x+16\\right) &#x3D;&#x3D; f\\left(x\\right)\\ &#x3D;\\ x\\left(16+3x\\right)&quot;,
+          &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;literal.ts [literal] 2 + 3 !&#x3D; 3 + 2&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
           &quot;status&quot;: &quot;passed&quot;,
-          &quot;title&quot;: &quot;&#x3D;&#x3D; f\\left(x\\right)\\ &#x3D;\\ x\\left(16+3x\\right)&quot;
+          &quot;title&quot;: &quot;!&#x3D; 3 + 2&quot;
         },
         {
           &quot;ancestorTitles&quot;: [
-            &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;fractions-symbolic.ts&quot;,
-            &quot;[symbolic] f\\left(x\\right)&#x3D;x\\left(3x+16\\right)&quot;
+            &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;literal.ts&quot;,
+            &quot;[literal] a+b+c&quot;
           ],
           &quot;duration&quot;: 16,
           &quot;failureDetails&quot;: [
@@ -2501,16 +2489,16 @@
           &quot;failureMessages&quot;: [
             &quot;Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) &#x2F;&#x2F; deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;__tests__&#x2F;latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;jasmineAsyncInstall.js:106:37)\n    at &#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:45:12\n    at new Promise (&lt;anonymous&gt;)\n    at mapper (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:28:19)\n    at &#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:75:41&quot;
           ],
-          &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;fractions-symbolic.ts [symbolic] f\\left(x\\right)&#x3D;x\\left(3x+16\\right) &#x3D;&#x3D; f\\left(x\\right)\\ &#x3D;\\ \\left(16+3x\\right)x&quot;,
+          &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;literal.ts [literal] a+b+c &#x3D;&#x3D; c+a+b&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
           &quot;status&quot;: &quot;failed&quot;,
-          &quot;title&quot;: &quot;&#x3D;&#x3D; f\\left(x\\right)\\ &#x3D;\\ \\left(16+3x\\right)x&quot;
+          &quot;title&quot;: &quot;&#x3D;&#x3D; c+a+b&quot;
         },
         {
           &quot;ancestorTitles&quot;: [
-            &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;fractions-symbolic.ts&quot;,
-            &quot;[symbolic] f\\left(x\\right)&#x3D;x\\left(3x+16\\right)&quot;
+            &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;literal.ts&quot;,
+            &quot;[literal] a+b+c&quot;
           ],
           &quot;duration&quot;: 15,
           &quot;failureDetails&quot;: [
@@ -2537,13 +2525,13 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;fractions-symbolic.ts [symbolic] f\\left(x\\right)&#x3D;x\\left(3x+16\\right) &#x3D;&#x3D; f\\left(x\\right)\\ &#x3D;\\ 16x+3x^2&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
-          &quot;title&quot;: &quot;&#x3D;&#x3D; f\\left(x\\right)\\ &#x3D;\\ 16x+3x^2&quot;
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;!&#x3D; c+a+b&quot;
         },
         {
           &quot;ancestorTitles&quot;: [
-            &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;fractions-symbolic.ts&quot;,
-            &quot;[symbolic] f\\left(x\\right)&#x3D;x\\left(3x+16\\right)&quot;
+            &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;literal.ts&quot;,
+            &quot;[literal] 12.00+3&quot;
           ],
           &quot;duration&quot;: 15,
           &quot;failureDetails&quot;: [
@@ -2567,11 +2555,11 @@
           &quot;failureMessages&quot;: [
             &quot;Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) &#x2F;&#x2F; deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;__tests__&#x2F;latex-equal.spec.ts:94:23)\n    at Object.asyncJestTest (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;jasmineAsyncInstall.js:106:37)\n    at &#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:45:12\n    at new Promise (&lt;anonymous&gt;)\n    at mapper (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:28:19)\n    at &#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:75:41&quot;
           ],
-          &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;fractions-symbolic.ts [symbolic] f\\left(x\\right)&#x3D;x\\left(3x+16\\right) &#x3D;&#x3D; f\\left(x\\right)\\ &#x3D;\\ 3x^2+16x&quot;,
+          &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;literal.ts [literal] 12.00+3 &#x3D;&#x3D; 3+12.00&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
           &quot;status&quot;: &quot;failed&quot;,
-          &quot;title&quot;: &quot;&#x3D;&#x3D; f\\left(x\\right)\\ &#x3D;\\ 3x^2+16x&quot;
+          &quot;title&quot;: &quot;&#x3D;&#x3D; 3+12.00&quot;
         },
         {
           &quot;ancestorTitles&quot;: [
@@ -2668,7 +2656,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-282.ts [literal] 1 &#x3D;&#x3D; 1.0&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; 1.0&quot;
         },
         {
@@ -2682,7 +2670,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-282.ts [literal] 1 !&#x3D; 1.01&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;!&#x3D; 1.01&quot;
         },
         {
@@ -2696,7 +2684,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-282.ts [literal] 1 &#x3D;&#x3D; 01&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; 01&quot;
         },
         {
@@ -2729,7 +2717,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-282.ts [literal] 1 !&#x3D; 1.0&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;!&#x3D; 1.0&quot;
         },
         {
@@ -2762,7 +2750,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-283.ts [literal] a+b+10 &#x3D;&#x3D; a+10+b&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; a+10+b&quot;
         },
         {
@@ -2795,7 +2783,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-283.ts [literal] a+b+10 &#x3D;&#x3D; 10+a+b&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; 10+a+b&quot;
         },
         {
@@ -2828,7 +2816,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-283.ts [literal] a+b+10 &#x3D;&#x3D; 10+b+a&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; 10+b+a&quot;
         },
         {
@@ -2861,7 +2849,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-283.ts [literal] a+b+10 &#x3D;&#x3D; b+a+10&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; b+a+10&quot;
         },
         {
@@ -2894,7 +2882,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-283.ts [literal] a+b+10 &#x3D;&#x3D; b+a+10&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; b+a+10&quot;
         },
         {
@@ -2908,7 +2896,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-283.ts [literal] a+b+10 !&#x3D; a+10+b&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;!&#x3D; a+10+b&quot;
         },
         {
@@ -2922,7 +2910,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-283.ts [literal] a+b+10 !&#x3D; 10+a+b&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;!&#x3D; 10+a+b&quot;
         },
         {
@@ -2936,7 +2924,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-283.ts [literal] a+b+10 !&#x3D; 10+b+a&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;!&#x3D; 10+b+a&quot;
         },
         {
@@ -2950,7 +2938,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-283.ts [literal] a+b+10 !&#x3D; b+a+10&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;!&#x3D; b+a+10&quot;
         },
         {
@@ -2964,7 +2952,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-283.ts [literal] a+b+10 !&#x3D; b+a+10&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;!&#x3D; b+a+10&quot;
         },
         {
@@ -2995,7 +2983,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-283.ts [literal] 0&lt;x≤4 &#x3D;&#x3D; 4≥x&gt;0&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; 4≥x&gt;0&quot;
         },
         {
@@ -3003,30 +2991,13 @@
             &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-283.ts&quot;,
             &quot;[literal] 0&lt;x≤4&quot;
           ],
-          &quot;duration&quot;: 1,
-          &quot;failureDetails&quot;: [
-            {
-              &quot;actual&quot;: &quot;&quot;,
-              &quot;error&quot;: {
-                &quot;name&quot;: &quot;ParseError&quot;,
-                &quot;message&quot;: &quot;Invalid symbol &#39;≤&#39;&quot;,
-                &quot;stack&quot;: &quot;Error: \n    at new ParseError (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.advance (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:444:13)\n    at LatexToAst.baseFactor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:1228:14)\n    at LatexToAst.nonMinusFactor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:818:23)\n    at LatexToAst.factor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:800:23)\n    at LatexToAst.term (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:641:22)\n    at LatexToAst.statement_b (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)&quot;,
-                &quot;location&quot;: 3
-              },
-              &quot;expected&quot;: &quot;&quot;,
-              &quot;matcherName&quot;: &quot;&quot;,
-              &quot;message&quot;: &quot;ParseError: Invalid symbol &#39;≤&#39;&quot;,
-              &quot;passed&quot;: false,
-              &quot;stack&quot;: &quot;Error: \n    at new ParseError (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.advance (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:444:13)\n    at LatexToAst.baseFactor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:1228:14)\n    at LatexToAst.nonMinusFactor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:818:23)\n    at LatexToAst.factor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:800:23)\n    at LatexToAst.term (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:641:22)\n    at LatexToAst.statement_b (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)&quot;
-            }
-          ],
-          &quot;failureMessages&quot;: [
-            &quot;ParseError: Invalid symbol &#39;≤&#39;\n    at new ParseError (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.advance (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:444:13)\n    at LatexToAst.baseFactor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:1228:14)\n    at LatexToAst.nonMinusFactor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:818:23)\n    at LatexToAst.factor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:800:23)\n    at LatexToAst.term (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:641:22)\n    at LatexToAst.statement_b (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)&quot;
-          ],
+          &quot;duration&quot;: 0,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-283.ts [literal] 0&lt;x≤4 !&#x3D; 4≥x&gt;0&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;!&#x3D; 4≥x&gt;0&quot;
         },
         {
@@ -3323,18 +3294,18 @@
               &quot;error&quot;: {
                 &quot;name&quot;: &quot;ParseError&quot;,
                 &quot;message&quot;: &quot;Invalid symbol &#39;÷&#39;&quot;,
-                &quot;stack&quot;: &quot;Error: \n    at new ParseError (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.advance (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:444:13)\n    at LatexToAst.baseFactor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:1228:14)\n    at LatexToAst.nonMinusFactor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:818:23)\n    at LatexToAst.factor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:800:23)\n    at LatexToAst.term (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)&quot;,
+                &quot;stack&quot;: &quot;Error: \n    at new ParseError (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.advance (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:444:13)\n    at LatexToAst.baseFactor (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:1228:14)\n    at LatexToAst.nonMinusFactor (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:818:23)\n    at LatexToAst.factor (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:800:23)\n    at LatexToAst.term (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)&quot;,
                 &quot;location&quot;: 1
               },
               &quot;expected&quot;: &quot;&quot;,
               &quot;matcherName&quot;: &quot;&quot;,
               &quot;message&quot;: &quot;ParseError: Invalid symbol &#39;÷&#39;&quot;,
               &quot;passed&quot;: false,
-              &quot;stack&quot;: &quot;Error: \n    at new ParseError (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.advance (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:444:13)\n    at LatexToAst.baseFactor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:1228:14)\n    at LatexToAst.nonMinusFactor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:818:23)\n    at LatexToAst.factor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:800:23)\n    at LatexToAst.term (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)&quot;
+              &quot;stack&quot;: &quot;Error: \n    at new ParseError (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.advance (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:444:13)\n    at LatexToAst.baseFactor (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:1228:14)\n    at LatexToAst.nonMinusFactor (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:818:23)\n    at LatexToAst.factor (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:800:23)\n    at LatexToAst.term (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)&quot;
             }
           ],
           &quot;failureMessages&quot;: [
-            &quot;ParseError: Invalid symbol &#39;÷&#39;\n    at new ParseError (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.advance (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:444:13)\n    at LatexToAst.baseFactor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:1228:14)\n    at LatexToAst.nonMinusFactor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:818:23)\n    at LatexToAst.factor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:800:23)\n    at LatexToAst.term (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)&quot;
+            &quot;ParseError: Invalid symbol &#39;÷&#39;\n    at new ParseError (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.advance (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:444:13)\n    at LatexToAst.baseFactor (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:1228:14)\n    at LatexToAst.nonMinusFactor (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:818:23)\n    at LatexToAst.factor (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:800:23)\n    at LatexToAst.term (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)&quot;
           ],
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-288.ts [symbolic] a&#x2F;b &#x3D;&#x3D; a÷b&quot;,
           &quot;location&quot;: null,
@@ -3354,18 +3325,18 @@
               &quot;error&quot;: {
                 &quot;name&quot;: &quot;ParseError&quot;,
                 &quot;message&quot;: &quot;Invalid symbol &#39;•&#39;&quot;,
-                &quot;stack&quot;: &quot;Error: \n    at new ParseError (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.advance (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:444:13)\n    at LatexToAst.baseFactor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:1299:12)\n    at LatexToAst.nonMinusFactor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:818:23)\n    at LatexToAst.factor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:800:23)\n    at LatexToAst.term (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)&quot;,
+                &quot;stack&quot;: &quot;Error: \n    at new ParseError (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.advance (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:444:13)\n    at LatexToAst.baseFactor (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:1299:12)\n    at LatexToAst.nonMinusFactor (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:818:23)\n    at LatexToAst.factor (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:800:23)\n    at LatexToAst.term (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)&quot;,
                 &quot;location&quot;: 5
               },
               &quot;expected&quot;: &quot;&quot;,
               &quot;matcherName&quot;: &quot;&quot;,
               &quot;message&quot;: &quot;ParseError: Invalid symbol &#39;•&#39;&quot;,
               &quot;passed&quot;: false,
-              &quot;stack&quot;: &quot;Error: \n    at new ParseError (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.advance (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:444:13)\n    at LatexToAst.baseFactor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:1299:12)\n    at LatexToAst.nonMinusFactor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:818:23)\n    at LatexToAst.factor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:800:23)\n    at LatexToAst.term (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)&quot;
+              &quot;stack&quot;: &quot;Error: \n    at new ParseError (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.advance (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:444:13)\n    at LatexToAst.baseFactor (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:1299:12)\n    at LatexToAst.nonMinusFactor (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:818:23)\n    at LatexToAst.factor (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:800:23)\n    at LatexToAst.term (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)&quot;
             }
           ],
           &quot;failureMessages&quot;: [
-            &quot;ParseError: Invalid symbol &#39;•&#39;\n    at new ParseError (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.advance (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:444:13)\n    at LatexToAst.baseFactor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:1299:12)\n    at LatexToAst.nonMinusFactor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:818:23)\n    at LatexToAst.factor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:800:23)\n    at LatexToAst.term (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)&quot;
+            &quot;ParseError: Invalid symbol &#39;•&#39;\n    at new ParseError (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.advance (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:444:13)\n    at LatexToAst.baseFactor (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:1299:12)\n    at LatexToAst.nonMinusFactor (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:818:23)\n    at LatexToAst.factor (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:800:23)\n    at LatexToAst.term (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)&quot;
           ],
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-288.ts [symbolic] ab&#x2F;x &#x3D;&#x3D; (b&#x2F;x)•a&quot;,
           &quot;location&quot;: null,
@@ -3439,7 +3410,7 @@
             &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-288.ts&quot;,
             &quot;[symbolic] 9,000&quot;
           ],
-          &quot;duration&quot;: 4,
+          &quot;duration&quot;: 5,
           &quot;failureDetails&quot;: [],
           &quot;failureMessages&quot;: [],
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-288.ts [symbolic] 9,000 &#x3D;&#x3D; 9000&quot;,
@@ -3467,7 +3438,7 @@
             &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-288.ts&quot;,
             &quot;[symbolic] -(a&#x2F;b)&quot;
           ],
-          &quot;duration&quot;: 11,
+          &quot;duration&quot;: 17,
           &quot;failureDetails&quot;: [],
           &quot;failureMessages&quot;: [],
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-288.ts [symbolic] -(a&#x2F;b) &#x3D;&#x3D; (-a)&#x2F;b&quot;,
@@ -3598,11 +3569,11 @@
               &quot;matcherName&quot;: &quot;&quot;,
               &quot;message&quot;: &quot;Error: Operator % not implemented for conversion to mathjs&quot;,
               &quot;passed&quot;: false,
-              &quot;stack&quot;: &quot;Error: Operator % not implemented for conversion to mathjs\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:347:11)\n    at toMathNode (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:27:14)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:47:15)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;index.ts:25:12)\n    at Object.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;__tests__&#x2F;latex-equal.spec.ts:92:23)\n    at Object.asyncJestTest (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;jasmineAsyncInstall.js:106:37)\n    at &#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:45:12\n    at new Promise (&lt;anonymous&gt;)\n    at mapper (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:28:19)\n    at &#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:75:41&quot;
+              &quot;stack&quot;: &quot;Error: Operator % not implemented for conversion to mathjs\n    at AstToMathJs.convert (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:347:11)\n    at toMathNode (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:27:14)\n    at Object.latexEqual (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:47:15)\n    at Object.latexEqual (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;index.ts:24:12)\n    at Object.&lt;anonymous&gt; (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;__tests__&#x2F;latex-equal.spec.ts:96:23)\n    at Object.asyncJestTest (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;jasmineAsyncInstall.js:106:37)\n    at &#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:45:12\n    at new Promise (&lt;anonymous&gt;)\n    at mapper (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:28:19)\n    at &#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:75:41&quot;
             }
           ],
           &quot;failureMessages&quot;: [
-            &quot;Error: Operator % not implemented for conversion to mathjs\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:347:11)\n    at toMathNode (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:27:14)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:47:15)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;index.ts:25:12)\n    at Object.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;__tests__&#x2F;latex-equal.spec.ts:92:23)\n    at Object.asyncJestTest (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;jasmineAsyncInstall.js:106:37)\n    at &#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:45:12\n    at new Promise (&lt;anonymous&gt;)\n    at mapper (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:28:19)\n    at &#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:75:41&quot;
+            &quot;Error: Operator % not implemented for conversion to mathjs\n    at AstToMathJs.convert (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:347:11)\n    at toMathNode (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:27:14)\n    at Object.latexEqual (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:47:15)\n    at Object.latexEqual (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;index.ts:24:12)\n    at Object.&lt;anonymous&gt; (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;src&#x2F;__tests__&#x2F;latex-equal.spec.ts:96:23)\n    at Object.asyncJestTest (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;jasmineAsyncInstall.js:106:37)\n    at &#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:45:12\n    at new Promise (&lt;anonymous&gt;)\n    at mapper (&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:28:19)\n    at &#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:75:41&quot;
           ],
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;PD-288.ts [symbolic] 88% &#x3D;&#x3D; 0.88&quot;,
           &quot;location&quot;: null,
@@ -3621,7 +3592,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;percent.ts [symbolic] we have percent support in math-expressions - port &#x3D;&#x3D; -12.5%&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; -12.5%&quot;
         },
         {
@@ -3647,7 +3618,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;percent.ts [symbolic] we have percent support in math-expressions - port &#x3D;&#x3D; -12.5\\%&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; -12.5\\%&quot;
         },
         {
@@ -3673,7 +3644,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;percent.ts [symbolic] we have percent support in math-expressions - port !&#x3D; -11.5%&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;!&#x3D; -11.5%&quot;
         },
         {
@@ -3682,24 +3653,12 @@
             &quot;[symbolic] \\frac{2}{4} -12.5%&quot;
           ],
           &quot;duration&quot;: 0,
-          &quot;failureDetails&quot;: [
-            {
-              &quot;actual&quot;: &quot;&quot;,
-              &quot;error&quot;: {},
-              &quot;expected&quot;: &quot;&quot;,
-              &quot;matcherName&quot;: &quot;&quot;,
-              &quot;message&quot;: &quot;Error: Operator % not implemented for conversion to mathjs&quot;,
-              &quot;passed&quot;: false,
-              &quot;stack&quot;: &quot;Error: Operator % not implemented for conversion to mathjs\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:347:11)\n    at AstToMathJs.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:341:25)\n    at Array.map (&lt;anonymous&gt;)\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:339:18)\n    at AstToMathJs.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:341:25)\n    at Array.map (&lt;anonymous&gt;)\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:339:18)\n    at toMathNode (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:27:14)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:47:15)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;index.ts:25:12)&quot;
-            }
-          ],
-          &quot;failureMessages&quot;: [
-            &quot;Error: Operator % not implemented for conversion to mathjs\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:347:11)\n    at AstToMathJs.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:341:25)\n    at Array.map (&lt;anonymous&gt;)\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:339:18)\n    at AstToMathJs.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:341:25)\n    at Array.map (&lt;anonymous&gt;)\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:339:18)\n    at toMathNode (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:27:14)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:47:15)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;index.ts:25:12)&quot;
-          ],
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;percent.ts [symbolic] \\frac{2}{4} -12.5% &#x3D;&#x3D; \\frac{1}{2} - 12.5%&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; \\frac{1}{2} - 12.5%&quot;
         },
         {
@@ -3707,25 +3666,13 @@
             &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;percent.ts&quot;,
             &quot;[symbolic] \\frac{2}{4} -12.5%&quot;
           ],
-          &quot;duration&quot;: 1,
-          &quot;failureDetails&quot;: [
-            {
-              &quot;actual&quot;: &quot;&quot;,
-              &quot;error&quot;: {},
-              &quot;expected&quot;: &quot;&quot;,
-              &quot;matcherName&quot;: &quot;&quot;,
-              &quot;message&quot;: &quot;Error: Operator % not implemented for conversion to mathjs&quot;,
-              &quot;passed&quot;: false,
-              &quot;stack&quot;: &quot;Error: Operator % not implemented for conversion to mathjs\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:347:11)\n    at AstToMathJs.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:341:25)\n    at Array.map (&lt;anonymous&gt;)\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:339:18)\n    at AstToMathJs.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:341:25)\n    at Array.map (&lt;anonymous&gt;)\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:339:18)\n    at toMathNode (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:27:14)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:47:15)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;index.ts:25:12)&quot;
-            }
-          ],
-          &quot;failureMessages&quot;: [
-            &quot;Error: Operator % not implemented for conversion to mathjs\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:347:11)\n    at AstToMathJs.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:341:25)\n    at Array.map (&lt;anonymous&gt;)\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:339:18)\n    at AstToMathJs.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:341:25)\n    at Array.map (&lt;anonymous&gt;)\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:339:18)\n    at toMathNode (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:27:14)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:47:15)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;index.ts:25:12)&quot;
-          ],
+          &quot;duration&quot;: 0,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;percent.ts [symbolic] \\frac{2}{4} -12.5% &#x3D;&#x3D; \\frac{10}{20}-12.5\\%&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; \\frac{10}{20}-12.5\\%&quot;
         },
         {
@@ -3751,7 +3698,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;symbolic-a.ts [symbolic] \\left(\\frac{2\\sqrt{2}}{3},\\frac{1}{3}\\right) &#x3D;&#x3D; (\\frac{\\sqrt{8}}{3},\\frac{1}{3})&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; (\\frac{\\sqrt{8}}{3},\\frac{1}{3})&quot;
         },
         {
@@ -3777,7 +3724,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;symbolic-a.ts [symbolic] \\left(\\frac{2\\sqrt{2}}{3},\\frac{1}{3}\\right) &#x3D;&#x3D; (\\frac{2}{3}\\sqrt{2},\\frac{1}{3})&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; (\\frac{2}{3}\\sqrt{2},\\frac{1}{3})&quot;
         },
         {
@@ -3803,7 +3750,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;symbolic-a.ts [symbolic] \\left(\\frac{2\\sqrt{2}}{3},\\frac{1}{3}\\right) &#x3D;&#x3D; (\\frac{1}{3}\\sqrt{8},\\frac{1}{3})&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; (\\frac{1}{3}\\sqrt{8},\\frac{1}{3})&quot;
         },
         {
@@ -3829,7 +3776,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;symbolic-a.ts [symbolic] \\left(\\frac{2\\sqrt{2}}{3},\\frac{1}{3}\\right) &#x3D;&#x3D; (\\frac{1}{3}\\sqrt{8},\\frac{1}{3})&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; (\\frac{1}{3}\\sqrt{8},\\frac{1}{3})&quot;
         },
         {
@@ -3843,7 +3790,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;symbolic-a.ts [symbolic] f\\left[\\left(x,y\\right)\\right]&#x3D;\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right) &#x3D;&#x3D; f\\left[\\left(x,y\\right)\\right]&#x3D;(\\frac{1}{3}\\left(x-3\\right),\\frac{1}{3}\\left(y-2\\right))&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f\\left[\\left(x,y\\right)\\right]&#x3D;(\\frac{1}{3}\\left(x-3\\right),\\frac{1}{3}\\left(y-2\\right))&quot;
         },
         {
@@ -3857,7 +3804,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;symbolic-a.ts [symbolic] f\\left[\\left(x,y\\right)\\right]&#x3D;\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right) &#x3D;&#x3D; f\\left[\\left(x,y\\right)\\right]&#x3D;(\\frac{1}{3}\\left(-3+x\\right),\\frac{1}{3}\\left(-2+y\\right))&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f\\left[\\left(x,y\\right)\\right]&#x3D;(\\frac{1}{3}\\left(-3+x\\right),\\frac{1}{3}\\left(-2+y\\right))&quot;
         },
         {
@@ -3871,7 +3818,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;symbolic-a.ts [symbolic] f\\left[\\left(x,y\\right)\\right]&#x3D;\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right) &#x3D;&#x3D; f\\left[\\left(x,y\\right)\\right]&#x3D;(\\frac{-3+x}{3},\\frac{-2+y}{3})&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f\\left[\\left(x,y\\right)\\right]&#x3D;(\\frac{-3+x}{3},\\frac{-2+y}{3})&quot;
         },
         {
@@ -3904,7 +3851,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;symbolic-a.ts [symbolic] f\\left[\\left(x,y\\right)\\right]&#x3D;\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right) &#x3D;&#x3D; f\\left[\\left(x,y\\right)\\right]&#x3D;(\\frac{x}{3}-1,\\frac{y-1}{3})&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f\\left[\\left(x,y\\right)\\right]&#x3D;(\\frac{x}{3}-1,\\frac{y-1}{3})&quot;
         },
         {
@@ -3918,7 +3865,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;symbolic-a.ts [symbolic] f\\left[\\left(x,y\\right)\\right]&#x3D;\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right) &#x3D;&#x3D; f\\left[\\left(x,y\\right)\\right]&#x3D;(\\frac{-3+x}{3},\\frac{-2+y}{3})&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f\\left[\\left(x,y\\right)\\right]&#x3D;(\\frac{-3+x}{3},\\frac{-2+y}{3})&quot;
         },
         {
@@ -3932,7 +3879,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;symbolic-a.ts [symbolic] -\\frac{3\\pi}{4}\\le x\\le\\frac{\\pi}{4} &#x3D;&#x3D; -\\frac{3}{4}\\pi\\ \\le\\ x\\le\\ \\ \\frac{1}{4}\\pi&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; -\\frac{3}{4}\\pi\\ \\le\\ x\\le\\ \\ \\frac{1}{4}\\pi&quot;
         },
         {
@@ -3946,7 +3893,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;symbolic-b.ts [symbolic] m&#x3D;50\\cos\\left(\\frac{2\\pi}{30}d\\right)+50 &#x3D;&#x3D; m&#x3D;50\\cos\\left(\\frac{\\pi\\ }{15}d\\right)+50&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; m&#x3D;50\\cos\\left(\\frac{\\pi\\ }{15}d\\right)+50&quot;
         },
         {
@@ -3960,7 +3907,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;symbolic-b.ts [symbolic] m&#x3D;50\\cos\\left(\\frac{2\\pi}{30}d\\right)+50 &#x3D;&#x3D; m&#x3D;50\\cos\\left(\\frac{1}{15}\\pi\\ d\\right)+50&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; m&#x3D;50\\cos\\left(\\frac{1}{15}\\pi\\ d\\right)+50&quot;
         },
         {
@@ -3993,7 +3940,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;symbolic-b.ts [symbolic] m&#x3D;50\\cos\\left(\\frac{2\\pi}{30}d\\right)+50 &#x3D;&#x3D; m&#x3D;50\\cos\\left(d\\right)+50&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; m&#x3D;50\\cos\\left(d\\right)+50&quot;
         },
         {
@@ -4007,7 +3954,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;symbolic-b.ts [symbolic] y&#x3D;250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500 &#x3D;&#x3D; y&#x3D;250\\sin\\left(\\frac{2}{5}\\pi\\ x\\right)+2500&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; y&#x3D;250\\sin\\left(\\frac{2}{5}\\pi\\ x\\right)+2500&quot;
         },
         {
@@ -4021,7 +3968,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;symbolic-b.ts [symbolic] y&#x3D;250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500 &#x3D;&#x3D; y&#x3D;250\\sin\\left(\\left(\\frac{2}{5}\\pi\\ \\right)x\\right)+2500&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; y&#x3D;250\\sin\\left(\\left(\\frac{2}{5}\\pi\\ \\right)x\\right)+2500&quot;
         },
         {
@@ -4035,7 +3982,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;symbolic-b.ts [symbolic] y&#x3D;250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500 &#x3D;&#x3D; y&#x3D;250\\sin\\left(\\left(\\frac{2\\pi\\ }{5}\\right)x\\right)+2500&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; y&#x3D;250\\sin\\left(\\left(\\frac{2\\pi\\ }{5}\\right)x\\right)+2500&quot;
         },
         {
@@ -4049,7 +3996,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;symbolic-b.ts [symbolic] y&#x3D;250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500 &#x3D;&#x3D; y&#x3D;250\\sin\\left(\\frac{2\\pi\\ }{5}x\\right)+2,500&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; y&#x3D;250\\sin\\left(\\frac{2\\pi\\ }{5}x\\right)+2,500&quot;
         },
         {
@@ -4063,7 +4010,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;symbolic-b.ts [symbolic] y&#x3D;250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500 &#x3D;&#x3D; y&#x3D;250\\sin\\left(\\frac{2}{5}\\pi\\ x\\right)+2,500&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; y&#x3D;250\\sin\\left(\\frac{2}{5}\\pi\\ x\\right)+2,500&quot;
         },
         {
@@ -4077,7 +4024,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;symbolic-b.ts [symbolic] y&#x3D;250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500 &#x3D;&#x3D; y&#x3D;250\\sin\\left(\\left(\\frac{2}{5}\\pi\\ \\right)x\\right)+2,500&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; y&#x3D;250\\sin\\left(\\left(\\frac{2}{5}\\pi\\ \\right)x\\right)+2,500&quot;
         },
         {
@@ -4091,7 +4038,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;symbolic-b.ts [symbolic] y&#x3D;250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500 &#x3D;&#x3D; y&#x3D;250\\sin\\left(\\left(\\frac{2\\pi\\ }{5}\\right)x\\right)+2,500&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; y&#x3D;250\\sin\\left(\\left(\\frac{2\\pi\\ }{5}\\right)x\\right)+2,500&quot;
         },
         {
@@ -4117,7 +4064,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] a_n&#x3D;3a_{n-1} &#x3D;&#x3D; a_n&#x3D;3\\times a_{n-1}&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; a_n&#x3D;3\\times a_{n-1}&quot;
         },
         {
@@ -4131,7 +4078,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] f\\left(y\\right)&#x3D;26000\\left(0.83\\right)^y &#x3D;&#x3D; f\\left(y\\right)&#x3D;26000\\left(1-0.17\\right)^y&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f\\left(y\\right)&#x3D;26000\\left(1-0.17\\right)^y&quot;
         },
         {
@@ -4145,7 +4092,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] f\\left(y\\right)&#x3D;26000\\left(0.83\\right)^y &#x3D;&#x3D; f\\left(y\\right)&#x3D;26,000\\left(1-0.17\\right)^y&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f\\left(y\\right)&#x3D;26,000\\left(1-0.17\\right)^y&quot;
         },
         {
@@ -4159,7 +4106,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] f\\left(y\\right)&#x3D;26000\\left(0.83\\right)^y &#x3D;&#x3D; f\\left(y\\right)&#x3D;26,000\\left(0.83\\right)^y&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f\\left(y\\right)&#x3D;26,000\\left(0.83\\right)^y&quot;
         },
         {
@@ -4167,25 +4114,13 @@
             &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts&quot;,
             &quot;[symbolic] f^{-1}\\left(x\\right)&#x3D;-\\frac{12}{x}+8&quot;
           ],
-          &quot;duration&quot;: 1,
-          &quot;failureDetails&quot;: [
-            {
-              &quot;actual&quot;: &quot;&quot;,
-              &quot;error&quot;: {},
-              &quot;expected&quot;: &quot;&quot;,
-              &quot;matcherName&quot;: &quot;&quot;,
-              &quot;message&quot;: &quot;Error: Non string functions not implemented for conversion to mathjs&quot;,
-              &quot;passed&quot;: false,
-              &quot;stack&quot;: &quot;Error: Non string functions not implemented for conversion to mathjs\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:107:15)\n    at AstToMathJs.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:184:23)\n    at Array.map (&lt;anonymous&gt;)\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:182:32)\n    at toMathNode (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:27:14)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:47:15)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;index.ts:25:12)\n    at Object.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;__tests__&#x2F;latex-equal.spec.ts:92:23)\n    at Object.asyncJestTest (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;jasmineAsyncInstall.js:106:37)\n    at &#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:45:12&quot;
-            }
-          ],
-          &quot;failureMessages&quot;: [
-            &quot;Error: Non string functions not implemented for conversion to mathjs\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:107:15)\n    at AstToMathJs.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:184:23)\n    at Array.map (&lt;anonymous&gt;)\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:182:32)\n    at toMathNode (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:27:14)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:47:15)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;index.ts:25:12)\n    at Object.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;__tests__&#x2F;latex-equal.spec.ts:92:23)\n    at Object.asyncJestTest (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;jasmineAsyncInstall.js:106:37)\n    at &#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:45:12&quot;
-          ],
+          &quot;duration&quot;: 0,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] f^{-1}\\left(x\\right)&#x3D;-\\frac{12}{x}+8 &#x3D;&#x3D; f^{-1}(x)\\ &#x3D;\\ 8-\\frac{12}{x}&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f^{-1}(x)\\ &#x3D;\\ 8-\\frac{12}{x}&quot;
         },
         {
@@ -4211,7 +4146,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] f^{-1}\\left(x\\right)&#x3D;-\\frac{12}{x}+8 &#x3D;&#x3D; f^{-1}(x)\\ &#x3D;\\ \\frac{8x-12}{x}&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f^{-1}(x)\\ &#x3D;\\ \\frac{8x-12}{x}&quot;
         },
         {
@@ -4237,7 +4172,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] f^{-1}\\left(x\\right)&#x3D;-\\frac{12}{x}+8 &#x3D;&#x3D; f^{-1}(x)\\ &#x3D;\\ \\frac{-12+8x}{x}&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f^{-1}(x)\\ &#x3D;\\ \\frac{-12+8x}{x}&quot;
         },
         {
@@ -4263,7 +4198,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] f^{-1}\\left(x\\right)&#x3D;-\\frac{12}{x}+8 &#x3D;&#x3D; f^{-1}(x)\\ &#x3D;\\ -12\\left(\\frac{1}{x}\\right)+8&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f^{-1}(x)\\ &#x3D;\\ -12\\left(\\frac{1}{x}\\right)+8&quot;
         },
         {
@@ -4272,24 +4207,12 @@
             &quot;[symbolic] f^{-1}\\left(x\\right)&#x3D;-\\frac{12}{x}+8&quot;
           ],
           &quot;duration&quot;: 0,
-          &quot;failureDetails&quot;: [
-            {
-              &quot;actual&quot;: &quot;&quot;,
-              &quot;error&quot;: {},
-              &quot;expected&quot;: &quot;&quot;,
-              &quot;matcherName&quot;: &quot;&quot;,
-              &quot;message&quot;: &quot;Error: Non string functions not implemented for conversion to mathjs&quot;,
-              &quot;passed&quot;: false,
-              &quot;stack&quot;: &quot;Error: Non string functions not implemented for conversion to mathjs\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:107:15)\n    at AstToMathJs.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:184:23)\n    at Array.map (&lt;anonymous&gt;)\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:182:32)\n    at toMathNode (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:27:14)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:47:15)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;index.ts:25:12)\n    at Object.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;__tests__&#x2F;latex-equal.spec.ts:92:23)\n    at Object.asyncJestTest (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;jasmineAsyncInstall.js:106:37)\n    at &#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:45:12&quot;
-            }
-          ],
-          &quot;failureMessages&quot;: [
-            &quot;Error: Non string functions not implemented for conversion to mathjs\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:107:15)\n    at AstToMathJs.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:184:23)\n    at Array.map (&lt;anonymous&gt;)\n    at AstToMathJs.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;ast-to-mathjs.ts:182:32)\n    at toMathNode (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:27:14)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;latex-equal.ts:47:15)\n    at Object.latexEqual (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;index.ts:25:12)\n    at Object.&lt;anonymous&gt; (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;__tests__&#x2F;latex-equal.spec.ts:92:23)\n    at Object.asyncJestTest (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;jasmineAsyncInstall.js:106:37)\n    at &#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:45:12&quot;
-          ],
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] f^{-1}\\left(x\\right)&#x3D;-\\frac{12}{x}+8 &#x3D;&#x3D; f^{-1}(x)\\ &#x3D;\\ 8-12\\left(\\frac{1}{x}\\right)&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f^{-1}(x)\\ &#x3D;\\ 8-12\\left(\\frac{1}{x}\\right)&quot;
         },
         {
@@ -4303,7 +4226,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] f\\left(x\\right)&#x3D;1.1x+8 &#x3D;&#x3D; f(x)\\ &#x3D;\\ 8+1.1x&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f(x)\\ &#x3D;\\ 8+1.1x&quot;
         },
         {
@@ -4317,7 +4240,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] f\\left(x\\right)&#x3D;1.1x+8 &#x3D;&#x3D; f(x)\\ &#x3D;\\ 8+\\left(1+0.1\\right)x&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f(x)\\ &#x3D;\\ 8+\\left(1+0.1\\right)x&quot;
         },
         {
@@ -4331,7 +4254,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] f\\left(x\\right)&#x3D;1.1x+8 &#x3D;&#x3D; f(x)\\ &#x3D;\\ \\left(1+0.1\\right)x+8&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f(x)\\ &#x3D;\\ \\left(1+0.1\\right)x+8&quot;
         },
         {
@@ -4345,7 +4268,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] f\\left(x\\right)&#x3D;1.1x+8 &#x3D;&#x3D; f(x)\\ &#x3D;\\ x+0.1x+8&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f(x)\\ &#x3D;\\ x+0.1x+8&quot;
         },
         {
@@ -4359,7 +4282,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] f\\left(x\\right)&#x3D;1.1x+8 &#x3D;&#x3D; f(x)\\ &#x3D;\\ 8+x+0.1x&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f(x)\\ &#x3D;\\ 8+x+0.1x&quot;
         },
         {
@@ -4373,7 +4296,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] f\\left(x\\right)&#x3D;1.1x+8 &#x3D;&#x3D; f(x)\\ &#x3D;\\ 8+x+0.1x&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f(x)\\ &#x3D;\\ 8+x+0.1x&quot;
         },
         {
@@ -4387,7 +4310,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] f\\left(x\\right)&#x3D;1.1x+8 &#x3D;&#x3D; f(x)\\ &#x3D;\\ 8+0.1x+x&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f(x)\\ &#x3D;\\ 8+0.1x+x&quot;
         },
         {
@@ -4401,7 +4324,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] f\\left(x\\right)&#x3D;1.1x+8 &#x3D;&#x3D; f(x)\\ &#x3D;\\ 0.1x+x+8&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; f(x)\\ &#x3D;\\ 0.1x+x+8&quot;
         },
         {
@@ -4415,7 +4338,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] x&#x3D;\\frac{20,000}{r^2}\\text{radians} &#x3D;&#x3D; x&#x3D;\\frac{1}{r^2}\\left(20,000\\right)\\ \\text{radians}&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; x&#x3D;\\frac{1}{r^2}\\left(20,000\\right)\\ \\text{radians}&quot;
         },
         {
@@ -4429,7 +4352,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] x&#x3D;\\frac{20,000}{r^2}\\text{radians} &#x3D;&#x3D; x&#x3D;\\frac{20000}{r^2}\\ \\text{radians}&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; x&#x3D;\\frac{20000}{r^2}\\ \\text{radians}&quot;
         },
         {
@@ -4443,7 +4366,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] x&#x3D;\\frac{20,000}{r^2}\\text{radians} &#x3D;&#x3D; x&#x3D;\\frac{1}{r^2}\\times 20000\\ \\text{radians}&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; x&#x3D;\\frac{1}{r^2}\\times 20000\\ \\text{radians}&quot;
         },
         {
@@ -4457,7 +4380,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] x&#x3D;\\frac{20,000}{r^2}\\text{radians} &#x3D;&#x3D; x&#x3D;\\frac{1}{r^2}\\times 20,000\\ \\text{radians}&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; x&#x3D;\\frac{1}{r^2}\\times 20,000\\ \\text{radians}&quot;
         },
         {
@@ -4465,13 +4388,13 @@
             &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts&quot;,
             &quot;[symbolic] x&#x3D;\\frac{20,000}{r^2}\\text{radians}&quot;
           ],
-          &quot;duration&quot;: 7,
+          &quot;duration&quot;: 0,
           &quot;failureDetails&quot;: [],
           &quot;failureMessages&quot;: [],
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] x&#x3D;\\frac{20,000}{r^2}\\text{radians} &#x3D;&#x3D; x&#x3D;20000\\left(\\frac{1}{r^2}\\right)\\ \\text{radians}&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; x&#x3D;20000\\left(\\frac{1}{r^2}\\right)\\ \\text{radians}&quot;
         },
         {
@@ -4485,7 +4408,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] x&#x3D;\\frac{20,000}{r^2}\\text{radians} &#x3D;&#x3D; x&#x3D;20,000\\left(\\frac{1}{r^2}\\right)\\ \\text{radians}&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; x&#x3D;20,000\\left(\\frac{1}{r^2}\\right)\\ \\text{radians}&quot;
         },
         {
@@ -4516,7 +4439,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] \\text{height}\\ &#x3D;\\ 120\\sin\\theta &#x3D;&#x3D; \\text{height}\\ &#x3D;\\ 120\\left(\\sin \\theta \\right)&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; \\text{height}\\ &#x3D;\\ 120\\left(\\sin \\theta \\right)&quot;
         },
         {
@@ -4524,30 +4447,13 @@
             &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts&quot;,
             &quot;[symbolic] \\text{height}\\ &#x3D;\\ 120\\sin\\theta&quot;
           ],
-          &quot;duration&quot;: 1,
-          &quot;failureDetails&quot;: [
-            {
-              &quot;actual&quot;: &quot;&quot;,
-              &quot;error&quot;: {
-                &quot;name&quot;: &quot;ParseError&quot;,
-                &quot;message&quot;: &quot;Invalid location of &#39;&#x3D;&#39;&quot;,
-                &quot;stack&quot;: &quot;Error: \n    at new ParseError (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.factor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:807:15)\n    at LatexToAst.term (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)\n    at LatexToAst.statement (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:511:22)\n    at LatexToAst.statement_list (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:479:22)\n    at LatexToAst.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:467:23)&quot;,
-                &quot;location&quot;: 16
-              },
-              &quot;expected&quot;: &quot;&quot;,
-              &quot;matcherName&quot;: &quot;&quot;,
-              &quot;message&quot;: &quot;ParseError: Invalid location of &#39;&#x3D;&#39;&quot;,
-              &quot;passed&quot;: false,
-              &quot;stack&quot;: &quot;Error: \n    at new ParseError (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.factor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:807:15)\n    at LatexToAst.term (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)\n    at LatexToAst.statement (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:511:22)\n    at LatexToAst.statement_list (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:479:22)\n    at LatexToAst.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:467:23)&quot;
-            }
-          ],
-          &quot;failureMessages&quot;: [
-            &quot;ParseError: Invalid location of &#39;&#x3D;&#39;\n    at new ParseError (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.factor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:807:15)\n    at LatexToAst.term (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)\n    at LatexToAst.statement (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:511:22)\n    at LatexToAst.statement_list (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:479:22)\n    at LatexToAst.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:467:23)&quot;
-          ],
+          &quot;duration&quot;: 0,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] \\text{height}\\ &#x3D;\\ 120\\sin\\theta &#x3D;&#x3D; \\text{height}\\ &#x3D;\\ 120\\sin \\left(\\theta \\right)&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; \\text{height}\\ &#x3D;\\ 120\\sin \\left(\\theta \\right)&quot;
         },
         {
@@ -4578,7 +4484,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] \\text{height}\\ &#x3D;\\ 120\\sin\\theta &#x3D;&#x3D; \\text{height}\\ &#x3D;\\ \\left(\\sin \\theta \\right)\\left(120\\right)&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; \\text{height}\\ &#x3D;\\ \\left(\\sin \\theta \\right)\\left(120\\right)&quot;
         },
         {
@@ -4586,30 +4492,13 @@
             &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts&quot;,
             &quot;[symbolic] \\text{height}\\ &#x3D;\\ 120\\sin\\theta&quot;
           ],
-          &quot;duration&quot;: 1,
-          &quot;failureDetails&quot;: [
-            {
-              &quot;actual&quot;: &quot;&quot;,
-              &quot;error&quot;: {
-                &quot;name&quot;: &quot;ParseError&quot;,
-                &quot;message&quot;: &quot;Invalid location of &#39;&#x3D;&#39;&quot;,
-                &quot;stack&quot;: &quot;Error: \n    at new ParseError (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.factor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:807:15)\n    at LatexToAst.term (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)\n    at LatexToAst.statement (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:511:22)\n    at LatexToAst.statement_list (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:479:22)\n    at LatexToAst.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:467:23)&quot;,
-                &quot;location&quot;: 16
-              },
-              &quot;expected&quot;: &quot;&quot;,
-              &quot;matcherName&quot;: &quot;&quot;,
-              &quot;message&quot;: &quot;ParseError: Invalid location of &#39;&#x3D;&#39;&quot;,
-              &quot;passed&quot;: false,
-              &quot;stack&quot;: &quot;Error: \n    at new ParseError (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.factor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:807:15)\n    at LatexToAst.term (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)\n    at LatexToAst.statement (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:511:22)\n    at LatexToAst.statement_list (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:479:22)\n    at LatexToAst.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:467:23)&quot;
-            }
-          ],
-          &quot;failureMessages&quot;: [
-            &quot;ParseError: Invalid location of &#39;&#x3D;&#39;\n    at new ParseError (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.factor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:807:15)\n    at LatexToAst.term (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)\n    at LatexToAst.statement (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:511:22)\n    at LatexToAst.statement_list (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:479:22)\n    at LatexToAst.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:467:23)&quot;
-          ],
+          &quot;duration&quot;: 0,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] \\text{height}\\ &#x3D;\\ 120\\sin\\theta &#x3D;&#x3D; \\text{height}\\ &#x3D;\\ \\left(\\sin \\theta \\right)\\times 120&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; \\text{height}\\ &#x3D;\\ \\left(\\sin \\theta \\right)\\times 120&quot;
         },
         {
@@ -4618,29 +4507,12 @@
             &quot;[symbolic] \\text{height}\\ &#x3D;\\ 120\\sin\\theta&quot;
           ],
           &quot;duration&quot;: 0,
-          &quot;failureDetails&quot;: [
-            {
-              &quot;actual&quot;: &quot;&quot;,
-              &quot;error&quot;: {
-                &quot;name&quot;: &quot;ParseError&quot;,
-                &quot;message&quot;: &quot;Invalid location of &#39;&#x3D;&#39;&quot;,
-                &quot;stack&quot;: &quot;Error: \n    at new ParseError (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.factor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:807:15)\n    at LatexToAst.term (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)\n    at LatexToAst.statement (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:511:22)\n    at LatexToAst.statement_list (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:479:22)\n    at LatexToAst.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:467:23)&quot;,
-                &quot;location&quot;: 16
-              },
-              &quot;expected&quot;: &quot;&quot;,
-              &quot;matcherName&quot;: &quot;&quot;,
-              &quot;message&quot;: &quot;ParseError: Invalid location of &#39;&#x3D;&#39;&quot;,
-              &quot;passed&quot;: false,
-              &quot;stack&quot;: &quot;Error: \n    at new ParseError (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.factor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:807:15)\n    at LatexToAst.term (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)\n    at LatexToAst.statement (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:511:22)\n    at LatexToAst.statement_list (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:479:22)\n    at LatexToAst.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:467:23)&quot;
-            }
-          ],
-          &quot;failureMessages&quot;: [
-            &quot;ParseError: Invalid location of &#39;&#x3D;&#39;\n    at new ParseError (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;error.ts:4:16)\n    at LatexToAst.factor (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:807:15)\n    at LatexToAst.term (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:754:18)\n    at LatexToAst.expression (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:712:20)\n    at LatexToAst.relation (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:609:20)\n    at LatexToAst.statement_b (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:588:20)\n    at LatexToAst.statement_a (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:562:20)\n    at LatexToAst.statement (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:511:22)\n    at LatexToAst.statement_list (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:479:22)\n    at LatexToAst.convert (&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;src&#x2F;conversion&#x2F;latex-to-ast.ts:467:23)&quot;
-          ],
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] \\text{height}\\ &#x3D;\\ 120\\sin\\theta &#x3D;&#x3D; \\text{height}\\ &#x3D;\\ \\sin \\theta \\times 120&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; \\text{height}\\ &#x3D;\\ \\sin \\theta \\times 120&quot;
         },
         {
@@ -4671,7 +4543,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] \\cos\\theta&#x3D;-\\sqrt{1-y^2} &#x3D;&#x3D; cos\\ \\theta\\ \\ &#x3D;\\ -\\sqrt{-y^2+1}&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;&#x3D;&#x3D; cos\\ \\theta\\ \\ &#x3D;\\ -\\sqrt{-y^2+1}&quot;
         },
         {
@@ -4685,7 +4557,7 @@
           &quot;fullName&quot;: &quot;src&#x2F;fixtures&#x2F;latex-equal&#x2F;to-be-fixed.ts [symbolic] 100 !&#x3D; 100 - 0.0001&quot;,
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 0,
-          &quot;status&quot;: &quot;passed&quot;,
+          &quot;status&quot;: &quot;pending&quot;,
           &quot;title&quot;: &quot;!&#x3D; 100 - 0.0001&quot;
         }
       ],
@@ -4834,7 +4706,7 @@
   &quot;changedFilesWithAncestor&quot;: false,
   &quot;collectCoverage&quot;: false,
   &quot;collectCoverageFrom&quot;: [],
-  &quot;coverageDirectory&quot;: &quot;&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;coverage&quot;,
+  &quot;coverageDirectory&quot;: &quot;&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;coverage&quot;,
   &quot;coverageProvider&quot;: &quot;babel&quot;,
   &quot;coverageReporters&quot;: [
     &quot;json&quot;,
@@ -4868,7 +4740,7 @@
       {}
     ],
     [
-      &quot;&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;jest-stare&#x2F;lib&#x2F;index.js&quot;,
+      &quot;&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;node_modules&#x2F;jest-stare&#x2F;lib&#x2F;index.js&quot;,
       {
         &quot;resultDir&quot;: &quot;docs&#x2F;&quot;,
         &quot;reportTitle&quot;: &quot;test results&quot;,
@@ -4878,12 +4750,12 @@
       }
     ]
   ],
-  &quot;rootDir&quot;: &quot;&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&quot;,
+  &quot;rootDir&quot;: &quot;&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&quot;,
   &quot;runTestsByPath&quot;: false,
   &quot;skipFilter&quot;: false,
   &quot;testFailureExitCode&quot;: 1,
   &quot;testPathPattern&quot;: &quot;&quot;,
-  &quot;testSequencer&quot;: &quot;&#x2F;home&#x2F;ede&#x2F;dev&#x2F;github&#x2F;pie-framework&#x2F;math-validation&#x2F;node_modules&#x2F;@jest&#x2F;test-sequencer&#x2F;build&#x2F;index.js&quot;,
+  &quot;testSequencer&quot;: &quot;&#x2F;Users&#x2F;patriciaromaniuc&#x2F;math-validation&#x2F;node_modules&#x2F;@jest&#x2F;test-sequencer&#x2F;build&#x2F;index.js&quot;,
   &quot;updateSnapshot&quot;: &quot;new&quot;,
   &quot;useStderr&quot;: false,
   &quot;watch&quot;: false,
