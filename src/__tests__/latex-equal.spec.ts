@@ -24,6 +24,10 @@ type FixtureData = {
   skip?: boolean;
   only?: boolean;
   label?: string;
+  literalOpts: {
+    allowTrailingZeros?: boolean,
+    ignoreOrder?: boolean;
+  }
   eq: string | string[];
   ne: string | string[];
 };

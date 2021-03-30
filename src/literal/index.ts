@@ -8,7 +8,7 @@ export type LiteralOpts = {
   /** For future implementation, per PD-304
    * If a response matches an "exception", it is incorrect, even if it also matches one of the correct answers
    */
-  exception?: boolean;
+  exception?: string[];
 };
 
 const log = logger("mv:literal");
