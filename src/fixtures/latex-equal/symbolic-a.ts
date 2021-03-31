@@ -1,3 +1,5 @@
+import { Triage } from "../triage";
+
 export default {
   mode: "symbolic",
   skip: true,
@@ -10,6 +12,7 @@ export default {
         "(\\frac{1}{3}\\sqrt{8},\\frac{1}{3})",
         "(\\frac{1}{3}\\sqrt{8},\\frac{1}{3})",
       ],
+      triage: Triage.FRACTION_CONVERSION_ERROR,
     },
     {
       target:
@@ -21,6 +24,7 @@ export default {
         "f\\left[\\left(x,y\\right)\\right]=(\\frac{x}{3}-1,\\frac{y-1}{3})",
         "f\\left[\\left(x,y\\right)\\right]=(\\frac{-3+x}{3},\\frac{-2+y}{3})",
       ],
+      triage: Triage.COMMON_DENOMINATOR
     },
     {
       target: "-\\frac{3\\pi}{4}\\le x\\le\\frac{\\pi}{4}",

@@ -16,15 +16,23 @@ export enum Triage {
    * The latex parser is choking on the input things like:
    * (b/x)•a
    * a÷b
+   * Invalid symblol 'x'
+   * Invalid symblol '≤'
    */
   LATEX_PARSE_ERROR,
 
   /**
    * percent not converting to mathjs.
+   * _underscore not implemented for conversion to mathjs
    * We had this working in the legacy set up so may just need to update
    * ast => mathjs conversion logic
    */
   PERCENT_SUPPORT,
+
+   /**
+   * _underscore not implemented for conversion to mathjs
+   */
+  UNDERSCORE_SUPPORT,
 
   /**
    *  multiply every term within the parentheses by the factor outside
@@ -60,4 +68,30 @@ export enum Triage {
    */
   FRACTIONS_PROPERTIES,
 
+     /**
+  * TypeError: Cannot implicitly convert a number to a Fraction when there will be a loss of precision (value: 0.31426968052735443).
+  * Use function fraction(x) to convert to Fraction.
+   */
+  FRACTION_CONVERSION_ERROR,
+
+    /**
+  * Atention: 0.0 is not a valid floating point
+  * 1 should be equal to 1.0
+   */
+  FLOATING_POINT,
+
+      /**
+  * Invalid location of '='
+   */
+  EQUAL_LOCATION_PARSE_ERROR,
+
+       /**
+  * Non string functions not implemented for conversion to mathjs
+   */
+  NON_STRING,
+
+         /**
+  * expecting ( after function
+   */
+  EXPECTING_PARANTHESIS,
 }
