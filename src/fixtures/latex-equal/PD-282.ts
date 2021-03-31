@@ -3,13 +3,17 @@ export default {
   skip: true,
   tests: [
     {
-      allowTrailingZeros: true,
+      opts: {
+        allowTrailingZeros: true,
+      },
       target: "1",
       eq: ["1.0"],
       ne: ["1.01"],
     },
     {
-      allowTrailingZeros: false,
+      opts: {
+        allowTrailingZeros: false,
+      },
       target: "1",
       eq: ["01"],
       ne: ["1.0"],
