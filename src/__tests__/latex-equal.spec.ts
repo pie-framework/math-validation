@@ -67,6 +67,19 @@ const getLabel = (t: FixtureData) => {
   return t.target;
 };
 
+const optsLabel = (o) => {
+  if (!o) {
+    return "";
+  }
+
+  if (o.mode === "symbolic") {
+    return "";
+  }
+  return Object.entries(o)
+    .map(([k, v]) => (v ? k : undefined))
+    .filter((v) => !!v)
+    .join(",");
+};
 testData.forEach((d) => {
   // console.log("d.data", d.data);
   describe(d.filename, () => {
@@ -78,16 +91,6 @@ testData.forEach((d) => {
 
       const label = getLabel(t);
       const mode = t.mode || d.data.mode;
-
-      const optsLabel = (o) => {
-        if (o.mode === "symbolic") {
-          return "";
-        }
-        return Object.entries(o)
-          .map(([k, v]) => (v ? k : undefined))
-          .filter((v) => !!v)
-          .join(",");
-      };
 
       dfn(`[${mode}] ${label}`, () => {
         const eq = t.eq ? (Array.isArray(t.eq) ? t.eq : [t.eq]) : [];
