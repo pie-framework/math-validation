@@ -16,6 +16,7 @@ export enum Triage {
    * The latex parser is choking on the input things like:
    * (b/x)•a
    * a÷b
+   * Invalid symblol '×'
    * Invalid symblol '≤'
    */
   LATEX_PARSE_ERROR,
