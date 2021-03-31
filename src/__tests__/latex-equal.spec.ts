@@ -78,14 +78,26 @@ testData.forEach((d) => {
 
       const label = getLabel(t);
       const mode = t.mode || d.data.mode;
+
+      const optsLabel = (o) => {
+        if (o.mode === "symbolic") {
+          return "";
+        }
+        return Object.entries(o)
+          .map(([k, v]) => (v ? k : undefined))
+          .filter((v) => !!v)
+          .join(",");
+      };
+
       dfn(`[${mode}] ${label}`, () => {
         const eq = t.eq ? (Array.isArray(t.eq) ? t.eq : [t.eq]) : [];
 
         // console.log(t.label || t.target, "eq.length", eq.length);
         // console.log("mode!!", mode);
+        const l = optsLabel(t.opts);
         eq.forEach((y) => {
           if (process.env.LEGACY === "true") {
-            it(`[legacy] == ${y}`, () => {
+            it(`[legacy] == ${y} (${l})`, () => {
               const l = latexEqual(t.target, y, {
                 legacy: true,
                 mode,
@@ -93,7 +105,8 @@ testData.forEach((d) => {
               expect(l).toEqual(true);
             });
           }
-          it(`== ${y}`, () => {
+
+          it(`== ${y} (${l})`, () => {
             const l = latexEqual(t.target, y, {
               legacy: false,
               mode,
@@ -108,12 +121,12 @@ testData.forEach((d) => {
 
         ne.forEach((y) => {
           if (process.env.LEGACY === "true") {
-            it(`[legacy] != ${y}`, () => {
+            it(`[legacy] != ${y} (${l})`, () => {
               const l = latexEqual(t.target, y, { legacy: true, mode });
               expect(l).toEqual(false);
             });
           }
-          it(`!= ${y}`, () => {
+          it(`!= ${y} (${l})`, () => {
             const l = latexEqual(t.target, y, {
               legacy: false,
               mode,
