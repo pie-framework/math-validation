@@ -26,7 +26,7 @@
     "unmatched": 0,
     "updated": 0
   },
-  "startTime": 1617181403338,
+  "startTime": 1617197392093,
   "success": false,
   "testResults": [
     {
@@ -37,10 +37,10 @@
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1617181407390,
-        "runtime": 4012,
-        "slow": false,
-        "start": 1617181403378
+        "end": 1617197400572,
+        "runtime": 8436,
+        "slow": true,
+        "start": 1617197392136
       },
       "skipped": false,
       "snapshot": {
@@ -73,7 +73,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 11,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} == 3.2 + 1.3 ",
@@ -87,7 +87,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 16,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} == (4 - \\frac{4}{5}) + 1.3 ",
@@ -101,7 +101,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 12,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} == \\frac{9}{2} ",
@@ -129,7 +129,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 13,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} == \\frac{10}{2} - 0.5 ",
@@ -143,7 +143,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 28,
+          "duration": 26,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} != 4.55 ",
@@ -151,6 +151,20 @@
           "numPassingAsserts": 0,
           "status": "passed",
           "title": "!= 4.55 "
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/bad-input.ts",
+            "[symbolic] 1 + 1"
+          ],
+          "duration": 4093,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/bad-input.ts [symbolic] 1 + 1 != abcdefghijklmnopqrstuvwxyz 1 2 abcdeghijk ab cd ef bq arub oin tsn arstoin a8 asin aosin cvbkyu isn ",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "!= abcdefghijklmnopqrstuvwxyz 1 2 abcdeghijk ab cd ef bq arub oin tsn arstoin a8 asin aosin cvbkyu isn "
         },
         {
           "ancestorTitles": [
@@ -185,7 +199,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 6,
+          "duration": 5,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 == 25 * 4 ",
@@ -199,7 +213,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 8,
+          "duration": 6,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 == 200 / 2 ",
@@ -213,7 +227,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 7,
+          "duration": 9,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 == 20 * 5 ",
@@ -227,7 +241,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 7,
+          "duration": 6,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 == 2.5 * 40 ",
@@ -241,7 +255,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 5,
+          "duration": 6,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 == 10 * 10 ",
@@ -255,7 +269,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 9,
+          "duration": 5,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 == 100/2 + 50 ",
@@ -269,7 +283,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 10,
+          "duration": 9,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 != 44 + 57 ",
@@ -283,7 +297,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 11,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 != 100 - 0.001 ",
@@ -311,7 +325,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] x"
           ],
-          "duration": 14,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] x == x+0 ",
@@ -325,7 +339,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] x"
           ],
-          "duration": 13,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] x == (x-2)+2 ",
@@ -339,7 +353,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] x"
           ],
-          "duration": 14,
+          "duration": 13,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] x == ((x^2 + x) / x) - 1 ",
@@ -367,7 +381,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] x"
           ],
-          "duration": 14,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] x == ((x^2 + x) / x) - 1 ",
@@ -381,7 +395,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] x"
           ],
-          "duration": 17,
+          "duration": 18,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] x != y ",
@@ -395,7 +409,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] x"
           ],
-          "duration": 20,
+          "duration": 24,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] x != x + 1 ",
@@ -409,7 +423,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] (x + 2)^2"
           ],
-          "duration": 21,
+          "duration": 24,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 == x^2 + 4x + 4 ",
@@ -423,7 +437,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] (x + 2)^2"
           ],
-          "duration": 20,
+          "duration": 23,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 == (2 + x)^2 ",
@@ -437,7 +451,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] (x + 2)^2"
           ],
-          "duration": 24,
+          "duration": 21,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 == x^2 + 4(x+1) ",
@@ -451,7 +465,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] (x + 2)^2"
           ],
-          "duration": 41,
+          "duration": 47,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 == x^2 + 8 ((x+1) / 2) ",
@@ -465,7 +479,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] (x + 2)^2"
           ],
-          "duration": 32,
+          "duration": 39,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 != x^2 + 4(x+2) ",
@@ -479,7 +493,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] breaks - not sure why > (x + 2)^2"
           ],
-          "duration": 31,
+          "duration": 41,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] breaks - not sure why > (x + 2)^2 != x^3 + 4x + 4 ",
@@ -493,7 +507,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] y^(2 x)"
           ],
-          "duration": 11,
+          "duration": 6,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] y^(2 x) == y^(x+x) ",
@@ -507,7 +521,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] \\sqrt{4x}"
           ],
-          "duration": 10,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] \\sqrt{4x} == \\sqrt{3x + 1x} ",
@@ -521,7 +535,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 1000"
           ],
-          "duration": 4,
+          "duration": 5,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 1000 == 1,000 ",
@@ -535,7 +549,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 1000"
           ],
-          "duration": 3,
+          "duration": 4,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 1000 == 1,000.00 ",
@@ -577,7 +591,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] tan(x)"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] tan(x) == tan(x) ",
@@ -659,7 +673,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] \\left(x\\right)^{\\frac{1}{n}}"
           ],
-          "duration": 5,
+          "duration": 6,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] \\left(x\\right)^{\\frac{1}{n}} == \\sqrt[n]{x} ",
@@ -673,7 +687,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] \\left(x\\right)^{\\frac{1}{n}}"
           ],
-          "duration": 4,
+          "duration": 7,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] \\left(x\\right)^{\\frac{1}{n}} == \\sqrt[n]{x} ",
@@ -687,7 +701,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] \\left(x\\right)^{\\frac{1}{2}}"
           ],
-          "duration": 5,
+          "duration": 7,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] \\left(x\\right)^{\\frac{1}{2}} == \\sqrt{x} ",
@@ -701,7 +715,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] \\left(x-1\\right)^{\\frac{1}{2}}+3"
           ],
-          "duration": 9,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] \\left(x-1\\right)^{\\frac{1}{2}}+3 == \\sqrt{x-1}+3 ",
@@ -741,7 +755,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{x}{12}\\times7\\text{dollars}"
           ],
-          "duration": 17,
+          "duration": 18,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{x}{12}\\times7\\text{dollars} == \\frac{7x}{12}\\ \\text{dollars} ",
@@ -755,7 +769,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{x}{12}\\times7\\text{dollars}"
           ],
-          "duration": 16,
+          "duration": 15,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{x}{12}\\times7\\text{dollars} == x\\times \\frac{1}{12}\\times 7\\ \\text{dollars} ",
@@ -769,7 +783,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{x}{12}\\times7\\text{dollars}"
           ],
-          "duration": 12,
+          "duration": 16,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{x}{12}\\times7\\text{dollars} == x\\times 7\\times \\frac{1}{12}\\ \\text{dollars} ",
@@ -783,7 +797,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{x}{12}\\times7\\text{dollars}"
           ],
-          "duration": 13,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{x}{12}\\times7\\text{dollars} == \\frac{1}{12}\\times x\\times 7\\ \\text{dollars} ",
@@ -797,7 +811,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{x}{12}\\times7\\text{dollars}"
           ],
-          "duration": 13,
+          "duration": 15,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{x}{12}\\times7\\text{dollars} == \\frac{7}{12}\\times x\\ \\text{dollars} ",
@@ -811,7 +825,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{x}{12}\\times7\\text{dollars}"
           ],
-          "duration": 12,
+          "duration": 15,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{x}{12}\\times7\\text{dollars} == \\frac{1}{12}x\\times 7\\ \\text{dollars} ",
@@ -825,7 +839,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{x}{12}\\times7\\text{dollars}"
           ],
-          "duration": 12,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{x}{12}\\times7\\text{dollars} == \\frac{1}{12}\\left(7x\\right)\\ \\text{dollars} ",
@@ -839,7 +853,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{x}{12}\\times7\\text{dollars}"
           ],
-          "duration": 12,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{x}{12}\\times7\\text{dollars} == \\frac{1}{12}\\left(x\\times 7\\right)\\ \\text{dollars} ",
@@ -853,7 +867,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{n-5}{6}"
           ],
-          "duration": 16,
+          "duration": 18,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{n-5}{6} == \\frac{-5+n}{6} ",
@@ -867,7 +881,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{n-5}{6}"
           ],
-          "duration": 16,
+          "duration": 19,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{n-5}{6} == \\frac{n}{6}-\\frac{5}{6} ",
@@ -881,7 +895,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{n-5}{6}"
           ],
-          "duration": 16,
+          "duration": 25,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{n-5}{6} == -\\frac{5}{6}+\\frac{n}{6} ",
@@ -895,7 +909,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{n-5}{6}"
           ],
-          "duration": 74,
+          "duration": 81,
           "failureDetails": [
             {
               "actual": "",
@@ -928,7 +942,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{n-5}{6}"
           ],
-          "duration": 61,
+          "duration": 70,
           "failureDetails": [
             {
               "actual": "",
@@ -961,7 +975,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] 6 \\frac{1}{2}"
           ],
-          "duration": 4,
+          "duration": 5,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] 6 \\frac{1}{2} == 6 + \\frac{1}{2} ",
@@ -975,7 +989,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] 6 \\frac{1}{2}"
           ],
-          "duration": 7,
+          "duration": 9,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] 6 \\frac{1}{2} != 6 * \\frac{1}{2} ",
@@ -989,7 +1003,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second}"
           ],
-          "duration": 13,
+          "duration": 15,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second} == \\frac{1}{x}\\left(6\\pi \\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second} ",
@@ -1003,7 +1017,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second}"
           ],
-          "duration": 13,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second} == \\frac{6}{x}\\pi \\ \\text{radians}\\ \\text{per}\\ \\text{second} ",
@@ -1017,7 +1031,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second}"
           ],
-          "duration": 13,
+          "duration": 16,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second} == 6\\pi \\left(\\frac{1}{x}\\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second} ",
@@ -1045,7 +1059,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{6\\pi}{x}"
           ],
-          "duration": 11,
+          "duration": 15,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{6\\pi}{x} == \\frac{6}{x}\\pi ",
@@ -1059,7 +1073,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{6\\pi}{x}"
           ],
-          "duration": 13,
+          "duration": 17,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{6\\pi}{x} == 6 * \\frac{\\pi }{x} ",
@@ -1073,7 +1087,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{6\\pi}{x}"
           ],
-          "duration": 12,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{6\\pi}{x} == \\left(6\\right) \\frac{\\pi }{x} ",
@@ -1087,7 +1101,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{6\\pi}{x}"
           ],
-          "duration": 11,
+          "duration": 15,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{6\\pi}{x} == 6\\pi \\left(\\frac{1}{x}\\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second} ",
@@ -1101,7 +1115,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
           ],
-          "duration": 15,
+          "duration": 18,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == 4+\\frac{d}{240}\\ \\text{years} ",
@@ -1115,7 +1129,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
           ],
-          "duration": 13,
+          "duration": 17,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == 4+\\frac{1}{240}d\\ \\text{years} ",
@@ -1129,7 +1143,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
           ],
-          "duration": 13,
+          "duration": 16,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == 4+d\\left(\\frac{1}{240}\\right)\\ \\text{years} ",
@@ -1143,7 +1157,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
           ],
-          "duration": 14,
+          "duration": 25,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == d\\left(\\frac{1}{240}\\right)+4\\ \\text{years} ",
@@ -1157,7 +1171,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
           ],
-          "duration": 13,
+          "duration": 16,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == \\frac{1}{240}d+4\\ \\text{years} ",
@@ -1171,7 +1185,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
           ],
-          "duration": 13,
+          "duration": 16,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == 4+\\frac{d}{240}\\ \\text{years} ",
@@ -1185,7 +1199,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
           ],
-          "duration": 13,
+          "duration": 17,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == 4+\\frac{1}{240}d\\ \\text{years} ",
@@ -1199,7 +1213,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
           ],
-          "duration": 13,
+          "duration": 15,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == 4+d\\left(\\frac{1}{240}\\right)\\ \\text{years} ",
@@ -1213,7 +1227,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
           ],
-          "duration": 12,
+          "duration": 18,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == d\\left(\\frac{1}{240}\\right)+4\\ \\text{years} ",
@@ -1227,7 +1241,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
           ],
-          "duration": 14,
+          "duration": 15,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == \\frac{1}{240}d+4\\ \\text{years} ",
@@ -1241,7 +1255,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] 0.65x"
           ],
-          "duration": 10,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] 0.65x == \\frac{65}{100}x ",
@@ -1255,7 +1269,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] 0.65x"
           ],
-          "duration": 11,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] 0.65x == \\frac{13}{20}x ",
@@ -1269,7 +1283,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] 0.65x"
           ],
-          "duration": 12,
+          "duration": 15,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] 0.65x == \\frac{65x}{100} ",
@@ -1283,7 +1297,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] 0.65x"
           ],
-          "duration": 15,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] 0.65x == \\frac{13x}{20} ",
@@ -1297,7 +1311,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{a+c}{2}+\\frac{b+d}{2}i"
           ],
-          "duration": 44,
+          "duration": 58,
           "failureDetails": [
             {
               "actual": "",
@@ -1330,7 +1344,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{a+c}{2}+\\frac{b+d}{2}i"
           ],
-          "duration": 48,
+          "duration": 57,
           "failureDetails": [
             {
               "actual": "",
@@ -1363,7 +1377,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{a+c}{2}+\\frac{b+d}{2}i"
           ],
-          "duration": 51,
+          "duration": 62,
           "failureDetails": [
             {
               "actual": "",
@@ -1396,7 +1410,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{10}{12}\\pi\\ \\text{radians}"
           ],
-          "duration": 11,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{10}{12}\\pi\\ \\text{radians} == \\frac{5}{6}\\pi \\ \\text{radians} ",
@@ -1410,7 +1424,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{10}{12}\\pi\\ \\text{radians}"
           ],
-          "duration": 12,
+          "duration": 16,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{10}{12}\\pi\\ \\text{radians} == \\frac{10\\pi }{12}\\ \\text{radians} ",
@@ -1424,7 +1438,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{10}{12}\\pi\\ \\text{radians}"
           ],
-          "duration": 12,
+          "duration": 16,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{10}{12}\\pi\\ \\text{radians} == \\frac{5\\pi }{6}\\ \\text{radians} ",
@@ -1438,7 +1452,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{10}{12}\\pi\\ \\text{radians}"
           ],
-          "duration": 13,
+          "duration": 15,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{10}{12}\\pi\\ \\text{radians} == \\frac{50\\pi }{60}\\ \\text{radians} ",
@@ -1452,7 +1466,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{10}{12}\\pi\\ \\text{radians}"
           ],
-          "duration": 10,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{10}{12}\\pi\\ \\text{radians} == \\frac{50}{60}\\pi \\ \\text{radians} ",
@@ -1466,7 +1480,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{3V}{B}"
           ],
-          "duration": 11,
+          "duration": 18,
           "failureDetails": [
             {
               "actual": "",
@@ -1499,7 +1513,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{3V}{B}"
           ],
-          "duration": 7,
+          "duration": 8,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{3V}{B} == h=\\frac{\\left(3\\times V\\right)}{B} ",
@@ -1513,7 +1527,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{3V}{B}"
           ],
-          "duration": 6,
+          "duration": 8,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{3V}{B} == h=\\left(3V\\right)\\div B ",
@@ -1527,7 +1541,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{3V}{B}"
           ],
-          "duration": 8,
+          "duration": 9,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{3V}{B} == h=\\left(3\\times V\\right)\\div B ",
@@ -1541,7 +1555,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] r=\\sqrt{\\frac{V}{\\pi h}}"
           ],
-          "duration": 8,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] r=\\sqrt{\\frac{V}{\\pi h}} == r=\\left(\\frac{V}{\\pi h}\\right)^{\\frac{1}{2}} ",
@@ -1555,7 +1569,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] r=\\sqrt{\\frac{V}{\\pi h}}"
           ],
-          "duration": 8,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] r=\\sqrt{\\frac{V}{\\pi h}} == r=\\left(\\frac{V}{\\pi \\times h}\\right)^{\\frac{1}{2}} ",
@@ -1569,7 +1583,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] r=\\sqrt{\\frac{V}{\\pi h}}"
           ],
-          "duration": 7,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] r=\\sqrt{\\frac{V}{\\pi h}} == r=\\sqrt{\\frac{V}{\\pi \\times h}} ",
@@ -1597,7 +1611,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] c=-\\frac{b}{m}"
           ],
-          "duration": 6,
+          "duration": 9,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] c=-\\frac{b}{m} == c=-b\\times \\frac{1}{m} ",
@@ -1639,7 +1653,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] c=-\\frac{b}{m}"
           ],
-          "duration": 10,
+          "duration": 14,
           "failureDetails": [
             {
               "actual": "",
@@ -1672,7 +1686,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] c=\\frac{\\pi}{b}"
           ],
-          "duration": 4,
+          "duration": 5,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] c=\\frac{\\pi}{b} == c=\\pi \\div b ",
@@ -1686,7 +1700,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] c=\\frac{\\pi}{b}"
           ],
-          "duration": 5,
+          "duration": 6,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] c=\\frac{\\pi}{b} == c=\\pi \\times \\frac{1}{b} ",
@@ -1700,7 +1714,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] c=\\frac{\\pi}{b}"
           ],
-          "duration": 5,
+          "duration": 6,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] c=\\frac{\\pi}{b} == c=\\pi \\left(\\frac{1}{b}\\right) ",
@@ -1714,7 +1728,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] c=\\frac{\\pi}{b}"
           ],
-          "duration": 5,
+          "duration": 6,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] c=\\frac{\\pi}{b} == c=\\left(\\frac{1}{b}\\right)\\pi  ",
@@ -1728,7 +1742,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] V\\left(t\\right)=750\\left(1.5\\right)^t"
           ],
-          "duration": 8,
+          "duration": 9,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] V\\left(t\\right)=750\\left(1.5\\right)^t == V(t)\\ =\\ 750\\left(\\frac{3}{2}\\right)^t ",
@@ -1742,7 +1756,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] V\\left(t\\right)=750\\left(1.5\\right)^t"
           ],
-          "duration": 9,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] V\\left(t\\right)=750\\left(1.5\\right)^t == V(t)\\ =\\ 750\\left(1+0.5\\right)^t ",
@@ -1756,7 +1770,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] V\\left(t\\right)=750\\left(1.5\\right)^t"
           ],
-          "duration": 9,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] V\\left(t\\right)=750\\left(1.5\\right)^t == V(t)\\ =\\ 750\\left(1+\\frac{1}{2}\\right)^t ",
@@ -1770,7 +1784,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] g\\left(x\\right)=\\sqrt[3]{x-2}"
           ],
-          "duration": 7,
+          "duration": 8,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] g\\left(x\\right)=\\sqrt[3]{x-2} == g\\left(x\\right)\\ =\\ \\sqrt[3]{-2+x} ",
@@ -1784,7 +1798,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] g\\left(x\\right)=\\sqrt[3]{x-2}"
           ],
-          "duration": 8,
+          "duration": 9,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] g\\left(x\\right)=\\sqrt[3]{x-2} == g\\left(x\\right)\\ =\\ \\left(x-2\\right)^{\\frac{1}{3}} ",
@@ -1798,7 +1812,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] g\\left(x\\right)=\\sqrt[3]{x-2}"
           ],
-          "duration": 7,
+          "duration": 8,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] g\\left(x\\right)=\\sqrt[3]{x-2} == g\\left(x\\right)\\ =\\ \\left(-2+x\\right)^{\\frac{1}{3}} ",
@@ -1812,7 +1826,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] g\\left(x\\right)=\\sqrt[3]{x-2}"
           ],
-          "duration": 8,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] g\\left(x\\right)=\\sqrt[3]{x-2} == g\\left(x\\right)\\ =\\ \\sqrt[3]{-2+x} ",
@@ -1840,7 +1854,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] g\\left(x\\right)=\\sqrt[3]{x-2}"
           ],
-          "duration": 8,
+          "duration": 9,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] g\\left(x\\right)=\\sqrt[3]{x-2} == g\\left(x\\right)\\ =\\ \\left(-2+x\\right)^{\\frac{1}{3}} ",
@@ -1854,7 +1868,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{da}{c}"
           ],
-          "duration": 11,
+          "duration": 13,
           "failureDetails": [
             {
               "actual": "",
@@ -1887,7 +1901,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{da}{c}"
           ],
-          "duration": 12,
+          "duration": 15,
           "failureDetails": [
             {
               "actual": "",
@@ -1948,7 +1962,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{da}{c}"
           ],
-          "duration": 11,
+          "duration": 13,
           "failureDetails": [
             {
               "actual": "",
@@ -1981,7 +1995,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{da}{c}"
           ],
-          "duration": 12,
+          "duration": 16,
           "failureDetails": [
             {
               "actual": "",
@@ -2014,7 +2028,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{da}{c}"
           ],
-          "duration": 14,
+          "duration": 15,
           "failureDetails": [
             {
               "actual": "",
@@ -2047,7 +2061,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{da}{c}"
           ],
-          "duration": 6,
+          "duration": 9,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{da}{c} == h=a\\left(d\\div c\\right) ",
@@ -2075,7 +2089,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] x=\\frac{c-by}{a}"
           ],
-          "duration": 9,
+          "duration": 13,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] x=\\frac{c-by}{a} == x=\\frac{1}{a}\\left(c-by\\right) ",
@@ -2089,7 +2103,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] x=\\frac{c-by}{a}"
           ],
-          "duration": 11,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] x=\\frac{c-by}{a} == x=\\left(c-by\\right)\\div a ",
@@ -2103,7 +2117,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] x=\\frac{c-by}{a}"
           ],
-          "duration": 10,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] x=\\frac{c-by}{a} == x=\\frac{1}{a}\\left(-by+c\\right) ",
@@ -2117,7 +2131,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] x=\\frac{c-by}{a}"
           ],
-          "duration": 9,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] x=\\frac{c-by}{a} == x=\\frac{\\left(-by+c\\right)}{a} ",
@@ -2131,7 +2145,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] x=\\frac{c-by}{a}"
           ],
-          "duration": 9,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] x=\\frac{c-by}{a} == x=\\frac{-by+c}{a} ",
@@ -2145,7 +2159,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] x=\\frac{c-by}{a}"
           ],
-          "duration": 9,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] x=\\frac{c-by}{a} == x=\\left(-by+c\\right)\\div a ",
@@ -2159,7 +2173,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] x=\\frac{c-by}{a}"
           ],
-          "duration": 10,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] x=\\frac{c-by}{a} == x=\\frac{\\left(c-by\\right)}{a} ",
@@ -2173,7 +2187,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] x=\\frac{c-by}{a}"
           ],
-          "duration": 18,
+          "duration": 22,
           "failureDetails": [
             {
               "actual": "",
@@ -2206,7 +2220,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] x=\\frac{c-by}{a}"
           ],
-          "duration": 19,
+          "duration": 22,
           "failureDetails": [
             {
               "actual": "",
@@ -2239,7 +2253,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] f\\left(x\\right)=x\\left(3x+16\\right)"
           ],
-          "duration": 16,
+          "duration": 19,
           "failureDetails": [
             {
               "actual": "",
@@ -2272,7 +2286,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] f\\left(x\\right)=x\\left(3x+16\\right)"
           ],
-          "duration": 16,
+          "duration": 18,
           "failureDetails": [
             {
               "actual": "",
@@ -2305,7 +2319,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] f\\left(x\\right)=x\\left(3x+16\\right)"
           ],
-          "duration": 16,
+          "duration": 19,
           "failureDetails": [
             {
               "actual": "",
@@ -2338,7 +2352,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] f\\left(x\\right)=x\\left(3x+16\\right)"
           ],
-          "duration": 10,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] f\\left(x\\right)=x\\left(3x+16\\right) == f\\left(x\\right)\\ =\\ x\\left(16+3x\\right) ",
@@ -2352,7 +2366,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] f\\left(x\\right)=x\\left(3x+16\\right)"
           ],
-          "duration": 17,
+          "duration": 18,
           "failureDetails": [
             {
               "actual": "",
@@ -2385,7 +2399,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] f\\left(x\\right)=x\\left(3x+16\\right)"
           ],
-          "duration": 15,
+          "duration": 17,
           "failureDetails": [
             {
               "actual": "",
@@ -2418,7 +2432,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] f\\left(x\\right)=x\\left(3x+16\\right)"
           ],
-          "duration": 13,
+          "duration": 17,
           "failureDetails": [
             {
               "actual": "",
@@ -2451,7 +2465,7 @@
             "src/fixtures/latex-equal/literal.ts",
             "[literal] 12 + 3 * x"
           ],
-          "duration": 2,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/literal.ts [literal] 12 + 3 * x == 12    +     3   \\times x   ()",
@@ -2498,7 +2512,7 @@
             "src/fixtures/latex-equal/literal.ts",
             "[literal] 12 + 3 * x"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/literal.ts [literal] 12 + 3 * x != 3 * x + 12 ()",
@@ -2526,7 +2540,7 @@
             "src/fixtures/latex-equal/literal.ts",
             "[literal] 12.00"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/literal.ts [literal] 12.00 != 12.001 (allowTrailingZeros)",
@@ -2540,21 +2554,7 @@
             "src/fixtures/latex-equal/literal.ts",
             "[literal] 12.00"
           ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/literal.ts [literal] 12.00 == 12.00 ()",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "== 12.00 ()"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/literal.ts",
-            "[literal] 12.00"
-          ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [
             {
               "actual": "",
@@ -2587,7 +2587,7 @@
             "src/fixtures/latex-equal/literal.ts",
             "[literal] 2 + 3"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [
             {
               "actual": "",
@@ -2620,7 +2620,7 @@
             "src/fixtures/latex-equal/literal.ts",
             "[literal] 2 + 3"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/literal.ts [literal] 2 + 3 != 3 + 2 ()",
@@ -2634,7 +2634,7 @@
             "src/fixtures/latex-equal/literal.ts",
             "[literal] a+b+c"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [
             {
               "actual": "",
@@ -2681,7 +2681,7 @@
             "src/fixtures/latex-equal/literal.ts",
             "[literal] 12.00+3"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [
             {
               "actual": "",
@@ -2770,7 +2770,7 @@
             "src/fixtures/latex-equal/old-literal.ts",
             "[literal] 72\\div12=6\\text{eggs}"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/old-literal.ts [literal] 72\\div12=6\\text{eggs} ==  72\\div12=6\\text{eggs}  ",
@@ -2784,7 +2784,7 @@
             "src/fixtures/latex-equal/old-literal.ts",
             "[literal] 72\\div12=6\\text{eggs}"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/old-literal.ts [literal] 72\\div12=6\\text{eggs} ==  72 \\div 12= 6 \\text{eggs}  ",
@@ -2798,7 +2798,7 @@
             "src/fixtures/latex-equal/PD-282.ts",
             "[literal] 1"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-282.ts [literal] 1 == 1.0 (allowTrailingZeros)",
@@ -2873,7 +2873,7 @@
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] a+b+10"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [
             {
               "actual": "",
@@ -2939,7 +2939,7 @@
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] a+b+10"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [
             {
               "actual": "",
@@ -3052,7 +3052,7 @@
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] a+b+10"
           ],
-          "duration": 0,
+          "duration": 2,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 != 10+a+b ()",
@@ -3066,7 +3066,7 @@
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] a+b+10"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 != 10+b+a ()",
@@ -3074,20 +3074,6 @@
           "numPassingAsserts": 0,
           "status": "passed",
           "title": "!= 10+b+a ()"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/PD-283.ts",
-            "[literal] a+b+10"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 != b+a+10 ()",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "!= b+a+10 ()"
         },
         {
           "ancestorTitles": [
@@ -3106,9 +3092,23 @@
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] a+b+10"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 != b+a+10 ()",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "!= b+a+10 ()"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
             "[literal] 0<x≤4"
           ],
-          "duration": 18,
+          "duration": 27,
           "failureDetails": [
             {
               "actual": "",
@@ -3170,7 +3170,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] a/x"
           ],
-          "duration": 9,
+          "duration": 13,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-288.ts [symbolic] a/x == (1/x) * a ",
@@ -3184,7 +3184,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] a(x+y)"
           ],
-          "duration": 12,
+          "duration": 13,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-288.ts [symbolic] a(x+y) == ax+ay ",
@@ -3198,7 +3198,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] ab"
           ],
-          "duration": 8,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-288.ts [symbolic] ab == a*b ",
@@ -3212,7 +3212,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] ab"
           ],
-          "duration": 11,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-288.ts [symbolic] ab == a(b) ",
@@ -3226,7 +3226,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] ab"
           ],
-          "duration": 8,
+          "duration": 9,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-288.ts [symbolic] ab == (a)b ",
@@ -3240,7 +3240,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] ab"
           ],
-          "duration": 9,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-288.ts [symbolic] ab == (a)(b) ",
@@ -3254,7 +3254,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] ab"
           ],
-          "duration": 17,
+          "duration": 20,
           "failureDetails": [
             {
               "actual": "",
@@ -3287,7 +3287,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] ab"
           ],
-          "duration": 19,
+          "duration": 20,
           "failureDetails": [
             {
               "actual": "",
@@ -3320,7 +3320,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] ab"
           ],
-          "duration": 17,
+          "duration": 19,
           "failureDetails": [
             {
               "actual": "",
@@ -3353,7 +3353,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] ab"
           ],
-          "duration": 18,
+          "duration": 19,
           "failureDetails": [
             {
               "actual": "",
@@ -3386,7 +3386,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] ab"
           ],
-          "duration": 18,
+          "duration": 20,
           "failureDetails": [
             {
               "actual": "",
@@ -3419,7 +3419,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] ab"
           ],
-          "duration": 18,
+          "duration": 19,
           "failureDetails": [
             {
               "actual": "",
@@ -3452,7 +3452,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] a/b"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [
             {
               "actual": "",
@@ -3514,7 +3514,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] ab/x"
           ],
-          "duration": 11,
+          "duration": 13,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-288.ts [symbolic] ab/x == (b/x)*a ",
@@ -3528,7 +3528,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] a+b"
           ],
-          "duration": 16,
+          "duration": 19,
           "failureDetails": [
             {
               "actual": "",
@@ -3589,7 +3589,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] 8.5x"
           ],
-          "duration": 10,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-288.ts [symbolic] 8.5x == 8.5000x ",
@@ -3603,7 +3603,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] -(a/b)"
           ],
-          "duration": 10,
+          "duration": 16,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-288.ts [symbolic] -(a/b) == (-a)/b ",
@@ -3617,7 +3617,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] -(a/b)"
           ],
-          "duration": 21,
+          "duration": 24,
           "failureDetails": [
             {
               "actual": "",
@@ -3650,7 +3650,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] ab(x+y)"
           ],
-          "duration": 30,
+          "duration": 39,
           "failureDetails": [
             {
               "actual": "",
@@ -3683,7 +3683,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] ab(x+y)"
           ],
-          "duration": 15,
+          "duration": 23,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-288.ts [symbolic] ab(x+y) == (abx+aby) ",
@@ -3697,7 +3697,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] ab(x+y)"
           ],
-          "duration": 16,
+          "duration": 18,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-288.ts [symbolic] ab(x+y) == abx+aby ",
@@ -3711,7 +3711,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] ab(x+y)"
           ],
-          "duration": 16,
+          "duration": 20,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-288.ts [symbolic] ab(x+y) == abx + aby ",
@@ -3751,7 +3751,7 @@
             "src/fixtures/latex-equal/PD-304.ts",
             "[symbolic] 1 * 3 * x"
           ],
-          "duration": 10,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-304.ts [symbolic] 1 * 3 * x == x * 1 * 3 (exception:1 * x * 3)",
@@ -3765,7 +3765,7 @@
             "src/fixtures/latex-equal/PD-304.ts",
             "[symbolic] 1 * 3 * x"
           ],
-          "duration": 10,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-304.ts [symbolic] 1 * 3 * x == x * 3 (exception:1 * x * 3)",
@@ -3793,7 +3793,7 @@
             "src/fixtures/latex-equal/PD-304.ts",
             "[symbolic] 1 * 3 * x"
           ],
-          "duration": 10,
+          "duration": 13,
           "failureDetails": [
             {
               "actual": "",
@@ -3840,7 +3840,7 @@
             "src/fixtures/latex-equal/percent.ts",
             "[symbolic] we have percent support in math-expressions - port"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [
             {
               "actual": "",
@@ -3970,7 +3970,7 @@
             "src/fixtures/latex-equal/symbolic-a.ts",
             "[symbolic] \\left(\\frac{2\\sqrt{2}}{3},\\frac{1}{3}\\right)"
           ],
-          "duration": 3,
+          "duration": 5,
           "failureDetails": [
             {
               "actual": "",
@@ -3990,32 +3990,6 @@
           "numPassingAsserts": 0,
           "status": "failed",
           "title": "== (\\frac{2}{3}\\sqrt{2},\\frac{1}{3}) "
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/symbolic-a.ts",
-            "[symbolic] \\left(\\frac{2\\sqrt{2}}{3},\\frac{1}{3}\\right)"
-          ],
-          "duration": 3,
-          "failureDetails": [
-            {
-              "actual": "",
-              "error": {},
-              "expected": "",
-              "matcherName": "",
-              "message": "TypeError: Cannot implicitly convert a number to a Fraction when there will be a loss of precision (value: 0.31426968052735443). Use function fraction(x) to convert to Fraction.",
-              "passed": false,
-              "stack": "TypeError: Cannot implicitly convert a number to a Fraction when there will be a loss of precision (value: 0.31426968052735443). Use function fraction(x) to convert to Fraction.\n    at convert (/home/ede/dev/github/pie-framework/math-validation/node_modules/mathjs/lib/cjs/core/function/typed.js:264:15)\n    at Array.convertArg (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:819:22)\n    at Function.convertArgs (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:766:45)\n    at Function.generic (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:1073:27)\n    at equalScalar (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:1092:24)\n    at Function.anyAny (/home/ede/dev/github/pie-framework/math-validation/node_modules/mathjs/lib/cjs/function/relational/equal.js:108:14)\n    at Function.generic (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:1073:27)\n    at equal (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:1092:24)\n    at _ruleMatch (/home/ede/dev/github/pie-framework/math-validation/node_modules/mathjs/lib/cjs/function/algebra/simplify.js:771:12)\n    at _ruleMatch (/home/ede/dev/github/pie-framework/math-validation/node_modules/mathjs/lib/cjs/function/algebra/simplify.js:698:28)"
-            }
-          ],
-          "failureMessages": [
-            "TypeError: Cannot implicitly convert a number to a Fraction when there will be a loss of precision (value: 0.31426968052735443). Use function fraction(x) to convert to Fraction.\n    at convert (/home/ede/dev/github/pie-framework/math-validation/node_modules/mathjs/lib/cjs/core/function/typed.js:264:15)\n    at Array.convertArg (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:819:22)\n    at Function.convertArgs (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:766:45)\n    at Function.generic (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:1073:27)\n    at equalScalar (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:1092:24)\n    at Function.anyAny (/home/ede/dev/github/pie-framework/math-validation/node_modules/mathjs/lib/cjs/function/relational/equal.js:108:14)\n    at Function.generic (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:1073:27)\n    at equal (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:1092:24)\n    at _ruleMatch (/home/ede/dev/github/pie-framework/math-validation/node_modules/mathjs/lib/cjs/function/algebra/simplify.js:771:12)\n    at _ruleMatch (/home/ede/dev/github/pie-framework/math-validation/node_modules/mathjs/lib/cjs/function/algebra/simplify.js:698:28)"
-          ],
-          "fullName": "src/fixtures/latex-equal/symbolic-a.ts [symbolic] \\left(\\frac{2\\sqrt{2}}{3},\\frac{1}{3}\\right) == (\\frac{1}{3}\\sqrt{8},\\frac{1}{3}) ",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "failed",
-          "title": "== (\\frac{1}{3}\\sqrt{8},\\frac{1}{3}) "
         },
         {
           "ancestorTitles": [
@@ -4046,9 +4020,35 @@
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/symbolic-a.ts",
+            "[symbolic] \\left(\\frac{2\\sqrt{2}}{3},\\frac{1}{3}\\right)"
+          ],
+          "duration": 3,
+          "failureDetails": [
+            {
+              "actual": "",
+              "error": {},
+              "expected": "",
+              "matcherName": "",
+              "message": "TypeError: Cannot implicitly convert a number to a Fraction when there will be a loss of precision (value: 0.31426968052735443). Use function fraction(x) to convert to Fraction.",
+              "passed": false,
+              "stack": "TypeError: Cannot implicitly convert a number to a Fraction when there will be a loss of precision (value: 0.31426968052735443). Use function fraction(x) to convert to Fraction.\n    at convert (/home/ede/dev/github/pie-framework/math-validation/node_modules/mathjs/lib/cjs/core/function/typed.js:264:15)\n    at Array.convertArg (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:819:22)\n    at Function.convertArgs (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:766:45)\n    at Function.generic (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:1073:27)\n    at equalScalar (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:1092:24)\n    at Function.anyAny (/home/ede/dev/github/pie-framework/math-validation/node_modules/mathjs/lib/cjs/function/relational/equal.js:108:14)\n    at Function.generic (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:1073:27)\n    at equal (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:1092:24)\n    at _ruleMatch (/home/ede/dev/github/pie-framework/math-validation/node_modules/mathjs/lib/cjs/function/algebra/simplify.js:771:12)\n    at _ruleMatch (/home/ede/dev/github/pie-framework/math-validation/node_modules/mathjs/lib/cjs/function/algebra/simplify.js:698:28)"
+            }
+          ],
+          "failureMessages": [
+            "TypeError: Cannot implicitly convert a number to a Fraction when there will be a loss of precision (value: 0.31426968052735443). Use function fraction(x) to convert to Fraction.\n    at convert (/home/ede/dev/github/pie-framework/math-validation/node_modules/mathjs/lib/cjs/core/function/typed.js:264:15)\n    at Array.convertArg (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:819:22)\n    at Function.convertArgs (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:766:45)\n    at Function.generic (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:1073:27)\n    at equalScalar (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:1092:24)\n    at Function.anyAny (/home/ede/dev/github/pie-framework/math-validation/node_modules/mathjs/lib/cjs/function/relational/equal.js:108:14)\n    at Function.generic (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:1073:27)\n    at equal (/home/ede/dev/github/pie-framework/math-validation/node_modules/typed-function/typed-function.js:1092:24)\n    at _ruleMatch (/home/ede/dev/github/pie-framework/math-validation/node_modules/mathjs/lib/cjs/function/algebra/simplify.js:771:12)\n    at _ruleMatch (/home/ede/dev/github/pie-framework/math-validation/node_modules/mathjs/lib/cjs/function/algebra/simplify.js:698:28)"
+          ],
+          "fullName": "src/fixtures/latex-equal/symbolic-a.ts [symbolic] \\left(\\frac{2\\sqrt{2}}{3},\\frac{1}{3}\\right) == (\\frac{1}{3}\\sqrt{8},\\frac{1}{3}) ",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "failed",
+          "title": "== (\\frac{1}{3}\\sqrt{8},\\frac{1}{3}) "
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/symbolic-a.ts",
             "[symbolic] f\\left[\\left(x,y\\right)\\right]=\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right)"
           ],
-          "duration": 36,
+          "duration": 51,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-a.ts [symbolic] f\\left[\\left(x,y\\right)\\right]=\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right) == f\\left[\\left(x,y\\right)\\right]=(\\frac{1}{3}\\left(x-3\\right),\\frac{1}{3}\\left(y-2\\right)) ",
@@ -4062,7 +4062,7 @@
             "src/fixtures/latex-equal/symbolic-a.ts",
             "[symbolic] f\\left[\\left(x,y\\right)\\right]=\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right)"
           ],
-          "duration": 32,
+          "duration": 36,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-a.ts [symbolic] f\\left[\\left(x,y\\right)\\right]=\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right) == f\\left[\\left(x,y\\right)\\right]=(\\frac{1}{3}\\left(-3+x\\right),\\frac{1}{3}\\left(-2+y\\right)) ",
@@ -4076,7 +4076,7 @@
             "src/fixtures/latex-equal/symbolic-a.ts",
             "[symbolic] f\\left[\\left(x,y\\right)\\right]=\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right)"
           ],
-          "duration": 30,
+          "duration": 33,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-a.ts [symbolic] f\\left[\\left(x,y\\right)\\right]=\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right) == f\\left[\\left(x,y\\right)\\right]=(\\frac{-3+x}{3},\\frac{-2+y}{3}) ",
@@ -4090,7 +4090,7 @@
             "src/fixtures/latex-equal/symbolic-a.ts",
             "[symbolic] f\\left[\\left(x,y\\right)\\right]=\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right)"
           ],
-          "duration": 46,
+          "duration": 60,
           "failureDetails": [
             {
               "actual": "",
@@ -4123,7 +4123,7 @@
             "src/fixtures/latex-equal/symbolic-a.ts",
             "[symbolic] f\\left[\\left(x,y\\right)\\right]=\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right)"
           ],
-          "duration": 30,
+          "duration": 38,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-a.ts [symbolic] f\\left[\\left(x,y\\right)\\right]=\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right) == f\\left[\\left(x,y\\right)\\right]=(\\frac{-3+x}{3},\\frac{-2+y}{3}) ",
@@ -4137,7 +4137,7 @@
             "src/fixtures/latex-equal/symbolic-a.ts",
             "[symbolic] -\\frac{3\\pi}{4}\\le x\\le\\frac{\\pi}{4}"
           ],
-          "duration": 11,
+          "duration": 15,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-a.ts [symbolic] -\\frac{3\\pi}{4}\\le x\\le\\frac{\\pi}{4} == -\\frac{3}{4}\\pi\\ \\le\\ x\\le\\ \\ \\frac{1}{4}\\pi ",
@@ -4151,7 +4151,7 @@
             "src/fixtures/latex-equal/symbolic-b.ts",
             "[symbolic] m=50\\cos\\left(\\frac{2\\pi}{30}d\\right)+50"
           ],
-          "duration": 19,
+          "duration": 23,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-b.ts [symbolic] m=50\\cos\\left(\\frac{2\\pi}{30}d\\right)+50 == m=50\\cos\\left(\\frac{\\pi\\ }{15}d\\right)+50 ",
@@ -4165,7 +4165,7 @@
             "src/fixtures/latex-equal/symbolic-b.ts",
             "[symbolic] m=50\\cos\\left(\\frac{2\\pi}{30}d\\right)+50"
           ],
-          "duration": 16,
+          "duration": 18,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-b.ts [symbolic] m=50\\cos\\left(\\frac{2\\pi}{30}d\\right)+50 == m=50\\cos\\left(\\frac{1}{15}\\pi\\ d\\right)+50 ",
@@ -4179,7 +4179,7 @@
             "src/fixtures/latex-equal/symbolic-b.ts",
             "[symbolic] m=50\\cos\\left(\\frac{2\\pi}{30}d\\right)+50"
           ],
-          "duration": 18,
+          "duration": 22,
           "failureDetails": [
             {
               "actual": "",
@@ -4212,7 +4212,7 @@
             "src/fixtures/latex-equal/symbolic-b.ts",
             "[symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500"
           ],
-          "duration": 29,
+          "duration": 22,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-b.ts [symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500 == y=250\\sin\\left(\\frac{2}{5}\\pi\\ x\\right)+2500 ",
@@ -4226,7 +4226,7 @@
             "src/fixtures/latex-equal/symbolic-b.ts",
             "[symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500"
           ],
-          "duration": 28,
+          "duration": 21,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-b.ts [symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500 == y=250\\sin\\left(\\left(\\frac{2}{5}\\pi\\ \\right)x\\right)+2500 ",
@@ -4240,7 +4240,7 @@
             "src/fixtures/latex-equal/symbolic-b.ts",
             "[symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500"
           ],
-          "duration": 21,
+          "duration": 23,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-b.ts [symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500 == y=250\\sin\\left(\\left(\\frac{2\\pi\\ }{5}\\right)x\\right)+2500 ",
@@ -4254,7 +4254,7 @@
             "src/fixtures/latex-equal/symbolic-b.ts",
             "[symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500"
           ],
-          "duration": 23,
+          "duration": 22,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-b.ts [symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500 == y=250\\sin\\left(\\frac{2\\pi\\ }{5}x\\right)+2,500 ",
@@ -4282,7 +4282,7 @@
             "src/fixtures/latex-equal/symbolic-b.ts",
             "[symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500"
           ],
-          "duration": 20,
+          "duration": 23,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-b.ts [symbolic] y=250\\sin\\left(\\frac{2\\pi}{5}x\\right)+2500 == y=250\\sin\\left(\\left(\\frac{2}{5}\\pi\\ \\right)x\\right)+2,500 ",
@@ -4364,7 +4364,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] f\\left(y\\right)=26000\\left(0.83\\right)^y"
           ],
-          "duration": 8,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/to-be-fixed.ts [symbolic] f\\left(y\\right)=26000\\left(0.83\\right)^y == f\\left(y\\right)=26,000\\left(0.83\\right)^y ",
@@ -4430,7 +4430,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] f^{-1}\\left(x\\right)=-\\frac{12}{x}+8"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [
             {
               "actual": "",
@@ -4508,7 +4508,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] f\\left(x\\right)=1.1x+8"
           ],
-          "duration": 11,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/to-be-fixed.ts [symbolic] f\\left(x\\right)=1.1x+8 == f(x)\\ =\\ 8+1.1x ",
@@ -4522,7 +4522,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] f\\left(x\\right)=1.1x+8"
           ],
-          "duration": 11,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/to-be-fixed.ts [symbolic] f\\left(x\\right)=1.1x+8 == f(x)\\ =\\ 8+\\left(1+0.1\\right)x ",
@@ -4536,7 +4536,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] f\\left(x\\right)=1.1x+8"
           ],
-          "duration": 13,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/to-be-fixed.ts [symbolic] f\\left(x\\right)=1.1x+8 == f(x)\\ =\\ \\left(1+0.1\\right)x+8 ",
@@ -4550,7 +4550,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] f\\left(x\\right)=1.1x+8"
           ],
-          "duration": 11,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/to-be-fixed.ts [symbolic] f\\left(x\\right)=1.1x+8 == f(x)\\ =\\ x+0.1x+8 ",
@@ -4564,7 +4564,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] f\\left(x\\right)=1.1x+8"
           ],
-          "duration": 11,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/to-be-fixed.ts [symbolic] f\\left(x\\right)=1.1x+8 == f(x)\\ =\\ 8+x+0.1x ",
@@ -4592,7 +4592,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] f\\left(x\\right)=1.1x+8"
           ],
-          "duration": 11,
+          "duration": 12,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/to-be-fixed.ts [symbolic] f\\left(x\\right)=1.1x+8 == f(x)\\ =\\ 8+0.1x+x ",
@@ -4606,7 +4606,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] f\\left(x\\right)=1.1x+8"
           ],
-          "duration": 11,
+          "duration": 13,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/to-be-fixed.ts [symbolic] f\\left(x\\right)=1.1x+8 == f(x)\\ =\\ 0.1x+x+8 ",
@@ -4620,7 +4620,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] x=\\frac{20,000}{r^2}\\text{radians}"
           ],
-          "duration": 7,
+          "duration": 8,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/to-be-fixed.ts [symbolic] x=\\frac{20,000}{r^2}\\text{radians} == x=\\frac{1}{r^2}\\left(20,000\\right)\\ \\text{radians} ",
@@ -4634,7 +4634,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] x=\\frac{20,000}{r^2}\\text{radians}"
           ],
-          "duration": 5,
+          "duration": 6,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/to-be-fixed.ts [symbolic] x=\\frac{20,000}{r^2}\\text{radians} == x=\\frac{20000}{r^2}\\ \\text{radians} ",
@@ -4662,7 +4662,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] x=\\frac{20,000}{r^2}\\text{radians}"
           ],
-          "duration": 6,
+          "duration": 7,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/to-be-fixed.ts [symbolic] x=\\frac{20,000}{r^2}\\text{radians} == x=\\frac{1}{r^2}\\times 20,000\\ \\text{radians} ",
@@ -4735,7 +4735,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] \\text{height}\\ =\\ 120\\sin\\theta"
           ],
-          "duration": 0,
+          "duration": 2,
           "failureDetails": [
             {
               "actual": "",
@@ -4828,7 +4828,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] \\text{height}\\ =\\ 120\\sin\\theta"
           ],
-          "duration": 0,
+          "duration": 2,
           "failureDetails": [
             {
               "actual": "",
@@ -4890,7 +4890,7 @@
             "src/fixtures/latex-equal/to-be-fixed.ts",
             "[symbolic] 100"
           ],
-          "duration": 20,
+          "duration": 23,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/to-be-fixed.ts [symbolic] 100 != 100 - 0.0001 ",
@@ -4910,10 +4910,10 @@
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1617181407810,
-        "runtime": 378,
+        "end": 1617197401032,
+        "runtime": 402,
         "slow": false,
-        "start": 1617181407432
+        "start": 1617197400630
       },
       "skipped": false,
       "snapshot": {
@@ -4931,7 +4931,7 @@
           "ancestorTitles": [
             "'b + a' => 'a + b'"
           ],
-          "duration": 13,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "'b + a' => 'a + b' sorts",
@@ -4957,7 +4957,7 @@
           "ancestorTitles": [
             "'b + a + c' => 'a + b + c'"
           ],
-          "duration": 8,
+          "duration": 9,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "'b + a + c' => 'a + b + c' sorts",
@@ -4970,7 +4970,7 @@
           "ancestorTitles": [
             "'c + b + a' => 'a + b + c'"
           ],
-          "duration": 11,
+          "duration": 10,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "'c + b + a' => 'a + b + c' sorts",
@@ -4990,10 +4990,10 @@
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1617181407919,
-        "runtime": 87,
+        "end": 1617197401146,
+        "runtime": 92,
         "slow": false,
-        "start": 1617181407832
+        "start": 1617197401054
       },
       "skipped": false,
       "snapshot": {
@@ -5011,7 +5011,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 3,
+          "duration": 2,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta 1,000 => 1000",
