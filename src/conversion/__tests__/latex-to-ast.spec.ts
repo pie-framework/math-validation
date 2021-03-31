@@ -49,3 +49,33 @@ describe("bugs in lta", () => {
     expect(out).toEqual(expected);
   });
 });
+
+
+describe.only("latex_parse_error", () => {
+  it.only("treat × as multiplication operator", () => {
+    const input = 'a×b';
+    const expected = ['*', 'a', 'b'];
+
+    const out = lta.convert(input);
+
+    expect(out).toEqual(expected);
+  });
+
+    it.only("treat • as multiplication operator", () => {
+    const input = 'a•b';
+    const expected = ['*', 'a', 'b'];
+
+    const out = lta.convert(input);
+
+    expect(out).toEqual(expected);
+    });
+
+      it.only("treat ÷ as devide operator", () => {
+    const input = 'a÷b';
+    const expected = ['/', 'a', 'b'];
+
+    const out = lta.convert(input);
+
+    expect(out).toEqual(expected);
+  });
+});
