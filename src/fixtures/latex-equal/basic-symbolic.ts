@@ -64,7 +64,8 @@ export default {
     { target: "sin(x)", eq: "sin(x)" },
     { target: "tan(x)", eq: "tan(x)" },
     {
-      skip: true,
+      //only: true,
+      // skip: true,
       target: "f^{-1}\\left(x\\right)=\\sqrt{x-1}+3",
       eq: "f^{-1}\\left(x\\right)=\\sqrt{x-1}+4-1",
     },

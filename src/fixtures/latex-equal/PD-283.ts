@@ -30,7 +30,7 @@ export default {
     {
       // treat reordered multiplicands as identical
       ignoreOrder: true,
-      target: "a×b×c",
+      target: "a*b*c",
       eq: ["a×c×b", "b·a·c", " b×c·a", "c·b×a", "c×a×b"],
       triage: [Triage.NODE_SORT, Triage.LATEX_PARSE_ERROR],
     },
@@ -68,7 +68,7 @@ export default {
       ignoreOrder: true,
       target: "0<x≤4",
       eq: ["4≥x>0"],
-      triage: Triage.LATEX_PARSE_ERROR,
+      triage: [Triage.LATEX_PARSE_ERROR, Triage.NODE_SORT],
     },
     {
       ignoreOrder: false,

@@ -2,7 +2,8 @@ import { sync } from "glob";
 import { resolve, relative } from "path";
 import { latexEqual } from "../index";
 import minimist from "minimist";
-import { boolean } from "mathjs";
+import { LiteralOpts } from "../literal";
+import { SymbolicOpts } from "../symbolic";
 
 const doubleDashIndex = process.argv.indexOf("--");
 
@@ -24,6 +25,7 @@ type FixtureData = {
   skip?: boolean;
   only?: boolean;
   label?: string;
+  opts?: LiteralOpts | SymbolicOpts;
   eq: string | string[];
   ne: string | string[];
 };
@@ -84,12 +86,19 @@ testData.forEach((d) => {
         eq.forEach((y) => {
           if (process.env.LEGACY === "true") {
             it(`[legacy] == ${y}`, () => {
-              const l = latexEqual(t.target, y, { legacy: true, mode });
+              const l = latexEqual(t.target, y, {
+                legacy: true,
+                mode,
+              });
               expect(l).toEqual(true);
             });
           }
           it(`== ${y}`, () => {
-            const l = latexEqual(t.target, y, { legacy: false, mode });
+            const l = latexEqual(t.target, y, {
+              legacy: false,
+              mode,
+              ...t.opts,
+            });
             // console.log(l);
             expect(l).toEqual(true);
           });
@@ -105,7 +114,11 @@ testData.forEach((d) => {
             });
           }
           it(`!= ${y}`, () => {
-            const l = latexEqual(t.target, y, { legacy: false, mode });
+            const l = latexEqual(t.target, y, {
+              legacy: false,
+              mode,
+              ...t.opts,
+            });
             expect(l).toEqual(false);
           });
         });

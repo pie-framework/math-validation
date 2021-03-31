@@ -7,8 +7,6 @@ export default {
       eq: [
         "m=50\\cos\\left(\\frac{\\pi\\ }{15}d\\right)+50",
         "m=50\\cos\\left(\\frac{1}{15}\\pi\\ d\\right)+50",
-        // I am not sure this should be equal
-        "m=50\\cos\\left(\\frac{\\pi\\ }{15}d\\right)+50",
       ],
     },
     {
