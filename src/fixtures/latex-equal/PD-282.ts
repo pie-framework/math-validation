@@ -1,6 +1,6 @@
 export default {
   mode: "literal",
-  skip: true,
+  skip: false,
   tests: [
     {
       allowTrailingZeros: true,

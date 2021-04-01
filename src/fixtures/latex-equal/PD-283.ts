@@ -19,7 +19,7 @@ export default {
     },
     {
       ignoreOrder: false,
-      target: "0<x<=4",
+      target: "0<x≤4",
       ne: ["4≥x>0"],
     },
   ],

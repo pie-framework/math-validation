@@ -67,7 +67,7 @@ export default {
     {
       // expecting ( after function
       target: "\\cos\\theta=-\\sqrt{1-y^2}",
-      eq: ["cos\\ \\theta\\ \\ =\\ -\\sqrt{-y^2+1}"],
+      eq: ["cos\\ \\theta\\ =\\ -\\sqrt{-y^2+1}"],
     },
     {
       // precision error

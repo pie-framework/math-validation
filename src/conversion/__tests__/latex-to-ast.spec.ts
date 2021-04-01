@@ -77,5 +77,23 @@ describe.only("latex_parse_error", () => {
     const out = lta.convert(input);
 
     expect(out).toEqual(expected);
+      });
+
+        it.only("accept rational operator ≤", () => {
+    const input = 'a≤b';
+    const expected = ['le', 'a', 'b'];
+
+    const out = lta.convert(input);
+
+    expect(out).toEqual(expected);
+        });
+
+          it.only("accept rational operator ≥", () => {
+    const input = 'a≥b';
+    const expected = ['ge', 'a', 'b'];
+
+    const out = lta.convert(input);
+
+    expect(out).toEqual(expected);
   });
 });
