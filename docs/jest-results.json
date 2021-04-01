@@ -2,9 +2,9 @@
   "numFailedTestSuites": 1,
   "numFailedTests": 9,
   "numPassedTestSuites": 2,
-  "numPassedTests": 69,
+  "numPassedTests": 71,
   "numPendingTestSuites": 0,
-  "numPendingTests": 194,
+  "numPendingTests": 192,
   "numRuntimeErrorTestSuites": 0,
   "numTodoTests": 0,
   "numTotalTestSuites": 3,
@@ -26,7 +26,7 @@
     "unmatched": 0,
     "updated": 0
   },
-  "startTime": 1617264029412,
+  "startTime": 1617279975922,
   "success": false,
   "testResults": [
     {
@@ -37,10 +37,10 @@
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1617264031516,
-        "runtime": 1735,
+        "end": 1617279978575,
+        "runtime": 2269,
         "slow": false,
-        "start": 1617264029781
+        "start": 1617279976306
       },
       "skipped": false,
       "snapshot": {
@@ -58,7 +58,7 @@
           "ancestorTitles": [
             "'b + a' => 'a + b'"
           ],
-          "duration": 31,
+          "duration": 29,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "'b + a' => 'a + b' sorts",
@@ -71,7 +71,7 @@
           "ancestorTitles": [
             "'b + c + a' => 'a + b + c'"
           ],
-          "duration": 17,
+          "duration": 22,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "'b + c + a' => 'a + b + c' sorts",
@@ -84,7 +84,7 @@
           "ancestorTitles": [
             "'b + a + c' => 'a + b + c'"
           ],
-          "duration": 12,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "'b + a + c' => 'a + b + c' sorts",
@@ -97,7 +97,7 @@
           "ancestorTitles": [
             "'c + b + a' => 'a + b + c'"
           ],
-          "duration": 13,
+          "duration": 24,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "'c + b + a' => 'a + b + c' sorts",
@@ -112,15 +112,15 @@
     {
       "leaks": false,
       "numFailingTests": 0,
-      "numPassingTests": 5,
-      "numPendingTests": 2,
+      "numPassingTests": 7,
+      "numPendingTests": 0,
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1617264032371,
-        "runtime": 2595,
+        "end": 1617279979237,
+        "runtime": 2931,
         "slow": false,
-        "start": 1617264029776
+        "start": 1617279976306
       },
       "skipped": false,
       "snapshot": {
@@ -138,13 +138,13 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 0,
+          "duration": 5,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta 1,000 => 1000",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
+          "status": "passed",
           "title": "1,000 => 1000"
         },
         {
@@ -157,73 +157,73 @@
           "fullName": "bugs in lta 1,000,000 => 1000000",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
+          "status": "passed",
           "title": "1,000,000 => 1000000"
         },
         {
           "ancestorTitles": [
-            "latex_parse_error"
+            "bugs in lta"
           ],
-          "duration": 8,
+          "duration": 5,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "latex_parse_error treat × as multiplication operator",
+          "fullName": "bugs in lta a×b => [ '*', 'a', 'b' ]",
           "location": null,
           "numPassingAsserts": 0,
           "status": "passed",
-          "title": "treat × as multiplication operator"
+          "title": "a×b => [ '*', 'a', 'b' ]"
         },
         {
           "ancestorTitles": [
-            "latex_parse_error"
+            "bugs in lta"
           ],
-          "duration": 4,
+          "duration": 3,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "latex_parse_error treat • as multiplication operator",
+          "fullName": "bugs in lta a•b => [ '*', 'a', 'b' ]",
           "location": null,
           "numPassingAsserts": 0,
           "status": "passed",
-          "title": "treat • as multiplication operator"
+          "title": "a•b => [ '*', 'a', 'b' ]"
         },
         {
           "ancestorTitles": [
-            "latex_parse_error"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "latex_parse_error treat ÷ as devide operator",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "treat ÷ as devide operator"
-        },
-        {
-          "ancestorTitles": [
-            "latex_parse_error"
+            "bugs in lta"
           ],
           "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "latex_parse_error accept rational operator ≤",
+          "fullName": "bugs in lta a÷b => [ '/', 'a', 'b' ]",
           "location": null,
           "numPassingAsserts": 0,
           "status": "passed",
-          "title": "accept rational operator ≤"
+          "title": "a÷b => [ '/', 'a', 'b' ]"
         },
         {
           "ancestorTitles": [
-            "latex_parse_error"
+            "bugs in lta"
           ],
           "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "latex_parse_error accept rational operator ≥",
+          "fullName": "bugs in lta a≤b => [ 'le', 'a', 'b' ]",
           "location": null,
           "numPassingAsserts": 0,
           "status": "passed",
-          "title": "accept rational operator ≥"
+          "title": "a≤b => [ 'le', 'a', 'b' ]"
+        },
+        {
+          "ancestorTitles": [
+            "bugs in lta"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "bugs in lta a≥b => [ 'ge', 'a', 'b' ]",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "a≥b => [ 'ge', 'a', 'b' ]"
         }
       ],
       "failureMessage": null
@@ -236,10 +236,10 @@
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1617264032844,
-        "runtime": 3073,
+        "end": 1617279979875,
+        "runtime": 3569,
         "slow": false,
-        "start": 1617264029771
+        "start": 1617279976306
       },
       "skipped": false,
       "snapshot": {
@@ -258,7 +258,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 34,
+          "duration": 30,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} == 4.5",
@@ -272,7 +272,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 18,
+          "duration": 23,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} == 3.2 + 1.3",
@@ -300,7 +300,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 18,
+          "duration": 13,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} == \\frac{9}{2}",
@@ -328,7 +328,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 14,
+          "duration": 13,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} == \\frac{10}{2} - 0.5",
@@ -342,7 +342,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 50,
+          "duration": 40,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} != 4.55",
@@ -384,7 +384,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 8,
+          "duration": 15,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 == 25 * 4",
@@ -398,7 +398,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 9,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 == 200 / 2",
@@ -440,7 +440,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 8,
+          "duration": 9,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 == 10 * 10",
@@ -454,7 +454,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 12,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 == 100/2 + 50",
@@ -468,7 +468,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 13,
+          "duration": 15,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 != 44 + 57",
@@ -482,7 +482,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 18,
+          "duration": 16,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 != 100 - 0.001",
@@ -510,7 +510,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] x"
           ],
-          "duration": 16,
+          "duration": 17,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] x == x+0",
@@ -524,7 +524,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] x"
           ],
-          "duration": 13,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] x == (x-2)+2",
@@ -538,7 +538,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] x"
           ],
-          "duration": 21,
+          "duration": 20,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] x == ((x^2 + x) / x) - 1",
@@ -566,7 +566,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] x"
           ],
-          "duration": 21,
+          "duration": 20,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] x == ((x^2 + x) / x) - 1",
@@ -580,7 +580,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] x"
           ],
-          "duration": 25,
+          "duration": 23,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] x != y",
@@ -622,7 +622,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] (x + 2)^2"
           ],
-          "duration": 31,
+          "duration": 30,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 == (2 + x)^2",
@@ -636,7 +636,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] (x + 2)^2"
           ],
-          "duration": 26,
+          "duration": 27,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 == x^2 + 4(x+1)",
@@ -650,7 +650,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] (x + 2)^2"
           ],
-          "duration": 53,
+          "duration": 52,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 == x^2 + 8 ((x+1) / 2)",
@@ -664,7 +664,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] (x + 2)^2"
           ],
-          "duration": 41,
+          "duration": 42,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 != x^2 + 4(x+2)",
@@ -678,7 +678,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] breaks - not sure why > (x + 2)^2"
           ],
-          "duration": 43,
+          "duration": 44,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] breaks - not sure why > (x + 2)^2 != x^3 + 4x + 4",
@@ -706,7 +706,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] \\sqrt{4x}"
           ],
-          "duration": 13,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] \\sqrt{4x} == \\sqrt{3x + 1x}",
@@ -776,7 +776,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] tan(x)"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] tan(x) == tan(x)",
@@ -816,7 +816,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 72\\div12=6\\text{eggs}"
           ],
-          "duration": 6,
+          "duration": 7,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 72\\div12=6\\text{eggs} == 72\\div12=(3+3)\\text{eggs}",
@@ -830,7 +830,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] \\left(x\\right)^{ \\frac{1}{\\left(y + 3\\right)}}"
           ],
-          "duration": 12,
+          "duration": 13,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] \\left(x\\right)^{ \\frac{1}{\\left(y + 3\\right)}} == \\sqrt[\\left(y + 3\\right)]{x}",
@@ -844,7 +844,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] \\left(x\\right)^{\\frac{1}{3}}"
           ],
-          "duration": 8,
+          "duration": 9,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] \\left(x\\right)^{\\frac{1}{3}} == \\sqrt[3]{x}",
@@ -858,7 +858,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] \\left(x\\right)^{\\frac{1}{n}}"
           ],
-          "duration": 7,
+          "duration": 6,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] \\left(x\\right)^{\\frac{1}{n}} == \\sqrt[n]{x}",
@@ -872,7 +872,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] \\left(x\\right)^{\\frac{1}{n}}"
           ],
-          "duration": 7,
+          "duration": 6,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] \\left(x\\right)^{\\frac{1}{n}} == \\sqrt[n]{x}",
@@ -1360,7 +1360,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == 4+d\\left(\\frac{1}{240}\\right)\\ \\text{years}",
@@ -1920,7 +1920,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] h=\\frac{da}{c}"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{da}{c} == h=\\frac{ad}{c}",
@@ -2452,7 +2452,7 @@
             "src/fixtures/latex-equal/old-literal.ts",
             "[literal] 1.00"
           ],
-          "duration": 0,
+          "duration": 2,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/old-literal.ts [literal] 1.00 == 1",
@@ -2480,7 +2480,7 @@
             "src/fixtures/latex-equal/old-literal.ts",
             "[literal] 72\\div12=6\\text{eggs}"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/old-literal.ts [literal] 72\\div12=6\\text{eggs} == 72\\div12=6\\text{eggs}",
@@ -2494,7 +2494,7 @@
             "src/fixtures/latex-equal/old-literal.ts",
             "[literal] 72\\div12=6\\text{eggs}"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/old-literal.ts [literal] 72\\div12=6\\text{eggs} ==  72\\div12=6\\text{eggs} ",
@@ -2522,7 +2522,7 @@
             "src/fixtures/latex-equal/PD-282.ts",
             "[literal] 1"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-282.ts [literal] 1 == 1.0",
@@ -2564,7 +2564,7 @@
             "src/fixtures/latex-equal/PD-282.ts",
             "[literal] 1"
           ],
-          "duration": 2,
+          "duration": 1,
           "failureDetails": [
             {
               "actual": "",
@@ -2630,7 +2630,7 @@
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] a+b+10"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [
             {
               "actual": "",
@@ -2696,39 +2696,6 @@
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] a+b+10"
           ],
-          "duration": 0,
-          "failureDetails": [
-            {
-              "actual": "",
-              "error": {
-                "matcherResult": {
-                  "actual": false,
-                  "expected": true,
-                  "name": "toEqual",
-                  "pass": false
-                }
-              },
-              "expected": "",
-              "matcherName": "",
-              "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
-              "passed": false,
-              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/Users/carla/Documents/Work/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:103:23)\n    at Object.asyncJestTest (/Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)"
-            }
-          ],
-          "failureMessages": [
-            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/Users/carla/Documents/Work/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:103:23)\n    at Object.asyncJestTest (/Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)"
-          ],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 == b+a+10",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "failed",
-          "title": "== b+a+10"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/PD-283.ts",
-            "[literal] a+b+10"
-          ],
           "duration": 1,
           "failureDetails": [
             {
@@ -2763,6 +2730,39 @@
             "[literal] a+b+10"
           ],
           "duration": 0,
+          "failureDetails": [
+            {
+              "actual": "",
+              "error": {
+                "matcherResult": {
+                  "actual": false,
+                  "expected": true,
+                  "name": "toEqual",
+                  "pass": false
+                }
+              },
+              "expected": "",
+              "matcherName": "",
+              "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+              "passed": false,
+              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/Users/carla/Documents/Work/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:103:23)\n    at Object.asyncJestTest (/Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)"
+            }
+          ],
+          "failureMessages": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/Users/carla/Documents/Work/pie-framework/math-validation/src/__tests__/latex-equal.spec.ts:103:23)\n    at Object.asyncJestTest (/Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)"
+          ],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 == b+a+10",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "failed",
+          "title": "== b+a+10"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] a+b+10"
+          ],
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 != a+10+b",
@@ -2776,7 +2776,7 @@
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] a+b+10"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 != 10+a+b",
@@ -2790,7 +2790,7 @@
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] a+b+10"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 != 10+b+a",
@@ -2798,6 +2798,20 @@
           "numPassingAsserts": 0,
           "status": "passed",
           "title": "!= 10+b+a"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] a+b+10"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 != b+a+10",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "!= b+a+10"
         },
         {
           "ancestorTitles": [
@@ -2816,23 +2830,9 @@
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/PD-283.ts",
-            "[literal] a+b+10"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 != b+a+10",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "!= b+a+10"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/PD-283.ts",
             "[literal] 0<x≤4"
           ],
-          "duration": 4,
+          "duration": 3,
           "failureDetails": [
             {
               "actual": "",
@@ -3523,7 +3523,7 @@
             "src/fixtures/latex-equal/symbolic-b.ts",
             "[symbolic] m=50\\cos\\left(\\frac{2\\pi}{30}d\\right)+50"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/symbolic-b.ts [symbolic] m=50\\cos\\left(\\frac{2\\pi}{30}d\\right)+50 == m=50\\cos\\left(\\frac{1}{15}\\pi\\ d\\right)+50",

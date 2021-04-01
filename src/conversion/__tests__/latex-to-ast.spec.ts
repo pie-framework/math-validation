@@ -8,6 +8,16 @@ const fixtures = [
   // ["1000", 1000],
   ["1,000", 1000],
   ["1,000,000", 1000000],
+  // treat × as multiplication operator
+  ['a×b', ['*', 'a', 'b']],
+  // treat • as multiplication operator
+  ['a•b', ['*', 'a', 'b']],
+  // treat ÷ as devide operator
+  ['a÷b', ['/', 'a', 'b']],
+  // accept rational operator ≤
+  ['a≤b', ['le', 'a', 'b']],
+  // accept rational operator ≥
+  ['a≥b',['ge', 'a', 'b']],
   // [
   // we were getting: [+, 6, [/, pi, x]]
   // "6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
@@ -27,7 +37,8 @@ const fixtures = [
 
 const lta = new LatexToAst();
 
-describe("bugs in lta", () => {
+describe.only("bugs in lta", () => {
+  // @ts-ignore
   it.each(fixtures)("%s => %s", (input, expected) => {
     // console.time("l-u");
     // const ast = latexParser.parse(input as string, { timeout: 5000 });
@@ -46,54 +57,6 @@ describe("bugs in lta", () => {
     const out = lta.convert(input);
     // console.log("out", out);
     // console.timeEnd("lta");
-    expect(out).toEqual(expected);
-  });
-});
-
-
-describe.only("latex_parse_error", () => {
-  it.only("treat × as multiplication operator", () => {
-    const input = 'a×b';
-    const expected = ['*', 'a', 'b'];
-
-    const out = lta.convert(input);
-
-    expect(out).toEqual(expected);
-  });
-
-    it.only("treat • as multiplication operator", () => {
-    const input = 'a•b';
-    const expected = ['*', 'a', 'b'];
-
-    const out = lta.convert(input);
-
-    expect(out).toEqual(expected);
-    });
-
-      it.only("treat ÷ as devide operator", () => {
-    const input = 'a÷b';
-    const expected = ['/', 'a', 'b'];
-
-    const out = lta.convert(input);
-
-    expect(out).toEqual(expected);
-      });
-
-        it.only("accept rational operator ≤", () => {
-    const input = 'a≤b';
-    const expected = ['le', 'a', 'b'];
-
-    const out = lta.convert(input);
-
-    expect(out).toEqual(expected);
-        });
-
-          it.only("accept rational operator ≥", () => {
-    const input = 'a≥b';
-    const expected = ['ge', 'a', 'b'];
-
-    const out = lta.convert(input);
-
     expect(out).toEqual(expected);
   });
 });
