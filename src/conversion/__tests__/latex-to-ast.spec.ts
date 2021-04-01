@@ -6,8 +6,11 @@ const fixtures = [
   // we were getting [ [ '^', 'f', [ '-', 1 ] ], 'x' ]
   // ["f^{-1}\\left(x\\right)", ["*", ["^", ["f", "-1"]], "x"]],
   // ["1000", 1000],
-  ["1,000", 1000],
-  ["1,000,000", 1000000],
+  ['1,000', 1000],
+  ['1,000,000', 1000000],
+  ['1.00', ['tzn', 1, 2]],
+  ['1.10', ['tzn', 1.1, 1]],
+  [ '1.11000', ['tzn', 1.11, 3]]
   // [
   // we were getting: [+, 6, [/, pi, x]]
   // "6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
@@ -28,6 +31,7 @@ const fixtures = [
 const lta = new LatexToAst();
 
 describe("bugs in lta", () => {
+  // @ts-ignore
   it.each(fixtures)("%s => %s", (input, expected) => {
     // console.time("l-u");
     // const ast = latexParser.parse(input as string, { timeout: 5000 });

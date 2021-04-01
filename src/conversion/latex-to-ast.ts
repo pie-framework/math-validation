@@ -1045,7 +1045,27 @@ export class LatexToAst {
     if (this.token.token_type === "NUMBER") {
       /** TODO: this is a bit primitive, should try and parse commas in numbers correctly */
       // @ts-ignore
-      result = parseFloat(this.token.token_text.replace(/,/g, ""));
+      result = this.token.token_text.replace(/,/g, "");
+
+      // @ts-ignore
+      const parsedFloat = parseFloat(result).toString();
+
+      // @ts-ignore
+      if(result !== parsedFloat) {
+          let noOfTrailingZeros = 0;
+
+          if (parsedFloat.includes('.')) {
+            // @ts-ignore
+            noOfTrailingZeros = result.length - parsedFloat.length;
+          } else {
+            // @ts-ignore
+            noOfTrailingZeros = result.length - parsedFloat.length - 1;
+          }
+
+          // @ts-ignore
+          result = ['tzn', parseFloat(result), noOfTrailingZeros];
+        }
+
       this.advance();
     } else if (this.token.token_type === "INFINITY") {
       // @ts-ignore
