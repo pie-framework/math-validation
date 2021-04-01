@@ -2,6 +2,7 @@ import { Triage } from "../triage";
 
 export default {
   mode: "symbolic",
+ // skip: true,
   tests: [
     {
       //only: true,

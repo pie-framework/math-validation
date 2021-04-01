@@ -1,3 +1,5 @@
+import { Triage } from "../triage";
+
 export default {
   mode: "literal",
   skip: true,
@@ -7,8 +9,9 @@ export default {
         allowTrailingZeros: true,
       },
       target: "1",
-      eq: ["1.0"],
+      eq: ["1.0", "01"],
       ne: ["1.01"],
+      triage: Triage.FLOATING_POINT,
     },
     {
       opts: {
