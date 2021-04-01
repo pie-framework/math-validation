@@ -12,6 +12,8 @@ const fixtures = [
   ['a×b', ['*', 'a', 'b']],
   // treat • as multiplication operator
   ['a•b', ['*', 'a', 'b']],
+  // treat · as multiplication operator
+  ['a·b', ['*', 'a', 'b']],
   // treat ÷ as devide operator
   ['a÷b', ['/', 'a', 'b']],
   // accept rational operator ≤
