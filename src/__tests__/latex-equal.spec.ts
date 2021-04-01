@@ -67,6 +67,23 @@ const getLabel = (t: FixtureData) => {
   return t.target;
 };
 
+const optsLabel = (mode, o) => {
+  if (!o) {
+    return "";
+  }
+
+  if (mode === "symbolic") {
+    if (o.exception) {
+      return `(exception:${o.exception.join(",")})`;
+    }
+    return "";
+  }
+  return `(${Object.entries(o)
+    .map(([k, v]) => (v ? k : undefined))
+    .filter((v) => !!v)
+    .join(",")})`;
+};
+
 testData.forEach((d) => {
   // console.log("d.data", d.data);
   describe(d.filename, () => {
@@ -78,14 +95,16 @@ testData.forEach((d) => {
 
       const label = getLabel(t);
       const mode = t.mode || d.data.mode;
+
       dfn(`[${mode}] ${label}`, () => {
         const eq = t.eq ? (Array.isArray(t.eq) ? t.eq : [t.eq]) : [];
 
         // console.log(t.label || t.target, "eq.length", eq.length);
         // console.log("mode!!", mode);
+        const l = optsLabel(mode, t.opts);
         eq.forEach((y) => {
           if (process.env.LEGACY === "true") {
-            it(`[legacy] == ${y}`, () => {
+            it(`[legacy] == ${y} ${l}`, () => {
               const l = latexEqual(t.target, y, {
                 legacy: true,
                 mode,
@@ -93,7 +112,8 @@ testData.forEach((d) => {
               expect(l).toEqual(true);
             });
           }
-          it(`== ${y}`, () => {
+
+          it(`== ${y} ${l}`, () => {
             const l = latexEqual(t.target, y, {
               legacy: false,
               mode,
@@ -108,12 +128,12 @@ testData.forEach((d) => {
 
         ne.forEach((y) => {
           if (process.env.LEGACY === "true") {
-            it(`[legacy] != ${y}`, () => {
+            it(`[legacy] != ${y} ${l}`, () => {
               const l = latexEqual(t.target, y, { legacy: true, mode });
               expect(l).toEqual(false);
             });
           }
-          it(`!= ${y}`, () => {
+          it(`!= ${y} ${l}`, () => {
             const l = latexEqual(t.target, y, {
               legacy: false,
               mode,

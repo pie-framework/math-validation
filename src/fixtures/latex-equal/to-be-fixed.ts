@@ -1,11 +1,14 @@
+import { Triage } from "../triage";
+
 export default {
   mode: "symbolic",
-  skip: true,
+  skip: false,
   tests: [
     {
       // error: underscore not implemented for conversion
       target: "a_n=3a_{n-1}",
       eq: ["a_n=3\\times a_{n-1}"],
+      triage: Triage.UNDERSCORE_SUPPORT,
     },
     {
       // error: list not implemented for conversion
@@ -26,6 +29,7 @@ export default {
         "f^{-1}(x)\\ =\\ -12\\left(\\frac{1}{x}\\right)+8",
         "f^{-1}(x)\\ =\\ 8-12\\left(\\frac{1}{x}\\right)",
       ],
+      triage: Triage.NON_STRING
     },
     {
       // error TypeError: (intermediate value)(intermediate value)(intermediate value) is not a function
@@ -63,11 +67,13 @@ export default {
         "\\text{height}\\ =\\ \\left(\\sin \\theta \\right)\\times 120",
         "\\text{height}\\ =\\ \\sin \\theta \\times 120",
       ],
+      triage: Triage.EQUAL_LOCATION_PARSE_ERROR,
     },
     {
       // expecting ( after function
       target: "\\cos\\theta=-\\sqrt{1-y^2}",
-      eq: ["cos\\ \\theta\\ =\\ -\\sqrt{-y^2+1}"],
+      eq: ["cos\\ \\theta\\ \\ =\\ -\\sqrt{-y^2+1}"],
+      triage: Triage.EXPECTING_PARANTHESIS
     },
     {
       // precision error

@@ -23,7 +23,7 @@ export default {
         "(a)b",
         "(a)(b)",
         "ba",
-        "bxa",
+        "b \\times a",
         "b*a",
         "(b)a",
         "b(a)",
