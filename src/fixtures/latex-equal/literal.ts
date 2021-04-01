@@ -14,8 +14,9 @@ export default {
       opts: { allowTrailingZeros: true },
     },
     {
+      only: true,
       target: "12.00",
-      eq: ["12.00"],
+      // eq: ["12.00"],
       ne: ["12.000000"],
       opts: { allowTrailingZeros: false },
     },

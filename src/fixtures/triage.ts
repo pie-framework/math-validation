@@ -49,22 +49,22 @@ export enum Triage {
   IDENTITY_PROPERTY,
 
   /**
-    * multiply with a common factor
-    * -(b/m) != b/(-m)
+   * multiply with a common factor
+   * -(b/m) != b/(-m)
    */
   COMMON_FACTOR,
 
-    /**
-  * Expand a fraction with common denominator will not work
-  * (c-by)/a) != c/a-by/a
+  /**
+   * Expand a fraction with common denominator will not work
+   * (c-by)/a) != c/a-by/a
    */
   COMMON_DENOMINATOR,
 
-    /**
-  * Distributive Property of Multiplication over Addition
-  * Associative Property
-  * expanding the fraction should be valid
-  * 3V/B != 3*(V/B)
+  /**
+   * Distributive Property of Multiplication over Addition
+   * Associative Property
+   * expanding the fraction should be valid
+   * 3V/B != 3*(V/B)
    */
   FRACTIONS_PROPERTIES,
 
@@ -94,4 +94,10 @@ export enum Triage {
   * expecting ( after function
    */
   EXPECTING_PARANTHESIS,
+  /**
+   * A user can randomly punch any old input to be evaluated.
+   * If this input is of a sufficient length it can cause the function to stall.
+   * We need to identify this input before we run through the evaluator.
+   */
+  BAD_USER_INPUT,
 }
