@@ -10,7 +10,19 @@ const fixtures = [
   ['1,000,000', 1000000],
   ['1.00', ['tzn', 1, 2]],
   ['1.10', ['tzn', 1.1, 1]],
-  [ '1.11000', ['tzn', 1.11, 3]]
+  [ '1.11000', ['tzn', 1.11, 3]],
+  // treat × as multiplication operator
+  ['a×b', ['*', 'a', 'b']],
+  // treat • as multiplication operator
+  ['a•b', ['*', 'a', 'b']],
+  // treat · as multiplication operator
+  ['a·b', ['*', 'a', 'b']],
+  // treat ÷ as devide operator
+  ['a÷b', ['/', 'a', 'b']],
+  // accept rational operator ≤
+  ['a≤b', ['le', 'a', 'b']],
+  // accept rational operator ≥
+  ['a≥b',['ge', 'a', 'b']],
   // [
   // we were getting: [+, 6, [/, pi, x]]
   // "6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
@@ -30,7 +42,7 @@ const fixtures = [
 
 const lta = new LatexToAst();
 
-describe("bugs in lta", () => {
+describe.only("bugs in lta", () => {
   // @ts-ignore
   it.each(fixtures)("%s => %s", (input, expected) => {
     // console.time("l-u");

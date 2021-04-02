@@ -1,5 +1,6 @@
 export default {
   mode: "literal",
+  skip: true,
   tests: [
     {
       target: "12 + 3 * x",
@@ -14,14 +15,13 @@ export default {
       opts: { literal: { allowTrailingZeros: true } },
     },
     {
-      // only: true,
+      only: true,
       target: "12.00",
       // eq: ["12.00"],
       ne: ["12.000000"],
       opts: { literal: { allowTrailingZeros: false } },
     },
     {
-
       target: "1",
       ne: ["1.000000"],
       opts: { literal: { allowTrailingZeros: false } },

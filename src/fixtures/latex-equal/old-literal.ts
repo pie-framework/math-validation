@@ -6,7 +6,7 @@
  */
 export default {
   mode: "literal",
-
+ skip: false,
   tests: [
     { target: "1,000", eq: ["1000"] },
     { target: "1.00", eq: ["1"] },
