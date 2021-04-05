@@ -78,7 +78,8 @@ const compareNodes = (a: MathNode, b: MathNode): number => {
   //   "'"
   // );
   if (a.type === "SymbolNode" && b.type === "SymbolNode") {
-    // console.log(a.name, "> ", b.name);
+    console.log(a.name, "> ", b.name);
+    console.log(a.name.localeCompare(b.name),"locale compare")
     return a.name.localeCompare(b.name);
   }
 
@@ -100,15 +101,26 @@ const compareNodes = (a: MathNode, b: MathNode): number => {
 };
 
 export const sort = (node: MathNode): MathNode => {
-  // console.log("[sort] :", JSON.stringify(node, null, "  "));
-
+  console.log("[sort] :", JSON.stringify(node, null, "  "));
+  debugger;
   if (node.isParenthesisNode) {
+    console.log("node.isParanthesisNode", node.isParenthesisNode)
+    console.log("content before sort", node.content)
     node.content = sort(node.content);
+    console.log("content after sort", node.content)
     return node;
   }
 
+  console.log(node.type)
   if (node.type === "OperatorNode" && node.fn === "add") {
+    console.log("in args")
+
+
+    console.log("node args before sort", node.args)
+
     node.args = node.args.map(sort);
+
+    console.log("node args after sort ", node.args)
 
     node.args.sort(compareNodes);
     return node;

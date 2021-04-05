@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es2019",
-    "module": "commonjs",
+    "target": "es5",
+   // "module": "commonjs",
     "strict": false,
     "esModuleInterop": true,
     "declaration": true,
     "rootDir": "src",
-    "outDir": "lib",
     "moduleResolution": "Node",
-    "sourceMap": true
+    "sourceMap": true,
+   // "outFile": "${math-validation}/index.js",
+   // "outDir": "${math-validation}"
+
   },
   "exclude": ["node_modules", "lib", "**/__tests__/**", "src/fixtures", "playground", "old-stuff", "wip-src" ]
 }

@@ -24,3 +24,9 @@ export const latexEqual = (a: Latex, b: Latex, opts: Opts): boolean => {
     return le(a, b, opts);
   }
 };
+
+declare global {
+    interface Window { fn: any; }
+}
+
+window.fn = latexEqual;
