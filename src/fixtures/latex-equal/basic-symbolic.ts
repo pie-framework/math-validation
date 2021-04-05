@@ -1,6 +1,6 @@
 export default {
   mode: "symbolic",
-
+  skip: false,
   tests: [
     {
       target: "100",
@@ -29,7 +29,7 @@ export default {
       ne: ["y", "x + 1"],
     },
     {
-      // only: true,
+      //only: true,
       target: "(x + 2)^2",
       eq: [
         /** when simplified w/ perfect square formula - should be this */
@@ -64,7 +64,7 @@ export default {
     { target: "sin(x)", eq: "sin(x)" },
     { target: "tan(x)", eq: "tan(x)" },
     {
-      only: true,
+      // only: true,
       // skip: true,
       target: "f^{-1}\\left(x\\right)=\\sqrt{x-1}+3",
       eq: "f^{-1}\\left(x\\right)=\\sqrt{x-1}+4-1",
