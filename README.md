@@ -72,3 +72,24 @@ We have the old math validation logic in the repo, so we can compare speed and r
 * start going through the tests, build up literal + symbolic a bit att the start
 * derivatives kind of work and kind of not - how to use?
 
+
+### debugging tests
+
+#### vscode 
+add the following to `configurations` array in launch.json
+```json
+    {
+      "name": "Attach",
+      "port": 9229,
+      "request": "attach",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "pwa-node"
+    }
+```
+
+```shell
+node --inspect-brk ./node_modules/.bin/jest --runInBand #and any other flags you want 
+```
+The launch debug using 'Attach' command above.
