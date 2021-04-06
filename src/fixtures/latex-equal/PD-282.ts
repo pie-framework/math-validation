@@ -6,7 +6,7 @@ export default {
   tests: [
     {
       opts: {
-        allowTrailingZeros: true,
+        literal: { allowTrailingZeros: true }
       },
       target: "1",
       eq: ["1.0", "01"],
@@ -15,7 +15,7 @@ export default {
     },
     {
       opts: {
-        allowTrailingZeros: false,
+        literal: { allowTrailingZeros: false }
       },
       target: "1",
       eq: ["01"],

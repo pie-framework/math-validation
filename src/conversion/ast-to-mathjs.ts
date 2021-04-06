@@ -74,6 +74,9 @@ const operators = {
   },
   //"union": function (operands) { return operands.join(' \\cup '); },
   //"intersect": function (operands) { return operands.join(' \\cap '); },
+  tzn: function (operands) {
+    return new m.FunctionNode("tzn", operands);
+  }
 };
 
 export class AstToMathJs {
