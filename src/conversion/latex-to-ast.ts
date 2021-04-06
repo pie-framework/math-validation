@@ -1052,25 +1052,27 @@ export class LatexToAst {
       /** TODO: this is a bit primitive, should try and parse commas in numbers correctly */
       // @ts-ignore
       result = this.token.token_text.replace(/,/g, "");
-
       // @ts-ignore
-      const parsedFloat = parseFloat(result).toString();
+      const number = parseFloat(result);
 
+      /** trailing zero number ['tzn', number, countOfZeros] */
       // @ts-ignore
-      if(result !== parsedFloat) {
-          let noOfTrailingZeros = 0;
-
-          if (parsedFloat.includes('.')) {
-            // @ts-ignore
-            noOfTrailingZeros = result.length - parsedFloat.length;
-          } else {
-            // @ts-ignore
-            noOfTrailingZeros = result.length - parsedFloat.length - 1;
-          }
-
+      if (result !== number.toString()) {
+        const p = number.toString();
+        // @ts-ignore
+        const sub = result
           // @ts-ignore
-          result = ['tzn', parseFloat(result), noOfTrailingZeros];
-        }
+          .substring(p.length)
+          .split("")
+          .filter((c) => c === "0");
+        const noOfTrailingZeros = sub.length;
+
+        // @ts-ignore
+        result = ["tzn", number, noOfTrailingZeros];
+      } else {
+        // @ts-ignore
+        result = number;
+      }
 
       this.advance();
     } else if (this.token.token_type === "INFINITY") {

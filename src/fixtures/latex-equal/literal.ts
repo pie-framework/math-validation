@@ -1,6 +1,6 @@
 export default {
   mode: "literal",
-  skip: true,
+  skip: false,
   tests: [
     {
       target: "12 + 3 * x",
@@ -18,7 +18,7 @@ export default {
       only: true,
       target: "12.00",
       // eq: ["12.00"],
-      ne: ["12.000000"],
+      ne: ["12.000000", "12.0", "12.000"],
       opts: { literal: { allowTrailingZeros: false } },
     },
     {
@@ -26,10 +26,26 @@ export default {
       ne: ["1.000000"],
       opts: { literal: { allowTrailingZeros: false } },
     },
-    { target: "2 + 3", eq: ["3 + 2"], opts: { literal: { ignoreOrder: true } } },
-    { target: "2 + 3", ne: ["3 + 2"], opts: { literal: { ignoreOrder: false } } },
-    { target: "a+b+c", eq: ["c+a+b"], opts: { literal: { ignoreOrder: true } } },
-    { target: "a+b+c", ne: ["c+a+b"], opts: { literal: { ignoreOrder: false } } },
+    {
+      target: "2 + 3",
+      eq: ["3 + 2"],
+      opts: { literal: { ignoreOrder: true } },
+    },
+    {
+      target: "2 + 3",
+      ne: ["3 + 2"],
+      opts: { literal: { ignoreOrder: false } },
+    },
+    {
+      target: "a+b+c",
+      eq: ["c+a+b"],
+      opts: { literal: { ignoreOrder: true } },
+    },
+    {
+      target: "a+b+c",
+      ne: ["c+a+b"],
+      opts: { literal: { ignoreOrder: false } },
+    },
     {
       target: "12.00+3",
       eq: ["3+12.00"],
