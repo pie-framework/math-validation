@@ -102,11 +102,13 @@ const compareNodes = (a: MathNode, b: MathNode): number => {
 export const sortRelational = (node: any) => {
   console.log("THIS IS THE START ++++",JSON.stringify(node))
 
-  if (node.type === "RelationalNode") {
     node.traverse((node, path, parent) => {
+
+      let reverse = false;
       if (node.conditionals) {
         node.conditionals = node.conditionals.map((cond: any) => {
           if (cond === "larger") {
+            reverse = true
             return "smaller";
           }
 
@@ -114,7 +116,7 @@ export const sortRelational = (node: any) => {
         });
       }
 
-      if (node.params) {
+      if (node.params && reverse) {
         node.params.reverse();
       }
 
@@ -122,13 +124,8 @@ export const sortRelational = (node: any) => {
 
       if (parent && parent.type === "RelationalNode") {
         node = customSort(node);
-        if (node.args) {
-           node.args = node.args.sort(compareNodes);
-        }
-
       }
     });
-  }
 
   console.log("THIS IS THE END ++++",JSON.stringify(node))
   return node;
@@ -145,10 +142,10 @@ export const customSort = (node: MathNode): MathNode => {
   }
 
   if (node.type === "OperatorNode" && node.fn === "add") {
-    node.args = node.args.map(customSort);
+    node.args = node.args.map(sort);
 
     node.args.sort(compareNodes);
-    // console.log("[2 AFTER sort] :", JSON.stringify(node, null, "  "));
+   console.log("[2 AFTER sort] :", JSON.stringify(node, null, "  "));
     return node;
   }
 
@@ -165,19 +162,6 @@ export const customSort = (node: MathNode): MathNode => {
         // console.log("[3 AFTER sort] :", JSON.stringify(node, null, "  "));
     return node;
   }
-
-
-    //   if (node.type === "OperatorNode" && node.fn === "larger") {
-    // //let mirror = new mathjs.OperatorNode('>', 'larger', node.args)
-    //     node.op = '<'
-    //     node.fn = "smaller"
-    //  const temp = node.args[0]
-    //   node.args[0] = node.args[1]
-    //   node.args[1] = temp;
-
-    //     node.args = node.args.map(customSort);
-    // return node;
-    //   }
 
   return node;
 };

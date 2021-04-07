@@ -8,11 +8,12 @@ const simpleAddition = [
   ["b + c + a", "a + b + c"],
   ["b + a + c", "a + b + c"],
 
-// //   //normalize comparatives too - always use greater than
- ["A < B", "B > A"],
+//normalize comparatives too - always use greater than
+  ["A < B", "B > A"],
+ ["A < B > c", "c < B < A"],
    ["A > B + 2", "2+ B < A"],
-  ["g+b > a > d ", "d < a < b+g"],
-//  // ["b <= a", "a >= b"],
+ ["g+b > a > d ", "d < a < b+g"],
+// ["b <= a", "a >= b"],
   ["a + (c + b)", "a + (b + c)"],
  ["(a+e) + (c + b)", "(e+a) + (b + c)"],
 

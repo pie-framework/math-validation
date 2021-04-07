@@ -1,14 +1,14 @@
 {
-  "numFailedTestSuites": 1,
-  "numFailedTests": 1,
-  "numPassedTestSuites": 2,
-  "numPassedTests": 32,
+  "numFailedTestSuites": 0,
+  "numFailedTests": 0,
+  "numPassedTestSuites": 3,
+  "numPassedTests": 34,
   "numPendingTestSuites": 0,
   "numPendingTests": 267,
   "numRuntimeErrorTestSuites": 0,
   "numTodoTests": 0,
   "numTotalTestSuites": 3,
-  "numTotalTests": 300,
+  "numTotalTests": 301,
   "openHandles": [],
   "snapshot": {
     "added": 0,
@@ -26,7 +26,7 @@
     "unmatched": 0,
     "updated": 0
   },
-  "startTime": 1617804363766,
+  "startTime": 1617824912290,
   "success": false,
   "testResults": [
     {
@@ -37,10 +37,10 @@
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1617804364947,
-        "runtime": 781,
+        "end": 1617824913462,
+        "runtime": 765,
         "slow": false,
-        "start": 1617804364166
+        "start": 1617824912697
       },
       "skipped": false,
       "snapshot": {
@@ -58,7 +58,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 5,
+          "duration": 4,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta 1,000 => 1000",
@@ -71,7 +71,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta 1,000,000 => 1000000",
@@ -84,7 +84,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 5,
+          "duration": 6,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta a×b => [ '*', 'a', 'b' ]",
@@ -163,16 +163,16 @@
     },
     {
       "leaks": false,
-      "numFailingTests": 1,
-      "numPassingTests": 10,
+      "numFailingTests": 0,
+      "numPassingTests": 12,
       "numPendingTests": 0,
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1617804367809,
-        "runtime": 3656,
+        "end": 1617824916405,
+        "runtime": 3710,
         "slow": false,
-        "start": 1617804364153
+        "start": 1617824912695
       },
       "skipped": false,
       "snapshot": {
@@ -190,7 +190,7 @@
           "ancestorTitles": [
             "'a + b' => 'a + b'"
           ],
-          "duration": 31,
+          "duration": 52,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "'a + b' => 'a + b' sorts",
@@ -203,7 +203,7 @@
           "ancestorTitles": [
             "'b + a' => 'a + b'"
           ],
-          "duration": 7,
+          "duration": 20,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "'b + a' => 'a + b' sorts",
@@ -216,7 +216,7 @@
           "ancestorTitles": [
             "'a + b + c' => 'a + b + c'"
           ],
-          "duration": 11,
+          "duration": 30,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "'a + b + c' => 'a + b + c' sorts",
@@ -229,7 +229,7 @@
           "ancestorTitles": [
             "'b + c + a' => 'a + b + c'"
           ],
-          "duration": 9,
+          "duration": 23,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "'b + c + a' => 'a + b + c' sorts",
@@ -242,7 +242,7 @@
           "ancestorTitles": [
             "'b + a + c' => 'a + b + c'"
           ],
-          "duration": 8,
+          "duration": 26,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "'b + a + c' => 'a + b + c' sorts",
@@ -255,7 +255,7 @@
           "ancestorTitles": [
             "'A < B' => 'B > A'"
           ],
-          "duration": 7,
+          "duration": 5,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "'A < B' => 'B > A' sorts",
@@ -266,9 +266,22 @@
         },
         {
           "ancestorTitles": [
+            "'A < B > c' => 'c < B < A'"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "'A < B > c' => 'c < B < A' sorts",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "sorts"
+        },
+        {
+          "ancestorTitles": [
             "'A > B + 2' => '2+ B < A'"
           ],
-          "duration": 12,
+          "duration": 11,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "'A > B + 2' => '2+ B < A' sorts",
@@ -281,39 +294,20 @@
           "ancestorTitles": [
             "'g+b > a > d ' => 'd < a < b+g'"
           ],
-          "duration": 10,
-          "failureDetails": [
-            {
-              "actual": "",
-              "error": {
-                "matcherResult": {
-                  "actual": false,
-                  "expected": true,
-                  "name": "toBe",
-                  "pass": false
-                }
-              },
-              "expected": "",
-              "matcherName": "",
-              "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
-              "passed": false,
-              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/Users/carla/Documents/Work/pie-framework/math-validation/src/__tests__/node-sort.spec.ts:63:30)\n    at Object.asyncJestTest (/Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)"
-            }
-          ],
-          "failureMessages": [
-            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/Users/carla/Documents/Work/pie-framework/math-validation/src/__tests__/node-sort.spec.ts:63:30)\n    at Object.asyncJestTest (/Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)"
-          ],
+          "duration": 9,
+          "failureDetails": [],
+          "failureMessages": [],
           "fullName": "'g+b > a > d ' => 'd < a < b+g' sorts",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "failed",
+          "status": "passed",
           "title": "sorts"
         },
         {
           "ancestorTitles": [
             "'a + (c + b)' => 'a + (b + c)'"
           ],
-          "duration": 7,
+          "duration": 25,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "'a + (c + b)' => 'a + (b + c)' sorts",
@@ -326,7 +320,7 @@
           "ancestorTitles": [
             "'(a+e) + (c + b)' => '(e+a) + (b + c)'"
           ],
-          "duration": 11,
+          "duration": 32,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "'(a+e) + (c + b)' => '(e+a) + (b + c)' sorts",
@@ -339,7 +333,7 @@
           "ancestorTitles": [
             "'1+2*(3+4*(5+6*(7+8)))' => '(4*((8+7)*6+5)+3)*2+1'"
           ],
-          "duration": 10,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "'1+2*(3+4*(5+6*(7+8)))' => '(4*((8+7)*6+5)+3)*2+1' sorts",
@@ -349,7 +343,7 @@
           "title": "sorts"
         }
       ],
-      "failureMessage": "\u001b[1m\u001b[31m  \u001b[1m● \u001b[22m\u001b[1m'g+b > a > d ' => 'd < a < b+g' › sorts\u001b[39m\u001b[22m\n\n    \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\n    Expected: \u001b[32mtrue\u001b[39m\n    Received: \u001b[31mfalse\u001b[39m\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 61 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 62 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[2m\u001b[39m\u001b[90m 63 |\u001b[39m expect(opExpected\u001b[33m.\u001b[39mequals(i))\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m    |\u001b[39m                              \u001b[31m\u001b[1m^\u001b[22m\u001b[2m\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 64 |\u001b[39m   })\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 65 |\u001b[39m }\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 66 |\u001b[39m describe\u001b[33m.\u001b[39meach(simpleAddition)(\u001b[32m\"%o => %o\"\u001b[39m\u001b[33m,\u001b[39m tester)\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.<anonymous> (\u001b[22m\u001b[2m\u001b[0m\u001b[36msrc/__tests__/node-sort.spec.ts\u001b[39m\u001b[0m\u001b[2m:63:30)\u001b[22m\u001b[2m\u001b[22m\n"
+      "failureMessage": null
     },
     {
       "leaks": false,
@@ -359,10 +353,10 @@
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1617804372832,
-        "runtime": 8669,
+        "end": 1617824921242,
+        "runtime": 8547,
         "slow": true,
-        "start": 1617804364163
+        "start": 1617824912695
       },
       "skipped": false,
       "snapshot": {
@@ -381,7 +375,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 43,
+          "duration": 39,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} == 4.5 ",
@@ -395,7 +389,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 24,
+          "duration": 21,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} == 3.2 + 1.3 ",
@@ -409,7 +403,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 24,
+          "duration": 19,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} == (4 - \\frac{4}{5}) + 1.3 ",
@@ -423,7 +417,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 15,
+          "duration": 19,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} == \\frac{9}{2} ",
@@ -451,7 +445,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 13,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} == \\frac{10}{2} - 0.5 ",
@@ -465,7 +459,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 45,
+          "duration": 46,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} != 4.55 ",
@@ -479,7 +473,7 @@
             "src/fixtures/latex-equal/bad-input.ts",
             "[symbolic] 1 + 1"
           ],
-          "duration": 6056,
+          "duration": 5984,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/bad-input.ts [symbolic] 1 + 1 != abcdefghijklmnopqrstuvwxyz 1 2 abcdeghijk ab cd ef bq arub oin tsn arstoin a8 asin aosin cvbkyu isn ",
@@ -619,7 +613,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 100"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 != 100 - 0.001 ",
@@ -1417,7 +1411,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == d\\left(\\frac{1}{240}\\right)+4\\ \\text{years} ",
@@ -1445,7 +1439,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{d}{240}+4\\ \\text{years}"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{d}{240}+4\\ \\text{years} == 4+\\frac{d}{240}\\ \\text{years} ",
@@ -2579,7 +2573,7 @@
             "src/fixtures/latex-equal/old-literal.ts",
             "[literal] 72\\div12=6\\text{eggs}"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/old-literal.ts [literal] 72\\div12=6\\text{eggs} == 72\\div12=6\\text{eggs} ",
@@ -2593,7 +2587,7 @@
             "src/fixtures/latex-equal/old-literal.ts",
             "[literal] 72\\div12=6\\text{eggs}"
           ],
-          "duration": 1,
+          "duration": 2,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/old-literal.ts [literal] 72\\div12=6\\text{eggs} ==  72\\div12=6\\text{eggs}  ",
@@ -3405,7 +3399,7 @@
             "src/fixtures/latex-equal/PD-288.ts",
             "[symbolic] -(a/b)"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-288.ts [symbolic] -(a/b) == (-a)/b ",
