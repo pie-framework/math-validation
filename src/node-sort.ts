@@ -1,4 +1,4 @@
-import { MathNode } from "./mathjs";
+import { MathNode, simplify } from "mathjs";
 
 /**
  * The plan with node sort was to sort all the nodes in an expression where possible
@@ -99,7 +99,7 @@ const compareNodes = (a: MathNode, b: MathNode): number => {
   // return 0;
 };
 
-export const sortRelational = (node) => {
+export const sortRelational = (node: any) => {
   console.log("THIS IS THE START ++++",JSON.stringify(node))
 
   if (node.type === "RelationalNode") {
@@ -121,7 +121,11 @@ export const sortRelational = (node) => {
       // console.log("node++++", JSON.stringify(node), parent && parent.type, " ?????????") //,"path", JSON.stringify(path), "parrent",JSON.stringify(parent))
 
       if (parent && parent.type === "RelationalNode") {
-        node = sort(node);
+        node = customSort(node);
+        if (node.args) {
+           node.args = node.args.sort(compareNodes);
+        }
+
       }
     });
   }
@@ -129,46 +133,19 @@ export const sortRelational = (node) => {
   console.log("THIS IS THE END ++++",JSON.stringify(node))
   return node;
 
-    // node.conditionals[0]="smaller"
-    // node.traverse(sign => {
-    //   console.log("sign", sign.conditionals)
-    //   sign.conditionals && sign.conditionals.forEach(cond => {
-    //     if (cond === 'larger')
-    //    cond='smaller'
-    // })
-    //   })
-
-//  console.log(conditionals, "conditionals")
-    //console.log(node.conditionals, "node conditionals")
-  //   node.traverse(function (node, path, parent) {
-  // switch (node.type) {
-  //   case 'OperatorNode': console.log(node.type, node.op);    break;
-  //   case 'ConstantNode': console.log(node.type, node.value); break;
-  //   case 'SymbolNode': console.log(node.type, node.name); break;
-  //   case 'RelationalNode': console.log(node, "node relational", node.args=node.params, "node args"); break;
-  //   default:             console.log(node.type);
-  // }})
-    //let mirror = new mathjs.OperatorNode('>', 'larger', node.args)
-   // console.log(node,"--------------------")
-    // const temp = node.args[0]
-    // node.args[0] = node.args[1]
-    // node.args[1] = temp;
-
-  //  node.args = node.args.map(sort);
-
 };
 
-export const sort = (node: MathNode): MathNode => {
+export const customSort = (node: MathNode): MathNode => {
   // console.log("[sort] :", JSON.stringify(node, null, "  "));
 
   if (node.isParenthesisNode) {
-    node.content = sort(node.content);
+    node.content = customSort(node.content);
     // console.log("[1 AFTER sort] :", JSON.stringify(node, null, "  "));
     return node;
   }
 
   if (node.type === "OperatorNode" && node.fn === "add") {
-    node.args = node.args.map(sort);
+    node.args = node.args.map(customSort);
 
     node.args.sort(compareNodes);
     // console.log("[2 AFTER sort] :", JSON.stringify(node, null, "  "));
@@ -184,43 +161,32 @@ export const sort = (node: MathNode): MathNode => {
       node.args[1] = temp;
 
 
-      node.args = node.args.map(sort);
+      node.args = node.args.map(customSort);
         // console.log("[3 AFTER sort] :", JSON.stringify(node, null, "  "));
     return node;
   }
 
 
-      if (node.type === "OperatorNode" && node.fn === "larger") {
-    //let mirror = new mathjs.OperatorNode('>', 'larger', node.args)
-        node.op = '<'
-        node.fn = "smaller"
-     const temp = node.args[0]
-      node.args[0] = node.args[1]
-      node.args[1] = temp;
+    //   if (node.type === "OperatorNode" && node.fn === "larger") {
+    // //let mirror = new mathjs.OperatorNode('>', 'larger', node.args)
+    //     node.op = '<'
+    //     node.fn = "smaller"
+    //  const temp = node.args[0]
+    //   node.args[0] = node.args[1]
+    //   node.args[1] = temp;
 
-        node.args = node.args.map(sort);
-    return node;
-      }
+    //     node.args = node.args.map(customSort);
+    // return node;
+    //   }
 
-  if (node.type === "RelationalNode") {
-
-    sortRelational(node)
-  //   node.traverse(function (node, path, parent) {
-  // switch (node.type) {
-  //   case 'OperatorNode': console.log(node.type, node.op);    break;
-  //   case 'ConstantNode': console.log(node.type, node.value); break;
-  //   case 'SymbolNode': console.log(node.type, node.name); break;
-  //   case 'RelationalNode': console.log(node, "node relational", node.args=node.params, "node args"); break;
-  //   default:             console.log(node.type);
-  // }})
-    //let mirror = new mathjs.OperatorNode('>', 'larger', node.args)
-    console.log(node,"--------------------")
-    // const temp = node.args[0]
-    // node.args[0] = node.args[1]
-    // node.args[1] = temp;
-
-  //  node.args = node.args.map(sort);
-    return node;
-  }
   return node;
 };
+
+export const sort = (node: any) => {
+  if (node.type === "RelationalNode") {
+
+    return sortRelational(node)
+  }
+
+  return simplify(customSort(node))
+}
