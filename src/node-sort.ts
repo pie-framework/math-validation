@@ -112,6 +112,11 @@ export const sortRelational = (node: any) => {
             return "smaller";
           }
 
+          if (cond === "largerEq") {
+            reverse = !reverse;
+            return "smallerEq";
+          }
+
           return cond;
         });
       }
@@ -149,18 +154,25 @@ export const customSort = (node: MathNode): MathNode => {
    console.log("[2 AFTER sort] :", JSON.stringify(node, null, "  "));
     return node;
   }
-  if (node.type === "OperatorNode" && node.fn === "multiply") {
-    node.args = node.args.map(sort);
 
-    node.args.sort(compareNodes);
-   console.log("[2 AFTER sort] :", JSON.stringify(node, null, "  "));
-    return node;
-  }
-
-    if (node.type === "OperatorNode" && node.fn === "smaller") {
+    if (node.type === "OperatorNode" && node.fn === "larger") {
     //let mirror = new mathjs.OperatorNode('>', 'larger', node.args)
-      node.op = '>'
-      node.fn = "larger"
+      node.op = '<'
+      node.fn = "smaller"
+      const temp = node.args[0]
+      node.args[0] = node.args[1]
+      node.args[1] = temp;
+
+
+      node.args = node.args.map(customSort);
+        // console.log("[3 AFTER sort] :", JSON.stringify(node, null, "  "));
+    return node;
+    }
+
+      if (node.type === "OperatorNode" && node.fn === "largerEq") {
+    //let mirror = new mathjs.OperatorNode('>', 'larger', node.args)
+      node.op = '<='
+      node.fn = "smallerEq"
       const temp = node.args[0]
       node.args[0] = node.args[1]
       node.args[1] = temp;

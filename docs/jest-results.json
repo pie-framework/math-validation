@@ -1,14 +1,14 @@
 {
-  "numFailedTestSuites": 0,
-  "numFailedTests": 0,
-  "numPassedTestSuites": 3,
-  "numPassedTests": 35,
+  "numFailedTestSuites": 1,
+  "numFailedTests": 1,
+  "numPassedTestSuites": 2,
+  "numPassedTests": 19,
   "numPendingTestSuites": 0,
   "numPendingTests": 282,
   "numRuntimeErrorTestSuites": 0,
   "numTodoTests": 0,
   "numTotalTestSuites": 3,
-  "numTotalTests": 317,
+  "numTotalTests": 302,
   "openHandles": [],
   "snapshot": {
     "added": 0,
@@ -26,7 +26,7 @@
     "unmatched": 0,
     "updated": 0
   },
-  "startTime": 1617867171648,
+  "startTime": 1617870514505,
   "success": false,
   "testResults": [
     {
@@ -37,246 +37,10 @@
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1617867174677,
-        "runtime": 2640,
+        "end": 1617870515612,
+        "runtime": 721,
         "slow": false,
-        "start": 1617867172037
-      },
-      "skipped": false,
-      "snapshot": {
-        "added": 0,
-        "fileDeleted": false,
-        "matched": 0,
-        "unchecked": 0,
-        "unmatched": 0,
-        "updated": 0,
-        "uncheckedKeys": []
-      },
-      "testFilePath": "/Users/carla/Documents/Work/pie-framework/math-validation/src/__tests__/node-sort.spec.ts",
-      "testResults": [
-        {
-          "ancestorTitles": [
-            "'a + b' => 'a + b'"
-          ],
-          "duration": 57,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'a + b' => 'a + b' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'b + a' => 'a + b'"
-          ],
-          "duration": 29,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'b + a' => 'a + b' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'a * b' => 'a * b'"
-          ],
-          "duration": 34,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'a * b' => 'a * b' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'b * a' => 'a * b'"
-          ],
-          "duration": 24,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'b * a' => 'a * b' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'b * a + 2' => '2 + a * b'"
-          ],
-          "duration": 34,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'b * a + 2' => '2 + a * b' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'a + b + c' => 'a + b + c'"
-          ],
-          "duration": 50,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'a + b + c' => 'a + b + c' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'b + c + a' => 'a + b + c'"
-          ],
-          "duration": 43,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'b + c + a' => 'a + b + c' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'b + a + c' => 'a + b + c'"
-          ],
-          "duration": 31,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'b + a + c' => 'a + b + c' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'A < B' => 'B > A'"
-          ],
-          "duration": 10,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'A < B' => 'B > A' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'A < B > c' => 'c < B < A'"
-          ],
-          "duration": 8,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'A < B > c' => 'c < B < A' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'A > B + 2' => '2+ B < A'"
-          ],
-          "duration": 18,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'A > B + 2' => '2+ B < A' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'g+b > a > d ' => 'd < a < b+g'"
-          ],
-          "duration": 31,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'g+b > a > d ' => 'd < a < b+g' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'a + (c + b)' => 'a + (b + c)'"
-          ],
-          "duration": 35,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'a + (c + b)' => 'a + (b + c)' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'a*(c + b)' => '(b + c)*a'"
-          ],
-          "duration": 29,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'a*(c + b)' => '(b + c)*a' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'(a+e) + (c + b)' => '(e+a) + (b + c)'"
-          ],
-          "duration": 48,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'(a+e) + (c + b)' => '(e+a) + (b + c)' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'1+2*(3+4*(5+6*(7+8)))' => '(4*((8+7)*6+5)+3)*2+1'"
-          ],
-          "duration": 103,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'1+2*(3+4*(5+6*(7+8)))' => '(4*((8+7)*6+5)+3)*2+1' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        }
-      ],
-      "failureMessage": null
-    },
-    {
-      "leaks": false,
-      "numFailingTests": 0,
-      "numPassingTests": 16,
-      "numPendingTests": 0,
-      "numTodoTests": 0,
-      "openHandles": [],
-      "perfStats": {
-        "end": 1617867175512,
-        "runtime": 3479,
-        "slow": false,
-        "start": 1617867172033
+        "start": 1617870514891
       },
       "skipped": false,
       "snapshot": {
@@ -294,7 +58,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 4,
+          "duration": 5,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta 1000 => 1000",
@@ -320,7 +84,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta 1,000,000 => 1000000",
@@ -372,7 +136,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta 1.00 => [ 'tzn', 1, 2 ]",
@@ -385,7 +149,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta 1.10 => [ 'tzn', 1.1, 1 ]",
@@ -411,7 +175,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta 1.11000 => [ 'tzn', 1.11, 3 ]",
@@ -437,7 +201,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 3,
+          "duration": 4,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta a•b => [ '*', 'a', 'b' ]",
@@ -463,7 +227,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta a÷b => [ '/', 'a', 'b' ]",
@@ -476,7 +240,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta a≤b => [ 'le', 'a', 'b' ]",
@@ -489,7 +253,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta a≥b => [ 'ge', 'a', 'b' ]",
@@ -509,10 +273,10 @@
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1617867177113,
-        "runtime": 5080,
-        "slow": true,
-        "start": 1617867172033
+        "end": 1617870517369,
+        "runtime": 2481,
+        "slow": false,
+        "start": 1617870514888
       },
       "skipped": false,
       "snapshot": {
@@ -1035,7 +799,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 1,500,000"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 1,500,000 == 1500000 ",
@@ -1427,7 +1191,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second}"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second} == \\frac{6}{x}\\pi \\ \\text{radians}\\ \\text{per}\\ \\text{second} ",
@@ -2603,7 +2367,7 @@
             "src/fixtures/latex-equal/literal.ts",
             "[literal] 12.00"
           ],
-          "duration": 6,
+          "duration": 7,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/literal.ts [literal] 12.00 != 12.000000 (literal)",
@@ -2617,7 +2381,7 @@
             "src/fixtures/latex-equal/literal.ts",
             "[literal] 12.00"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/literal.ts [literal] 12.00 != 12.0 (literal)",
@@ -3765,7 +3529,7 @@
             "src/fixtures/latex-equal/percent.ts",
             "[symbolic] we have percent support in math-expressions - port"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/percent.ts [symbolic] we have percent support in math-expressions - port == -12.5% ",
@@ -3807,7 +3571,7 @@
             "src/fixtures/latex-equal/percent.ts",
             "[symbolic] \\frac{2}{4} -12.5%"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/percent.ts [symbolic] \\frac{2}{4} -12.5% == \\frac{1}{2} - 12.5% ",
@@ -4518,6 +4282,66 @@
         }
       ],
       "failureMessage": null
+    },
+    {
+      "leaks": false,
+      "numFailingTests": 1,
+      "numPassingTests": 0,
+      "numPendingTests": 0,
+      "numTodoTests": 0,
+      "openHandles": [],
+      "perfStats": {
+        "end": 1617870518394,
+        "runtime": 3504,
+        "slow": false,
+        "start": 1617870514890
+      },
+      "skipped": false,
+      "snapshot": {
+        "added": 0,
+        "fileDeleted": false,
+        "matched": 0,
+        "unchecked": 0,
+        "unmatched": 0,
+        "updated": 0,
+        "uncheckedKeys": []
+      },
+      "testFilePath": "/Users/carla/Documents/Work/pie-framework/math-validation/src/__tests__/node-sort.spec.ts",
+      "testResults": [
+        {
+          "ancestorTitles": [
+            "'A <= B > c' => 'c < B >= A'"
+          ],
+          "duration": 18,
+          "failureDetails": [
+            {
+              "actual": "",
+              "error": {
+                "matcherResult": {
+                  "actual": false,
+                  "expected": true,
+                  "name": "toBe",
+                  "pass": false
+                }
+              },
+              "expected": "",
+              "matcherName": "",
+              "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+              "passed": false,
+              "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/Users/carla/Documents/Work/pie-framework/math-validation/src/__tests__/node-sort.spec.ts:73:30)\n    at Object.asyncJestTest (/Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)"
+            }
+          ],
+          "failureMessages": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at Object.<anonymous> (/Users/carla/Documents/Work/pie-framework/math-validation/src/__tests__/node-sort.spec.ts:73:30)\n    at Object.asyncJestTest (/Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)\n    at /Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:45:12\n    at new Promise (<anonymous>)\n    at mapper (/Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n    at /Users/carla/Documents/Work/pie-framework/math-validation/node_modules/jest-jasmine2/build/queueRunner.js:75:41\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)"
+          ],
+          "fullName": "'A <= B > c' => 'c < B >= A' sorts",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "failed",
+          "title": "sorts"
+        }
+      ],
+      "failureMessage": "\u001b[1m\u001b[31m  \u001b[1m● \u001b[22m\u001b[1m'A <= B > c' => 'c < B >= A' › sorts\u001b[39m\u001b[22m\n\n    \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\n    Expected: \u001b[32mtrue\u001b[39m\n    Received: \u001b[31mfalse\u001b[39m\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 71 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 72 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[2m\u001b[39m\u001b[90m 73 |\u001b[39m expect(opExpected\u001b[33m.\u001b[39mequals(i))\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m    |\u001b[39m                              \u001b[31m\u001b[1m^\u001b[22m\u001b[2m\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 74 |\u001b[39m   })\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 75 |\u001b[39m }\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 76 |\u001b[39m describe\u001b[33m.\u001b[39meach(simpleAddition)(\u001b[32m\"%o => %o\"\u001b[39m\u001b[33m,\u001b[39m tester)\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.<anonymous> (\u001b[22m\u001b[2m\u001b[0m\u001b[36msrc/__tests__/node-sort.spec.ts\u001b[39m\u001b[0m\u001b[2m:73:30)\u001b[22m\u001b[2m\u001b[22m\n"
     }
   ],
   "wasInterrupted": false
