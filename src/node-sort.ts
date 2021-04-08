@@ -183,3 +183,66 @@ export const sort = (node: any) => {
 
   return customSort(node);
 };
+
+const newCompare = (a: MathNode, b: MathNode): number => {
+  // log(a.type);
+  log("[compareNodes]: a:", a.toString(), a.type);
+  log("[compareNodes]: b:", b.toString(), b.type);
+  if (a.type === "SymbolNode" && b.type === "SymbolNode") {
+    // log(a.name, "> ", b.name);
+    return a.name.localeCompare(b.name);
+  }
+
+  // both constants - sort by value
+  if (a.type === "ConstantNode" && b.type === "ConstantNode") {
+    log("a.value", a.value);
+    log("b.value", b.value);
+    return a.value - b.value; //(b.name);
+  }
+
+  // constants before any other node
+  if (a.type === "ConstantNode" && b.type !== "ConstantNode") {
+    return -1;
+  }
+
+  if (b.type === "ConstantNode" && a.type !== "ConstantNode") {
+    return 1;
+  }
+
+  // if(a.type === "C")
+
+  // return a.toString().localeCompare(b.toString());
+  // // if (a.isSymbolNode && b.isOperatorNode) {
+  // //   return 1;
+  // // }
+  // // if (b.isSymbolNode && a.isOperatorNode) {
+  // //   return -1;
+  // // }
+
+  // // if (a.isOperatorNode) {
+  // //   return 1;
+  // // }
+  // // if (b.isOperatorNode) {
+  // //   return -1;
+  // // }
+  // // return 0;
+};
+const applySort = (
+  node: MathNode,
+  path: string | null,
+  parent: MathNode | null
+) => {
+  // log("node: ", node.toString());
+  // log("path: ", path);
+  // log("parent: ", parent);
+  if (node.fn === "add") {
+    node.args = node.args.sort(newCompare);
+  } else if (node.fn === "multiply") {
+    node.args = node.args.sort(newCompare);
+  }
+  return node;
+};
+
+export const s = (node: MathNode) => {
+  return node.transform(applySort);
+};

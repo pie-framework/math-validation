@@ -1,35 +1,47 @@
-import { sort, flatten } from "../node-sort";
+import { sort, flatten, s } from "../node-sort";
+// @ts-ignore
 import { parse, simplify, replacer } from "mathjs";
 import diff from "jest-diff";
 import { logger } from "../log";
 const log = logger("mv:node-sort.spec");
-const simpleAddition = [
+
+type Fixture = [inputs: string | string[], expected: string];
+
+const fixtures: Fixture[] = [
   ["1 + 1", "1 + 1"],
-  ["2 + 1", "1 + 2"],
-  ["1 + 2", "1 + 2"],
-  ["2 + 1 * 3", "1 * 3 + 2"],
-  ["2 + 3 * 1", "1 * 3 + 2"],
-  ["2 + (3 * 1)", "(1 * 3) + 2"],
-  ["(2 + 3) * 1", "(2 + 3) * 1"],
-  ["(3 + 2) * 1", "(2 + 3) * 1"],
-  ["1 * (3 + 2) ", "(2 + 3) * 1"],
-  ["2 + (3 * 1)", "(1 * 3) + 2"],
-  ["a + b", "a + b"],
-  ["b + a", "a + b"],
-  ["a * b", "a * b"],
-  ["b * a", "a * b"],
-  ["b * a + 2", "2 + a * b"],
-  ["a + b + c", "a + b + c"],
+  [["2+1", "1+2"], "1+2"],
+  [["2 + 1 * 3", "2 + 3 * 1"], "2 + 1 * 3"],
+  ["(3 + 2) + 1", "1 + (2 + 3)"],
+  ["(3 * 2) + 1", "1 + (2 * 3)"],
+  [
+    ["(4*((8+7)*6+5)+3)*2+1", "1 + 2 *(3 + 4*((8+7)*6+5))"],
+    "1 + 2 * (3 + 4 * (5 + 6 * (7+8)))",
+  ],
+  // ["1+2*(3+4*(5+6*(7+8)))", "(4*((8+7)*6+5)+3)*2+1"],
+  // ["2 + 3 * 1", "2 + 1 * 3"],
+  // ["3 * 1 + 2", "2 + 1 * 3"],
+  // ["2 + (3 * 1)", "(1 * 3) + 2"],
+  // ["(2 + 3) * 1", "(2 + 3) * 1"],
+  // ["(3 + 2) * 1", "(2 + 3) * 1"],
+  // ["1 * (3 + 2) ", "(2 + 3) * 1"],
+  // ["2 + (3 * 1)", "(1 * 3) + 2"],
+  // ["a + b", "a + b"],
+  // ["b + a", "a + b"],
+  // ["a * b", "a * b"],
+  // ["b * a", "a * b"],
+  // ["b * a + 2", "2 + a * b"],
+  // ["a + b + c", "a + b + c"],
   /**
    * needs to be flattened? result is [+, a, [+, b, c]]
    * needs to be flattened expected is [+, [+ a, b], c]]
    */
-  ["b + c + a", "a + b + c"],
-  ["b + a + c", "a + b + c"],
+  // ["b + c + a", "a + b + c"],
+  // ["b + a + c", "a + b + c"],
 
   // normalize comparatives too - always use greater than
-  ["A < B", "B > A"],
-  // ["A < B > c", "B > c > A"],
+  // ["A < B", "B > A"],
+  // // how to sort this?
+  // ["A < B > C", "B > A > C"],
   // ["A > B + 2", "A > 2 + B"],
   // ["B + 2 < A ", "A > 2 + B"],
   // ["g+b > a > d ", "b+g > a > d"],
@@ -39,7 +51,7 @@ const simpleAddition = [
   // ["a*(c + b)", "(b + c)*a"],
   // ["(a+e) + (c + b)", "(e+a) + (b + c)"],
 
-  ["1+2*(3+4*(5+6*(7+8)))", "(4*((8+7)*6+5)+3)*2+1"],
+  // ["1+2*(3+4*(5+6*(7+8)))", "(4*((8+7)*6+5)+3)*2+1"],
 ];
 
 // ${["+", "1", ["+", "2"]]} | ${["+", "1", "2"]}
@@ -63,8 +75,8 @@ expect.extend({
       promise: this.promise,
     };
 
-    log(JSON.stringify(received, replacer, "  "));
-    log(JSON.stringify(expected, replacer, "  "));
+    // log(JSON.stringify(received, replacer, "  "));
+    // log(JSON.stringify(expected, replacer, "  "));
     const pass = received.equals(expected);
 
     const message = pass
@@ -101,10 +113,18 @@ expect.extend({
   },
 });
 
-it.each(simpleAddition)("%o sorted == %o", (input, expected) => {
-  const i = parse(input);
-  const sorted = sort(i);
+describe.each(fixtures)("%s => %s", (input, expected) => {
   const e = parse(expected);
-  // @ts-ignore
-  expect(sorted).toEqualExpression(e);
+
+  const testInput = Array.isArray(input) ? input : [input];
+  //@ts-ignore
+  it.each(testInput as any)("%s", (ii) => {
+    // console.log("i:", ii);
+    const i = parse(ii);
+    console.time("sort");
+    const sorted = s(i);
+    console.timeEnd("sort");
+    // @ts-ignore
+    expect(sorted).toEqualExpression(e);
+  });
 });
