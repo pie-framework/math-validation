@@ -1,5 +1,7 @@
 import { MathNode, simplify } from "mathjs";
+import { logger } from "./log";
 
+const log = logger("mv:node-sort");
 /**
  * The plan with node sort was to sort all the nodes in an expression where possible
  * This means any commutative operators aka + and *.
@@ -13,7 +15,7 @@ const _f = (op: string) => (acc: any[], param: any): any => {
       param.shift();
       return param.reduce(_f(op), acc);
       // const out = acc.concat(param);
-      // console.log("OUT:", out);
+      // log("OUT:", out);
       // return out;
     } else {
       acc.push(param);
@@ -26,7 +28,7 @@ const _f = (op: string) => (acc: any[], param: any): any => {
 };
 
 const reducer = (acc: any[], value: any): any => {
-  console.log("acc:", acc);
+  log("acc:", acc);
   if (acc.length === 0) {
     acc.push(value);
     return acc;
@@ -38,7 +40,7 @@ const reducer = (acc: any[], value: any): any => {
 
 export const flatten = (tree: any[]): any[] => {
   // const op = tree.shift();
-  // console.log("op", op);
+  // log("op", op);
   return tree.reduce(reducer, []);
   // (acc, value) => {
   //   if (Array.isArray(value)) {
@@ -49,15 +51,15 @@ export const flatten = (tree: any[]): any[] => {
   //   if (Array.isArray(value)) {
   //   }
   // }, []);
-  // console.log("params", params);
+  // log("params", params);
   // return [op, ...params]; //.flat(100);
 
-  // console.log("tree now:", tree);
+  // log("tree now:", tree);
   // const mapped = tree.map((v) => {
   //   if (Array.isArray(v)) {
   //     if (v[0] === op) {
   //       v.shift();
-  //       console.log("v now:", v);
+  //       log("v now:", v);
   //       return [...v];
   //     } else {
   //       return [v];
@@ -70,7 +72,7 @@ export const flatten = (tree: any[]): any[] => {
 };
 
 const compareNodes = (a: MathNode, b: MathNode): number => {
-  // console.log(
+  // log(
   //   "[compareNodes]: a '",
   //   a.toString(),
   //   "', b: '",
@@ -78,7 +80,7 @@ const compareNodes = (a: MathNode, b: MathNode): number => {
   //   "'"
   // );
   if (a.type === "SymbolNode" && b.type === "SymbolNode") {
-    // console.log(a.name, "> ", b.name);
+    // log(a.name, "> ", b.name);
     return a.name.localeCompare(b.name);
   }
 
@@ -100,74 +102,74 @@ const compareNodes = (a: MathNode, b: MathNode): number => {
 };
 
 export const sortRelational = (node: any) => {
-  console.log("THIS IS THE START ++++",JSON.stringify(node))
+  log("THIS IS THE START ++++", JSON.stringify(node));
 
-    node.traverse((node, path, parent) => {
+  node.traverse((node, path, parent) => {
+    let reverse = false;
+    if (node.conditionals) {
+      node.conditionals = node.conditionals.map((cond: any) => {
+        if (cond === "larger") {
+          reverse = true;
+          return "smaller";
+        }
 
-      let reverse = false;
-      if (node.conditionals) {
-        node.conditionals = node.conditionals.map((cond: any) => {
-          if (cond === "larger") {
-            reverse = true
-            return "smaller";
-          }
+        return cond;
+      });
+    }
 
-          return cond;
-        });
-      }
+    if (node.params && reverse) {
+      node.params.reverse();
+    }
 
-      if (node.params && reverse) {
-        node.params.reverse();
-      }
+    // log("node++++", JSON.stringify(node), parent && parent.type, " ?????????") //,"path", JSON.stringify(path), "parrent",JSON.stringify(parent))
 
-      // console.log("node++++", JSON.stringify(node), parent && parent.type, " ?????????") //,"path", JSON.stringify(path), "parrent",JSON.stringify(parent))
+    if (parent && parent.type === "RelationalNode") {
+      node = customSort(node);
+    }
+  });
 
-      if (parent && parent.type === "RelationalNode") {
-        node = customSort(node);
-      }
-    });
-
-  console.log("THIS IS THE END ++++",JSON.stringify(node))
+  log("THIS IS THE END ++++", JSON.stringify(node));
   return node;
-
 };
 
 export const customSort = (node: MathNode): MathNode => {
-  // console.log("[sort] :", JSON.stringify(node, null, "  "));
-  console.log(node,"node")
+  // log("[sort] :", JSON.stringify(node, null, "  "));
+  log(node, "node");
 
   if (node.isParenthesisNode) {
     node.content = customSort(node.content);
-    // console.log("[1 AFTER sort] :", JSON.stringify(node, null, "  "));
+    // log("[1 AFTER sort] :", JSON.stringify(node, null, "  "));
     return node;
   }
 
-   if (node.type === "OperatorNode" && (node.fn === "add" || node.fn === "multiply" )) {
+  if (
+    node.type === "OperatorNode" &&
+    (node.fn === "add" || node.fn === "multiply")
+  ) {
     node.args = node.args.map(sort);
 
     node.args.sort(compareNodes);
-   console.log("[2 AFTER sort] :", JSON.stringify(node, null, "  "));
+    log("[2 AFTER sort] :", JSON.stringify(node, null, "  "));
     return node;
   }
   if (node.type === "OperatorNode" && node.fn === "multiply") {
     node.args = node.args.map(sort);
 
     node.args.sort(compareNodes);
-   console.log("[2 AFTER sort] :", JSON.stringify(node, null, "  "));
+    log("[2 AFTER sort] :", JSON.stringify(node, null, "  "));
     return node;
   }
 
-    if (node.type === "OperatorNode" && node.fn === "smaller") {
+  if (node.type === "OperatorNode" && node.fn === "smaller") {
     //let mirror = new mathjs.OperatorNode('>', 'larger', node.args)
-      node.op = '>'
-      node.fn = "larger"
-      const temp = node.args[0]
-      node.args[0] = node.args[1]
-      node.args[1] = temp;
+    node.op = ">";
+    node.fn = "larger";
+    const temp = node.args[0];
+    node.args[0] = node.args[1];
+    node.args[1] = temp;
 
-
-      node.args = node.args.map(customSort);
-        // console.log("[3 AFTER sort] :", JSON.stringify(node, null, "  "));
+    node.args = node.args.map(customSort);
+    // log("[3 AFTER sort] :", JSON.stringify(node, null, "  "));
     return node;
   }
 
@@ -176,9 +178,8 @@ export const customSort = (node: MathNode): MathNode => {
 
 export const sort = (node: any) => {
   if (node.type === "RelationalNode") {
-
-    return sortRelational(node)
+    return sortRelational(node);
   }
 
-  return simplify(customSort(node))
-}
+  return customSort(node);
+};

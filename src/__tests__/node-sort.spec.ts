@@ -1,30 +1,45 @@
 import { sort, flatten } from "../node-sort";
-import { parse, simplify } from "mathjs";
-
+import { parse, simplify, replacer } from "mathjs";
+import diff from "jest-diff";
+import { logger } from "../log";
+const log = logger("mv:node-sort.spec");
 const simpleAddition = [
+  ["1 + 1", "1 + 1"],
+  ["2 + 1", "1 + 2"],
+  ["1 + 2", "1 + 2"],
+  ["2 + 1 * 3", "1 * 3 + 2"],
+  ["2 + 3 * 1", "1 * 3 + 2"],
+  ["2 + (3 * 1)", "(1 * 3) + 2"],
+  ["(2 + 3) * 1", "(2 + 3) * 1"],
+  ["(3 + 2) * 1", "(2 + 3) * 1"],
+  ["1 * (3 + 2) ", "(2 + 3) * 1"],
+  ["2 + (3 * 1)", "(1 * 3) + 2"],
   ["a + b", "a + b"],
   ["b + a", "a + b"],
-    ["a * b", "a * b"],
+  ["a * b", "a * b"],
   ["b * a", "a * b"],
   ["b * a + 2", "2 + a * b"],
-  //      ["a(b)", "(b)a"],
-  // ["ba", "ab"],
-  ///["ba + 2", "2 + ab"],
   ["a + b + c", "a + b + c"],
+  /**
+   * needs to be flattened? result is [+, a, [+, b, c]]
+   * needs to be flattened expected is [+, [+ a, b], c]]
+   */
   ["b + c + a", "a + b + c"],
   ["b + a + c", "a + b + c"],
 
-// //normalize comparatives too - always use greater than
+  // normalize comparatives too - always use greater than
   ["A < B", "B > A"],
- ["A < B > c", "c < B < A"],
-   ["A > B + 2", "2+ B < A"],
- ["g+b > a > d ", "d < a < b+g"],
-// // ["b <= a", "a >= b"],
-    ["a + (c + b)", "a + (b + c)"],
- ["a*(c + b)", "(b + c)*a"],
- ["(a+e) + (c + b)", "(e+a) + (b + c)"],
+  // ["A < B > c", "B > c > A"],
+  // ["A > B + 2", "A > 2 + B"],
+  // ["B + 2 < A ", "A > 2 + B"],
+  // ["g+b > a > d ", "b+g > a > d"],
+  // ["g+b > a > d ", "d < a < b+g"],
+  // // // ["b <= a", "a >= b"],
+  // ["a + (c + b)", "a + (b + c)"],
+  // ["a*(c + b)", "(b + c)*a"],
+  // ["(a+e) + (c + b)", "(e+a) + (b + c)"],
 
-["1+2*(3+4*(5+6*(7+8)))", "(4*((8+7)*6+5)+3)*2+1"],
+  ["1+2*(3+4*(5+6*(7+8)))", "(4*((8+7)*6+5)+3)*2+1"],
 ];
 
 // ${["+", "1", ["+", "2"]]} | ${["+", "1", "2"]}
@@ -40,35 +55,56 @@ const simpleAddition = [
 //   expect(result).toEqual(expected);
 // });
 
-const tester = (input, expected) => {
-  it("sorts", () => {
-    const i = sort(parse(input));
-    const e = parse(expected);
-    const opExpected = sort(parse(expected));
-    console.log("i", i)
-   // console.log("simplify", simplify(i))
-   // console.log("sort", sort(simplify(i)))
-  //  const result = sort(i);
-   // const result = sort(i);
+expect.extend({
+  toEqualExpression(received, expected) {
+    const options = {
+      comment: "mathnode.equals equality",
+      isNot: this.isNot,
+      promise: this.promise,
+    };
 
-    console.log(i, "result")
-    console.log(e, "expected")
-   // console.log(simplify(e), "expected")
+    log(JSON.stringify(received, replacer, "  "));
+    log(JSON.stringify(expected, replacer, "  "));
+    const pass = received.equals(expected);
 
+    const message = pass
+      ? () =>
+          this.utils.matcherHint(
+            "toEqualExpression",
+            undefined,
+            undefined,
+            options
+          ) +
+          "\n\n" +
+          `Expected: not ${this.utils.printExpected(expected.toString())}\n` +
+          `Received: ${this.utils.printReceived(received.toString())}`
+      : () => {
+          const diffString = diff(expected.toString(), received.toString(), {
+            expand: this.expand,
+          });
+          return (
+            this.utils.matcherHint(
+              "toEqualExpression",
+              undefined,
+              undefined,
+              options
+            ) +
+            "\n\n" +
+            (diffString && diffString.includes("- Expect")
+              ? `Difference:\n\n${diffString}`
+              : `Expected: ${this.utils.printExpected(expected.toString())}\n` +
+                `Received: ${this.utils.printReceived(received.toString())}`)
+          );
+        };
 
-    // console.log("result.json", JSON.stringify(result, null, "  "));
-    // console.log("e.json", JSON.stringify(e, null, "  "));
-    // console.log("result:", result.toString(), "expected:", e.toString());
+    return { actual: received, message, pass };
+  },
+});
 
-    // console.log("i fn", i.fn, "i", i)
-    // if ((i.fn && i.fn == "larger") || i.type=="RelationalNode") {
-    //   expect(e.equals(i)).toBe(true);()
-    // } else {
-    //   expect(opExpected.equals(i)).toBe(true);
-    // }
-
-
-expect(opExpected.equals(i)).toBe(true);
-  });
-};
-describe.each(simpleAddition)("%o => %o", tester);
+it.each(simpleAddition)("%o sorted == %o", (input, expected) => {
+  const i = parse(input);
+  const sorted = sort(i);
+  const e = parse(expected);
+  // @ts-ignore
+  expect(sorted).toEqualExpression(e);
+});
