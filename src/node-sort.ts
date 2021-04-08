@@ -134,6 +134,7 @@ export const sortRelational = (node: any) => {
 
 export const customSort = (node: MathNode): MathNode => {
   // console.log("[sort] :", JSON.stringify(node, null, "  "));
+  console.log(node,"node")
 
   if (node.isParenthesisNode) {
     node.content = customSort(node.content);
@@ -141,7 +142,14 @@ export const customSort = (node: MathNode): MathNode => {
     return node;
   }
 
-  if (node.type === "OperatorNode" && node.fn === "add") {
+   if (node.type === "OperatorNode" && (node.fn === "add" || node.fn === "multiply" )) {
+    node.args = node.args.map(sort);
+
+    node.args.sort(compareNodes);
+   console.log("[2 AFTER sort] :", JSON.stringify(node, null, "  "));
+    return node;
+  }
+  if (node.type === "OperatorNode" && node.fn === "multiply") {
     node.args = node.args.map(sort);
 
     node.args.sort(compareNodes);
