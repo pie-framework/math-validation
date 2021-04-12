@@ -246,77 +246,108 @@ const applySort = (
   return node;
 };
 
+const flattenNode = (node: MathNode) => {
+  console.log('flatten func');
+  const operator = node.op;
+  const func = node.fn;
+   const resultNode = new m.OperatorNode(operator, func, []);
+
+  node = node.traverse((node, path, parent) => {
+    if (node.fn && node.fn !== func && parent.fn && parent.fn === func) {
+     resultNode.args.push(node);
+    } else if ((node.type === 'SymbolNode' || node.type ==='ConstantNode') && parent.fn && parent.fn === func) {
+      resultNode.args.unshift(node);
+    }
+  })
+
+  return resultNode;
+}
+
+const nodeContainsOperatorNode = (node) => {
+  let ok = false;
+ node.traverse((node, path, parent) => {
+   if (parent && parent.fn === node.fn && !ok) {
+     console.log(parent, 'parent');
+     console.log(node, 'node');
+     ok = true;
+    }
+ })
+
+  return ok;
+}
+
 export const s = (node: MathNode) => {
 
-  //console.log("input node ===============================", node)
+  let resultNode = node;
+  // console.log(node, "node")
 
-  node = node.transform((node, path, parent) => {
+  const sameOperator = nodeContainsOperatorNode(node);
+  if ( node.args.length === 2 && node.args[0].type === 'OperatorNode' && sameOperator ) {
+   resultNode = flattenNode(node);
+  }
 
-    console.log("current node =========", node)
-    console.log("current node =========", JSON.stringify(node))
-    // console.log('&&&&', JSON.stringify(node), '---', path, '---', parent, "&& parent.args");
 
-    console.log('parent op', parent && parent.op, 'node op', node.op);
+  // console.log(JSON.stringify(resultNode))
+  return resultNode.transform(applySort);
 
-    // //console.log(node.args[0].args, "======================nodeargs0args")
+}
+  // node = node.transform((node, path, parent) => {
 
-           console.log("parrent true ++++++++++++++++", parent)
-      console.log("parrent fn", parent&&parent.fn)
-    console.log("node fn", node.fn)
-    console.log("node.args[1].tyoe",node.args && node.args[1].type )
+  //    console.log("current node =========", node)
+  //   // console.log("current node =========", JSON.stringify(node))
+  //   // // console.log('&&&&', JSON.stringify(node), '---', path, '---', parent, "&& parent.args");
 
-    // if (parent && parent.fn == "add" && node.fn == parent.fn && node.args[1].type == "SymbolName") {
-    //   console.log(" am intrat ")
-    //   node.args[1].args = node.args[1].args.concat(parent.args[1])
-    //   parent.args.splice(1, 1);
+  //   // console.log('parent op', parent && parent.op, 'node op', node.op);
+
+
+
+  //   if (node.args && node.args[1].type == "SymbolNode" && node.args[0].args) {
+  //     //   console.log("node.args ---- before", node.args)
+
+  //     //   console.log("node.args[0].args ---- ", node.args[0].args)
+
+  //     //       console.log("node.args[1] ---- ", node.args[1])
+  //     for (let i = 1; i < node.args.length; i++) {
+  //       if (node.args[i].type == "SymbolNode") {
+  //         node.args = node.args[0].args.concat(node.args[i])
+  //       }
+  //     }
+  //   }
+  //   if (node.args && node.args[0].type == "SymbolNode") {
+  //     parent.args.concat(node.args[0]);
+  //   }
+    //   console.log("node.args after ", node.args)
+    //   console.log("new node", node)
+
+
+      // if (node.fn == "add" && node.args[0].fn == "add") {
+      //   let args = node.args[0].args.concat(node.args[1]).concat(node.args[2])
+      //   console.log("args=====", args)
+      //   node.args[0].args = args;
+      // }
+
+
+
+    // } else {
+    //   console.log("else node", node)
     // }
 
 
-    if (node.args && node.args[1].type == "SymbolNode" && node.args[0].args) {
-      node.args = node.args[0].args.concat(node.args[1])
-      console.log("node.arg after splice", node.args, "node", node)
-    }
-  //   else if (parent && parent.args[0].args && node.type == "SymbolNode" && !node.args) {
 
-  //    parent.args[0].args=parent.args[0].args.concat(node)
-  //       console.log("parrent ===", parent)
-  //     console.log("node===", node)
-  //     return parent
+    //  console.log('result =======', node)
+
+  //     return node
   // }
-  //   if (parent) {
-  //     console.log("parrent true ++++++++++++++++")
-  //     console.log("parrent op", parent.op)
-  //     console.log("node op", parent.args[0].op)
-  //       if (parent.op === parent.args[0].op && parent.op=== "+") {
 
 
-  //         console.log("ce ne trebe ", parent.args[0].args)
-  //         node.args = parent.args[0].args.concat(parent.args[1])
+//   console.log("output node ===============================", node)
+//   console.log("output node ===============================", JSON.stringify(node))
+//   // const node2 = new m.SymbolNode('x')
+//   // const node3 = new m.SymbolNode('y')
+//   // const node4 = new m.SymbolNode('z')
 
-  //         console.log("parent args before splice", parent.args)
-  //         parent.args = parent.args.splice(0, 1)
+//   // const resultNode = new m.OperatorNode("+", "add", [node3, node4, node2])
+//   // console.log("result Node", resultNode)
 
-  //         console.log("parent args after splice", parent.args)
-  //         console.log("result args????????????????", node.args)
-  //         //node = new m.SymbolNode(node.args)
-  //         return node
-  //       }
-  //     }
-
-
-
-     console.log('result =======', node)
-
-      return node
-  })
-
-  console.log("output node ===============================", JSON.stringify(node))
-  // const node2 = new m.SymbolNode('x')
-  // const node3 = new m.SymbolNode('y')
-  // const node4 = new m.SymbolNode('z')
-
-  // const resultNode = new m.OperatorNode("+", "add", [node3, node4, node2])
-  // console.log("result Node", resultNode)
-
-  return node.transform(applySort);
-};
+//   return node.transform(applySort);
+// };
