@@ -1,5 +1,8 @@
-import { MathNode, simplify } from "mathjs";
+import { cosDependencies, MathNode, simplify } from "mathjs";
 import { logger } from "./log";
+
+import { mathjs as mjs } from "./mathjs";
+const m: any = mjs;
 
 const log = logger("mv:node-sort");
 /**
@@ -244,5 +247,76 @@ const applySort = (
 };
 
 export const s = (node: MathNode) => {
+
+  //console.log("input node ===============================", node)
+
+  node = node.transform((node, path, parent) => {
+
+    console.log("current node =========", node)
+    console.log("current node =========", JSON.stringify(node))
+    // console.log('&&&&', JSON.stringify(node), '---', path, '---', parent, "&& parent.args");
+
+    console.log('parent op', parent && parent.op, 'node op', node.op);
+
+    // //console.log(node.args[0].args, "======================nodeargs0args")
+
+           console.log("parrent true ++++++++++++++++", parent)
+      console.log("parrent fn", parent&&parent.fn)
+    console.log("node fn", node.fn)
+    console.log("node.args[1].tyoe",node.args && node.args[1].type )
+
+    // if (parent && parent.fn == "add" && node.fn == parent.fn && node.args[1].type == "SymbolName") {
+    //   console.log(" am intrat ")
+    //   node.args[1].args = node.args[1].args.concat(parent.args[1])
+    //   parent.args.splice(1, 1);
+    // }
+
+
+    if (node.args && node.args[1].type == "SymbolNode" && node.args[0].args) {
+      node.args = node.args[0].args.concat(node.args[1])
+      console.log("node.arg after splice", node.args, "node", node)
+    }
+  //   else if (parent && parent.args[0].args && node.type == "SymbolNode" && !node.args) {
+
+  //    parent.args[0].args=parent.args[0].args.concat(node)
+  //       console.log("parrent ===", parent)
+  //     console.log("node===", node)
+  //     return parent
+  // }
+  //   if (parent) {
+  //     console.log("parrent true ++++++++++++++++")
+  //     console.log("parrent op", parent.op)
+  //     console.log("node op", parent.args[0].op)
+  //       if (parent.op === parent.args[0].op && parent.op=== "+") {
+
+
+  //         console.log("ce ne trebe ", parent.args[0].args)
+  //         node.args = parent.args[0].args.concat(parent.args[1])
+
+  //         console.log("parent args before splice", parent.args)
+  //         parent.args = parent.args.splice(0, 1)
+
+  //         console.log("parent args after splice", parent.args)
+  //         console.log("result args????????????????", node.args)
+  //         //node = new m.SymbolNode(node.args)
+  //         return node
+  //       }
+  //     }
+
+
+
+     console.log('result =======', node)
+
+      return node
+  })
+
+  console.log("output node ===============================", JSON.stringify(node))
+  // const node2 = new m.SymbolNode('x')
+  // const node3 = new m.SymbolNode('y')
+  // const node4 = new m.SymbolNode('z')
+
+  // const resultNode = new m.OperatorNode("+", "add", [node3, node4, node2])
+  // console.log("result Node", resultNode)
+
   return node.transform(applySort);
 };

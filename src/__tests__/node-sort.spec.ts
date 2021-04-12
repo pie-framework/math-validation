@@ -8,15 +8,15 @@ const log = logger("mv:node-sort.spec");
 type Fixture = [inputs: string | string[], expected: string];
 
 const fixtures: Fixture[] = [
-  ["1 + 1", "1 + 1"],
-  [["2+1", "1+2"], "1+2"],
-  [["2 + 1 * 3", "2 + 3 * 1"], "2 + 1 * 3"],
-  ["(3 + 2) + 1", "1 + (2 + 3)"],
-  ["(3 * 2) + 1", "1 + (2 * 3)"],
-  [
-    ["(4*((8+7)*6+5)+3)*2+1", "1 + 2 *(3 + 4*((8+7)*6+5))"],
-    "1 + 2 * (3 + 4 * (5 + 6 * (7+8)))",
-  ],
+  // ["1 + 1", "1 + 1"],
+  // [["2+1", "1+2"], "1+2"],
+  // [["2 + 1 * 3", "2 + 3 * 1"], "2 + 1 * 3"],
+  // ["(3 + 2) + 1", "1 + (2 + 3)"],
+  // ["(3 * 2) + 1", "1 + (2 * 3)"],
+  // [
+  //   ["(4*((8+7)*6+5)+3)*2+1", "1 + 2 *(3 + 4*((8+7)*6+5))"],
+  //   "1 + 2 * (3 + 4 * (5 + 6 * (7+8)))",
+  // ],
   // ["1+2*(3+4*(5+6*(7+8)))", "(4*((8+7)*6+5)+3)*2+1"],
   // ["2 + 3 * 1", "2 + 1 * 3"],
   // ["3 * 1 + 2", "2 + 1 * 3"],
@@ -35,7 +35,7 @@ const fixtures: Fixture[] = [
    * needs to be flattened? result is [+, a, [+, b, c]]
    * needs to be flattened expected is [+, [+ a, b], c]]
    */
-  // ["b + c + a", "a + b + c"],
+   ["b+c+a +e +d", "a + b + c +d+ e"],
   // ["b + a + c", "a + b + c"],
 
   // normalize comparatives too - always use greater than
@@ -120,9 +120,12 @@ describe.each(fixtures)("%s => %s", (input, expected) => {
   //@ts-ignore
   it.each(testInput as any)("%s", (ii) => {
     // console.log("i:", ii);
-    const i = parse(ii);
+
+    let i = parse(ii);
+
     console.time("sort");
     const sorted = s(i);
+    console.log("sorted", sorted)
     console.timeEnd("sort");
     // @ts-ignore
     expect(sorted).toEqualExpression(e);
