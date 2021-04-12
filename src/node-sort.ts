@@ -1,4 +1,4 @@
-import { cosDependencies, MathNode, simplify } from "mathjs";
+import { MathNode } from "mathjs";
 import { logger } from "./log";
 
 import { mathjs as mjs } from "./mathjs";
@@ -242,6 +242,10 @@ const applySort = (
     node.args = node.args.sort(newCompare);
   } else if (node.fn === "multiply") {
     node.args = node.args.sort(newCompare);
+  } else if (node.fn === "smaller") {
+     node.op = ">";
+    node.fn = "larger";
+    node.args = node.args.reverse()
   }
   return node;
 };
@@ -279,28 +283,21 @@ const nodeContainsOperatorNode = (node) => {
 export const s = (node: MathNode) => {
 
   let resultNode = node;
-  // console.log(node, "node")
+   console.log(node, "node")
 
   const sameOperator = nodeContainsOperatorNode(node);
   if ( node.args.length === 2 && node.args[0].type === 'OperatorNode' && sameOperator ) {
    resultNode = flattenNode(node);
   }
 
-
-  // console.log(JSON.stringify(resultNode))
+   console.log(JSON.stringify(resultNode))
   return resultNode.transform(applySort);
-
 }
+
+
+// using transform I couldn't dive deep enough
+
   // node = node.transform((node, path, parent) => {
-
-  //    console.log("current node =========", node)
-  //   // console.log("current node =========", JSON.stringify(node))
-  //   // // console.log('&&&&', JSON.stringify(node), '---', path, '---', parent, "&& parent.args");
-
-  //   // console.log('parent op', parent && parent.op, 'node op', node.op);
-
-
-
   //   if (node.args && node.args[1].type == "SymbolNode" && node.args[0].args) {
   //     //   console.log("node.args ---- before", node.args)
 
@@ -325,29 +322,11 @@ export const s = (node: MathNode) => {
       //   console.log("args=====", args)
       //   node.args[0].args = args;
       // }
-
-
-
     // } else {
     //   console.log("else node", node)
     // }
-
-
 
     //  console.log('result =======', node)
 
   //     return node
   // }
-
-
-//   console.log("output node ===============================", node)
-//   console.log("output node ===============================", JSON.stringify(node))
-//   // const node2 = new m.SymbolNode('x')
-//   // const node3 = new m.SymbolNode('y')
-//   // const node4 = new m.SymbolNode('z')
-
-//   // const resultNode = new m.OperatorNode("+", "add", [node3, node4, node2])
-//   // console.log("result Node", resultNode)
-
-//   return node.transform(applySort);
-// };
