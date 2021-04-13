@@ -8,39 +8,39 @@ const log = logger("mv:node-sort.spec");
 type Fixture = [inputs: string | string[], expected: string];
 
 const fixtures: Fixture[] = [
-  // ["1 + 1", "1 + 1"],
-  // [["2+1", "1+2"], "1+2"],
-  // [["2 + 1 * 3", "2 + 3 * 1"], "2 + 1 * 3"],
-  // ["(3 + 2) + 1", "1 + (2 + 3)"],
-  // ["(3 * 2) + 1", "1 + (2 * 3)"],
-  // [
-  //   ["(4*((8+7)*6+5)+3)*2+1", "1 + 2 *(3 + 4*((8+7)*6+5))"],
-  //   "1 + 2 * (3 + 4 * (5 + 6 * (7+8)))",
-  // ],
-  // ["2 + 3 * 1", "2 + 1 * 3"],
-  // ["3 * 1 + 2", "2 + 1 * 3"],
-  // ["(1 * 3) + 2", "2 + (1 * 3)"],
+  ["1 + 1", "1 + 1"],
+  [["2+1", "1+2"], "1+2"],
+  [["2 + 1 * 3", "2 + 3 * 1"], "2 + 1 * 3"],
+  ["(3 + 2) + 1", "1 + (2 + 3)"],
+  ["(3 * 2) + 1", "1 + (2 * 3)"],
+  [
+    ["(4*((8+7)*6+5)+3)*2+1", "1 + 2 *(3 + 4*((8+7)*6+5))"],
+    "1 + 2 * (3 + 4 * (5 + 6 * (7+8)))",
+  ],
+  ["2 + 3 * 1", "2 + 1 * 3"],
+  ["3 * 1 + 2", "2 + 1 * 3"],
+  ["(1 * 3) + 2", "2 + (1 * 3)"],
   // ["(2 + 3) * 1", "(2 + 3) * 1"],
-  // ["(3 + 2) * 1", "(2 + 3) * 1"],
-  // ["1 * (3 + 2) ", "(2 + 3) * 1"],
-  // ["a + b", "a + b"],
-  // ["b + a", "a + b"],
-  // ["a * b", "a * b"],
-  // ["b * a", "a * b"],
-  // ["b * a + 2", "2 + a * b"],
-  // ["a + b + c", "a + b + c"],
-  // /**
-  //  * needs to be flattened? result is [+, a, [+, b, c]]
-  //  * needs to be flattened expected is [+, [+ a, b], c]]
-  //  */
-   ["a + e + b + c + f + g + d", "a + b + c +d+ e+ f+ g"],
-   ["b * a * c", "a * b * c"],
+  //["(3 + 2) * 1", "(2 + 3) * 1"],
+  //["1 * (3 + 2) ", "(2 + 3) * 1"],
+  ["a + b", "a + b"],
+  ["b + a", "a + b"],
+  ["a * b", "a * b"],
+  ["b * a", "a * b"],
+  ["b * a + 2", "2 + a * b"],
+  [["a + b + c", "b+c+a"], "a + b + c"],
+  // // /**
+  // //  * needs to be flattened? result is [+, a, [+, b, c]]
+  // //  * needs to be flattened expected is [+, [+ a, b], c]]
+  // //  */
+  //  ["a + e + b + c + f + g + d", "a + b + c +d+ e+ f+ g"],
+  //  ["b * a * c", "a * b * c"],
 
-  // normalize comparatives too - always use greater than
+  // // normalize comparatives too - always use greater than
   ["A < B", "B > A"],
   ["C + A < D + B", "B +D > A + C"],
-  //["C + A + F < H + D + B", "B +D +H > A + C +F"],
- // ["A > B", "A > B"],
+  ["C + A + F < H + D + B", "B +D +H > A + C +F"],
+  ["A > B", "A > B"],
 
   // // how to sort this?
   // ["A < B > C", "B > A > C"],
@@ -128,7 +128,7 @@ describe.each(fixtures)("%s => %s", (input, expected) => {
 
     console.time("sort");
     const sorted = s(i);
-    console.log("sorted", sorted)
+    console.log("sorted", sorted);
     console.timeEnd("sort");
     // @ts-ignore
     expect(sorted).toEqualExpression(e);

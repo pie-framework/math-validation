@@ -151,32 +151,8 @@ const applySort = (
     node.args = node.args.sort(newCompare);
   } else if (node.fn === "multiply") {
     node.args = node.args.sort(newCompare);
-  } else if (node.fn === "smaller") {
-    node.op = ">";
-    node.fn = "larger";
-    node.args = node.args.reverse();
   }
   return node;
-};
-
-export const flattenNode = (node: MathNode) => {
-  console.log('flatten func');
-  console.log("operator", node.op)
-  const operator = node.op;
-  const func = node.fn;
-  const resultNode = new m.OperatorNode(operator, func, []);
-
-  node = node.traverse((node, path, parent) => {
-    if (parent && parent.fn && parent.fn === func) {
-      if (node.fn && node.fn !== func) {
-        resultNode.args.push(node);
-      } else if (node.type === "SymbolNode" || node.type === "ConstantNode") {
-        resultNode.args.unshift(node);
-      }
-    }
-  });
-
-  return resultNode;
 };
 
 const chainedSimilarOperators = (node) => {
@@ -192,22 +168,56 @@ const chainedSimilarOperators = (node) => {
   return ok;
 };
 
-export const s = (node: MathNode) => {
-  let resultNode = node;
-  console.log(node, "node");
+export const flattenNode = (node: MathNode) => {
+  console.log("flatten func");
+  console.log("operator", node.op);
 
+  const operator = node.op;
+  const func = node.fn;
   const sameOperator = chainedSimilarOperators(node);
 
+  let resultNode = node;
+
   if (
+    node.args &&
     node.args.length === 2 &&
     node.args[0].type === "OperatorNode" &&
     sameOperator
   ) {
-    resultNode = flattenNode(node);
+    resultNode = new m.OperatorNode(operator, func, []);
+
+    node = node.traverse((node, path, parent) => {
+      if (parent && parent.fn && parent.fn === func) {
+        if (node.fn && node.fn !== func) {
+          resultNode.args.push(node);
+        } else if (node.type === "SymbolNode" || node.type === "ConstantNode") {
+          resultNode.args.unshift(node);
+        }
+      }
+    });
   }
 
+  return resultNode;
+};
+
+export const s = (node: MathNode) => {
+  let resultNode = node;
+  console.log(node, "node");
+
+  if (node.type === "OperatorNode" && node.fn === "smaller") {
+    node.op = ">";
+    node.fn = "larger";
+    node.args = node.args.reverse();
+    console.log(node.args, "===========node args in rational node")
+    node.args = node.args.map(s);
+    return node
+  }
+
+    resultNode = flattenNode(node).transform(applySort);
+
+
   console.log(JSON.stringify(resultNode));
-  return resultNode.transform(applySort);
+  return resultNode;
 };
 
 // using transform I couldn't dive deep enough
