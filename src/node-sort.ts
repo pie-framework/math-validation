@@ -12,88 +12,36 @@ const log = logger("mv:node-sort");
  * With symbols sorted - we shoud be able to call `node.equals(other)` and avoid having to call evaluate.
  */
 
-export const sortRelational = (node: any) => {
-  log("THIS IS THE START ++++", JSON.stringify(node));
+// export const sortRelationalNode = (node: any) => {
+//   log("THIS IS THE START ++++", JSON.stringify(node));
 
-  node.traverse((node, path, parent) => {
-    let reverse = false;
-    if (node.conditionals) {
-      node.conditionals = node.conditionals.map((cond: any) => {
-        if (cond === "larger") {
-          reverse = true;
-          return "smaller";
-        }
+//   node.traverse((node, path, parent) => {
+//     let reverse = false;
+//     if (node.conditionals) {
+//       node.conditionals = node.conditionals.map((cond: any) => {
+//         if (cond === "larger") {
+//           reverse = true;
+//           return "smaller";
+//         }
 
-        return cond;
-      });
-    }
+//         return cond;
+//       });
+//     }
 
-    if (node.params && reverse) {
-      node.params.reverse();
-    }
+//     if (node.params && reverse) {
+//       node.params.reverse();
+//     }
 
-    // log("node++++", JSON.stringify(node), parent && parent.type, " ?????????") //,"path", JSON.stringify(path), "parrent",JSON.stringify(parent))
+//     // log("node++++", JSON.stringify(node), parent && parent.type, " ?????????") //,"path", JSON.stringify(path), "parrent",JSON.stringify(parent))
 
-    if (parent && parent.type === "RelationalNode") {
-      node = customSort(node);
-    }
-  });
+//     if (parent && parent.type === "RelationalNode") {
+//       node = customSort(node);
+//     }
+//   });
 
-  log("THIS IS THE END ++++", JSON.stringify(node));
-  return node;
-};
-
-export const customSort = (node: MathNode): MathNode => {
-  // log("[sort] :", JSON.stringify(node, null, "  "));
-  log(node, "node");
-
-  if (node.isParenthesisNode) {
-    node.content = customSort(node.content);
-    // log("[1 AFTER sort] :", JSON.stringify(node, null, "  "));
-    return node;
-  }
-
-  if (
-    node.type === "OperatorNode" &&
-    (node.fn === "add" || node.fn === "multiply")
-  ) {
-    node.args = node.args.map(sort);
-
-    node.args.sort(newCompare);
-    log("[2 AFTER sort] :", JSON.stringify(node, null, "  "));
-    return node;
-  }
-  if (node.type === "OperatorNode" && node.fn === "multiply") {
-    node.args = node.args.map(sort);
-
-    node.args.sort(newCompare);
-    log("[2 AFTER sort] :", JSON.stringify(node, null, "  "));
-    return node;
-  }
-
-  if (node.type === "OperatorNode" && node.fn === "smaller") {
-    //let mirror = new mathjs.OperatorNode('>', 'larger', node.args)
-    node.op = ">";
-    node.fn = "larger";
-    const temp = node.args[0];
-    node.args[0] = node.args[1];
-    node.args[1] = temp;
-
-    node.args = node.args.map(customSort);
-    // log("[3 AFTER sort] :", JSON.stringify(node, null, "  "));
-    return node;
-  }
-
-  return node;
-};
-
-export const sort = (node: any) => {
-  if (node.type === "RelationalNode") {
-    return sortRelational(node);
-  }
-
-  return customSort(node);
-};
+//   log("THIS IS THE END ++++", JSON.stringify(node));
+//   return node;
+// };
 
 const newCompare = (a: MathNode, b: MathNode): number => {
   // log(a.type);
@@ -208,13 +156,15 @@ export const s = (node: MathNode) => {
     node.op = ">";
     node.fn = "larger";
     node.args = node.args.reverse();
-    console.log(node.args, "===========node args in rational node")
-    node.args = node.args.map(s);
-    return node
   }
 
-    resultNode = flattenNode(node).transform(applySort);
+  if (node.type === "OperatorNode" && node.fn === "larger") {
+    console.log(node.args, "===========node args in rational node");
+    node.args = node.args.map(s);
+    return node;
+  }
 
+  resultNode = flattenNode(node).transform(applySort);
 
   console.log(JSON.stringify(resultNode));
   return resultNode;
