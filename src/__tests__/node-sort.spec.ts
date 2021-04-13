@@ -29,6 +29,12 @@ const fixtures: Fixture[] = [
   ["b * a", "a * b"],
   ["b * a + 2", "2 + a * b"],
   [["a + b + c", "b+c+a"], "a + b + c"],
+  ["a + (c + b)", "a + (b + c)"],
+
+  ["a*(c + b)", "a*(b+c)"],
+
+  //[["(e+a) + (c + b)", "(c+b)+(e+a)"], "(a+e) + (b + c)"],
+
   // // /**
   // //  * needs to be flattened? result is [+, a, [+, b, c]]
   // //  * needs to be flattened expected is [+, [+ a, b], c]]
@@ -36,22 +42,20 @@ const fixtures: Fixture[] = [
   //  ["a + e + b + c + f + g + d", "a + b + c +d+ e+ f+ g"],
   //  ["b * a * c", "a * b * c"],
 
-  // // normalize comparatives too - always use greater than
-  ["A < B", "B > A"],
-  ["C + A < D + B", "B +D > A + C"],
-  ["C + A + F < H + D + B", "B +D +H > A + C +F"],
-  [["A > B", "B<A"], "A > B"],
-  [["A > B + 2", "B + 2 < A "], "A > 2 + B"],
+  // // // normalize comparatives too - always use greater than
+  // ["A < B", "B > A"],
+  // ["C + A < D + B", "B +D > A + C"],
+  // ["C + A + F < H + D + B", "B +D +H > A + C +F"],
+  // [["A > B", "B<A"], "A > B"],
+  // [["A > B + 2", "B + 2 < A "], "A > 2 + B"],
 
   // // how to sort this?
   // ["A < B > C", "C < B > A"],
 
-  // ["g+b > a > d ", "b+g > a > d"],
-  // ["g+b > a > d ", "d < a < b+g"],
+  // always use greater than
+  [["g+b < a < d ", "d>a>g+b"], "d> a > b+g "],
+
   // // // ["b <= a", "a >= b"],
-  // ["a + (c + b)", "a + (b + c)"],
-  // ["a*(c + b)", "(b + c)*a"],
-  // ["(a+e) + (c + b)", "(e+a) + (b + c)"],
 ];
 
 // ${["+", "1", ["+", "2"]]} | ${["+", "1", "2"]}

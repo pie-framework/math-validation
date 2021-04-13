@@ -12,37 +12,6 @@ const log = logger("mv:node-sort");
  * With symbols sorted - we shoud be able to call `node.equals(other)` and avoid having to call evaluate.
  */
 
-// export const sortRelationalNode = (node: any) => {
-//   log("THIS IS THE START ++++", JSON.stringify(node));
-
-//   node.traverse((node, path, parent) => {
-//     let reverse = false;
-//     if (node.conditionals) {
-//       node.conditionals = node.conditionals.map((cond: any) => {
-//         if (cond === "larger") {
-//           reverse = true;
-//           return "smaller";
-//         }
-
-//         return cond;
-//       });
-//     }
-
-//     if (node.params && reverse) {
-//       node.params.reverse();
-//     }
-
-//     // log("node++++", JSON.stringify(node), parent && parent.type, " ?????????") //,"path", JSON.stringify(path), "parrent",JSON.stringify(parent))
-
-//     if (parent && parent.type === "RelationalNode") {
-//       node = customSort(node);
-//     }
-//   });
-
-//   log("THIS IS THE END ++++", JSON.stringify(node));
-//   return node;
-// };
-
 const newCompare = (a: MathNode, b: MathNode): number => {
   // log(a.type);
   log("[compareNodes]: a:", a.toString(), a.type);
@@ -148,9 +117,45 @@ export const flattenNode = (node: MathNode) => {
   return resultNode;
 };
 
+export const sortRelationalNode = (node: any) => {
+  log("THIS IS THE START ++++", JSON.stringify(node));
+
+  node.traverse((node, path, parent) => {
+    let reverse = false;
+    if (node.conditionals) {
+      node.conditionals = node.conditionals.map((cond: any) => {
+        if (cond === "smaller") {
+          reverse = true;
+          return "larger";
+        }
+
+        return cond;
+      });
+    }
+
+    if (node.params && reverse) {
+      node.params.reverse();
+    }
+
+    log("node", JSON.stringify(node), parent && parent.type)
+
+    if (parent && parent.type === "RelationalNode") {
+      node = s(node);
+    }
+  });
+
+  log("THIS IS THE END ++++", JSON.stringify(node));
+  return node;
+};
+
 export const s = (node: MathNode) => {
   let resultNode = node;
   console.log(node, "node");
+  console.log(node.type, "type")
+
+  if (node.type === "RelationalNode") {
+    return sortRelationalNode(node);
+  }
 
   if (node.type === "OperatorNode" && node.fn === "smaller") {
     node.op = ">";
