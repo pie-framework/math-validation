@@ -16,24 +16,24 @@ const newCompare = (a: MathNode, b: MathNode): number => {
   // log(a.type);
   log("[compareNodes]: a:", a.toString(), a.type);
   log("[compareNodes]: b:", b.toString(), b.type);
-  if (a.type === "SymbolNode" && b.type === "SymbolNode") {
+  if (a.isSymbolNode && b.isSymbolNode) {
     // log(a.name, "> ", b.name);
     return a.name.localeCompare(b.name);
   }
 
   // both constants - sort by value
-  if (a.type === "ConstantNode" && b.type === "ConstantNode") {
+  if (a.isConstantNode && b.isConstantNode) {
     log("a.value", a.value);
     log("b.value", b.value);
     return a.value - b.value; //(b.name);
   }
 
   // constants before any other node
-  if (a.type === "ConstantNode" && b.type !== "ConstantNode") {
+  if (a.isConstantNode && !b.isConstantNode) {
     return -1;
   }
 
-  if (b.type === "ConstantNode" && a.type !== "ConstantNode") {
+  if (b.isConstantNode && !a.isConstantNode) {
     return 1;
   }
 
@@ -98,7 +98,7 @@ export const flattenNode = (node: MathNode) => {
   if (
     node.args &&
     node.args.length === 2 &&
-    node.args[0].type === "OperatorNode" &&
+    node.args[0].isOperatorNode &&
     sameOperator
   ) {
     resultNode = new m.OperatorNode(operator, func, []);
@@ -107,7 +107,7 @@ export const flattenNode = (node: MathNode) => {
       if (parent && parent.fn && parent.fn === func) {
         if (node.fn && node.fn !== func) {
           resultNode.args.push(node);
-        } else if (node.type === "SymbolNode" || node.type === "ConstantNode") {
+        } else if (node.isSymbolNode || node.isConstantNode) {
           resultNode.args.unshift(node);
         }
       }
@@ -137,7 +137,7 @@ export const sortRelationalNode = (node: any) => {
       node.params.reverse();
     }
 
-    log("node", JSON.stringify(node), parent && parent.type)
+    log("node", JSON.stringify(node), parent && parent.type);
 
     if (parent && parent.type === "RelationalNode") {
       node = s(node);
@@ -151,20 +151,20 @@ export const sortRelationalNode = (node: any) => {
 export const s = (node: MathNode) => {
   let resultNode = node;
   console.log(node, "node");
-  console.log(node.type, "type")
+  console.log(node.type, "type");
 
   if (node.type === "RelationalNode") {
     return sortRelationalNode(node);
   }
 
-  if (node.type === "OperatorNode" && node.fn === "smaller") {
+  if (node.isOperatorNode && node.fn === "smaller") {
     node.op = ">";
     node.fn = "larger";
     node.args = node.args.reverse();
   }
 
-  if (node.type === "OperatorNode" && node.fn === "larger") {
-    console.log(node.args, "===========node args in rational node");
+  if (node.isOperatorNode && node.fn === "larger") {
+    //console.log(node.args, "===========node args in rational node");
     node.args = node.args.map(s);
     return node;
   }

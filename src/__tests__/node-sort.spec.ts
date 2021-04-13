@@ -43,11 +43,11 @@ const fixtures: Fixture[] = [
   //  ["b * a * c", "a * b * c"],
 
   // // // normalize comparatives too - always use greater than
-  // ["A < B", "B > A"],
-  // ["C + A < D + B", "B +D > A + C"],
-  // ["C + A + F < H + D + B", "B +D +H > A + C +F"],
-  // [["A > B", "B<A"], "A > B"],
-  // [["A > B + 2", "B + 2 < A "], "A > 2 + B"],
+  ["A < B", "B > A"],
+  ["C + A < D + B", "B +D > A + C"],
+  ["C + A + F < H + D + B", "B +D +H > A + C +F"],
+  [["A > B", "B<A"], "A > B"],
+  [["A > B + 2", "B + 2 < A "], "A > 2 + B"],
 
   // // how to sort this?
   // ["A < B > C", "C < B > A"],
