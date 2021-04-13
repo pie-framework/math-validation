@@ -1,4 +1,4 @@
-import { sort, flatten, s } from "../node-sort";
+import { sort, flattenNode, s } from "../node-sort";
 // @ts-ignore
 import { parse, simplify, replacer } from "mathjs";
 import diff from "jest-diff";
@@ -63,8 +63,9 @@ const fixtures: Fixture[] = [
 // it.each`
 //   input                | expected
 //   ${["+", ["+", "1"]]} | ${["+", "1"]}
+//    ${["+", "1", ["+", "2"]]} | ${["+", "1", "2"]}
 // `("", ({ input, expected }) => {
-//   const result = flatten(input);
+//   const result = flattenNode(input);
 //   console.log("result:", result);
 //   expect(result).toEqual(expected);
 // });
