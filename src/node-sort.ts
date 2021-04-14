@@ -37,6 +37,19 @@ const newCompare = (a: MathNode, b: MathNode): number => {
     return 1;
   }
 
+  // paranthesis node
+  if (a.isParenthesisNode && b.isParenthesisNode) {
+    console.log(
+      "paranteze===================================",
+      "a",
+      a.content.args,
+      "b",
+      b.content.args
+    );
+
+    // return a.content.localeCompare(b.content);
+  }
+
   // if(a.type === "C")
 
   // return a.toString().localeCompare(b.toString());
@@ -56,15 +69,14 @@ const newCompare = (a: MathNode, b: MathNode): number => {
   // // return 0;
 };
 
-const applySort = (
-  node: MathNode,
-  path: string | null,
-  parent: MathNode | null
-) => {
+const applySort = (node: MathNode) => {
   // log("node: ", node.toString());
   // log("path: ", path);
   // log("parent: ", parent);
-  if (node.fn === "add") {
+  if (node.isParenthesisNode) {
+    console.log(node.content, "node content");
+    node.content = applySort(node.content);
+  } else if (node.fn === "add") {
     node.args = node.args.sort(newCompare);
   } else if (node.fn === "multiply") {
     node.args = node.args.sort(newCompare);
@@ -85,9 +97,20 @@ const chainedSimilarOperators = (node) => {
   return ok;
 };
 
+const argsIsOperatorNode = (node) => {
+  let isOperator = false;
+  node.args.map((args) => {
+    if (args.isOperatorNode) {
+      isOperator = true;
+      return;
+    }
+  });
+  return isOperator;
+};
+
 export const flattenNode = (node: MathNode) => {
-  console.log("flatten func");
-  console.log("operator", node.op);
+  // console.log("flatten func");
+  // console.log("operator", node.op);
 
   const operator = node.op;
   const func = node.fn;
@@ -95,20 +118,17 @@ export const flattenNode = (node: MathNode) => {
 
   let resultNode = node;
 
-  if (
-    node.args &&
-    node.args.length === 2 &&
-    node.args[0].isOperatorNode &&
-    sameOperator
-  ) {
+  if (node.args && argsIsOperatorNode(node) && sameOperator) {
     resultNode = new m.OperatorNode(operator, func, []);
-
+    console.log("FLATTEN IS TRUE--------------------------");
     node = node.traverse((node, path, parent) => {
       if (parent && parent.fn && parent.fn === func) {
-        if (node.fn && node.fn !== func) {
+        if (
+          (node.fn && node.fn !== func) ||
+          node.isSymbolNode ||
+          node.isConstantNode
+        ) {
           resultNode.args.push(node);
-        } else if (node.isSymbolNode || node.isConstantNode) {
-          resultNode.args.unshift(node);
         }
       }
     });
@@ -150,8 +170,8 @@ export const sortRelationalNode = (node: any) => {
 
 export const s = (node: MathNode) => {
   let resultNode = node;
-  console.log(node, "node");
-  console.log(node.type, "type");
+  //console.log(node, "node");
+  //console.log(node.type, "type");
 
   if (node.type === "RelationalNode") {
     return sortRelationalNode(node);
