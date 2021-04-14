@@ -76,6 +76,7 @@ const applySort = (node: MathNode) => {
 
 const chainedSimilarOperators = (node) => {
   let ok = false;
+
   node.traverse((node, path, parent) => {
     if (parent && parent.fn === node.fn && !ok) {
       ok = true;
@@ -87,12 +88,14 @@ const chainedSimilarOperators = (node) => {
 
 const argsIsOperatorNode = (node) => {
   let isOperator = false;
+
   node.args.map((args) => {
     if (args.isOperatorNode) {
       isOperator = true;
       return;
     }
   });
+
   return isOperator;
 };
 
@@ -131,7 +134,10 @@ export const sortRelationalNode = (node: any) => {
       node.conditionals = node.conditionals.map((cond: any) => {
         if (cond === "smaller") {
           reverse = true;
-          return "larger";
+          cond = "larger";
+        } else if (cond === "smallerEq") {
+          reverse = true;
+          cond = "largerEq";
         }
 
         return cond;
@@ -139,6 +145,7 @@ export const sortRelationalNode = (node: any) => {
     }
 
     if (node.params && reverse) {
+      node.conditionals.reverse();
       node.params.reverse();
     }
 
@@ -166,13 +173,19 @@ export const s = (node: MathNode) => {
     node.args = node.args.reverse();
   }
 
-  if (node.isOperatorNode && node.fn === "larger") {
+  if (node.isOperatorNode && node.fn === "smallerEq") {
+    node.op = ">=";
+    node.fn = "largerEq";
+    node.args = node.args.reverse();
+  }
+
+  if (node.isOperatorNode && (node.fn === "larger" || node.fn === "largerEq")) {
     node.args = node.args.map(s);
+
     return node;
   }
 
   resultNode = flattenNode(node).transform(applySort);
 
-  console.log(JSON.stringify(resultNode));
   return resultNode;
 };

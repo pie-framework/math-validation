@@ -30,11 +30,11 @@ const fixtures: Fixture[] = [
   ["b * a", "a * b"],
   ["b * a + 2", "2 + a * b"],
 
-  [["a + (c + b)", "( b+ c)+ a"], "a + (b + c)"],
-  ["a*(c + b)", "a*(b+c)"],
-  [["(e+a) + (c + b)", "(c+b)+(e+a)"], "(a+e) + (b + c)"],
-  [["(4+1) + (3 + 2)", "(3+2)+(4+1)"], "(1+4) + (2 + 3)"],
-  [["(4+1 + z) + (3 + 2x)", "(2x+3)+(z + 4+1)"], "(1+4+z) + (3 + 2x)"],
+  [["a + (c + b)", "(b + c)+ a"], "a + (b + c)"],
+  ["a * (c + b)", "a * (b +c )"],
+  [["(e + a) + (c + b)", "(c + b) + (e + a)"], "(a + e) + (b + c)"],
+  [["(4 + 1) + (3 + 2)", "(3 + 2) + (4 + 1)"], "(1+4) + (2 + 3)"],
+
   // /**
   //  * needs to be flattened? result is [+, a, [+, b, c]]
   //  * needs to be flattened expected is [+, [+ a, b], c]]
@@ -42,17 +42,27 @@ const fixtures: Fixture[] = [
   [["a + b + c", "b+c+a"], "a + b + c"],
   ["a + e + b + c + f + g + d", "a + b + c +d+ e+ f+ g"],
   ["b * a * c", "a * b * c"],
+  [
+    ["(4 + 1 + z) + (3 + 2 * x)", "(2 * x + 3) + (z + 4 + 1)"],
+    "(1 + 4 + z) + (3 + 2 * x)",
+  ],
+  ["C + A + F < H + D + B", "B + D + H > A + C + F"],
+  ["C + A + F <= H + D + B", "B  + D + H >= A + C + F"],
+
   // normalize comparatives too - always use greater than
   ["A < B", "B > A"],
   ["C + A < D + B", "B +D > A + C"],
-  ["C + A + F < H + D + B", "B +D +H > A + C +F"],
-  [["A > B", "B<A"], "A > B"],
+  [["A > B", "B < A"], "A > B"],
   [["A > B + 2", "B + 2 < A "], "A > 2 + B"],
+
   // // how to sort this?
   // ["A < B > C", "C < B > A"],
+
   // always use greater than
-  [["g+b < a < d ", "d>a>g+b"], "d> a > b+g "],
-  // // ["b <= a", "a >= b"],
+  [["g + b < a < d ", "d > a > g + b"], "d > a > b + g"],
+  [["b <= a", "a >= b"], "a >= b"],
+  [["b < a <= d", "d >= a > b"], "d >= a > b"],
+  [["b <= a <= d", "d >= a >= b"], "d >= a >= b"],
 ];
 
 const atm = new AstToMathJs();
@@ -68,12 +78,7 @@ it.each`
 `("", ({ input, expected }) => {
   input = atm.convert(input);
   const result = flattenNode(input);
-  console.log("result:", result);
-
-  console.log("expected", expected);
   const ex = atm.convert(expected);
-
-  console.log("ex", ex);
   expect(result).toEqual(ex);
 });
 
@@ -124,18 +129,15 @@ expect.extend({
 });
 
 describe.each(fixtures)("%s => %s", (input, expected) => {
-  const e = flattenNode(parse(expected));
+  const e = parse(expected);
 
   const testInput = Array.isArray(input) ? input : [input];
   //@ts-ignore
   it.each(testInput as any)("%s", (ii) => {
-    // console.log("i:", ii);
-
     let i = parse(ii);
 
     console.time("sort");
     const sorted = s(i);
-    console.log("sorted", sorted);
     console.timeEnd("sort");
     // @ts-ignore
     expect(sorted).toEqualExpression(e);
