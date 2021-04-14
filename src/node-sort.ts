@@ -1,4 +1,4 @@
-import { MathNode } from "mathjs";
+import { MathNode, smaller } from "mathjs";
 import { logger } from "./log";
 
 import { mathjs as mjs } from "./mathjs";
@@ -37,46 +37,36 @@ const newCompare = (a: MathNode, b: MathNode): number => {
     return 1;
   }
 
-  // paranthesis node
-  if (a.isParenthesisNode && b.isParenthesisNode) {
-    console.log(
-      "paranteze===================================",
-      "a",
-      a.content.args,
-      "b",
-      b.content.args
-    );
-
-    // return a.content.localeCompare(b.content);
+  // paranthesess after any other node
+  if (!a.isParenthesisNode && b.isParenthesisNode) {
+    return -1;
   }
 
-  // if(a.type === "C")
+  if (!b.isParenthesisNode && b.isParenthesisNode) {
+    return 1;
+  }
 
-  // return a.toString().localeCompare(b.toString());
-  // // if (a.isSymbolNode && b.isOperatorNode) {
-  // //   return 1;
-  // // }
-  // // if (b.isSymbolNode && a.isOperatorNode) {
-  // //   return -1;
-  // // }
+  // both parantheses node
+  if (a.isParenthesisNode && b.isParenthesisNode) {
+    const localeCompareResult = a.content.args
+      .toString()
+      .localeCompare(b.content.args.toString());
 
-  // // if (a.isOperatorNode) {
-  // //   return 1;
-  // // }
-  // // if (b.isOperatorNode) {
-  // //   return -1;
-  // // }
-  // // return 0;
+    if (localeCompareResult === 1) {
+      return -1;
+    } else if (localeCompareResult === -1) {
+      return 1;
+    }
+
+    return localeCompareResult;
+  }
 };
 
 const applySort = (node: MathNode) => {
   // log("node: ", node.toString());
   // log("path: ", path);
   // log("parent: ", parent);
-  if (node.isParenthesisNode) {
-    console.log(node.content, "node content");
-    node.content = applySort(node.content);
-  } else if (node.fn === "add") {
+  if (node.fn === "add") {
     node.args = node.args.sort(newCompare);
   } else if (node.fn === "multiply") {
     node.args = node.args.sort(newCompare);
@@ -88,8 +78,6 @@ const chainedSimilarOperators = (node) => {
   let ok = false;
   node.traverse((node, path, parent) => {
     if (parent && parent.fn === node.fn && !ok) {
-      console.log(parent, "parent");
-      console.log(node, "node");
       ok = true;
     }
   });
@@ -109,9 +97,6 @@ const argsIsOperatorNode = (node) => {
 };
 
 export const flattenNode = (node: MathNode) => {
-  // console.log("flatten func");
-  // console.log("operator", node.op);
-
   const operator = node.op;
   const func = node.fn;
   const sameOperator = chainedSimilarOperators(node);
@@ -120,7 +105,7 @@ export const flattenNode = (node: MathNode) => {
 
   if (node.args && argsIsOperatorNode(node) && sameOperator) {
     resultNode = new m.OperatorNode(operator, func, []);
-    console.log("FLATTEN IS TRUE--------------------------");
+
     node = node.traverse((node, path, parent) => {
       if (parent && parent.fn && parent.fn === func) {
         if (
@@ -170,8 +155,6 @@ export const sortRelationalNode = (node: any) => {
 
 export const s = (node: MathNode) => {
   let resultNode = node;
-  //console.log(node, "node");
-  //console.log(node.type, "type");
 
   if (node.type === "RelationalNode") {
     return sortRelationalNode(node);
@@ -184,7 +167,6 @@ export const s = (node: MathNode) => {
   }
 
   if (node.isOperatorNode && node.fn === "larger") {
-    //console.log(node.args, "===========node args in rational node");
     node.args = node.args.map(s);
     return node;
   }
@@ -194,38 +176,3 @@ export const s = (node: MathNode) => {
   console.log(JSON.stringify(resultNode));
   return resultNode;
 };
-
-// using transform I couldn't dive deep enough
-
-// node = node.transform((node, path, parent) => {
-//   if (node.args && node.args[1].type == "SymbolNode" && node.args[0].args) {
-//     //   console.log("node.args ---- before", node.args)
-
-//     //   console.log("node.args[0].args ---- ", node.args[0].args)
-
-//     //       console.log("node.args[1] ---- ", node.args[1])
-//     for (let i = 1; i < node.args.length; i++) {
-//       if (node.args[i].type == "SymbolNode") {
-//         node.args = node.args[0].args.concat(node.args[i])
-//       }
-//     }
-//   }
-//   if (node.args && node.args[0].type == "SymbolNode") {
-//     parent.args.concat(node.args[0]);
-//   }
-//   console.log("node.args after ", node.args)
-//   console.log("new node", node)
-
-// if (node.fn == "add" && node.args[0].fn == "add") {
-//   let args = node.args[0].args.concat(node.args[1]).concat(node.args[2])
-//   console.log("args=====", args)
-//   node.args[0].args = args;
-// }
-// } else {
-//   console.log("else node", node)
-// }
-
-//  console.log('result =======', node)
-
-//     return node
-// }
