@@ -27,15 +27,15 @@ export const isMathEqual = (a: MathNode, b: MathNode, opts: LiteralOpts) => {
   }
 
   if (opts && opts.ignoreOrder) {
-    console.log(b, "a----------------------------");
+    // console.log(b, "a----------------------------");
     a = s(a);
     b = s(b);
-    console.log(b, "a sorted----------------------------");
+    // console.log(b, "a sorted----------------------------");
   }
 
   //console.log(a, "a----------------------------");
   //console.log(b, "b-----------------------------");
-  console.log("a:", a.toTex(), "b: ", b.toTex());
+  // console.log("a:", a.toTex(), "b: ", b.toTex());
 
   const equalTex = a.toTex().trim() === b.toTex().trim();
 

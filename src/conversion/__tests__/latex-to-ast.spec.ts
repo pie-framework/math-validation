@@ -5,29 +5,34 @@ import { LatexToAst } from "../latex-to-ast";
 const fixtures = [
   // we were getting [ [ '^', 'f', [ '-', 1 ] ], 'x' ]
   // ["f^{-1}\\left(x\\right)", ["*", ["^", ["f", "-1"]], "x"]],
-  ["1000", 1000],
-  ["1,000", 1000],
-  ["1,000,000", 1000000],
-  ["1,000,000.000", ["tzn", 1000000, 3]],
-  ["1,000,000.001", 1000000.001],
-  ["1,000,000.00000000000000000", ["tzn", 1000000, 17]],
-  ["1.00", ["tzn", 1, 2]],
-  ["1.10", ["tzn", 1.1, 1]],
-  ["1,001.10", ["tzn", 1001.1, 1]],
-  ["1.11000", ["tzn", 1.11, 3]],
-  // treat × as multiplication operator
-  ["a×b", ["*", "a", "b"]],
-  // treat • as multiplication operator
-  ["a•b", ["*", "a", "b"]],
-  // treat · as multiplication operator
-  ["a·b", ["*", "a", "b"]],
-  // treat ÷ as devide operator
-  ["a÷b", ["/", "a", "b"]],
-  // accept rational operator ≤
-  ["a≤b", ["le", "a", "b"]],
-  // accept rational operator ≥
-  ["a≥b", ["ge", "a", "b"]],
-  // [
+  ["(1 + (1 + 1))", "1"],
+  ["(1 + (1 * 1))", "1"],
+  ["(4 + 1) / (3 + 2 - 1)", "1"],
+  ["a < b > c", "1"],
+  ["c < b > a", "1"],
+  // ["1000", 1000],
+  // ["1,000", 1000],
+  // ["1,000,000", 1000000],
+  // ["1,000,000.000", ["tzn", 1000000, 3]],
+  // ["1,000,000.001", 1000000.001],
+  // ["1,000,000.00000000000000000", ["tzn", 1000000, 17]],
+  // ["1.00", ["tzn", 1, 2]],
+  // ["1.10", ["tzn", 1.1, 1]],
+  // ["1,001.10", ["tzn", 1001.1, 1]],
+  // ["1.11000", ["tzn", 1.11, 3]],
+  // // treat × as multiplication operator
+  // ["a×b", ["*", "a", "b"]],
+  // // treat • as multiplication operator
+  // ["a•b", ["*", "a", "b"]],
+  // // treat · as multiplication operator
+  // ["a·b", ["*", "a", "b"]],
+  // // treat ÷ as devide operator
+  // ["a÷b", ["/", "a", "b"]],
+  // // accept rational operator ≤
+  // ["a≤b", ["le", "a", "b"]],
+  // // accept rational operator ≥
+  // ["a≥b", ["ge", "a", "b"]],
+  // // [
   // we were getting: [+, 6, [/, pi, x]]
   // "6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
   // "6\\frac{\\pi }{x}", //\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
