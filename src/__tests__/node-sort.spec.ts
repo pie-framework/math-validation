@@ -48,8 +48,8 @@ const fixtures: Fixture[] = [
   ],
   ["a + e + b + c + f + g + d", ["+", "a", "b", "c", "d", "e", "f", "g"]],
   ["b * a * c", ["*", "a", "b", "c"]],
-  [["(1 + (1 + 1))"], ["()", ["+", 1, ["()", ["+", 1, 1]]]]],
-  [["(4 + 1) + (2 * x)"], ["+", ["()", ["+", 1, 4]], ["()", ["*", 2, "x"]]]],
+  // [["(1 + (1 + 1))"], ["()", ["+", 1, ["()", ["+", 1, 1]]]]],
+  // [["(4 + 1) + (2 * x)"], ["+", ["()", ["+", 1, 4]], ["()", ["*", 2, "x"]]]],
   // [
   //   ["(4 + 1 + z) + (3 + 2 * x)", "(2 * x + 3) + (z + 4 + 1)"],
   //   ["+", ["+", "1", "4", "z"], ["+", "3", ["*", "2", "x"]]],
@@ -155,9 +155,9 @@ describe.only.each(fixtures)("%s => %s", (input, expected) => {
   it.each(testInput as any)("%s", (ii) => {
     let i = parse(ii);
 
-    console.time("sort");
+    // console.time("sort");
     const sorted = s(i);
-    console.timeEnd("sort");
+    // console.timeEnd("sort");
     // @ts-ignore
     expect(sorted).toEqualExpression(expected);
   });
