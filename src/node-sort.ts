@@ -36,6 +36,15 @@ const newCompare = (a: MathNode, b: MathNode): number => {
     return 1;
   }
 
+  // symbolNode before operatorNode
+  if (a.isSymbolNode && b.isOperatorNode) {
+    return -1;
+  }
+
+  if (b.isSymbolNode && a.isOperatorNode) {
+    return 1;
+  }
+
   // paranthesess after any other node
   if (!a.isParenthesisNode && b.isParenthesisNode) {
     return -1;
@@ -178,8 +187,17 @@ export const s = (node: MathNode) => {
     node.args = node.args.reverse();
   }
 
-  if (node.isOperatorNode && (node.fn === "larger" || node.fn === "largerEq")) {
+  if (
+    node.isOperatorNode &&
+    (node.fn === "larger" || node.fn === "largerEq" || node.fn == "equal")
+  ) {
+    console.log(node, "node");
     node.args = node.args.map(s);
+    console.log(node, "sorted node");
+
+    if (node.fn == "equal") {
+      node.args = node.args.sort(newCompare);
+    }
 
     return node;
   }
