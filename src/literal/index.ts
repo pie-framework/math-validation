@@ -1,6 +1,8 @@
 import { MathNode } from "mathjs";
 import { logger } from "../log";
-const { create, all } = require("mathjs");
+import { s } from "../node-sort";
+
+const { create, all, parse } = require("mathjs");
 
 const mathjs = create(all);
 
@@ -24,7 +26,16 @@ export const isMathEqual = (a: MathNode, b: MathNode, opts: LiteralOpts) => {
     b = mathjs.simplify(b, [simplifyRule]);
   }
 
-  log("a:", a.toTex(), "b: ", b.toTex());
+  if (opts && opts.ignoreOrder) {
+    console.log(b, "a----------------------------");
+    a = s(a);
+    b = s(b);
+    console.log(b, "a sorted----------------------------");
+  }
+
+  //console.log(a, "a----------------------------");
+  //console.log(b, "b-----------------------------");
+  console.log("a:", a.toTex(), "b: ", b.toTex());
 
   const equalTex = a.toTex().trim() === b.toTex().trim();
 

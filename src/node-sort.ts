@@ -187,5 +187,6 @@ export const s = (node: MathNode) => {
 
   resultNode = flattenNode(node).transform(applySort);
 
+  console.log(resultNode, "resultNode");
   return resultNode;
 };
