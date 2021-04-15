@@ -76,7 +76,7 @@ const operators = {
   //"intersect": function (operands) { return operands.join(' \\cap '); },
   tzn: function (operands) {
     return new m.FunctionNode("tzn", operands);
-  },
+  }
 };
 
 export class AstToMathJs {
@@ -86,15 +86,7 @@ export class AstToMathJs {
 
   convert(tree) {
     if (typeof tree === "number") {
-      if (Number.isFinite(tree)) {
-        const f = new m.Fraction([
-          new m.ConstantNode(tree),
-          new m.ConstantNode(1),
-        ]);
-        // console.log("out:", out);
-        // return out;
-        return new m.ConstantNode(f);
-      }
+      if (Number.isFinite(tree)) return new m.ConstantNode(tree);
       if (Number.isNaN(tree)) return new m.SymbolNode("NaN");
       if (tree < 0) return operators["-"]([new m.SymbolNode("Infinity")]);
       return new m.SymbolNode("Infinity");
@@ -111,16 +103,9 @@ export class AstToMathJs {
     const operator = tree[0];
     const operands = tree.slice(1);
 
-    if (operator === "()") {
-      // console.log("operands:", operands);
-      const contents = this.convert(operands[0]);
-      // console.log("contents:", contents);
-      return new m.ParenthesisNode(contents);
-    }
-
     if (operator === "apply") {
-      // log("operands:", operands);
-      // log("0", operands[0]);
+      log("operands:", operands);
+      log("0", operands[0]);
       if (typeof operands[0] !== "string")
         throw Error(
           "Non string functions not implemented for conversion to mathjs"
