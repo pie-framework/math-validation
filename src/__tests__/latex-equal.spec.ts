@@ -114,7 +114,6 @@ testData.forEach((d) => {
           }
 
           it(`== ${y} ${l}`, () => {
-            console.log("opts:", t.opts);
             const l = latexEqual(t.target, y, {
               legacy: false,
               mode,

@@ -9,11 +9,10 @@ export default {
       opts: { literal: { allowTrailingZeros: false } },
     },
     {
-      only: true,
       target: "12.00",
       eq: ["12.000000"],
       ne: ["12.001"],
-      opts: { literal: { allowTrailingZeros: false } },
+      opts: { literal: { allowTrailingZeros: true } },
     },
     {
       // only: true,

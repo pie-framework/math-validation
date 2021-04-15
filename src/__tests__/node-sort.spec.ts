@@ -148,8 +148,6 @@ expect.extend({
 });
 
 describe.only.each(fixtures)("%s => %s", (input, expected) => {
-  // const e = parse(expected);
-
   const testInput = Array.isArray(input) ? input : [input];
   //@ts-ignore
   it.each(testInput as any)("%s", (ii) => {
