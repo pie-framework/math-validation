@@ -1,7 +1,6 @@
-import { MathNode, smaller } from "mathjs";
 import { logger } from "./log";
 
-import { mathjs as mjs } from "./mathjs";
+import { mathjs as mjs, MathNode } from "./mathjs";
 const m: any = mjs;
 
 const log = logger("mv:node-sort");
@@ -187,6 +186,6 @@ export const s = (node: MathNode) => {
 
   resultNode = flattenNode(node).transform(applySort);
 
-  console.log(resultNode, "resultNode");
+  log(resultNode, "resultNode");
   return resultNode;
 };
