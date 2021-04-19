@@ -3,13 +3,21 @@ import { logger } from "./log";
 import { mathjs as mjs, MathNode } from "./mathjs";
 const m: any = mjs;
 
+import { AstToMathJs } from "./conversion/ast-to-mathjs";
+import { LatexToAst } from "./conversion/latex-to-ast";
+const { parse } = mjs;
 const log = logger("mv:node-sort");
+
+//import { string } from "mathjs";
 /**
  * The plan with node sort was to sort all the nodes in an expression where possible
  * This means any commutative operators aka + and *.
  *
  * With symbols sorted - we shoud be able to call `node.equals(other)` and avoid having to call evaluate.
  */
+
+const lta = new LatexToAst();
+const atm = new AstToMathJs();
 
 const newCompare = (a: MathNode, b: MathNode): number => {
   // log(a.type);
@@ -136,20 +144,36 @@ export const flattenNode = (node: MathNode) => {
 export const sortRelationalNode = (node: any) => {
   log("THIS IS THE START ++++", JSON.stringify(node));
 
-  node.traverse((node, path, parent) => {
+  const smaller = ["smaller", "smallerEq"];
+  const bigger = ["larger", "largerEq"];
+
+  const resultNode = node.transform((node, path, parent) => {
     let reverse = false;
     if (node.conditionals) {
-      node.conditionals = node.conditionals.map((cond: any) => {
-        if (cond === "smaller") {
-          reverse = true;
-          cond = "larger";
-        } else if (cond === "smallerEq") {
-          reverse = true;
-          cond = "largerEq";
-        }
+      const smallerAndBigger =
+        smaller.some((small) => node.conditionals.includes(small)) &&
+        bigger.some((big) => node.conditionals.includes(big));
 
-        return cond;
-      });
+      if (node.conditionals.includes("equal")) {
+        node.params.sort(newCompare);
+      } else if (smallerAndBigger && node.params) {
+        if (
+          newCompare(node.params[0], node.params[node.params.length - 1]) > -1
+        )
+          node.params.reverse();
+      } else {
+        node.conditionals = node.conditionals.map((cond: any) => {
+          if (cond === "smaller") {
+            reverse = true;
+            cond = "larger";
+          } else if (cond === "smallerEq") {
+            reverse = true;
+            cond = "largerEq";
+          }
+
+          return cond;
+        });
+      }
     }
 
     if (node.params && reverse) {
@@ -157,15 +181,27 @@ export const sortRelationalNode = (node: any) => {
       node.params.reverse();
     }
 
-    log("node", JSON.stringify(node), parent && parent.type);
+    if (parent && parent.type === "RelationalNode" && node.args) {
+      console.log(parent, "parent");
+      console.log("node before sort", node);
 
-    if (parent && parent.type === "RelationalNode") {
       node = s(node);
     }
+
+    return node;
   });
 
   log("THIS IS THE END ++++", JSON.stringify(node));
-  return node;
+  log("THIS IS THE END newNode ++++", JSON.stringify(node));
+  return resultNode;
+};
+
+export const test = (input) => {
+  // const latexConverted = lta.convert(input);
+  // const mathNode = atm.convert(latexConverted);
+  const sorted = s(parse(input));
+  console.log("sorted from test")
+  return sorted;
 };
 
 export const s = (node: MathNode) => {
@@ -191,19 +227,15 @@ export const s = (node: MathNode) => {
     node.isOperatorNode &&
     (node.fn === "larger" || node.fn === "largerEq" || node.fn == "equal")
   ) {
-    console.log(node, "node");
     node.args = node.args.map(s);
-    console.log(node, "sorted node");
 
     if (node.fn == "equal") {
       node.args = node.args.sort(newCompare);
     }
-
-    return node;
   }
 
   resultNode = flattenNode(node).transform(applySort);
 
-  log(resultNode, "resultNode");
+  console.log(resultNode, "resultNode");
   return resultNode;
 };

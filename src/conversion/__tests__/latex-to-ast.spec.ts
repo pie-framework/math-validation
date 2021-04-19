@@ -68,7 +68,7 @@ describe.only("bugs in lta", () => {
     // console.time("katexParse");
     // const kt = k.__parse(input);
     // console.timeEnd("katexParse");
-    // console.log("kt:", kt);
+
     console.time("lta");
     const out = lta.convert(input);
     // console.log("out", out);
