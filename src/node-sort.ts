@@ -197,10 +197,10 @@ export const sortRelationalNode = (node: any) => {
 };
 
 export const test = (input) => {
-  // const latexConverted = lta.convert(input);
-  // const mathNode = atm.convert(latexConverted);
-  const sorted = s(parse(input));
-  console.log("sorted from test")
+  const latexConverted = lta.convert(input);
+  const mathNode = atm.convert(latexConverted);
+  const sorted = s(mathNode);
+  console.log("sorted from test");
   return sorted;
 };
 

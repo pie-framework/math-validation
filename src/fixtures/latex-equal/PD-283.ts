@@ -2,7 +2,7 @@ import { Triage } from "../triage";
 
 export default {
   mode: "literal",
-  skip: false,
+  skip: true,
   tests: [
     // {
     //   opts: {
@@ -99,15 +99,15 @@ export default {
     //   target: "y = 3x+4",
     //   ne: ["y=4+3x", "3x+4=y", "4+3x=y"],
     // },
-    // {
-    //   // allow the order of an inequality to be reversed, provided the signs of the operators are reversed
-    //   opts: {
-    //     literal: { ignoreOrder: true },
-    //   },
-    //   target: "0<x≤4",
-    //   eq: ["4≥x>0"],
-    //   triage: [Triage.LATEX_PARSE_ERROR, Triage.NODE_SORT],
-    // },
+    {
+      //   // allow the order of an inequality to be reversed, provided the signs of the operators are reversed
+      opts: {
+        literal: { ignoreOrder: true },
+      },
+      target: "0<x≤4",
+      eq: ["4≥x>0"],
+      triage: [Triage.LATEX_PARSE_ERROR, Triage.NODE_SORT],
+    },
     // {
     //   opts: {
     //     literal: { ignoreOrder: false },
@@ -132,14 +132,22 @@ export default {
     //   ne: ["x>2+0"],
     //   triage: [Triage.LATEX_PARSE_ERROR, Triage.NODE_SORT],
     // },
-    // {
-    //   opts: {
-    //     literal: { ignoreOrder: true },
-    //   },
-    //   target: "0<2<x",
-    //   eq: ["x>2>0"],
-    //   triage: [Triage.LATEX_PARSE_ERROR, Triage.NODE_SORT],
-    // },
+    {
+      opts: {
+        literal: { ignoreOrder: true },
+      },
+      target: "0<2<x",
+      eq: ["x>2>0"],
+      triage: [Triage.LATEX_PARSE_ERROR, Triage.NODE_SORT],
+    },
+    {
+      opts: {
+        literal: { ignoreOrder: true },
+      },
+      target: "a<b<c",
+      eq: ["c>b>a"],
+      triage: [Triage.LATEX_PARSE_ERROR, Triage.NODE_SORT],
+    },
     // {
     //   opts: {
     //     literal: { ignoreOrder: false },

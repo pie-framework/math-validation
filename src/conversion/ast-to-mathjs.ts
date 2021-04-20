@@ -132,7 +132,7 @@ export class AstToMathJs {
     }
 
     // if we have more than one comparison operators return a Relational Node
-    if (operator === "lts" || operator === "gts") {
+    if (operator[0] === "lts" || operator[0] === "gts") {
       const params = operands[0];
       const strict = operands[1];
 
@@ -147,13 +147,14 @@ export class AstToMathJs {
         }.bind(this)
       );
 
+      console.log(operator, "---operator");
       let comparisons = [];
       for (let i = 0; i < params.length - 1; i++) {
         if (strict[i]) {
-          if (operator === "lts") comparisons.push("smaller");
+          if (operator[i] === "lts") comparisons.push("smaller");
           else comparisons.push("larger");
         } else {
-          if (operator === "lts") comparisons.push("smallerEq");
+          if (operator[i] === "lts") comparisons.push("smallerEq");
           else comparisons.push("largerEq");
         }
       }
@@ -161,7 +162,7 @@ export class AstToMathJs {
       console.log("comparisons", comparisons);
 
       let result = new m.RelationalNode(comparisons, arg_nodes);
-
+      console.log("result from ast", result);
       return result;
     }
 

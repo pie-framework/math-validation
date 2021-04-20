@@ -645,15 +645,16 @@ export class LatexToAst {
 
       this.advance();
       let rhs = this.expression(params);
+      let operators = [];
+      let strict: (string | boolean)[] = ["tuple"];
+      let args = ["tuple", lhs, rhs];
 
       if (inequality_sequence === -1) {
         if (this.token.token_type === "<" || this.token.token_type === "LE") {
           // sequence of multiple < or <=
-          let strict: (string | boolean)[] = ["tuple"];
           if (operation === "<") strict.push(true);
           else strict.push(false);
 
-          let args = ["tuple", lhs, rhs];
           while (
             this.token.token_type === "<" ||
             this.token.token_type === "LE"
@@ -664,7 +665,30 @@ export class LatexToAst {
             this.advance();
             args.push(this.expression(params));
           }
-          lhs = ["lts", args, strict];
+
+          operators.push("lts");
+          lhs = [operators, args, strict];
+        } else if (
+          this.token.token_type === ">" ||
+          this.token.token_type === "GE"
+        ) {
+          // sequence of multiple > or >=
+
+          if (operation === ">") strict.push(true);
+          else strict.push(false);
+
+          while (
+            this.token.token_type === ">" ||
+            this.token.token_type === "GE"
+          ) {
+            if (this.token.token_type === ">") strict.push(true);
+            else strict.push(false);
+
+            this.advance();
+            args.push(this.expression(params));
+          }
+          operators.push("gts");
+          lhs = [operators, args, strict];
         } else {
           lhs = [operation, lhs, rhs];
         }
@@ -686,7 +710,29 @@ export class LatexToAst {
             this.advance();
             args.push(this.expression(params));
           }
-          lhs = ["gts", args, strict];
+          lhs = [operators, args, strict];
+        } else if (
+          this.token.token_type === "<" ||
+          this.token.token_type === "LE"
+        ) {
+          // sequence of multiple < or <=
+          let strict: (string | boolean)[] = ["tuple"];
+          if (operation === "<") strict.push(true);
+          else strict.push(false);
+
+          let args = ["tuple", lhs, rhs];
+          while (
+            this.token.token_type === "<" ||
+            this.token.token_type === "LE"
+          ) {
+            if (this.token.token_type === "<") strict.push(true);
+            else strict.push(false);
+
+            this.advance();
+            args.push(this.expression(params));
+          }
+          operators.push("lts");
+          lhs = [operators, args, strict];
         } else {
           lhs = [operation, lhs, rhs];
         }
