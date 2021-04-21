@@ -118,11 +118,22 @@ const argsIsOperatorNode = (node) => {
 export const flattenNode = (node: MathNode) => {
   const operator = node.op;
   const func = node.fn;
-  const sameOperator = chainedSimilarOperators(node);
+
+  let strip = false;
+
+  node = node.transform((node, path, parent) => {
+    if (node.isParenthesisNode && parent.op != "*") {
+      node = node.content;
+      strip = true;
+    }
+
+    return node;
+  });
 
   let resultNode = node;
+  const sameOperator = chainedSimilarOperators(node);
 
-  if (node.args && argsIsOperatorNode(node) && sameOperator) {
+  if (resultNode.args && argsIsOperatorNode(resultNode) && sameOperator || strip) {
     resultNode = new m.OperatorNode(operator, func, []);
 
     node = node.traverse((node, path, parent) => {
@@ -136,9 +147,11 @@ export const flattenNode = (node: MathNode) => {
         }
       }
     });
+
+    return resultNode;
   }
 
-  return resultNode;
+  return node;
 };
 
 export const sortRelationalNode = (node: any) => {
@@ -182,9 +195,6 @@ export const sortRelationalNode = (node: any) => {
     }
 
     if (parent && parent.type === "RelationalNode" && node.args) {
-      console.log(parent, "parent");
-      console.log("node before sort", node);
-
       node = s(node);
     }
 
@@ -192,16 +202,16 @@ export const sortRelationalNode = (node: any) => {
   });
 
   log("THIS IS THE END ++++", JSON.stringify(node));
-  log("THIS IS THE END newNode ++++", JSON.stringify(node));
+
   return resultNode;
 };
 
 export const test = (input) => {
   // const latexConverted = lta.convert(input);
   // const mathNode = atm.convert(latexConverted);
-  const sorted = s(parse(input));
-  console.log("sorted from test")
-  return sorted;
+  // const sorted = s(mathNode);
+  // console.log("sorted from test");
+  // return sorted;
 };
 
 export const s = (node: MathNode) => {
@@ -234,8 +244,13 @@ export const s = (node: MathNode) => {
     }
   }
 
-  resultNode = flattenNode(node).transform(applySort);
+  const x = flattenNode(node);
 
-  console.log(resultNode, "resultNode");
+  resultNode = x.transform((node) => {
+    const y = applySort(node);
+
+    return y;
+  });
+
   return resultNode;
 };

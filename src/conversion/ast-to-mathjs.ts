@@ -158,8 +158,6 @@ export class AstToMathJs {
         }
       }
 
-      console.log("comparisons", comparisons);
-
       let result = new m.RelationalNode(comparisons, arg_nodes);
 
       return result;
@@ -177,8 +175,6 @@ export class AstToMathJs {
       for (let i = 0; i < arg_nodes.length - 1; i++) {
         comparisons.push("equal");
       }
-
-      console.log(comparisons, "________________comparisons_______________");
 
       if (comparisons.length === 1)
         return new m.OperatorNode("==", "equal", arg_nodes);
