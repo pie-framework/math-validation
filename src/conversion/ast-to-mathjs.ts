@@ -150,11 +150,9 @@ export class AstToMathJs {
       let comparisons = [];
       for (let i = 0; i < params.length - 1; i++) {
         if (strict[i]) {
-          if (operator === "lts") comparisons.push("smaller");
-          else comparisons.push("larger");
+          comparisons.push(operator === "lts" ? "smaller" : "larger");
         } else {
-          if (operator === "lts") comparisons.push("smallerEq");
-          else comparisons.push("largerEq");
+          comparisons.push(operator === "lts" ? "smallerEq" : "largerEq");
         }
       }
 

@@ -5,7 +5,7 @@ const m: any = mjs;
 
 import { AstToMathJs } from "./conversion/ast-to-mathjs";
 import { LatexToAst } from "./conversion/latex-to-ast";
-const { parse } = mjs;
+
 const log = logger("mv:node-sort");
 
 //import { string } from "mathjs";
@@ -23,6 +23,7 @@ const newCompare = (a: MathNode, b: MathNode): number => {
   // log(a.type);
   log("[compareNodes]: a:", a.toString(), a.type);
   log("[compareNodes]: b:", b.toString(), b.type);
+
   if (a.isSymbolNode && b.isSymbolNode) {
     // log(a.name, "> ", b.name);
     return a.name.localeCompare(b.name);
@@ -68,13 +69,7 @@ const newCompare = (a: MathNode, b: MathNode): number => {
       .toString()
       .localeCompare(b.content.args.toString());
 
-    if (localeCompareResult === 1) {
-      return -1;
-    } else if (localeCompareResult === -1) {
-      return 1;
-    }
-
-    return localeCompareResult;
+    return -localeCompareResult;
   }
 };
 
@@ -82,11 +77,10 @@ const applySort = (node: MathNode) => {
   // log("node: ", node.toString());
   // log("path: ", path);
   // log("parent: ", parent);
-  if (node.fn === "add") {
-    node.args = node.args.sort(newCompare);
-  } else if (node.fn === "multiply") {
+  if (node.fn === "add" || node.fn === "multiply") {
     node.args = node.args.sort(newCompare);
   }
+
   return node;
 };
 
@@ -94,9 +88,7 @@ const chainedSimilarOperators = (node) => {
   let ok = false;
 
   node.traverse((node, path, parent) => {
-    if (parent && parent.fn === node.fn && !ok) {
-      ok = true;
-    }
+    ok = ok || (parent && parent.fn === node.fn && !ok);
   });
 
   return ok;
@@ -139,14 +131,12 @@ export const flattenNode = (node: MathNode) => {
     resultNode = new m.OperatorNode(operator, func, []);
 
     node = node.traverse((node, path, parent) => {
-      if (parent && parent.fn && parent.fn === func) {
-        if (
-          (node.fn && node.fn !== func) ||
-          node.isSymbolNode ||
-          node.isConstantNode
-        ) {
-          resultNode.args.push(node);
-        }
+      if (
+        (parent && node.fn && node.fn !== func) ||
+        node.isSymbolNode ||
+        node.isConstantNode
+      ) {
+        resultNode.args.push(node);
       }
     });
 
@@ -164,6 +154,7 @@ export const sortRelationalNode = (node: any) => {
 
   const resultNode = node.transform((node, path, parent) => {
     let reverse = false;
+    
     if (node.conditionals) {
       const smallerAndBigger =
         smaller.some((small) => node.conditionals.includes(small)) &&
@@ -174,8 +165,9 @@ export const sortRelationalNode = (node: any) => {
       } else if (smallerAndBigger && node.params) {
         if (
           newCompare(node.params[0], node.params[node.params.length - 1]) > -1
-        )
+        ) {
           node.params.reverse();
+        }
       } else {
         node.conditionals = node.conditionals.map((cond: any) => {
           if (cond === "smaller") {
@@ -246,13 +238,9 @@ export const s = (node: MathNode) => {
     }
   }
 
-  const x = flattenNode(node);
+  const flattened = flattenNode(node);
 
-  resultNode = x.transform((node) => {
-    const y = applySort(node);
-
-    return y;
-  });
+  resultNode = flattened.transform(applySort);
 
   return resultNode;
 };
