@@ -1,4 +1,4 @@
-import { flattenNode, s, test } from "../node-sort";
+import { flattenNode, s } from "../node-sort";
 // @ts-ignore
 import { mathjs, replacer } from "../mathjs";
 const { parse } = mathjs;
