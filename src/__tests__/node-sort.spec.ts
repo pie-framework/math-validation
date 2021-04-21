@@ -21,12 +21,13 @@ type Fixture = [
 ];
 
 const fixtures: Fixture[] = [
+  [["y*(3)", "(y)*3", "(y)*(3)", "(3)*(y)"], "3*y"],
+  [["3(y)", "(3)(y)", "(y)(3)", "((((y))))(3)"], "3y"],
+  ["3y", "3y"],
+  ["(y+x)*(3)", "3*(x+y)"],
   ["1 + 1", "1 + 1"],
   [["2+1", "1+2"], "1+2"],
   [["2 + 1 * 3", "2 + 3 * 1"], "2 + 1 * 3"],
-
-  // fails look at the node - how is flatten
-  //["(3 + 2) + 1", ["+", "1", "2", "3"]],
 
   ["(3 * 2) + 1", "1 + 2 * 3"],
   [
@@ -49,17 +50,12 @@ const fixtures: Fixture[] = [
   ],
   ["a * (c + b)", "a * (b +c)"],
   ["a + (c + b)", ["+", "a", "b", "c"]],
-  //fails -look at the nodes
-  // [
-  //   ["(e + a) + (c + b)", "(c + b) + (e + a)"],
-  //   ["+", "a", "b", "c ", "e"],
-  // ],
 
-  // fails - kook at the node
-  // [
-  //   ["(4 + 1) + (3 + 2)", "(3 + 2) + (4 + 1)"],
-  //   ["+", "1", "2", "3", "4"],
-  // ],
+  [
+    ["(e + a) + (c + b)", "(c + b) + (e + a)"],
+    ["+", "a", "b", "c", "e"],
+  ],
+
   [
     ["a + b + c", "b+c+a"],
     ["+", "a", "b", "c"],
@@ -67,38 +63,26 @@ const fixtures: Fixture[] = [
   ["a + e + b + c + f + g + d", ["+", "a", "b", "c", "d", "e", "f", "g"]],
   ["b * a * c", ["*", "a", "b", "c"]],
 
-  //strip parenthesis
-  //[["(1 + (1 + 1))"], ["()", ["+", 1, ["()", ["+", 1, 1]]]]],
-  // [["(4 + 1) + (2 * x)"], ["+", ["()", ["+", 1, 4]], ["()", ["*", 2, "x"]]]],
-  // [
-  //   ["(4 + 1 + z) + (3 + 2 * x)", "(2 * x + 3) + (z + 4 + 1)"],
-  //   ["+", ["+", "1", "4", "z"], ["+", "3", ["*", "2", "x"]]],
-  // ],
   ["C + A + F < H + D + B", [">", ["+", "B", "D", "H"], ["+", "A", "C", "F"]]],
   [
     "C + A + F <= H + D + B",
     ["ge", ["+", "B", "D", "H"], ["+", "A", "C", "F"]],
   ],
-  // // normalize comparatives too - always use greater than
+  // normalize comparatives too - always use greater than
   ["A < B", "B > A"],
   ["C + A < D + B", "B +D > A + C"],
   [["A > B", "B < A"], "A > B"],
   [["A > B + 2", "B + 2 < A "], "A > 2 + B"],
-  // //
+  // this fails from PD283 also because our ast to mathjs parses this case < > in an operationl node, not a relational node like mathjs
   [["A < B > C", "C < B > A"], "A < B > C"],
 
-  //   // this example does not work, our ast to mathjs parses this in an operationl node, not a relational node like mathjs
-  // [
-  //   "y + w + z > c < a + e + d + f",
-  //   ["<", [">", ["+", "w", "y", "z"], "c"], ["+", "a", "d", "e", "f"]],
-  // ],
   [["C == B == A", "A == B == C", "B == C == A", "B == A == C"], "A == B == C"],
   ["C + B + A == B + A + C", ["=", ["+", "A", "B", "C"], ["+", "A", "B", "C"]]],
   [
     "C + B + A == B + A + C == A + C +B",
     ["=", ["+", "A", "B", "C"], ["+", "A", "B", "C"], ["+", "A", "B", "C"]],
   ],
-  // // always use greater than
+  /// always use greater than
   [["g + b < a < d ", "d > a > g + b"], "d > a > b + g"],
   [["b <= a", "a >= b"], "a >= b"],
   [["b < a <= d", "d >= a > b"], "d >= a > b"],
@@ -106,6 +90,32 @@ const fixtures: Fixture[] = [
   // allow the sides of an equation to be swapped
   [["x == y", "y == x"], "x ==y"],
   [["7+x == y", "y == 7 + x"], " y == 7 + x"],
+
+  // // fails - the way we parse the ast-to-math node is diffrent from the way mathjs parses a node
+  // [
+  //   ["(4 + 1) + (3 + 2)", "(3 + 2) + (4 + 1)"],
+  //   ["+", "1", "2", "3", "4"],
+  // ],
+  // ["(4 + 1) + (3 + 2)", ["+", 1, 2, 3, 4]],
+  // ["(3 + 2) + (4 + 1)", ["+", "1", "2", "3", "4"]],
+
+  // //fails - the way we parse the ast-to-math constant node is diffrent from the way mathjs parses a node
+  // ["(3 + 2) + 1", ["+", 1, 2, 3]],
+  // ["(y*x)(3)", ["*", 3, "x", "y"]],
+
+  // //strip parenthesis
+  // //[["(1 + (1 + 1))"], ["()", ["+", 1, ["()", ["+", 1, 1]]]]],
+  // // [["(4 + 1) + (2 * x)"], ["+", ["()", ["+", 1, 4]], ["()", ["*", 2, "x"]]]],
+  // [
+  //   ["(4 + 1 + z) + (3 + 2 * x)", "(2 * x + 3) + (z + 4 + 1)"],
+  //   ["+", ["+", "1", "4", "z"], ["+", "3", ["*", "2", "x"]]],
+  // ],
+
+  // // fails, our ast to mathjs parses this case < > in an operationl node, not a relational node like mathjs
+  // [
+  //   "y + w + z > c < a + e + d + f",
+  //   ["<", [">", ["+", "w", "y", "z"], "c"], ["+", "a", "d", "e", "f"]],
+  // ],
 ];
 
 // ["parenthesis", ["+"]];
@@ -182,8 +192,6 @@ expect.extend({
           );
         };
 
-    console.log(JSON.stringify(expectedNode), "expected----------");
-
     return { actual: received, message, pass };
   },
 });
@@ -194,19 +202,10 @@ describe.only.each(fixtures)("%s => %s", (input, expected) => {
   it.each(testInput as any)("%s", (ii) => {
     let i = parse(ii);
 
-    console.log(i, "input");
     // console.time("sort");
     const sorted = s(i);
     // console.timeEnd("sort");
-    //console.log("sorted", JSON.stringify(sorted));
-
-    //console.log(lta.convert(ii), "converted input");
-    console.log("expected", expected);
-
-    console.log(sorted, "sorted in test");
-
     // @ts-ignore
-
     expect(sorted).toEqualExpression(expected);
   });
 });

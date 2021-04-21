@@ -119,12 +119,14 @@ export const flattenNode = (node: MathNode) => {
   const operator = node.op;
   const func = node.fn;
 
-  let strip = false;
-
   node = node.transform((node, path, parent) => {
-    if (node.isParenthesisNode && parent.op != "*") {
+    if (
+      node.isParenthesisNode &&
+      parent &&
+      (parent.op != "*" || (parent.op == "*" && node.content.op != "+"))
+    ) {
+      while (node.content.isParenthesisNode) node = node.content;
       node = node.content;
-      strip = true;
     }
 
     return node;
@@ -133,7 +135,7 @@ export const flattenNode = (node: MathNode) => {
   let resultNode = node;
   const sameOperator = chainedSimilarOperators(node);
 
-  if (resultNode.args && argsIsOperatorNode(resultNode) && sameOperator || strip) {
+  if (resultNode.args && argsIsOperatorNode(resultNode) && sameOperator) {
     resultNode = new m.OperatorNode(operator, func, []);
 
     node = node.traverse((node, path, parent) => {
@@ -206,13 +208,13 @@ export const sortRelationalNode = (node: any) => {
   return resultNode;
 };
 
-export const test = (input) => {
-  // const latexConverted = lta.convert(input);
-  // const mathNode = atm.convert(latexConverted);
-  // const sorted = s(mathNode);
-  // console.log("sorted from test");
-  // return sorted;
-};
+// export const test = (input) => {
+//   const latexConverted = lta.convert(input);
+//   const mathNode = atm.convert(latexConverted);
+//   const sorted = s(mathNode);
+//   console.log("sorted from test");
+//   return sorted;
+// };
 
 export const s = (node: MathNode) => {
   let resultNode = node;
