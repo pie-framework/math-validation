@@ -8,29 +8,29 @@ const fixtures = [
 
   // parentheses are stripped!
   ["(1 + (1 + 1))", ["+", 1, 1, 1]],
-  // ["(4 + 1) / (3 + 2 - 1)", ["/", ["+", 4, 1], ["+", 3, 2, ["-", 1]]]],
-  // ["1000", 1000],
-  // ["1,000", 1000],
-  // ["1,000,000", 1000000],
-  // ["1,000,000.000", ["tzn", 1000000, 3]],
-  // ["1,000,000.001", 1000000.001],
-  // ["1,000,000.00000000000000000", ["tzn", 1000000, 17]],
-  // ["1.00", ["tzn", 1, 2]],
-  // ["1.10", ["tzn", 1.1, 1]],
-  // ["1,001.10", ["tzn", 1001.1, 1]],
-  // ["1.11000", ["tzn", 1.11, 3]],
-  // // treat × as multiplication operator
-  // ["a×b", ["*", "a", "b"]],
-  // // treat • as multiplication operator
-  // ["a•b", ["*", "a", "b"]],
-  // // treat · as multiplication operator
-  // ["a·b", ["*", "a", "b"]],
-  // // treat ÷ as devide operator
-  // ["a÷b", ["/", "a", "b"]],
-  // // accept rational operator ≤
-  // ["a≤b", ["le", "a", "b"]],
+  ["(4 + 1) / (3 + 2 - 1)", ["/", ["+", 4, 1], ["+", 3, 2, ["-", 1]]]],
+  ["1000", 1000],
+  ["1,000", 1000],
+  ["1,000,000", 1000000],
+  ["1,000,000.000", ["tzn", 1000000, 3]],
+  ["1,000,000.001", 1000000.001],
+  ["1,000,000.00000000000000000", ["tzn", 1000000, 17]],
+  ["1.00", ["tzn", 1, 2]],
+  ["1.10", ["tzn", 1.1, 1]],
+  ["1,001.10", ["tzn", 1001.1, 1]],
+  ["1.11000", ["tzn", 1.11, 3]],
+  // treat × as multiplication operator
+  ["a×b", ["*", "a", "b"]],
+  // treat • as multiplication operator
+  ["a•b", ["*", "a", "b"]],
+  // treat · as multiplication operator
+  ["a·b", ["*", "a", "b"]],
+  // treat ÷ as devide operator
+  ["a÷b", ["/", "a", "b"]],
+  // accept rational operator ≤
+  ["a≤b", ["le", "a", "b"]],
   // accept rational operator ≥
-  // ["a≥b", ["ge", "a", "b"]],
+  ["a≥b", ["ge", "a", "b"]],
   // TODO...
   // ["a < b > c", "1"],
   // ["c < b > a", "1"],
@@ -70,9 +70,9 @@ describe.only("bugs in lta", () => {
     // console.timeEnd("katexParse");
 
     console.time("lta");
-    // const out = lta.convert(input);
-    // // console.log("out", out);
-    // // console.timeEnd("lta");
-    // expect(out).toEqual(expected);
+    const out = lta.convert(input);
+    // console.log("out", out);
+    // console.timeEnd("lta");
+    expect(out).toEqual(expected);
   });
 });

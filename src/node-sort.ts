@@ -108,9 +108,6 @@ const argsIsOperatorNode = (node) => {
 };
 
 export const flattenNode = (node: MathNode) => {
-  const operator = node.op;
-  const func = node.fn;
-
   node = node.transform((node, path, parent) => {
     if (
       node.isParenthesisNode &&
@@ -125,25 +122,33 @@ export const flattenNode = (node: MathNode) => {
   });
 
   let resultNode = node;
-  const sameOperator = chainedSimilarOperators(node);
+  const operator = resultNode.op;
+  const func = resultNode.fn;
+  const sameOperator = chainedSimilarOperators(resultNode);
 
   if (resultNode.args && argsIsOperatorNode(resultNode) && sameOperator) {
-    resultNode = new m.OperatorNode(operator, func, []);
+    let newNode = new m.OperatorNode(operator, func, []);
 
-    node = node.traverse((node, path, parent) => {
+    resultNode = resultNode.traverse((node, path, parent) => {
       if (
-        (parent && node.fn && node.fn !== func) ||
-        node.isSymbolNode ||
-        node.isConstantNode
+        (parent &&
+          parent.fn &&
+          parent.fn == func &&
+          node.fn &&
+          node.fn !== func) ||
+        (node.isSymbolNode && parent.op == "*" && func == "multiply") ||
+        (node.isConstantNode && parent.op == "*" && func == "multiply") ||
+        (node.isSymbolNode && parent.op !== "*" && func !== "multiply") ||
+        (node.isConstantNode && parent.op !== "*" && func !== "multiply")
       ) {
-        resultNode.args.push(node);
+        newNode.args.push(node);
       }
     });
 
-    return resultNode;
+    return newNode;
   }
 
-  return node;
+  return resultNode;
 };
 
 export const sortRelationalNode = (node: any) => {
@@ -154,7 +159,7 @@ export const sortRelationalNode = (node: any) => {
 
   const resultNode = node.transform((node, path, parent) => {
     let reverse = false;
-    
+
     if (node.conditionals) {
       const smallerAndBigger =
         smaller.some((small) => node.conditionals.includes(small)) &&
@@ -202,7 +207,9 @@ export const sortRelationalNode = (node: any) => {
 
 // export const test = (input) => {
 //   const latexConverted = lta.convert(input);
+//   console.log(latexConverted, "latexconverted");
 //   const mathNode = atm.convert(latexConverted);
+//   console.log(mathNode, "math node");
 //   const sorted = s(mathNode);
 //   console.log("sorted from test");
 //   return sorted;
