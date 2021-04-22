@@ -1,7 +1,7 @@
 import { flattenNode, s } from "../node-sort";
 // @ts-ignore
-import { mathjs, replacer } from "../mathjs";
-const { parse } = mathjs;
+import { replacer } from "../mathjs";
+import { parse } from "mathjs";
 import diff from "jest-diff";
 import { logger } from "../log";
 const log = logger("mv:node-sort.spec");
@@ -26,6 +26,7 @@ const fixtures: Fixture[] = [
   ["3y", "3y"],
   ["(y+x)*(3)", "3*(x+y)"],
   ["1 + 1", "1 + 1"],
+  ["1 + 1", ["+", 1, 1]],
   [["2+1", "1+2"], "1+2"],
   [["2 + 1 * 3", "2 + 3 * 1"], "2 + 1 * 3"],
   ["(3 * 2) + 1", "1 + 2 * 3"],
@@ -76,42 +77,40 @@ const fixtures: Fixture[] = [
     "C + B + A == B + A + C == A + C +B",
     ["=", ["+", "A", "B", "C"], ["+", "A", "B", "C"], ["+", "A", "B", "C"]],
   ],
+
   /// always use greater than
   [["g + b < a < d ", "d > a > g + b"], "d > a > b + g"],
   [["b <= a", "a >= b"], "a >= b"],
   [["b < a <= d", "d >= a > b"], "d >= a > b"],
   [["b < a < d", "d > a > b"], "d > a > b"],
+
   // allow the sides of an equation to be swapped
   [["x == y", "y == x"], "x ==y"],
   [["7+x == y", "y == 7 + x"], " y == 7 + x"],
-  // // fails - the way we parse the ast-to-math node is diffrent from the way mathjs parses a node
-  // [
-  //   ["(4 + 1) + (3 + 2)", "(3 + 2) + (4 + 1)"],
-  //   ["+", "1", "2", "3", "4"],
-  // ],
-  // ["(4 + 1) + (3 + 2)", ["+", 1, 2, 3, 4]],
-  // ["(3 + 2) + (4 + 1)", ["+", "1", "2", "3", "4"]],
-  // // //fails - the way we parse the ast-to-math constant node is diffrent from the way mathjs parses a node
-  // ["(3 + 2) + 1", ["+", 1, 2, 3]],
-  // ["(y*x)(3)", ["*", 3, "x", "y"]],
-  // // //strip parenthesis
-  // // //[["(1 + (1 + 1))"], ["()", ["+", 1, ["()", ["+", 1, 1]]]]],
-  // // // [["(4 + 1) + (2 * x)"], ["+", ["()", ["+", 1, 4]], ["()", ["*", 2, "x"]]]],
-  // [
-  //   // ["(4 + 1 + z) + (3 + 2 * x)",
-  //   "(2 * x + 3) + (z + 4 + 1)",
-  //   // ],
-  //   ["+", 1, 3, 4, "z", ["*", 2, "x"]],
-  // ],
+
+  // fails - the way we parse the ast-to-math node is diffrent from the way mathjs parses a node
+  [
+    ["(4 + 1) + (3 + 2)", "(3 + 2) + (4 + 1)"],
+    ["+", 1, 2, 3, 4],
+  ],
+  ["(4 + 1) + (3 + 2)", ["+", 1, 2, 3, 4]],
+  ["(3 + 2) + (4 + 1)", ["+", 1, 2, 3, 4]],
+
+  //fails - the way we parse the ast-to-math constant node is diffrent from the way mathjs parses a node
+  ["(3 + 2) + 1", ["+", 1, 2, 3]],
+  ["(y*x)(3)", ["*", 3, "x", "y"]],
+
+  //strip parenthesis
+  //[["(1 + (1 + 1))"], ["()", ["+", 1, ["()", ["+", 1, 1]]]]],
+  // [["(4 + 1) + (2 * x)"], ["+", ["()", ["+", 1, 4]], ["()", ["*", 2, "x"]]]],
+  [
+    ["(4 + 1 + z) + (3 + 2 * x)", "(2 * x + 3) + (z + 4 + 1)"],
+    ["+", 1, 3, 4, "z", ["*", 2, "x"]],
+  ],
   // // // fails, our ast to mathjs parses this case < > in an operationl node, not a relational node like mathjs
   // [
   //   "y + w + z > c < a + e + d + f",
   //   ["<", [">", ["+", "w", "y", "z"], "c"], ["+", "a", "d", "e", "f"]],
-  // ],
-  // fails, instead of constant node 3, we receive an object that contains 3/1
-  // [
-  //   ["3(y)", "(3)(y)", "(y)(3)", "((((y))))(3)"],
-  //   ["*", 3, "y"],
   // ],
 ];
 
@@ -135,6 +134,31 @@ it.each`
   expect(result).toEqual(ex);
 });
 
+const deepEqual = (object1, object2) => {
+  const keys1 = Object.keys(object1);
+  const keys2 = Object.keys(object2);
+
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  for (const key of keys1) {
+    const val1 = object1[key];
+    const val2 = object2[key];
+    const areObjects = isObject(val1) && isObject(val2);
+    if (
+      (areObjects && !deepEqual(val1, val2)) ||
+      (!areObjects && val1 !== val2)
+    ) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+const isObject = (object) => object != null && typeof object === "object";
+
 expect.extend({
   toEqualExpression(received, expected: string | string[]) {
     const options = {
@@ -142,14 +166,16 @@ expect.extend({
       isNot: this.isNot,
       promise: this.promise,
     };
-    // console.log(lta.convert(expected), "converted expected");
 
     const expectedNode =
       typeof expected === "string" ? parse(expected) : atm.convert(expected);
 
+    delete expectedNode.comment;
+
     log("received", JSON.stringify(received, replacer, "  "));
     log("expected", JSON.stringify(expectedNode, replacer, "  "));
-    const pass = received.equals(expectedNode);
+
+    const pass = deepEqual(received, expectedNode);
 
     const message = pass
       ? () =>
@@ -189,7 +215,6 @@ expect.extend({
           );
         };
 
-    console.log("expected node-----------", expectedNode);
     return { actual: received, message, pass };
   },
 });
@@ -199,6 +224,7 @@ describe.only.each(fixtures)("%s => %s", (input, expected) => {
   //@ts-ignore
   it.each(testInput as any)("%s", (ii) => {
     let i = parse(ii);
+
     // console.time("sort");
     const sorted = s(i);
     // console.timeEnd("sort");

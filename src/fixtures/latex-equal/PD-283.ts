@@ -188,7 +188,7 @@ export default {
       eq: ["x≥0"],
       triage: [Triage.LATEX_PARSE_ERROR, Triage.NODE_SORT],
     },
-    //this fails this case  < > is not parsed as a relational node from latex-to-ast and ast-to-mathjs
+    // this fails this case  < > is not parsed as a relational node from latex-to-ast and ast-to-mathjs
     // {
     //   opts: {
     //     literal: { ignoreOrder: true },
