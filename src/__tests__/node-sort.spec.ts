@@ -1,7 +1,6 @@
 import { flattenNode, s } from "../node-sort";
 // @ts-ignore
-import { replacer } from "../mathjs";
-import { parse } from "mathjs";
+import { replacer, parse } from "../mathjs";
 import diff from "jest-diff";
 import { logger } from "../log";
 const log = logger("mv:node-sort.spec");
@@ -21,13 +20,15 @@ type Fixture = [
 ];
 
 const fixtures: Fixture[] = [
-  [["y*(3)", "(y)*3", "(y)*(3)", "(3)*(y)"], "3*y"],
-  [["3(y)", "(3)(y)", "(y)(3)", "((((y))))(3)"], "3y"],
-  ["3y", "3y"],
-  ["(y+x)*(3)", "3*(x+y)"],
-  ["1 + 1", "1 + 1"],
-  ["1 + 1", ["+", 1, 1]],
-  [["2+1", "1+2"], "1+2"],
+  // [["y*(3)", "(y)*3", "(y)*(3)", "(3)*(y)"], "3*y"],
+  // [["3(y)", "(3)(y)", "(y)(3)", "((((y))))(3)"], "3y"],
+  // ["3y", "3y"],
+  // ["(y+x)*(3)", "3*(x+y)"],
+  // ["1 + 1", "1 + 1"],
+  ["1 + 1", ["+", ["/", 1, 1], ["/", 1, 1]]],
+  // [["2+1", "1+2"], "1+2"],
+];
+const ff = [
   [["2 + 1 * 3", "2 + 3 * 1"], "2 + 1 * 3"],
   ["(3 * 2) + 1", "1 + 2 * 3"],
   [
@@ -133,28 +134,28 @@ it.each`
   expect(result).toEqual(ex);
 });
 
-const deepEqual = (object1, object2) => {
-  const keys1 = Object.keys(object1);
-  const keys2 = Object.keys(object2);
+// const deepEqual = (object1, object2) => {
+//   const keys1 = Object.keys(object1);
+//   const keys2 = Object.keys(object2);
 
-  if (keys1.length !== keys2.length) {
-    return false;
-  }
+//   if (keys1.length !== keys2.length) {
+//     return false;
+//   }
 
-  for (const key of keys1) {
-    const val1 = object1[key];
-    const val2 = object2[key];
-    const areObjects = isObject(val1) && isObject(val2);
-    if (
-      (areObjects && !deepEqual(val1, val2)) ||
-      (!areObjects && val1 !== val2)
-    ) {
-      return false;
-    }
-  }
+//   for (const key of keys1) {
+//     const val1 = object1[key];
+//     const val2 = object2[key];
+//     const areObjects = isObject(val1) && isObject(val2);
+//     if (
+//       (areObjects && !deepEqual(val1, val2)) ||
+//       (!areObjects && val1 !== val2)
+//     ) {
+//       return false;
+//     }
+//   }
 
-  return true;
-};
+//   return true;
+// };
 
 const isObject = (object) => object != null && typeof object === "object";
 
@@ -174,7 +175,7 @@ expect.extend({
     log("received", JSON.stringify(received, replacer, "  "));
     log("expected", JSON.stringify(expectedNode, replacer, "  "));
 
-    const pass = deepEqual(received, expectedNode);
+    const pass = received.equals(expectedNode);
 
     const message = pass
       ? () =>
