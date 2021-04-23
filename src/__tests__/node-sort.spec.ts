@@ -64,6 +64,13 @@ const fixtures: Fixture[] = [
     "C + A + F <= H + D + B",
     ["ge", ["+", "B", "D", "H"], ["+", "A", "C", "F"]],
   ],
+  [
+    ["(4 + 1) + (3 + 2)", "(3 + 2) + (4 + 1)"],
+    ["+", 1, 2, 3, 4],
+  ],
+  ["(4 + 1) + (3 * 2)", ["+", 1, 4, ["*", 2, 3]]],
+  ["(3 + 2) + (4 * 1)", ["+", 2, 3, ["*", 1, 4]]],
+
   // normalize comparatives too - always use greater than
   ["A < B", "B > A"],
   ["C + A < D + B", "B +D > A + C"],
@@ -88,14 +95,6 @@ const fixtures: Fixture[] = [
   [["x == y", "y == x"], "x ==y"],
   [["7+x == y", "y == 7 + x"], " y == 7 + x"],
 
-  // fails - the way we parse the ast-to-math node is diffrent from the way mathjs parses a node
-  [
-    ["(4 + 1) + (3 + 2)", "(3 + 2) + (4 + 1)"],
-    ["+", 1, 2, 3, 4],
-  ],
-  ["(4 + 1) + (3 + 2)", ["+", 1, 2, 3, 4]],
-  ["(3 + 2) + (4 + 1)", ["+", 1, 2, 3, 4]],
-
   //fails - the way we parse the ast-to-math constant node is diffrent from the way mathjs parses a node
   ["(3 + 2) + 1", ["+", 1, 2, 3]],
   ["(y*x)(3)", ["*", 3, "x", "y"]],
@@ -107,7 +106,7 @@ const fixtures: Fixture[] = [
     ["(4 + 1 + z) + (3 + 2 * x)", "(2 * x + 3) + (z + 4 + 1)"],
     ["+", 1, 3, 4, "z", ["*", 2, "x"]],
   ],
-  // // // fails, our ast to mathjs parses this case < > in an operationl node, not a relational node like mathjs
+  // // fails, our ast to mathjs parses this case < > in an operationl node, not a relational node like mathjs
   // [
   //   "y + w + z > c < a + e + d + f",
   //   ["<", [">", ["+", "w", "y", "z"], "c"], ["+", "a", "d", "e", "f"]],
