@@ -174,7 +174,7 @@ expect.extend({
     log("received", JSON.stringify(received, replacer, "  "));
     log("expected", JSON.stringify(expectedNode, replacer, "  "));
 
-    const pass = deepEqual(received, expectedNode);
+    const pass = received.equals(expectedNode); //deepEqual(received, expectedNode);
 
     const message = pass
       ? () =>
