@@ -1,7 +1,6 @@
 import { flattenNode, s } from "../node-sort";
 // @ts-ignore
-import { replacer } from "../mathjs";
-import { parse } from "mathjs";
+import { replacer, parse } from "../mathjs";
 import diff from "jest-diff";
 import { logger } from "../log";
 const log = logger("mv:node-sort.spec");
@@ -84,7 +83,6 @@ const fixtures: Fixture[] = [
     "C + B + A == B + A + C == A + C +B",
     ["=", ["+", "A", "B", "C"], ["+", "A", "B", "C"], ["+", "A", "B", "C"]],
   ],
-
   /// always use greater than
   [["g + b < a < d ", "d > a > g + b"], "d > a > b + g"],
   [["b <= a", "a >= b"], "a >= b"],
@@ -112,6 +110,7 @@ const fixtures: Fixture[] = [
   //   ["<", [">", ["+", "w", "y", "z"], "c"], ["+", "a", "d", "e", "f"]],
   // ],
 ];
+const ff = [];
 
 // ["parenthesis", ["+"]];
 
@@ -133,28 +132,28 @@ it.each`
   expect(result).toEqual(ex);
 });
 
-const deepEqual = (object1, object2) => {
-  const keys1 = Object.keys(object1);
-  const keys2 = Object.keys(object2);
+// const deepEqual = (object1, object2) => {
+//   const keys1 = Object.keys(object1);
+//   const keys2 = Object.keys(object2);
 
-  if (keys1.length !== keys2.length) {
-    return false;
-  }
+//   if (keys1.length !== keys2.length) {
+//     return false;
+//   }
 
-  for (const key of keys1) {
-    const val1 = object1[key];
-    const val2 = object2[key];
-    const areObjects = isObject(val1) && isObject(val2);
-    if (
-      (areObjects && !deepEqual(val1, val2)) ||
-      (!areObjects && val1 !== val2)
-    ) {
-      return false;
-    }
-  }
+//   for (const key of keys1) {
+//     const val1 = object1[key];
+//     const val2 = object2[key];
+//     const areObjects = isObject(val1) && isObject(val2);
+//     if (
+//       (areObjects && !deepEqual(val1, val2)) ||
+//       (!areObjects && val1 !== val2)
+//     ) {
+//       return false;
+//     }
+//   }
 
-  return true;
-};
+//   return true;
+// };
 
 const isObject = (object) => object != null && typeof object === "object";
 
@@ -174,7 +173,7 @@ expect.extend({
     log("received", JSON.stringify(received, replacer, "  "));
     log("expected", JSON.stringify(expectedNode, replacer, "  "));
 
-    const pass = deepEqual(received, expectedNode);
+    const pass = received.equals(expectedNode);
 
     const message = pass
       ? () =>
@@ -224,9 +223,7 @@ describe.only.each(fixtures)("%s => %s", (input, expected) => {
   it.each(testInput as any)("%s", (ii) => {
     let i = parse(ii);
 
-    // console.time("sort");
     const sorted = s(i);
-    // console.timeEnd("sort");
 
     // @ts-ignore
     expect(sorted).toEqualExpression(expected);

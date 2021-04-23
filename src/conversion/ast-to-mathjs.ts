@@ -79,14 +79,31 @@ const operators = {
   },
 };
 
+export type AstToMathJsOpts = {
+  number?: string;
+};
+
 export class AstToMathJs {
-  constructor({ mathjs = null } = {}) {
-    // if (mathjs) node = mathjs.expression.node;
-  }
+  /**
+   * Note: we use fractions as the default number format.
+   * So by default AstToMathJs will generate fractions too.
+   */
+  constructor(private opts: AstToMathJsOpts = { number: "Fraction" }) {}
 
   convert(tree) {
     if (typeof tree === "number") {
-      if (Number.isFinite(tree)) return new m.ConstantNode(tree);
+      if (Number.isFinite(tree)) {
+        if (this.opts.number === "Fraction") {
+          const f = new m.Fraction([
+            new m.ConstantNode(tree),
+            new m.ConstantNode(1),
+          ]);
+          return new m.ConstantNode(f);
+        } else {
+          return new m.ConstantNode(tree);
+        }
+      }
+
       if (Number.isNaN(tree)) return new m.SymbolNode("NaN");
       if (tree < 0) return operators["-"]([new m.SymbolNode("Infinity")]);
       return new m.SymbolNode("Infinity");
