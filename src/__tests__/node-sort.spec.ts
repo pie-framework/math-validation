@@ -20,15 +20,13 @@ type Fixture = [
 ];
 
 const fixtures: Fixture[] = [
-  // [["y*(3)", "(y)*3", "(y)*(3)", "(3)*(y)"], "3*y"],
-  // [["3(y)", "(3)(y)", "(y)(3)", "((((y))))(3)"], "3y"],
-  // ["3y", "3y"],
-  // ["(y+x)*(3)", "3*(x+y)"],
-  // ["1 + 1", "1 + 1"],
-  ["1 + 1", ["+", ["/", 1, 1], ["/", 1, 1]]],
-  // [["2+1", "1+2"], "1+2"],
-];
-const ff = [
+  [["y*(3)", "(y)*3", "(y)*(3)", "(3)*(y)"], "3*y"],
+  [["3(y)", "(3)(y)", "(y)(3)", "((((y))))(3)"], "3y"],
+  ["3y", "3y"],
+  ["(y+x)*(3)", "3*(x+y)"],
+  ["1 + 1", "1 + 1"],
+  ["1 + 1", ["+", 1, 1]],
+  [["2+1", "1+2"], "1+2"],
   [["2 + 1 * 3", "2 + 3 * 1"], "2 + 1 * 3"],
   ["(3 * 2) + 1", "1 + 2 * 3"],
   [
@@ -85,7 +83,6 @@ const ff = [
     "C + B + A == B + A + C == A + C +B",
     ["=", ["+", "A", "B", "C"], ["+", "A", "B", "C"], ["+", "A", "B", "C"]],
   ],
-
   /// always use greater than
   [["g + b < a < d ", "d > a > g + b"], "d > a > b + g"],
   [["b <= a", "a >= b"], "a >= b"],
@@ -113,6 +110,7 @@ const ff = [
   //   ["<", [">", ["+", "w", "y", "z"], "c"], ["+", "a", "d", "e", "f"]],
   // ],
 ];
+const ff = [];
 
 // ["parenthesis", ["+"]];
 
@@ -225,9 +223,7 @@ describe.only.each(fixtures)("%s => %s", (input, expected) => {
   it.each(testInput as any)("%s", (ii) => {
     let i = parse(ii);
 
-    // console.time("sort");
     const sorted = s(i);
-    // console.timeEnd("sort");
 
     // @ts-ignore
     expect(sorted).toEqualExpression(expected);
