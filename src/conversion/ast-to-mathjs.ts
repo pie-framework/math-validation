@@ -333,6 +333,14 @@ export class AstToMathJs {
       return new m.ArrayNode(result);
     }
 
+    if (operator == "%") {
+      const dividend = this.convert(operands[0]);
+      const divisor = new m.ConstantNode(100);
+      const result = new m.OperatorNode("/", "divide", [dividend, divisor]);
+
+      return result;
+    }
+
     if (operator in operators) {
       return operators[operator](
         operands.map(
