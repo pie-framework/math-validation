@@ -112,6 +112,11 @@ export enum Triage {
    */
   EQUIVALENCE_RELATIONS,
 
+  /**
+   * something goes wrong when striping parenthessis
+   */
+  PARENTHESES,
+
   /**  Done
    * A user can randomly punch any old input to be evaluated.
    * If this input is of a sufficient length it can cause the function to stall.

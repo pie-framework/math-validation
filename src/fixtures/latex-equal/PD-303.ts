@@ -67,19 +67,22 @@ export default {
       ne: ["x\\left(3\\right)+4y+2yx+5", "3x+4y+2yx+5", "2yx+3x+4y+5"],
     },
     {
+      triage: Triage.PARENTHESES,
       opts: {
         literal: { ignoreOrder: true },
       },
       target: "2xy+3x+4y+5",
       eq: [
         "2yx+3x+4y+5",
-        //failing
+        //failing (5+3x+4y+2xy)
         "\\left(5+3x+4y+2xy\\right)",
-        //failing
+        //failing (5+3x)+(4y+2xy)
         "\\left(5+3x\\right)+\\left(4y+2xy\\right)",
+        // passing (2xy+3x) + 4y+5
         "\\left(2xy+3x\\right)+4y+5",
+        //passing (2xy+3x)+(4y + 5)
         "\\left(2xy+3x\\right)+\\left(4y+5\\right)",
-        //failing
+        //failing (3x+2xy) + (4y) + 5
         "\\left(3x+2xy\\right)+\\left(4y\\right)+5",
         "2xy+3x+\\left(4y+5\\right)",
         "2xy+\\left(3x+4y\\right)+5",
@@ -158,18 +161,20 @@ export default {
       ],
     },
     {
+      triage: Triage.PARENTHESES,
       opts: {
         literal: { ignoreOrder: true },
       },
       target: "ab+cd=0",
       eq: [
         "0=ab+cd",
+        // passed 0 = (ab) + (cd)
         "0=\\left(ab\\right)+\\left(cd\\right)",
-        // failing
+        // failing 0 = (cd) + (ab)
         "0=\\left(cd\\right)+\\left(ab\\right)",
-        // failing
+        // failing 0 =  (dc) + (ab)
         "0=\\left(dc\\right)+\\left(ab\\right)",
-        // failing
+        // failing 0 = (dc) + (ba)
         "0=\\left(dc\\right)+\\left(ba\\right)",
       ],
     },
