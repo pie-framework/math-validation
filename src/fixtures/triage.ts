@@ -10,7 +10,7 @@ export enum Triage {
    * ab !== b(a)
    * ab !== (b)(a)
    */
-  NODE_SORT,
+  NODE_SORT_SYMBOLIC,
 
   /**
    * The latex parser is choking on the input things like:
@@ -22,14 +22,6 @@ export enum Triage {
   LATEX_PARSE_ERROR,
 
   /**
-   * percent not converting to mathjs.
-   * _underscore not implemented for conversion to mathjs
-   * We had this working in the legacy set up so may just need to update
-   * ast => mathjs conversion logic
-   */
-  PERCENT_SUPPORT,
-
-   /**
    * _underscore not implemented for conversion to mathjs
    */
   UNDERSCORE_SUPPORT,
@@ -68,36 +60,70 @@ export enum Triage {
    */
   FRACTIONS_PROPERTIES,
 
-     /**
-  * TypeError: Cannot implicitly convert a number to a Fraction when there will be a loss of precision (value: 0.31426968052735443).
-  * Use function fraction(x) to convert to Fraction.
+  /**
+   * TypeError: Cannot implicitly convert a number to a Fraction when there will be a loss of precision (value: 0.31426968052735443).
+   * Use function fraction(x) to convert to Fraction.
    */
   FRACTION_CONVERSION_ERROR,
 
-    /**
-  * Atention: 0.0 is not a valid floating point
-  * 1 should be equal to 1.0
+  /**
+   * Atention: 0.0 is not a valid floating point
+   * 1 should be equal to 1.0 - Done
    */
-  FLOATING_POINT,
+  ALLOW_TRAILING_ZEROS_FOR_ZERO,
 
-      /**
-  * Invalid location of '='
+  /**
+   * Invalid location of '='
    */
   EQUAL_LOCATION_PARSE_ERROR,
 
-       /**
-  * Non string functions not implemented for conversion to mathjs
+  /**
+   * Non string functions not implemented for conversion to mathjs
    */
   NON_STRING,
 
-         /**
-  * expecting ( after function
+  /**
+   * expecting ( after function
    */
   EXPECTING_PARANTHESIS,
+
   /**
+   * Unimplemented node type in simplifyConstant: RelationalNode
+   */
+  UNIMPLEMENTED_NODE,
+
+  ALLOW_TRAILING_ZEROS_SYMBOLIC,
+
+  /**
+   * I'm not sure yet what this is about
+   */
+  OPTS_EXCEPTION,
+
+  /**
+   * ml should be eq with mL
+   * ALSO I SHOULD CHECK OTHER UNITS
+   */
+  MEASUREMENT_UNITS,
+
+  /**
+   * sqrt(x) should be eq with sqrt{2}(x)
+   * log x should be eq with log{10}(x)
+   * qrt(x) should be eq with mL
+   */
+  EQUIVALENCE_RELATIONS,
+
+  /**  Done
    * A user can randomly punch any old input to be evaluated.
    * If this input is of a sufficient length it can cause the function to stall.
    * We need to identify this input before we run through the evaluator.
    */
   BAD_USER_INPUT,
+
+  /** Done
+   * percent not converting to mathjs.
+   * _underscore not implemented for conversion to mathjs
+   * We had this working in the legacy set up so may just need to update
+   * ast => mathjs conversion logic
+   */
+  PERCENT_SUPPORT,
 }

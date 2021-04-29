@@ -21,7 +21,11 @@ export default {
 
     {
       target: "\\frac{n-5}{6}",
-      triage: [Triage.NODE_SORT, Triage.IDENTITY_PROPERTY, Triage.FRACTIONS_PROPERTIES],
+      triage: [
+        Triage.NODE_SORT_SYMBOLIC,
+        Triage.IDENTITY_PROPERTY,
+        Triage.FRACTIONS_PROPERTIES,
+      ],
       eq: [
         "\\frac{-5+n}{6}",
         "\\frac{n}{6}-\\frac{5}{6}",
@@ -93,14 +97,16 @@ export default {
     },
     {
       target: "\\frac{a+c}{2}+\\frac{b+d}{2}i",
-       triage: Triage.NODE_SORT,
+      triage: Triage.NODE_SORT_SYMBOLIC,
       eq: [
+        // all failing
         "\\frac{c+a}{2}+\\frac{b+d}{2}i",
         "\\frac{c+a}{2}+\\frac{d+b}{2}i",
         "\\frac{a+c}{2}+\\frac{d+b}{2}i",
       ],
     },
     {
+      // passed
       target: "\\frac{10}{12}\\pi\\ \\text{radians}",
       eq: [
         "\\frac{5}{6}\\pi \\ \\text{radians}",
@@ -112,12 +118,13 @@ export default {
     },
     {
       target: "h=\\frac{3V}{B}",
-      triage: Triage.FRACTIONS_PROPERTIES,
+      triage: [Triage.FRACTIONS_PROPERTIES, Triage.COMMON_FACTOR],
       eq: [
-        "h=3\\frac{V}{B}",
         "h=\\frac{\\left(3\\times V\\right)}{B}",
         "h=\\left(3V\\right)\\div B",
         "h=\\left(3\\times V\\right)\\div B",
+        // failing
+        "h=3\\frac{V}{B}",
       ],
     },
     {
@@ -130,12 +137,13 @@ export default {
     },
     {
       target: "c=-\\frac{b}{m}",
-      triage: Triage.COMMON_FACTOR,
+      triage: [Triage.COMMON_FACTOR, Triage.NODE_SORT_SYMBOLIC],
       eq: [
         "c=-b\\div m",
         "c=-b\\times \\frac{1}{m}",
         "c=\\left(-b\\right)\\left(\\frac{1}{m}\\right)",
         "c=\\frac{-b}{m}",
+        //failing
         "c=\\frac{b}{-m}",
       ],
     },
@@ -174,17 +182,20 @@ export default {
     },
     {
       target: "h=\\frac{da}{c}",
-      triage: Triage.NODE_SORT,
+      triage: Triage.NODE_SORT_SYMBOLIC,
       eq: [
+        //failing
         "h=\\frac{ad}{c}",
-        "h=\\frac{a\\times d}{c}",
-        "h=\\frac{d\\times a}{c}",
-        "h=\\left(d\\times a\\right)\\div c",
         "h=\\left(a\\times d\\right)\\div c",
         "h=d\\left(\\frac{a}{c}\\right)",
         "h=d\\left(a\\div c\\right)",
+        "h=\\frac{a\\times d}{c}",
+
+        //passing:
         "h=a\\left(d\\div c\\right)",
         "h=a\\left(\\frac{d}{c}\\right)",
+        "h=\\frac{d\\times a}{c}",
+        "h=\\left(d\\times a\\right)\\div c",
       ],
     },
     {
@@ -198,18 +209,20 @@ export default {
         "x=\\frac{-by+c}{a}",
         "x=\\left(-by+c\\right)\\div a",
         "x=\\frac{\\left(c-by\\right)}{a}",
+
+        // failing:
         "x=\\frac{c}{a}-\\frac{by}{a}",
         "x=\\frac{1}{a}c-\\frac{1}{a}by",
       ],
     },
     {
-      skip: true,
+      triage: [Triage.NODE_SORT_SYMBOLIC, Triage.FRACTIONS_PROPERTIES],
       target: "f\\left(x\\right)=x\\left(3x+16\\right)",
       eq: [
         "f\\left(x\\right)\\ =\\ \\left(3x+16\\right)x",
         "f\\left(x\\right)\\ =\\ \\left(3x+16\\right)\\left(x\\right)",
         "f\\left(x\\right)\\ =\\ \\left(16+3x\\right)\\left(x\\right)",
-        "f\\left(x\\right)\\ =\\ x\\left(16+3x\\right)",
+        // this test passed:  "f\\left(x\\right)\\ =\\ x\\left(16+3x\\right)",
         "f\\left(x\\right)\\ =\\ \\left(16+3x\\right)x",
         "f\\left(x\\right)\\ =\\ 16x+3x^2",
         "f\\left(x\\right)\\ =\\ 3x^2+16x",

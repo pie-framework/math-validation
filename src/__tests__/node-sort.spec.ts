@@ -217,7 +217,7 @@ expect.extend({
   },
 });
 
-describe.only.each(fixtures)("%s => %s", (input, expected) => {
+describe.each(fixtures)("%s => %s", (input, expected) => {
   const testInput = Array.isArray(input) ? input : [input];
   //@ts-ignore
   it.each(testInput as any)("%s", (ii) => {

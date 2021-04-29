@@ -17,7 +17,6 @@ export default {
       },
       target: "sin x",
       eq: ["sin(x)"],
-      ne: ["1.0"],
     },
     {
       opts: {
@@ -25,35 +24,31 @@ export default {
       },
       target: "x^\\frac{1}{2}",
       eq: ["x^(\\frac{1}{2})"],
-      ne: ["1.0"],
     },
     {
       opts: {
         literal: { ignoreOrder: true },
       },
-      // fails
       target: "sqrt(x)",
       eq: ["sqrt{2}(x)"],
-      ne: ["1.0"],
+      triage: Triage.EQUIVALENCE_RELATIONS,
     },
     {
       opts: {
         literal: { ignoreOrder: true },
       },
       target: "log x",
-      //fails
       eq: ["log{10}(x)"],
-      ne: ["1.0"],
+      triage: Triage.EQUIVALENCE_RELATIONS,
     },
     {
       opts: {
         literal: { ignoreOrder: true },
       },
 
-      // fails
       target: "ln(x)",
       eq: ["log{e}(x)"],
-      ne: ["1.0"],
+      triage: Triage.EQUIVALENCE_RELATIONS,
     },
     {
       opts: {
