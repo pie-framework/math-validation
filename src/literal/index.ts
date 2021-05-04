@@ -1,8 +1,8 @@
-import { MathNode } from "mathjs";
+import { MathNode, mathjs } from "../mathjs";
 import { logger } from "../log";
-const { create, all } = require("mathjs");
+import { s } from "../node-sort";
 
-const mathjs = create(all);
+const { simplify } = mathjs;
 
 export type LiteralOpts = {
   allowTrailingZeros?: boolean;
@@ -20,11 +20,14 @@ const simplifyRule = { l: "tzn(n1, n2)", r: "n1" };
 
 export const isMathEqual = (a: MathNode, b: MathNode, opts: LiteralOpts) => {
   if (opts && opts.allowTrailingZeros) {
-    a = mathjs.simplify(a, [simplifyRule]);
-    b = mathjs.simplify(b, [simplifyRule]);
+    a = simplify(a, [simplifyRule]);
+    b = simplify(b, [simplifyRule]);
   }
 
-  log("a:", a.toTex(), "b: ", b.toTex());
+  if (opts && opts.ignoreOrder) {
+    a = s(a);
+    b = s(b);
+  }
 
   const equalTex = a.toTex().trim() === b.toTex().trim();
 

@@ -4,16 +4,16 @@ export default {
   mode: "literal",
   skip: false,
   tests: [
-        {
+    {
       opts: {
-        ignoreOrder: true,
+        literal: { ignoreOrder: true },
       },
       target: "a+b",
       eq: ["b+a"],
       triage: Triage.NODE_SORT,
     },
-        {
-        opts: {
+    {
+      opts: {
         ignoreOrder: false,
       },
       target: "a+b",
@@ -22,7 +22,7 @@ export default {
     {
       // treat reordered addends as identical
       opts: {
-        ignoreOrder: true,
+        literal: { ignoreOrder: true },
       },
       target: "a+b+10",
       eq: ["a+10+b", "10+a+b", "10+b+a", "b+a+10", "b+a+10"],
@@ -30,7 +30,7 @@ export default {
     },
     {
       opts: {
-        ignoreOrder: false,
+        literal: { ignoreOrder: false },
       },
       target: "a+b+10",
       ne: ["a+10+b", "10+a+b", "10+b+a", "b+a+10", "b+a+10"],
@@ -38,24 +38,40 @@ export default {
     {
       // treat reordered multiplicands as identical
       opts: {
-        ignoreOrder: true,
+        literal: { ignoreOrder: true },
       },
       target: "a*b*c",
       eq: ["a×c×b", "b·a·c", " b×c·a", "c·b×a", "c×a×b"],
       triage: [Triage.NODE_SORT, Triage.LATEX_PARSE_ERROR],
     },
     {
-        opts: {
-        ignoreOrder: false,
+      opts: {
+        literal: { ignoreOrder: false },
       },
       target: "a×b×c",
       ne: ["a×c×b", "b·a·c", " b×c·a", "c·b×a", "c×a×b"],
       triage: Triage.LATEX_PARSE_ERROR,
     },
     // allow the sides of an equation to be swapped
-       {
+    {
       opts: {
-        ignoreOrder: true,
+        literal: { ignoreOrder: true },
+      },
+      target: "y = 7x =z",
+      eq: ["7x=y=z"],
+      triage: Triage.NODE_SORT,
+    },
+    {
+      opts: {
+        literal: { ignoreOrder: false },
+      },
+      target: "y = 7x =z",
+      ne: ["7x=y=z"],
+      triage: Triage.NODE_SORT,
+    },
+    {
+      opts: {
+        literal: { ignoreOrder: true },
       },
       target: "y = 7x",
       eq: ["7x=y"],
@@ -63,14 +79,14 @@ export default {
     },
     {
       opts: {
-        ignoreOrder: false,
+        literal: { ignoreOrder: false },
       },
       target: "y = 7x",
       ne: ["7x=y"],
     },
-           {
+    {
       opts: {
-        ignoreOrder: true,
+        literal: { ignoreOrder: true },
       },
       target: "y = 3x+4",
       eq: ["y=4+3x", "3x+4=y", "4+3x=y"],
@@ -78,7 +94,39 @@ export default {
     },
     {
       opts: {
-        ignoreOrder: false,
+        literal: { ignoreOrder: true },
+      },
+      target: "y = 3x+4",
+      eq: ["y=(4+3x)", "3x+4=y", "4+3x=y"],
+      triage: Triage.NODE_SORT,
+    },
+    {
+      opts: {
+        literal: { ignoreOrder: true },
+      },
+      target: "y = 3x+4",
+      eq: ["y=(4+3x)", "3x+4=y", "4+3x=y"],
+      triage: Triage.NODE_SORT,
+    },
+    {
+      opts: {
+        literal: { ignoreOrder: true },
+      },
+      target: "a + b + c + d +e + f + 2 *x",
+      eq: ["(a+c) + (b+e) + 2*x +d+ f", "(a+b+c)+(2*x+f+((e))+d)"],
+      triage: Triage.NODE_SORT,
+    },
+    {
+      opts: {
+        literal: { ignoreOrder: true },
+      },
+      target: "3y",
+      eq: ["(3)(y)", "(y)(3)", "3(y)", "(3)y", "((((3))))y"],
+      triage: Triage.NODE_SORT,
+    },
+    {
+      opts: {
+        literal: { ignoreOrder: false },
       },
       target: "y = 3x+4",
       ne: ["y=4+3x", "3x+4=y", "4+3x=y"],
@@ -86,7 +134,7 @@ export default {
     {
       // allow the order of an inequality to be reversed, provided the signs of the operators are reversed
       opts: {
-        ignoreOrder: true,
+        literal: { ignoreOrder: true },
       },
       target: "0<x≤4",
       eq: ["4≥x>0"],
@@ -94,11 +142,76 @@ export default {
     },
     {
       opts: {
-        ignoreOrder: false,
+        literal: { ignoreOrder: false },
       },
       target: "0<x≤4",
       ne: ["4≥x>0"],
       triage: Triage.LATEX_PARSE_ERROR,
+    },
+    {
+      opts: {
+        literal: { ignoreOrder: true },
+      },
+      target: "0+2<x",
+      eq: ["x>2+0"],
+      triage: [Triage.LATEX_PARSE_ERROR, Triage.NODE_SORT],
+    },
+    {
+      opts: {
+        literal: { ignoreOrder: false },
+      },
+      target: "0+2<x",
+      ne: ["x>2+0"],
+      triage: [Triage.LATEX_PARSE_ERROR, Triage.NODE_SORT],
+    },
+    {
+      opts: {
+        literal: { ignoreOrder: true },
+      },
+      target: "0<2<x",
+      eq: ["x>2>0"],
+      triage: [Triage.LATEX_PARSE_ERROR, Triage.NODE_SORT],
+    },
+    {
+      opts: {
+        literal: { ignoreOrder: false },
+      },
+      target: "0<2<x",
+      ne: ["x>2>0"],
+      triage: [Triage.LATEX_PARSE_ERROR, Triage.NODE_SORT],
+    },
+    {
+      opts: {
+        literal: { ignoreOrder: true },
+      },
+      target: "0≤x",
+      eq: ["x≥0"],
+      triage: [Triage.LATEX_PARSE_ERROR, Triage.NODE_SORT],
+    },
+    // this fails this case  < > is not parsed as a relational node from latex-to-ast and ast-to-mathjs
+    // {
+    //   opts: {
+    //     literal: { ignoreOrder: true },
+    //   },
+    //   target: "A < B > C",
+    //   eq: ["A <B >C", "C<B>A"],
+    //   triage: [Triage.LATEX_PARSE_ERROR, Triage.NODE_SORT],
+    // },
+    {
+      opts: {
+        literal: { ignoreOrder: true },
+      },
+      target: "a+b+c = b+c+a = a+b+c",
+      eq: ["a+b+c = a+b+c = a+b+c"],
+      triage: [Triage.LATEX_PARSE_ERROR, Triage.NODE_SORT],
+    },
+    {
+      opts: {
+        literal: { ignoreOrder: false },
+      },
+      target: "0≤x",
+      ne: ["x≥0"],
+      triage: [Triage.LATEX_PARSE_ERROR, Triage.NODE_SORT],
     },
   ],
 };

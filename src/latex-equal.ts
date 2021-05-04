@@ -1,8 +1,9 @@
 import { LatexToAst } from "./conversion/latex-to-ast";
 import { AstToMathJs } from "./conversion/ast-to-mathjs";
-import { MathNode } from "mathjs";
+import { MathNode } from "./mathjs";
 import { isMathEqual as isSymbolicEqual, SymbolicOpts } from "./symbolic";
 import { isMathEqual as isLiteralEqual, LiteralOpts } from "./literal";
+import { parse } from "mathjs";
 
 export type Latex = string;
 
@@ -25,6 +26,7 @@ const atm = new AstToMathJs();
 const toMathNode = (latex: string): MathNode => {
   const ast = lta.convert(latex);
   return atm.convert(ast);
+  // return parse(latex);
 };
 
 export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {

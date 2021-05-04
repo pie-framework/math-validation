@@ -5,6 +5,10 @@ import { LatexToAst } from "../latex-to-ast";
 const fixtures = [
   // we were getting [ [ '^', 'f', [ '-', 1 ] ], 'x' ]
   // ["f^{-1}\\left(x\\right)", ["*", ["^", ["f", "-1"]], "x"]],
+
+  // parentheses are stripped!
+  ["(1 + (1 + 1))", ["+", 1, 1, 1]],
+  ["(4 + 1) / (3 + 2 - 1)", ["/", ["+", 4, 1], ["+", 3, 2, ["-", 1]]]],
   ["1000", 1000],
   ["1,000", 1000],
   ["1,000,000", 1000000],
@@ -27,6 +31,9 @@ const fixtures = [
   ["a≤b", ["le", "a", "b"]],
   // accept rational operator ≥
   ["a≥b", ["ge", "a", "b"]],
+  // TODO...
+  // ["a < b > c", "1"],
+  // ["c < b > a", "1"],
   // [
   // we were getting: [+, 6, [/, pi, x]]
   // "6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
@@ -61,7 +68,7 @@ describe.only("bugs in lta", () => {
     // console.time("katexParse");
     // const kt = k.__parse(input);
     // console.timeEnd("katexParse");
-    // console.log("kt:", kt);
+
     console.time("lta");
     const out = lta.convert(input);
     // console.log("out", out);

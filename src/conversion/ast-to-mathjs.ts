@@ -76,7 +76,7 @@ const operators = {
   //"intersect": function (operands) { return operands.join(' \\cap '); },
   tzn: function (operands) {
     return new m.FunctionNode("tzn", operands);
-  }
+  },
 };
 
 export class AstToMathJs {
@@ -131,56 +131,37 @@ export class AstToMathJs {
       return new m.FunctionNode(f, f_args);
     }
 
+    // if we have more than one comparison operators return a Relational Node
     if (operator === "lts" || operator === "gts") {
-      const args = operands[0];
+      const params = operands[0];
       const strict = operands[1];
 
-      if (args[0] !== "tuple" || strict[0] !== "tuple")
+      if (params[0] !== "tuple" || strict[0] !== "tuple")
         // something wrong if args or strict are not tuples
         throw new Error("Badly formed ast");
-
-      const arg_nodes = args.slice(1).map(
+      params.splice(0, 1);
+      strict.splice(0, 1);
+      const arg_nodes = params.map(
         function (v, i) {
           return this.convert(v);
         }.bind(this)
       );
 
       let comparisons = [];
-      for (let i = 1; i < args.length - 1; i++) {
+      for (let i = 0; i < params.length - 1; i++) {
         if (strict[i]) {
-          if (operator === "lts")
-            comparisons.push(
-              new m.OperatorNode("<", "smaller", arg_nodes.slice(i - 1, i + 1))
-            );
-          else
-            comparisons.push(
-              new m.OperatorNode(">", "larger", arg_nodes.slice(i - 1, i + 1))
-            );
+          comparisons.push(operator === "lts" ? "smaller" : "larger");
         } else {
-          if (operator === "lts")
-            comparisons.push(
-              new m.OperatorNode(
-                "<=",
-                "smallerEq",
-                arg_nodes.slice(i - 1, i + 1)
-              )
-            );
-          else
-            comparisons.push(
-              new m.OperatorNode(
-                ">=",
-                "largerEq",
-                arg_nodes.slice(i - 1, i + 1)
-              )
-            );
+          comparisons.push(operator === "lts" ? "smallerEq" : "largerEq");
         }
       }
-      let result = new m.OperatorNode("and", "and", comparisons.slice(0, 2));
-      for (let i = 2; i < comparisons.length; i++)
-        result = new m.OperatorNode("and", "and", [result, comparisons[i]]);
+
+      let result = new m.RelationalNode(comparisons, arg_nodes);
+
       return result;
     }
 
+    // if we have more than one equality operators return a Relational Node
     if (operator === "=") {
       let arg_nodes = operands.map(
         function (v, i) {
@@ -189,17 +170,15 @@ export class AstToMathJs {
       );
 
       let comparisons = [];
-      for (let i = 1; i < arg_nodes.length; i++) {
-        comparisons.push(
-          new m.OperatorNode("==", "equal", arg_nodes.slice(i - 1, i + 1))
-        );
+      for (let i = 0; i < arg_nodes.length - 1; i++) {
+        comparisons.push("equal");
       }
 
-      if (comparisons.length === 1) return comparisons[0];
+      if (comparisons.length === 1)
+        return new m.OperatorNode("==", "equal", arg_nodes);
 
-      let result = new m.OperatorNode("and", "and", comparisons.slice(0, 2));
-      for (let i = 2; i < comparisons.length; i++)
-        result = new m.OperatorNode("and", "and", [result, comparisons[i]]);
+      let result = new m.RelationalNode(comparisons, arg_nodes);
+
       return result;
     }
 

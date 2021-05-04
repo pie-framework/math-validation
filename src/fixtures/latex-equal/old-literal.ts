@@ -6,10 +6,14 @@
  */
 export default {
   mode: "literal",
- skip: false,
+  skip: true,
   tests: [
     { target: "1,000", eq: ["1000"] },
-    { target: "1.00", eq: ["1"], opts: { literal: { allowTrailingZeros: true } } },
+    {
+      target: "1.00",
+      eq: ["1"],
+      opts: { literal: { allowTrailingZeros: true } },
+    },
     { target: "1.01", eq: ["1.01"] },
     {
       target: "72\\div12=6\\text{eggs}",
