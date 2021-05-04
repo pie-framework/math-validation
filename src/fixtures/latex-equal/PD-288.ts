@@ -16,7 +16,7 @@ export default {
     },
     {
       target: "ab",
-      triage: Triage.NODE_SORT,
+      triage: Triage.NODE_SORT_SYMBOLIC,
       eq: [
         "a*b",
         "a(b)",
@@ -32,16 +32,14 @@ export default {
     },
     {
       target: "a/b",
-      triage: Triage.LATEX_PARSE_ERROR,
       eq: "a÷b",
     },
     {
       target: "ab/x",
-      triage: Triage.LATEX_PARSE_ERROR,
       eq: ["(b/x)•a", "(b/x)*a"],
     },
     {
-      triage: Triage.NODE_SORT,
+      triage: Triage.NODE_SORT_SYMBOLIC,
       target: "a+b",
       eq: ["b+a"],
     },
@@ -50,13 +48,22 @@ export default {
       eq: "a/x + b/x",
     },
     eq("9,000", "9000"),
-    eq("8.5x", "8.5000x"),
+
+    {
+      triage: Triage.ALLOW_TRAILING_ZEROS_SYMBOLIC,
+      target: "8.5x",
+      eq: ["8.5000x"],
+    },
     {
       target: "-(a/b)",
-      triage: [Triage.NODE_SORT, Triage.IDENTITY_PROPERTY],
+      triage: [Triage.NODE_SORT_SYMBOLIC, Triage.IDENTITY_PROPERTY],
       eq: ["(-a)/b", "a/(-b)"],
     },
-    { target: "ab(x+y)", eq: ["a(bx+by)", "(abx+aby)", "abx+aby", "abx + aby"], triage:Triage.DISTRIBUTIVE_PROPERTY },
-    { target: "88%", eq: "0.88", triage: Triage.PERCENT_SUPPORT },
+    {
+      target: "ab(x+y)",
+      eq: ["a(bx+by)", "(abx+aby)", "abx+aby", "abx + aby"],
+      triage: Triage.DISTRIBUTIVE_PROPERTY,
+    },
+    { target: "88%", eq: "0.88" },
   ],
 };

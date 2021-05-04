@@ -11,7 +11,7 @@ export default {
       triage: Triage.UNDERSCORE_SUPPORT,
     },
     {
-      // error: list not implemented for conversion
+      // all passed
       target: "f\\left(y\\right)=26000\\left(0.83\\right)^y",
       eq: [
         "f\\left(y\\right)=26000\\left(1-0.17\\right)^y",
@@ -29,10 +29,10 @@ export default {
         "f^{-1}(x)\\ =\\ -12\\left(\\frac{1}{x}\\right)+8",
         "f^{-1}(x)\\ =\\ 8-12\\left(\\frac{1}{x}\\right)",
       ],
-      triage: Triage.NON_STRING
+      triage: Triage.NON_STRING,
     },
     {
-      // error TypeError: (intermediate value)(intermediate value)(intermediate value) is not a function
+      // all passed
       target: "f\\left(x\\right)=1.1x+8",
       eq: [
         "f(x)\\ =\\ 8+1.1x",
@@ -46,7 +46,7 @@ export default {
       ],
     },
     {
-      // parse error }
+      // all passed
       target: "x=\\frac{20,000}{r^2}\\text{radians}",
       eq: [
         "x=\\frac{1}{r^2}\\left(20,000\\right)\\ \\text{radians}",
@@ -73,7 +73,7 @@ export default {
       // expecting ( after function
       target: "\\cos\\theta=-\\sqrt{1-y^2}",
       eq: ["cos\\ \\theta\\ \\ =\\ -\\sqrt{-y^2+1}"],
-      triage: Triage.EXPECTING_PARANTHESIS
+      triage: Triage.EXPECTING_PARANTHESIS,
     },
     {
       // precision error

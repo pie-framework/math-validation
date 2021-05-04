@@ -2,7 +2,9 @@ import { Triage } from "../triage";
 export default {
   skip: true,
   mode: "symbolic",
+  skip: true,
   tests: [
+    // all passed
     {
       triage: [Triage.BAD_USER_INPUT],
       target: "1 + 1",

@@ -1,3 +1,5 @@
+import { Triage } from "../triage";
+
 export default {
   mode: "literal",
   skip: true,
@@ -13,6 +15,12 @@ export default {
       eq: ["12.000000"],
       ne: ["12.001"],
       opts: { literal: { allowTrailingZeros: true } },
+    },
+    {
+      target: "0",
+      ne: ["0.0"],
+      opts: { literal: { allowTrailingZeros: true } },
+      triage: Triage.ALLOW_TRAILING_ZEROS_FOR_ZERO,
     },
     {
       // only: true,

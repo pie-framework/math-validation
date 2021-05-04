@@ -25,36 +25,32 @@ export default {
       },
       target: "x^\\frac{1}{2}",
       eq: ["x^(\\frac{1}{2})"],
-      ne: ["1.0"],
     },
-    // {
-    //   opts: {
-    //     literal: { ignoreOrder: true },
-    //   },
-    //   // fails
-    //   target: "sqrt(x)",
-    //   eq: ["sqrt{2}(x)"],
-    //   ne: ["1.0"],
-    // },
-    // {
-    //   opts: {
-    //     literal: { ignoreOrder: true },
-    //   },
-    //   target: "log x",
-    //   //fails
-    //   eq: ["log{10}(x)"],
-    //   ne: ["1.0"],
-    // },
-    // {
-    //   opts: {
-    //     literal: { ignoreOrder: true },
-    //   },
+    {
+      opts: {
+        literal: { ignoreOrder: true },
+      },
+      target: "sqrt(x)",
+      eq: ["sqrt{2}(x)"],
+      triage: Triage.EQUIVALENCE_RELATIONS,
+    },
+    {
+      opts: {
+        literal: { ignoreOrder: true },
+      },
+      target: "log x",
+      eq: ["log{10}(x)"],
+      triage: Triage.EQUIVALENCE_RELATIONS,
+    },
+    {
+      opts: {
+        literal: { ignoreOrder: true },
+      },
 
-    //   // fails
-    //   target: "ln(x)",
-    //   eq: ["log{e}(x)"],
-    //   ne: ["1.0"],
-    // },
+      target: "ln(x)",
+      eq: ["log{e}(x)"],
+      triage: Triage.EQUIVALENCE_RELATIONS,
+    },
     {
       opts: {
         literal: { ignoreOrder: false },
@@ -72,20 +68,22 @@ export default {
       ne: ["x\\left(3\\right)+4y+2yx+5", "3x+4y+2yx+5", "2yx+3x+4y+5"],
     },
     {
+      triage: Triage.PARENTHESES,
       opts: {
         literal: { ignoreOrder: true },
       },
-      // only: true,
       target: "2xy+3x+4y+5",
       eq: [
         "2yx+3x+4y+5",
-        //failing
+        //failing (5+3x+4y+2xy)
         "\\left(5+3x+4y+2xy\\right)",
-        //failing
+        //failing (5+3x)+(4y+2xy)
         "\\left(5+3x\\right)+\\left(4y+2xy\\right)",
+        // passing (2xy+3x) + 4y+5
         "\\left(2xy+3x\\right)+4y+5",
+        //passing (2xy+3x)+(4y + 5)
         "\\left(2xy+3x\\right)+\\left(4y+5\\right)",
-        //failing
+        //failing (3x+2xy) + (4y) + 5
         "\\left(3x+2xy\\right)+\\left(4y\\right)+5",
         "2xy+3x+\\left(4y+5\\right)",
         "2xy+\\left(3x+4y\\right)+5",
@@ -164,18 +162,20 @@ export default {
       ],
     },
     {
+      triage: Triage.PARENTHESES,
       opts: {
         literal: { ignoreOrder: true },
       },
       target: "ab+cd=0",
       eq: [
         "0=ab+cd",
+        // passed 0 = (ab) + (cd)
         "0=\\left(ab\\right)+\\left(cd\\right)",
-        // failing
+        // failing 0 = (cd) + (ab)
         "0=\\left(cd\\right)+\\left(ab\\right)",
-        // failing
+        // failing 0 =  (dc) + (ab)
         "0=\\left(dc\\right)+\\left(ab\\right)",
-        // failing
+        // failing 0 = (dc) + (ba)
         "0=\\left(dc\\right)+\\left(ba\\right)",
       ],
     },

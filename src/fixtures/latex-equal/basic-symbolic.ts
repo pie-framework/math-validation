@@ -1,3 +1,5 @@
+import { Triage } from "../triage";
+
 export default {
   mode: "symbolic",
   skip: true,
@@ -29,7 +31,6 @@ export default {
       ne: ["y", "x + 1"],
     },
     {
-      //only: true,
       target: "(x + 2)^2",
       eq: [
         /** when simplified w/ perfect square formula - should be this */
@@ -59,15 +60,15 @@ export default {
     {
       target: "1000",
       eq: ["1,000", "1,000.00"],
+      triage: Triage.ALLOW_TRAILING_ZEROS_SYMBOLIC,
     },
     { target: "1,500,000", eq: "1500000" },
     { target: "sin(x)", eq: "sin(x)" },
     { target: "tan(x)", eq: "tan(x)" },
     {
-      // only: true,
-      // skip: true,
       target: "f^{-1}\\left(x\\right)=\\sqrt{x-1}+3",
       eq: "f^{-1}\\left(x\\right)=\\sqrt{x-1}+4-1",
+      triage: Triage.NON_STRING,
     },
     {
       target: "72\\div12=6\\text{eggs}",
@@ -98,9 +99,9 @@ export default {
       eq: "\\sqrt{x-1}+3",
     },
     {
-      skip: true,
       target: "f^{-1}\\left(x\\right)=\\left(x-1\\right)^{\\frac{1}{2}}+3",
       eq: "f^{-1}\\left(x\\right)=\\sqrt{x-1}+3",
+      triage: Triage.NON_STRING,
     },
   ],
 };
