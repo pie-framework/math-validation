@@ -96,6 +96,7 @@ testData.forEach((d) => {
       const label = getLabel(t);
       const mode = t.mode || d.data.mode;
 
+      const { LEGACY, LEGACY_ONLY } = process.env;
       dfn(`[${mode}] ${label}`, () => {
         const eq = t.eq ? (Array.isArray(t.eq) ? t.eq : [t.eq]) : [];
 
@@ -103,7 +104,7 @@ testData.forEach((d) => {
         // console.log("mode!!", mode);
         const l = optsLabel(mode, t.opts);
         eq.forEach((y) => {
-          if (process.env.LEGACY === "true") {
+          if (LEGACY === "true" || LEGACY_ONLY === "true") {
             it(`[legacy] == ${y} ${l}`, () => {
               const l = latexEqual(t.target, y, {
                 legacy: true,
@@ -113,34 +114,38 @@ testData.forEach((d) => {
             });
           }
 
-          it(`== ${y} ${l}`, () => {
-            const l = latexEqual(t.target, y, {
-              legacy: false,
-              mode,
-              ...t.opts,
+          if (!LEGACY_ONLY) {
+            it(`== ${y} ${l}`, () => {
+              const l = latexEqual(t.target, y, {
+                legacy: false,
+                mode,
+                ...t.opts,
+              });
+              // console.log(l);
+              expect(l).toEqual(true);
             });
-            // console.log(l);
-            expect(l).toEqual(true);
-          });
+          }
         });
 
         const ne = t.ne ? (Array.isArray(t.ne) ? t.ne : [t.ne]) : [];
 
         ne.forEach((y) => {
-          if (process.env.LEGACY === "true") {
+          if (LEGACY === "true" || LEGACY_ONLY === "true") {
             it(`[legacy] != ${y} ${l}`, () => {
               const l = latexEqual(t.target, y, { legacy: true, mode });
               expect(l).toEqual(false);
             });
           }
-          it(`!= ${y} ${l}`, () => {
-            const l = latexEqual(t.target, y, {
-              legacy: false,
-              mode,
-              ...t.opts,
+          if (LEGACY_ONLY) {
+            it(`!= ${y} ${l}`, () => {
+              const l = latexEqual(t.target, y, {
+                legacy: false,
+                mode,
+                ...t.opts,
+              });
+              expect(l).toEqual(false);
             });
-            expect(l).toEqual(false);
-          });
+          }
         });
       });
     });
