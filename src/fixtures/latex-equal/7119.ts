@@ -1,5 +1,6 @@
 export default {
   mode: "symbolic",
+  skip: true,
   tests: [
     {
       target: "4 \\frac{1}{2}",

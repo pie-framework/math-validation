@@ -54,20 +54,28 @@ const newCompare = (a: MathNode, b: MathNode): number => {
     return 1;
   }
 
-  // paranthesess after any other node
-  if (!a.isParenthesisNode && b.isParenthesisNode) {
-    return -1;
-  }
+  // // paranthesess after any other node
+  // if (!a.isParenthesisNode && b.isParenthesisNode) {
+  //   return -1;
+  // }
 
-  if (!b.isParenthesisNode && b.isParenthesisNode) {
-    return 1;
-  }
+  // if (!b.isParenthesisNode && a.isParenthesisNode) {
+  //   return 1;
+  // }
 
   // both parantheses node
-  if (a.isParenthesisNode && b.isParenthesisNode) {
-    const localeCompareResult = a.content.args
+  // if (a.isParenthesisNode && b.isParenthesisNode) {
+  //   const localeCompareResult = a.content.args
+  //     .toString()
+  //     .localeCompare(b.content.args.toString());
+
+  //   return -localeCompareResult;
+  // }
+
+  if (a.isOperatorNode && b.isOperatorNode) {
+    const localeCompareResult = a.args
       .toString()
-      .localeCompare(b.content.args.toString());
+      .localeCompare(b.args.toString());
 
     return -localeCompareResult;
   }
@@ -109,6 +117,10 @@ const argsIsOperatorNode = (node) => {
 
 export const flattenNode = (node: MathNode) => {
   node = node.transform((node, path, parent) => {
+    while (node.isParenthesisNode && !parent && node.content) {
+      node = node.content;
+    }
+
     if (
       node.isParenthesisNode &&
       parent &&

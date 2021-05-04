@@ -20,8 +20,9 @@ type Fixture = [
 ];
 
 const fixtures: Fixture[] = [
+  ["(5+3x+4y+2xy)", "5+4y+3x+2xy"],
   [["y*(3)", "(y)*3", "(y)*(3)", "(3)*(y)"], "3*y"],
-  [["3(y)", "(3)(y)", "(y)(3)", "((((y))))(3)"], "3y"],
+  [["3(y)", "(3)(y)", "y(3)", "(y)(3)", "((((y))))(3)"], "3y"],
   ["3y", "3y"],
   ["(y+x)*(3)", "3*(x+y)"],
   ["1 + 1", "1 + 1"],
@@ -104,11 +105,11 @@ const fixtures: Fixture[] = [
     ["(4 + 1 + z) + (3 + 2 * x)", "(2 * x + 3) + (z + 4 + 1)"],
     ["+", 1, 3, 4, "z", ["*", 2, "x"]],
   ],
-  // // fails, our ast to mathjs parses this case < > in an operationl node, not a relational node like mathjs
-  // [
-  //   "y + w + z > c < a + e + d + f",
-  //   ["<", [">", ["+", "w", "y", "z"], "c"], ["+", "a", "d", "e", "f"]],
-  // ],
+  // // // fails, our ast to mathjs parses this case < > in an operationl node, not a relational node like mathjs
+  // // [
+  // //   "y + w + z > c < a + e + d + f",
+  // //   ["<", [">", ["+", "w", "y", "z"], "c"], ["+", "a", "d", "e", "f"]],
+  // // ],
 ];
 const ff = [];
 
@@ -155,7 +156,7 @@ it.each`
 //   return true;
 // };
 
-const isObject = (object) => object != null && typeof object === "object";
+// const isObject = (object) => object != null && typeof object === "object";
 
 expect.extend({
   toEqualExpression(received, expected: string | string[]) {
@@ -213,6 +214,8 @@ expect.extend({
           );
         };
 
+    console.log("expected", JSON.stringify(expectedNode));
+    console.log("received", JSON.stringify(received));
     return { actual: received, message, pass };
   },
 });
