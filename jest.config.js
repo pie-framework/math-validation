@@ -6,12 +6,12 @@ module.exports = {
   modulePathIgnorePatterns: ["old-stuff", "wip-src"],
   reporters: [
     "default",
-    [
+    /*[
       "jest-stare",
       {
         resultDir: "docs",
         reportTitle: "test results",
       },
-    ],
+    ],*/
   ],
 };
