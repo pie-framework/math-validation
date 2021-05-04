@@ -46,6 +46,13 @@ export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {
    * Say limit to 3 times the size of correct string?
    */
 
+  const aTrimmed = a.replace(/ /g, "").length;
+  const bTrimmed = b.replace(/ /g, "").length;
+
+  if (aTrimmed > bTrimmed * 3 || bTrimmed > aTrimmed * 3) {
+    return false;
+  }
+
   const amo = toMathNode(a);
   const bmo = toMathNode(b);
   if (opts.mode === "literal") {
