@@ -12,7 +12,7 @@ export default {
         "(\\frac{1}{3}\\sqrt{8},\\frac{1}{3})",
         "(\\frac{1}{3}\\sqrt{8},\\frac{1}{3})",
       ],
-      triage: Triage.FRACTION_CONVERSION_ERROR,
+      triage: [Triage.FRACTION_CONVERSION_ERROR],
     },
     {
       target:
@@ -35,7 +35,7 @@ export default {
       //  Unimplemented node type in simplifyConstant: RelationalNode
       target: "-\\frac{3\\pi}{4}\\le x\\le\\frac{\\pi}{4}",
       eq: ["-\\frac{3}{4}\\pi\\ \\le\\ x\\le\\ \\ \\frac{1}{4}\\pi"],
-      triage: Triage.UNIMPLEMENTED_NODE,
+      triage: [Triage.UNIMPLEMENTED_NODE],
     },
   ],
 };

@@ -54,24 +54,6 @@ const newCompare = (a: MathNode, b: MathNode): number => {
     return 1;
   }
 
-  // // paranthesess after any other node
-  // if (!a.isParenthesisNode && b.isParenthesisNode) {
-  //   return -1;
-  // }
-
-  // if (!b.isParenthesisNode && a.isParenthesisNode) {
-  //   return 1;
-  // }
-
-  // both parantheses node
-  // if (a.isParenthesisNode && b.isParenthesisNode) {
-  //   const localeCompareResult = a.content.args
-  //     .toString()
-  //     .localeCompare(b.content.args.toString());
-
-  //   return -localeCompareResult;
-  // }
-
   if (a.isOperatorNode && b.isOperatorNode) {
     const localeCompareResult = a.args
       .toString()
@@ -87,6 +69,7 @@ const applySort = (node: MathNode) => {
   // log("parent: ", parent);
   if (node.fn === "add" || node.fn === "multiply") {
     node.args = node.args.sort(newCompare);
+    node.args = node.args.map(applySort);
   }
 
   return node;

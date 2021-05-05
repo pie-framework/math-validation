@@ -12,7 +12,6 @@ export default {
       },
       eq: ["x * 1 * 3", "x * 3", "3x"],
       ne: ["1 * x * 3"],
-      triage: Triage.OPTS_EXCEPTION,
     },
   ],
 };

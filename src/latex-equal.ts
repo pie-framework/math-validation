@@ -3,7 +3,6 @@ import { AstToMathJs } from "./conversion/ast-to-mathjs";
 import { MathNode } from "./mathjs";
 import { isMathEqual as isSymbolicEqual, SymbolicOpts } from "./symbolic";
 import { isMathEqual as isLiteralEqual, LiteralOpts } from "./literal";
-import { parse } from "mathjs";
 
 export type Latex = string;
 
@@ -49,9 +48,10 @@ export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {
   const aTrimmed = a.replace(/ /g, "").length;
   const bTrimmed = b.replace(/ /g, "").length;
 
-  if (aTrimmed > bTrimmed * 3 || bTrimmed > aTrimmed * 3) {
-    return false;
-  }
+  // This is not working for some expresions. For example "3y" should validate against "y\\left(3\\right)" whose length is 8 times bigger
+  // if (aTrimmed > bTrimmed * 7 || bTrimmed > aTrimmed * 7) {
+  //   return false;
+  // }
 
   const amo = toMathNode(a);
   const bmo = toMathNode(b);
