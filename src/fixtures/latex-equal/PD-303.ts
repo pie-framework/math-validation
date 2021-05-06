@@ -177,6 +177,26 @@ export default {
         "0=\\left(dc\\right)+\\left(ab\\right)",
         "0=\\left(dc\\right)+\\left(ba\\right)",
       ],
+      ne: [
+        "0=a+cd",
+        "0=\\left(ab\\right)+\\left(d\\right)",
+        "0=\\left(cd\\right)+\\left(b\\right)",
+        "0=\\left(d\\right)+\\left(ab\\right)",
+        "0=\\left(dc\\right)+\\left(a\\right)",
+      ],
+    },
+    {
+      opts: {
+        literal: { ignoreOrder: false },
+      },
+      target: "ab+cd=0",
+      ne: [
+        "0=ab+cd",
+        "0=\\left(ab\\right)+\\left(cd\\right)",
+        "0=\\left(cd\\right)+\\left(ab\\right)",
+        "0=\\left(dc\\right)+\\left(ab\\right)",
+        "0=\\left(dc\\right)+\\left(ba\\right)",
+      ],
     },
     {
       opts: {

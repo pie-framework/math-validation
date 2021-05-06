@@ -45,13 +45,13 @@ export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {
    * Say limit to 3 times the size of correct string?
    */
 
-  const aTrimmed = a.replace(/ /g, "").length;
-  const bTrimmed = b.replace(/ /g, "").length;
+  // remove spaces & left & right parenthesis before counting length
+  const aTrimmed = a.replace(/(\\left\()|(\\right\))|( )/g, "").length;
+  const bTrimmed = b.replace(/(\\left\()|(\\right\))|( )/g, "").length;
 
-  // This is not working for some expresions. For example "3y" should validate against "y\\left(3\\right)" whose length is 8 times bigger
-  // if (aTrimmed > bTrimmed * 7 || bTrimmed > aTrimmed * 7) {
-  //   return false;
-  // }
+  if (aTrimmed > bTrimmed * 3 || bTrimmed > aTrimmed * 3) {
+    return false;
+  }
 
   const amo = toMathNode(a);
   const bmo = toMathNode(b);
