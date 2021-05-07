@@ -27,28 +27,32 @@ export default {
       eq: ["x^(\\frac{1}{2})"],
     },
     {
+      only: true,
       opts: {
         literal: { ignoreOrder: true },
       },
-      target: "sqrt(x)",
-      eq: ["sqrt{2}(x)"],
+      target: "\\sqrt {x}",
+      eq: ["\\sqrt [2]{x}"],
+      ne: ["\\sqrt [3]{x}", "\\sqrt [3]{x}"],
       triage: [Triage.EQUIVALENT_FUNCTIONS],
     },
     {
+      //only: true,
       opts: {
         literal: { ignoreOrder: true },
       },
-      target: "log x",
-      eq: ["log{10}(x)"],
+      target: "\\log (x)",
+      eq: ["\\log_{10}(x)"],
       triage: [Triage.EQUIVALENT_FUNCTIONS],
     },
     {
+      //only: true,
       opts: {
         literal: { ignoreOrder: true },
       },
 
-      target: "ln(x)",
-      eq: ["log{e}(x)"],
+      target: "\\ln(x)",
+      eq: ["\\log{e}(x)"],
       triage: [Triage.EQUIVALENT_FUNCTIONS],
     },
     {
