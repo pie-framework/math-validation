@@ -240,6 +240,8 @@ export const latex_rules = [
   ["\\\\acos(?![a-zA-Z])", "LATEXCOMMAND", "\\arccos"],
   ["\\\\atan(?![a-zA-Z])", "LATEXCOMMAND", "\\arctan"],
   ["\\\\sqrt(?![a-zA-Z])", "SQRT"],
+  ["\\\\log(?![a-zA-Z])", "LOG"],
+  ["\\\\ln(?![a-zA-Z])", "LN"],
 
   ["\\\\land(?![a-zA-Z])", "AND"],
   ["\\\\wedge(?![a-zA-Z])", "AND"],
@@ -1098,25 +1100,81 @@ export class LatexToAst {
         root = parameter;
       }
 
+      let parameter;
       // @ts-ignore
-      if (this.token.token_type !== "{") {
-        throw new ParseError("Expecting {", this.lexer.location);
+      if (this.token.token_type == "{") {
+        this.advance();
+        parameter = this.statement({
+          parse_absolute_value: parse_absolute_value,
+          unknownCommands: unknownCommands,
+        });
+        // @ts-ignore
+        if (this.token.token_type !== "}") {
+          throw new ParseError("Expecting }", this.lexer.location);
+        }
+        this.advance();
+      } else {
+        parameter = this.statement({
+          parse_absolute_value: parse_absolute_value,
+          unknownCommands: unknownCommands,
+        });
       }
-
-      this.advance();
-      let parameter = this.statement({
-        parse_absolute_value: parse_absolute_value,
-        unknownCommands: unknownCommands,
-      });
-      if (this.token.token_type !== "}") {
-        throw new ParseError("Expecting }", this.lexer.location);
-      }
-      this.advance();
 
       // @ts-ignore
       if (root === 2) result = ["apply", "sqrt", parameter];
       // @ts-ignore
       else result = ["^", parameter, ["/", 1, root]];
+    } else if (
+      this.token.token_type === "LOG" ||
+      this.token.token_type === "LN"
+    ) {
+      let base = this.token.token_type === "LOG" ? 10 : "e";
+      this.advance();
+
+      // @ts-ignore
+      if (this.token.token_type === "_") {
+        this.advance();
+        // @ts-ignore
+        if (this.token.token_type === "{") {
+          this.advance();
+          let parameter = this.statement({
+            parse_absolute_value: parse_absolute_value,
+            unknownCommands: unknownCommands,
+          });
+          if (this.token.token_type !== "}") {
+            throw new ParseError("Expecting }", this.lexer.location);
+          }
+          this.advance();
+
+          base = parameter;
+        }
+      }
+
+      let parameter;
+      // @ts-ignore
+      if (this.token.token_type == "(") {
+        this.advance();
+        parameter = this.statement({
+          parse_absolute_value: parse_absolute_value,
+          unknownCommands: unknownCommands,
+        });
+        if (this.token.token_type !== ")") {
+          throw new ParseError("Expecting )", this.lexer.location);
+        }
+        this.advance();
+      } else {
+        parameter = this.statement({
+          parse_absolute_value: parse_absolute_value,
+          unknownCommands: unknownCommands,
+        });
+      }
+
+      // @ts-ignore
+      if (base === 10) result = ["apply", "log", ["tuple", parameter, base]];
+      // @ts-ignore
+      else if (base === "e") result = ["apply", "log", parameter];
+      // @ts-ignore
+      else result = ["apply", "log", ["tuple", parameter, base]];
     } else if (
       this.token.token_type === "VAR" ||
       this.token.token_type === "LATEXCOMMAND" ||

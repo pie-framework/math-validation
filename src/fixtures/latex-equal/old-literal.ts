@@ -12,7 +12,9 @@ export default {
     {
       target: "1.00",
       eq: ["1"],
-      opts: { literal: { allowTrailingZeros: true } },
+      opts: {
+        literal: { allowTrailingZeros: true },
+      },
     },
     { target: "1.01", eq: ["1.01"] },
     {

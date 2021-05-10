@@ -27,32 +27,31 @@ export default {
       eq: ["x^(\\frac{1}{2})"],
     },
     {
-      only: true,
       opts: {
         literal: { ignoreOrder: true },
       },
-      target: "\\sqrt {x}",
-      eq: ["\\sqrt [2]{x}"],
+      // input format for square root, input must be a function \\sqrt optional-[order root] and number || {mumber}
+      target: "\\sqrt x",
+      eq: ["\\sqrt [2]{x}", "\\sqrt {x}"],
       ne: ["\\sqrt [3]{x}", "\\sqrt [3]{x}"],
       triage: [Triage.EQUIVALENT_FUNCTIONS],
     },
     {
-      //only: true,
       opts: {
         literal: { ignoreOrder: true },
       },
       target: "\\log (x)",
-      eq: ["\\log_{10}(x)"],
+      eq: ["\\log_{10}(x)", "\\log x"],
+      ne: ["\\log_{3}(x)"],
       triage: [Triage.EQUIVALENT_FUNCTIONS],
     },
     {
-      //only: true,
       opts: {
         literal: { ignoreOrder: true },
       },
 
       target: "\\ln(x)",
-      eq: ["\\log{e}(x)"],
+      eq: ["\\log_{e}(x)"],
       triage: [Triage.EQUIVALENT_FUNCTIONS],
     },
     {
