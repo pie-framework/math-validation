@@ -1080,27 +1080,29 @@ export class LatexToAst {
     } else if (this.token.token_type === "INFINITY") {
       // @ts-ignore
       result = Infinity;
+
       this.advance();
     } else if (this.token.token_type === "SQRT") {
       this.advance();
 
       let root = 2;
+      let parameter;
       // @ts-ignore
       if (this.token.token_type === "[") {
         this.advance();
-        let parameter = this.statement({
+        parameter = this.statement({
           parse_absolute_value: parse_absolute_value,
           unknownCommands: unknownCommands,
         });
+
         if (this.token.token_type !== "]") {
           throw new ParseError("Expecting ]", this.lexer.location);
         }
-        this.advance();
 
+        this.advance();
         root = parameter;
       }
 
-      let parameter;
       // @ts-ignore
       if (this.token.token_type == "{") {
         this.advance();
@@ -1112,6 +1114,7 @@ export class LatexToAst {
         if (this.token.token_type !== "}") {
           throw new ParseError("Expecting }", this.lexer.location);
         }
+
         this.advance();
       } else {
         parameter = this.statement({
@@ -1129,28 +1132,28 @@ export class LatexToAst {
       this.token.token_type === "LN"
     ) {
       let base = this.token.token_type === "LOG" ? 10 : "e";
-      this.advance();
+      let parameter;
 
+      this.advance();
       // @ts-ignore
       if (this.token.token_type === "_") {
         this.advance();
         // @ts-ignore
         if (this.token.token_type === "{") {
           this.advance();
-          let parameter = this.statement({
+          parameter = this.statement({
             parse_absolute_value: parse_absolute_value,
             unknownCommands: unknownCommands,
           });
           if (this.token.token_type !== "}") {
             throw new ParseError("Expecting }", this.lexer.location);
           }
-          this.advance();
 
+          this.advance();
           base = parameter;
         }
       }
 
-      let parameter;
       // @ts-ignore
       if (this.token.token_type == "(") {
         this.advance();
@@ -1158,9 +1161,11 @@ export class LatexToAst {
           parse_absolute_value: parse_absolute_value,
           unknownCommands: unknownCommands,
         });
+
         if (this.token.token_type !== ")") {
           throw new ParseError("Expecting )", this.lexer.location);
         }
+
         this.advance();
       } else {
         parameter = this.statement({

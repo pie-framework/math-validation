@@ -42,14 +42,17 @@ export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {
    * say correctResponse is 1+1=2
    * but user enters: 'arstasr arsoinerst9arsta8rstarsiotenarstoiarestaoristnarstoi'
    * This string is way bigger than it needs to be.
-   * Say limit to 3 times the size of correct string? - does not work for 1 = 1.00
+   * Say limit to 3 times the size of correct string?
    */
 
-  // remove spaces & left & right parenthesis before counting length
-  const aTrimmed = a.replace(/(\\left\()|(\\right\))|( )/g, "").length;
-  const bTrimmed = b.replace(/(\\left\()|(\\right\))|( )/g, "").length;
+  // remove spaces, trailing zeros & left & right parenthesis before counting length
+  const aTrimmed = a.replace(/(\\left\()|(\\right\))|( )|([.](0+))/g, "")
+    .length;
 
-  if (aTrimmed > bTrimmed * 4 || bTrimmed > aTrimmed * 4) {
+  const bTrimmed = b.replace(/(\\left\()|(\\right\))|( )|([.](0+))/g, "")
+    .length;
+
+  if (aTrimmed > bTrimmed * 3 || bTrimmed > aTrimmed * 3) {
     return false;
   }
 
