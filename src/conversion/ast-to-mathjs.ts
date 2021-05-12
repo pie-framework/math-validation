@@ -91,6 +91,7 @@ export class AstToMathJs {
   constructor(private opts: AstToMathJsOpts = { number: "Fraction" }) {}
 
   convert(tree) {
+    console.log(tree, "tree");
     if (typeof tree === "number") {
       if (Number.isFinite(tree)) {
         if (this.opts.number === "Fraction") {
@@ -148,8 +149,12 @@ export class AstToMathJs {
       return new m.FunctionNode(f, f_args);
     }
 
-    // if we have more than one comparison operators return a Relational Node
+    if (operator === "unit") {
+      return new m.Unit(operands[0]);
+    }
+
     if (operator === "lts" || operator === "gts") {
+      // if we have more than one comparison operators return a Relational Node
       const params = operands[0];
       const strict = operands[1];
 

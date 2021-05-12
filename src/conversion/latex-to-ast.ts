@@ -152,11 +152,20 @@ export const whitespace_rule =
 const sci_notat_exp_regex =
   "(E[+\\-]?[0-9]+\\s*($|(?=\\,|&|\\||\\\\\\||\\)|\\}|\\\\}|\\]|\\\\\\\\|\\\\end)))?";
 
+// TO-DO: ADD all mathjs built-in units?
+
+const lengthUnit = "(mm|cm|km|in|ft|yd|mi|mmi|li|rd|angstrom|mil";
+const volumeUnit = "|mL|ml|L|m3|in3|ft3|pt|qt|gal|bbl)";
+const measurmentUnit = lengthUnit + volumeUnit + "{1}";
+
 // const latex_rules = [["\\\\neq(?![a-zA-Z])", "NE"]];
 export const latex_rules = [
+  [measurmentUnit, "UNIT"],
+
   ["[0-9]+\\s*\\\\frac(?![a-zA-Z])", "MIXED_NUMBER"],
   ["[0-9|,]+(\\.[0-9]*)?" + sci_notat_exp_regex, "NUMBER"],
   ["\\.[0-9|,]+" + sci_notat_exp_regex, "NUMBER"],
+
   ["\\*", "*"],
   ["\\×", "*"],
   ["\\•", "*"],
@@ -1051,6 +1060,7 @@ export class LatexToAst {
     }
 
     if (this.token.token_type === "NUMBER") {
+      console.log("number---------");
       /** TODO: this is a bit primitive, should try and parse commas in numbers correctly */
       // @ts-ignore
       result = this.token.token_text.replace(/,/g, "");
@@ -1081,6 +1091,13 @@ export class LatexToAst {
       // @ts-ignore
       result = Infinity;
 
+      this.advance();
+    } else if (this.token.token_type === "UNIT") {
+      console.log("UNIT----------------------------");
+      // @ts-ignore
+      result = result = ["unit", this.token.token_text];
+
+      console.log("result", result);
       this.advance();
     } else if (this.token.token_type === "SQRT") {
       this.advance();
