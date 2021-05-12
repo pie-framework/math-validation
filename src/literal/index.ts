@@ -34,7 +34,13 @@ export const isMathEqual = (a: MathNode, b: MathNode, opts: LiteralOpts) => {
     //console.log("sorted b", JSON.stringify(b));
   }
 
-  const equalTex = a.toTex().trim() === b.toTex().trim();
+  let equalTex;
+  // @ts-ignore
+  console.log(a.isUnit, "------a");
+  // @ts-ignore
+  if (!a.isUnit) {
+    equalTex = a.toTex().trim() === b.toTex().trim();
+  }
 
   return a.equals(b) || equalTex;
 };
