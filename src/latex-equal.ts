@@ -46,13 +46,17 @@ export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {
    */
 
   // remove spaces, trailing zeros & left & right parenthesis before counting length
-  const aTrimmed = a.replace(/(\\left\()|(\\right\))|( )|([.](0+))/g, "")
-    .length;
+  const aTrimmed = a.replace(
+    /(\\left\()|(\\right\))|( )|([.](0+))/g,
+    ""
+  ).length;
 
-  const bTrimmed = b.replace(/(\\left\()|(\\right\))|( )|([.](0+))/g, "")
-    .length;
+  const bTrimmed = b.replace(
+    /(\\left\()|(\\right\))|( )|([.](0+))/g,
+    ""
+  ).length;
 
-  if (aTrimmed > bTrimmed * 3 || bTrimmed > aTrimmed * 3) {
+  if (aTrimmed > bTrimmed * 5 || bTrimmed > aTrimmed * 5) {
     return false;
   }
 

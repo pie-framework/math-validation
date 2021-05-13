@@ -24,8 +24,6 @@ export const isMathEqual = (a: MathNode, b: MathNode, opts: LiteralOpts) => {
     b = simplify(b, [simplifyRule]);
   }
 
-  console.log("unit ml", mathjs.unit(1000, "ml"));
-  console.log("unit mL", JSON.stringify(mathjs.unit(1000, "ML")));
   if (opts && opts.ignoreOrder) {
     a = s(a);
     //console.log("sorted a", JSON.stringify(a));
@@ -35,8 +33,7 @@ export const isMathEqual = (a: MathNode, b: MathNode, opts: LiteralOpts) => {
   }
 
   let equalTex;
-  // @ts-ignore
-  console.log(a.isUnit, "------a");
+
   // @ts-ignore
   if (!a.isUnit) {
     equalTex = a.toTex().trim() === b.toTex().trim();

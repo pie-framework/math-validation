@@ -1060,7 +1060,6 @@ export class LatexToAst {
     }
 
     if (this.token.token_type === "NUMBER") {
-      console.log("number---------");
       /** TODO: this is a bit primitive, should try and parse commas in numbers correctly */
       // @ts-ignore
       result = this.token.token_text.replace(/,/g, "");
@@ -1093,11 +1092,9 @@ export class LatexToAst {
 
       this.advance();
     } else if (this.token.token_type === "UNIT") {
-      console.log("UNIT----------------------------");
       // @ts-ignore
       result = ["unit", this.token.token_text];
 
-      console.log("result", result);
       this.advance();
     } else if (this.token.token_type === "SQRT") {
       this.advance();

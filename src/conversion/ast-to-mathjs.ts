@@ -30,12 +30,8 @@ const operators = {
   },
   "*": function (operands) {
     if (operands[1] && operands[1].isUnit) {
-      console.log("operands 0", operands[0]);
-      const ceIese = m.multiply(operands[0].value, operands[1]);
-      console.log(ceIese);
-      return ceIese;
+      return m.multiply(operands[0].value, operands[1]);
     }
-    console.log("operands", operands.includes("Unit"));
     return new m.OperatorNode("*", "multiply", operands);
   },
   "/": function (operands) {
@@ -98,7 +94,6 @@ export class AstToMathJs {
   constructor(private opts: AstToMathJsOpts = { number: "Fraction" }) {}
 
   convert(tree) {
-    console.log(tree, "tree");
     if (typeof tree === "number") {
       if (Number.isFinite(tree)) {
         if (this.opts.number === "Fraction") {
@@ -158,11 +153,6 @@ export class AstToMathJs {
 
     if (operator === "unit") {
       const unit = new m.Unit(1, operands[0]);
-      const test1 = new m.Unit(10, "ml");
-      const test2 = new m.unit(10, "mL");
-      console.log(test1.equals(test2), "test ");
-      console.log("operands", operands);
-      console.log("unit math");
       return unit;
     }
 
