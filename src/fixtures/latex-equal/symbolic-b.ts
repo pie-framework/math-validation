@@ -1,6 +1,6 @@
 export default {
   mode: "symbolic",
- // skip: true,
+  skip: true,
   tests: [
     {
       // all passed

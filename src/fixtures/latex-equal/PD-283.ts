@@ -121,6 +121,7 @@ export default {
     },
     {
       // allow the order of an inequality to be reversed, provided the signs of the operators are reversed
+      only: true,
       opts: {
         literal: { ignoreOrder: true },
       },
@@ -149,6 +150,7 @@ export default {
       ne: ["x>2+0"],
     },
     {
+      //only: true,
       opts: {
         literal: { ignoreOrder: true },
       },
@@ -169,7 +171,6 @@ export default {
       target: "0≤x",
       eq: ["x≥0"],
     },
-    // this fails: this case  < > is not parsed as a relational node from latex-to-ast and ast-to-mathjs
     {
       opts: {
         literal: { ignoreOrder: true },

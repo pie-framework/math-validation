@@ -2,7 +2,7 @@ import { Triage } from "../triage";
 
 export default {
   mode: "symbolic",
-  //skip: true,
+  skip: true,
   tests: [
     {
       target: "\\frac{x}{12}\\times7\\text{dollars}",
