@@ -121,12 +121,11 @@ export default {
     },
     {
       // allow the order of an inequality to be reversed, provided the signs of the operators are reversed
-      only: true,
       opts: {
         literal: { ignoreOrder: true },
       },
-      target: "0<x≤4",
-      eq: ["4≥x>0"],
+      target: "4≥x>0",
+      eq: [" 0<x≤4"],
     },
     {
       opts: {
@@ -150,7 +149,6 @@ export default {
       ne: ["x>2+0"],
     },
     {
-      //only: true,
       opts: {
         literal: { ignoreOrder: true },
       },
@@ -175,8 +173,22 @@ export default {
       opts: {
         literal: { ignoreOrder: true },
       },
+      target: "rt≥x",
+      eq: ["x≤rt"],
+    },
+    {
+      opts: {
+        literal: { ignoreOrder: true },
+      },
       target: "A < B > C",
       eq: ["A <B >C", "C<B>A"],
+    },
+    {
+      opts: {
+        literal: { ignoreOrder: true },
+      },
+      target: "A+2 < B+5 > C+6",
+      eq: ["A+2 <B+5 >C+6", "C+6<B+5>A+2"],
     },
     {
       opts: {

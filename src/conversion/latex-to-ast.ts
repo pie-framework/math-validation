@@ -160,108 +160,108 @@ const measurmentUnit = lengthUnit + volumeUnit + "{1}";
 
 // const latex_rules = [["\\\\neq(?![a-zA-Z])", "NE"]];
 export const latex_rules = [
-  // [measurmentUnit, "UNIT"],
-  // ["[0-9]+\\s*\\\\frac(?![a-zA-Z])", "MIXED_NUMBER"],
+  [measurmentUnit, "UNIT"],
+  ["[0-9]+\\s*\\\\frac(?![a-zA-Z])", "MIXED_NUMBER"],
   ["[0-9|,]+(\\.[0-9]*)?" + sci_notat_exp_regex, "NUMBER"],
-  //["\\.[0-9|,]+" + sci_notat_exp_regex, "NUMBER"],
-  // ["\\*", "*"],
-  // ["\\×", "*"],
-  // ["\\•", "*"],
-  // ["\\·", "*"],
-  // ["\\/", "/"],
-  // ["\\÷", "/"],
-  // ["%", "PERCENT"],
-  // ["\\\\%", "PERCENT"],
-  // ["-", "-"],
-  // ["\\+", "+"],
-  // ["\\^", "^"],
-  // ["\\(", "("],
-  // ["\\\\left\\s*\\(", "("],
-  // ["\\\\bigl\\s*\\(", "("],
-  // ["\\\\Bigl\\s*\\(", "("],
-  // ["\\\\biggl\\s*\\(", "("],
-  // ["\\\\Biggl\\s*\\(", "("],
-  // ["\\)", ")"],
-  // ["\\\\right\\s*\\)", ")"],
-  // ["\\\\bigr\\s*\\)", ")"],
-  // ["\\\\Bigr\\s*\\)", ")"],
-  // ["\\\\biggr\\s*\\)", ")"],
-  // ["\\\\Biggr\\s*\\)", ")"],
-  // ["\\[", "["],
-  // ["\\\\left\\s*\\[", "["],
-  // ["\\\\bigl\\s*\\[", "["],
-  // ["\\\\Bigl\\s*\\[", "["],
-  // ["\\\\biggl\\s*\\[", "["],
-  // ["\\\\Biggl\\s*\\[", "["],
-  // ["\\]", "]"],
-  // ["\\\\right\\s*\\]", "]"],
-  // ["\\\\bigr\\s*\\]", "]"],
-  // ["\\\\Bigr\\s*\\]", "]"],
-  // ["\\\\biggr\\s*\\]", "]"],
-  // ["\\\\Biggr\\s*\\]", "]"],
-  // ["\\|", "|"],
-  // ["\\\\left\\s*\\|", "|L"],
-  // ["\\\\bigl\\s*\\|", "|L"],
-  // ["\\\\Bigl\\s*\\|", "|L"],
-  // ["\\\\biggl\\s*\\|", "|L"],
-  // ["\\\\Biggl\\s*\\|", "|L"],
-  // ["\\\\right\\s*\\|", "|"],
-  // ["\\\\bigr\\s*\\|", "|"],
-  // ["\\\\Bigr\\s*\\|", "|"],
-  // ["\\\\biggr\\s*\\|", "|"],
-  // ["\\\\Biggr\\s*\\|", "|"],
-  // ["\\\\big\\s*\\|", "|"],
-  // ["\\\\Big\\s*\\|", "|"],
-  // ["\\\\bigg\\s*\\|", "|"],
-  // ["\\\\Bigg\\s*\\|", "|"],
-  // ["{", "{"],
-  // ["}", "}"],
-  // ["\\\\{", "LBRACE"],
-  // ["\\\\left\\s*\\\\{", "LBRACE"],
-  // ["\\\\bigl\\s*\\\\{", "LBRACE"],
-  // ["\\\\Bigl\\s*\\\\{", "LBRACE"],
-  // ["\\\\biggl\\s*\\\\{", "LBRACE"],
-  // ["\\\\Biggl\\s*\\\\{", "LBRACE"],
-  // ["\\\\}", "RBRACE"],
-  // ["\\\\right\\s*\\\\}", "RBRACE"],
-  // ["\\\\bigr\\s*\\\\}", "RBRACE"],
-  // ["\\\\Bigr\\s*\\\\}", "RBRACE"],
-  // ["\\\\biggr\\s*\\\\}", "RBRACE"],
-  // ["\\\\Biggr\\s*\\\\}", "RBRACE"],
+  ["\\.[0-9|,]+" + sci_notat_exp_regex, "NUMBER"],
+  ["\\*", "*"],
+  ["\\×", "*"],
+  ["\\•", "*"],
+  ["\\·", "*"],
+  ["\\/", "/"],
+  ["\\÷", "/"],
+  ["%", "PERCENT"],
+  ["\\\\%", "PERCENT"],
+  ["-", "-"],
+  ["\\+", "+"],
+  ["\\^", "^"],
+  ["\\(", "("],
+  ["\\\\left\\s*\\(", "("],
+  ["\\\\bigl\\s*\\(", "("],
+  ["\\\\Bigl\\s*\\(", "("],
+  ["\\\\biggl\\s*\\(", "("],
+  ["\\\\Biggl\\s*\\(", "("],
+  ["\\)", ")"],
+  ["\\\\right\\s*\\)", ")"],
+  ["\\\\bigr\\s*\\)", ")"],
+  ["\\\\Bigr\\s*\\)", ")"],
+  ["\\\\biggr\\s*\\)", ")"],
+  ["\\\\Biggr\\s*\\)", ")"],
+  ["\\[", "["],
+  ["\\\\left\\s*\\[", "["],
+  ["\\\\bigl\\s*\\[", "["],
+  ["\\\\Bigl\\s*\\[", "["],
+  ["\\\\biggl\\s*\\[", "["],
+  ["\\\\Biggl\\s*\\[", "["],
+  ["\\]", "]"],
+  ["\\\\right\\s*\\]", "]"],
+  ["\\\\bigr\\s*\\]", "]"],
+  ["\\\\Bigr\\s*\\]", "]"],
+  ["\\\\biggr\\s*\\]", "]"],
+  ["\\\\Biggr\\s*\\]", "]"],
+  ["\\|", "|"],
+  ["\\\\left\\s*\\|", "|L"],
+  ["\\\\bigl\\s*\\|", "|L"],
+  ["\\\\Bigl\\s*\\|", "|L"],
+  ["\\\\biggl\\s*\\|", "|L"],
+  ["\\\\Biggl\\s*\\|", "|L"],
+  ["\\\\right\\s*\\|", "|"],
+  ["\\\\bigr\\s*\\|", "|"],
+  ["\\\\Bigr\\s*\\|", "|"],
+  ["\\\\biggr\\s*\\|", "|"],
+  ["\\\\Biggr\\s*\\|", "|"],
+  ["\\\\big\\s*\\|", "|"],
+  ["\\\\Big\\s*\\|", "|"],
+  ["\\\\bigg\\s*\\|", "|"],
+  ["\\\\Bigg\\s*\\|", "|"],
+  ["{", "{"],
+  ["}", "}"],
+  ["\\\\{", "LBRACE"],
+  ["\\\\left\\s*\\\\{", "LBRACE"],
+  ["\\\\bigl\\s*\\\\{", "LBRACE"],
+  ["\\\\Bigl\\s*\\\\{", "LBRACE"],
+  ["\\\\biggl\\s*\\\\{", "LBRACE"],
+  ["\\\\Biggl\\s*\\\\{", "LBRACE"],
+  ["\\\\}", "RBRACE"],
+  ["\\\\right\\s*\\\\}", "RBRACE"],
+  ["\\\\bigr\\s*\\\\}", "RBRACE"],
+  ["\\\\Bigr\\s*\\\\}", "RBRACE"],
+  ["\\\\biggr\\s*\\\\}", "RBRACE"],
+  ["\\\\Biggr\\s*\\\\}", "RBRACE"],
   ["\\\\cdot(?![a-zA-Z])", "*"],
   ["\\\\div(?![a-zA-Z])", "/"],
   ["\\\\times(?![a-zA-Z])", "*"],
   ["\\\\frac(?![a-zA-Z])", "FRAC"],
-  // [",", ","],
-  // [":", ":"],
-  // ["\\\\mid", "MID"],
+  [",", ","],
+  [":", ":"],
+  ["\\\\mid", "MID"],
 
-  // ["\\\\vartheta(?![a-zA-Z])", "LATEXCOMMAND", "\\theta"],
-  // ["\\\\varepsilon(?![a-zA-Z])", "LATEXCOMMAND", "\\epsilon"],
-  // ["\\\\varrho(?![a-zA-Z])", "LATEXCOMMAND", "\\rho"],
-  // ["\\\\varphi(?![a-zA-Z])", "LATEXCOMMAND", "\\phi"],
+  ["\\\\vartheta(?![a-zA-Z])", "LATEXCOMMAND", "\\theta"],
+  ["\\\\varepsilon(?![a-zA-Z])", "LATEXCOMMAND", "\\epsilon"],
+  ["\\\\varrho(?![a-zA-Z])", "LATEXCOMMAND", "\\rho"],
+  ["\\\\varphi(?![a-zA-Z])", "LATEXCOMMAND", "\\phi"],
 
-  // ["\\\\infty(?![a-zA-Z])", "INFINITY"],
+  ["\\\\infty(?![a-zA-Z])", "INFINITY"],
 
-  // ["\\\\asin(?![a-zA-Z])", "LATEXCOMMAND", "\\arcsin"],
-  // ["\\\\acos(?![a-zA-Z])", "LATEXCOMMAND", "\\arccos"],
-  // ["\\\\atan(?![a-zA-Z])", "LATEXCOMMAND", "\\arctan"],
-  // ["\\\\sqrt(?![a-zA-Z])", "SQRT"],
-  // ["\\\\log(?![a-zA-Z])", "LOG"],
-  // ["\\\\ln(?![a-zA-Z])", "LN"],
+  ["\\\\asin(?![a-zA-Z])", "LATEXCOMMAND", "\\arcsin"],
+  ["\\\\acos(?![a-zA-Z])", "LATEXCOMMAND", "\\arccos"],
+  ["\\\\atan(?![a-zA-Z])", "LATEXCOMMAND", "\\arctan"],
+  ["\\\\sqrt(?![a-zA-Z])", "SQRT"],
+  ["\\\\log(?![a-zA-Z])", "LOG"],
+  ["\\\\ln(?![a-zA-Z])", "LN"],
 
-  // ["\\\\land(?![a-zA-Z])", "AND"],
-  // ["\\\\wedge(?![a-zA-Z])", "AND"],
+  ["\\\\land(?![a-zA-Z])", "AND"],
+  ["\\\\wedge(?![a-zA-Z])", "AND"],
 
-  // ["\\\\lor(?![a-zA-Z])", "OR"],
-  // ["\\\\vee(?![a-zA-Z])", "OR"],
+  ["\\\\lor(?![a-zA-Z])", "OR"],
+  ["\\\\vee(?![a-zA-Z])", "OR"],
 
-  // ["\\\\lnot(?![a-zA-Z])", "NOT"],
+  ["\\\\lnot(?![a-zA-Z])", "NOT"],
 
-  // ["=", "="],
-  // ["\\\\neq(?![a-zA-Z])", "NE"],
-  // ["\\\\ne(?![a-zA-Z])", "NE"],
-  // ["\\\\not\\s*=", "NE"],
+  ["=", "="],
+  ["\\\\neq(?![a-zA-Z])", "NE"],
+  ["\\\\ne(?![a-zA-Z])", "NE"],
+  ["\\\\not\\s*=", "NE"],
   ["\\\\leq(?![a-zA-Z])", "LE"],
   ["\\\\le(?![a-zA-Z])", "LE"],
   ["\\\\geq(?![a-zA-Z])", "GE"],
@@ -273,42 +273,42 @@ export const latex_rules = [
   ["≥", "GE"],
   ["\\\\gt(?![a-zA-Z])", ">"],
 
-  // ["\\\\in(?![a-zA-Z])", "IN"],
+  ["\\\\in(?![a-zA-Z])", "IN"],
 
-  // ["\\\\notin(?![a-zA-Z])", "NOTIN"],
-  // ["\\\\not\\s*\\\\in(?![a-zA-Z])", "NOTIN"],
+  ["\\\\notin(?![a-zA-Z])", "NOTIN"],
+  ["\\\\not\\s*\\\\in(?![a-zA-Z])", "NOTIN"],
 
-  // ["\\\\ni(?![a-zA-Z])", "NI"],
+  ["\\\\ni(?![a-zA-Z])", "NI"],
 
-  // ["\\\\not\\s*\\\\ni(?![a-zA-Z])", "NOTNI"],
+  ["\\\\not\\s*\\\\ni(?![a-zA-Z])", "NOTNI"],
 
-  // ["\\\\subset(?![a-zA-Z])", "SUBSET"],
+  ["\\\\subset(?![a-zA-Z])", "SUBSET"],
 
-  // ["\\\\not\\s*\\\\subset(?![a-zA-Z])", "NOTSUBSET"],
+  ["\\\\not\\s*\\\\subset(?![a-zA-Z])", "NOTSUBSET"],
 
-  // ["\\\\supset(?![a-zA-Z])", "SUPERSET"],
+  ["\\\\supset(?![a-zA-Z])", "SUPERSET"],
 
-  // ["\\\\not\\s*\\\\supset(?![a-zA-Z])", "NOTSUPERSET"],
+  ["\\\\not\\s*\\\\supset(?![a-zA-Z])", "NOTSUPERSET"],
 
-  // ["\\\\cup(?![a-zA-Z])", "UNION"],
+  ["\\\\cup(?![a-zA-Z])", "UNION"],
 
-  // ["\\\\cap(?![a-zA-Z])", "INTERSECT"],
+  ["\\\\cap(?![a-zA-Z])", "INTERSECT"],
 
-  // ["!", "!"],
-  // ["'", "'"],
-  // ["_", "_"],
-  // ["&", "&"],
-  // ["\\\\ldots", "LDOTS"],
+  ["!", "!"],
+  ["'", "'"],
+  ["_", "_"],
+  ["&", "&"],
+  ["\\\\ldots", "LDOTS"],
 
-  // ["\\\\\\\\", "LINEBREAK"],
+  ["\\\\\\\\", "LINEBREAK"],
 
-  // ["\\\\begin\\s*{\\s*[a-zA-Z0-9]+\\s*}", "BEGINENVIRONMENT"],
+  ["\\\\begin\\s*{\\s*[a-zA-Z0-9]+\\s*}", "BEGINENVIRONMENT"],
 
-  // ["\\\\end\\s*{\\s*[a-zA-Z0-9]+\\s*}", "ENDENVIRONMENT"],
+  ["\\\\end\\s*{\\s*[a-zA-Z0-9]+\\s*}", "ENDENVIRONMENT"],
 
-  // ["\\\\var\\s*{\\s*[a-zA-Z0-9]+\\s*}", "VARMULTICHAR"],
+  ["\\\\var\\s*{\\s*[a-zA-Z0-9]+\\s*}", "VARMULTICHAR"],
 
-  // ["\\\\[a-zA-Z]+(?![a-zA-Z])", "LATEXCOMMAND"],
+  ["\\\\[a-zA-Z]+(?![a-zA-Z])", "LATEXCOMMAND"],
   ["[a-zA-Z]", "VAR"],
 ];
 
@@ -623,6 +623,9 @@ export class LatexToAst {
 
     var lhs = this.expression(params);
 
+    let relationalToken = (token) =>
+      token === "<" || token === "LE" || token === ">" || token === "GE";
+
     while (
       this.token.token_type === "=" ||
       this.token.token_type === "NE" ||
@@ -641,16 +644,7 @@ export class LatexToAst {
     ) {
       let operation = this.token.token_type.toLowerCase();
 
-      let inequality_sequence = false;
-
-      if (
-        this.token.token_type === "<" ||
-        this.token.token_type === "LE" ||
-        this.token.token_type === ">" ||
-        this.token.token_type === "GE"
-      ) {
-        inequality_sequence = true;
-      }
+      let inequality_sequence = relationalToken(this.token.token_type);
 
       this.advance();
       let rhs = this.expression(params);
@@ -659,47 +653,30 @@ export class LatexToAst {
         switch (operatorSign) {
           case "<":
             return "smaller";
-          case "LE":
+          case "LE" || "le":
             return "smallerEq";
           case ">":
             return "larger";
           case "GE":
             return "largerEq";
+          case "ge":
+            return "largerEq";
         }
       };
 
-      if (inequality_sequence) {
+      if (inequality_sequence && relationalToken(this.token.token_type)) {
         let strict: (string | boolean)[] = ["tuple"];
 
         strict.push(relationalOperator(operation));
         let args = ["tuple", lhs, rhs];
-        while (
-          this.token.token_type === "<" ||
-          this.token.token_type === "LE" ||
-          this.token.token_type === ">" ||
-          this.token.token_type === "GE"
-        ) {
+
+        while (relationalOperator(this.token.token_type)) {
           strict.push(relationalOperator(this.token.token_type));
           this.advance();
           args.push(this.expression(params));
         }
+
         lhs = ["relational", args, strict];
-
-        //       // sequence of multiple > or >=
-        //       let strict: (string | boolean)[] = ["tuple"];
-
-        //       strict.push(relationalOperator(operation));
-        //       let args = ["tuple", lhs, rhs];
-        //       while (
-        //         this.token.token_type === ">" ||
-        //         this.token.token_type === "GE"
-        //       ) {
-        //         strict.push(relationalOperator(this.token.token_type));
-        //         this.advance();
-        //         args.push(this.expression(params));
-        //       }
-        //       lhs = ["relational", args, strict];
-        //     }
       } else if (operation === "=") {
         lhs = ["=", lhs, rhs];
 
