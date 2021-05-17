@@ -1,7 +1,8 @@
 export default {
   mode: "symbolic",
   label: "CH6456",
-  skip: false,
+  skip: true,
+  // all passed
   tests: [
     {
       label: "we have percent support in math-expressions - port",
