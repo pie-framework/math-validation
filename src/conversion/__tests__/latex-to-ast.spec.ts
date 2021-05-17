@@ -33,16 +33,16 @@ const fixtures = [
   ["a≤b", ["le", "a", "b"]],
   // accept rational operator ≥
   ["a≥b", ["ge", "a", "b"]],
-  // TODO...
+  //  // TODO...
   // ["a < b > c", "1"],
   // ["c < b > a", "1"],
-  // [
-  // we were getting: [+, 6, [/, pi, x]]
-  // "6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-  // "6\\frac{\\pi }{x}", //\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-  // "6 \\frac{\\pi}{x}", //\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-  // ["+", 6, ["/", "pi", "x"]],
-  // ],
+  //   [
+  //   we were getting: [+, 6, [/, pi, x]]
+  //   "6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
+  //   "6\\frac{\\pi }{x}", //\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
+  //   "6 \\frac{\\pi}{x}", //\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
+  //   ["+", 6, ["/", "pi", "x"]],
+  //   ],
 
   //   [
   //     `

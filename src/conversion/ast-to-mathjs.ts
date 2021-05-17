@@ -29,6 +29,9 @@ const operators = {
     return new m.OperatorNode("+", "add", operands);
   },
   "*": function (operands) {
+    if (operands[1] && operands[1].isUnit) {
+      return m.multiply(operands[0].value, operands[1]);
+    }
     return new m.OperatorNode("*", "multiply", operands);
   },
   "/": function (operands) {
@@ -148,8 +151,13 @@ export class AstToMathJs {
       return new m.FunctionNode(f, f_args);
     }
 
-    // if we have more than one comparison operators return a Relational Node
-    if (operator === "lts" || operator === "gts") {
+    if (operator === "unit") {
+      const unit = new m.Unit(1, operands[0]);
+      return unit;
+    }
+
+    if (operator === "relational") {
+      // if we have more than one comparison operators return a Relational Node
       const params = operands[0];
       const strict = operands[1];
 
@@ -166,11 +174,7 @@ export class AstToMathJs {
 
       let comparisons = [];
       for (let i = 0; i < params.length - 1; i++) {
-        if (strict[i]) {
-          comparisons.push(operator === "lts" ? "smaller" : "larger");
-        } else {
-          comparisons.push(operator === "lts" ? "smallerEq" : "largerEq");
-        }
+        comparisons.push(strict[i]);
       }
 
       let result = new m.RelationalNode(comparisons, arg_nodes);

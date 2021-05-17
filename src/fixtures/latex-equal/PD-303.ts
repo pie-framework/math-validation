@@ -2,7 +2,7 @@ import { Triage } from "../triage";
 
 export default {
   mode: "literal",
-  skip: false,
+  //skip: true,
   tests: [
     {
       opts: {
@@ -30,16 +30,19 @@ export default {
       opts: {
         literal: { ignoreOrder: true },
       },
-      target: "sqrt(x)",
-      eq: ["sqrt{2}(x)"],
+      // input format for square root, input must be a function \\sqrt optional-[order root] and number || {mumber}
+      target: "\\sqrt x",
+      eq: ["\\sqrt [2]{x}", "\\sqrt {x}"],
+      ne: ["\\sqrt [3]{x}", "\\sqrt [3]{x}"],
       triage: [Triage.EQUIVALENT_FUNCTIONS],
     },
     {
       opts: {
         literal: { ignoreOrder: true },
       },
-      target: "log x",
-      eq: ["log{10}(x)"],
+      target: "\\log (x)",
+      eq: ["\\log_{10}(x)", "\\log x"],
+      ne: ["\\log_{3}(x)"],
       triage: [Triage.EQUIVALENT_FUNCTIONS],
     },
     {
@@ -47,8 +50,8 @@ export default {
         literal: { ignoreOrder: true },
       },
 
-      target: "ln(x)",
-      eq: ["log{e}(x)"],
+      target: "\\ln(x)",
+      eq: ["\\log_{e}(x)"],
       triage: [Triage.EQUIVALENT_FUNCTIONS],
     },
     {

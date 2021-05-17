@@ -2,7 +2,7 @@ import { Triage } from "../triage";
 
 export default {
   mode: "literal",
-  skip: true,
+  //skip: true,
   tests: [
     {
       opts: {
@@ -124,8 +124,8 @@ export default {
       opts: {
         literal: { ignoreOrder: true },
       },
-      target: "0<x≤4",
-      eq: ["4≥x>0"],
+      target: "4≥x>0",
+      eq: [" 0<x≤4"],
     },
     {
       opts: {
@@ -169,13 +169,26 @@ export default {
       target: "0≤x",
       eq: ["x≥0"],
     },
-    // this fails: this case  < > is not parsed as a relational node from latex-to-ast and ast-to-mathjs
+    {
+      opts: {
+        literal: { ignoreOrder: true },
+      },
+      target: "rt≥x",
+      eq: ["x≤rt"],
+    },
     {
       opts: {
         literal: { ignoreOrder: true },
       },
       target: "A < B > C",
       eq: ["A <B >C", "C<B>A"],
+    },
+    {
+      opts: {
+        literal: { ignoreOrder: true },
+      },
+      target: "A+2 < B+5 > C+6",
+      eq: ["A+2 <B+5 >C+6", "C+6<B+5>A+2"],
     },
     {
       opts: {

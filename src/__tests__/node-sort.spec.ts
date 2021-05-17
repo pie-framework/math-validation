@@ -102,11 +102,6 @@ const fixtures: Fixture[] = [
     ["(4 + 1 + z) + (3 + 2 * x)", "(2 * x + 3) + (z + 4 + 1)"],
     ["+", 1, 3, 4, "z", ["*", 2, "x"]],
   ],
-  // fails, our ast to mathjs parses this case < > in an operationl node, not a relational node like mathjs
-  // [
-  //   "y + w + z > c < a + e + d + f",
-  //   ["<", [">", ["+", "w", "y", "z"], "c"], ["+", "a", "d", "e", "f"]],
-  // ],
 ];
 const ff = [];
 
