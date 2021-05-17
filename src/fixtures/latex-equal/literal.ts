@@ -2,7 +2,7 @@ import { Triage } from "../triage";
 
 export default {
   mode: "literal",
-  skip: true,
+  skip: false,
   tests: [
     {
       target: "12 + 3 * x",
@@ -17,13 +17,6 @@ export default {
       opts: { literal: { allowTrailingZeros: true } },
     },
     {
-      target: "0",
-      ne: ["0.0"],
-      opts: { literal: { allowTrailingZeros: true } },
-      triage: Triage.ALLOW_TRAILING_ZEROS_FOR_ZERO,
-    },
-    {
-      // only: true,
       target: "12.00",
       // eq: ["12.00"],
       ne: ["12.000000", "12.0", "12.000"],

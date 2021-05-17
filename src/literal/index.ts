@@ -26,7 +26,10 @@ export const isMathEqual = (a: MathNode, b: MathNode, opts: LiteralOpts) => {
 
   if (opts && opts.ignoreOrder) {
     a = s(a);
+    //console.log("sorted a", JSON.stringify(a));
+
     b = s(b);
+    //console.log("sorted b", JSON.stringify(b));
   }
 
   const equalTex = a.toTex().trim() === b.toTex().trim();

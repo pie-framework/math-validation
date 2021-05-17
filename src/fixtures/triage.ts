@@ -27,9 +27,9 @@ export enum Triage {
   UNDERSCORE_SUPPORT,
 
   /**
-   *  multiply every term within the parentheses by the factor outside
-   * of the parentheses does not work if we have more than one factor and we want to multiply
-   * the terms in parantheses with only one factor
+   *  multiply every term within the parenthesis by the factor outside
+   * of the parenthesis does not work if we have more than one factor and we want to multiply
+   * the terms in paranthesis with only one factor
    * ab(x+y) it won't be equal with a(bx+by)
    */
   DISTRIBUTIVE_PROPERTY,
@@ -67,12 +67,6 @@ export enum Triage {
   FRACTION_CONVERSION_ERROR,
 
   /**
-   * Atention: 0.0 is not a valid floating point
-   * 1 should be equal to 1.0 - Done
-   */
-  ALLOW_TRAILING_ZEROS_FOR_ZERO,
-
-  /**
    * Invalid location of '='
    */
   EQUAL_LOCATION_PARSE_ERROR,
@@ -95,11 +89,6 @@ export enum Triage {
   ALLOW_TRAILING_ZEROS_SYMBOLIC,
 
   /**
-   * I'm not sure yet what this is about
-   */
-  OPTS_EXCEPTION,
-
-  /**
    * ml should be eq with mL
    * ALSO I SHOULD CHECK OTHER UNITS
    */
@@ -108,14 +97,14 @@ export enum Triage {
   /**
    * sqrt(x) should be eq with sqrt{2}(x)
    * log x should be eq with log{10}(x)
-   * qrt(x) should be eq with mL
+   * ln(x) should be eq with log{e}(x)
    */
-  EQUIVALENCE_RELATIONS,
+  EQUIVALENT_FUNCTIONS,
 
-  /**
-   * something goes wrong when striping parenthessis
+  /** Done - I got it wrong, this was not a parenthesis error -> it was about sorting an operator node
+   * something goes wrong when striping parenthesis
    */
-  PARENTHESES,
+  PARENTHESIS,
 
   /**  Done
    * A user can randomly punch any old input to be evaluated.

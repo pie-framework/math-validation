@@ -75,7 +75,6 @@ const fixtures: Fixture[] = [
   ["C + A < D + B", "B +D > A + C"],
   [["A > B", "B < A"], "A > B"],
   [["A > B + 2", "B + 2 < A "], "A > 2 + B"],
-  // this fails from PD283 also because our ast to mathjs parses this case < > in an operationl node, not a relational node like mathjs
   [["A < B > C", "C < B > A"], "A < B > C"],
   [["C == B == A", "A == B == C", "B == C == A", "B == A == C"], "A == B == C"],
   ["C + B + A == B + A + C", ["=", ["+", "A", "B", "C"], ["+", "A", "B", "C"]]],
@@ -93,7 +92,6 @@ const fixtures: Fixture[] = [
   [["x == y", "y == x"], "x ==y"],
   [["7+x == y", "y == 7 + x"], " y == 7 + x"],
 
-  //fails - the way we parse the ast-to-math constant node is diffrent from the way mathjs parses a node
   ["(3 + 2) + 1", ["+", 1, 2, 3]],
   ["(y*x)(3)", ["*", 3, "x", "y"]],
 
@@ -104,7 +102,7 @@ const fixtures: Fixture[] = [
     ["(4 + 1 + z) + (3 + 2 * x)", "(2 * x + 3) + (z + 4 + 1)"],
     ["+", 1, 3, 4, "z", ["*", 2, "x"]],
   ],
-  // // fails, our ast to mathjs parses this case < > in an operationl node, not a relational node like mathjs
+  // fails, our ast to mathjs parses this case < > in an operationl node, not a relational node like mathjs
   // [
   //   "y + w + z > c < a + e + d + f",
   //   ["<", [">", ["+", "w", "y", "z"], "c"], ["+", "a", "d", "e", "f"]],
@@ -188,6 +186,8 @@ expect.extend({
           );
         };
 
+    // console.log("expected", JSON.stringify(expectedNode));
+    // console.log("received", JSON.stringify(received));
     return { actual: received, message, pass };
   },
 });
