@@ -1,8 +1,6 @@
-import { Triage } from "../triage";
-
 export default {
   mode: "literal",
-  skip: false,
+  skip: true,
   tests: [
     {
       opts: {

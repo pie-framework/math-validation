@@ -1,11 +1,8 @@
-import { Triage } from "../triage";
-
 export default {
   mode: "symbolic",
-  skip: true,
+  //skip: true,
   tests: [
     {
-      // ?
       target: "1 * 3 * x",
       opts: {
         exception: ["1 * x * 3"],

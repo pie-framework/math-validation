@@ -1,10 +1,10 @@
-import { Triage } from "../triage";
+import { Triage } from "../../triage";
 
 const eq = (a, eq) => ({ target: a, eq });
 
 export default {
   mode: "symbolic",
-  skip: true,
+ // skip: true,
   tests: [
     {
       target: "a/x",
@@ -50,7 +50,6 @@ export default {
     eq("9,000", "9000"),
 
     {
-      triage: Triage.ALLOW_TRAILING_ZEROS_SYMBOLIC,
       target: "8.5x",
       eq: ["8.5000x"],
     },

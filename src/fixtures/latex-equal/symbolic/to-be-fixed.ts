@@ -1,8 +1,8 @@
-import { Triage } from "../triage";
+import { Triage } from "../../triage";
 
 export default {
   mode: "symbolic",
-  skip: true,
+  //skip: true,
   tests: [
     {
       // error: underscore not implemented for conversion

@@ -18,6 +18,7 @@ const SIMPLIFY_RULES = [
   // perfect square formula:
   { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
   // { l: "(n^2) + 4n + 4", r: "(n^2) + (2n * 2) + (2^2)" },
+  { l: "tzn(n1, n2)", r: "n1" },
 ];
 
 const simplify = (v) => {

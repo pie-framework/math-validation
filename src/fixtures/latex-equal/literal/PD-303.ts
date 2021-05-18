@@ -1,8 +1,6 @@
-import { Triage } from "../triage";
-
 export default {
   mode: "literal",
-  //skip: true,
+  skip: true,
   tests: [
     {
       opts: {
@@ -34,7 +32,6 @@ export default {
       target: "\\sqrt x",
       eq: ["\\sqrt [2]{x}", "\\sqrt {x}"],
       ne: ["\\sqrt [3]{x}", "\\sqrt [3]{x}"],
-      triage: [Triage.EQUIVALENT_FUNCTIONS],
     },
     {
       opts: {
@@ -43,7 +40,6 @@ export default {
       target: "\\log (x)",
       eq: ["\\log_{10}(x)", "\\log x"],
       ne: ["\\log_{3}(x)"],
-      triage: [Triage.EQUIVALENT_FUNCTIONS],
     },
     {
       opts: {
@@ -52,7 +48,6 @@ export default {
 
       target: "\\ln(x)",
       eq: ["\\log_{e}(x)"],
-      triage: [Triage.EQUIVALENT_FUNCTIONS],
     },
     {
       opts: {

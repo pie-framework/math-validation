@@ -13,15 +13,6 @@ export enum Triage {
   NODE_SORT_SYMBOLIC,
 
   /**
-   * The latex parser is choking on the input things like:
-   * (b/x)•a
-   * a÷b
-   * Invalid symblol '×'
-   * Invalid symblol '≤'
-   */
-  LATEX_PARSE_ERROR,
-
-  /**
    * _underscore not implemented for conversion to mathjs
    */
   UNDERSCORE_SUPPORT,
@@ -86,20 +77,13 @@ export enum Triage {
    */
   UNIMPLEMENTED_NODE,
 
-  ALLOW_TRAILING_ZEROS_SYMBOLIC,
-
   /**
    * ml should be eq with mL
    * ALSO I SHOULD CHECK OTHER UNITS
    */
   MEASUREMENT_UNITS,
 
-  /**
-   * sqrt(x) should be eq with sqrt{2}(x)
-   * log x should be eq with log{10}(x)
-   * ln(x) should be eq with log{e}(x)
-   */
-  EQUIVALENT_FUNCTIONS,
+  // DONE
 
   /** Done - I got it wrong, this was not a parenthesis error -> it was about sorting an operator node
    * something goes wrong when striping parenthesis
@@ -120,4 +104,22 @@ export enum Triage {
    * ast => mathjs conversion logic
    */
   PERCENT_SUPPORT,
+
+  /**
+   * The latex parser is choking on the input things like:
+   * (b/x)•a
+   * a÷b
+   * Invalid symblol '×'
+   * Invalid symblol '≤'
+   */
+  LATEX_PARSE_ERROR,
+
+  /**
+   * sqrt(x) should be eq with sqrt{2}(x)
+   * log x should be eq with log{10}(x)
+   * ln(x) should be eq with log{e}(x)
+   */
+  EQUIVALENT_FUNCTIONS,
+
+  ALLOW_TRAILING_ZEROS_SYMBOLIC,
 }

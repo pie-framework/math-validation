@@ -1,8 +1,8 @@
-import { Triage } from "../triage";
+import { Triage } from "../../triage";
 
 export default {
   mode: "symbolic",
-  skip: true,
+  //skip: true,
   tests: [
     {
       target: "100",
@@ -60,7 +60,6 @@ export default {
     {
       target: "1000",
       eq: ["1,000", "1,000.00"],
-      triage: Triage.ALLOW_TRAILING_ZEROS_SYMBOLIC,
     },
     { target: "1,500,000", eq: "1500000" },
     { target: "sin(x)", eq: "sin(x)" },

@@ -1,8 +1,8 @@
-import { Triage } from "../triage";
+import { Triage } from "../../triage";
 
 export default {
   mode: "symbolic",
-  skip: true,
+  //skip: true,
   tests: [
     {
       target: "\\left(\\frac{2\\sqrt{2}}{3},\\frac{1}{3}\\right)",
