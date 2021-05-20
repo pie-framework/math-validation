@@ -5,16 +5,26 @@ import {
 import { latexEqual as le } from "./latex-equal";
 export type Latex = string;
 
-const form: HTMLFormElement = document.querySelector("#equalityForm");
+//
 
-form.onsubmit = () => {
-  const inputValue = (<HTMLInputElement>(
-    document.getElementById("#validation-type")
-  )).value;
+let form: HTMLFormElement;
+if (typeof document !== undefined) {
+  form = <HTMLFormElement>document.getElementById("#equalityForm");
+}
 
-  console.log("input value", inputValue);
-  return false; // prevent reload
-};
+// @ts-ignore
+if (form !== undefined) {
+  // @ts-ignore
+  form.onsubmit = () => {
+    debugger;
+    const inputValue = (<HTMLInputElement>(
+      document.getElementById("#validation-type")
+    )).select();
+
+    console.log("input value", inputValue);
+    return false; // prevent reload
+  };
+}
 
 export type Opts = {
   mode?: "symbolic" | "literal";
