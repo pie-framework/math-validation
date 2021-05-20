@@ -5,6 +5,17 @@ import {
 import { latexEqual as le } from "./latex-equal";
 export type Latex = string;
 
+const form: HTMLFormElement = document.querySelector("#equalityForm");
+
+form.onsubmit = () => {
+  const inputValue = (<HTMLInputElement>(
+    document.getElementById("#validation-type")
+  )).value;
+
+  console.log("input value", inputValue);
+  return false; // prevent reload
+};
+
 export type Opts = {
   mode?: "symbolic" | "literal";
   /** only for development - to be removed */
