@@ -8,20 +8,20 @@ export type Latex = string;
 //
 
 let form: HTMLFormElement;
-if (typeof document !== undefined) {
-  form = <HTMLFormElement>document.getElementById("#equalityForm");
+if (typeof document !== "undefined") {
+  form = <HTMLFormElement>document.getElementById("#equalityform")!;
 }
 
 // @ts-ignore
-if (form !== undefined) {
+if (form) {
   // @ts-ignore
   form.onsubmit = () => {
     debugger;
-    const inputValue = (<HTMLInputElement>(
+    const validationType = (<HTMLInputElement>(
       document.getElementById("#validation-type")
     )).select();
 
-    console.log("input value", inputValue);
+    console.log("input value", validationType);
     return false; // prevent reload
   };
 }
