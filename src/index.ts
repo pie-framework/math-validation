@@ -16,11 +16,25 @@ if (typeof document !== "undefined") {
 if (form) {
   // @ts-ignore
   form.onsubmit = () => {
-    debugger;
+    const formData = new FormData(form);
+
+    const text = formData.get("me1") as string;
+
+    console.log(formData, "formdata")
+    console.log(text, "text");
     const validationType = (<HTMLInputElement>(
       document.getElementById("#validation-type")
     )).select();
 
+    let firstExpression: string = (
+      document.getElementById("#me1") as HTMLInputElement
+    ).value;
+
+    let secondExpression: string = (
+      document.getElementById("#me1") as HTMLInputElement
+    ).value;
+
+    le(firstExpression, secondExpression, {});
     console.log("input value", validationType);
     return false; // prevent reload
   };
