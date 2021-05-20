@@ -6,7 +6,8 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "jest",
-    "test:report": "jest --config jest-stare.config.js"
+    "test:report": "jest --config jest-stare.config.js",
+    "build": "tsc -p ."
   },
   "author": "",
   "license": "ISC",
