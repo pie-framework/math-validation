@@ -52,26 +52,27 @@
                 </select>
             </div>
             <h5>Choose literal options</h5>
-            <div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="tzn">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Allow trailing zeros</label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                    <label class="form-check-label" for="ign">Ignore order True</label>
-                </div>
+
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="tzn">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Allow trailing zeros</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="ign">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Ignore order True</label>
             </div>
             <div class="row row-cols-lg-auto g-3 align-items-center">
                 <label>Mathematical expression I</label>
-                <input type="text"  name="me1" id="me1">
+                <input type="text" name="me1" id="me1">
             </div>
             <div>
                 <label>Mathematical expression II</label>
-                <input type="text" id="me2">
+                <input type="text" name="me2" id="me2">
             </div>
             <button class="btn btn-outline-success" type="submit">Check I equal II</button>
         </form>
+
+        <div id="result"></div>
 
     </main>
     <hr>
