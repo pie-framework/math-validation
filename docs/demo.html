@@ -42,36 +42,57 @@
 
     <!-- Begin page content -->
     <main role="main" class="container">
-        <form id="equalityform" class="col-sm-10">
-            <div>
-                <!--<label>Validation Type:</label> -->
-                <select id="validation-type" class="form-select" aria-label="Default select example">
-                    <option selected>Choose Validation Type</option>
-                    <option value="literal">Literal</option>
-                    <option value="symbolic">Symbolic</option>
-                </select>
-            </div>
-            <h5>Choose literal options</h5>
 
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" value="" id="tzn">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Allow trailing zeros</label>
-            </div>
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" value="" id="ign">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Ignore order True</label>
-            </div>
-            <div class="row row-cols-lg-auto g-3 align-items-center">
-                <label>Mathematical expression I</label>
-                <input type="text" id="me1">
-            </div>
-            <div>
-                <label>Mathematical expression II</label>
-                <input type="text" id="me2">
-            </div>
-            <button class="btn btn-outline-success" type="submit">Check I equal II</button>
-        </form>
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6">
 
+
+                <h1 class="mt-5">Choose Validation Type</h1>
+
+
+                <form id="equalityform" class="form-horizontal">
+                    <div class="form-content">
+                        <div class="form-group">
+                            <!--<label>Validation Type:</label> -->
+                            <select id="validation-type" class="form-select" aria-label="Default select example">
+                                <option selected>-</option>
+                                <option value="literal">Literal</option>
+                                <option value="symbolic">Symbolic</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">Choose literal options</div>
+
+                        <div class="form-group">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" value="" id="tzn">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Allow trailing
+                                    zeros</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" value="" id="ign">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Ignore order True</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mathematical expression I</label>
+                            <input type="text" id="me1">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mathematical expression II</label>
+                            <input type="text" id="me2">
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-outline-success" type="submit">     Check I equal II    </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
         <p id="response"></p>
 
     </main>
