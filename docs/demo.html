@@ -50,15 +50,15 @@
                 <h1 class="mt-5">Choose Validation Type</h1>
 
 
-                <form id="equalityform" class="form-horizontal">
+                <form action="" id="equalityform" class="form-horizontal needs-validation" novalidate>
                     <div class="form-content">
                         <div class="form-group">
-                            <!--<label>Validation Type:</label> -->
-                            <select id="validation-type" class="form-select" aria-label="Default select example">
-                                <option selected>-</option>
+                            <!--<label>Choose Validation Type:</label> -->
+                            <select id="validation-type" class="form-select" required>
                                 <option value="literal">Literal</option>
                                 <option value="symbolic">Symbolic</option>
                             </select>
+                            <div class="invalid-feedback">Please choose validation type</div>
                         </div>
 
                         <div class="form-group">Choose literal options</div>
@@ -66,23 +66,25 @@
                         <div class="form-group">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" value="" id="tzn">
-                                <label class="form-check-label" for="flexSwitchCheckDefault">Allow trailing
+                                <label class="form-check-label" for="tzn">Allow trailing
                                     zeros</label>
                             </div>
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" value="" id="ign">
-                                <label class="form-check-label" for="flexSwitchCheckDefault">Ignore order True</label>
+                                <label class="form-check-label" for="ign">Ignore order True</label>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label>Mathematical expression I</label>
-                            <input type="text" id="me1">
+                            <label for="me1">Mathematical expression I</label>
+                            <input type="text" id="me1" class="form-control" required>
+                            <div class="invalid-feedback">An expression must be provided</div>
                         </div>
 
                         <div class="form-group">
-                            <label>Mathematical expression II</label>
-                            <input type="text" id="me2">
+                            <label for="me2">Mathematical expression II</label>
+                            <input type="text" id="me2" class="form-control" required>
+                             <div class="invalid-feedback">An expression must be provided</div>
                         </div>
 
                         <div class="form-group">

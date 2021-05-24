@@ -98,6 +98,13 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     window.history.replaceState(null, null, flags);
 
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    form.classList.add("was-validated");
+
     // reset flags
     flags = "?";
 
