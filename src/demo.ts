@@ -1,44 +1,56 @@
-import { string } from "mathjs";
 import { latexEqual } from "./index";
 import { Opts } from "./latex-equal";
 
 let opts: Opts = {};
-let flags = "";
+let flags = "?";
 
+//const baseUrl = window.location.href;
 const params = window.location.search;
 const urlParams = new URLSearchParams(params);
 
-// atob()
+// this metod is necessary in order to encode UTF-8 characters
+const toBinary = (latex) => {
+  const codeUnits = new Uint16Array(latex.length);
 
-// // this metod is necessary in order to encode UTF-8 characters
-// const toBinary = (latex) => {
-//   const codeUnits = new Uint16Array(latex.length);
+  for (let i = 0; i < codeUnits.length; i++) {
+    codeUnits[i] = latex.charCodeAt(i);
+  }
+  return String.fromCharCode(...new Uint8Array(codeUnits.buffer));
+};
 
-//   for (let i = 0; i < codeUnits.length; i++) {
-//     codeUnits[i] = latex.charCodeAt(i);
-//   }
-//   return String.fromCharCode(...new Uint8Array(codeUnits.buffer));
-// };
+const fromBinary = (binary) => {
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < bytes.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return String.fromCharCode(...new Uint16Array(bytes.buffer));
+};
 
 window.addEventListener("DOMContentLoaded", (event) => {
   const form = <HTMLFormElement>document.getElementById("equalityform")!;
 
   const mode = document.getElementById("validation-type") as HTMLInputElement;
   mode.value = urlParams.get("validation-type")
-    ? urlParams.get("validation-type")
+    ? atob(toBinary(urlParams.get("validation-type")))
     : "";
 
   const allowTzn = document.getElementById("tzn") as HTMLInputElement;
-  allowTzn.value = urlParams.get("tzn") ? urlParams.get("tzn") : "";
+  // @ts-ignore
+  allowTzn.checked = urlParams.get("tzn")
+    ? atob(toBinary(urlParams.get("tzn")))
+    : false;
 
   const ignTrue = document.getElementById("ign") as HTMLInputElement;
-  ignTrue.value = urlParams.get("ign") ? urlParams.get("ign") : "";
+  // @ts-ignore
+  ignTrue.checked = urlParams.get("ign")
+    ? atob(toBinary(urlParams.get("ign")))
+    : false;
 
   const exp1 = document.getElementById("me1") as HTMLInputElement;
-  exp1.value = urlParams.get("me1") ? urlParams.get("me1") : "";
+  exp1.value = urlParams.get("me1") ? atob(toBinary(urlParams.get("me1"))) : "";
 
   const exp2 = document.getElementById("me2") as HTMLInputElement;
-  exp2.value = urlParams.get("me2") ? urlParams.get("me2") : "";
+  exp2.value = urlParams.get("me2") ? atob(toBinary(urlParams.get("me2"))) : "";
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -47,18 +59,20 @@ window.addEventListener("DOMContentLoaded", (event) => {
       document.getElementById("validation-type") as HTMLInputElement
     ).value;
 
+    flags += "validation-type=" + btoa(validationType);
+
     if (validationType == "literal" || validationType == "symbolic") {
       console.log(validationType, "validationType");
       opts.mode = validationType;
       console.log(opts.mode, "mode");
     }
 
-    const tzn: string = (document.getElementById("tzn") as HTMLInputElement)
-      .value;
+    const tzn: boolean = (document.getElementById("tzn") as HTMLInputElement)
+      .checked;
 
-    const ignoreOrder: string = (
+    const ignoreOrder: boolean = (
       document.getElementById("ign") as HTMLInputElement
-    ).value;
+    ).checked;
 
     if (opts.mode == "literal") {
       opts.literal = {
@@ -66,22 +80,22 @@ window.addEventListener("DOMContentLoaded", (event) => {
         ignoreOrder: false,
       };
 
-      console.log("tzn", tzn);
       if (tzn) {
         opts.literal.allowTrailingZeros = true;
+        flags += "&tzn=" + fromBinary(btoa(tzn.toString()));
       }
 
-      console.log(ignoreOrder, "ign");
       if (ignoreOrder) {
         opts.literal.ignoreOrder = true;
+        flags += "&ign=" + fromBinary(btoa(ignoreOrder.toString()));
       }
     }
 
-    let firstExpression: string = (
+    const firstExpression: string = (
       document.getElementById("me1") as HTMLInputElement
     ).value;
 
-    let secondExpression: string = (
+    const secondExpression: string = (
       document.getElementById("me2") as HTMLInputElement
     ).value;
 
@@ -94,14 +108,18 @@ window.addEventListener("DOMContentLoaded", (event) => {
       message = `The entered expressions does not validate each other in ${validationType} mode`;
     }
 
-    console.log(firstExpression, "firstexpr");
-    console.log(secondExpression, "secondexpr");
-    console.log(result, "result");
+    flags +=
+      "&me1=" +
+      fromBinary(btoa(firstExpression)) +
+      "&me2=" +
+      fromBinary(btoa(secondExpression));
 
-    let paragraph = document.createElement("p");
-    const node = document.createTextNode(message);
-    paragraph.appendChild(node);
-    const response = document.getElementById("result");
-    response.appendChild(paragraph);
+    window.history.replaceState(null, null, flags);
+
+    // reset flags
+    flags = "?";
+
+    const response = document.getElementById("response") as HTMLInputElement;
+    response.innerHTML = message;
   });
 });
