@@ -3566,11 +3566,10 @@ var Demo = (function (mathjs_1, require$$1) {
 
 	});
 
-	var demo_1 = createCommonjsModule(function (module, exports) {
+	var demo = createCommonjsModule(function (module, exports) {
 	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.demo = void 0;
 
-	const demo = () => {
+	function default_1() {
 	    let opts = {};
 	    let flags = "?";
 	    const params = window.location.search;
@@ -3732,13 +3731,13 @@ var Demo = (function (mathjs_1, require$$1) {
 	            flags = "?";
 	        });
 	    });
-	};
-	exports.demo = demo;
+	}
+	exports.default = default_1;
 
 	});
 
-	var demo = /*@__PURE__*/getDefaultExportFromCjs(demo_1);
+	var demo$1 = /*@__PURE__*/getDefaultExportFromCjs(demo);
 
-	return demo;
+	return demo$1;
 
 }(mathjs_1, require$$1));
