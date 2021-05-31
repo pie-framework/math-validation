@@ -1,5 +1,6 @@
 import { logger } from "../log";
-import { mathjs, MathNode } from "../mathjs";
+import { mathjs } from "../mathjs";
+import { MathNode } from "mathjs";
 
 const log = logger("mv:symbolic");
 

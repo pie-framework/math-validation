@@ -1,6 +1,9 @@
 import { logger } from "./log";
 
-import { mathjs as mjs, MathNode } from "./mathjs";
+import { mathjs as mjs } from "./mathjs";
+
+import { MathNode } from "mathjs";
+
 const m: any = mjs;
 
 import { AstToMathJs } from "./conversion/ast-to-mathjs";
