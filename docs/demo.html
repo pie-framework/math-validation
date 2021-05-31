@@ -1,6 +1,5 @@
 <html>
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <title>Demo</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -12,106 +11,124 @@
     <script src="js/diff2html.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type="module">
-       import * as Demo from "./js/demo.js"
-        Demo();
-
+      import { demo } from "./js/demo.js";
+      console.log("demo:", demo);
+      demo();
     </script>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <header>
-        <!-- Fixed navbar -->
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" id="navbar-title" href="#">equality-checker</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/math-validation">Home</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link">Demo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="coverage-link" class="nav-link disabled" href="#">Coverage</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" id="navbar-title" href="#">equality-checker</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarCollapse"
+          aria-controls="navbarCollapse"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/math-validation">Home</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link">Demo</a>
+            </li>
+            <li class="nav-item">
+              <a id="coverage-link" class="nav-link disabled" href="#"
+                >Coverage</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
     </header>
 
     <!-- Begin page content -->
     <main role="main" class="container">
-        <h1 class="page-header text-center margin">Math equality checker</h1>
-        <form action="" id="equality-form" class=" margin form-horizontal">
-            <div class="clearfix"></div>
-            <div class="form-content">
-                <div class="form-group">
-                    <label>Choose Validation Type:</label>
-                    <select id="validation-type" class="form-control">
-                        <option value="literal">Literal</option>
-                        <option value="symbolic">Symbolic</option>
-                    </select>
-                </div>
+      <h1 class="page-header text-center margin">Math equality checker</h1>
+      <form action="" id="equality-form" class="margin form-horizontal">
+        <div class="clearfix"></div>
+        <div class="form-content">
+          <div class="form-group">
+            <label>Choose Validation Type:</label>
+            <select id="validation-type" class="form-control">
+              <option value="literal">Literal</option>
+              <option value="symbolic">Symbolic</option>
+            </select>
+          </div>
 
-                <div class="form-group  d-none" id="literal-options">
-                    <div class="form-group">Choose literal options</div>
+          <div class="form-group d-none" id="literal-options">
+            <div class="form-group">Choose literal options</div>
 
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" value="" id="trailing-zeros" />
-                        <label class="form-check-label" for="trailing-zeros">
-                            Allow trailing zeros
-                        </label>
-                    </div>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" value="" id="ignore-order" />
-                        <label class="form-check-label" for="ignore-order">Ignore order True</label>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <label for="math-expression1">Mathematical expression I</label>
-                            <input type="text" id="math-expression1" class="form-control" />
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <text id="equality-result" class="sign text-center"></text>
-                    </div>
-
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <label for="math-expression2">Mathematical expression II</label>
-                            <input type="text" id="math-expression2" class="form-control" />
-                        </div>
-                    </div>
-                </div>
-                <br>
-
-                <div class="form-group">
-                    <button class="btn btn-outline-success" type="submit">
-                        Check I equal II
-                    </button>
-                </div>
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="trailing-zeros"
+              />
+              <label class="form-check-label" for="trailing-zeros">
+                Allow trailing zeros
+              </label>
             </div>
-        </form>
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="ignore-order"
+              />
+              <label class="form-check-label" for="ignore-order"
+                >Ignore order True</label
+              >
+            </div>
+          </div>
 
-        <br>
-        <div id="response" class="alert"></div>
+          <div class="row">
+            <div class="col-md-5">
+              <div class="form-group">
+                <label for="math-expression1">Mathematical expression I</label>
+                <input type="text" id="math-expression1" class="form-control" />
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <text id="equality-result" class="sign text-center"></text>
+            </div>
+
+            <div class="col-md-5">
+              <div class="form-group">
+                <label for="math-expression2">Mathematical expression II</label>
+                <input type="text" id="math-expression2" class="form-control" />
+              </div>
+            </div>
+          </div>
+          <br />
+
+          <div class="form-group">
+            <button class="btn btn-outline-success" type="submit">
+              Check I equal II
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <br />
+      <div id="response" class="alert"></div>
     </main>
 
     <footer class="footer">
-        <div class="container">
-            <span class="text-muted">Enjoy playground! 2021</span>
-        </div>
+      <div class="container">
+        <span class="text-muted">Enjoy playground! 2021</span>
+      </div>
     </footer>
-</body>
-
+  </body>
 </html>
