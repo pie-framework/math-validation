@@ -2,13 +2,13 @@
   "numFailedTestSuites": 0,
   "numFailedTests": 0,
   "numPassedTestSuites": 3,
-  "numPassedTests": 35,
+  "numPassedTests": 219,
   "numPendingTestSuites": 0,
-  "numPendingTests": 282,
+  "numPendingTests": 214,
   "numRuntimeErrorTestSuites": 0,
   "numTodoTests": 0,
   "numTotalTestSuites": 3,
-  "numTotalTests": 317,
+  "numTotalTests": 433,
   "openHandles": [],
   "snapshot": {
     "added": 0,
@@ -26,257 +26,21 @@
     "unmatched": 0,
     "updated": 0
   },
-  "startTime": 1617867171648,
+  "startTime": 1621504457299,
   "success": false,
   "testResults": [
     {
       "leaks": false,
       "numFailingTests": 0,
-      "numPassingTests": 16,
+      "numPassingTests": 20,
       "numPendingTests": 0,
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1617867174677,
-        "runtime": 2640,
+        "end": 1621504458634,
+        "runtime": 862,
         "slow": false,
-        "start": 1617867172037
-      },
-      "skipped": false,
-      "snapshot": {
-        "added": 0,
-        "fileDeleted": false,
-        "matched": 0,
-        "unchecked": 0,
-        "unmatched": 0,
-        "updated": 0,
-        "uncheckedKeys": []
-      },
-      "testFilePath": "/Users/carla/Documents/Work/pie-framework/math-validation/src/__tests__/node-sort.spec.ts",
-      "testResults": [
-        {
-          "ancestorTitles": [
-            "'a + b' => 'a + b'"
-          ],
-          "duration": 57,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'a + b' => 'a + b' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'b + a' => 'a + b'"
-          ],
-          "duration": 29,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'b + a' => 'a + b' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'a * b' => 'a * b'"
-          ],
-          "duration": 34,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'a * b' => 'a * b' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'b * a' => 'a * b'"
-          ],
-          "duration": 24,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'b * a' => 'a * b' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'b * a + 2' => '2 + a * b'"
-          ],
-          "duration": 34,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'b * a + 2' => '2 + a * b' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'a + b + c' => 'a + b + c'"
-          ],
-          "duration": 50,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'a + b + c' => 'a + b + c' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'b + c + a' => 'a + b + c'"
-          ],
-          "duration": 43,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'b + c + a' => 'a + b + c' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'b + a + c' => 'a + b + c'"
-          ],
-          "duration": 31,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'b + a + c' => 'a + b + c' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'A < B' => 'B > A'"
-          ],
-          "duration": 10,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'A < B' => 'B > A' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'A < B > c' => 'c < B < A'"
-          ],
-          "duration": 8,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'A < B > c' => 'c < B < A' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'A > B + 2' => '2+ B < A'"
-          ],
-          "duration": 18,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'A > B + 2' => '2+ B < A' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'g+b > a > d ' => 'd < a < b+g'"
-          ],
-          "duration": 31,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'g+b > a > d ' => 'd < a < b+g' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'a + (c + b)' => 'a + (b + c)'"
-          ],
-          "duration": 35,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'a + (c + b)' => 'a + (b + c)' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'a*(c + b)' => '(b + c)*a'"
-          ],
-          "duration": 29,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'a*(c + b)' => '(b + c)*a' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'(a+e) + (c + b)' => '(e+a) + (b + c)'"
-          ],
-          "duration": 48,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'(a+e) + (c + b)' => '(e+a) + (b + c)' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        },
-        {
-          "ancestorTitles": [
-            "'1+2*(3+4*(5+6*(7+8)))' => '(4*((8+7)*6+5)+3)*2+1'"
-          ],
-          "duration": 103,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "'1+2*(3+4*(5+6*(7+8)))' => '(4*((8+7)*6+5)+3)*2+1' sorts",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "sorts"
-        }
-      ],
-      "failureMessage": null
-    },
-    {
-      "leaks": false,
-      "numFailingTests": 0,
-      "numPassingTests": 16,
-      "numPendingTests": 0,
-      "numTodoTests": 0,
-      "openHandles": [],
-      "perfStats": {
-        "end": 1617867175512,
-        "runtime": 3479,
-        "slow": false,
-        "start": 1617867172033
+        "start": 1621504457772
       },
       "skipped": false,
       "snapshot": {
@@ -294,7 +58,59 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
+          "duration": 6,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "bugs in lta (1 + (1 + 1)) => [ '+', 1, 1, 1 ]",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(1 + (1 + 1)) => [ '+', 1, 1, 1 ]"
+        },
+        {
+          "ancestorTitles": [
+            "bugs in lta"
+          ],
           "duration": 4,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "bugs in lta \\frac{1}{2} => [ '/', 1, 2 ]",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "\\frac{1}{2} => [ '/', 1, 2 ]"
+        },
+        {
+          "ancestorTitles": [
+            "bugs in lta"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "bugs in lta 15% => [ '%', 15 ]",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "15% => [ '%', 15 ]"
+        },
+        {
+          "ancestorTitles": [
+            "bugs in lta"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "bugs in lta (4 + 1) / (3 + 2 - 1) => [ '/', [Array], [Array] ]",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(4 + 1) / (3 + 2 - 1) => [ '/', [Array], [Array] ]"
+        },
+        {
+          "ancestorTitles": [
+            "bugs in lta"
+          ],
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta 1000 => 1000",
@@ -307,7 +123,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta 1,000 => 1000",
@@ -333,7 +149,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta 1,000,000.000 => [ 'tzn', 1000000, 3 ]",
@@ -346,7 +162,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta 1,000,000.001 => 1000000.001",
@@ -359,7 +175,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta 1,000,000.00000000000000000 => [ 'tzn', 1000000, 17 ]",
@@ -411,7 +227,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta 1.11000 => [ 'tzn', 1.11, 3 ]",
@@ -437,7 +253,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 3,
+          "duration": 5,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta a•b => [ '*', 'a', 'b' ]",
@@ -450,7 +266,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta a·b => [ '*', 'a', 'b' ]",
@@ -463,7 +279,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta a÷b => [ '/', 'a', 'b' ]",
@@ -476,7 +292,7 @@
           "ancestorTitles": [
             "bugs in lta"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "bugs in lta a≤b => [ 'le', 'a', 'b' ]",
@@ -504,15 +320,1097 @@
     {
       "leaks": false,
       "numFailingTests": 0,
-      "numPassingTests": 3,
-      "numPendingTests": 282,
+      "numPassingTests": 82,
+      "numPendingTests": 0,
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1617867177113,
-        "runtime": 5080,
+        "end": 1621504460416,
+        "runtime": 2651,
+        "slow": false,
+        "start": 1621504457765
+      },
+      "skipped": false,
+      "snapshot": {
+        "added": 0,
+        "fileDeleted": false,
+        "matched": 0,
+        "unchecked": 0,
+        "unmatched": 0,
+        "updated": 0,
+        "uncheckedKeys": []
+      },
+      "testFilePath": "/Users/carla/Documents/Work/pie-framework/math-validation/src/__tests__/node-sort.spec.ts",
+      "testResults": [
+        {
+          "ancestorTitles": [],
+          "duration": 5,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": ""
+        },
+        {
+          "ancestorTitles": [],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": ""
+        },
+        {
+          "ancestorTitles": [],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": ""
+        },
+        {
+          "ancestorTitles": [],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": ""
+        },
+        {
+          "ancestorTitles": [],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": ""
+        },
+        {
+          "ancestorTitles": [],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": ""
+        },
+        {
+          "ancestorTitles": [
+            "[ 'y*(3)', '(y)*3', '(y)*(3)', '(3)*(y)' ] => 3*y"
+          ],
+          "duration": 5,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'y*(3)', '(y)*3', '(y)*(3)', '(3)*(y)' ] => 3*y y*(3)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "y*(3)"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'y*(3)', '(y)*3', '(y)*(3)', '(3)*(y)' ] => 3*y"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'y*(3)', '(y)*3', '(y)*(3)', '(3)*(y)' ] => 3*y (y)*3",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(y)*3"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'y*(3)', '(y)*3', '(y)*(3)', '(3)*(y)' ] => 3*y"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'y*(3)', '(y)*3', '(y)*(3)', '(3)*(y)' ] => 3*y (y)*(3)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(y)*(3)"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'y*(3)', '(y)*3', '(y)*(3)', '(3)*(y)' ] => 3*y"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'y*(3)', '(y)*3', '(y)*(3)', '(3)*(y)' ] => 3*y (3)*(y)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(3)*(y)"
+        },
+        {
+          "ancestorTitles": [
+            "[ '3(y)', '(3)(y)', '(y)(3)', '((((y))))(3)' ] => 3y"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '3(y)', '(3)(y)', '(y)(3)', '((((y))))(3)' ] => 3y 3(y)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "3(y)"
+        },
+        {
+          "ancestorTitles": [
+            "[ '3(y)', '(3)(y)', '(y)(3)', '((((y))))(3)' ] => 3y"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '3(y)', '(3)(y)', '(y)(3)', '((((y))))(3)' ] => 3y (3)(y)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(3)(y)"
+        },
+        {
+          "ancestorTitles": [
+            "[ '3(y)', '(3)(y)', '(y)(3)', '((((y))))(3)' ] => 3y"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '3(y)', '(3)(y)', '(y)(3)', '((((y))))(3)' ] => 3y (y)(3)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(y)(3)"
+        },
+        {
+          "ancestorTitles": [
+            "[ '3(y)', '(3)(y)', '(y)(3)', '((((y))))(3)' ] => 3y"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '3(y)', '(3)(y)', '(y)(3)', '((((y))))(3)' ] => 3y ((((y))))(3)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "((((y))))(3)"
+        },
+        {
+          "ancestorTitles": [
+            "3y => 3y"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "3y => 3y 3y",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "3y"
+        },
+        {
+          "ancestorTitles": [
+            "(y+x)*(3) => 3*(x+y)"
+          ],
+          "duration": 15,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "(y+x)*(3) => 3*(x+y) (y+x)*(3)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(y+x)*(3)"
+        },
+        {
+          "ancestorTitles": [
+            "1 + 1 => 1 + 1"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "1 + 1 => 1 + 1 1 + 1",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "1 + 1"
+        },
+        {
+          "ancestorTitles": [
+            "1 + 1 => [ '+', 1, 1 ]"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "1 + 1 => [ '+', 1, 1 ] 1 + 1",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "1 + 1"
+        },
+        {
+          "ancestorTitles": [
+            "[ '2+1', '1+2' ] => 1+2"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '2+1', '1+2' ] => 1+2 2+1",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "2+1"
+        },
+        {
+          "ancestorTitles": [
+            "[ '2+1', '1+2' ] => 1+2"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '2+1', '1+2' ] => 1+2 1+2",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "1+2"
+        },
+        {
+          "ancestorTitles": [
+            "[ '2 + 1 * 3', '2 + 3 * 1' ] => 2 + 1 * 3"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '2 + 1 * 3', '2 + 3 * 1' ] => 2 + 1 * 3 2 + 1 * 3",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "2 + 1 * 3"
+        },
+        {
+          "ancestorTitles": [
+            "[ '2 + 1 * 3', '2 + 3 * 1' ] => 2 + 1 * 3"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '2 + 1 * 3', '2 + 3 * 1' ] => 2 + 1 * 3 2 + 3 * 1",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "2 + 3 * 1"
+        },
+        {
+          "ancestorTitles": [
+            "(3 * 2) + 1 => 1 + 2 * 3"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "(3 * 2) + 1 => 1 + 2 * 3 (3 * 2) + 1",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(3 * 2) + 1"
+        },
+        {
+          "ancestorTitles": [
+            "[ '(4*((8+7)*6+5)+3)*2+1', '1 + 2 *(3 + 4*((8+7)*6+5))' ] => 1 + 2 * (3 + 4 * (5 + 6 * (7+8)))"
+          ],
+          "duration": 251,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '(4*((8+7)*6+5)+3)*2+1', '1 + 2 *(3 + 4*((8+7)*6+5))' ] => 1 + 2 * (3 + 4 * (5 + 6 * (7+8))) (4*((8+7)*6+5)+3)*2+1",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(4*((8+7)*6+5)+3)*2+1"
+        },
+        {
+          "ancestorTitles": [
+            "[ '(4*((8+7)*6+5)+3)*2+1', '1 + 2 *(3 + 4*((8+7)*6+5))' ] => 1 + 2 * (3 + 4 * (5 + 6 * (7+8)))"
+          ],
+          "duration": 252,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '(4*((8+7)*6+5)+3)*2+1', '1 + 2 *(3 + 4*((8+7)*6+5))' ] => 1 + 2 * (3 + 4 * (5 + 6 * (7+8))) 1 + 2 *(3 + 4*((8+7)*6+5))",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "1 + 2 *(3 + 4*((8+7)*6+5))"
+        },
+        {
+          "ancestorTitles": [
+            "2 + 3 * 1 => 2 + 1 * 3"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "2 + 3 * 1 => 2 + 1 * 3 2 + 3 * 1",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "2 + 3 * 1"
+        },
+        {
+          "ancestorTitles": [
+            "3 * 1 + 2 => 2 + 1 * 3"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "3 * 1 + 2 => 2 + 1 * 3 3 * 1 + 2",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "3 * 1 + 2"
+        },
+        {
+          "ancestorTitles": [
+            "(1 * 3) + 2 => 2 + 1 * 3"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "(1 * 3) + 2 => 2 + 1 * 3 (1 * 3) + 2",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(1 * 3) + 2"
+        },
+        {
+          "ancestorTitles": [
+            "[ '(3 + 2) * 1', '(2 + 3) * 1', '1 * (3 + 2) ' ] => 1 * (2 + 3)"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '(3 + 2) * 1', '(2 + 3) * 1', '1 * (3 + 2) ' ] => 1 * (2 + 3) (3 + 2) * 1",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(3 + 2) * 1"
+        },
+        {
+          "ancestorTitles": [
+            "[ '(3 + 2) * 1', '(2 + 3) * 1', '1 * (3 + 2) ' ] => 1 * (2 + 3)"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '(3 + 2) * 1', '(2 + 3) * 1', '1 * (3 + 2) ' ] => 1 * (2 + 3) (2 + 3) * 1",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(2 + 3) * 1"
+        },
+        {
+          "ancestorTitles": [
+            "[ '(3 + 2) * 1', '(2 + 3) * 1', '1 * (3 + 2) ' ] => 1 * (2 + 3)"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '(3 + 2) * 1', '(2 + 3) * 1', '1 * (3 + 2) ' ] => 1 * (2 + 3) 1 * (3 + 2) ",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "1 * (3 + 2) "
+        },
+        {
+          "ancestorTitles": [
+            "a + b => a + b"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "a + b => a + b a + b",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "a + b"
+        },
+        {
+          "ancestorTitles": [
+            "b + a => a + b"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "b + a => a + b b + a",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "b + a"
+        },
+        {
+          "ancestorTitles": [
+            "a * b => a * b"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "a * b => a * b a * b",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "a * b"
+        },
+        {
+          "ancestorTitles": [
+            "b * a => a * b"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "b * a => a * b b * a",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "b * a"
+        },
+        {
+          "ancestorTitles": [
+            "b * a + 2 => 2 + a * b"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "b * a + 2 => 2 + a * b b * a + 2",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "b * a + 2"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'a + (c + b)', '(b + c)+ a' ] => [ '+', 'a', 'b', 'c' ]"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'a + (c + b)', '(b + c)+ a' ] => [ '+', 'a', 'b', 'c' ] a + (c + b)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "a + (c + b)"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'a + (c + b)', '(b + c)+ a' ] => [ '+', 'a', 'b', 'c' ]"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'a + (c + b)', '(b + c)+ a' ] => [ '+', 'a', 'b', 'c' ] (b + c)+ a",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(b + c)+ a"
+        },
+        {
+          "ancestorTitles": [
+            "a * (c + b) => a * (b +c)"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "a * (c + b) => a * (b +c) a * (c + b)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "a * (c + b)"
+        },
+        {
+          "ancestorTitles": [
+            "a + (c + b) => [ '+', 'a', 'b', 'c' ]"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "a + (c + b) => [ '+', 'a', 'b', 'c' ] a + (c + b)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "a + (c + b)"
+        },
+        {
+          "ancestorTitles": [
+            "[ '(e + a) + (c + b)', '(c + b) + (e + a)' ] => [ '+', 'a', 'b', 'c', 'e' ]"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '(e + a) + (c + b)', '(c + b) + (e + a)' ] => [ '+', 'a', 'b', 'c', 'e' ] (e + a) + (c + b)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(e + a) + (c + b)"
+        },
+        {
+          "ancestorTitles": [
+            "[ '(e + a) + (c + b)', '(c + b) + (e + a)' ] => [ '+', 'a', 'b', 'c', 'e' ]"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '(e + a) + (c + b)', '(c + b) + (e + a)' ] => [ '+', 'a', 'b', 'c', 'e' ] (c + b) + (e + a)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(c + b) + (e + a)"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'a + b + c', 'b+c+a' ] => [ '+', 'a', 'b', 'c' ]"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'a + b + c', 'b+c+a' ] => [ '+', 'a', 'b', 'c' ] a + b + c",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "a + b + c"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'a + b + c', 'b+c+a' ] => [ '+', 'a', 'b', 'c' ]"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'a + b + c', 'b+c+a' ] => [ '+', 'a', 'b', 'c' ] b+c+a",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "b+c+a"
+        },
+        {
+          "ancestorTitles": [
+            "a + e + b + c + f + g + d => [\n  '+', 'a', 'b',\n  'c', 'd', 'e',\n  'f', 'g'\n]"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "a + e + b + c + f + g + d => [\n  '+', 'a', 'b',\n  'c', 'd', 'e',\n  'f', 'g'\n] a + e + b + c + f + g + d",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "a + e + b + c + f + g + d"
+        },
+        {
+          "ancestorTitles": [
+            "b * a * c => [ '*', 'a', 'b', 'c' ]"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "b * a * c => [ '*', 'a', 'b', 'c' ] b * a * c",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "b * a * c"
+        },
+        {
+          "ancestorTitles": [
+            "C + A + F < H + D + B => [ '>', [Array], [Array] ]"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "C + A + F < H + D + B => [ '>', [Array], [Array] ] C + A + F < H + D + B",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "C + A + F < H + D + B"
+        },
+        {
+          "ancestorTitles": [
+            "C + A + F <= H + D + B => [ 'ge', [Array], [Array] ]"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "C + A + F <= H + D + B => [ 'ge', [Array], [Array] ] C + A + F <= H + D + B",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "C + A + F <= H + D + B"
+        },
+        {
+          "ancestorTitles": [
+            "[ '(4 + 1) + (3 + 2)', '(3 + 2) + (4 + 1)' ] => [ '+', 1, 2, 3, 4 ]"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '(4 + 1) + (3 + 2)', '(3 + 2) + (4 + 1)' ] => [ '+', 1, 2, 3, 4 ] (4 + 1) + (3 + 2)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(4 + 1) + (3 + 2)"
+        },
+        {
+          "ancestorTitles": [
+            "[ '(4 + 1) + (3 + 2)', '(3 + 2) + (4 + 1)' ] => [ '+', 1, 2, 3, 4 ]"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '(4 + 1) + (3 + 2)', '(3 + 2) + (4 + 1)' ] => [ '+', 1, 2, 3, 4 ] (3 + 2) + (4 + 1)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(3 + 2) + (4 + 1)"
+        },
+        {
+          "ancestorTitles": [
+            "(4 + 1) + (3 * 2) => [ '+', 1, 4, [Array] ]"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "(4 + 1) + (3 * 2) => [ '+', 1, 4, [Array] ] (4 + 1) + (3 * 2)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(4 + 1) + (3 * 2)"
+        },
+        {
+          "ancestorTitles": [
+            "(3 + 2) + (4 * 1) => [ '+', 2, 3, [Array] ]"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "(3 + 2) + (4 * 1) => [ '+', 2, 3, [Array] ] (3 + 2) + (4 * 1)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(3 + 2) + (4 * 1)"
+        },
+        {
+          "ancestorTitles": [
+            "A < B => B > A"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "A < B => B > A A < B",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "A < B"
+        },
+        {
+          "ancestorTitles": [
+            "C + A < D + B => B +D > A + C"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "C + A < D + B => B +D > A + C C + A < D + B",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "C + A < D + B"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'A > B', 'B < A' ] => A > B"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'A > B', 'B < A' ] => A > B A > B",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "A > B"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'A > B', 'B < A' ] => A > B"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'A > B', 'B < A' ] => A > B B < A",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "B < A"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'A > B + 2', 'B + 2 < A ' ] => A > 2 + B"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'A > B + 2', 'B + 2 < A ' ] => A > 2 + B A > B + 2",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "A > B + 2"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'A > B + 2', 'B + 2 < A ' ] => A > 2 + B"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'A > B + 2', 'B + 2 < A ' ] => A > 2 + B B + 2 < A ",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "B + 2 < A "
+        },
+        {
+          "ancestorTitles": [
+            "[ 'A < B > C', 'C < B > A' ] => A < B > C"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'A < B > C', 'C < B > A' ] => A < B > C A < B > C",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "A < B > C"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'A < B > C', 'C < B > A' ] => A < B > C"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'A < B > C', 'C < B > A' ] => A < B > C C < B > A",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "C < B > A"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'C == B == A', 'A == B == C', 'B == C == A', 'B == A == C' ] => A == B == C"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'C == B == A', 'A == B == C', 'B == C == A', 'B == A == C' ] => A == B == C C == B == A",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "C == B == A"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'C == B == A', 'A == B == C', 'B == C == A', 'B == A == C' ] => A == B == C"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'C == B == A', 'A == B == C', 'B == C == A', 'B == A == C' ] => A == B == C A == B == C",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "A == B == C"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'C == B == A', 'A == B == C', 'B == C == A', 'B == A == C' ] => A == B == C"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'C == B == A', 'A == B == C', 'B == C == A', 'B == A == C' ] => A == B == C B == C == A",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "B == C == A"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'C == B == A', 'A == B == C', 'B == C == A', 'B == A == C' ] => A == B == C"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'C == B == A', 'A == B == C', 'B == C == A', 'B == A == C' ] => A == B == C B == A == C",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "B == A == C"
+        },
+        {
+          "ancestorTitles": [
+            "C + B + A == B + A + C => [ '=', [Array], [Array] ]"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "C + B + A == B + A + C => [ '=', [Array], [Array] ] C + B + A == B + A + C",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "C + B + A == B + A + C"
+        },
+        {
+          "ancestorTitles": [
+            "C + B + A == B + A + C == A + C +B => [ '=', [Array], [Array], [Array] ]"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "C + B + A == B + A + C == A + C +B => [ '=', [Array], [Array], [Array] ] C + B + A == B + A + C == A + C +B",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "C + B + A == B + A + C == A + C +B"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'g + b < a < d ', 'd > a > g + b' ] => d > a > b + g"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'g + b < a < d ', 'd > a > g + b' ] => d > a > b + g g + b < a < d ",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "g + b < a < d "
+        },
+        {
+          "ancestorTitles": [
+            "[ 'g + b < a < d ', 'd > a > g + b' ] => d > a > b + g"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'g + b < a < d ', 'd > a > g + b' ] => d > a > b + g d > a > g + b",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "d > a > g + b"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'b <= a', 'a >= b' ] => a >= b"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'b <= a', 'a >= b' ] => a >= b b <= a",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "b <= a"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'b <= a', 'a >= b' ] => a >= b"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'b <= a', 'a >= b' ] => a >= b a >= b",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "a >= b"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'b < a <= d', 'd >= a > b' ] => d >= a > b"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'b < a <= d', 'd >= a > b' ] => d >= a > b b < a <= d",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "b < a <= d"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'b < a <= d', 'd >= a > b' ] => d >= a > b"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'b < a <= d', 'd >= a > b' ] => d >= a > b d >= a > b",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "d >= a > b"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'b < a < d', 'd > a > b' ] => d > a > b"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'b < a < d', 'd > a > b' ] => d > a > b b < a < d",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "b < a < d"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'b < a < d', 'd > a > b' ] => d > a > b"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'b < a < d', 'd > a > b' ] => d > a > b d > a > b",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "d > a > b"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'x == y', 'y == x' ] => x ==y"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'x == y', 'y == x' ] => x ==y x == y",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "x == y"
+        },
+        {
+          "ancestorTitles": [
+            "[ 'x == y', 'y == x' ] => x ==y"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ 'x == y', 'y == x' ] => x ==y y == x",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "y == x"
+        },
+        {
+          "ancestorTitles": [
+            "[ '7+x == y', 'y == 7 + x' ] =>  y == 7 + x"
+          ],
+          "duration": 6,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '7+x == y', 'y == 7 + x' ] =>  y == 7 + x 7+x == y",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "7+x == y"
+        },
+        {
+          "ancestorTitles": [
+            "[ '7+x == y', 'y == 7 + x' ] =>  y == 7 + x"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '7+x == y', 'y == 7 + x' ] =>  y == 7 + x y == 7 + x",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "y == 7 + x"
+        },
+        {
+          "ancestorTitles": [
+            "(3 + 2) + 1 => [ '+', 1, 2, 3 ]"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "(3 + 2) + 1 => [ '+', 1, 2, 3 ] (3 + 2) + 1",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(3 + 2) + 1"
+        },
+        {
+          "ancestorTitles": [
+            "(y*x)(3) => [ '*', 3, 'x', 'y' ]"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "(y*x)(3) => [ '*', 3, 'x', 'y' ] (y*x)(3)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(y*x)(3)"
+        },
+        {
+          "ancestorTitles": [
+            "[ '(4 + 1 + z) + (3 + 2 * x)', '(2 * x + 3) + (z + 4 + 1)' ] => [ '+', 1, 3, 4, 'z', [Array] ]"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '(4 + 1 + z) + (3 + 2 * x)', '(2 * x + 3) + (z + 4 + 1)' ] => [ '+', 1, 3, 4, 'z', [Array] ] (4 + 1 + z) + (3 + 2 * x)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(4 + 1 + z) + (3 + 2 * x)"
+        },
+        {
+          "ancestorTitles": [
+            "[ '(4 + 1 + z) + (3 + 2 * x)', '(2 * x + 3) + (z + 4 + 1)' ] => [ '+', 1, 3, 4, 'z', [Array] ]"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "[ '(4 + 1 + z) + (3 + 2 * x)', '(2 * x + 3) + (z + 4 + 1)' ] => [ '+', 1, 3, 4, 'z', [Array] ] (2 * x + 3) + (z + 4 + 1)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "(2 * x + 3) + (z + 4 + 1)"
+        }
+      ],
+      "failureMessage": null
+    },
+    {
+      "leaks": false,
+      "numFailingTests": 0,
+      "numPassingTests": 117,
+      "numPendingTests": 214,
+      "numTodoTests": 0,
+      "openHandles": [],
+      "perfStats": {
+        "end": 1621504463180,
+        "runtime": 5416,
         "slow": true,
-        "start": 1617867172033
+        "start": 1621504457764
       },
       "skipped": false,
       "snapshot": {
@@ -531,7 +1429,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} == 4.5 ",
@@ -601,7 +1499,7 @@
             "src/fixtures/latex-equal/7119.ts",
             "[symbolic] 4 \\frac{1}{2}"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} == \\frac{10}{2} - 0.5 ",
@@ -609,34 +1507,6 @@
           "numPassingAsserts": 0,
           "status": "pending",
           "title": "== \\frac{10}{2} - 0.5 "
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/7119.ts",
-            "[symbolic] 4 \\frac{1}{2}"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/7119.ts [symbolic] 4 \\frac{1}{2} != 4.55 ",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= 4.55 "
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/bad-input.ts",
-            "[symbolic] 1 + 1"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/bad-input.ts [symbolic] 1 + 1 != abcdefghijklmnopqrstuvwxyz 1 2 abcdeghijk ab cd ef bq arub oin tsn arstoin a8 asin aosin cvbkyu isn ",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= abcdefghijklmnopqrstuvwxyz 1 2 abcdeghijk ab cd ef bq arub oin tsn arstoin a8 asin aosin cvbkyu isn "
         },
         {
           "ancestorTitles": [
@@ -753,34 +1623,6 @@
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/basic-symbolic.ts",
-            "[symbolic] 100"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 != 44 + 57 ",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= 44 + 57 "
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/basic-symbolic.ts",
-            "[symbolic] 100"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 100 != 100 - 0.001 ",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= 100 - 0.001 "
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] x"
           ],
           "duration": 0,
@@ -865,34 +1707,6 @@
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/basic-symbolic.ts",
-            "[symbolic] x"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] x != y ",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= y "
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/basic-symbolic.ts",
-            "[symbolic] x"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] x != x + 1 ",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= x + 1 "
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] (x + 2)^2"
           ],
           "duration": 0,
@@ -945,34 +1759,6 @@
           "numPassingAsserts": 0,
           "status": "pending",
           "title": "== x^2 + 8 ((x+1) / 2) "
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/basic-symbolic.ts",
-            "[symbolic] (x + 2)^2"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] (x + 2)^2 != x^2 + 4(x+2) ",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= x^2 + 4(x+2) "
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/basic-symbolic.ts",
-            "[symbolic] breaks - not sure why > (x + 2)^2"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] breaks - not sure why > (x + 2)^2 != x^3 + 4x + 4 ",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= x^3 + 4x + 4 "
         },
         {
           "ancestorTitles": [
@@ -1035,7 +1821,7 @@
             "src/fixtures/latex-equal/basic-symbolic.ts",
             "[symbolic] 1,500,000"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/basic-symbolic.ts [symbolic] 1,500,000 == 1500000 ",
@@ -1397,20 +2183,6 @@
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/fractions-symbolic.ts",
-            "[symbolic] 6 \\frac{1}{2}"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] 6 \\frac{1}{2} != 6 * \\frac{1}{2} ",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= 6 * \\frac{1}{2} "
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second}"
           ],
           "duration": 0,
@@ -1427,7 +2199,7 @@
             "src/fixtures/latex-equal/fractions-symbolic.ts",
             "[symbolic] \\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second}"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] \\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second} == \\frac{6}{x}\\pi \\ \\text{radians}\\ \\text{per}\\ \\text{second} ",
@@ -1836,20 +2608,6 @@
           "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{3V}{B} == h=3\\frac{V}{B} ",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== h=3\\frac{V}{B} "
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/fractions-symbolic.ts",
-            "[symbolic] h=\\frac{3V}{B}"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{3V}{B} == h=\\frac{\\left(3\\times V\\right)}{B} ",
           "location": null,
           "numPassingAsserts": 0,
@@ -1883,6 +2641,20 @@
           "numPassingAsserts": 0,
           "status": "pending",
           "title": "== h=\\left(3\\times V\\right)\\div B "
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/fractions-symbolic.ts",
+            "[symbolic] h=\\frac{3V}{B}"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{3V}{B} == h=3\\frac{V}{B} ",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "pending",
+          "title": "== h=3\\frac{V}{B} "
         },
         {
           "ancestorTitles": [
@@ -2200,48 +2972,6 @@
           "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{da}{c} == h=\\frac{a\\times d}{c} ",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== h=\\frac{a\\times d}{c} "
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/fractions-symbolic.ts",
-            "[symbolic] h=\\frac{da}{c}"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{da}{c} == h=\\frac{d\\times a}{c} ",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== h=\\frac{d\\times a}{c} "
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/fractions-symbolic.ts",
-            "[symbolic] h=\\frac{da}{c}"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{da}{c} == h=\\left(d\\times a\\right)\\div c ",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== h=\\left(d\\times a\\right)\\div c "
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/fractions-symbolic.ts",
-            "[symbolic] h=\\frac{da}{c}"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{da}{c} == h=\\left(a\\times d\\right)\\div c ",
           "location": null,
           "numPassingAsserts": 0,
@@ -2284,6 +3014,20 @@
           "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{da}{c} == h=\\frac{a\\times d}{c} ",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "pending",
+          "title": "== h=\\frac{a\\times d}{c} "
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/fractions-symbolic.ts",
+            "[symbolic] h=\\frac{da}{c}"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{da}{c} == h=a\\left(d\\div c\\right) ",
           "location": null,
           "numPassingAsserts": 0,
@@ -2303,6 +3047,34 @@
           "numPassingAsserts": 0,
           "status": "pending",
           "title": "== h=a\\left(\\frac{d}{c}\\right) "
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/fractions-symbolic.ts",
+            "[symbolic] h=\\frac{da}{c}"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{da}{c} == h=\\frac{d\\times a}{c} ",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "pending",
+          "title": "== h=\\frac{d\\times a}{c} "
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/fractions-symbolic.ts",
+            "[symbolic] h=\\frac{da}{c}"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] h=\\frac{da}{c} == h=\\left(d\\times a\\right)\\div c ",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "pending",
+          "title": "== h=\\left(d\\times a\\right)\\div c "
         },
         {
           "ancestorTitles": [
@@ -2480,20 +3252,6 @@
           "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] f\\left(x\\right)=x\\left(3x+16\\right) == f\\left(x\\right)\\ =\\ x\\left(16+3x\\right) ",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== f\\left(x\\right)\\ =\\ x\\left(16+3x\\right) "
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/fractions-symbolic.ts",
-            "[symbolic] f\\left(x\\right)=x\\left(3x+16\\right)"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/fractions-symbolic.ts [symbolic] f\\left(x\\right)=x\\left(3x+16\\right) == f\\left(x\\right)\\ =\\ \\left(16+3x\\right)x ",
           "location": null,
           "numPassingAsserts": 0,
@@ -2533,195 +3291,69 @@
             "src/fixtures/latex-equal/literal.ts",
             "[literal] 12 + 3 * x"
           ],
-          "duration": 0,
+          "duration": 14,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/literal.ts [literal] 12 + 3 * x == 12    +     3   \\times x   (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
+          "status": "passed",
           "title": "== 12    +     3   \\times x   (literal)"
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/literal.ts",
-            "[literal] 12 + 3 * x"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/literal.ts [literal] 12 + 3 * x != 12.0 + 3 * x (literal)",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= 12.0 + 3 * x (literal)"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/literal.ts",
-            "[literal] 12 + 3 * x"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/literal.ts [literal] 12 + 3 * x != 3 * x + 12 (literal)",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= 3 * x + 12 (literal)"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/literal.ts",
             "[literal] 12.00"
           ],
-          "duration": 0,
+          "duration": 5,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/literal.ts [literal] 12.00 == 12.000000 (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
+          "status": "passed",
           "title": "== 12.000000 (literal)"
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/literal.ts",
-            "[literal] 12.00"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/literal.ts [literal] 12.00 != 12.001 (literal)",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= 12.001 (literal)"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/literal.ts",
-            "[literal] 12.00"
-          ],
-          "duration": 6,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/literal.ts [literal] 12.00 != 12.000000 (literal)",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "!= 12.000000 (literal)"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/literal.ts",
-            "[literal] 12.00"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/literal.ts [literal] 12.00 != 12.0 (literal)",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "!= 12.0 (literal)"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/literal.ts",
-            "[literal] 12.00"
-          ],
-          "duration": 1,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/literal.ts [literal] 12.00 != 12.000 (literal)",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "passed",
-          "title": "!= 12.000 (literal)"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/literal.ts",
-            "[literal] 1"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/literal.ts [literal] 1 != 1.000000 (literal)",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= 1.000000 (literal)"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/literal.ts",
             "[literal] 2 + 3"
           ],
-          "duration": 0,
+          "duration": 2,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/literal.ts [literal] 2 + 3 == 3 + 2 (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
+          "status": "passed",
           "title": "== 3 + 2 (literal)"
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/literal.ts",
-            "[literal] 2 + 3"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/literal.ts [literal] 2 + 3 != 3 + 2 (literal)",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= 3 + 2 (literal)"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/literal.ts",
             "[literal] a+b+c"
           ],
-          "duration": 0,
+          "duration": 2,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/literal.ts [literal] a+b+c == c+a+b (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
+          "status": "passed",
           "title": "== c+a+b (literal)"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/literal.ts",
-            "[literal] a+b+c"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/literal.ts [literal] a+b+c != c+a+b (literal)",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= c+a+b (literal)"
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/literal.ts",
             "[literal] 12.00+3"
           ],
-          "duration": 0,
+          "duration": 2,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/literal.ts [literal] 12.00+3 == 3+12.00 (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
+          "status": "passed",
           "title": "== 3+12.00 (literal)"
         },
         {
@@ -2729,13 +3361,13 @@
             "src/fixtures/latex-equal/old-literal.ts",
             "[literal] 1,000"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/old-literal.ts [literal] 1,000 == 1000 ",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
+          "status": "passed",
           "title": "== 1000 "
         },
         {
@@ -2743,13 +3375,13 @@
             "src/fixtures/latex-equal/old-literal.ts",
             "[literal] 1.00"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/old-literal.ts [literal] 1.00 == 1 (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
+          "status": "passed",
           "title": "== 1 (literal)"
         },
         {
@@ -2763,7 +3395,7 @@
           "fullName": "src/fixtures/latex-equal/old-literal.ts [literal] 1.01 == 1.01 ",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
+          "status": "passed",
           "title": "== 1.01 "
         },
         {
@@ -2771,13 +3403,13 @@
             "src/fixtures/latex-equal/old-literal.ts",
             "[literal] 72\\div12=6\\text{eggs}"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/old-literal.ts [literal] 72\\div12=6\\text{eggs} == 72\\div12=6\\text{eggs} ",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
+          "status": "passed",
           "title": "== 72\\div12=6\\text{eggs} "
         },
         {
@@ -2785,13 +3417,13 @@
             "src/fixtures/latex-equal/old-literal.ts",
             "[literal] 72\\div12=6\\text{eggs}"
           ],
-          "duration": 0,
+          "duration": 2,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/old-literal.ts [literal] 72\\div12=6\\text{eggs} ==  72\\div12=6\\text{eggs}  ",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
+          "status": "passed",
           "title": "==  72\\div12=6\\text{eggs}  "
         },
         {
@@ -2799,41 +3431,41 @@
             "src/fixtures/latex-equal/old-literal.ts",
             "[literal] 72\\div12=6\\text{eggs}"
           ],
-          "duration": 0,
+          "duration": 2,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/old-literal.ts [literal] 72\\div12=6\\text{eggs} ==  72 \\div 12= 6 \\text{eggs}  ",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
+          "status": "passed",
           "title": "==  72 \\div 12= 6 \\text{eggs}  "
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/PD-1031.ts",
-            "[literal] 1000{ mL}"
+            "[literal] 1000{mL}"
           ],
-          "duration": 0,
+          "duration": 39,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-1031.ts [literal] 1000{ mL} == 1,000 { ml} ",
+          "fullName": "src/fixtures/latex-equal/PD-1031.ts [literal] 1000{mL} == 1000ml ",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== 1,000 { ml} "
+          "status": "passed",
+          "title": "== 1000ml "
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/PD-282.ts",
             "[literal] 1"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-282.ts [literal] 1 == 1.0 (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
+          "status": "passed",
           "title": "== 1.0 (literal)"
         },
         {
@@ -2841,13 +3473,13 @@
             "src/fixtures/latex-equal/PD-282.ts",
             "[literal] 1"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/PD-282.ts [literal] 1 == 01 (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
+          "status": "passed",
           "title": "== 01 (literal)"
         },
         {
@@ -2858,207 +3490,95 @@
           "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-282.ts [literal] 1 != 1.01 (literal)",
+          "fullName": "src/fixtures/latex-equal/PD-282.ts [literal] 1 == 1 (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= 1.01 (literal)"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/PD-282.ts",
-            "[literal] 1"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-282.ts [literal] 1 == 01 (literal)",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== 01 (literal)"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/PD-282.ts",
-            "[literal] 1"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-282.ts [literal] 1 != 1.0 (literal)",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= 1.0 (literal)"
+          "status": "passed",
+          "title": "== 1 (literal)"
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] a+b"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b == b+a (ignoreOrder)",
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b == b+a (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== b+a (ignoreOrder)"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/PD-283.ts",
-            "[literal] a+b"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b != b+a ()",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= b+a ()"
+          "status": "passed",
+          "title": "== b+a (literal)"
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] a+b+10"
           ],
-          "duration": 0,
+          "duration": 2,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 == a+10+b (ignoreOrder)",
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 == a+10+b (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== a+10+b (ignoreOrder)"
+          "status": "passed",
+          "title": "== a+10+b (literal)"
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] a+b+10"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 == 10+a+b (ignoreOrder)",
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 == 10+a+b (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== 10+a+b (ignoreOrder)"
+          "status": "passed",
+          "title": "== 10+a+b (literal)"
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] a+b+10"
           ],
-          "duration": 0,
+          "duration": 4,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 == 10+b+a (ignoreOrder)",
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 == 10+b+a (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== 10+b+a (ignoreOrder)"
+          "status": "passed",
+          "title": "== 10+b+a (literal)"
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] a+b+10"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 == b+a+10 (ignoreOrder)",
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 == b+a+10 (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== b+a+10 (ignoreOrder)"
+          "status": "passed",
+          "title": "== b+a+10 (literal)"
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] a+b+10"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 == b+a+10 (ignoreOrder)",
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 == b+a+10 (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== b+a+10 (ignoreOrder)"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/PD-283.ts",
-            "[literal] a+b+10"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 != a+10+b ()",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= a+10+b ()"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/PD-283.ts",
-            "[literal] a+b+10"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 != 10+a+b ()",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= 10+a+b ()"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/PD-283.ts",
-            "[literal] a+b+10"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 != 10+b+a ()",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= 10+b+a ()"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/PD-283.ts",
-            "[literal] a+b+10"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 != b+a+10 ()",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= b+a+10 ()"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/PD-283.ts",
-            "[literal] a+b+10"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+10 != b+a+10 ()",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= b+a+10 ()"
+          "status": "passed",
+          "title": "== b+a+10 (literal)"
         },
         {
           "ancestorTitles": [
@@ -3068,11 +3588,39 @@
           "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a*b*c == a×c×b (ignoreOrder)",
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a*b*c == a×c×b (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== a×c×b (ignoreOrder)"
+          "status": "passed",
+          "title": "== a×c×b (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] a*b*c"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a*b*c == b·a·c (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== b·a·c (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] a*b*c"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a*b*c ==  b×c·a (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "==  b×c·a (literal)"
         },
         {
           "ancestorTitles": [
@@ -3082,11 +3630,11 @@
           "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a*b*c == b·a·c (ignoreOrder)",
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a*b*c == c·b×a (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== b·a·c (ignoreOrder)"
+          "status": "passed",
+          "title": "== c·b×a (literal)"
         },
         {
           "ancestorTitles": [
@@ -3096,249 +3644,403 @@
           "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a*b*c ==  b×c·a (ignoreOrder)",
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a*b*c == c×a×b (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "==  b×c·a (ignoreOrder)"
+          "status": "passed",
+          "title": "== c×a×b (literal)"
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/PD-283.ts",
-            "[literal] a*b*c"
+            "[literal] y = 7x =z"
           ],
-          "duration": 0,
+          "duration": 3,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a*b*c == c·b×a (ignoreOrder)",
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] y = 7x =z == 7x=y=z (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== c·b×a (ignoreOrder)"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/PD-283.ts",
-            "[literal] a*b*c"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a*b*c == c×a×b (ignoreOrder)",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== c×a×b (ignoreOrder)"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/PD-283.ts",
-            "[literal] a×b×c"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a×b×c != a×c×b ()",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= a×c×b ()"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/PD-283.ts",
-            "[literal] a×b×c"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a×b×c != b·a·c ()",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= b·a·c ()"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/PD-283.ts",
-            "[literal] a×b×c"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a×b×c !=  b×c·a ()",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!=  b×c·a ()"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/PD-283.ts",
-            "[literal] a×b×c"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a×b×c != c·b×a ()",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= c·b×a ()"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/PD-283.ts",
-            "[literal] a×b×c"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a×b×c != c×a×b ()",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= c×a×b ()"
+          "status": "passed",
+          "title": "== 7x=y=z (literal)"
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] y = 7x"
           ],
-          "duration": 0,
+          "duration": 2,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] y = 7x == 7x=y (ignoreOrder)",
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] y = 7x == 7x=y (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== 7x=y (ignoreOrder)"
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/PD-283.ts",
-            "[literal] y = 7x"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] y = 7x != 7x=y ()",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= 7x=y ()"
+          "status": "passed",
+          "title": "== 7x=y (literal)"
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] y = 3x+4"
           ],
-          "duration": 0,
+          "duration": 2,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] y = 3x+4 == y=4+3x (ignoreOrder)",
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] y = 3x+4 == y=4+3x (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== y=4+3x (ignoreOrder)"
+          "status": "passed",
+          "title": "== y=4+3x (literal)"
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] y = 3x+4"
           ],
-          "duration": 0,
+          "duration": 3,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] y = 3x+4 == 3x+4=y (ignoreOrder)",
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] y = 3x+4 == 3x+4=y (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== 3x+4=y (ignoreOrder)"
+          "status": "passed",
+          "title": "== 3x+4=y (literal)"
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] y = 3x+4"
           ],
-          "duration": 0,
+          "duration": 2,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] y = 3x+4 == 4+3x=y (ignoreOrder)",
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] y = 3x+4 == 4+3x=y (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== 4+3x=y (ignoreOrder)"
+          "status": "passed",
+          "title": "== 4+3x=y (literal)"
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] y = 3x+4"
           ],
-          "duration": 0,
+          "duration": 3,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] y = 3x+4 != y=4+3x ()",
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] y = 3x+4 == y=(4+3x) (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= y=4+3x ()"
+          "status": "passed",
+          "title": "== y=(4+3x) (literal)"
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] y = 3x+4"
           ],
-          "duration": 0,
+          "duration": 2,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] y = 3x+4 != 3x+4=y ()",
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] y = 3x+4 == 3x+4=y (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= 3x+4=y ()"
+          "status": "passed",
+          "title": "== 3x+4=y (literal)"
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/PD-283.ts",
             "[literal] y = 3x+4"
           ],
-          "duration": 0,
+          "duration": 3,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] y = 3x+4 != 4+3x=y ()",
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] y = 3x+4 == 4+3x=y (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= 4+3x=y ()"
+          "status": "passed",
+          "title": "== 4+3x=y (literal)"
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/PD-283.ts",
-            "[literal] 0<x≤4"
+            "[literal] y = 3x+4"
           ],
-          "duration": 0,
+          "duration": 3,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] 0<x≤4 == 4≥x>0 (ignoreOrder)",
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] y = 3x+4 == y=(4+3x) (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "== 4≥x>0 (ignoreOrder)"
+          "status": "passed",
+          "title": "== y=(4+3x) (literal)"
         },
         {
           "ancestorTitles": [
             "src/fixtures/latex-equal/PD-283.ts",
-            "[literal] 0<x≤4"
+            "[literal] y = 3x+4"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] y = 3x+4 == 3x+4=y (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 3x+4=y (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] y = 3x+4"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] y = 3x+4 == 4+3x=y (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 4+3x=y (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] a + b + c + d +e + f + 2 *x"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a + b + c + d +e + f + 2 *x == (a+c) + (b+e) + 2*x +d+ f (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== (a+c) + (b+e) + 2*x +d+ f (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] a + b + c + d +e + f + 2 *x"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a + b + c + d +e + f + 2 *x == (a+b+c)+(2*x+f+((e))+d) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== (a+b+c)+(2*x+f+((e))+d) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] 3y"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] 3y == (3)(y) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== (3)(y) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] 3y"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] 3y == (y)(3) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== (y)(3) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] 3y"
           ],
           "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] 0<x≤4 != 4≥x>0 ()",
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] 3y == 3(y) (literal)",
           "location": null,
           "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= 4≥x>0 ()"
+          "status": "passed",
+          "title": "== 3(y) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] 3y"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] 3y == (3)y (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== (3)y (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] 3y"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] 3y == ((((3))))y (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== ((((3))))y (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] 4≥x>0"
+          ],
+          "duration": 5,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] 4≥x>0 ==  0<x≤4 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "==  0<x≤4 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] 0+2<x"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] 0+2<x == x>2+0 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== x>2+0 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] 0<2<x"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] 0<2<x == x>2>0 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== x>2>0 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] 0≤x"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] 0≤x == x≥0 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== x≥0 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] rt≥x"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] rt≥x == x≤rt (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== x≤rt (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] A < B > C"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] A < B > C == A <B >C (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== A <B >C (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] A < B > C"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] A < B > C == C<B>A (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== C<B>A (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] A+2 < B+5 > C+6"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] A+2 < B+5 > C+6 == A+2 <B+5 >C+6 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== A+2 <B+5 >C+6 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] A+2 < B+5 > C+6"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] A+2 < B+5 > C+6 == C+6<B+5>A+2 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== C+6<B+5>A+2 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-283.ts",
+            "[literal] a+b+c = b+c+a = a+b+c"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-283.ts [literal] a+b+c = b+c+a = a+b+c == a+b+c = a+b+c = a+b+c (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== a+b+c = a+b+c = a+b+c (literal)"
         },
         {
           "ancestorTitles": [
@@ -3706,6 +4408,888 @@
         },
         {
           "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] a+b+c "
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] a+b+c  == (a+b) + c (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== (a+b) + c (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] a+b+c "
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] a+b+c  == a + (b+c) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== a + (b+c) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] sin x"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] sin x == sin(x) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== sin(x) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] x^\\frac{1}{2}"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] x^\\frac{1}{2} == x^(\\frac{1}{2}) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== x^(\\frac{1}{2}) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] \\sqrt x"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] \\sqrt x == \\sqrt [2]{x} (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\sqrt [2]{x} (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] \\sqrt x"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] \\sqrt x == \\sqrt {x} (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\sqrt {x} (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] \\log (x)"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] \\log (x) == \\log_{10}(x) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\log_{10}(x) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] \\log (x)"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] \\log (x) == \\log x (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\log x (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] \\ln(x)"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] \\ln(x) == \\log_{e}(x) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\log_{e}(x) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == \\left(2xy+3x\\right)+4y+5 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\left(2xy+3x\\right)+4y+5 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == \\left(2xy+3x\\right)+\\left(4y+5\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\left(2xy+3x\\right)+\\left(4y+5\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == 2xy+3x+\\left(4y+5\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 2xy+3x+\\left(4y+5\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == 2xy+\\left(3x+4y\\right)+5 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 2xy+\\left(3x+4y\\right)+5 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == \\left(2xy+3x+4y+5\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\left(2xy+3x+4y+5\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == 2x\\left(y\\right)+3x+4y+5 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 2x\\left(y\\right)+3x+4y+5 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == 2\\left(x\\right)y+3x+4y+5 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 2\\left(x\\right)y+3x+4y+5 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 3y"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 3y == y\\left(3\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== y\\left(3\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 3y"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 3y == y\\left(\\left(\\left(3\\right)\\right)\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== y\\left(\\left(\\left(3\\right)\\right)\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == 2yx+3x+4y+5 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 2yx+3x+4y+5 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == \\left(5+3x+4y+2xy\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\left(5+3x+4y+2xy\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == \\left(5+3x\\right)+\\left(4y+2xy\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\left(5+3x\\right)+\\left(4y+2xy\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == \\left(2xy+3x\\right)+4y+5 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\left(2xy+3x\\right)+4y+5 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == \\left(2xy+3x\\right)+\\left(4y+5\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\left(2xy+3x\\right)+\\left(4y+5\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == \\left(3x+2xy\\right)+\\left(4y\\right)+5 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\left(3x+2xy\\right)+\\left(4y\\right)+5 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == 2xy+3x+\\left(4y+5\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 2xy+3x+\\left(4y+5\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == 2xy+\\left(3x+4y\\right)+5 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 2xy+\\left(3x+4y\\right)+5 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == \\left(2xy+3x+4y+5\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\left(2xy+3x+4y+5\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == 2x\\left(y\\right)+3x+4y+5 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 2x\\left(y\\right)+3x+4y+5 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == 2\\left(x\\right)y+3x+4y+5 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 2\\left(x\\right)y+3x+4y+5 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == 2\\left(y\\right)\\left(x\\right)+3x+4y+5 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 2\\left(y\\right)\\left(x\\right)+3x+4y+5 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == 2xy+3\\left(x\\right)+4y+5 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 2xy+3\\left(x\\right)+4y+5 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == 2xy+3\\left(x\\right)+4y + 5 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 2xy+3\\left(x\\right)+4y + 5 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 2xy+3x+4y+5"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 2xy+3x+4y+5 == 3\\left(x\\right)+4y+2yx+5 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 3\\left(x\\right)+4y+2yx+5 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 3\\left(x+y\\right)"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 3\\left(x+y\\right) == \\left(3\\right)\\left(x+y\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\left(3\\right)\\left(x+y\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 3\\left(x+y\\right)"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 3\\left(x+y\\right) == \\left(3\\left(x+y\\right)\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\left(3\\left(x+y\\right)\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 3\\left(x+y\\right)"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 3\\left(x+y\\right) == 3\\times \\left(x+y\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 3\\times \\left(x+y\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] sin t"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] sin t == sin \\left(t\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== sin \\left(t\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] cos x+35"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] cos x+35 == cos \\left(x\\right)+35 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== cos \\left(x\\right)+35 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] cos x+35"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] cos x+35 == \\left(cos \\left(x\\right)\\right)+\\left(35\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\left(cos \\left(x\\right)\\right)+\\left(35\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] tan \\left(x\\right)+35"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] tan \\left(x\\right)+35 == tan x+35 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== tan x+35 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] tan \\left(x\\right)+35"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] tan \\left(x\\right)+35 == \\left(tan x\\right)+35 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\left(tan x\\right)+35 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] tan \\left(x\\right)+35"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] tan \\left(x\\right)+35 == \\left(tan x+35\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\left(tan x+35\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] n^{\\frac{3}{5}}"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] n^{\\frac{3}{5}} == n^{\\left(\\frac{3}{5}\\right)} (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== n^{\\left(\\frac{3}{5}\\right)} (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] n^{\\left(\\frac{3}{5}\\right)}"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] n^{\\left(\\frac{3}{5}\\right)} == n^{\\frac{3}{5}} (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== n^{\\frac{3}{5}} (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 5^{ab}"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 5^{ab} == 5^{\\left(ab\\right)} (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 5^{\\left(ab\\right)} (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 5^{ab}"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 5^{ab} == 5^{ba} (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 5^{ba} (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 5^{ab}"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 5^{ab} == \\left(5^{ba}\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\left(5^{ba}\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 5^{ab}"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 5^{ab} == 5^{\\left(ba\\right)} (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 5^{\\left(ba\\right)} (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] ab+cd=0"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] ab+cd=0 == 0=ab+cd (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 0=ab+cd (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] ab+cd=0"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] ab+cd=0 == 0=\\left(ab\\right)+\\left(cd\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 0=\\left(ab\\right)+\\left(cd\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] ab+cd=0"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] ab+cd=0 == 0=\\left(cd\\right)+\\left(ab\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 0=\\left(cd\\right)+\\left(ab\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] ab+cd=0"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] ab+cd=0 == 0=\\left(dc\\right)+\\left(ab\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 0=\\left(dc\\right)+\\left(ab\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] ab+cd=0"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] ab+cd=0 == 0=\\left(dc\\right)+\\left(ba\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 0=\\left(dc\\right)+\\left(ba\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] y=2\\left(x-3\\right)^2+4"
+          ],
+          "duration": 11,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] y=2\\left(x-3\\right)^2+4 == 2\\left(x-3\\right)^2+4=y (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 2\\left(x-3\\right)^2+4=y (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] y=2\\left(x-3\\right)^2+4"
+          ],
+          "duration": 12,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] y=2\\left(x-3\\right)^2+4 == 4+2\\left(x-3\\right)^2=y (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 4+2\\left(x-3\\right)^2=y (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] y=2\\left(x-3\\right)^2+4"
+          ],
+          "duration": 11,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] y=2\\left(x-3\\right)^2+4 == 4+2\\left(-3+x\\right)^2=y (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 4+2\\left(-3+x\\right)^2=y (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] y=2\\left(x-3\\right)^2+4"
+          ],
+          "duration": 11,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] y=2\\left(x-3\\right)^2+4 == 4+\\left(2\\left(-3+x\\right)^2\\right)=y (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 4+\\left(2\\left(-3+x\\right)^2\\right)=y (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] y=2\\left(x-3\\right)^2+4"
+          ],
+          "duration": 11,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] y=2\\left(x-3\\right)^2+4 == \\left(4\\right)+\\left(2\\left(-3+x\\right)^2\\right)=y (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\left(4\\right)+\\left(2\\left(-3+x\\right)^2\\right)=y (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 3\\left(x\\right)+\\left(2\\right)\\left(y\\right)<0"
+          ],
+          "duration": 4,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 3\\left(x\\right)+\\left(2\\right)\\left(y\\right)<0 == \\left(3\\right)x+\\left(2\\right)\\left(y\\right)<0 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\left(3\\right)x+\\left(2\\right)\\left(y\\right)<0 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 3\\left(x\\right)+\\left(2\\right)\\left(y\\right)<0"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 3\\left(x\\right)+\\left(2\\right)\\left(y\\right)<0 == \\left(3\\right)x+\\left(2\\right)\\left(y\\right)<0 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== \\left(3\\right)x+\\left(2\\right)\\left(y\\right)<0 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 3\\left(x\\right)+\\left(2\\right)\\left(y\\right)<0"
+          ],
+          "duration": 11,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 3\\left(x\\right)+\\left(2\\right)\\left(y\\right)<0 == 0>\\left(3\\right)x+\\left(2\\right)\\left(y\\right) (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 0>\\left(3\\right)x+\\left(2\\right)\\left(y\\right) (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 3\\left(x\\right)+\\left(2\\right)\\left(y\\right)<0"
+          ],
+          "duration": 4,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 3\\left(x\\right)+\\left(2\\right)\\left(y\\right)<0 == 0>\\left(3\\right)x+\\left(y\\right)2 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 0>\\left(3\\right)x+\\left(y\\right)2 (literal)"
+        },
+        {
+          "ancestorTitles": [
+            "src/fixtures/latex-equal/PD-303.ts",
+            "[literal] 3\\left(x\\right)+\\left(2\\right)\\left(y\\right)<0"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "src/fixtures/latex-equal/PD-303.ts [literal] 3\\left(x\\right)+\\left(2\\right)\\left(y\\right)<0 == 3x+\\left(2\\right)\\left(y\\right)<0 (literal)",
+          "location": null,
+          "numPassingAsserts": 0,
+          "status": "passed",
+          "title": "== 3x+\\left(2\\right)\\left(y\\right)<0 (literal)"
+        },
+        {
+          "ancestorTitles": [
             "src/fixtures/latex-equal/PD-304.ts",
             "[symbolic] 1 * 3 * x"
           ],
@@ -3748,24 +5332,10 @@
         },
         {
           "ancestorTitles": [
-            "src/fixtures/latex-equal/PD-304.ts",
-            "[symbolic] 1 * 3 * x"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/PD-304.ts [symbolic] 1 * 3 * x != 1 * x * 3 (exception:1 * x * 3)",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= 1 * x * 3 (exception:1 * x * 3)"
-        },
-        {
-          "ancestorTitles": [
             "src/fixtures/latex-equal/percent.ts",
             "[symbolic] we have percent support in math-expressions - port"
           ],
-          "duration": 1,
+          "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "src/fixtures/latex-equal/percent.ts [symbolic] we have percent support in math-expressions - port == -12.5% ",
@@ -3787,20 +5357,6 @@
           "numPassingAsserts": 0,
           "status": "pending",
           "title": "== -12.5\\% "
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/percent.ts",
-            "[symbolic] we have percent support in math-expressions - port"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/percent.ts [symbolic] we have percent support in math-expressions - port != -11.5% ",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= -11.5% "
         },
         {
           "ancestorTitles": [
@@ -4496,25 +6052,11 @@
           "duration": 0,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/to-be-fixed.ts [symbolic] \\cos\\theta=-\\sqrt{1-y^2} == cos\\ \\theta\\ \\ =\\ -\\sqrt{-y^2+1} ",
+          "fullName": "src/fixtures/latex-equal/to-be-fixed.ts [symbolic] \\cos\\theta=-\\sqrt{1-y^2} == \\cos\\ \\theta\\ \\ =\\ -\\sqrt{-y^2+1} ",
           "location": null,
           "numPassingAsserts": 0,
           "status": "pending",
-          "title": "== cos\\ \\theta\\ \\ =\\ -\\sqrt{-y^2+1} "
-        },
-        {
-          "ancestorTitles": [
-            "src/fixtures/latex-equal/to-be-fixed.ts",
-            "[symbolic] 100"
-          ],
-          "duration": 0,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "src/fixtures/latex-equal/to-be-fixed.ts [symbolic] 100 != 100 - 0.0001 ",
-          "location": null,
-          "numPassingAsserts": 0,
-          "status": "pending",
-          "title": "!= 100 - 0.0001 "
+          "title": "== \\cos\\ \\theta\\ \\ =\\ -\\sqrt{-y^2+1} "
         }
       ],
       "failureMessage": null

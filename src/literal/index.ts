@@ -1,4 +1,5 @@
-import { MathNode, mathjs } from "../mathjs";
+import { mathjs } from "../mathjs";
+import { MathNode } from "mathjs";
 import { logger } from "../log";
 import { s } from "../node-sort";
 
