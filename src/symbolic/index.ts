@@ -1,6 +1,7 @@
 import { logger } from "../log";
 import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
+import { s as st } from "../node-sort";
 
 const log = logger("mv:symbolic");
 
@@ -9,6 +10,7 @@ export type SymbolicOpts = {};
 const { simplify: ms, rationalize } = mathjs;
 
 const SIMPLIFY_RULES = [
+  { l: "n1 < n2<n3", r: "n1<n2<n3" },
   { l: "n1^(1/n2)", r: "nthRoot(n1, n2)" },
   { l: "sqrt(n1)", r: "nthRoot(n1, 2)" },
   { l: "(n^2)/n", r: "n" },
@@ -27,36 +29,55 @@ const simplify = (v) => {
   return ms(v, rules); //.concat(SIMPLIFY_RULES));
 };
 
-const normalize = (a: string | MathNode) => {
-  let r: string | MathNode = a;
+const normalize = (a: string | MathNode | any) => {
+  let r: string | MathNode | any = a;
   try {
     r = rationalize(a, {}, true).expression;
   } catch (e) {
     // ok;
   }
-  const s = simplify(r);
+
+  let s = r;
+
+  // for relationalNode apply simplify for all params
+  if (r.conditionals && r.params) {
+    s.params = r.params.map((param) => {
+      return st(simplify(param));
+    });
+  } else {
+    s = simplify(r);
+  }
 
   log("[normalize] input: ", a.toString(), "output: ", s.toString());
   return s;
 };
 
-export const isMathEqual = (a: MathNode, b: MathNode, opts?: SymbolicOpts) => {
-  const as = normalize(a);
-  const bs = normalize(b);
+export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
+  let as;
+  let bs;
+
+  if (!a.conditionals) {
+    as = st(normalize(a));
+  } else {
+    as = normalize(a);
+  }
+
+  if (!b.conditionals) {
+    bs = st(normalize(b));
+  } else {
+    bs = normalize(b);
+  }
 
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
-  const firstTest = as.equals(bs);
-  if (firstTest) {
-    return true;
-  }
+  return as.equals(bs);
 
-  /**
+  /** This is not used anymore
    * Note: this seems very dodgy that we have to try a 2nd round of normalization here.
    * Why is this necessary and try and remove it.
    */
-  const at = normalize(as);
-  const bt = normalize(bs);
+  // const at = normalize(as);
+  // const bt = normalize(bs);
 
-  return at.equals(bt);
+  // return at.equals(bt);
 };

@@ -14,9 +14,8 @@ const args = minimist(
 const cwd = resolve(__dirname, "../..");
 
 const fixtures = sync(
-  args.t ||
-    ("src/fixtures/latex-equal/literal/**.ts" &&
-      "src/fixtures/latex-equal/symbolic/**.ts"),
+  // args.t || "src/fixtures/latex-equal/**/**.ts",
+  "src/fixtures/latex-equal/symbolic/**.ts",
   {
     cwd,
   }

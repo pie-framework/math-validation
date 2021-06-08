@@ -19,18 +19,17 @@ export default {
         "f\\left(y\\right)=26,000\\left(0.83\\right)^y",
       ],
     },
-    {
-      // error     Non string functions not implemented for conversion to mathjs
-      target: "f^{-1}\\left(x\\right)=-\\frac{12}{x}+8",
-      eq: [
-        "f^{-1}(x)\\ =\\ 8-\\frac{12}{x}",
-        "f^{-1}(x)\\ =\\ \\frac{8x-12}{x}",
-        "f^{-1}(x)\\ =\\ \\frac{-12+8x}{x}",
-        "f^{-1}(x)\\ =\\ -12\\left(\\frac{1}{x}\\right)+8",
-        "f^{-1}(x)\\ =\\ 8-12\\left(\\frac{1}{x}\\right)",
-      ],
-      triage: Triage.NON_STRING,
-    },
+    // {
+    //   target: "f^{-1}\\left(x\\right)=-\\frac{12}{x}+8",
+    //   eq: [
+    //     "f^{-1}(x)\\ =\\ 8-\\frac{12}{x}",
+    //     "f^{-1}(x)\\ =\\ \\frac{8x-12}{x}",
+    //     "f^{-1}(x)\\ =\\ \\frac{-12+8x}{x}",
+    //     "f^{-1}(x)\\ =\\ -12\\left(\\frac{1}{x}\\right)+8",
+    //     "f^{-1}(x)\\ =\\ 8-12\\left(\\frac{1}{x}\\right)",
+    //   ],
+    //   triage: Triage.INVERSE_FUNCTIONS,
+    // },
     {
       // all passed
       target: "f\\left(x\\right)=1.1x+8",
@@ -71,8 +70,8 @@ export default {
     },
     {
       // expecting ( after function
-      target: "\\cos\\theta=-\\sqrt{1-y^2}",
-      eq: ["\\cos\\ \\theta\\ \\ =\\ -\\sqrt{-y^2+1}"],
+      target: "\\cos\\x=-\\sqrt{1-y^2}",
+      eq: ["\\cos\\ \\x\\ \\ =\\ -\\sqrt{-y^2+1}"],
       triage: Triage.EXPECTING_PARANTHESIS,
     },
     {

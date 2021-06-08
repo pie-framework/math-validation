@@ -35,8 +35,8 @@ export default {
     },
     {
       target: "6 \\frac{1}{2}",
-      eq: ["6 + \\frac{1}{2}"],
-      ne: ["6 * \\frac{1}{2}"],
+      eq: ["6 * \\frac{1}{2}"],
+      ne: ["6 + \\frac{1}{2}"],
     },
 
     {
@@ -46,7 +46,7 @@ export default {
         "\\frac{1}{x}\\left(6\\pi \\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
         "\\frac{6}{x}\\pi \\ \\text{radians}\\ \\text{per}\\ \\text{second}",
         // >>> TODO: the ast is wrong here - we get [+, 6, [/, pi, x]]
-        // "6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
+        //"6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
         "6\\pi \\left(\\frac{1}{x}\\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
       ],
     },
@@ -61,7 +61,7 @@ export default {
         "\\left(6\\right) \\frac{\\pi }{x}",
 
         // see above a number followed by a fraction is seen as addition not multiplication
-        //"6 \\frac{\\pi }{x}",
+        "6 \\frac{\\pi }{x}",
         "6\\pi \\left(\\frac{1}{x}\\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
       ],
     },
@@ -221,7 +221,8 @@ export default {
         "f\\left(x\\right)\\ =\\ \\left(3x+16\\right)x",
         "f\\left(x\\right)\\ =\\ \\left(3x+16\\right)\\left(x\\right)",
         "f\\left(x\\right)\\ =\\ \\left(16+3x\\right)\\left(x\\right)",
-        // this test passed:  "f\\left(x\\right)\\ =\\ x\\left(16+3x\\right)",
+        // this test passed:
+        "f\\left(x\\right)\\ =\\ x\\left(16+3x\\right)",
         "f\\left(x\\right)\\ =\\ \\left(16+3x\\right)x",
         "f\\left(x\\right)\\ =\\ 16x+3x^2",
         "f\\left(x\\right)\\ =\\ 3x^2+16x",
@@ -231,16 +232,6 @@ export default {
 };
 
 export const toBeAdded = [
-  {
-    target: "y=6x^2+2x",
-    eq: [
-      "y=2x+6x^2",
-      "y=x\\left(6x+2\\right)",
-      "y=2x\\left(3x+1\\right)",
-      "y=x\\left(2+6x\\right)",
-      "y=2x\\left(1+3x\\right)",
-    ],
-  },
   {
     target: "d\\left(x\\right)=0.05x^2+2x",
     eq: [

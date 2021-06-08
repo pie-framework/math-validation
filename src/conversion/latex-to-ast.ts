@@ -145,7 +145,7 @@ const log = logger("mv:latex-to-ast");
 
 // Some of the latex commands that lead to spacing
 export const whitespace_rule =
-  "\\s|\\\\,|\\\\!|\\\\ |\\\\>|\\\\;|\\\\:|\\\\quad\\b|\\\\qquad\\b|\\\\text{[a-zA-Z0-9\\s\\\\,\\\\.]+?}";
+  "\\s|\\\\,|\\\\!|\\\\ |\\\\>|\\\\;|\\\\:|\\\\quad\\b|\\\\qquad\\b";
 
 // in order to parse as scientific notation, e.g., 3.2E-12 or .7E+3,
 // it must be at the end or followed a comma, &, |, \|, ), }, \}, ], \\, or \end
@@ -161,6 +161,7 @@ const measurmentUnit = lengthUnit + volumeUnit + "{1}";
 // const latex_rules = [["\\\\neq(?![a-zA-Z])", "NE"]];
 export const latex_rules = [
   [measurmentUnit, "UNIT"],
+  ["\\\\text{[a-zA-Z0-9\\s\\\\,\\\\.]+?}", "TEXT"],
   ["[0-9]+\\s*\\\\frac(?![a-zA-Z])", "MIXED_NUMBER"],
   ["[0-9|,]+(\\.[0-9]*)?" + sci_notat_exp_regex, "NUMBER"],
   ["\\.[0-9|,]+" + sci_notat_exp_regex, "NUMBER"],
@@ -307,9 +308,8 @@ export const latex_rules = [
   ["\\\\end\\s*{\\s*[a-zA-Z0-9]+\\s*}", "ENDENVIRONMENT"],
 
   ["\\\\var\\s*{\\s*[a-zA-Z0-9]+\\s*}", "VARMULTICHAR"],
-
-  ["\\\\[a-zA-Z]+(?![a-zA-Z])", "LATEXCOMMAND"],
   ["[a-zA-Z]", "VAR"],
+  ["\\\\[a-zA-Z]+(?![a-zA-Z])", "LATEXCOMMAND"],
 ];
 
 // defaults for parsers if not overridden by context
@@ -653,7 +653,9 @@ export class LatexToAst {
         switch (operatorSign) {
           case "<":
             return "smaller";
-          case "LE" || "le":
+          case "LE":
+            return "smallerEq";
+          case "le":
             return "smallerEq";
           case ">":
             return "larger";
@@ -670,7 +672,7 @@ export class LatexToAst {
         strict.push(relationalOperator(operation));
         let args = ["tuple", lhs, rhs];
 
-        while (relationalOperator(this.token.token_type)) {
+        while (relationalToken(this.token.token_type)) {
           strict.push(relationalOperator(this.token.token_type));
           this.advance();
           args.push(this.expression(params));
@@ -913,7 +915,7 @@ export class LatexToAst {
         const numberString = t[0].trim();
         const number = parseInt(numberString, 10);
         const f = this.fraction({});
-        return ["+", number, f];
+        return ["*", number, f];
       } catch (e) {
         throw new ParseError(`Mixed number parsing failed: ${e.message}`);
       }
@@ -921,6 +923,14 @@ export class LatexToAst {
 
     if (this.token.token_type === "FRAC") {
       return this.fraction({});
+    }
+
+    if (this.token.token_type === "TEXT") {
+      console.log(this.token, "thisTOKEN");
+      const text = this.token.original_text;
+      this.advance();
+
+      return text.toString();
     }
 
     if (this.token.token_type === "BEGINENVIRONMENT") {
@@ -1289,7 +1299,7 @@ export class LatexToAst {
           // cannot omit argument
           if (must_apply) {
             // @ts-ignore
-            if (!this.allowSimplifiedFunctionApplication)
+            if (!this.opts.allowSimplifiedFunctionApplication)
               throw new ParseError(
                 "Expecting ( after function",
                 this.lexer.location

@@ -1,6 +1,5 @@
 export default {
   mode: "literal",
-  skip: true,
   tests: [
     {
       opts: {

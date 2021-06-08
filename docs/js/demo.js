@@ -361,7 +361,7 @@ logger("mv:latex-to-ast");
 
 // Some of the latex commands that lead to spacing
 const whitespace_rule =
-  "\\s|\\\\,|\\\\!|\\\\ |\\\\>|\\\\;|\\\\:|\\\\quad\\b|\\\\qquad\\b|\\\\text{[a-zA-Z0-9\\s\\\\,\\\\.]+?}";
+  "\\s|\\\\,|\\\\!|\\\\ |\\\\>|\\\\;|\\\\:|\\\\quad\\b|\\\\qquad\\b";
 
 // in order to parse as scientific notation, e.g., 3.2E-12 or .7E+3,
 // it must be at the end or followed a comma, &, |, \|, ), }, \}, ], \\, or \end
@@ -377,6 +377,7 @@ const measurmentUnit = lengthUnit + volumeUnit + "{1}";
 // const latex_rules = [["\\\\neq(?![a-zA-Z])", "NE"]];
 const latex_rules = [
   [measurmentUnit, "UNIT"],
+  ["\\\\text{[a-zA-Z0-9\\s\\\\,\\\\.]+?}", "TEXT"],
   ["[0-9]+\\s*\\\\frac(?![a-zA-Z])", "MIXED_NUMBER"],
   ["[0-9|,]+(\\.[0-9]*)?" + sci_notat_exp_regex, "NUMBER"],
   ["\\.[0-9|,]+" + sci_notat_exp_regex, "NUMBER"],
@@ -523,9 +524,8 @@ const latex_rules = [
   ["\\\\end\\s*{\\s*[a-zA-Z0-9]+\\s*}", "ENDENVIRONMENT"],
 
   ["\\\\var\\s*{\\s*[a-zA-Z0-9]+\\s*}", "VARMULTICHAR"],
-
-  ["\\\\[a-zA-Z]+(?![a-zA-Z])", "LATEXCOMMAND"],
   ["[a-zA-Z]", "VAR"],
+  ["\\\\[a-zA-Z]+(?![a-zA-Z])", "LATEXCOMMAND"],
 ];
 
 // defaults for parsers if not overridden by context
@@ -869,7 +869,9 @@ class LatexToAst {
         switch (operatorSign) {
           case "<":
             return "smaller";
-          case "LE" :
+          case "LE":
+            return "smallerEq";
+          case "le":
             return "smallerEq";
           case ">":
             return "larger";
@@ -886,7 +888,7 @@ class LatexToAst {
         strict.push(relationalOperator(operation));
         let args = ["tuple", lhs, rhs];
 
-        while (relationalOperator(this.token.token_type)) {
+        while (relationalToken(this.token.token_type)) {
           strict.push(relationalOperator(this.token.token_type));
           this.advance();
           args.push(this.expression(params));
@@ -1129,7 +1131,7 @@ class LatexToAst {
         const numberString = t[0].trim();
         const number = parseInt(numberString, 10);
         const f = this.fraction({});
-        return ["+", number, f];
+        return ["*", number, f];
       } catch (e) {
         throw new ParseError(`Mixed number parsing failed: ${e.message}`);
       }
@@ -1137,6 +1139,14 @@ class LatexToAst {
 
     if (this.token.token_type === "FRAC") {
       return this.fraction({});
+    }
+
+    if (this.token.token_type === "TEXT") {
+      console.log(this.token, "thisTOKEN");
+      const text = this.token.original_text;
+      this.advance();
+
+      return text.toString();
     }
 
     if (this.token.token_type === "BEGINENVIRONMENT") {
@@ -1505,7 +1515,7 @@ class LatexToAst {
           // cannot omit argument
           if (must_apply) {
             // @ts-ignore
-            if (!this.allowSimplifiedFunctionApplication)
+            if (!this.opts.allowSimplifiedFunctionApplication)
               throw new ParseError(
                 "Expecting ( after function",
                 this.lexer.location
@@ -65897,67 +65907,9 @@ class AstToMathJs {
   }
 }
 
-const log$1 = logger("mv:symbolic");
-
-
-
-const { simplify: ms, rationalize } = mathjs;
-
-const SIMPLIFY_RULES = [
-  { l: "n1^(1/n2)", r: "nthRoot(n1, n2)" },
-  { l: "sqrt(n1)", r: "nthRoot(n1, 2)" },
-  { l: "(n^2)/n", r: "n" },
-  { l: "(n^2) + n", r: "n * (n + 1)" },
-  { l: "((n^n1) + n)/n", r: "n^(n1-1)+1" },
-  { l: "(n^2) + 2n", r: "n * (n + 2)" },
-  // { l: "(n/n1) * n2", r: "t" },
-  // perfect square formula:
-  { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
-  // { l: "(n^2) + 4n + 4", r: "(n^2) + (2n * 2) + (2^2)" },
-];
-
-const simplify$1 = (v) => {
-  const rules = SIMPLIFY_RULES.concat((ms ).rules);
-  return ms(v, rules); //.concat(SIMPLIFY_RULES));
-};
-
-const normalize = (a) => {
-  let r = a;
-  try {
-    r = rationalize(a, {}, true).expression;
-  } catch (e) {
-    // ok;
-  }
-  const s = simplify$1(r);
-
-  log$1("[normalize] input: ", a.toString(), "output: ", s.toString());
-  return s;
-};
-
-const isMathEqual$1 = (a, b, opts) => {
-  const as = normalize(a);
-  const bs = normalize(b);
-
-  log$1("[isMathEqual]", as.toString(), "==?", bs.toString());
-
-  const firstTest = as.equals(bs);
-  if (firstTest) {
-    return true;
-  }
-
-  /**
-   * Note: this seems very dodgy that we have to try a 2nd round of normalization here.
-   * Why is this necessary and try and remove it.
-   */
-  const at = normalize(as);
-  const bt = normalize(bs);
-
-  return at.equals(bt);
-};
-
 const m = mathjs;
 
-const log = logger("mv:node-sort");
+const log$1 = logger("mv:node-sort");
 
 //import { string } from "mathjs";
 /**
@@ -65972,8 +65924,8 @@ new AstToMathJs();
 
 const newCompare = (a, b) => {
   // log(a.type);
-  log("[compareNodes]: a:", a.toString(), a.type);
-  log("[compareNodes]: b:", b.toString(), b.type);
+  log$1("[compareNodes]: a:", a.toString(), a.type);
+  log$1("[compareNodes]: b:", b.toString(), b.type);
 
   if (a.isSymbolNode && b.isSymbolNode) {
     // log(a.name, "> ", b.name);
@@ -65982,8 +65934,8 @@ const newCompare = (a, b) => {
 
   // both constants - sort by value
   if (a.isConstantNode && b.isConstantNode) {
-    log("a.value", a.value);
-    log("b.value", b.value);
+    log$1("a.value", a.value);
+    log$1("b.value", b.value);
     return a.value - b.value; //(b.name);
   }
 
@@ -66098,7 +66050,7 @@ const flattenNode = (node) => {
 };
 
 const sortRelationalNode = (node) => {
-  log("THIS IS THE START ++++", JSON.stringify(node));
+  log$1("THIS IS THE START ++++", JSON.stringify(node));
 
   const smaller = ["smaller", "smallerEq"];
   const bigger = ["larger", "largerEq"];
@@ -66146,7 +66098,7 @@ const sortRelationalNode = (node) => {
     return node;
   });
 
-  log("THIS IS THE END ++++", JSON.stringify(node));
+  log$1("THIS IS THE END ++++", JSON.stringify(node));
 
   return resultNode;
 };
@@ -66198,6 +66150,85 @@ const s = (node) => {
   return resultNode;
 };
 
+const log = logger("mv:symbolic");
+
+
+
+const { simplify: ms, rationalize } = mathjs;
+
+const SIMPLIFY_RULES = [
+  { l: "n1 < n2<n3", r: "n1<n2<n3" },
+  { l: "n1^(1/n2)", r: "nthRoot(n1, n2)" },
+  { l: "sqrt(n1)", r: "nthRoot(n1, 2)" },
+  { l: "(n^2)/n", r: "n" },
+  { l: "(n^2) + n", r: "n * (n + 1)" },
+  { l: "((n^n1) + n)/n", r: "n^(n1-1)+1" },
+  { l: "(n^2) + 2n", r: "n * (n + 2)" },
+  // { l: "(n/n1) * n2", r: "t" },
+  // perfect square formula:
+  { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
+  // { l: "(n^2) + 4n + 4", r: "(n^2) + (2n * 2) + (2^2)" },
+  { l: "tzn(n1, n2)", r: "n1" },
+];
+
+const simplify$1 = (v) => {
+  const rules = SIMPLIFY_RULES.concat((ms ).rules);
+  return ms(v, rules); //.concat(SIMPLIFY_RULES));
+};
+
+const normalize = (a) => {
+  let r = a;
+  try {
+    r = rationalize(a, {}, true).expression;
+  } catch (e) {
+    // ok;
+  }
+
+  let s$1 = r;
+
+  // for relationalNode apply simplify for all params
+  if (r.conditionals && r.params) {
+    s$1.params = r.params.map((param) => {
+      return s(simplify$1(param));
+    });
+  } else {
+    s$1 = simplify$1(r);
+  }
+
+  log("[normalize] input: ", a.toString(), "output: ", s$1.toString());
+  return s$1;
+};
+
+const isMathEqual$1 = (a, b, opts) => {
+  let as;
+  let bs;
+
+  if (!a.conditionals) {
+    as = s(normalize(a));
+  } else {
+    as = normalize(a);
+  }
+
+  if (!b.conditionals) {
+    bs = s(normalize(b));
+  } else {
+    bs = normalize(b);
+  }
+
+  log("[isMathEqual]", as.toString(), "==?", bs.toString());
+
+  return as.equals(bs);
+
+  /** This is not used anymore
+   * Note: this seems very dodgy that we have to try a 2nd round of normalization here.
+   * Why is this necessary and try and remove it.
+   */
+  // const at = normalize(as);
+  // const bt = normalize(bs);
+
+  // return at.equals(bt);
+};
+
 const { simplify } = mathjs;
 
 
@@ -66243,7 +66274,9 @@ const atm = new AstToMathJs();
 
 const toMathNode = (latex) => {
   const ast = lta.convert(latex);
-  return atm.convert(ast);
+  console.log(ast, "ast");
+  const converted = atm.convert(ast);
+  return converted;
   // return parse(latex);
 };
 
@@ -66265,19 +66298,21 @@ const latexEqual$1 = (a, b, opts) => {
    */
 
   // remove spaces, trailing zeros & left & right parenthesis before counting length
-  const aTrimmed = a.replace(
+  a.replace(
     /(\\left\()|(\\right\))|( )|([.](0+))/g,
     ""
   ).length;
 
-  const bTrimmed = b.replace(
+  b.replace(
     /(\\left\()|(\\right\))|( )|([.](0+))/g,
     ""
   ).length;
 
-  if (aTrimmed > bTrimmed * 5 || bTrimmed > aTrimmed * 5) {
-    return false;
-  }
+  // here we still have a problem when we have expressions like this: target: "x", expression: "((x^2 + x) / x) - 1"
+
+  // if (aTrimmed > bTrimmed * 6 || bTrimmed > aTrimmed * 6) {
+  //   return false;
+  // }
 
   const amo = toMathNode(a);
   const bmo = toMathNode(b);

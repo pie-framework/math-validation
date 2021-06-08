@@ -24,7 +24,9 @@ const atm = new AstToMathJs();
 
 const toMathNode = (latex: string): MathNode => {
   const ast = lta.convert(latex);
-  return atm.convert(ast);
+  console.log(ast, "ast");
+  const converted = atm.convert(ast);
+  return converted;
   // return parse(latex);
 };
 
@@ -56,9 +58,11 @@ export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {
     ""
   ).length;
 
-  if (aTrimmed > bTrimmed * 5 || bTrimmed > aTrimmed * 5) {
-    return false;
-  }
+  // here we still have a problem when we have expressions like this: target: "x", expression: "((x^2 + x) / x) - 1"
+
+  // if (aTrimmed > bTrimmed * 6 || bTrimmed > aTrimmed * 6) {
+  //   return false;
+  // }
 
   const amo = toMathNode(a);
   const bmo = toMathNode(b);

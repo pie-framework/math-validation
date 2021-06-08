@@ -6,7 +6,6 @@
  */
 export default {
   mode: "literal",
-  skip: true,
   tests: [
     { target: "1,000", eq: ["1000"] },
     {

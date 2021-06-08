@@ -58,19 +58,9 @@ export enum Triage {
   FRACTION_CONVERSION_ERROR,
 
   /**
-   * Invalid location of '='
+   * We don't parse inverse functions
    */
-  EQUAL_LOCATION_PARSE_ERROR,
-
-  /**
-   * Non string functions not implemented for conversion to mathjs
-   */
-  NON_STRING,
-
-  /**
-   * expecting ( after function
-   */
-  EXPECTING_PARANTHESIS,
+  INVERSE_FUNCTIONS,
 
   /**
    * Unimplemented node type in simplifyConstant: RelationalNode
@@ -105,7 +95,7 @@ export enum Triage {
    */
   PERCENT_SUPPORT,
 
-  /**
+  /** Done
    * The latex parser is choking on the input things like:
    * (b/x)•a
    * a÷b
@@ -114,7 +104,7 @@ export enum Triage {
    */
   LATEX_PARSE_ERROR,
 
-  /**
+  /** Done
    * sqrt(x) should be eq with sqrt{2}(x)
    * log x should be eq with log{10}(x)
    * ln(x) should be eq with log{e}(x)
@@ -122,4 +112,16 @@ export enum Triage {
   EQUIVALENT_FUNCTIONS,
 
   ALLOW_TRAILING_ZEROS_SYMBOLIC,
+
+  /** Done
+   * Invalid location of '='
+   *  for an expression like "text{whatever} = 5", text{whatever} was treated like an empty space therefore it was removed. the remaining "= 5" is not a valid expression
+   */
+  EQUAL_LOCATION_PARSE_ERROR,
+
+  /** Done
+   * allow applied functions to omit parentheses around argument
+   * expecting ( after function
+   */
+  EXPECTING_PARANTHESIS,
 }

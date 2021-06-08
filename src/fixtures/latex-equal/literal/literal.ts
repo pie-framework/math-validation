@@ -1,6 +1,5 @@
 export default {
   mode: "literal",
-  skip: true,
   tests: [
     {
       target: "12 + 3 * x",
