@@ -926,8 +926,7 @@ export class LatexToAst {
     }
 
     if (this.token.token_type === "TEXT") {
-      console.log(this.token, "thisTOKEN");
-      const text = this.token.original_text;
+      const text = this.token.original_text.replace(/[[\]\\]/g, "");
       this.advance();
 
       return text.toString();

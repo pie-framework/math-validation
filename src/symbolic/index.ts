@@ -10,7 +10,6 @@ export type SymbolicOpts = {};
 const { simplify: ms, rationalize } = mathjs;
 
 const SIMPLIFY_RULES = [
-  { l: "n1 < n2<n3", r: "n1<n2<n3" },
   { l: "n1^(1/n2)", r: "nthRoot(n1, n2)" },
   { l: "sqrt(n1)", r: "nthRoot(n1, 2)" },
   { l: "(n^2)/n", r: "n" },

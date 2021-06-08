@@ -40,27 +40,23 @@ export default {
     },
 
     {
-      //GEORGE QUESTION
       target: "\\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second}",
       eq: [
         "\\frac{1}{x}\\left(6\\pi \\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
         "\\frac{6}{x}\\pi \\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-        // >>> TODO: the ast is wrong here - we get [+, 6, [/, pi, x]]
-        //"6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
+        "6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
         "6\\pi \\left(\\frac{1}{x}\\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
       ],
     },
     {
-      //GEORGE QUESTION
       target: "\\frac{6\\pi}{x}",
       eq: [
         "\\frac{1}{x}\\left(6\\pi \\right)",
         "\\frac{6}{x}\\pi",
-        // >>> TODO: the ast is wrong here - we get [+, 6, [/, pi, x]]
         "6 * \\frac{\\pi }{x}",
         "\\left(6\\right) \\frac{\\pi }{x}",
 
-        // see above a number followed by a fraction is seen as addition not multiplication
+        // see above a number followed by a fraction is seen as addition not multiplication - this is fixed now
         "6 \\frac{\\pi }{x}",
         "6\\pi \\left(\\frac{1}{x}\\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
       ],

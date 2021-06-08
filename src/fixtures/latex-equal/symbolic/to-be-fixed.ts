@@ -57,7 +57,6 @@ export default {
       ],
     },
     {
-      // invalid location of =
       target: "\\text{height}\\ =\\ 120\\sin\\theta",
       eq: [
         "\\text{height}\\ =\\ 120\\left(\\sin \\theta \\right)",
@@ -66,13 +65,10 @@ export default {
         "\\text{height}\\ =\\ \\left(\\sin \\theta \\right)\\times 120",
         "\\text{height}\\ =\\ \\sin \\theta \\times 120",
       ],
-      triage: Triage.EQUAL_LOCATION_PARSE_ERROR,
     },
     {
-      // expecting ( after function
       target: "\\cos\\x=-\\sqrt{1-y^2}",
       eq: ["\\cos\\ \\x\\ \\ =\\ -\\sqrt{-y^2+1}"],
-      triage: Triage.EXPECTING_PARANTHESIS,
     },
     {
       // precision error
