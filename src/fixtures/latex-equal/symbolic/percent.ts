@@ -1,7 +1,7 @@
 export default {
   mode: "symbolic",
   label: "CH6456",
-  //skip: true,
+  skip: true,
   // all passed
   tests: [
     {

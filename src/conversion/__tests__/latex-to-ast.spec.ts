@@ -3,10 +3,11 @@ import { LatexToAst } from "../latex-to-ast";
 // import { latexParser } from "latex-utensils";
 
 const fixtures = [
-  // we were getting [ [ '^', 'f', [ '-', 1 ] ], 'x' ]
-  // ["f^{-1}\\left(x\\right)", ["*", ["^", ["f", "-1"]], "x"]],
+  // TO DO -> parse inverse functions
+  //we were getting [ [ '^', 'f', [ '-', 1 ] ], 'x' ]
+  //["f^{-1}\\left(x\\right)", ["*", ["^", ["f", "-1"]], "x"]],
 
-  // parentheses are stripped!
+  //parentheses are stripped!
   ["(1 + (1 + 1))", ["+", 1, 1, 1]],
   ["\\frac{1}{2}", ["/", 1, 2]],
   ["15%", ["%", 15]],
@@ -29,28 +30,43 @@ const fixtures = [
   ["a·b", ["*", "a", "b"]],
   // treat ÷ as devide operator
   ["a÷b", ["/", "a", "b"]],
-  // accept rational operator ≤
+  // accept relational operator ≤
   ["a≤b", ["le", "a", "b"]],
-  // accept rational operator ≥
+  // accept relational operator ≥
   ["a≥b", ["ge", "a", "b"]],
-  //  // TODO...
-  // ["a < b > c", "1"],
-  // ["c < b > a", "1"],
-  //   [
-  //   we were getting: [+, 6, [/, pi, x]]
-  //   "6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-  //   "6\\frac{\\pi }{x}", //\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-  //   "6 \\frac{\\pi}{x}", //\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-  //   ["+", 6, ["/", "pi", "x"]],
-  //   ],
 
-  //   [
-  //     `
-  // \\frac{7x}{12}\\ \\text{dollars}
-  //          x\\times \\frac{1}{12}\\times 7\\ \\text{dollars}
-  //          x\\times 7\\times \\frac{1}{12}\\ \\text{dollars}`,
-  //     [],
-  //   ],
+  //  // TODO...
+  // ["a < b > c", ""],
+  // ["c < b > a", "1"],
+
+  [
+    "a < b > c",
+    ["relational", ["tuple", "a", "b", "c"], ["tuple", "smaller", "larger"]],
+  ],
+
+  [
+    "6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
+    ["*", 6, ["/", "pi", "x"], "text{radians}", "text{per}", "text{second}"],
+  ],
+
+  [
+    `\\frac{7x}{12}\\ \\text{dollars}`,
+    //  `x\\times \\frac{1}{12}\\times 7\\ \\text{dollars}
+    //  x\\times 7\\times \\frac{1}{12}\\ \\text{dollars}`,
+    [
+      "*",
+      ["/", ["*", 7, "x"], 12],
+      "text{dollars}",
+      // "x",
+      // ["/", 1, 12],
+      // 7,
+      // "text{dollars}",
+      // "x",
+      // 7,
+      // ["/", 1, 12],
+      // "text{dollars}",
+    ],
+  ],
 ];
 
 const lta = new LatexToAst();
