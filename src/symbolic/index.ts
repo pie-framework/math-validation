@@ -38,7 +38,7 @@ const normalize = (a: string | MathNode | any) => {
 
   let s = r;
 
-  // for relationalNode apply simplify for all params
+  // for relationalNode apply sort & simplify for all params
   if (r.conditionals && r.params) {
     s.params = r.params.map((param) => {
       return st(simplify(param));
@@ -52,9 +52,12 @@ const normalize = (a: string | MathNode | any) => {
 };
 
 export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
-  let as;
-  let bs;
+  let as: MathNode;
+  let bs: MathNode;
 
+  console.log(a.isOperatorNode, "true");
+
+  // apply sort if we are not in a relationalNode
   if (!a.conditionals) {
     as = st(normalize(a));
   } else {

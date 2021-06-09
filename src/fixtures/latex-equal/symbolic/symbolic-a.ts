@@ -2,7 +2,7 @@ import { Triage } from "../../triage";
 
 export default {
   mode: "symbolic",
-  skip: true,
+  skip: false,
   tests: [
     // {
     //   // this is not a fraction conversion error, this is because we do not treat correctly expressions like (expression1, expression2)
@@ -38,6 +38,10 @@ export default {
       target: "-\\frac{3\\pi}{4}\\le x\\le\\frac{\\pi}{4}",
       eq: ["-\\frac{3}{4}\\pi\\ \\le\\ x\\le\\ \\ \\frac{1}{4}\\pi"],
       triage: [Triage.UNIMPLEMENTED_NODE],
+    },
+    {
+      target: "2",
+      eq: ["\\sqrt [3]{8}", "\\sqrt [3]8", "\\sqrt [3]8"],
     },
   ],
 };

@@ -1,5 +1,5 @@
 export default {
-  skip: false,
+  skip: true,
   mode: "symbolic",
   tests: [
     // all passed
