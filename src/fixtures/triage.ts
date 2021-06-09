@@ -1,18 +1,5 @@
 export enum Triage {
   /**
-   * Mathjs is not sorting the nodes in the AST as we would expect.
-   * commutative pproperties of opperations are ignored
-   * so a+b !== b+a
-   * ab !== ba
-   * ab !== bxa
-   * ab !== b*a
-   * ab !== (b)a
-   * ab !== b(a)
-   * ab !== (b)(a)
-   */
-  NODE_SORT_SYMBOLIC,
-
-  /**
    * _underscore not implemented for conversion to mathjs
    */
   UNDERSCORE_SUPPORT,
@@ -52,20 +39,9 @@ export enum Triage {
   FRACTIONS_PROPERTIES,
 
   /**
-   * TypeError: Cannot implicitly convert a number to a Fraction when there will be a loss of precision (value: 0.31426968052735443).
-   * Use function fraction(x) to convert to Fraction.
-   */
-  FRACTION_CONVERSION_ERROR,
-
-  /**
    * We don't parse inverse functions
    */
   INVERSE_FUNCTIONS,
-
-  /**
-   * Unimplemented node type in simplifyConstant: RelationalNode
-   */
-  UNIMPLEMENTED_NODE,
 
   /**
    * ml should be eq with mL
@@ -111,6 +87,7 @@ export enum Triage {
    */
   EQUIVALENT_FUNCTIONS,
 
+  // Done
   ALLOW_TRAILING_ZEROS_SYMBOLIC,
 
   /** Done
@@ -124,4 +101,28 @@ export enum Triage {
    * expecting ( after function
    */
   EXPECTING_PARANTHESIS,
+
+  /** Done
+   * Unimplemented node type in simplifyConstant: RelationalNode
+   */
+  UNIMPLEMENTED_NODE,
+
+  /** Done - this was a parsing error
+   * TypeError: Cannot implicitly convert a number to a Fraction when there will be a loss of precision (value: 0.31426968052735443).
+   * Use function fraction(x) to convert to Fraction.
+   */
+  FRACTION_CONVERSION_ERROR,
+
+  /** Done
+   * Mathjs is not sorting the nodes in the AST as we would expect.
+   * commutative pproperties of opperations are ignored
+   * so a+b !== b+a
+   * ab !== ba
+   * ab !== bxa
+   * ab !== b*a
+   * ab !== (b)a
+   * ab !== b(a)
+   * ab !== (b)(a)
+   */
+  NODE_SORT_SYMBOLIC,
 }

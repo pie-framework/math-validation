@@ -1171,6 +1171,8 @@ export class LatexToAst {
           parse_absolute_value: parse_absolute_value,
           unknownCommands: unknownCommands,
         });
+
+        this.advance();
       }
 
       // @ts-ignore

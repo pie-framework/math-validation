@@ -4,7 +4,7 @@ const eq = (a, eq) => ({ target: a, eq });
 
 export default {
   mode: "symbolic",
- skip: true,
+  skip: true,
   tests: [
     {
       target: "a/x",
@@ -16,7 +16,6 @@ export default {
     },
     {
       target: "ab",
-      triage: Triage.NODE_SORT_SYMBOLIC,
       eq: [
         "a*b",
         "a(b)",
@@ -39,7 +38,6 @@ export default {
       eq: ["(b/x)•a", "(b/x)*a"],
     },
     {
-      triage: Triage.NODE_SORT_SYMBOLIC,
       target: "a+b",
       eq: ["b+a"],
     },

@@ -42,11 +42,24 @@ const fixtures = [
   ],
   ["8=\\text{eggs}", ["=", 8, "text{eggs}"]],
 
+  // convert sqrt when root=2
   ["\\sqrt {x}", ["apply", "sqrt", "x"]],
   ["\\sqrt [2]{x}", ["apply", "sqrt", "x"]],
   ["\\sqrt [2]x", ["apply", "sqrt", "x"]],
   ["\\sqrt x", ["apply", "sqrt", "x"]],
+
+  // convert sqrt when root!=2
   ["\\sqrt [3]{x}", ["^", "x", ["/", 1, 3]]],
+
+  // convert log
+
+  ["\\log (x)", ["apply", "log", ["tuple", "x", 10]]],
+
+  //something is wrong here
+  ["\\log {10} (x)", ["apply", "log", ["tuple", "x", 10]]],
+  ["\\ln x", ["apply", "log", ["tuple", "x", "e"]]],
+  ["\\ln {e}x", ["apply", "log", ["tuple", "x", "e"]]],
+
   //  // TODO...
   // ["a < b > c", ""],
   // ["c < b > a", "1"],

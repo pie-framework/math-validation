@@ -21,6 +21,7 @@ const SIMPLIFY_RULES = [
   { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
   // { l: "(n^2) + 4n + 4", r: "(n^2) + (2n * 2) + (2^2)" },
   { l: "tzn(n1, n2)", r: "n1" },
+  { l: "n1/(-n2)", r: "-(n1/n2)" },
 ];
 
 const simplify = (v) => {
@@ -54,8 +55,6 @@ const normalize = (a: string | MathNode | any) => {
 export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   let as: MathNode;
   let bs: MathNode;
-
-  console.log(a.isOperatorNode, "true");
 
   // apply sort if we are not in a relationalNode
   if (!a.conditionals) {
