@@ -2,12 +2,14 @@ import { Triage } from "../../triage";
 
 export default {
   mode: "symbolic",
-  skip: true,
+  //skip: true,
   tests: [
     {
       target: "\\frac{x}{12}\\times7\\text{dollars}",
       eq: [
+        // this is failing
         "\\frac{7x}{12}\\ \\text{dollars}",
+        //
         "x\\times \\frac{1}{12}\\times 7\\ \\text{dollars}",
         "x\\times 7\\times \\frac{1}{12}\\ \\text{dollars}",
         "\\frac{1}{12}\\times x\\times 7\\ \\text{dollars}",
@@ -16,15 +18,11 @@ export default {
         "\\frac{1}{12}\\left(7x\\right)\\ \\text{dollars}",
         "\\frac{1}{12}\\left(x\\times 7\\right)\\ \\text{dollars}",
       ],
+      triage: [Triage.FRACTIONS_PROPERTIES],
     },
 
     {
       target: "\\frac{n-5}{6}",
-      triage: [
-        Triage.NODE_SORT_SYMBOLIC,
-        Triage.IDENTITY_PROPERTY,
-        Triage.FRACTIONS_PROPERTIES,
-      ],
       eq: [
         "\\frac{-5+n}{6}",
         "\\frac{n}{6}-\\frac{5}{6}",
@@ -35,8 +33,8 @@ export default {
     },
     {
       target: "6 \\frac{1}{2}",
-      eq: ["6 * \\frac{1}{2}"],
-      ne: ["6 + \\frac{1}{2}"],
+      eq: ["6 + \\frac{1}{2}"],
+      ne: ["6 * \\frac{1}{2}"],
     },
 
     {
@@ -44,7 +42,7 @@ export default {
       eq: [
         "\\frac{1}{x}\\left(6\\pi \\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
         "\\frac{6}{x}\\pi \\ \\text{radians}\\ \\text{per}\\ \\text{second}",
-        "6\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
+        "6*\\frac{\\pi }{x}\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
         "6\\pi \\left(\\frac{1}{x}\\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
       ],
     },
@@ -56,9 +54,9 @@ export default {
         "6 * \\frac{\\pi }{x}",
         "\\left(6\\right) \\frac{\\pi }{x}",
 
-        // see above a number followed by a fraction is seen as addition not multiplication - this is fixed now
-        "6 \\frac{\\pi }{x}",
-        "6\\pi \\left(\\frac{1}{x}\\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
+        // a number followed by a fraction (mixed number) should be seen as addition not multiplication --> to convert a mixed number to an improper fraction we have to multiply the demoninator by the whole number and add the result to the numerator
+        "6 * \\frac{\\pi }{x}",
+        "6\\pi \\left(\\frac{1}{x}\\right)",
       ],
     },
     {
@@ -70,16 +68,7 @@ export default {
         "d\\left(\\frac{1}{240}\\right)+4\\ \\text{years}",
         "\\frac{1}{240}d+4\\ \\text{years}",
       ],
-    },
-    {
-      target: "\\frac{d}{240}+4\\ \\text{years}",
-      eq: [
-        "4+\\frac{d}{240}\\ \\text{years}",
-        "4+\\frac{1}{240}d\\ \\text{years}",
-        "4+d\\left(\\frac{1}{240}\\right)\\ \\text{years}",
-        "d\\left(\\frac{1}{240}\\right)+4\\ \\text{years}",
-        "\\frac{1}{240}d+4\\ \\text{years}",
-      ],
+      triage: [Triage.FRACTIONS_PROPERTIES],
     },
     {
       target: "0.65x",
@@ -92,7 +81,7 @@ export default {
     },
     {
       target: "\\frac{a+c}{2}+\\frac{b+d}{2}i",
-      triage: Triage.NODE_SORT_SYMBOLIC,
+      triage: [Triage.NODE_SORT_SYMBOLIC, Triage.FRACTIONS_PROPERTIES],
       eq: [
         // all failing
         "\\frac{c+a}{2}+\\frac{b+d}{2}i",
@@ -103,6 +92,7 @@ export default {
     {
       // passed
       target: "\\frac{10}{12}\\pi\\ \\text{radians}",
+      triage: [Triage.NODE_SORT_SYMBOLIC, Triage.FRACTIONS_PROPERTIES],
       eq: [
         "\\frac{5}{6}\\pi \\ \\text{radians}",
         "\\frac{10\\pi }{12}\\ \\text{radians}",
@@ -113,13 +103,11 @@ export default {
     },
     {
       target: "h=\\frac{3V}{B}",
-      triage: [Triage.FRACTIONS_PROPERTIES, Triage.COMMON_FACTOR],
       eq: [
         "h=\\frac{\\left(3\\times V\\right)}{B}",
         "h=\\left(3V\\right)\\div B",
         "h=\\left(3\\times V\\right)\\div B",
-        // failing
-        "h=3\\frac{V}{B}",
+        "h=3*\\frac{V}{B}",
       ],
     },
     {
@@ -177,16 +165,12 @@ export default {
     },
     {
       target: "h=\\frac{da}{c}",
-      triage: Triage.NODE_SORT_SYMBOLIC,
       eq: [
-        //failing
         "h=\\frac{ad}{c}",
         "h=\\left(a\\times d\\right)\\div c",
         "h=d\\left(\\frac{a}{c}\\right)",
         "h=d\\left(a\\div c\\right)",
         "h=\\frac{a\\times d}{c}",
-
-        //passing:
         "h=a\\left(d\\div c\\right)",
         "h=a\\left(\\frac{d}{c}\\right)",
         "h=\\frac{d\\times a}{c}",
@@ -217,12 +201,33 @@ export default {
         "f\\left(x\\right)\\ =\\ \\left(3x+16\\right)x",
         "f\\left(x\\right)\\ =\\ \\left(3x+16\\right)\\left(x\\right)",
         "f\\left(x\\right)\\ =\\ \\left(16+3x\\right)\\left(x\\right)",
-        // this test passed:
         "f\\left(x\\right)\\ =\\ x\\left(16+3x\\right)",
         "f\\left(x\\right)\\ =\\ \\left(16+3x\\right)x",
+
+        // failing
         "f\\left(x\\right)\\ =\\ 16x+3x^2",
         "f\\left(x\\right)\\ =\\ 3x^2+16x",
       ],
+    },
+    {
+      target: "100,000=72,300\\left(1.008\\right)^x",
+      eq: [
+        "72,300\\left(1.008\\right)^x=100,000",
+        "100000=72300\\left(1.008\\right)^x",
+        "72300\\left(1.008\\right)^x=100000",
+      ],
+    },
+    {
+      target: "p=15n-5",
+      eq: ["p=-5+15n", "-5+15n=p", "15n-5=p"],
+    },
+    {
+      target: "f=\\text{$}7.5h",
+      eq: ["f=\\text{$}7.5h"],
+    },
+    {
+      target: "b=d",
+      eq: ["d=b"],
     },
   ],
 };
@@ -292,26 +297,7 @@ export const toBeAdded = [
       "r=\\sqrt{\\frac{V}{\\pi \\times h}}^{ }",
     ],
   },
-  {
-    target: "100,000=72,300\\left(1.008\\right)^x",
-    eq: [
-      "72,300\\left(1.008\\right)^x=100,000",
-      "100000=72300\\left(1.008\\right)^x",
-      "72300\\left(1.008\\right)^x=100000",
-    ],
-  },
-  {
-    target: "p=15n-5",
-    eq: ["p=-5+15n", "-5+15n=p", "15n-5=p"],
-  },
-  {
-    target: "f=\\text{$}7.5h",
-    eq: ["f=\\text{$}7.5h"],
-  },
-  {
-    target: "b=d",
-    eq: ["d=b"],
-  },
+
   {
     target:
       "\\frac{\\left(y+0\\right)^2}{16}-\\frac{\\left(x+2\\right)^2}{9}=1",

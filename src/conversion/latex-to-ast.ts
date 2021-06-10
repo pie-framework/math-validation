@@ -915,7 +915,8 @@ export class LatexToAst {
         const numberString = t[0].trim();
         const number = parseInt(numberString, 10);
         const f = this.fraction({});
-        return ["*", number, f];
+        // this is correct, to convert a mixed number to an improper fraction we have to multiply the demoninator by the whole number and add the result to the numerator
+        return ["+", number, f];
       } catch (e) {
         throw new ParseError(`Mixed number parsing failed: ${e.message}`);
       }
