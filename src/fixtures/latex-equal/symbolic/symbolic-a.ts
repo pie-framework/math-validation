@@ -34,10 +34,8 @@ export default {
       triage: [Triage.COMMON_DENOMINATOR],
     },
     {
-      //  Unimplemented node type in simplifyConstant: RelationalNode
       target: "-\\frac{3\\pi}{4}\\le x\\le\\frac{\\pi}{4}",
       eq: ["-\\frac{3}{4}\\pi\\ \\le\\ x\\le\\ \\ \\frac{1}{4}\\pi"],
-      triage: [Triage.UNIMPLEMENTED_NODE],
     },
     {
       target: "2",
