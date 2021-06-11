@@ -74,8 +74,6 @@ const operators = {
   },
   _: function (operands) {
     const result = new m.SymbolNode(`${operands[0]}[${operands.splice(1)}]`);
-    console.log(result, "result");
-
     return result;
   },
   ne: function (operands) {
@@ -156,18 +154,6 @@ export class AstToMathJs {
 
       return new m.FunctionNode(f, f_args);
     }
-
-    // if (operator === "_") {
-    //   console.log(tree, "tree");
-    //   console.log(operands, "operands");
-    //   console.log([operands[1]], "array");
-
-    //   let result = new m.SymbolNode(`${operands[0]}[${operands}]`);
-
-    //   console.log(result, "result");
-    //   console.log(operands[1], "operands");
-    //   return result;
-    // }
 
     if (operator === "unit") {
       const unit = new m.Unit(1, operands[0]);

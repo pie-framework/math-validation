@@ -1,5 +1,6 @@
 export default {
   mode: "symbolic",
+  skip: true,
   tests: [
     {
       target: "1 * 3 * x",

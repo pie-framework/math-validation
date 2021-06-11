@@ -1,4 +1,5 @@
 export default {
+  skip: true,
   mode: "symbolic",
   tests: [
     {

@@ -4,7 +4,7 @@ const eq = (a, eq) => ({ target: a, eq });
 
 export default {
   mode: "symbolic",
-  //skip: true,
+  sskip: true,
   tests: [
     {
       target: "a/x",
