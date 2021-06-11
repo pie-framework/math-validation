@@ -1131,6 +1131,7 @@ export class LatexToAst {
       this.token.token_type === "LOG" ||
       this.token.token_type === "LN"
     ) {
+      // function log(x) in JS returns ln(x)
       let base = this.token.token_type === "LOG" ? 10 : "e";
       let parameter;
 

@@ -4,7 +4,7 @@ const eq = (a, eq) => ({ target: a, eq });
 
 export default {
   mode: "symbolic",
-  skip: true,
+  //skip: true,
   tests: [
     {
       target: "a/x",
@@ -53,13 +53,11 @@ export default {
     },
     {
       target: "-(a/b)",
-      triage: [Triage.NODE_SORT_SYMBOLIC, Triage.IDENTITY_PROPERTY],
       eq: ["(-a)/b", "a/(-b)"],
     },
     {
       target: "ab(x+y)",
       eq: ["a(bx+by)", "(abx+aby)", "abx+aby", "abx + aby"],
-      triage: Triage.DISTRIBUTIVE_PROPERTY,
     },
     { target: "88%", eq: "0.88" },
   ],

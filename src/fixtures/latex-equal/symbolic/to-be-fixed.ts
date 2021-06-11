@@ -2,16 +2,16 @@ import { Triage } from "../../triage";
 
 export default {
   mode: "symbolic",
-  skip: true,
+  //skip: true,
   tests: [
     {
+      only: true,
       // error: underscore not implemented for conversion
       target: "a_n=3a_{n-1}",
       eq: ["a_n=3\\times a_{n-1}"],
       triage: Triage.UNDERSCORE_SUPPORT,
     },
     {
-      // all passed
       target: "f\\left(y\\right)=26000\\left(0.83\\right)^y",
       eq: [
         "f\\left(y\\right)=26000\\left(1-0.17\\right)^y",
@@ -31,7 +31,6 @@ export default {
     //   triage: Triage.INVERSE_FUNCTIONS,
     // },
     {
-      // all passed
       target: "f\\left(x\\right)=1.1x+8",
       eq: [
         "f(x)\\ =\\ 8+1.1x",
@@ -45,7 +44,6 @@ export default {
       ],
     },
     {
-      // all passed
       target: "x=\\frac{20,000}{r^2}\\text{radians}",
       eq: [
         "x=\\frac{1}{r^2}\\left(20,000\\right)\\ \\text{radians}",
@@ -71,7 +69,6 @@ export default {
       eq: ["\\cos\\ \\x\\ \\ =\\ -\\sqrt{-y^2+1}"],
     },
     {
-      // precision error
       target: "100",
       ne: ["100 - 0.0001"],
     },

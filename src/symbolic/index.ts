@@ -59,12 +59,14 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   // apply sort if we are not in a relationalNode
   if (!a.conditionals) {
     as = st(normalize(a));
+    console.log("as", JSON.stringify(as));
   } else {
     as = normalize(a);
   }
 
   if (!b.conditionals) {
     bs = st(normalize(b));
+    console.log("bs", JSON.stringify(bs));
   } else {
     bs = normalize(b);
   }
