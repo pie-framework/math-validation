@@ -41,9 +41,7 @@ const normalize = (a: string | MathNode | any) => {
 
   // for relationalNode apply sort & simplify for all params
   if (r.conditionals && r.params) {
-    s.params = r.params.map((param) => {
-      return st(simplify(param));
-    });
+    s.params = r.params.map((param) => st(simplify(param)));
   } else {
     s = simplify(r);
   }

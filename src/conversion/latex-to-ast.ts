@@ -649,18 +649,16 @@ export class LatexToAst {
       this.advance();
       let rhs = this.expression(params);
 
-      const relationalOperator = (operatorSign) => {
+      const relationalOperator = (operatorSign: string) => {
         switch (operatorSign) {
           case "<":
             return "smaller";
           case "LE":
-            return "smallerEq";
           case "le":
             return "smallerEq";
           case ">":
             return "larger";
           case "GE":
-            return "largerEq";
           case "ge":
             return "largerEq";
         }

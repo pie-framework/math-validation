@@ -2,20 +2,19 @@ import { Triage } from "../../triage";
 
 export default {
   mode: "symbolic",
-  skip: true,
+  //skip: true,
   tests: [
-    // {
-    //   // this is not a fraction conversion error, this is because we do not treat correctly expressions like (expression1, expression2)
-    //   only: true,
-    //   target: "\\left(\\frac{2\\sqrt{2}}{3},\\frac{1}{3}\\right)",
-    //   eq: [
-    //     "(\\frac{\\sqrt{8}}{3},\\frac{1}{3})",
-    //     "(\\frac{2}{3}\\sqrt{2},\\frac{1}{3})",
-    //     "(\\frac{1}{3}\\sqrt{8},\\frac{1}{3})",
-    //     "(\\frac{1}{3}\\sqrt{8},\\frac{1}{3})",
-    //   ],
-    //   triage: [Triage.FRACTION_CONVERSION_ERROR],
-    // },
+    {
+      // this is not a fraction conversion error, this is because we do not treat correctly expressions like (expression1, expression2)
+      target: "\\left(\\frac{2\\sqrt{2}}{3},\\frac{1}{3}\\right)",
+      eq: [
+        "(\\frac{\\sqrt{8}}{3},\\frac{1}{3})",
+        "(\\frac{2}{3}\\sqrt{2},\\frac{1}{3})",
+        "(\\frac{1}{3}\\sqrt{8},\\frac{1}{3})",
+        "(\\frac{1}{3}\\sqrt{8},\\frac{1}{3})",
+      ],
+      triage: [Triage.FRACTION_CONVERSION_ERROR],
+    },
     {
       target:
         "f\\left[\\left(x,y\\right)\\right]=\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right)",

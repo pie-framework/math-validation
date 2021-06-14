@@ -870,13 +870,11 @@ class LatexToAst {
           case "<":
             return "smaller";
           case "LE":
-            return "smallerEq";
           case "le":
             return "smallerEq";
           case ">":
             return "larger";
           case "GE":
-            return "largerEq";
           case "ge":
             return "largerEq";
         }
@@ -1131,7 +1129,8 @@ class LatexToAst {
         const numberString = t[0].trim();
         const number = parseInt(numberString, 10);
         const f = this.fraction({});
-        return ["*", number, f];
+        // this is correct, to convert a mixed number to an improper fraction we have to multiply the demoninator by the whole number and add the result to the numerator
+        return ["+", number, f];
       } catch (e) {
         throw new ParseError(`Mixed number parsing failed: ${e.message}`);
       }
@@ -1142,8 +1141,7 @@ class LatexToAst {
     }
 
     if (this.token.token_type === "TEXT") {
-      console.log(this.token, "thisTOKEN");
-      const text = this.token.original_text;
+      const text = this.token.original_text.replace(/[[\]\\]/g, "");
       this.advance();
 
       return text.toString();
@@ -1347,6 +1345,7 @@ class LatexToAst {
       this.token.token_type === "LOG" ||
       this.token.token_type === "LN"
     ) {
+      // function log(x) in JS returns ln(x)
       let base = this.token.token_type === "LOG" ? 10 : "e";
       let parameter;
 
@@ -1388,6 +1387,8 @@ class LatexToAst {
           parse_absolute_value: parse_absolute_value,
           unknownCommands: unknownCommands,
         });
+
+        this.advance();
       }
 
       // @ts-ignore
@@ -65542,7 +65543,6 @@ function create(factories, config) {
   return math;
 }
 
-// export { MathNode };
 const mathjs = create(all, { number: "Fraction" });
 // @ts-ignore
 mathjs.replacer;
@@ -65617,6 +65617,11 @@ const operators = {
   },
   ge: function (operands) {
     return new m$1.OperatorNode(">=", "largerEq", operands);
+  },
+  _: function (operands) {
+    const [arrayName, ...position] = operands;
+    const result = new m$1.SymbolNode(`${arrayName}[${position}]`);
+    return result;
   },
   ne: function (operands) {
     return new m$1.OperatorNode("!=", "unequal", operands);
@@ -66157,7 +66162,6 @@ const log = logger("mv:symbolic");
 const { simplify: ms, rationalize } = mathjs;
 
 const SIMPLIFY_RULES = [
-  { l: "n1 < n2<n3", r: "n1<n2<n3" },
   { l: "n1^(1/n2)", r: "nthRoot(n1, n2)" },
   { l: "sqrt(n1)", r: "nthRoot(n1, 2)" },
   { l: "(n^2)/n", r: "n" },
@@ -66169,6 +66173,7 @@ const SIMPLIFY_RULES = [
   { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
   // { l: "(n^2) + 4n + 4", r: "(n^2) + (2n * 2) + (2^2)" },
   { l: "tzn(n1, n2)", r: "n1" },
+  { l: "n1/(-n2)", r: "-(n1/n2)" },
 ];
 
 const simplify$1 = (v) => {
@@ -66186,11 +66191,9 @@ const normalize = (a) => {
 
   let s$1 = r;
 
-  // for relationalNode apply simplify for all params
+  // for relationalNode apply sort & simplify for all params
   if (r.conditionals && r.params) {
-    s$1.params = r.params.map((param) => {
-      return s(simplify$1(param));
-    });
+    s$1.params = r.params.map((param) => s(simplify$1(param)));
   } else {
     s$1 = simplify$1(r);
   }
@@ -66203,14 +66206,17 @@ const isMathEqual$1 = (a, b, opts) => {
   let as;
   let bs;
 
+  // apply sort if we are not in a relationalNode
   if (!a.conditionals) {
     as = s(normalize(a));
+    console.log("as", JSON.stringify(as));
   } else {
     as = normalize(a);
   }
 
   if (!b.conditionals) {
     bs = s(normalize(b));
+    console.log("bs", JSON.stringify(bs));
   } else {
     bs = normalize(b);
   }

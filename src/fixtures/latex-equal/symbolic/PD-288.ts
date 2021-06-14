@@ -1,10 +1,8 @@
-import { Triage } from "../../triage";
-
 const eq = (a, eq) => ({ target: a, eq });
 
 export default {
   mode: "symbolic",
-  sskip: true,
+  //skip: true,
   tests: [
     {
       target: "a/x",

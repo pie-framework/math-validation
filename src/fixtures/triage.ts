@@ -44,6 +44,11 @@ export enum Triage {
   INVERSE_FUNCTIONS,
 
   /**
+   * Expand expression
+   */
+  EXPAND_EXPRESSION,
+
+  /**
    * ml should be eq with mL
    * ALSO I SHOULD CHECK OTHER UNITS
    */

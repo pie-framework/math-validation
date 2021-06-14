@@ -73,7 +73,8 @@ const operators = {
     return new m.OperatorNode(">=", "largerEq", operands);
   },
   _: function (operands) {
-    const result = new m.SymbolNode(`${operands[0]}[${operands.splice(1)}]`);
+    const [arrayName, ...position] = operands;
+    const result = new m.SymbolNode(`${arrayName}[${position}]`);
     return result;
   },
   ne: function (operands) {

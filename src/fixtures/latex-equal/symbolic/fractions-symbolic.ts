@@ -2,7 +2,7 @@ import { Triage } from "../../triage";
 
 export default {
   mode: "symbolic",
-  skip: true,
+  //skip: true,
   tests: [
     {
       target: "\\frac{x}{12}\\times7\\text{dollars}",
@@ -22,6 +22,7 @@ export default {
     },
 
     {
+      //all passing
       target: "\\frac{n-5}{6}",
       eq: [
         "\\frac{-5+n}{6}",
@@ -32,12 +33,14 @@ export default {
       ],
     },
     {
+      // all passing
       target: "6 \\frac{1}{2}",
       eq: ["6 + \\frac{1}{2}"],
       ne: ["6 * \\frac{1}{2}"],
     },
 
     {
+      // all passing
       target: "\\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second}",
       eq: [
         "\\frac{1}{x}\\left(6\\pi \\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
@@ -47,6 +50,7 @@ export default {
       ],
     },
     {
+      // all passing
       target: "\\frac{6\\pi}{x}",
       eq: [
         "\\frac{1}{x}\\left(6\\pi \\right)",
@@ -62,9 +66,12 @@ export default {
     {
       target: "\\frac{d}{240}+4\\ \\text{years}",
       eq: [
+        // failing --> 4\\ \\text{years} is seen as multiplication
         "4+\\frac{d}{240}\\ \\text{years}",
         "4+\\frac{1}{240}d\\ \\text{years}",
         "4+d\\left(\\frac{1}{240}\\right)\\ \\text{years}",
+
+        // passing
         "d\\left(\\frac{1}{240}\\right)+4\\ \\text{years}",
         "\\frac{1}{240}d+4\\ \\text{years}",
       ],
@@ -92,13 +99,16 @@ export default {
     {
       // passed
       target: "\\frac{10}{12}\\pi\\ \\text{radians}",
-      triage: [Triage.NODE_SORT_SYMBOLIC, Triage.FRACTIONS_PROPERTIES],
+      triage: [Triage.FRACTIONS_PROPERTIES],
       eq: [
         "\\frac{5}{6}\\pi \\ \\text{radians}",
+
+        "\\frac{50}{60}\\pi \\ \\text{radians}",
+
+        //failed
         "\\frac{10\\pi }{12}\\ \\text{radians}",
         "\\frac{5\\pi }{6}\\ \\text{radians}",
         "\\frac{50\\pi }{60}\\ \\text{radians}",
-        "\\frac{50}{60}\\pi \\ \\text{radians}",
       ],
     },
     {
@@ -120,13 +130,11 @@ export default {
     },
     {
       target: "c=-\\frac{b}{m}",
-      triage: [Triage.COMMON_FACTOR, Triage.NODE_SORT_SYMBOLIC],
       eq: [
         "c=-b\\div m",
         "c=-b\\times \\frac{1}{m}",
         "c=\\left(-b\\right)\\left(\\frac{1}{m}\\right)",
         "c=\\frac{-b}{m}",
-        //failing
         "c=\\frac{b}{-m}",
       ],
     },
@@ -195,7 +203,6 @@ export default {
       ],
     },
     {
-      triage: [Triage.NODE_SORT_SYMBOLIC, Triage.FRACTIONS_PROPERTIES],
       target: "f\\left(x\\right)=x\\left(3x+16\\right)",
       eq: [
         "f\\left(x\\right)\\ =\\ \\left(3x+16\\right)x",
@@ -204,10 +211,11 @@ export default {
         "f\\left(x\\right)\\ =\\ x\\left(16+3x\\right)",
         "f\\left(x\\right)\\ =\\ \\left(16+3x\\right)x",
 
-        // failing
+        // failing - simplify inside function
         "f\\left(x\\right)\\ =\\ 16x+3x^2",
         "f\\left(x\\right)\\ =\\ 3x^2+16x",
       ],
+      triage: [Triage.EXPAND_EXPRESSION],
     },
     {
       target: "100,000=72,300\\left(1.008\\right)^x",

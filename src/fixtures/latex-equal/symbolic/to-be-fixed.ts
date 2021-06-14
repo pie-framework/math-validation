@@ -2,7 +2,7 @@ import { Triage } from "../../triage";
 
 export default {
   mode: "symbolic",
-  skip: true,
+  //skip: true,
   tests: [
     {
       target: "a_n=3a_{n-1}",
@@ -16,17 +16,17 @@ export default {
         "f\\left(y\\right)=26,000\\left(0.83\\right)^y",
       ],
     },
-    // {
-    //   target: "f^{-1}\\left(x\\right)=-\\frac{12}{x}+8",
-    //   eq: [
-    //     "f^{-1}(x)\\ =\\ 8-\\frac{12}{x}",
-    //     "f^{-1}(x)\\ =\\ \\frac{8x-12}{x}",
-    //     "f^{-1}(x)\\ =\\ \\frac{-12+8x}{x}",
-    //     "f^{-1}(x)\\ =\\ -12\\left(\\frac{1}{x}\\right)+8",
-    //     "f^{-1}(x)\\ =\\ 8-12\\left(\\frac{1}{x}\\right)",
-    //   ],
-    //   triage: Triage.INVERSE_FUNCTIONS,
-    // },
+    {
+      target: "f^{-1}\\left(x\\right)=-\\frac{12}{x}+8",
+      eq: [
+        "f^{-1}(x)\\ =\\ 8-\\frac{12}{x}",
+        "f^{-1}(x)\\ =\\ \\frac{8x-12}{x}",
+        "f^{-1}(x)\\ =\\ \\frac{-12+8x}{x}",
+        "f^{-1}(x)\\ =\\ -12\\left(\\frac{1}{x}\\right)+8",
+        "f^{-1}(x)\\ =\\ 8-12\\left(\\frac{1}{x}\\right)",
+      ],
+      triage: Triage.INVERSE_FUNCTIONS,
+    },
     {
       target: "f\\left(x\\right)=1.1x+8",
       eq: [
