@@ -1,5 +1,5 @@
 export const logger = (name: string) => {
-  if (process.env.NODE_ENV === "test") {
+  if (typeof process !== "undefined" && process.env.NODE_ENV === "test") {
     const debug = require("debug");
     return debug(name);
   } else {
