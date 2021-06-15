@@ -16,6 +16,7 @@ const SIMPLIFY_RULES = [
   { l: "(n^2) + n", r: "n * (n + 1)" },
   { l: "((n^n1) + n)/n", r: "n^(n1-1)+1" },
   { l: "(n^2) + 2n", r: "n * (n + 2)" },
+  { l: "n2*n3(n/n1)", r: "(n*n2*n3)/n1" },
   // { l: "(n/n1) * n2", r: "t" },
   // perfect square formula:
   { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
@@ -35,6 +36,7 @@ const normalize = (a: string | MathNode | any) => {
     r = rationalize(a, {}, true).expression;
   } catch (e) {
     // ok;
+    console.log(e, "failed to rationalize");
   }
 
   let s = r;
@@ -53,6 +55,9 @@ const normalize = (a: string | MathNode | any) => {
 export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   let as: MathNode;
   let bs: MathNode;
+  console.log(a, "node before proccesing");
+
+  console.log(!a.conditionals, "a----conditionals ");
 
   // apply sort if we are not in a relationalNode
   if (!a.conditionals) {
@@ -62,12 +67,16 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
     as = normalize(a);
   }
 
+  console.log(b.conditionals, "b------- conditionals");
+
   if (!b.conditionals) {
     bs = st(normalize(b));
     console.log("bs", JSON.stringify(bs));
   } else {
     bs = normalize(b);
   }
+
+  console.log(as, "node after-----------");
 
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
