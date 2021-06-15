@@ -82,7 +82,10 @@ const chainedSimilarOperators = (node) => {
   let ok = false;
 
   node.traverse((node, path, parent) => {
-    ok = ok || (parent && parent.fn === node.fn && !ok);
+    ok =
+      ok ||
+      (parent && parent.fn === node.fn && !ok) ||
+      (parent && parent.fn === "multiply" && node.fn === "divide");
   });
 
   return ok;

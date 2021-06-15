@@ -1,6 +1,6 @@
 import { logger } from "../log";
 import { mathjs } from "../mathjs";
-import { MathNode } from "mathjs";
+import { MathNode, ResultSetDependencies } from "mathjs";
 import { s as st } from "../node-sort";
 
 const log = logger("mv:symbolic");
@@ -16,7 +16,6 @@ const SIMPLIFY_RULES = [
   { l: "(n^2) + n", r: "n * (n + 1)" },
   { l: "((n^n1) + n)/n", r: "n^(n1-1)+1" },
   { l: "(n^2) + 2n", r: "n * (n + 2)" },
-  { l: "n2*n3(n/n1)", r: "(n*n2*n3)/n1" },
   // { l: "(n/n1) * n2", r: "t" },
   // perfect square formula:
   { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
@@ -52,12 +51,34 @@ const normalize = (a: string | MathNode | any) => {
   return s;
 };
 
+const insertAllCoecientsInNumerator = (node) => {
+  console.log(node, "node");
+  node = node.transform((node, path, parent) => {
+    if (parent && node.fn === "divide" && parent.fn === "multiply") {
+      console.log(node, "in transform");
+      node.args[0].args.push(parent.args[0]);
+      console.log(parent.args[0], "parent");
+      console.log(node.args[0].args, "node args 0 ------------");
+      //node = node.args;
+      console.log(node, "final node in iffffffffffffffffff");
+      parent = node;
+      console.log(parent, "parent after final");
+      return parent;
+    } else {
+      return node;
+    }
+  });
+
+  let resultNode = node;
+  console.log(resultNode, "resulNode");
+
+  return resultNode;
+};
+
 export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   let as: MathNode;
   let bs: MathNode;
   console.log(a, "node before proccesing");
-
-  console.log(!a.conditionals, "a----conditionals ");
 
   // apply sort if we are not in a relationalNode
   if (!a.conditionals) {
@@ -66,8 +87,6 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   } else {
     as = normalize(a);
   }
-
-  console.log(b.conditionals, "b------- conditionals");
 
   if (!b.conditionals) {
     bs = st(normalize(b));
@@ -79,6 +98,9 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   console.log(as, "node after-----------");
 
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
+
+  as = insertAllCoecientsInNumerator(as);
+  console.log(as, " as after transform");
 
   return as.equals(bs);
 
