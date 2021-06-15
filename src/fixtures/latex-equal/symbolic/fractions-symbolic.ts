@@ -40,6 +40,7 @@ export default {
     },
 
     {
+      // only: true,
       // all passing
       target: "\\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second}",
       eq: [
