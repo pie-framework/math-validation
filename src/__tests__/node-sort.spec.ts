@@ -110,18 +110,31 @@ const ff = [];
 const lta = new LatexToAst();
 const atm = new AstToMathJs();
 
-it.each`
-  input                                 | expected
-  ${["+", ["+", "1"]]}                  | ${["+", "1"]}
-  ${["+", "1", ["+", "2"]]}             | ${["+", "1", "2"]}
-  ${["+", "1", ["*", "2"]]}             | ${["+", "1", ["*", "2"]]}
-  ${["+", ["+", ["+", "1", "2"]], "3"]} | ${["+", "1", "2", "3"]}
-  ${["+", ["+", ["+", "a", "b"]], "c"]} | ${["+", "a", "b", "c"]}
-  ${["+", ["+", ["*", "1", "2"]], "3"]} | ${["+", ["*", "1", "2"], "3"]}
+// ${["+", ["+", "1"]]}                      | ${["+", "1"]}
+//   ${["+", "1", ["+", "2"]]}                 | ${["+", "1", "2"]}
+//   ${["+", "1", ["*", "2"]]}                 | ${["+", "1", ["*", "2"]]}
+//   ${["+", ["+", ["+", "1", "2"]], "3"]}     | ${["+", "1", "2", "3"]}
+//   ${["+", ["+", ["+", "a", "b"]], "c"]}     | ${["+", "a", "b", "c"]}
+//   ${["+", ["+", ["*", "1", "2"]], "3"]}     | ${["+", ["*", "1", "2"], "3"]}
+//   ${["*", ["/", ["*", "7", "pi"], 6], "3"]} | ${["/", ["*", "7", "pi", "3"], 6]}
+//   ${["*", ["/", 8, 6], "3"]}                | ${["/", ["*", 8, "3"], 6]}
+//  ${["*", 7, 9, ["/", 8, 6], "3"]}           | ${["/", ["*", 8, 7, 9, "3"], 6]}
+
+// tests for flatten and insert all multiplication terms in numerator
+it.only.each`
+  input                                      | expected
+  ${["+", ["*", 7, 9, ["/", 8, 6], "3"], 1]} | ${["+", ["/", ["*", 8, 7, 9, "3"], 6], 1]}
 `("", ({ input, expected }) => {
   input = atm.convert(input);
   const result = flattenNode(input);
   const ex = atm.convert(expected);
+  console.log(result.args[0].args, "result--args[0]");
+  console.log(result.args[1], "result--args[1]");
+  console.log(ex.args[0].args, "expected--args[0]");
+  console.log(ex.args[1], "ex--args[1]");
+
+  console.log(result, "result");
+  console.log(ex, "expected");
   expect(result).toEqual(ex);
 });
 

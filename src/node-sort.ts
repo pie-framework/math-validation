@@ -82,10 +82,17 @@ const chainedSimilarOperators = (node) => {
   let ok = false;
 
   node.traverse((node, path, parent) => {
-    ok =
-      ok ||
-      (parent && parent.fn === node.fn && !ok) ||
-      (parent && parent.fn === "multiply" && node.fn === "divide");
+    ok = ok || (parent && parent.fn === node.fn && !ok);
+  });
+
+  return ok;
+};
+
+const chainedMultiplyAndDivide = (node) => {
+  let ok = false;
+
+  node.traverse((node, path, parent) => {
+    ok = ok || (parent && parent.fn === "multiply" && node.fn === "divide");
   });
 
   return ok;
@@ -126,6 +133,7 @@ export const flattenNode = (node: MathNode) => {
   const operator = resultNode.op;
   const func = resultNode.fn;
   const sameOperator = chainedSimilarOperators(resultNode);
+  const divideAndMultiply = chainedMultiplyAndDivide(resultNode);
 
   if (resultNode.args && argsIsOperatorNode(resultNode) && sameOperator) {
     let newNode = new m.OperatorNode(operator, func, []);
@@ -142,7 +150,59 @@ export const flattenNode = (node: MathNode) => {
         (node.isSymbolNode && parent.op !== "*" && func !== "multiply") ||
         (node.isConstantNode && parent.op !== "*" && func !== "multiply")
       ) {
+        console.log(node, "node");
+        console.log(path, "path");
         newNode.args.push(node);
+      }
+    });
+
+    return newNode;
+  }
+
+  // Insert all multiplication terms in numerator
+  if (resultNode.args && argsIsOperatorNode(resultNode) && divideAndMultiply) {
+    let newNode = new m.OperatorNode(operator, func, []);
+    console.log(resultNode, "resultnode");
+    console.log(newNode, "new node at the beginning");
+    let result = false;
+
+    resultNode = resultNode.traverse((node, path, parent) => {
+      // this condition will be at least once true
+      if (parent && parent.fn === "multiply" && node.fn === "divide") {
+        if (node.args[0].isOperatorNode) {
+          parent.args.forEach((arg) => {
+            if (!arg.isOperatorNode) {
+              node.args[0].args.push(arg);
+            }
+          });
+        } else {
+          console.log(node.args, "yarif no operator node");
+          const newArgs = [];
+          console.log(parent.args, "parent args");
+          newArgs.push(node.args[0]);
+
+          parent.args.forEach((arg) => {
+            if (!arg.isOperatorNode) {
+              newArgs.push(arg);
+            }
+          });
+
+          node.args[0] = new m.OperatorNode("*", "multiply", newArgs);
+          console.log(node.args, "node from args");
+          if (!newNode.args) {
+            newNode = node;
+          } else {
+            newNode.args.push(node);
+          }
+        }
+
+        // if (operator === "+" || operator === "-") {
+        //   newNode.args.push(node);
+        // } else {
+        //   newNode = node;
+        // }
+
+        console.log(newNode, "newNode");
       }
     });
 
@@ -205,16 +265,6 @@ export const sortRelationalNode = (node: any) => {
 
   return resultNode;
 };
-
-// export const test = (input) => {
-//   const latexConverted = lta.convert(input);
-//   console.log(latexConverted, "latexconverted");
-//   const mathNode = atm.convert(latexConverted);
-//   console.log(mathNode, "math node");
-//   const sorted = s(mathNode);
-//   console.log("sorted from test");
-//   return sorted;
-// };
 
 export const s = (node: MathNode) => {
   let resultNode = node;

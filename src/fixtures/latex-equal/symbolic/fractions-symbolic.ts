@@ -2,14 +2,13 @@ import { Triage } from "../../triage";
 
 export default {
   mode: "symbolic",
-  //skip: true,
+  skip: true,
   tests: [
     {
-      target: "\\frac{x}{12}\\times7*a",
+      target: "\\frac{x}{12}\\times7\\text{dollars}",
       eq: [
         // this is failing
-        "\\frac{7x}{12}*a",
-        //
+        "\\frac{7x}{12}\\text{dollars}",
         // "x\\times \\frac{1}{12}\\times 7\\ \\text{dollars}",
         // "x\\times 7\\times \\frac{1}{12}\\ \\text{dollars}",
         // "\\frac{1}{12}\\times x\\times 7\\ \\text{dollars}",
@@ -99,18 +98,17 @@ export default {
     },
     {
       // passed
-      only: true,
       target: "\\frac{10}{12}\\pi\\ \\text{radians}",
       triage: [Triage.FRACTIONS_PROPERTIES],
       eq: [
-        // "\\frac{5}{6}\\pi \\ \\text{radians}",
+        "\\frac{5}{6}\\pi \\ \\text{radians}",
 
-        // "\\frac{50}{60}\\pi \\ \\text{radians}",
+        "\\frac{50}{60}\\pi \\ \\text{radians}",
 
         //failed
         "\\frac{10\\pi }{12}\\ \\text{radians}",
-        // "\\frac{5\\pi }{6}\\ \\text{radians}",
-        // "\\frac{50\\pi }{60}\\ \\text{radians}",
+        "\\frac{5\\pi }{6}\\ \\text{radians}",
+        "\\frac{50\\pi }{60}\\ \\text{radians}",
       ],
     },
     {

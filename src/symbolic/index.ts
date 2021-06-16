@@ -51,30 +51,6 @@ const normalize = (a: string | MathNode | any) => {
   return s;
 };
 
-const insertAllCoecientsInNumerator = (node) => {
-  console.log(node, "node");
-  node = node.transform((node, path, parent) => {
-    if (parent && node.fn === "divide" && parent.fn === "multiply") {
-      console.log(node, "in transform");
-      node.args[0].args.push(parent.args[0]);
-      console.log(parent.args[0], "parent");
-      console.log(node.args[0].args, "node args 0 ------------");
-      //node = node.args;
-      console.log(node, "final node in iffffffffffffffffff");
-      parent = node;
-      console.log(parent, "parent after final");
-      return parent;
-    } else {
-      return node;
-    }
-  });
-
-  let resultNode = node;
-  console.log(resultNode, "resulNode");
-
-  return resultNode;
-};
-
 export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   let as: MathNode;
   let bs: MathNode;
@@ -99,17 +75,8 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
 
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
-  as = insertAllCoecientsInNumerator(as);
-  console.log(as, " as after transform");
+  //console.log(as.args[0], " as after transform args[0]");
+  console.log(bs, " bs after transform");
 
   return as.equals(bs);
-
-  /** This is not used anymore
-   * Note: this seems very dodgy that we have to try a 2nd round of normalization here.
-   * Why is this necessary and try and remove it.
-   */
-  // const at = normalize(as);
-  // const bt = normalize(bs);
-
-  // return at.equals(bt);
 };
