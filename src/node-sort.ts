@@ -2,7 +2,7 @@ import { logger } from "./log";
 
 import { mathjs as mjs } from "./mathjs";
 
-import { MathNode } from "mathjs";
+import { arg, MathNode, re } from "mathjs";
 
 const m: any = mjs;
 
@@ -150,8 +150,6 @@ export const flattenNode = (node: MathNode) => {
         (node.isSymbolNode && parent.op !== "*" && func !== "multiply") ||
         (node.isConstantNode && parent.op !== "*" && func !== "multiply")
       ) {
-        console.log(node, "node");
-        console.log(path, "path");
         newNode.args.push(node);
       }
     });
@@ -159,55 +157,75 @@ export const flattenNode = (node: MathNode) => {
     return newNode;
   }
 
-  // Insert all multiplication terms in numerator
-  if (resultNode.args && argsIsOperatorNode(resultNode) && divideAndMultiply) {
-    let newNode = new m.OperatorNode(operator, func, []);
-    console.log(resultNode, "resultnode");
-    console.log(newNode, "new node at the beginning");
+  const firstChildIsDivideNode = (args) => {
     let result = false;
-
-    resultNode = resultNode.traverse((node, path, parent) => {
-      // this condition will be at least once true
-      if (parent && parent.fn === "multiply" && node.fn === "divide") {
-        if (node.args[0].isOperatorNode) {
-          parent.args.forEach((arg) => {
-            if (!arg.isOperatorNode) {
-              node.args[0].args.push(arg);
-            }
-          });
-        } else {
-          console.log(node.args, "yarif no operator node");
-          const newArgs = [];
-          console.log(parent.args, "parent args");
-          newArgs.push(node.args[0]);
-
-          parent.args.forEach((arg) => {
-            if (!arg.isOperatorNode) {
-              newArgs.push(arg);
-            }
-          });
-
-          node.args[0] = new m.OperatorNode("*", "multiply", newArgs);
-          console.log(node.args, "node from args");
-          if (!newNode.args) {
-            newNode = node;
-          } else {
-            newNode.args.push(node);
-          }
-        }
-
-        // if (operator === "+" || operator === "-") {
-        //   newNode.args.push(node);
-        // } else {
-        //   newNode = node;
-        // }
-
-        console.log(newNode, "newNode");
+    args.forEach((arg) => {
+      if (arg.fn === "divide") {
+        result = true;
       }
+
+      return result;
     });
 
-    return newNode;
-  }
+    if (result) {
+      console.log(args, "first args");
+    }
+    return result;
+  };
+
+  resultNode = resultNode.transform((currentNode, path, parent) => {
+
+    if (
+      currentNode.fn === "multiply" &&
+      firstChildIsDivideNode(currentNode.args)
+    ) {
+      console.log("nexxxt");
+
+      let divideNode = currentNode;
+
+      if (divideNode.fn === "multiply" && firstChildIsDivideNode(divideNode)) {
+        console.log(currentNode, "result node before proccesing");
+        let newNode;
+        divideNode = divideNode.traverse((node, path, parent) => {
+          // this condition will be at least once true
+          console.log(path, "path", node, "node path", parent, "parent");
+          if (parent && parent.fn === "multiply" && node.fn === "divide") {
+            if (node.args[0].isOperatorNode) {
+              parent.args.forEach((arg) => {
+                if (!arg.isOperatorNode) {
+                  node.args[0].args.push(arg);
+                }
+              });
+            } else {
+              const newArgs = [];
+
+              newArgs.push(node.args[0]);
+
+              parent.args.forEach((arg) => {
+                if (!arg.isOperatorNode) {
+                  newArgs.push(arg);
+                }
+              });
+
+              node.args[0] = new m.OperatorNode("*", "multiply", newArgs);
+
+              console.log(node, "node in traverse");
+            }
+            newNode = node;
+          }
+          console.log(newNode, "newNode----in trsverse");
+        });
+        return newNode;
+      }
+
+    } else {
+      currentNode = currentNode;
+    }
+
+    return currentNode;
+  });
+
+  console.log(node, "node after transform $$$$$$$$$");
 
   return resultNode;
 };
