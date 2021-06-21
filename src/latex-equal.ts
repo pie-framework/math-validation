@@ -1,6 +1,5 @@
 import { LatexToAst } from "./conversion/latex-to-ast";
 import { AstToMathJs } from "./conversion/ast-to-mathjs";
-import { MathNode } from "mathjs";
 import { isMathEqual as isSymbolicEqual, SymbolicOpts } from "./symbolic";
 import { isMathEqual as isLiteralEqual, LiteralOpts } from "./literal";
 import { differenceIsTooGreat } from "./difference";
@@ -33,8 +32,14 @@ export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {
     return true;
   }
 
+  // console.log(a, "a before converted");
+
   const al = lta.convert(a);
+
+  //console.log(al, "a lta converted");
   const bl = lta.convert(b);
+
+  //console.log(bl, "b lta  converteed");
 
   if (differenceIsTooGreat(al, bl)) {
     return false;

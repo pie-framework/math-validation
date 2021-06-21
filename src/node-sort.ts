@@ -2,7 +2,7 @@ import { logger } from "./log";
 
 import { mathjs as mjs } from "./mathjs";
 
-import { arg, MathNode, re } from "mathjs";
+import { MathNode, nuclearMagnetonDependencies } from "mathjs";
 
 const m: any = mjs;
 
@@ -74,6 +74,10 @@ const applySort = (node: MathNode) => {
     node.args = node.args.sort(newCompare);
     node.args = node.args.map(applySort);
   }
+  // else if (node.fn === "divide") {
+  //   node.args[0].args = node.args[0].args.sort(newCompare);
+  //   node.args[0].args = node.args[0].args.map(applySort);
+  // }
 
   return node;
 };
@@ -81,18 +85,11 @@ const applySort = (node: MathNode) => {
 const chainedSimilarOperators = (node) => {
   let ok = false;
 
-  node.traverse((node, path, parent) => {
+  node.transform((node, path, parent) => {
     ok = ok || (parent && parent.fn === node.fn && !ok);
-  });
-
-  return ok;
-};
-
-const chainedMultiplyAndDivide = (node) => {
-  let ok = false;
-
-  node.traverse((node, path, parent) => {
-    ok = ok || (parent && parent.fn === "multiply" && node.fn === "divide");
+    if (ok) {
+      return true;
+    }
   });
 
   return ok;
@@ -111,6 +108,32 @@ const argsIsOperatorNode = (node) => {
   return isOperator;
 };
 
+const firstChildIsDivideNode = (args) => {
+  let result = false;
+  args.forEach((arg) => {
+    if (arg.fn === "divide") {
+      result = true;
+    }
+
+    return result;
+  });
+
+  return result;
+};
+
+const firstChildOperator = (args, operator) => {
+  let result = false;
+  args.forEach((arg) => {
+    if (arg.fn === operator) {
+      result = true;
+    }
+
+    return result;
+  });
+
+  return result;
+};
+
 export const flattenNode = (node: MathNode) => {
   node = node.transform((node, path, parent) => {
     while (node.isParenthesisNode && !parent && node.content) {
@@ -119,8 +142,7 @@ export const flattenNode = (node: MathNode) => {
 
     if (
       node.isParenthesisNode &&
-      parent &&
-      (parent.op != "*" || (parent.op == "*" && node.content.op != "+"))
+      (parent?.op != "*" || (parent?.op == "*" && node.content.op != "+"))
     ) {
       while (node.content.isParenthesisNode) node = node.content;
       node = node.content;
@@ -130,65 +152,83 @@ export const flattenNode = (node: MathNode) => {
   });
 
   let resultNode = node;
-  const operator = resultNode.op;
-  const func = resultNode.fn;
-  const sameOperator = chainedSimilarOperators(resultNode);
-  const divideAndMultiply = chainedMultiplyAndDivide(resultNode);
-
-  if (resultNode.args && argsIsOperatorNode(resultNode) && sameOperator) {
-    let newNode = new m.OperatorNode(operator, func, []);
-
-    resultNode = resultNode.traverse((node, path, parent) => {
-      if (
-        (parent &&
-          parent.fn &&
-          parent.fn == func &&
-          node.fn &&
-          node.fn !== func) ||
-        (node.isSymbolNode && parent.op == "*" && func == "multiply") ||
-        (node.isConstantNode && parent.op == "*" && func == "multiply") ||
-        (node.isSymbolNode && parent.op !== "*" && func !== "multiply") ||
-        (node.isConstantNode && parent.op !== "*" && func !== "multiply")
-      ) {
-        newNode.args.push(node);
-      }
-    });
-
-    return newNode;
-  }
-
-  const firstChildIsDivideNode = (args) => {
-    let result = false;
-    args.forEach((arg) => {
-      if (arg.fn === "divide") {
-        result = true;
-      }
-
-      return result;
-    });
-
-    if (result) {
-      console.log(args, "first args");
-    }
-    return result;
-  };
 
   resultNode = resultNode.transform((currentNode, path, parent) => {
+    console.log(currentNode, "current node in transform");
+    // const operator = currentNode.op;
 
+    if (currentNode.args && parent?.fn === currentNode.fn) {
+      console.log("trueeeee");
+    }
+
+    if (firstChildOperator(currentNode, currentNode.fn)) {
+      const flatten = currentNode;
+      flatten.traverse((node, path, parent) => {
+        if (parent?.fn === node.fn) {
+          console.log(node, "the node to work with");
+          console.log(path, "path");
+          const indexToRemove = path.replace(/[^0-9]/g, "");
+          parent.args.splice(+indexToRemove, 1) || [];
+          let argstoAdd = parent.args;
+
+          node.args.forEach((arg) => {
+            argstoAdd.push(arg);
+          });
+          console.log(indexToRemove, argstoAdd, "index to remove, argstt");
+          node = new m.OperatorNode(node.op, node.fn, argstoAdd);
+        }
+        return node;
+      });
+      // console.log(currentNode, "the node I want");
+      // console.log(currentNode.args[0], "----args to add -0");
+      // console.log(currentNode.args[0].args, "----args to add");
+      // currentNode = new m.OperatorNode(
+      //   currentNode.op,
+      //   currentNode.fn,
+      //   currentNode.args[0].args
+      //);
+    }
+    // if (currentNode.args) {
+    //   currentNode.args.map((arg) => {
+    //     let newNode: MathNode = currentNode;
+
+    //     if (arg.isOperatorNode && arg.fn === operator) {
+    //       let flatten = currentNode;
+
+    //       flatten = flatten.traverse((node, path, parent) => {
+    //         if (parent?.fn === node.fn) {
+    //           newNode = node;
+    //         }
+    //       });
+    //     }
+    //     console.log(newNode, "newnode after traverse");
+    //     return newNode;
+    //   });
+    // } else {
+    //   currentNode = currentNode;
+    //}
+
+    // if (currentNode.isArrayNode)
+    console.log(currentNode, "current node cu array");
+    //  console.log(currentNode, "current node");
+    return currentNode;
+  });
+
+  resultNode = resultNode.transform((currentNode, path, parent) => {
     if (
       currentNode.fn === "multiply" &&
       firstChildIsDivideNode(currentNode.args)
     ) {
-      console.log("nexxxt");
+      let divisionNode = currentNode;
 
-      let divideNode = currentNode;
-
-      if (divideNode.fn === "multiply" && firstChildIsDivideNode(divideNode)) {
-        console.log(currentNode, "result node before proccesing");
-        let newNode;
-        divideNode = divideNode.traverse((node, path, parent) => {
+      if (
+        divisionNode.fn === "multiply" &&
+        firstChildIsDivideNode(divisionNode)
+      ) {
+        let newNode: MathNode;
+        divisionNode = divisionNode.traverse((node, path, parent) => {
           // this condition will be at least once true
-          console.log(path, "path", node, "node path", parent, "parent");
+
           if (parent && parent.fn === "multiply" && node.fn === "divide") {
             if (node.args[0].isOperatorNode) {
               parent.args.forEach((arg) => {
@@ -208,24 +248,18 @@ export const flattenNode = (node: MathNode) => {
               });
 
               node.args[0] = new m.OperatorNode("*", "multiply", newArgs);
-
-              console.log(node, "node in traverse");
             }
             newNode = node;
           }
-          console.log(newNode, "newNode----in trsverse");
         });
         return newNode;
       }
-
     } else {
       currentNode = currentNode;
     }
 
     return currentNode;
   });
-
-  console.log(node, "node after transform $$$$$$$$$");
 
   return resultNode;
 };

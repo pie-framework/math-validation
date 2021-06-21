@@ -5,7 +5,7 @@ export default {
   //skip: true,
   tests: [
     {
-      only: true,
+      //only: true,
       target: "\\frac{x}{12}\\times7\\text{dollars}",
       eq: [
         "\\frac{7x}{12}\\text{dollars}",
@@ -39,7 +39,6 @@ export default {
     },
 
     {
-      // only: true,
       // all passing
       target: "\\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second}",
       eq: [
@@ -87,6 +86,7 @@ export default {
       ],
     },
     {
+      only: true,
       target: "\\frac{a+c}{2}+\\frac{b+d}{2}i",
       triage: [Triage.NODE_SORT_SYMBOLIC, Triage.FRACTIONS_PROPERTIES],
       eq: [

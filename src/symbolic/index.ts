@@ -55,18 +55,19 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   let as: MathNode;
   let bs: MathNode;
   console.log(a, "node before proccesing");
+  console.log(b, "node before proccesing");
 
   // apply sort if we are not in a relationalNode
   if (!a.conditionals) {
     as = st(normalize(a));
-    console.log("as", JSON.stringify(as));
+    // console.log("as", JSON.stringify(as));
   } else {
     as = normalize(a);
   }
 
   if (!b.conditionals) {
     bs = st(normalize(b));
-    console.log("bs", JSON.stringify(bs));
+    //console.log("bs", JSON.stringify(bs));
   } else {
     bs = normalize(b);
   }
@@ -76,7 +77,7 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
   //console.log(as.args[0], " as after transform args[0]");
-  console.log(bs, " bs after transform");
+  console.log(bs, " bs after -----------");
 
   return as.equals(bs);
 };
