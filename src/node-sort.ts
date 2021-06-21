@@ -154,63 +154,28 @@ export const flattenNode = (node: MathNode) => {
   let resultNode = node;
 
   resultNode = resultNode.transform((currentNode, path, parent) => {
-    console.log(currentNode, "current node in transform");
-    // const operator = currentNode.op;
-
-    if (currentNode.args && parent?.fn === currentNode.fn) {
-      console.log("trueeeee");
-    }
-
-    if (firstChildOperator(currentNode, currentNode.fn)) {
+    while (firstChildOperator(currentNode, currentNode.fn)) {
       const flatten = currentNode;
+
       flatten.traverse((node, path, parent) => {
         if (parent?.fn === node.fn) {
-          console.log(node, "the node to work with");
-          console.log(path, "path");
           const indexToRemove = path.replace(/[^0-9]/g, "");
+
           parent.args.splice(+indexToRemove, 1) || [];
+
           let argstoAdd = parent.args;
 
           node.args.forEach((arg) => {
             argstoAdd.push(arg);
           });
-          console.log(indexToRemove, argstoAdd, "index to remove, argstt");
+
+          console.log(node.op, "------op", node.fn, "fn----------");
           node = new m.OperatorNode(node.op, node.fn, argstoAdd);
         }
         return node;
       });
-      // console.log(currentNode, "the node I want");
-      // console.log(currentNode.args[0], "----args to add -0");
-      // console.log(currentNode.args[0].args, "----args to add");
-      // currentNode = new m.OperatorNode(
-      //   currentNode.op,
-      //   currentNode.fn,
-      //   currentNode.args[0].args
-      //);
     }
-    // if (currentNode.args) {
-    //   currentNode.args.map((arg) => {
-    //     let newNode: MathNode = currentNode;
 
-    //     if (arg.isOperatorNode && arg.fn === operator) {
-    //       let flatten = currentNode;
-
-    //       flatten = flatten.traverse((node, path, parent) => {
-    //         if (parent?.fn === node.fn) {
-    //           newNode = node;
-    //         }
-    //       });
-    //     }
-    //     console.log(newNode, "newnode after traverse");
-    //     return newNode;
-    //   });
-    // } else {
-    //   currentNode = currentNode;
-    //}
-
-    // if (currentNode.isArrayNode)
-    console.log(currentNode, "current node cu array");
-    //  console.log(currentNode, "current node");
     return currentNode;
   });
 

@@ -2,7 +2,7 @@ import { Triage } from "../../triage";
 
 export default {
   mode: "symbolic",
-  //skip: true,
+  skip: true,
   tests: [
     {
       //only: true,
@@ -86,7 +86,7 @@ export default {
       ],
     },
     {
-      only: true,
+      //only: true,
       target: "\\frac{a+c}{2}+\\frac{b+d}{2}i",
       triage: [Triage.NODE_SORT_SYMBOLIC, Triage.FRACTIONS_PROPERTIES],
       eq: [
