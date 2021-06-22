@@ -35,7 +35,7 @@ const normalize = (a: string | MathNode | any) => {
     r = rationalize(a, {}, true).expression;
   } catch (e) {
     // ok;
-    console.log(e, "failed to rationalize");
+    //console.log(e, "failed to rationalize");
   }
 
   let s = r;

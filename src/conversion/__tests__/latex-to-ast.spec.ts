@@ -62,14 +62,15 @@ const fixtures = [
   ["\\ln x", ["apply", "log", "x"]],
   ["\\ln_{e}x", ["apply", "log", "x"]],
 
-  // //  // TODO...
-  // // ["a < b > c", ""],
-  // // ["c < b > a", "1"],
-
   // relational expression
   [
     "a < b > c",
     ["relational", ["tuple", "a", "b", "c"], ["tuple", "smaller", "larger"]],
+  ],
+
+  [
+    "c < b > a",
+    ["relational", ["tuple", "c", "b", "a"], ["tuple", "smaller", "larger"]],
   ],
 
   [

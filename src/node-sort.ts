@@ -6,9 +6,6 @@ import { MathNode } from "mathjs";
 
 const m: any = mjs;
 
-import { AstToMathJs } from "./conversion/ast-to-mathjs";
-import { LatexToAst } from "./conversion/latex-to-ast";
-
 const log = logger("mv:node-sort");
 
 //import { string } from "mathjs";
@@ -18,9 +15,6 @@ const log = logger("mv:node-sort");
  *
  * With symbols sorted - we shoud be able to call `node.equals(other)` and avoid having to call evaluate.
  */
-
-const lta = new LatexToAst();
-const atm = new AstToMathJs();
 
 const newCompare = (a: MathNode, b: MathNode): number => {
   // log(a.type);
@@ -74,54 +68,11 @@ const applySort = (node: MathNode) => {
     node.args = node.args.sort(newCompare);
     node.args = node.args.map(applySort);
   }
-  // else if (node.fn === "divide") {
-  //   node.args[0].args = node.args[0].args.sort(newCompare);
-  //   node.args[0].args = node.args[0].args.map(applySort);
-  // }
 
   return node;
 };
 
-const chainedSimilarOperators = (node) => {
-  let ok = false;
-
-  node.transform((node, path, parent) => {
-    ok = ok || (parent && parent.fn === node.fn && !ok);
-    if (ok) {
-      return true;
-    }
-  });
-
-  return ok;
-};
-
-const argsIsOperatorNode = (node) => {
-  let isOperator = false;
-
-  node.args.map((args) => {
-    if (args.isOperatorNode) {
-      isOperator = true;
-      return;
-    }
-  });
-
-  return isOperator;
-};
-
-const firstChildIsDivideNode = (args) => {
-  let result = false;
-  args.forEach((arg) => {
-    if (arg.fn === "divide") {
-      result = true;
-    }
-
-    return result;
-  });
-
-  return result;
-};
-
-const firstChildOperator = (args, operator) => {
+const firstChildOperator = (args: any, operator: string) => {
   let result = false;
   args.forEach((arg) => {
     if (arg.fn === operator) {
@@ -136,32 +87,23 @@ const firstChildOperator = (args, operator) => {
 
 export const flattenNode = (node: MathNode) => {
   while (node.isParenthesisNode && node.content) {
-    // node = node.content;
     node = node.content;
-    console.log(node, "result node in while");
   }
 
   node = node.transform((currentNode, path, parent) => {
-    // console.log(currentNode, "node");
-    // console.log(currentNode, "parent");
-    // console.log(currentNode, "path");
-
     if (
       currentNode.isParenthesisNode &&
       (parent?.op != "*" ||
         (parent?.op == "*" && currentNode.content.op != "+"))
     ) {
       while (currentNode.isParenthesisNode) currentNode = currentNode.content;
-      //currentNode = currentNode.content;
     }
 
     return currentNode;
   });
 
-  if (node.fn === "multiply") {
-    if (node["implicit"]) {
-      node["implicit"] = false;
-    }
+  if (node.fn === "multiply" && node["implicit"]) {
+    node["implicit"] = false;
   }
 
   let resultNode = node;
@@ -182,16 +124,11 @@ export const flattenNode = (node: MathNode) => {
             argstoAdd.push(arg);
           });
 
-          console.log(node.op, "------op", node.fn, "fn----------");
           node = new m.OperatorNode(node.op, node.fn, argstoAdd);
-          if (node.fn === "multiply") {
-            if (node["implicit"]) {
-              node["implicit"] = false;
-            }
-          }
 
-          console.log(node["implicit"], "implicit");
-          console.log(node, "newnode");
+          if (node.fn === "multiply" && node["implicit"]) {
+            node["implicit"] = false;
+          }
         }
         return node;
       });
@@ -203,18 +140,16 @@ export const flattenNode = (node: MathNode) => {
   resultNode = resultNode.transform((currentNode, path, parent) => {
     if (
       currentNode.fn === "multiply" &&
-      firstChildIsDivideNode(currentNode.args)
+      firstChildOperator(currentNode.args, "divide")
     ) {
       let divisionNode = currentNode;
 
       if (
         divisionNode.fn === "multiply" &&
-        firstChildIsDivideNode(divisionNode)
+        firstChildOperator(divisionNode, "divide")
       ) {
         let newNode: MathNode;
         divisionNode = divisionNode.traverse((node, path, parent) => {
-          // this condition will be at least once true
-
           if (parent && parent.fn === "multiply" && node.fn === "divide") {
             if (node.args[0].isOperatorNode) {
               parent.args.forEach((arg) => {
@@ -337,7 +272,6 @@ export const s = (node: MathNode) => {
   const flattened = flattenNode(node);
 
   resultNode = flattened.transform(applySort);
-  console.log(resultNode, "result after sort and flatten");
 
   return resultNode;
 };

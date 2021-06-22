@@ -22,7 +22,7 @@ type Fixture = [
 const fixtures: Fixture[] = [
   [["y*(3)", "(y)*3", "(y)*(3)", "(3)*(y)"], "3*y"],
   [["3(y)", "(3)(y)", "(y)(3)", "((((y))))(3)"], "3*y"],
-  ["3y", "3y"],
+  ["3y", "3*y"],
   ["(y+x)*(3)", "3*(x+y)"],
   ["1 + 1", "1 + 1"],
   ["1 + 1", ["+", 1, 1]],
@@ -197,8 +197,8 @@ expect.extend({
           );
         };
 
-    console.log("expected", JSON.stringify(expectedNode));
-    console.log("received", JSON.stringify(received));
+    // console.log("expected", JSON.stringify(expectedNode));
+    // console.log("received", JSON.stringify(received));
     return { actual: received, message, pass };
   },
 });

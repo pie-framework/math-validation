@@ -2,7 +2,7 @@ import { Triage } from "../../triage";
 
 export default {
   mode: "symbolic",
-  skip: true,
+  // skip: true,
   tests: [
     {
       //only: true,
@@ -237,24 +237,12 @@ export default {
       target: "b=d",
       eq: ["d=b"],
     },
+    
   ],
 };
 
 export const toBeAdded = [
-  {
-    target: "d\\left(x\\right)=0.05x^2+2x",
-    eq: [
-      "d\\left(x\\right)=\\frac{1}{20}x^2+2x",
-      "d\\left(x\\right)=\\frac{x^2}{20}+2x",
-      "d\\left(x\\right)=x\\left(0.05x+2\\right)",
-      "d\\left(x\\right)=x\\left(2+0.05x\\right)",
-      "d\\left(x\\right)=2x+0.05x^2",
-      "d\\left(x\\right)=x\\left(\\frac{1}{20}x+2\\right)",
-      "d\\left(x\\right)=x\\left(2+\\frac{1}{20}x\\right)",
-      "d\\left(x\\right)=x\\left(2+\\frac{x}{20}\\right)",
-      "d\\left(x\\right)=x\\left(\\frac{x}{20}+2\\right)",
-    ],
-  },
+
   {
     target: "f\\left(x\\right)=x\\left(4x-5\\right)",
     eq: [

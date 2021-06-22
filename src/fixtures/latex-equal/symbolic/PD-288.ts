@@ -2,7 +2,7 @@ const eq = (a, eq) => ({ target: a, eq });
 
 export default {
   mode: "symbolic",
-  skip: true,
+  //skip: true,
   tests: [
     {
       target: "a/x",
