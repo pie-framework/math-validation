@@ -2,7 +2,7 @@ import { logger } from "./log";
 
 import { mathjs as mjs } from "./mathjs";
 
-import { MathNode, nuclearMagnetonDependencies } from "mathjs";
+import { MathNode } from "mathjs";
 
 const m: any = mjs;
 
@@ -148,6 +148,10 @@ export const flattenNode = (node: MathNode) => {
       node = node.content;
     }
 
+    if (node.fn === "multiply" && node["implicit"]) {
+      node["implicit"] = false;
+    }
+
     return node;
   });
 
@@ -170,7 +174,15 @@ export const flattenNode = (node: MathNode) => {
           });
 
           console.log(node.op, "------op", node.fn, "fn----------");
-          node = new m.OperatorNode(node.op, node.fn, argstoAdd);
+          node = new m.OperatorNode(node.op, node.fn, argstoAdd, "false");
+          if (node.fn === "multiply") {
+            if (node["implicit"]) {
+              node["implicit"] = false;
+            }
+          }
+
+          console.log(node["implicit"], "implicit");
+          console.log(node, "newnode");
         }
         return node;
       });
@@ -316,6 +328,7 @@ export const s = (node: MathNode) => {
   const flattened = flattenNode(node);
 
   resultNode = flattened.transform(applySort);
+  console.log(resultNode, "result after sort and flatten");
 
   return resultNode;
 };
