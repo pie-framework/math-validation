@@ -237,12 +237,130 @@ export default {
       target: "b=d",
       eq: ["d=b"],
     },
-    
+    {
+      target: "x\\le3\\frac{1}{8}",
+      eq: ["x\\le 3.125", "3.125\\ge x", "3\\frac{1}{8}\\ge x"],
+    },
+    {
+      target: "4+5x\\le15",
+      eq: ["5x+4\\le 15"],
+    },
+    {
+      target: "12x=200",
+      eq: ["200=12x", "3x+9x=200", "9x+3x=200", "200=3x+9x", "200=9x+3x"],
+    },
+    {
+      target: "p=d-40",
+      eq: ["p=-40+d", "d-40=p", "-40+d=p"],
+    },
+    {
+      target: "d=p+40",
+      eq: ["d=40+p", "p+40=d", "40+p=d"],
+    },
+    {
+      target: "x+12\\ =\\ 16",
+      eq: ["16=x+12", "12+x=16", "16=12+x"],
+    },
+    {
+      target: "16-x=12",
+      eq: ["12=16-x"],
+    },
+    {
+      target: "x=16-12",
+      eq: ["16-12=x"],
+    },
+    {
+      target: "x=\\frac{50}{3}",
+      eq: [
+        "x=\\frac{200}{12}",
+        "\\frac{200}{12}=x",
+        "x=\\frac{50}{3}",
+        "\\frac{50}{3}=x",
+      ],
+    },
+    {
+      target: "18+6x=33",
+      eq: ["33=18+6x", "33=6x+18", "6x+18=33"],
+    },
+    {
+      target: "c\\ge\\frac{15}{2}",
+      eq: [
+        "c\\ge \\frac{30}{4}",
+        "c\\ge 7.5",
+        "7.5\\le c",
+        "\\frac{15}{2}\\le c",
+        "\\frac{30}{4}\\le c",
+      ],
+    },
+    {
+      target: "5.5x+8y\\ge100",
+      eq: [
+        "8y+5.5x\\ge 100",
+        "100\\le 8y+5.5x",
+        "100\\le 5.5x+8y",
+        "5.50x+8y\\ge 100",
+        "100\\le 5.50x+8y",
+        "8y+5.50x\\ge 100",
+        "100\\le 8y+5.50x",
+      ],
+    },
+    {
+      target: "y=\\frac{1}{2}x+11",
+      eq: ["y=0.5x+11", "y=11+0.5x", "y=11+\\frac{1}{2}x"],
+    },
+    {
+      target: "x+\\left(x-3\\right)+4x=63",
+      eq: [
+        "\\left(x-3\\right)+4x+x=63",
+        "x+x-3+4x=63",
+        "\\left(x-3\\right)+5x=63",
+        "6x-3=63",
+        "63=x+\\left(x-3\\right)+4x",
+        "63=6x-3",
+        "63=x+x-3+4x",
+        "4x+x+\\left(x-3\\right)=63",
+        "4x+\\left(x-3\\right)+x=63",
+      ],
+    },
+
+    {
+      target: "c=1-\\left(\\frac{3}{5}+\\frac{1}{4}\\right)",
+      eq: [
+        "1-\\left(\\frac{3}{5}+\\frac{1}{4}\\right)=c",
+        "1-\\frac{3}{5}-\\frac{1}{4}=c",
+        "c=1-\\frac{3}{5}-\\frac{1}{4}",
+        "c=1-\\frac{1}{4}-\\frac{3}{5}",
+        "c=1-\\left(\\frac{1}{4}+\\frac{3}{5}\\right)",
+      ],
+    },
+    {
+      target: "36x^2+64y^2=2,304",
+      eq: ["36x^2+64y^2=36\\left(64\\right)", "36x^2+64y^2=2304"],
+    },
+    {
+      target: "\\frac{x^2}{64}+\\frac{y^2}{36}=1",
+      eq: [
+        "\\frac{x^2}{8^2}+\\frac{y^2}{6^2}=1",
+        "1=\\frac{x^2}{64}+\\frac{y^2}{36}",
+        "1=\\frac{y^2}{36}+\\frac{x^2}{64}",
+        "\\frac{y^2}{36}+\\frac{x^2}{64}=1",
+        "\\frac{y^2}{6^2}+\\frac{x^2}{8^2}=1",
+        "1=\\frac{y^2}{6^2}+\\frac{x^2}{8^2}",
+      ],
+    },
+    {
+      target:
+        "\\frac{\\left(y+0\\right)^2}{16}-\\frac{\\left(x+2\\right)^2}{9}=1",
+      eq: [
+        "1=\\frac{\\left(y+0\\right)^2}{16}-\\frac{\\left(x+2\\right)^2}{9}",
+        "-\\frac{\\left(x+2\\right)^2}{9}+\\frac{\\left(y+0\\right)^2}{16}=1",
+        "1=-\\frac{\\left(x+2\\right)^2}{9}+\\frac{\\left(y+0\\right)^2}{16}",
+      ],
+    },
   ],
 };
 
 export const toBeAdded = [
-
   {
     target: "f\\left(x\\right)=x\\left(4x-5\\right)",
     eq: [
@@ -275,34 +393,7 @@ export const toBeAdded = [
       "y=\\frac{-c+ax}{b}",
     ],
   },
-  {
-    target: "x=ab-ay",
-    eq: [
-      "x=-ay+ab",
-      "x=ba-ya",
-      "x=-ya+ba",
-      "x=a\\left(b-y\\right)",
-      "x=a\\left(b-y\\right)",
-    ],
-  },
-  {
-    target: "r=\\sqrt{\\frac{V}{\\pi h}}",
-    eq: [
-      "r=\\left(\\frac{V}{\\pi h}\\right)^{\\frac{1}{2}}",
-      "r=\\left(\\frac{V}{\\pi \\times h}\\right)^{\\frac{1}{2}}",
-      "r=\\sqrt{\\frac{V}{\\pi \\times h}}^{ }",
-    ],
-  },
 
-  {
-    target:
-      "\\frac{\\left(y+0\\right)^2}{16}-\\frac{\\left(x+2\\right)^2}{9}=1",
-    eq: [
-      "1=\\frac{\\left(y+0\\right)^2}{16}-\\frac{\\left(x+2\\right)^2}{9}",
-      "-\\frac{\\left(x+2\\right)^2}{9}+\\frac{\\left(y+0\\right)^2}{16}=1",
-      "1=-\\frac{\\left(x+2\\right)^2}{9}+\\frac{\\left(y+0\\right)^2}{16}",
-    ],
-  },
   {
     target: "\\left(y-7\\right)^2=60\\left(x-15\\right)",
     eq: [
@@ -313,21 +404,7 @@ export const toBeAdded = [
       "60x-900=y^2-14y+49",
     ],
   },
-  {
-    target: "\\frac{x^2}{64}+\\frac{y^2}{36}=1",
-    eq: [
-      "\\frac{x^2}{8^2}+\\frac{y^2}{6^2}=1",
-      "1=\\frac{x^2}{64}+\\frac{y^2}{36}",
-      "1=\\frac{y^2}{36}+\\frac{x^2}{64}",
-      "\\frac{y^2}{36}+\\frac{x^2}{64}=1",
-      "\\frac{y^2}{6^2}+\\frac{x^2}{8^2}=1",
-      "1=\\frac{y^2}{6^2}+\\frac{x^2}{8^2}",
-    ],
-  },
-  {
-    target: "36x^2+64y^2=2,304",
-    eq: ["36x^2+64y^2=36\\left(64\\right)", "36x^2+64y^2=2304"],
-  },
+
   {
     target: "x=\\sin^{-1}\\left(\\frac{1}{n}\\right)",
     eq: ["\\frac{1}{n}=\\sin x"],
@@ -345,116 +422,5 @@ export const toBeAdded = [
       "1=\\frac{y^2}{30^2}+\\frac{\\left(x+10\\right)^2}{275}",
       "1=\\frac{y^2}{30^2}+\\frac{\\left(x+10\\right)^2}{30^2-25^2}",
     ],
-  },
-  {
-    target: "12x=200",
-    eq: ["200=12x", "3x+9x=200", "9x+3x=200", "200=3x+9x", "200=9x+3x"],
-  },
-  {
-    target: "x=\\frac{50}{3}",
-    eq: [
-      "x=\\frac{200}{12}",
-      "\\frac{200}{12}=x",
-      "x=\\frac{50}{3}",
-      "\\frac{50}{3}=x",
-    ],
-  },
-  {
-    target: "y=350x",
-    eq: ["350x=y"],
-  },
-  {
-    target: "c=1-\\left(\\frac{3}{5}+\\frac{1}{4}\\right)",
-    eq: [
-      "1-\\left(\\frac{3}{5}+\\frac{1}{4}\\right)=c",
-      "1-\\frac{3}{5}-\\frac{1}{4}=c",
-      "c=1-\\frac{3}{5}-\\frac{1}{4}",
-      "c=1-\\frac{1}{4}-\\frac{3}{5}",
-      "c=1-\\left(\\frac{1}{4}+\\frac{3}{5}\\right)",
-    ],
-  },
-  {
-    target: "1=c+\\frac{3}{5}+\\frac{1}{4}",
-    eq: [
-      "1=\\frac{3}{5}+\\frac{1}{4}+c",
-      "\\frac{3}{5}+\\frac{1}{4}+c=1",
-      "c+\\frac{3}{5}+\\frac{1}{4}=1",
-    ],
-  },
-  {
-    target: "x+\\left(x-3\\right)+4x=63",
-    eq: [
-      "\\left(x-3\\right)+4x+x=63",
-      "x+x-3+4x=63",
-      "\\left(x-3\\right)+5x=63",
-      "6x-3=63",
-      "63=x+\\left(x-3\\right)+4x",
-      "63=6x-3",
-      "63=x+x-3+4x",
-      "4x+x+\\left(x-3\\right)=63",
-      "4x+\\left(x-3\\right)+x=63",
-    ],
-  },
-  {
-    target: "18+6x=33",
-    eq: ["33=18+6x", "33=6x+18", "6x+18=33"],
-  },
-  {
-    target: "y=\\frac{1}{2}x+11",
-    eq: ["y=0.5x+11", "y=11+0.5x", "y=11+\\frac{1}{2}x"],
-  },
-  {
-    target: "p=d-40",
-    eq: ["p=-40+d", "d-40=p", "-40+d=p"],
-  },
-  {
-    target: "d=p+40",
-    eq: ["d=40+p", "p+40=d", "40+p=d"],
-  },
-  {
-    target: "x+12\\ =\\ 16",
-    eq: ["16=x+12", "12+x=16", "16=12+x"],
-  },
-  {
-    target: "16-x=12",
-    eq: ["12=16-x"],
-  },
-  {
-    target: "x=16-12",
-    eq: ["16-12=x"],
-  },
-  {
-    target: "5.5x+8y\\ge100",
-    eq: [
-      "8y+5.5x\\ge 100",
-      "100\\le 8y+5.5x",
-      "100\\le 5.5x+8y",
-      "5.50x+8y\\ge 100",
-      "100\\le 5.50x+8y",
-      "8y+5.50x\\ge 100",
-      "100\\le 8y+5.50x",
-    ],
-  },
-  {
-    target: "c\\ge\\frac{15}{2}",
-    eq: [
-      "c\\ge \\frac{30}{4}",
-      "c\\ge 7.5",
-      "7.5\\le c",
-      "\\frac{15}{2}\\le c",
-      "\\frac{30}{4}\\le c",
-    ],
-  },
-  {
-    target: "x\\le\\frac{11}{5}",
-    eq: ["x\\le 2.2", "x\\le 2\\frac{1}{5}"],
-  },
-  {
-    target: "4+5x\\le15",
-    eq: ["5x+4\\le 15"],
-  },
-  {
-    target: "x\\le3\\frac{1}{8}",
-    eq: ["x\\le 3.125", "3.125\\ge x", "3\\frac{1}{8}\\ge x"],
   },
 ];
