@@ -135,25 +135,34 @@ const firstChildOperator = (args, operator) => {
 };
 
 export const flattenNode = (node: MathNode) => {
-  node = node.transform((node, path, parent) => {
-    while (node.isParenthesisNode && !parent && node.content) {
-      node = node.content;
-    }
+  while (node.isParenthesisNode && node.content) {
+    // node = node.content;
+    node = node.content;
+    console.log(node, "result node in while");
+  }
+
+  node = node.transform((currentNode, path, parent) => {
+    // console.log(currentNode, "node");
+    // console.log(currentNode, "parent");
+    // console.log(currentNode, "path");
 
     if (
-      node.isParenthesisNode &&
-      (parent?.op != "*" || (parent?.op == "*" && node.content.op != "+"))
+      currentNode.isParenthesisNode &&
+      (parent?.op != "*" ||
+        (parent?.op == "*" && currentNode.content.op != "+"))
     ) {
-      while (node.content.isParenthesisNode) node = node.content;
-      node = node.content;
+      while (currentNode.isParenthesisNode) currentNode = currentNode.content;
+      //currentNode = currentNode.content;
     }
 
-    if (node.fn === "multiply" && node["implicit"]) {
+    return currentNode;
+  });
+
+  if (node.fn === "multiply") {
+    if (node["implicit"]) {
       node["implicit"] = false;
     }
-
-    return node;
-  });
+  }
 
   let resultNode = node;
 
@@ -174,7 +183,7 @@ export const flattenNode = (node: MathNode) => {
           });
 
           console.log(node.op, "------op", node.fn, "fn----------");
-          node = new m.OperatorNode(node.op, node.fn, argstoAdd, "false");
+          node = new m.OperatorNode(node.op, node.fn, argstoAdd);
           if (node.fn === "multiply") {
             if (node["implicit"]) {
               node["implicit"] = false;
