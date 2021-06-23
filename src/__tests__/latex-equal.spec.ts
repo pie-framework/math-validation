@@ -14,9 +14,9 @@ const args = minimist(
 const cwd = resolve(__dirname, "../..");
 
 const fixtures = sync(
-  // run only symbolic test at this point (all literal are passing)
-  // args.t || "src/fixtures/latex-equal/**/**.ts",
-  "src/fixtures/latex-equal/symbolic/**.ts",
+  // run only symbolic test at this point (all literal are passing)"src/fixtures/latex-equal/symbolic/**.ts",
+
+  args.t || "src/fixtures/latex-equal/**/**.ts",
   {
     cwd,
   }

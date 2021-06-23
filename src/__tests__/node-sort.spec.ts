@@ -97,12 +97,9 @@ const fixtures: Fixture[] = [
     ["+", 1, 2, 3],
   ],
 
-  //TO DO: special case, implicit multiplication
-  //result is 3xy
   ["(y*x)(3)", ["*", 3, "x", "y"]],
 
   //strip parenthesis
-  // TO DO: something is wrong here
   [["(1 + (1 + 1))"], ["+", 1, 1, 1]],
   [["(4 + 1) + (2 * x)"], ["+", 1, 4, ["*", 2, "x"]]],
   [
@@ -117,7 +114,7 @@ const ff = [];
 const lta = new LatexToAst();
 const atm = new AstToMathJs();
 
-// tests for flatten and insert all multiplication terms in numerator
+// tests for flatten and for inserting all multiplication terms in numerator
 it.each`
   input                                                                               | expected
   ${["+", ["+", "1"]]}                                                                | ${["+", "1"]}
@@ -203,7 +200,7 @@ expect.extend({
   },
 });
 
-describe.only.each(fixtures)("%s => %s", (input, expected) => {
+describe.each(fixtures)("%s => %s", (input, expected) => {
   const testInput = Array.isArray(input) ? input : [input];
   //@ts-ignore
   it.each(testInput as any)("%s", (ii) => {

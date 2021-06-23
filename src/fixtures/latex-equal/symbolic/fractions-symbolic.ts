@@ -5,7 +5,6 @@ export default {
   // skip: true,
   tests: [
     {
-      //only: true,
       target: "\\frac{x}{12}\\times7\\text{dollars}",
       eq: [
         "\\frac{7x}{12}\\text{dollars}",
