@@ -1,6 +1,6 @@
 import { logger } from "../log";
 import { mathjs } from "../mathjs";
-import { MathNode, ResultSetDependencies } from "mathjs";
+import { MathNode } from "mathjs";
 import { s as st } from "../node-sort";
 
 const log = logger("mv:symbolic");
@@ -70,5 +70,7 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
 
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
+  console.log(as, "as");
+  console.log(bs, "bs");
   return as.equals(bs);
 };

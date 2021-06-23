@@ -18,7 +18,7 @@ const logger = (name) => {
 
 // lexer class
 
-const log$3 = logger("mv:lexer");
+const log$4 = logger("mv:lexer");
 
 
 
@@ -77,7 +77,7 @@ class lexer {
   }
 
   advance({ remove_initial_space = true } = {}) {
-    log$3("[advance] input: ", this.input);
+    log$4("[advance] input: ", this.input);
     // Find next token at beginning of input and delete from input.
     // Update location to be the position in original input corresponding
     // to end of match.
@@ -86,15 +86,15 @@ class lexer {
     // if(this.input.(",")){}
     let result = this.whitespace.exec(this.input);
     const m = this.input.match(this.whitespace);
-    log$3("input:", this.input, "result:", result, m);
+    log$4("input:", this.input, "result:", result, m);
 
-    log$3("ws result:", result);
+    log$4("ws result:", result);
     if (result) {
       //first find any initial whitespace and adjust location
       let n_whitespace = result[0].length;
       this.input = this.input.slice(n_whitespace);
       this.location += n_whitespace;
-      log$3("location:", this.location, "input now:", this.input);
+      log$4("location:", this.location, "input now:", this.input);
       // don't remove initial space, return it as next token
       if (!remove_initial_space) {
         return {
@@ -1132,6 +1132,7 @@ class LatexToAst {
         // this is correct, to convert a mixed number to an improper fraction we have to multiply the demoninator by the whole number and add the result to the numerator
         return ["+", number, f];
       } catch (e) {
+        console.log("errror");
         throw new ParseError(`Mixed number parsing failed: ${e.message}`);
       }
     }
@@ -65567,69 +65568,69 @@ mathjs.replacer;
  * See the GNU General Public License for more details.
  *
  */
-const log$2 = logger("mv:ast-to-math");
-const m$1 = mathjs;
+const log$3 = logger("mv:ast-to-math");
+const m$2 = mathjs;
 
 const operators = {
   "+": function (operands) {
-    return new m$1.OperatorNode("+", "add", operands);
+    return new m$2.OperatorNode("+", "add", operands);
   },
   "*": function (operands) {
     if (operands[1] && operands[1].isUnit) {
-      return m$1.multiply(operands[0].value, operands[1]);
+      return m$2.multiply(operands[0].value, operands[1]);
     }
-    return new m$1.OperatorNode("*", "multiply", operands);
+    return new m$2.OperatorNode("*", "multiply", operands);
   },
   "/": function (operands) {
-    return new m$1.OperatorNode("/", "divide", operands);
+    return new m$2.OperatorNode("/", "divide", operands);
   },
   "-": function (operands) {
-    return new m$1.OperatorNode("-", "unaryMinus", [operands[0]]);
+    return new m$2.OperatorNode("-", "unaryMinus", [operands[0]]);
   },
   "^": function (operands) {
-    return new m$1.OperatorNode("^", "pow", operands);
+    return new m$2.OperatorNode("^", "pow", operands);
   },
   //"prime": function(operands) { return operands[0] + "'"; },
   //"tuple": function(operands) { return '\\left( ' + operands.join( ', ' ) + ' \\right)';},
   //"array": function(operands) { return '\\left[ ' + operands.join( ', ' ) + ' \\right]';},
   //"set": function(operands) { return '\\left\\{ ' + operands.join( ', ' ) + ' \\right\\}';},
   vector: function (operands) {
-    return new m$1.ArrayNode(operands);
+    return new m$2.ArrayNode(operands);
   },
   //"interval": function(operands) { return '\\left( ' + operands.join( ', ' ) + ' \\right)';},
   and: function (operands) {
-    return new m$1.OperatorNode("and", "and", operands);
+    return new m$2.OperatorNode("and", "and", operands);
   },
   or: function (operands) {
-    return new m$1.OperatorNode("or", "or", operands);
+    return new m$2.OperatorNode("or", "or", operands);
   },
   not: function (operands) {
-    return new m$1.OperatorNode("not", "not", [operands[0]]);
+    return new m$2.OperatorNode("not", "not", [operands[0]]);
   },
   "<": function (operands) {
-    return new m$1.OperatorNode("<", "smaller", operands);
+    return new m$2.OperatorNode("<", "smaller", operands);
   },
   ">": function (operands) {
-    return new m$1.OperatorNode(">", "larger", operands);
+    return new m$2.OperatorNode(">", "larger", operands);
   },
   le: function (operands) {
-    return new m$1.OperatorNode("<=", "smallerEq", operands);
+    return new m$2.OperatorNode("<=", "smallerEq", operands);
   },
   ge: function (operands) {
-    return new m$1.OperatorNode(">=", "largerEq", operands);
+    return new m$2.OperatorNode(">=", "largerEq", operands);
   },
   _: function (operands) {
     const [arrayName, ...position] = operands;
-    const result = new m$1.SymbolNode(`${arrayName}[${position}]`);
+    const result = new m$2.SymbolNode(`${arrayName}[${position}]`);
     return result;
   },
   ne: function (operands) {
-    return new m$1.OperatorNode("!=", "unequal", operands);
+    return new m$2.OperatorNode("!=", "unequal", operands);
   },
   //"union": function (operands) { return operands.join(' \\cup '); },
   //"intersect": function (operands) { return operands.join(' \\cap '); },
   tzn: function (operands) {
-    return new m$1.FunctionNode("tzn", operands);
+    return new m$2.FunctionNode("tzn", operands);
   },
 };
 
@@ -65648,23 +65649,23 @@ class AstToMathJs {
     if (typeof tree === "number") {
       if (Number.isFinite(tree)) {
         if (this.opts.number === "Fraction") {
-          const f = new m$1.Fraction([
-            new m$1.ConstantNode(tree),
-            new m$1.ConstantNode(1),
+          const f = new m$2.Fraction([
+            new m$2.ConstantNode(tree),
+            new m$2.ConstantNode(1),
           ]);
-          return new m$1.ConstantNode(f);
+          return new m$2.ConstantNode(f);
         } else {
-          return new m$1.ConstantNode(tree);
+          return new m$2.ConstantNode(tree);
         }
       }
 
-      if (Number.isNaN(tree)) return new m$1.SymbolNode("NaN");
-      if (tree < 0) return operators["-"]([new m$1.SymbolNode("Infinity")]);
-      return new m$1.SymbolNode("Infinity");
+      if (Number.isNaN(tree)) return new m$2.SymbolNode("NaN");
+      if (tree < 0) return operators["-"]([new m$2.SymbolNode("Infinity")]);
+      return new m$2.SymbolNode("Infinity");
     }
 
     if (typeof tree === "string") {
-      return new m$1.SymbolNode(tree);
+      return new m$2.SymbolNode(tree);
     }
 
     if (typeof tree === "boolean") throw Error("no support for boolean");
@@ -65675,19 +65676,19 @@ class AstToMathJs {
     const operands = tree.slice(1);
 
     if (operator === "apply") {
-      log$2("operands:", operands);
-      log$2("0", operands[0]);
+      log$3("operands:", operands);
+      log$3("0", operands[0]);
       if (typeof operands[0] !== "string")
         throw Error(
           "Non string functions not implemented for conversion to mathjs"
         );
 
       if (operands[0] === "factorial")
-        return new m$1.OperatorNode("!", "factorial", [
+        return new m$2.OperatorNode("!", "factorial", [
           this.convert(operands[1]),
         ]);
 
-      const f = new m$1.SymbolNode(operands[0]);
+      const f = new m$2.SymbolNode(operands[0]);
       const args = operands[1];
       let f_args;
 
@@ -65699,11 +65700,11 @@ class AstToMathJs {
         );
       else f_args = [this.convert(args)];
 
-      return new m$1.FunctionNode(f, f_args);
+      return new m$2.FunctionNode(f, f_args);
     }
 
     if (operator === "unit") {
-      const unit = new m$1.Unit(1, operands[0]);
+      const unit = new m$2.Unit(1, operands[0]);
       return unit;
     }
 
@@ -65728,7 +65729,7 @@ class AstToMathJs {
         comparisons.push(strict[i]);
       }
 
-      let result = new m$1.RelationalNode(comparisons, arg_nodes);
+      let result = new m$2.RelationalNode(comparisons, arg_nodes);
 
       return result;
     }
@@ -65747,9 +65748,9 @@ class AstToMathJs {
       }
 
       if (comparisons.length === 1)
-        return new m$1.OperatorNode("==", "equal", arg_nodes);
+        return new m$2.OperatorNode("==", "equal", arg_nodes);
 
-      let result = new m$1.RelationalNode(comparisons, arg_nodes);
+      let result = new m$2.RelationalNode(comparisons, arg_nodes);
 
       return result;
     }
@@ -65789,16 +65790,16 @@ class AstToMathJs {
 
       let comparisons = [];
       if (closed[1])
-        comparisons.push(new m$1.OperatorNode(">=", "largerEq", [x, a]));
-      else comparisons.push(new m$1.OperatorNode(">", "larger", [x, a]));
+        comparisons.push(new m$2.OperatorNode(">=", "largerEq", [x, a]));
+      else comparisons.push(new m$2.OperatorNode(">", "larger", [x, a]));
       if (closed[2])
-        comparisons.push(new m$1.OperatorNode("<=", "smallerEq", [x, b]));
-      else comparisons.push(new m$1.OperatorNode("<", "smaller", [x, b]));
+        comparisons.push(new m$2.OperatorNode("<=", "smallerEq", [x, b]));
+      else comparisons.push(new m$2.OperatorNode("<", "smaller", [x, b]));
 
-      let result = new m$1.OperatorNode("and", "and", comparisons);
+      let result = new m$2.OperatorNode("and", "and", comparisons);
 
       if (operator === "notin" || operator === "notni")
-        result = new m$1.OperatorNode("not", "not", [result]);
+        result = new m$2.OperatorNode("not", "not", [result]);
 
       return result;
     }
@@ -65841,23 +65842,23 @@ class AstToMathJs {
 
       let comparisons = [];
       if (small_closed[1] && !big_closed[1])
-        comparisons.push(new m$1.OperatorNode(">", "larger", [small_a, big_a]));
+        comparisons.push(new m$2.OperatorNode(">", "larger", [small_a, big_a]));
       else
         comparisons.push(
-          new m$1.OperatorNode(">=", "largerEq", [small_a, big_a])
+          new m$2.OperatorNode(">=", "largerEq", [small_a, big_a])
         );
 
       if (small_closed[2] && !big_closed[2])
-        comparisons.push(new m$1.OperatorNode("<", "smaller", [small_b, big_b]));
+        comparisons.push(new m$2.OperatorNode("<", "smaller", [small_b, big_b]));
       else
         comparisons.push(
-          new m$1.OperatorNode("<=", "smallerEq", [small_b, big_b])
+          new m$2.OperatorNode("<=", "smallerEq", [small_b, big_b])
         );
 
-      let result = new m$1.OperatorNode("and", "and", comparisons);
+      let result = new m$2.OperatorNode("and", "and", comparisons);
 
       if (operator === "notsubset" || operator === "notsuperset")
-        result = new m$1.OperatorNode("not", "not", [result]);
+        result = new m$2.OperatorNode("not", "not", [result]);
 
       return result;
     }
@@ -65882,16 +65883,16 @@ class AstToMathJs {
         for (let j = 1; j <= ncols; j++) {
           row.push(this.convert(entries[i][j]));
         }
-        result.push(new m$1.ArrayNode(row));
+        result.push(new m$2.ArrayNode(row));
       }
 
-      return new m$1.ArrayNode(result);
+      return new m$2.ArrayNode(result);
     }
 
     if (operator == "%") {
       const dividend = this.convert(operands[0]);
-      const divisor = new m$1.ConstantNode(100);
-      const result = new m$1.OperatorNode("/", "divide", [dividend, divisor]);
+      const divisor = new m$2.ConstantNode(100);
+      const result = new m$2.OperatorNode("/", "divide", [dividend, divisor]);
 
       return result;
     }
@@ -65912,9 +65913,12 @@ class AstToMathJs {
   }
 }
 
-const m = mathjs;
+function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
 
-const log$1 = logger("mv:node-sort");
+
+const m$1 = mathjs;
+
+const log$2 = logger("mv:node-sort");
 
 //import { string } from "mathjs";
 /**
@@ -65924,13 +65928,10 @@ const log$1 = logger("mv:node-sort");
  * With symbols sorted - we shoud be able to call `node.equals(other)` and avoid having to call evaluate.
  */
 
-new LatexToAst();
-new AstToMathJs();
-
 const newCompare = (a, b) => {
   // log(a.type);
-  log$1("[compareNodes]: a:", a.toString(), a.type);
-  log$1("[compareNodes]: b:", b.toString(), b.type);
+  log$2("[compareNodes]: a:", a.toString(), a.type);
+  log$2("[compareNodes]: b:", b.toString(), b.type);
 
   if (a.isSymbolNode && b.isSymbolNode) {
     // log(a.name, "> ", b.name);
@@ -65939,8 +65940,8 @@ const newCompare = (a, b) => {
 
   // both constants - sort by value
   if (a.isConstantNode && b.isConstantNode) {
-    log$1("a.value", a.value);
-    log$1("b.value", b.value);
+    log$2("a.value", a.value);
+    log$2("b.value", b.value);
     return a.value - b.value; //(b.name);
   }
 
@@ -65983,79 +65984,121 @@ const applySort = (node) => {
   return node;
 };
 
-const chainedSimilarOperators = (node) => {
-  let ok = false;
-
-  node.traverse((node, path, parent) => {
-    ok = ok || (parent && parent.fn === node.fn && !ok);
-  });
-
-  return ok;
-};
-
-const argsIsOperatorNode = (node) => {
-  let isOperator = false;
-
-  node.args.map((args) => {
-    if (args.isOperatorNode) {
-      isOperator = true;
-      return;
+const firstChildOperator = (args, operator) => {
+  let result = false;
+  args.forEach((arg) => {
+    if (arg.fn === operator) {
+      result = true;
     }
+
+    return result;
   });
 
-  return isOperator;
+  return result;
 };
 
 const flattenNode = (node) => {
-  node = node.transform((node, path, parent) => {
-    while (node.isParenthesisNode && !parent && node.content) {
-      node = node.content;
-    }
+  while (node.isParenthesisNode && node.content) {
+    node = node.content;
+  }
 
+  node = node.transform((currentNode, path, parent) => {
     if (
-      node.isParenthesisNode &&
-      parent &&
-      (parent.op != "*" || (parent.op == "*" && node.content.op != "+"))
+      currentNode.isParenthesisNode &&
+      (_optionalChain([parent, 'optionalAccess', _ => _.op]) != "*" ||
+        (_optionalChain([parent, 'optionalAccess', _2 => _2.op]) == "*" && currentNode.content.op != "+"))
     ) {
-      while (node.content.isParenthesisNode) node = node.content;
-      node = node.content;
+      while (currentNode.isParenthesisNode) currentNode = currentNode.content;
     }
 
-    return node;
+    return currentNode;
   });
 
-  let resultNode = node;
-  const operator = resultNode.op;
-  const func = resultNode.fn;
-  const sameOperator = chainedSimilarOperators(resultNode);
-
-  if (resultNode.args && argsIsOperatorNode(resultNode) && sameOperator) {
-    let newNode = new m.OperatorNode(operator, func, []);
-
-    resultNode = resultNode.traverse((node, path, parent) => {
-      if (
-        (parent &&
-          parent.fn &&
-          parent.fn == func &&
-          node.fn &&
-          node.fn !== func) ||
-        (node.isSymbolNode && parent.op == "*" && func == "multiply") ||
-        (node.isConstantNode && parent.op == "*" && func == "multiply") ||
-        (node.isSymbolNode && parent.op !== "*" && func !== "multiply") ||
-        (node.isConstantNode && parent.op !== "*" && func !== "multiply")
-      ) {
-        newNode.args.push(node);
-      }
-    });
-
-    return newNode;
+  if (node.fn === "multiply" && node["implicit"]) {
+    node["implicit"] = false;
   }
+
+  let resultNode = node;
+
+  resultNode = resultNode.transform((currentNode, path, parent) => {
+    while (firstChildOperator(currentNode, currentNode.fn)) {
+      const flatten = currentNode;
+
+      flatten.traverse((node, path, parent) => {
+        if (_optionalChain([parent, 'optionalAccess', _3 => _3.fn]) === node.fn) {
+          const indexToRemove = path.replace(/[^0-9]/g, "");
+
+          parent.args.splice(+indexToRemove, 1) || [];
+
+          let argstoAdd = parent.args;
+
+          node.args.forEach((arg) => {
+            argstoAdd.push(arg);
+          });
+
+          node = new m$1.OperatorNode(node.op, node.fn, argstoAdd);
+
+          if (node.fn === "multiply" && node["implicit"]) {
+            node["implicit"] = false;
+          }
+        }
+        return node;
+      });
+    }
+
+    return currentNode;
+  });
+
+  resultNode = resultNode.transform((currentNode, path, parent) => {
+    if (
+      currentNode.fn === "multiply" &&
+      firstChildOperator(currentNode.args, "divide")
+    ) {
+      let divisionNode = currentNode;
+
+      if (
+        divisionNode.fn === "multiply" &&
+        firstChildOperator(divisionNode, "divide")
+      ) {
+        let newNode;
+        divisionNode = divisionNode.traverse((node, path, parent) => {
+          if (parent && parent.fn === "multiply" && node.fn === "divide") {
+            if (node.args[0].isOperatorNode) {
+              parent.args.forEach((arg) => {
+                if (!arg.isOperatorNode) {
+                  node.args[0].args.push(arg);
+                }
+              });
+            } else {
+              const newArgs = [];
+
+              newArgs.push(node.args[0]);
+
+              parent.args.forEach((arg) => {
+                if (!arg.isOperatorNode) {
+                  newArgs.push(arg);
+                }
+              });
+
+              node.args[0] = new m$1.OperatorNode("*", "multiply", newArgs);
+            }
+            newNode = node;
+          }
+        });
+        return newNode;
+      }
+    } else {
+      currentNode = currentNode;
+    }
+
+    return currentNode;
+  });
 
   return resultNode;
 };
 
 const sortRelationalNode = (node) => {
-  log$1("THIS IS THE START ++++", JSON.stringify(node));
+  log$2("THIS IS THE START ++++", JSON.stringify(node));
 
   const smaller = ["smaller", "smallerEq"];
   const bigger = ["larger", "largerEq"];
@@ -66097,28 +66140,18 @@ const sortRelationalNode = (node) => {
     }
 
     if (parent && parent.type === "RelationalNode" && node.args) {
-      node = s(node);
+      node = s$1(node);
     }
 
     return node;
   });
 
-  log$1("THIS IS THE END ++++", JSON.stringify(node));
+  log$2("THIS IS THE END ++++", JSON.stringify(node));
 
   return resultNode;
 };
 
-// export const test = (input) => {
-//   const latexConverted = lta.convert(input);
-//   console.log(latexConverted, "latexconverted");
-//   const mathNode = atm.convert(latexConverted);
-//   console.log(mathNode, "math node");
-//   const sorted = s(mathNode);
-//   console.log("sorted from test");
-//   return sorted;
-// };
-
-const s = (node) => {
+const s$1 = (node) => {
   let resultNode = node;
 
   if (node.type === "RelationalNode") {
@@ -66141,7 +66174,7 @@ const s = (node) => {
     node.isOperatorNode &&
     (node.fn === "larger" || node.fn === "largerEq" || node.fn == "equal")
   ) {
-    node.args = node.args.map(s);
+    node.args = node.args.map(s$1);
 
     if (node.fn == "equal") {
       node.args = node.args.sort(newCompare);
@@ -66155,11 +66188,11 @@ const s = (node) => {
   return resultNode;
 };
 
-const log = logger("mv:symbolic");
+const log$1 = logger("mv:symbolic");
 
 
 
-const { simplify: ms, rationalize } = mathjs;
+const { simplify: ms$1, rationalize } = mathjs;
 
 const SIMPLIFY_RULES = [
   { l: "n1^(1/n2)", r: "nthRoot(n1, n2)" },
@@ -66177,8 +66210,8 @@ const SIMPLIFY_RULES = [
 ];
 
 const simplify$1 = (v) => {
-  const rules = SIMPLIFY_RULES.concat((ms ).rules);
-  return ms(v, rules); //.concat(SIMPLIFY_RULES));
+  const rules = SIMPLIFY_RULES.concat((ms$1 ).rules);
+  return ms$1(v, rules); //.concat(SIMPLIFY_RULES));
 };
 
 const normalize = (a) => {
@@ -66187,19 +66220,20 @@ const normalize = (a) => {
     r = rationalize(a, {}, true).expression;
   } catch (e) {
     // ok;
+    //console.log(e, "failed to rationalize");
   }
 
-  let s$1 = r;
+  let s = r;
 
   // for relationalNode apply sort & simplify for all params
   if (r.conditionals && r.params) {
-    s$1.params = r.params.map((param) => s(simplify$1(param)));
+    s.params = r.params.map((param) => s$1(simplify$1(param)));
   } else {
-    s$1 = simplify$1(r);
+    s = simplify$1(r);
   }
 
-  log("[normalize] input: ", a.toString(), "output: ", s$1.toString());
-  return s$1;
+  log$1("[normalize] input: ", a.toString(), "output: ", s.toString());
+  return s;
 };
 
 const isMathEqual$1 = (a, b, opts) => {
@@ -66208,31 +66242,22 @@ const isMathEqual$1 = (a, b, opts) => {
 
   // apply sort if we are not in a relationalNode
   if (!a.conditionals) {
-    as = s(normalize(a));
-    console.log("as", JSON.stringify(as));
+    as = s$1(normalize(a));
   } else {
     as = normalize(a);
   }
 
   if (!b.conditionals) {
-    bs = s(normalize(b));
-    console.log("bs", JSON.stringify(bs));
+    bs = s$1(normalize(b));
   } else {
     bs = normalize(b);
   }
 
-  log("[isMathEqual]", as.toString(), "==?", bs.toString());
+  log$1("[isMathEqual]", as.toString(), "==?", bs.toString());
 
+  console.log(as, "as");
+  console.log(bs, "bs");
   return as.equals(bs);
-
-  /** This is not used anymore
-   * Note: this seems very dodgy that we have to try a 2nd round of normalization here.
-   * Why is this necessary and try and remove it.
-   */
-  // const at = normalize(as);
-  // const bt = normalize(bs);
-
-  // return at.equals(bt);
 };
 
 const { simplify } = mathjs;
@@ -66258,10 +66283,10 @@ const isMathEqual = (a, b, opts) => {
   }
 
   if (opts && opts.ignoreOrder) {
-    a = s(a);
+    a = s$1(a);
     //console.log("sorted a", JSON.stringify(a));
 
-    b = s(b);
+    b = s$1(b);
     //console.log("sorted b", JSON.stringify(b));
   }
 
@@ -66275,16 +66300,732 @@ const isMathEqual = (a, b, opts) => {
   return a.equals(b) || equalTex;
 };
 
+/**
+ * Helpers.
+ */
+
+var s = 1000;
+var m = s * 60;
+var h = m * 60;
+var d = h * 24;
+var w = d * 7;
+var y = d * 365.25;
+
+/**
+ * Parse or format the given `val`.
+ *
+ * Options:
+ *
+ *  - `long` verbose formatting [false]
+ *
+ * @param {String|Number} val
+ * @param {Object} [options]
+ * @throws {Error} throw an error if val is not a non-empty string or a number
+ * @return {String|Number}
+ * @api public
+ */
+
+var ms = function(val, options) {
+  options = options || {};
+  var type = typeof val;
+  if (type === 'string' && val.length > 0) {
+    return parse(val);
+  } else if (type === 'number' && isFinite(val)) {
+    return options.long ? fmtLong(val) : fmtShort(val);
+  }
+  throw new Error(
+    'val is not a non-empty string or a valid number. val=' +
+      JSON.stringify(val)
+  );
+};
+
+/**
+ * Parse the given `str` and return milliseconds.
+ *
+ * @param {String} str
+ * @return {Number}
+ * @api private
+ */
+
+function parse(str) {
+  str = String(str);
+  if (str.length > 100) {
+    return;
+  }
+  var match = /^(-?(?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(
+    str
+  );
+  if (!match) {
+    return;
+  }
+  var n = parseFloat(match[1]);
+  var type = (match[2] || 'ms').toLowerCase();
+  switch (type) {
+    case 'years':
+    case 'year':
+    case 'yrs':
+    case 'yr':
+    case 'y':
+      return n * y;
+    case 'weeks':
+    case 'week':
+    case 'w':
+      return n * w;
+    case 'days':
+    case 'day':
+    case 'd':
+      return n * d;
+    case 'hours':
+    case 'hour':
+    case 'hrs':
+    case 'hr':
+    case 'h':
+      return n * h;
+    case 'minutes':
+    case 'minute':
+    case 'mins':
+    case 'min':
+    case 'm':
+      return n * m;
+    case 'seconds':
+    case 'second':
+    case 'secs':
+    case 'sec':
+    case 's':
+      return n * s;
+    case 'milliseconds':
+    case 'millisecond':
+    case 'msecs':
+    case 'msec':
+    case 'ms':
+      return n;
+    default:
+      return undefined;
+  }
+}
+
+/**
+ * Short format for `ms`.
+ *
+ * @param {Number} ms
+ * @return {String}
+ * @api private
+ */
+
+function fmtShort(ms) {
+  var msAbs = Math.abs(ms);
+  if (msAbs >= d) {
+    return Math.round(ms / d) + 'd';
+  }
+  if (msAbs >= h) {
+    return Math.round(ms / h) + 'h';
+  }
+  if (msAbs >= m) {
+    return Math.round(ms / m) + 'm';
+  }
+  if (msAbs >= s) {
+    return Math.round(ms / s) + 's';
+  }
+  return ms + 'ms';
+}
+
+/**
+ * Long format for `ms`.
+ *
+ * @param {Number} ms
+ * @return {String}
+ * @api private
+ */
+
+function fmtLong(ms) {
+  var msAbs = Math.abs(ms);
+  if (msAbs >= d) {
+    return plural(ms, msAbs, d, 'day');
+  }
+  if (msAbs >= h) {
+    return plural(ms, msAbs, h, 'hour');
+  }
+  if (msAbs >= m) {
+    return plural(ms, msAbs, m, 'minute');
+  }
+  if (msAbs >= s) {
+    return plural(ms, msAbs, s, 'second');
+  }
+  return ms + ' ms';
+}
+
+/**
+ * Pluralization helper.
+ */
+
+function plural(ms, msAbs, n, name) {
+  var isPlural = msAbs >= n * 1.5;
+  return Math.round(ms / n) + ' ' + name + (isPlural ? 's' : '');
+}
+
+/**
+ * This is the common logic for both the Node.js and web browser
+ * implementations of `debug()`.
+ */
+
+function setup(env) {
+	createDebug.debug = createDebug;
+	createDebug.default = createDebug;
+	createDebug.coerce = coerce;
+	createDebug.disable = disable;
+	createDebug.enable = enable;
+	createDebug.enabled = enabled;
+	createDebug.humanize = ms;
+	createDebug.destroy = destroy;
+
+	Object.keys(env).forEach(key => {
+		createDebug[key] = env[key];
+	});
+
+	/**
+	* The currently active debug mode names, and names to skip.
+	*/
+
+	createDebug.names = [];
+	createDebug.skips = [];
+
+	/**
+	* Map of special "%n" handling functions, for the debug "format" argument.
+	*
+	* Valid key names are a single, lower or upper-case letter, i.e. "n" and "N".
+	*/
+	createDebug.formatters = {};
+
+	/**
+	* Selects a color for a debug namespace
+	* @param {String} namespace The namespace string for the for the debug instance to be colored
+	* @return {Number|String} An ANSI color code for the given namespace
+	* @api private
+	*/
+	function selectColor(namespace) {
+		let hash = 0;
+
+		for (let i = 0; i < namespace.length; i++) {
+			hash = ((hash << 5) - hash) + namespace.charCodeAt(i);
+			hash |= 0; // Convert to 32bit integer
+		}
+
+		return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
+	}
+	createDebug.selectColor = selectColor;
+
+	/**
+	* Create a debugger with the given `namespace`.
+	*
+	* @param {String} namespace
+	* @return {Function}
+	* @api public
+	*/
+	function createDebug(namespace) {
+		let prevTime;
+		let enableOverride = null;
+
+		function debug(...args) {
+			// Disabled?
+			if (!debug.enabled) {
+				return;
+			}
+
+			const self = debug;
+
+			// Set `diff` timestamp
+			const curr = Number(new Date());
+			const ms = curr - (prevTime || curr);
+			self.diff = ms;
+			self.prev = prevTime;
+			self.curr = curr;
+			prevTime = curr;
+
+			args[0] = createDebug.coerce(args[0]);
+
+			if (typeof args[0] !== 'string') {
+				// Anything else let's inspect with %O
+				args.unshift('%O');
+			}
+
+			// Apply any `formatters` transformations
+			let index = 0;
+			args[0] = args[0].replace(/%([a-zA-Z%])/g, (match, format) => {
+				// If we encounter an escaped % then don't increase the array index
+				if (match === '%%') {
+					return '%';
+				}
+				index++;
+				const formatter = createDebug.formatters[format];
+				if (typeof formatter === 'function') {
+					const val = args[index];
+					match = formatter.call(self, val);
+
+					// Now we need to remove `args[index]` since it's inlined in the `format`
+					args.splice(index, 1);
+					index--;
+				}
+				return match;
+			});
+
+			// Apply env-specific formatting (colors, etc.)
+			createDebug.formatArgs.call(self, args);
+
+			const logFn = self.log || createDebug.log;
+			logFn.apply(self, args);
+		}
+
+		debug.namespace = namespace;
+		debug.useColors = createDebug.useColors();
+		debug.color = createDebug.selectColor(namespace);
+		debug.extend = extend;
+		debug.destroy = createDebug.destroy; // XXX Temporary. Will be removed in the next major release.
+
+		Object.defineProperty(debug, 'enabled', {
+			enumerable: true,
+			configurable: false,
+			get: () => enableOverride === null ? createDebug.enabled(namespace) : enableOverride,
+			set: v => {
+				enableOverride = v;
+			}
+		});
+
+		// Env-specific initialization logic for debug instances
+		if (typeof createDebug.init === 'function') {
+			createDebug.init(debug);
+		}
+
+		return debug;
+	}
+
+	function extend(namespace, delimiter) {
+		const newDebug = createDebug(this.namespace + (typeof delimiter === 'undefined' ? ':' : delimiter) + namespace);
+		newDebug.log = this.log;
+		return newDebug;
+	}
+
+	/**
+	* Enables a debug mode by namespaces. This can include modes
+	* separated by a colon and wildcards.
+	*
+	* @param {String} namespaces
+	* @api public
+	*/
+	function enable(namespaces) {
+		createDebug.save(namespaces);
+
+		createDebug.names = [];
+		createDebug.skips = [];
+
+		let i;
+		const split = (typeof namespaces === 'string' ? namespaces : '').split(/[\s,]+/);
+		const len = split.length;
+
+		for (i = 0; i < len; i++) {
+			if (!split[i]) {
+				// ignore empty strings
+				continue;
+			}
+
+			namespaces = split[i].replace(/\*/g, '.*?');
+
+			if (namespaces[0] === '-') {
+				createDebug.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
+			} else {
+				createDebug.names.push(new RegExp('^' + namespaces + '$'));
+			}
+		}
+	}
+
+	/**
+	* Disable debug output.
+	*
+	* @return {String} namespaces
+	* @api public
+	*/
+	function disable() {
+		const namespaces = [
+			...createDebug.names.map(toNamespace),
+			...createDebug.skips.map(toNamespace).map(namespace => '-' + namespace)
+		].join(',');
+		createDebug.enable('');
+		return namespaces;
+	}
+
+	/**
+	* Returns true if the given mode name is enabled, false otherwise.
+	*
+	* @param {String} name
+	* @return {Boolean}
+	* @api public
+	*/
+	function enabled(name) {
+		if (name[name.length - 1] === '*') {
+			return true;
+		}
+
+		let i;
+		let len;
+
+		for (i = 0, len = createDebug.skips.length; i < len; i++) {
+			if (createDebug.skips[i].test(name)) {
+				return false;
+			}
+		}
+
+		for (i = 0, len = createDebug.names.length; i < len; i++) {
+			if (createDebug.names[i].test(name)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	* Convert regexp to namespace
+	*
+	* @param {RegExp} regxep
+	* @return {String} namespace
+	* @api private
+	*/
+	function toNamespace(regexp) {
+		return regexp.toString()
+			.substring(2, regexp.toString().length - 2)
+			.replace(/\.\*\?$/, '*');
+	}
+
+	/**
+	* Coerce `val`.
+	*
+	* @param {Mixed} val
+	* @return {Mixed}
+	* @api private
+	*/
+	function coerce(val) {
+		if (val instanceof Error) {
+			return val.stack || val.message;
+		}
+		return val;
+	}
+
+	/**
+	* XXX DO NOT USE. This is a temporary stub function.
+	* XXX It WILL be removed in the next major release.
+	*/
+	function destroy() {
+		console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
+	}
+
+	createDebug.enable(createDebug.load());
+
+	return createDebug;
+}
+
+var common = setup;
+
+var browser = createCommonjsModule(function (module, exports) {
+/* eslint-env browser */
+
+/**
+ * This is the web browser implementation of `debug()`.
+ */
+
+exports.formatArgs = formatArgs;
+exports.save = save;
+exports.load = load;
+exports.useColors = useColors;
+exports.storage = localstorage();
+exports.destroy = (() => {
+	let warned = false;
+
+	return () => {
+		if (!warned) {
+			warned = true;
+			console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
+		}
+	};
+})();
+
+/**
+ * Colors.
+ */
+
+exports.colors = [
+	'#0000CC',
+	'#0000FF',
+	'#0033CC',
+	'#0033FF',
+	'#0066CC',
+	'#0066FF',
+	'#0099CC',
+	'#0099FF',
+	'#00CC00',
+	'#00CC33',
+	'#00CC66',
+	'#00CC99',
+	'#00CCCC',
+	'#00CCFF',
+	'#3300CC',
+	'#3300FF',
+	'#3333CC',
+	'#3333FF',
+	'#3366CC',
+	'#3366FF',
+	'#3399CC',
+	'#3399FF',
+	'#33CC00',
+	'#33CC33',
+	'#33CC66',
+	'#33CC99',
+	'#33CCCC',
+	'#33CCFF',
+	'#6600CC',
+	'#6600FF',
+	'#6633CC',
+	'#6633FF',
+	'#66CC00',
+	'#66CC33',
+	'#9900CC',
+	'#9900FF',
+	'#9933CC',
+	'#9933FF',
+	'#99CC00',
+	'#99CC33',
+	'#CC0000',
+	'#CC0033',
+	'#CC0066',
+	'#CC0099',
+	'#CC00CC',
+	'#CC00FF',
+	'#CC3300',
+	'#CC3333',
+	'#CC3366',
+	'#CC3399',
+	'#CC33CC',
+	'#CC33FF',
+	'#CC6600',
+	'#CC6633',
+	'#CC9900',
+	'#CC9933',
+	'#CCCC00',
+	'#CCCC33',
+	'#FF0000',
+	'#FF0033',
+	'#FF0066',
+	'#FF0099',
+	'#FF00CC',
+	'#FF00FF',
+	'#FF3300',
+	'#FF3333',
+	'#FF3366',
+	'#FF3399',
+	'#FF33CC',
+	'#FF33FF',
+	'#FF6600',
+	'#FF6633',
+	'#FF9900',
+	'#FF9933',
+	'#FFCC00',
+	'#FFCC33'
+];
+
+/**
+ * Currently only WebKit-based Web Inspectors, Firefox >= v31,
+ * and the Firebug extension (any Firefox version) are known
+ * to support "%c" CSS customizations.
+ *
+ * TODO: add a `localStorage` variable to explicitly enable/disable colors
+ */
+
+// eslint-disable-next-line complexity
+function useColors() {
+	// NB: In an Electron preload script, document will be defined but not fully
+	// initialized. Since we know we're in Chrome, we'll just detect this case
+	// explicitly
+	if (typeof window !== 'undefined' && window.process && (window.process.type === 'renderer' || window.process.__nwjs)) {
+		return true;
+	}
+
+	// Internet Explorer and Edge do not support colors.
+	if (typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/)) {
+		return false;
+	}
+
+	// Is webkit? http://stackoverflow.com/a/16459606/376773
+	// document is undefined in react-native: https://github.com/facebook/react-native/pull/1632
+	return (typeof document !== 'undefined' && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance) ||
+		// Is firebug? http://stackoverflow.com/a/398120/376773
+		(typeof window !== 'undefined' && window.console && (window.console.firebug || (window.console.exception && window.console.table))) ||
+		// Is firefox >= v31?
+		// https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
+		(typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31) ||
+		// Double check webkit in userAgent just in case we are in a worker
+		(typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/));
+}
+
+/**
+ * Colorize log arguments if enabled.
+ *
+ * @api public
+ */
+
+function formatArgs(args) {
+	args[0] = (this.useColors ? '%c' : '') +
+		this.namespace +
+		(this.useColors ? ' %c' : ' ') +
+		args[0] +
+		(this.useColors ? '%c ' : ' ') +
+		'+' + module.exports.humanize(this.diff);
+
+	if (!this.useColors) {
+		return;
+	}
+
+	const c = 'color: ' + this.color;
+	args.splice(1, 0, c, 'color: inherit');
+
+	// The final "%c" is somewhat tricky, because there could be other
+	// arguments passed either before or after the %c, so we need to
+	// figure out the correct index to insert the CSS into
+	let index = 0;
+	let lastC = 0;
+	args[0].replace(/%[a-zA-Z%]/g, match => {
+		if (match === '%%') {
+			return;
+		}
+		index++;
+		if (match === '%c') {
+			// We only are interested in the *last* %c
+			// (the user may have provided their own)
+			lastC = index;
+		}
+	});
+
+	args.splice(lastC, 0, c);
+}
+
+/**
+ * Invokes `console.debug()` when available.
+ * No-op when `console.debug` is not a "function".
+ * If `console.debug` is not available, falls back
+ * to `console.log`.
+ *
+ * @api public
+ */
+exports.log = console.debug || console.log || (() => {});
+
+/**
+ * Save `namespaces`.
+ *
+ * @param {String} namespaces
+ * @api private
+ */
+function save(namespaces) {
+	try {
+		if (namespaces) {
+			exports.storage.setItem('debug', namespaces);
+		} else {
+			exports.storage.removeItem('debug');
+		}
+	} catch (error) {
+		// Swallow
+		// XXX (@Qix-) should we be logging these?
+	}
+}
+
+/**
+ * Load `namespaces`.
+ *
+ * @return {String} returns the previously persisted debug modes
+ * @api private
+ */
+function load() {
+	let r;
+	try {
+		r = exports.storage.getItem('debug');
+	} catch (error) {
+		// Swallow
+		// XXX (@Qix-) should we be logging these?
+	}
+
+	// If debug isn't set in LS, and we're in Electron, try to load $DEBUG
+	if (!r && typeof process !== 'undefined' && 'env' in process) {
+		r = process.env.DEBUG;
+	}
+
+	return r;
+}
+
+/**
+ * Localstorage attempts to return the localstorage.
+ *
+ * This is necessary because safari throws
+ * when a user disables cookies/localstorage
+ * and you attempt to access it.
+ *
+ * @return {LocalStorage}
+ * @api private
+ */
+
+function localstorage() {
+	try {
+		// TVMLKit (Apple TV JS Runtime) does not have a window object, just localStorage in the global context
+		// The Browser also has localStorage in the global context.
+		return localStorage;
+	} catch (error) {
+		// Swallow
+		// XXX (@Qix-) should we be logging these?
+	}
+}
+
+module.exports = common(exports);
+
+const {formatters} = module.exports;
+
+/**
+ * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
+ */
+
+formatters.j = function (v) {
+	try {
+		return JSON.stringify(v);
+	} catch (error) {
+		return '[UnexpectedJSONParseError]: ' + error.message;
+	}
+};
+});
+
+const log = browser("difference");
+
+const differenceIsTooGreat = (a, b) => {
+  // remove spaces, trailing zeros & left & right parenthesis before counting length
+  // const STRIP_LR = /(\\left\()|(\\right\))|( )|([.](0+))/g;
+  // const aLength = a.replace(STRIP_LR, "").length;
+  // const bLength = b.replace(STRIP_LR, "").length;
+
+  // const lta = new LatexToAst();
+  // const al = lta.convert(a);
+  // const bl = lta.convert(b);
+
+  // log("al", al.toString());
+  // log("bl", bl.toString());
+  const smallest = Math.min(a.toString().length, b.toString().length);
+  const biggest = Math.max(a.toString().length, b.toString().length);
+  const limit = (1 / smallest) * 100 + 10;
+  const diff = biggest - smallest;
+
+  log("a:", a.toString(), "b:", b.toString(), "limit:", limit, "diff:", diff);
+
+  if (diff > limit) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 const lta = new LatexToAst();
 const atm = new AstToMathJs();
-
-const toMathNode = (latex) => {
-  const ast = lta.convert(latex);
-  console.log(ast, "ast");
-  const converted = atm.convert(ast);
-  return converted;
-  // return parse(latex);
-};
 
 const latexEqual$1 = (a, b, opts) => {
   if (!a || !b) {
@@ -66295,33 +67036,16 @@ const latexEqual$1 = (a, b, opts) => {
     return true;
   }
 
-  /**
-   * TODO: apply a cutoff in difference in string size:
-   * say correctResponse is 1+1=2
-   * but user enters: 'arstasr arsoinerst9arsta8rstarsiotenarstoiarestaoristnarstoi'
-   * This string is way bigger than it needs to be.
-   * Say limit to 3 times the size of correct string?
-   */
+  const al = lta.convert(a);
 
-  // remove spaces, trailing zeros & left & right parenthesis before counting length
-  a.replace(
-    /(\\left\()|(\\right\))|( )|([.](0+))/g,
-    ""
-  ).length;
+  const bl = lta.convert(b);
 
-  b.replace(
-    /(\\left\()|(\\right\))|( )|([.](0+))/g,
-    ""
-  ).length;
+  if (differenceIsTooGreat(al, bl)) {
+    return false;
+  }
 
-  // here we still have a problem when we have expressions like this: target: "x", expression: "((x^2 + x) / x) - 1"
-
-  // if (aTrimmed > bTrimmed * 6 || bTrimmed > aTrimmed * 6) {
-  //   return false;
-  // }
-
-  const amo = toMathNode(a);
-  const bmo = toMathNode(b);
+  const amo = atm.convert(al);
+  const bmo = atm.convert(bl);
   if (opts.mode === "literal") {
     return isMathEqual(amo, bmo, opts.literal);
   } else {

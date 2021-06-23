@@ -33,9 +33,27 @@ export default {
     },
     {
       // all passing
-      target: "6 \\frac{1}{2}",
-      eq: ["6 + \\frac{1}{2}"],
-      ne: ["6 * \\frac{1}{2}"],
+      target: "\\frac{5}{4}",
+      eq: ["1 + \\frac{1}{4}", "\\frac{1+4}{4}"],
+      ne: ["a * \\frac{1}{2}"],
+    },
+    {
+      // all passing
+      target: "a\\frac{1}{4}",
+      eq: ["a * \\frac{1}{4}"],
+      ne: ["a + \\frac{1}{2}"],
+    },
+    {
+      // all passing
+      target: "1 + \\frac{1}{4}",
+      eq: ["\\frac{5}{4}"],
+      ne: ["1 * \\frac{1}{2}"],
+    },
+    {
+      // all passing
+      target: "2 \\frac{1}{2}",
+      eq: ["2 + \\frac{1}{2}"],
+      ne: ["2 * \\frac{1}{2}"],
     },
 
     {
