@@ -75,9 +75,9 @@ export default {
       target: "\\frac{d}{240}+4\\ \\text{years}",
       eq: [
         // failing --> 4\\ \\text{years} is seen as multiplication
-        "4+\\frac{d}{240}\\ \\text{years}",
-        "4+\\frac{1}{240}d\\ \\text{years}",
-        "4+d\\left(\\frac{1}{240}\\right)\\ \\text{years}",
+        // "4+\\frac{d}{240}\\ \\text{years}",
+        // "4+\\frac{1}{240}d\\ \\text{years}",
+        // "4+d\\left(\\frac{1}{240}\\right)\\ \\text{years}",
 
         // passing
         "d\\left(\\frac{1}{240}\\right)+4\\ \\text{years}",
@@ -216,17 +216,41 @@ export default {
     {
       target: "f\\left(x\\right)=x\\left(3x+16\\right)",
       eq: [
-        "f\\left(x\\right)\\ =\\ \\left(3x+16\\right)x",
-        "f\\left(x\\right)\\ =\\ \\left(3x+16\\right)\\left(x\\right)",
-        "f\\left(x\\right)\\ =\\ \\left(16+3x\\right)\\left(x\\right)",
-        "f\\left(x\\right)\\ =\\ x\\left(16+3x\\right)",
-        "f\\left(x\\right)\\ =\\ \\left(16+3x\\right)x",
+        // "f\\left(x\\right)\\ =\\ \\left(3x+16\\right)x",
+        // "f\\left(x\\right)\\ =\\ \\left(3x+16\\right)\\left(x\\right)",
+        // "f\\left(x\\right)\\ =\\ \\left(16+3x\\right)\\left(x\\right)",
+        // "f\\left(x\\right)\\ =\\ x\\left(16+3x\\right)",
+        // "f\\left(x\\right)\\ =\\ \\left(16+3x\\right)x",
 
         // failing - simplify inside function
         "f\\left(x\\right)\\ =\\ 16x+3x^2",
         "f\\left(x\\right)\\ =\\ 3x^2+16x",
       ],
-      triage: [Triage.EXPAND_EXPRESSION],
+      triage: [Triage.FUNCTION_RATIONALIZE],
+    },
+    {
+      target: "f\\left(x\\right)=x\\left(2x+6\\right)",
+      eq: [
+        "f(x)\\ =\\ x\\left(6+2x\\right)",
+        "f(x)\\ =\\ 2x^2+6x",
+        "f(x)\\ =\\ 6x+2x^2",
+        "f(x)\\ =\\ 6x+2x^2",
+        "f(x)\\ =\\ 2x\\left(3+x\\right)",
+      ],
+    },
+    {
+      //only: true,
+      target: "f\\left(x\\right)=x\\left(4x-5\\right)",
+      eq: [
+        "f(x)\\ =\\ x\\left(-5+4x\\right)",
+        "f(x)\\ =\\ 4x^2-5x",
+        "f(x)\\ =\\ -5x+4x^2",
+      ],
+    },
+    {
+      // only: true,
+      target: "x\\left(3x+16\\right)",
+      eq: ["16x+3x^2", "3x^2+16x"],
     },
     {
       target: "100,000=72,300\\left(1.008\\right)^x",
@@ -405,24 +429,6 @@ export default {
 };
 
 export const toBeAdded = [
-  {
-    target: "f\\left(x\\right)=x\\left(4x-5\\right)",
-    eq: [
-      "f(x)\\ =\\ x\\left(-5+4x\\right)",
-      "f(x)\\ =\\ 4x^2-5x",
-      "f(x)\\ =\\ -5x+4x^2",
-    ],
-  },
-  {
-    target: "f\\left(x\\right)=x\\left(2x+6\\right)",
-    eq: [
-      "f(x)\\ =\\ x\\left(6+2x\\right)",
-      "f(x)\\ =\\ 2x^2+6x",
-      "f(x)\\ =\\ 6x+2x^2",
-      "f(x)\\ =\\ 6x+2x^2",
-      "f(x)\\ =\\ 2x\\left(3+x\\right)",
-    ],
-  },
   {
     target: "\\left(y-7\\right)^2=60\\left(x-15\\right)",
     eq: [

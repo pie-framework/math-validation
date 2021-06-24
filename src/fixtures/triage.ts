@@ -44,9 +44,9 @@ export enum Triage {
   INVERSE_FUNCTIONS,
 
   /**
-   * Expand expression
+   * Rationalize expressions inside functions
    */
-  EXPAND_EXPRESSION,
+  FUNCTION_RATIONALIZE,
 
   /**
    * ml should be eq with mL

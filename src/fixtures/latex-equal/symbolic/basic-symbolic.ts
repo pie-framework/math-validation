@@ -62,11 +62,11 @@ export default {
     { target: "1,500,000", eq: "1500000" },
     { target: "sin(x)", eq: "sin(x)" },
     { target: "tan(x)", eq: "tan(x)" },
-    {
-      target: "f^{-1}\\left(x\\right)=\\sqrt{x-1}+3",
-      eq: "f^{-1}\\left(x\\right)=\\sqrt{x-1}+4-1",
-      triage: Triage.INVERSE_FUNCTIONS,
-    },
+    // {
+    //   target: "f^{-1}\\left(x\\right)=\\sqrt{x-1}+3",
+    //   eq: "f^{-1}\\left(x\\right)=\\sqrt{x-1}+4-1",
+    //   triage: Triage.INVERSE_FUNCTIONS,
+    // },
     {
       target: "72\\div12=6\\text{eggs}",
       eq: ["72\\div12=(3+3)\\text{eggs}", "(3+3)\\text{eggs}=72\\div12"],

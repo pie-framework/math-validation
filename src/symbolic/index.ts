@@ -17,6 +17,7 @@ const SIMPLIFY_RULES = [
   { l: "((n^n1) + n)/n", r: "n^(n1-1)+1" },
   { l: "(n^2) + 2n", r: "n * (n + 2)" },
   // { l: "(n/n1) * n2", r: "t" },
+
   // perfect square formula:
   { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
   // { l: "(n^2) + 4n + 4", r: "(n^2) + (2n * 2) + (2^2)" },
@@ -31,11 +32,29 @@ const simplify = (v) => {
 
 const normalize = (a: string | MathNode | any) => {
   let r: string | MathNode | any = a;
+  console.log(r, "r before rat");
+
   try {
     r = rationalize(a, {}, true).expression;
   } catch (e) {
     // ok;
     //console.log(e, "failed to rationalize");
+  }
+
+  if (r.fn === "equal") {
+    r.args = r.args.map((arg) => {
+      if (!arg.isFunctionNode) {
+        try {
+          arg = rationalize(arg, {}, true).expression;
+        } catch (e) {
+          // ok;
+          //console.log(e, "failed to rationalize");
+        }
+      } else {
+        arg = arg;
+      }
+      return arg;
+    });
   }
 
   let s = r;
