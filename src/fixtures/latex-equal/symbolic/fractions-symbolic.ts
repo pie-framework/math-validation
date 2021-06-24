@@ -216,17 +216,14 @@ export default {
     {
       target: "f\\left(x\\right)=x\\left(3x+16\\right)",
       eq: [
-        // "f\\left(x\\right)\\ =\\ \\left(3x+16\\right)x",
-        // "f\\left(x\\right)\\ =\\ \\left(3x+16\\right)\\left(x\\right)",
-        // "f\\left(x\\right)\\ =\\ \\left(16+3x\\right)\\left(x\\right)",
-        // "f\\left(x\\right)\\ =\\ x\\left(16+3x\\right)",
-        // "f\\left(x\\right)\\ =\\ \\left(16+3x\\right)x",
-
-        // failing - simplify inside function
+        "f\\left(x\\right)\\ =\\ \\left(3x+16\\right)x",
+        "f\\left(x\\right)\\ =\\ \\left(3x+16\\right)\\left(x\\right)",
+        "f\\left(x\\right)\\ =\\ \\left(16+3x\\right)\\left(x\\right)",
+        "f\\left(x\\right)\\ =\\ x\\left(16+3x\\right)",
+        "f\\left(x\\right)\\ =\\ \\left(16+3x\\right)x",
         "f\\left(x\\right)\\ =\\ 16x+3x^2",
         "f\\left(x\\right)\\ =\\ 3x^2+16x",
       ],
-      triage: [Triage.FUNCTION_RATIONALIZE],
     },
     {
       target: "f\\left(x\\right)=x\\left(2x+6\\right)",
@@ -239,7 +236,6 @@ export default {
       ],
     },
     {
-      //only: true,
       target: "f\\left(x\\right)=x\\left(4x-5\\right)",
       eq: [
         "f(x)\\ =\\ x\\left(-5+4x\\right)",
@@ -248,7 +244,6 @@ export default {
       ],
     },
     {
-      // only: true,
       target: "x\\left(3x+16\\right)",
       eq: ["16x+3x^2", "3x^2+16x"],
     },
