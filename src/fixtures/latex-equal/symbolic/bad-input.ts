@@ -2,7 +2,6 @@ export default {
   // skip: true,
   mode: "symbolic",
   tests: [
-    // all passed
     {
       target: "1 + 1",
       ne: [

@@ -15,7 +15,7 @@ export default {
       ne: ["a_{i-1}=0.5i(2s+di-d)"],
     },
     {
-      // this is not working
+      // this is not working : difference between fraction and divide expression ???
       target: "a_{n}=(-1/2i)^n",
       eq: ["a_{n}=\\frac{-1}{2i}^n", "a_{n}=(-1*\\frac{1}{2i})^n"],
       ne: ["a_{i-1}=0.5i(2s+di-d)"],
