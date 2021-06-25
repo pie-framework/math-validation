@@ -1,7 +1,6 @@
 export default {
   mode: "symbolic",
   //skip: true,
-  // all passed
   //convert mixed numbers to an improper fraction
   tests: [
     {

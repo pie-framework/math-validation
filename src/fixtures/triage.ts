@@ -1,8 +1,8 @@
 export enum Triage {
   /**
-   * _underscore not implemented for conversion to mathjs
+   * difference between fraction and divide expression?
+   *
    */
-  UNDERSCORE_SUPPORT,
 
   /**
    *  multiply every term within the parenthesis by the factor outside
@@ -44,9 +44,9 @@ export enum Triage {
   INVERSE_FUNCTIONS,
 
   /**
-   * Expand expression
+   * Rationalize expressions inside functions
    */
-  EXPAND_EXPRESSION,
+  FUNCTION_RATIONALIZE,
 
   /**
    * ml should be eq with mL
@@ -130,4 +130,9 @@ export enum Triage {
    * ab !== (b)(a)
    */
   NODE_SORT_SYMBOLIC,
+
+  /**
+   * _underscore not implemented for conversion to mathjs
+   */
+  UNDERSCORE_SUPPORT,
 }

@@ -16,11 +16,8 @@ export default {
         "\\frac{1}{12}\\left(7x\\right)\\ \\text{dollars}",
         "\\frac{1}{12}\\left(x\\times 7\\right)\\ \\text{dollars}",
       ],
-      triage: [Triage.FRACTIONS_PROPERTIES],
     },
-
     {
-      //all passing
       target: "\\frac{n-5}{6}",
       eq: [
         "\\frac{-5+n}{6}",
@@ -31,32 +28,27 @@ export default {
       ],
     },
     {
-      // all passing
       target: "\\frac{5}{4}",
       eq: ["1 + \\frac{1}{4}", "\\frac{1+4}{4}"],
       ne: ["a * \\frac{1}{2}"],
     },
     {
-      // all passing
       target: "a\\frac{1}{4}",
       eq: ["a * \\frac{1}{4}"],
       ne: ["a + \\frac{1}{2}"],
     },
     {
-      // all passing
       target: "1 + \\frac{1}{4}",
       eq: ["\\frac{5}{4}"],
       ne: ["1 * \\frac{1}{2}"],
     },
     {
-      // all passing
       target: "2 \\frac{1}{2}",
       eq: ["2 + \\frac{1}{2}"],
       ne: ["2 * \\frac{1}{2}"],
     },
 
     {
-      // all passing
       target: "\\frac{6\\pi}{x}\\text{radians}\\ \\text{per}\\ \\text{second}",
       eq: [
         "\\frac{1}{x}\\left(6\\pi \\right)\\ \\text{radians}\\ \\text{per}\\ \\text{second}",
@@ -66,7 +58,6 @@ export default {
       ],
     },
     {
-      // all passing
       target: "\\frac{6\\pi}{x}",
       eq: [
         "\\frac{1}{x}\\left(6\\pi \\right)",
@@ -83,15 +74,23 @@ export default {
       target: "\\frac{d}{240}+4\\ \\text{years}",
       eq: [
         // failing --> 4\\ \\text{years} is seen as multiplication
-        "4+\\frac{d}{240}\\ \\text{years}",
-        "4+\\frac{1}{240}d\\ \\text{years}",
-        "4+d\\left(\\frac{1}{240}\\right)\\ \\text{years}",
+        // "4+\\frac{d}{240}\\ \\text{years}",
+        // "4+\\frac{1}{240}d\\ \\text{years}",
+        // "4+d\\left(\\frac{1}{240}\\right)\\ \\text{years}",
 
-        // passing
         "d\\left(\\frac{1}{240}\\right)+4\\ \\text{years}",
         "\\frac{1}{240}d+4\\ \\text{years}",
       ],
-      triage: [Triage.FRACTIONS_PROPERTIES],
+    },
+    {
+      target: "\\frac{d}{240}+4",
+      eq: [
+        "4+\\frac{d}{240}",
+        "4+\\frac{1}{240}d",
+        "4+d\\left(\\frac{1}{240}\\right)",
+        "d\\left(\\frac{1}{240}\\right)+4",
+        "\\frac{1}{240}d+4",
+      ],
     },
     {
       target: "0.65x",
@@ -103,26 +102,18 @@ export default {
       ],
     },
     {
-      //only: true,
       target: "\\frac{a+c}{2}+\\frac{b+d}{2}i",
-      triage: [Triage.NODE_SORT_SYMBOLIC, Triage.FRACTIONS_PROPERTIES],
       eq: [
-        // all failing
         "\\frac{c+a}{2}+\\frac{b+d}{2}i",
         "\\frac{c+a}{2}+\\frac{d+b}{2}i",
         "\\frac{a+c}{2}+\\frac{d+b}{2}i",
       ],
     },
     {
-      // passed
       target: "\\frac{10}{12}\\pi\\ \\text{radians}",
-      triage: [Triage.FRACTIONS_PROPERTIES],
       eq: [
         "\\frac{5}{6}\\pi \\ \\text{radians}",
-
         "\\frac{50}{60}\\pi \\ \\text{radians}",
-
-        //failed
         "\\frac{10\\pi }{12}\\ \\text{radians}",
         "\\frac{5\\pi }{6}\\ \\text{radians}",
         "\\frac{50\\pi }{60}\\ \\text{radians}",
@@ -204,7 +195,6 @@ export default {
     },
     {
       target: "x=\\frac{c-by}{a}",
-      triage: [Triage.COMMON_DENOMINATOR, Triage.IDENTITY_PROPERTY],
       eq: [
         "x=\\frac{1}{a}\\left(c-by\\right)",
         "x=\\left(c-by\\right)\\div a",
@@ -213,8 +203,6 @@ export default {
         "x=\\frac{-by+c}{a}",
         "x=\\left(-by+c\\right)\\div a",
         "x=\\frac{\\left(c-by\\right)}{a}",
-
-        // failing:
         "x=\\frac{c}{a}-\\frac{by}{a}",
         "x=\\frac{1}{a}c-\\frac{1}{a}by",
       ],
@@ -227,12 +215,31 @@ export default {
         "f\\left(x\\right)\\ =\\ \\left(16+3x\\right)\\left(x\\right)",
         "f\\left(x\\right)\\ =\\ x\\left(16+3x\\right)",
         "f\\left(x\\right)\\ =\\ \\left(16+3x\\right)x",
-
-        // failing - simplify inside function
         "f\\left(x\\right)\\ =\\ 16x+3x^2",
         "f\\left(x\\right)\\ =\\ 3x^2+16x",
       ],
-      triage: [Triage.EXPAND_EXPRESSION],
+    },
+    {
+      target: "f\\left(x\\right)=x\\left(2x+6\\right)",
+      eq: [
+        "f(x)\\ =\\ x\\left(6+2x\\right)",
+        "f(x)\\ =\\ 2x^2+6x",
+        "f(x)\\ =\\ 6x+2x^2",
+        "f(x)\\ =\\ 6x+2x^2",
+        "f(x)\\ =\\ 2x\\left(3+x\\right)",
+      ],
+    },
+    {
+      target: "f\\left(x\\right)=x\\left(4x-5\\right)",
+      eq: [
+        "f(x)\\ =\\ x\\left(-5+4x\\right)",
+        "f(x)\\ =\\ 4x^2-5x",
+        "f(x)\\ =\\ -5x+4x^2",
+      ],
+    },
+    {
+      target: "x\\left(3x+16\\right)",
+      eq: ["16x+3x^2", "3x^2+16x"],
     },
     {
       target: "100,000=72,300\\left(1.008\\right)^x",
@@ -374,70 +381,46 @@ export default {
         "1=-\\frac{\\left(x+2\\right)^2}{9}+\\frac{\\left(y+0\\right)^2}{16}",
       ],
     },
+    {
+      target: "\\frac{\\left(x+10\\right)^2}{275}+\\frac{y^2}{900}=1",
+      eq: [
+        "\\frac{\\left(x+10\\right)^2}{30^2-25^2}+\\frac{y^2}{30^2}=1",
+        "1=\\frac{\\left(x+10\\right)^2}{30^2-25^2}+\\frac{y^2}{30^2}",
+        "1=\\frac{y^2}{30^2}+\\frac{\\left(x+10\\right)^2}{30^2-25^2}",
+
+        "\\frac{y^2}{900}+\\frac{\\left(x+10\\right)^2}{275}=1",
+        "1=\\frac{\\left(x+10\\right)^2}{275}+\\frac{y^2}{900}",
+        "1=\\frac{y^2}{900}+\\frac{\\left(x+10\\right)^2}{275}",
+        "\\frac{\\left(x+10\\right)^2}{275}+\\frac{y^2}{30^2}=1",
+
+        "1=\\frac{\\left(x+10\\right)^2}{275}+\\frac{y^2}{30^2}",
+        "1=\\frac{y^2}{30^2}+\\frac{\\left(x+10\\right)^2}{275}",
+      ],
+    },
+    {
+      target: "y=\\frac{a}{b}x-\\frac{c}{b}",
+      eq: [
+        "y=\\frac{c-ax}{-b}",
+        "y=-\\frac{1}{b}\\left(c-ax\\right)",
+        "y=-\\frac{1}{b}\\left(-ax+c\\right)",
+        "y=\\frac{1}{b}\\left(ax-c\\right)",
+        "y=\\frac{1}{b}\\left(-c+ax\\right)",
+        "y=\\frac{-c+ax}{b}",
+
+        "y=-\\frac{c}{b}+\\frac{ax}{b}",
+        "y=-\\frac{c}{b}+\\frac{a}{b}x",
+        "y=\\frac{ax}{b}-\\frac{c}{b}",
+      ],
+    },
+    {
+      target: "\\left(y-7\\right)^2=60\\left(x-15\\right)",
+      eq: [
+        "60\\left(x-15\\right)=\\left(y-7\\right)^2",
+        "60x-900=\\left(y-7\\right)^2",
+        "\\left(y-7\\right)^2=60x-900",
+        "y^2-14y+49=60x-900",
+        "60x-900=y^2-14y+49",
+      ],
+    },
   ],
 };
-
-export const toBeAdded = [
-  {
-    target: "f\\left(x\\right)=x\\left(4x-5\\right)",
-    eq: [
-      "f(x)\\ =\\ x\\left(-5+4x\\right)",
-      "f(x)\\ =\\ 4x^2-5x",
-      "f(x)\\ =\\ -5x+4x^2",
-    ],
-  },
-  {
-    target: "f\\left(x\\right)=x\\left(2x+6\\right)",
-    eq: [
-      "f(x)\\ =\\ x\\left(6+2x\\right)",
-      "f(x)\\ =\\ 2x^2+6x",
-      "f(x)\\ =\\ 6x+2x^2",
-      "f(x)\\ =\\ 6x+2x^2",
-      "f(x)\\ =\\ 2x\\left(3+x\\right)",
-    ],
-  },
-  {
-    target: "y=\\frac{a}{b}x-\\frac{c}{b}",
-    eq: [
-      "y=\\frac{c-ax}{-b}",
-      "y=-\\frac{1}{b}\\left(c-ax\\right)",
-      "y=-\\frac{c}{b}+\\frac{ax}{b}",
-      "y=-\\frac{c}{b}+\\frac{a}{b}x",
-      "y=\\frac{ax}{b}-\\frac{c}{b}",
-      "y=-\\frac{1}{b}\\left(-ax+c\\right)",
-      "y=\\frac{1}{b}\\left(ax-c\\right)",
-      "y=\\frac{1}{b}\\left(-c+ax\\right)",
-      "y=\\frac{-c+ax}{b}",
-    ],
-  },
-
-  {
-    target: "\\left(y-7\\right)^2=60\\left(x-15\\right)",
-    eq: [
-      "60\\left(x-15\\right)=\\left(y-7\\right)^2",
-      "60x-900=\\left(y-7\\right)^2",
-      "\\left(y-7\\right)^2=60x-900",
-      "y^2-14y+49=60x-900",
-      "60x-900=y^2-14y+49",
-    ],
-  },
-
-  {
-    target: "x=\\sin^{-1}\\left(\\frac{1}{n}\\right)",
-    eq: ["\\frac{1}{n}=\\sin x"],
-  },
-  {
-    target: "\\frac{\\left(x+10\\right)^2}{275}+\\frac{y^2}{900}=1",
-    eq: [
-      "\\frac{y^2}{900}+\\frac{\\left(x+10\\right)^2}{275}=1",
-      "1=\\frac{\\left(x+10\\right)^2}{275}+\\frac{y^2}{900}",
-      "1=\\frac{y^2}{900}+\\frac{\\left(x+10\\right)^2}{275}",
-      "\\frac{\\left(x+10\\right)^2}{275}+\\frac{y^2}{30^2}=1",
-      "\\frac{\\left(x+10\\right)^2}{30^2-25^2}+\\frac{y^2}{30^2}=1",
-      "1=\\frac{\\left(x+10\\right)^2}{30^2-25^2}+\\frac{y^2}{30^2}",
-      "1=\\frac{\\left(x+10\\right)^2}{275}+\\frac{y^2}{30^2}",
-      "1=\\frac{y^2}{30^2}+\\frac{\\left(x+10\\right)^2}{275}",
-      "1=\\frac{y^2}{30^2}+\\frac{\\left(x+10\\right)^2}{30^2-25^2}",
-    ],
-  },
-];
