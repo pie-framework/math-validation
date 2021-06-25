@@ -388,6 +388,7 @@ export default {
       ],
     },
     {
+      only: true,
       triage: [Triage.FRACTIONS_PROPERTIES],
       target: "\\frac{\\left(x+10\\right)^2}{275}+\\frac{y^2}{900}=1",
       eq: [
