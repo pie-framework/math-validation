@@ -34,7 +34,6 @@ const simplify = (v) => {
 
 const normalize = (a: string | MathNode | any) => {
   let r: string | MathNode | any = a;
-  console.log(r, "r before rat");
 
   try {
     r = rationalize(a, {}, true).expression;
@@ -50,7 +49,6 @@ const normalize = (a: string | MathNode | any) => {
           arg = rationalize(arg, {}, true).expression;
         } catch (e) {
           // ok;
-          //console.log(e, "failed to rationalize");
         }
       } else {
         arg = arg;
@@ -91,7 +89,5 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
 
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
-  console.log(as, "as");
-  console.log(bs, "bs");
   return as.equals(bs);
 };

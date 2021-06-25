@@ -17,7 +17,6 @@ export default {
         "\\frac{1}{12}\\left(x\\times 7\\right)\\ \\text{dollars}",
       ],
     },
-
     {
       target: "\\frac{n-5}{6}",
       eq: [
@@ -79,11 +78,9 @@ export default {
         // "4+\\frac{1}{240}d\\ \\text{years}",
         // "4+d\\left(\\frac{1}{240}\\right)\\ \\text{years}",
 
-        // passing
         "d\\left(\\frac{1}{240}\\right)+4\\ \\text{years}",
         "\\frac{1}{240}d+4\\ \\text{years}",
       ],
-      triage: [Triage.FRACTIONS_PROPERTIES],
     },
     {
       target: "\\frac{d}{240}+4",
@@ -198,7 +195,6 @@ export default {
     },
     {
       target: "x=\\frac{c-by}{a}",
-      triage: [Triage.FRACTIONS_PROPERTIES],
       eq: [
         "x=\\frac{1}{a}\\left(c-by\\right)",
         "x=\\left(c-by\\right)\\div a",
@@ -207,8 +203,6 @@ export default {
         "x=\\frac{-by+c}{a}",
         "x=\\left(-by+c\\right)\\div a",
         "x=\\frac{\\left(c-by\\right)}{a}",
-
-        // failing:
         "x=\\frac{c}{a}-\\frac{by}{a}",
         "x=\\frac{1}{a}c-\\frac{1}{a}by",
       ],
@@ -388,25 +382,22 @@ export default {
       ],
     },
     {
-      only: true,
-      triage: [Triage.FRACTIONS_PROPERTIES],
       target: "\\frac{\\left(x+10\\right)^2}{275}+\\frac{y^2}{900}=1",
       eq: [
         "\\frac{\\left(x+10\\right)^2}{30^2-25^2}+\\frac{y^2}{30^2}=1",
         "1=\\frac{\\left(x+10\\right)^2}{30^2-25^2}+\\frac{y^2}{30^2}",
         "1=\\frac{y^2}{30^2}+\\frac{\\left(x+10\\right)^2}{30^2-25^2}",
 
-        // "\\frac{y^2}{900}+\\frac{\\left(x+10\\right)^2}{275}=1",
-        // "1=\\frac{\\left(x+10\\right)^2}{275}+\\frac{y^2}{900}",
-        // "1=\\frac{y^2}{900}+\\frac{\\left(x+10\\right)^2}{275}",
-        // "\\frac{\\left(x+10\\right)^2}{275}+\\frac{y^2}{30^2}=1",
+        "\\frac{y^2}{900}+\\frac{\\left(x+10\\right)^2}{275}=1",
+        "1=\\frac{\\left(x+10\\right)^2}{275}+\\frac{y^2}{900}",
+        "1=\\frac{y^2}{900}+\\frac{\\left(x+10\\right)^2}{275}",
+        "\\frac{\\left(x+10\\right)^2}{275}+\\frac{y^2}{30^2}=1",
 
-        // "1=\\frac{\\left(x+10\\right)^2}{275}+\\frac{y^2}{30^2}",
-        // "1=\\frac{y^2}{30^2}+\\frac{\\left(x+10\\right)^2}{275}",
+        "1=\\frac{\\left(x+10\\right)^2}{275}+\\frac{y^2}{30^2}",
+        "1=\\frac{y^2}{30^2}+\\frac{\\left(x+10\\right)^2}{275}",
       ],
     },
     {
-      triage: [Triage.FRACTIONS_PROPERTIES],
       target: "y=\\frac{a}{b}x-\\frac{c}{b}",
       eq: [
         "y=\\frac{c-ax}{-b}",
@@ -416,27 +407,20 @@ export default {
         "y=\\frac{1}{b}\\left(-c+ax\\right)",
         "y=\\frac{-c+ax}{b}",
 
-        // "y=-\\frac{c}{b}+\\frac{ax}{b}",
-        // "y=-\\frac{c}{b}+\\frac{a}{b}x",
-        // "y=\\frac{ax}{b}-\\frac{c}{b}",
+        "y=-\\frac{c}{b}+\\frac{ax}{b}",
+        "y=-\\frac{c}{b}+\\frac{a}{b}x",
+        "y=\\frac{ax}{b}-\\frac{c}{b}",
+      ],
+    },
+    {
+      target: "\\left(y-7\\right)^2=60\\left(x-15\\right)",
+      eq: [
+        "60\\left(x-15\\right)=\\left(y-7\\right)^2",
+        "60x-900=\\left(y-7\\right)^2",
+        "\\left(y-7\\right)^2=60x-900",
+        "y^2-14y+49=60x-900",
+        "60x-900=y^2-14y+49",
       ],
     },
   ],
 };
-
-export const toBeAdded = [
-  {
-    target: "\\left(y-7\\right)^2=60\\left(x-15\\right)",
-    eq: [
-      "60\\left(x-15\\right)=\\left(y-7\\right)^2",
-      "60x-900=\\left(y-7\\right)^2",
-      "\\left(y-7\\right)^2=60x-900",
-      "y^2-14y+49=60x-900",
-      "60x-900=y^2-14y+49",
-    ],
-  },
-  {
-    target: "x=\\sin^{-1}\\left(\\frac{1}{n}\\right)",
-    eq: ["\\frac{1}{n}=\\sin x"],
-  },
-];
