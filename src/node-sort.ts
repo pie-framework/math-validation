@@ -43,11 +43,11 @@ const newCompare = (a: MathNode, b: MathNode): number => {
   }
 
   // symbolNode before operatorNode
-  if (a.isSymbolNode && b.isOperatorNode) {
+  if (a.isSymbolNode && (b.isOperatorNode || b.isFunctionNode)) {
     return -1;
   }
 
-  if (b.isSymbolNode && a.isOperatorNode) {
+  if (b.isSymbolNode && (a.isOperatorNode || b.isFunctionNode)) {
     return 1;
   }
 
@@ -258,13 +258,21 @@ export const s = (node: MathNode) => {
     node.args = node.args.reverse();
   }
 
+  // @ts-ignore
+  if (node.isFunctionNode && (node?.fn.name === "≈" || node?.fn.name === "≉")) {
+    node.args = node.args.sort(newCompare);
+  }
+
   if (
     node.isOperatorNode &&
-    (node.fn === "larger" || node.fn === "largerEq" || node.fn == "equal")
+    (node.fn === "larger" ||
+      node.fn === "largerEq" ||
+      node.fn == "equal" ||
+      node.fn == "unequal")
   ) {
     node.args = node.args.map(s);
 
-    if (node.fn == "equal") {
+    if (node.fn === "equal" || node.fn == "unequal") {
       node.args = node.args.sort(newCompare);
     }
   }

@@ -15,7 +15,7 @@ Then go to `http://localhost:$PORT/demo`
 
 ## tests
 
-```shell 
+```shell
 yarn jest
 ```
 
@@ -44,7 +44,7 @@ yarn jest src/__tests__/latex-equal.spec.ts -t src/fixtures/latex-equal/7119.ts 
 | incorrect test data        | sometimes the test data is not quite right                             |
 
 
-## Goals 
+## Goals
 
 * we parse from latex -> ast -> mathjs, legacy was latex -> ast -> math_string -> mathjs (done)
 * clean up symbolic evaluation (in progress)
@@ -57,18 +57,18 @@ yarn jest src/__tests__/latex-equal.spec.ts -t src/fixtures/latex-equal/7119.ts 
 * a faster latex parser
 * faster math evaluation
 
-## modes 
+## modes
 
 There are 2 modes - literal and symbolic
 
 Literal: needs to more advanced than the legacy literal implementation which was essentially a string check.
 
-Symbolic: 
+Symbolic:
 
 
 ### legacy tests comparison
 
-We have the old math validation logic in the repo, so we can compare speed and results if needs be. To include them in the test run  set `LEGACY` env var to `true`. 
+We have the old math validation logic in the repo, so we can compare speed and results if needs be. To include them in the test run  set `LEGACY` env var to `true`.
 
 
 ### Notes
@@ -77,14 +77,14 @@ We have the old math validation logic in the repo, so we can compare speed and r
 
 ## TODO
 * strip logs on compile
-* set up api that is compatible w/ ui component options 
+* set up api that is compatible w/ ui component options
 * start going through the tests, build up literal + symbolic a bit att the start
 * derivatives kind of work and kind of not - how to use?
 
 
 ### debugging tests
 
-#### vscode 
+#### vscode
 add the following to `configurations` array in launch.json
 ```json
     {
@@ -99,6 +99,6 @@ add the following to `configurations` array in launch.json
 ```
 
 ```shell
-node --inspect-brk ./node_modules/.bin/jest --runInBand #and any other flags you want 
+node --inspect-brk ./node_modules/.bin/jest --runInBand #and any other flags you want
 ```
 The launch debug using 'Attach' command above.

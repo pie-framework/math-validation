@@ -274,6 +274,12 @@ export const latex_rules = [
   ["≥", "GE"],
   ["\\\\gt(?![a-zA-Z])", ">"],
 
+  ["\\\\napprox", "≉"],
+  ["≉", "≉"],
+
+  ["\\\\approx", "≈"],
+  ["≈", "≈"],
+
   ["\\\\in(?![a-zA-Z])", "IN"],
 
   ["\\\\notin(?![a-zA-Z])", "NOTIN"],
@@ -308,8 +314,9 @@ export const latex_rules = [
   ["\\\\end\\s*{\\s*[a-zA-Z0-9]+\\s*}", "ENDENVIRONMENT"],
 
   ["\\\\var\\s*{\\s*[a-zA-Z0-9]+\\s*}", "VARMULTICHAR"],
-  ["[a-zA-Z]", "VAR"],
+
   ["\\\\[a-zA-Z]+(?![a-zA-Z])", "LATEXCOMMAND"],
+  ["[a-zA-Z]", "VAR"],
 ];
 
 // defaults for parsers if not overridden by context
@@ -640,7 +647,9 @@ export class LatexToAst {
       this.token.token_type === "SUBSET" ||
       this.token.token_type === "NOTSUBSET" ||
       this.token.token_type === "SUPERSET" ||
-      this.token.token_type === "NOTSUPERSET"
+      this.token.token_type === "NOTSUPERSET" ||
+      this.token.token_type === "≈" ||
+      this.token.token_type === "≉"
     ) {
       let operation = this.token.token_type.toLowerCase();
 
@@ -678,8 +687,10 @@ export class LatexToAst {
 
         lhs = ["relational", args, strict];
       } else if (operation === "=") {
-        lhs = ["=", lhs, rhs];
+        lhs = [operation, lhs, rhs];
 
+        console.log(lhs, "l ");
+        console.log(rhs, " r");
         // check for sequence of multiple =
         while (this.token.token_type === "=") {
           this.advance();
