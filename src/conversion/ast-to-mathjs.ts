@@ -91,6 +91,21 @@ const operators = {
   "≉": function (operands) {
     return new m.FunctionNode("≉", operands);
   },
+  "~": function (operands) {
+    return new m.FunctionNode("~", operands);
+  },
+  "≃": function (operands) {
+    return new m.FunctionNode("≃", operands);
+  },
+  "≁": function (operands) {
+    return new m.FunctionNode("≁", operands);
+  },
+  "≅": function (operands) {
+    return new m.FunctionNode("≅", operands);
+  },
+  "≆": function (operands) {
+    return new m.FunctionNode("≆", operands);
+  },
 };
 
 export type AstToMathJsOpts = {

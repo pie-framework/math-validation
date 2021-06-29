@@ -258,8 +258,15 @@ export const s = (node: MathNode) => {
     node.args = node.args.reverse();
   }
 
-  // @ts-ignore
-  if (node.isFunctionNode && (node?.fn.name === "≈" || node?.fn.name === "≉")) {
+  const relationOperators = "=|NE|≃|≈|≈|≉|~|≃|≁|≅|≆";
+
+  if (
+    node.isFunctionNode &&
+    // @ts-ignore
+
+    // @ts-ignore
+    node.fn.name.match(relationOperators)
+  ) {
     node.args = node.args.sort(newCompare);
   }
 

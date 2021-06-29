@@ -263,6 +263,7 @@ export const latex_rules = [
   ["\\\\neq(?![a-zA-Z])", "NE"],
   ["\\\\ne(?![a-zA-Z])", "NE"],
   ["\\\\not\\s*=", "NE"],
+  ["≠", "NE"],
   ["\\\\leq(?![a-zA-Z])", "LE"],
   ["\\\\le(?![a-zA-Z])", "LE"],
   ["\\\\geq(?![a-zA-Z])", "GE"],
@@ -274,11 +275,33 @@ export const latex_rules = [
   ["≥", "GE"],
   ["\\\\gt(?![a-zA-Z])", ">"],
 
+  // is approximately
+  ["\\\\approx", "≈"],
+  ["≈", "≈"],
+
+  // not almost equal to
   ["\\\\napprox", "≉"],
   ["≉", "≉"],
 
-  ["\\\\approx", "≈"],
-  ["≈", "≈"],
+  // is similar or equal to
+  ["\\\\simeq", "≃"],
+  ["≃", "≃"],
+
+  // is similar to
+  ["\\\\sim", "~"],
+  ["~", "~"],
+
+  // is not similar to
+  ["\\\\nsim", "≁"],
+  ["≁", "≁"],
+
+  // is congruent to
+  ["\\\\cong", "≅"],
+  ["≅", "≅"],
+
+  // is not congurent to
+  ["\\\\ncong", "≆"],
+  ["≆", "≆"],
 
   ["\\\\in(?![a-zA-Z])", "IN"],
 
@@ -649,7 +672,12 @@ export class LatexToAst {
       this.token.token_type === "SUPERSET" ||
       this.token.token_type === "NOTSUPERSET" ||
       this.token.token_type === "≈" ||
-      this.token.token_type === "≉"
+      this.token.token_type === "≉" ||
+      this.token.token_type === "~" ||
+      this.token.token_type === "≃" ||
+      this.token.token_type === "≁" ||
+      this.token.token_type === "≅" ||
+      this.token.token_type === "≆"
     ) {
       let operation = this.token.token_type.toLowerCase();
 
