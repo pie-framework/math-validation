@@ -123,10 +123,7 @@ describe("bugs in lta", () => {
     // console.timeEnd("katexParse");
 
     console.time("lta");
-    const out = lta.convert(input, {
-      allowTrailingZeros: true,
-      ignoreOrder: true,
-    });
+    const out = lta.convert(input);
     // console.log("out", out);
     // console.timeEnd("lta");
     expect(out).toEqual(expected);

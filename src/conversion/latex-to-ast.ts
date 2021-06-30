@@ -1089,9 +1089,10 @@ export class LatexToAst {
       result = this.token.token_text.replace(/,/g, "");
 
       while (
+        result[0] === "0" &&
         //@ts-ignore
-        (result[0] === "0" && result.length >= 2) ||
-        (result[0] === "0" && result[1] && result[1] !== ".")
+        result.length >= 2 &&
+        result[1] !== "."
       ) {
         //@ts-ignore
         result = result.substring(1);
@@ -1099,10 +1100,9 @@ export class LatexToAst {
       if (result[0] === ".") {
         newresult = "0" + result;
       } else {
-        // @ts-ignore
         newresult = result;
       }
-      
+
       // @ts-ignore
       const number = parseFloat(newresult);
 
