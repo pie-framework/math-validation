@@ -717,8 +717,6 @@ export class LatexToAst {
       } else if (operation === "=") {
         lhs = [operation, lhs, rhs];
 
-        console.log(lhs, "l ");
-        console.log(rhs, " r");
         // check for sequence of multiple =
         while (this.token.token_type === "=") {
           this.advance();
@@ -847,7 +845,7 @@ export class LatexToAst {
   }
 
   nonMinusFactor(params) {
-    var result = this.baseFactor(params);
+    let result = this.baseFactor(params);
 
     // allow arbitrary sequence of factorials
     if (this.token.token_type === "!" || this.token.token_type === "'") {
@@ -1084,14 +1082,34 @@ export class LatexToAst {
 
     if (this.token.token_type === "NUMBER") {
       /** TODO: this is a bit primitive, should try and parse commas in numbers correctly */
+
+      let newresult;
+
       // @ts-ignore
       result = this.token.token_text.replace(/,/g, "");
+
+      while (
+        //@ts-ignore
+        (result[0] === "0" && result.length >= 2) ||
+        (result[0] === "0" && result[1] && result[1] !== ".")
+      ) {
+        //@ts-ignore
+        result = result.substring(1);
+      }
+      if (result[0] === ".") {
+        newresult = "0" + result;
+      } else {
+        // @ts-ignore
+        newresult = result;
+      }
+      
       // @ts-ignore
-      const number = parseFloat(result);
+      const number = parseFloat(newresult);
 
       /** trailing zero number ['tzn', number, countOfZeros] */
+
       // @ts-ignore
-      if (result !== number.toString()) {
+      if (newresult !== number.toString()) {
         const p = number.toString();
         // @ts-ignore
         const sub = result

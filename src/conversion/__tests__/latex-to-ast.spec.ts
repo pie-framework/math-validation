@@ -86,7 +86,7 @@ const fixtures = [
 
   [
     `\\frac{7x}{12}\\ \\text{dollars}`,
-    //  `x\\times \\frac{1}{12}\\times 7\\ \\text{dollars}
+    // `x\\times \\frac{1}{12}\\times 7\\ \\text{dollars}
     //  x\\times 7\\times \\frac{1}{12}\\ \\text{dollars}`,
     [
       "*",
@@ -106,7 +106,7 @@ const fixtures = [
 
 const lta = new LatexToAst();
 
-describe.only("bugs in lta", () => {
+describe("bugs in lta", () => {
   // @ts-ignore
   it.each(fixtures)("%s => %s", (input, expected) => {
     // console.time("l-u");
@@ -123,7 +123,10 @@ describe.only("bugs in lta", () => {
     // console.timeEnd("katexParse");
 
     console.time("lta");
-    const out = lta.convert(input);
+    const out = lta.convert(input, {
+      allowTrailingZeros: true,
+      ignoreOrder: true,
+    });
     // console.log("out", out);
     // console.timeEnd("lta");
     expect(out).toEqual(expected);

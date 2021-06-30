@@ -65,7 +65,6 @@ export default {
       eq: "y+z~ x",
     },
     {
-      only: true,
       opts: {
         literal: { ignoreOrder: true },
       },
@@ -127,6 +126,41 @@ export default {
       },
       target: "x≆ y+z",
       eq: "y+z≆ x",
+    },
+    {
+      opts: {
+        literal: { allowTrailingZeros: false },
+      },
+      target: ".75",
+      eq: "0.75",
+    },
+    {
+      opts: {
+        literal: { allowTrailingZeros: false },
+      },
+      target: ".75",
+      eq: "0.75",
+    },
+    {
+      opts: {
+        literal: { allowTrailingZeros: false },
+      },
+      target: "750.00",
+      ne: "750",
+    },
+    {
+      opts: {
+        literal: { allowTrailingZeros: false },
+      },
+      target: "00750",
+      eq: "750",
+    },
+    {
+      opts: {
+        literal: { allowTrailingZeros: false },
+      },
+      target: "001",
+      eq: "1",
     },
   ],
 };
