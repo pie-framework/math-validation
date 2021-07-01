@@ -1083,33 +1083,30 @@ export class LatexToAst {
     if (this.token.token_type === "NUMBER") {
       /** TODO: this is a bit primitive, should try and parse commas in numbers correctly */
 
-      let newresult;
-
       // @ts-ignore
       result = this.token.token_text.replace(/,/g, "");
 
-      while (
-        result[0] === "0" &&
-        //@ts-ignore
-        result.length >= 2 &&
-        result[1] !== "."
-      ) {
-        //@ts-ignore
-        result = result.substring(1);
-      }
-      if (result[0] === ".") {
-        newresult = "0" + result;
-      } else {
-        newresult = result;
+      let removeLeadingZeros = (result) =>
+        result.indexOf(".") >= 0
+          ? result.replace(/^[0]*([0-9])(.*)/, "$1$2")
+          : result.replace(/0*([1-9]*)/, "$1");
+
+      let parsedNumber;
+      // @ts-ignore
+      result === "0"
+        ? (parsedNumber = result)
+        : (parsedNumber = removeLeadingZeros(result));
+
+      if (parsedNumber.startsWith(".")) {
+        parsedNumber = "0" + parsedNumber;
       }
 
-      // @ts-ignore
-      const number = parseFloat(newresult);
+      const number = parseFloat(parsedNumber);
 
       /** trailing zero number ['tzn', number, countOfZeros] */
 
       // @ts-ignore
-      if (newresult !== number.toString()) {
+      if (parsedNumber !== number.toString()) {
         const p = number.toString();
         // @ts-ignore
         const sub = result
