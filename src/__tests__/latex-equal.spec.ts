@@ -141,7 +141,7 @@ testData.forEach((d) => {
               expect(l).toEqual(false);
             });
           }
-          if (LEGACY_ONLY) {
+          if (!LEGACY_ONLY) {
             it(`!= ${y} ${l}`, () => {
               const l = latexEqual(t.target, y, {
                 legacy: false,
