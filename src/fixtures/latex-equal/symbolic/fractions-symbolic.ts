@@ -1,5 +1,3 @@
-import { Triage } from "../../triage";
-
 export default {
   mode: "symbolic",
   // skip: true,
@@ -317,6 +315,7 @@ export default {
       ],
     },
     {
+      only: true,
       target: "5.5x+8y\\ge100",
       eq: [
         "8y+5.5x\\ge 100",

@@ -74,20 +74,32 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   let as: MathNode;
   let bs: MathNode;
 
-  // apply sort if we are not in a relationalNode
-  if (!a.conditionals) {
-    as = st(normalize(a));
+  const newA = Object.create(a);
+  const newB = Object.create(b);
+
+  const trySortA = st(newA);
+  const trySortB = st(newB);
+
+  if (trySortA.equals(trySortB)) {
+    return true;
   } else {
-    as = normalize(a);
+    // apply sort if we are not in a relationalNode
+    // @ts-ignore
+    if (!a.conditionals) {
+      as = st(normalize(a));
+    } else {
+      as = normalize(a);
+    }
+
+    // @ts-ignore
+    if (!b.conditionals) {
+      bs = st(normalize(b));
+    } else {
+      bs = normalize(b);
+    }
+
+    log("[isMathEqual]", as.toString(), "==?", bs.toString());
+
+    return as.equals(bs);
   }
-
-  if (!b.conditionals) {
-    bs = st(normalize(b));
-  } else {
-    bs = normalize(b);
-  }
-
-  log("[isMathEqual]", as.toString(), "==?", bs.toString());
-
-  return as.equals(bs);
 };
