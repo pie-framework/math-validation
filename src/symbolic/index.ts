@@ -81,7 +81,8 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
 
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
-  const equality = as.equals(bs) || st(a).equals(st(b));
+  const isSortingEnough = st(a).equals(st(b));
+  const equality = as.equals(bs) || isSortingEnough;
 
   return equality;
 };

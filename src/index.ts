@@ -17,10 +17,6 @@ export type Opts = {
  * Eventually we'll remove this.
  */
 
-export const isSortingEnough = (a: any, b: any) => {
-  return st(a).equals(st(b));
-};
-
 export const latexEqual = (a: Latex, b: Latex, opts: Opts): boolean => {
   if (opts.legacy) {
     return opts.mode === "literal"
