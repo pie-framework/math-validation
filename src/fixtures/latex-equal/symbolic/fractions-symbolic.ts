@@ -315,7 +315,6 @@ export default {
       ],
     },
     {
-      only: true,
       target: "5.5x+8y\\ge100",
       eq: [
         "8y+5.5x\\ge 100",

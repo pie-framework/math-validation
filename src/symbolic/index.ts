@@ -17,7 +17,6 @@ const SIMPLIFY_RULES = [
   { l: "((n^n1) + n)/n", r: "n^(n1-1)+1" },
   { l: "(n^2) + 2n", r: "n * (n + 2)" },
   { l: "(v1-v2)/n", r: "v1/n-v2/n" },
-
   // { l: "(n/n1) * n2", r: "t" },
 
   // perfect square formula:
@@ -53,6 +52,7 @@ const normalize = (a: string | MathNode | any) => {
       } else {
         arg = arg;
       }
+
       return arg;
     });
   }
@@ -74,32 +74,14 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   let as: MathNode;
   let bs: MathNode;
 
-  const newA = Object.create(a);
-  const newB = Object.create(b);
+  // apply sort if we are not in a relationalNode
+  !a.conditionals ? (as = st(normalize(a))) : (as = normalize(a));
 
-  const trySortA = st(newA);
-  const trySortB = st(newB);
+  !b.conditionals ? (bs = st(normalize(b))) : (bs = normalize(b));
 
-  if (trySortA.equals(trySortB)) {
-    return true;
-  } else {
-    // apply sort if we are not in a relationalNode
-    // @ts-ignore
-    if (!a.conditionals) {
-      as = st(normalize(a));
-    } else {
-      as = normalize(a);
-    }
+  log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
-    // @ts-ignore
-    if (!b.conditionals) {
-      bs = st(normalize(b));
-    } else {
-      bs = normalize(b);
-    }
+  const equality = as.equals(bs) || st(a).equals(st(b));
 
-    log("[isMathEqual]", as.toString(), "==?", bs.toString());
-
-    return as.equals(bs);
-  }
+  return equality;
 };

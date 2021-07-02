@@ -4,6 +4,7 @@ import {
 } from "./legacy";
 import { latexEqual as le } from "./latex-equal";
 export type Latex = string;
+import { s as st } from "./node-sort";
 
 export type Opts = {
   mode?: "symbolic" | "literal";
@@ -15,6 +16,11 @@ export type Opts = {
  * For dev purposes allow legacy to be called for comparison.
  * Eventually we'll remove this.
  */
+
+export const isSortingEnough = (a: any, b: any) => {
+  return st(a).equals(st(b));
+};
+
 export const latexEqual = (a: Latex, b: Latex, opts: Opts): boolean => {
   if (opts.legacy) {
     return opts.mode === "literal"
