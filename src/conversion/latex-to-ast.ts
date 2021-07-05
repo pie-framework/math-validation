@@ -303,6 +303,8 @@ export const latex_rules = [
   ["\\\\ncong", "≆"],
   ["≆", "≆"],
 
+  ["f\\^\\{-1}", "TEXT"],
+
   ["\\\\in(?![a-zA-Z])", "IN"],
 
   ["\\\\notin(?![a-zA-Z])", "NOTIN"],
@@ -961,6 +963,11 @@ export class LatexToAst {
       return this.fraction({});
     }
 
+    if (this.token.token_type === "inverse") {
+      console.log(this.token, "inverse group------------------");
+      // return this.fraction({});
+    }
+
     if (this.token.token_type === "TEXT") {
       const text = this.token.original_text.replace(/[[\]\\]/g, "");
       this.advance();
@@ -1085,8 +1092,11 @@ export class LatexToAst {
       const numberWithThousandSeparator =
         /^(?!0+\.00)(?=.{1,9}(\.|$))(?!0(?!\.))\d{1,3}(,\d{3})*(\.\d+)?$/;
 
-      // @ts-ignore
-      numberWithThousandSeparator.test(this.token.token_text)? result = this.token.token_text.replace(/,/g, "") : result = this.token.token_text;
+      numberWithThousandSeparator.test(this.token.token_text)
+        ? // @ts-ignore
+          (result = this.token.token_text.replace(/,/g, ""))
+        : // @ts-ignore
+          (result = this.token.token_text);
 
       let removeLeadingZeros = (result) =>
         result.indexOf(".") >= 0
