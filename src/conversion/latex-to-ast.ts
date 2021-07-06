@@ -263,6 +263,7 @@ export const latex_rules = [
   ["\\\\neq(?![a-zA-Z])", "NE"],
   ["\\\\ne(?![a-zA-Z])", "NE"],
   ["\\\\not\\s*=", "NE"],
+  ["≠", "NE"],
   ["\\\\leq(?![a-zA-Z])", "LE"],
   ["\\\\le(?![a-zA-Z])", "LE"],
   ["\\\\geq(?![a-zA-Z])", "GE"],
@@ -273,6 +274,34 @@ export const latex_rules = [
   [">", ">"],
   ["≥", "GE"],
   ["\\\\gt(?![a-zA-Z])", ">"],
+
+  // is approximately
+  ["\\\\approx", "≈"],
+  ["≈", "≈"],
+
+  // not almost equal to
+  ["\\\\napprox", "≉"],
+  ["≉", "≉"],
+
+  // is similar or equal to
+  ["\\\\simeq", "≃"],
+  ["≃", "≃"],
+
+  // is similar to
+  ["\\\\sim", "~"],
+  ["~", "~"],
+
+  // is not similar to
+  ["\\\\nsim", "≁"],
+  ["≁", "≁"],
+
+  // is congruent to
+  ["\\\\cong", "≅"],
+  ["≅", "≅"],
+
+  // is not congurent to
+  ["\\\\ncong", "≆"],
+  ["≆", "≆"],
 
   ["\\\\in(?![a-zA-Z])", "IN"],
 
@@ -308,8 +337,9 @@ export const latex_rules = [
   ["\\\\end\\s*{\\s*[a-zA-Z0-9]+\\s*}", "ENDENVIRONMENT"],
 
   ["\\\\var\\s*{\\s*[a-zA-Z0-9]+\\s*}", "VARMULTICHAR"],
-  ["[a-zA-Z]", "VAR"],
+
   ["\\\\[a-zA-Z]+(?![a-zA-Z])", "LATEXCOMMAND"],
+  ["[a-zA-Z]", "VAR"],
 ];
 
 // defaults for parsers if not overridden by context
@@ -640,7 +670,14 @@ export class LatexToAst {
       this.token.token_type === "SUBSET" ||
       this.token.token_type === "NOTSUBSET" ||
       this.token.token_type === "SUPERSET" ||
-      this.token.token_type === "NOTSUPERSET"
+      this.token.token_type === "NOTSUPERSET" ||
+      this.token.token_type === "≈" ||
+      this.token.token_type === "≉" ||
+      this.token.token_type === "~" ||
+      this.token.token_type === "≃" ||
+      this.token.token_type === "≁" ||
+      this.token.token_type === "≅" ||
+      this.token.token_type === "≆"
     ) {
       let operation = this.token.token_type.toLowerCase();
 
@@ -678,7 +715,7 @@ export class LatexToAst {
 
         lhs = ["relational", args, strict];
       } else if (operation === "=") {
-        lhs = ["=", lhs, rhs];
+        lhs = [operation, lhs, rhs];
 
         // check for sequence of multiple =
         while (this.token.token_type === "=") {
@@ -808,7 +845,7 @@ export class LatexToAst {
   }
 
   nonMinusFactor(params) {
-    var result = this.baseFactor(params);
+    let result = this.baseFactor(params);
 
     // allow arbitrary sequence of factorials
     if (this.token.token_type === "!" || this.token.token_type === "'") {
@@ -1045,14 +1082,31 @@ export class LatexToAst {
 
     if (this.token.token_type === "NUMBER") {
       /** TODO: this is a bit primitive, should try and parse commas in numbers correctly */
+
       // @ts-ignore
       result = this.token.token_text.replace(/,/g, "");
+
+      let removeLeadingZeros = (result) =>
+        result.indexOf(".") >= 0
+          ? result.replace(/^[0]*([0-9])(.*)/, "$1$2")
+          : result.replace(/0*([1-9]*)/, "$1");
+
+      let parsedNumber;
       // @ts-ignore
-      const number = parseFloat(result);
+      result === "0"
+        ? (parsedNumber = result)
+        : (parsedNumber = removeLeadingZeros(result));
+
+      if (parsedNumber.startsWith(".")) {
+        parsedNumber = "0" + parsedNumber;
+      }
+
+      const number = parseFloat(parsedNumber);
 
       /** trailing zero number ['tzn', number, countOfZeros] */
+
       // @ts-ignore
-      if (result !== number.toString()) {
+      if (parsedNumber !== number.toString()) {
         const p = number.toString();
         // @ts-ignore
         const sub = result

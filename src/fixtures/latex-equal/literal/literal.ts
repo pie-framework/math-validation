@@ -1,5 +1,6 @@
 export default {
   mode: "literal",
+
   tests: [
     {
       target: "12 + 3 * x",
@@ -15,8 +16,8 @@ export default {
     },
     {
       target: "12.00",
-      // eq: ["12.00"],
-      ne: ["12.000000", "12.0", "12.000"],
+      eq: ["12.00"],
+      ne: ["12.000000", "12", "12.0", "12.000"],
       opts: { literal: { allowTrailingZeros: false } },
     },
     {
