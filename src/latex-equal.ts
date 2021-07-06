@@ -32,13 +32,9 @@ export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {
     return true;
   }
 
-  console.log(a, "original a");
   const al = lta.convert(a);
-  console.log(al, "al converted lta");
 
-  console.log(b, "original b");
   const bl = lta.convert(b);
-  console.log(bl, "converted bl");
 
   if (differenceIsTooGreat(al, bl)) {
     return false;

@@ -272,8 +272,8 @@ export const s = (node: MathNode) => {
 
   if (
     node.isOperatorNode &&
-    (node.fn === "larger" ||
-      node.fn === "largerEq" ||
+    (node.fn == "larger" ||
+      node.fn == "largerEq" ||
       node.fn == "equal" ||
       node.fn == "unequal")
   ) {
