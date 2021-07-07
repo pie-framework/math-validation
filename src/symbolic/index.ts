@@ -24,6 +24,19 @@ const SIMPLIFY_RULES = [
   // { l: "(n^2) + 4n + 4", r: "(n^2) + (2n * 2) + (2^2)" },
   { l: "tzn(n1, n2)", r: "n1" },
   { l: "n1/(-n2)", r: "-(n1/n2)" },
+
+  // trigonometry: alternate forms for cotangent, secant and cosecant
+  { l: "csc(n)", r: "1/sin(n)" },
+  { l: "sec(n)", r: "1/cos(n)" },
+  { l: "cot(n)", r: "1/tan(n)" },
+
+  // inverse trigonometric functions -relations
+  { l: "n1 == arcsin(n)", r: "n == sin(n1)" },
+  { l: "n1 == arccos(n)", r: "n == cos(n1)" },
+  { l: "n1 == arctan(n)", r: "n == tan(n1)" },
+  { l: "n1 == arccot(n)", r: "n == cot(n1)" },
+  { l: "n1 == arcsec(n)", r: "n == sec(n1)" },
+  { l: "n1 == arccsc(n)", r: "n == csc(n1)" },
 ];
 
 const simplify = (v) => {

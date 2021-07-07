@@ -247,9 +247,20 @@ export const latex_rules = [
   ["\\\\asin(?![a-zA-Z])", "LATEXCOMMAND", "\\arcsin"],
   ["\\\\acos(?![a-zA-Z])", "LATEXCOMMAND", "\\arccos"],
   ["\\\\atan(?![a-zA-Z])", "LATEXCOMMAND", "\\arctan"],
+  ["\\\\acot(?![a-zA-Z])", "LATEXCOMMAND", "\\arccot"],
+  ["\\\\asec(?![a-zA-Z])", "LATEXCOMMAND", "\\arcsec"],
+  ["\\\\acsc(?![a-zA-Z])", "LATEXCOMMAND", "\\arccsc"],
   ["\\\\sqrt(?![a-zA-Z])", "SQRT"],
   ["\\\\log(?![a-zA-Z])", "LOG"],
   ["\\\\ln(?![a-zA-Z])", "LN"],
+
+  // inverse trigonometric functions
+  ["\\\\sin\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\arcsin"],
+  ["\\\\cos\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\arccos"],
+  ["\\\\tan\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\arctan"],
+  ["\\\\cot\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\arccot"],
+  ["\\\\sec\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\arcsec"],
+  ["\\\\csc\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\arccsc"],
 
   ["\\\\land(?![a-zA-Z])", "AND"],
   ["\\\\wedge(?![a-zA-Z])", "AND"],
@@ -303,7 +314,9 @@ export const latex_rules = [
   ["\\\\ncong", "≆"],
   ["≆", "≆"],
 
+  // inverse f and g functions are treated as text
   ["f\\^\\{-1}", "TEXT"],
+  ["g\\^\\{-1}", "TEXT"],
 
   ["\\\\in(?![a-zA-Z])", "IN"],
 
