@@ -1,7 +1,7 @@
 import { logger } from "../log";
 import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
-import { s as st } from "../node-sort";
+import { sort } from "../node-sort";
 
 const log = logger("mv:symbolic");
 
@@ -62,25 +62,21 @@ const normalize = (a: string | MathNode | any) => {
         } catch (e) {
           // ok;
         }
-      } else {
-        arg = arg;
       }
 
       return arg;
     });
   }
 
-  let s = r;
-
   // for relationalNode apply sort & simplify for all params
   if (r.conditionals && r.params) {
-    s.params = r.params.map((param) => st(simplify(param)));
+    r.params = r.params.map((param) => sort(simplify(param)));
   } else {
-    s = simplify(r);
+    r = simplify(r);
   }
 
-  log("[normalize] input: ", a.toString(), "output: ", s.toString());
-  return s;
+  log("[normalize] input: ", a.toString(), "output: ", r.toString());
+  return r;
 };
 
 export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
@@ -88,13 +84,12 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   let bs: MathNode;
 
   // apply sort if we are not in a relationalNode
-  !a.conditionals ? (as = st(normalize(a))) : (as = normalize(a));
-
-  !b.conditionals ? (bs = st(normalize(b))) : (bs = normalize(b));
+  as = a.conditionals ? normalize(a) : sort(normalize(a));
+  bs = b.conditionals ? normalize(b) : sort(normalize(b));
 
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
-  const isSortingEnough = st(a).equals(st(b));
+  const isSortingEnough = sort(a).equals(sort(b));
   const equality = as.equals(bs) || isSortingEnough;
 
   return equality;

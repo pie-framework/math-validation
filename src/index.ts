@@ -4,6 +4,7 @@ import {
 } from "./legacy";
 import { latexEqual as le } from "./latex-equal";
 export type Latex = string;
+import { sort as st } from "./node-sort";
 
 export type Opts = {
   mode?: "symbolic" | "literal";

@@ -1,4 +1,4 @@
-import { flattenNode, s } from "../node-sort";
+import { flattenNode, sort as s } from "../node-sort";
 // @ts-ignore
 import { replacer, parse } from "../mathjs";
 import diff from "jest-diff";
