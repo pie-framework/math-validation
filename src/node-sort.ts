@@ -228,7 +228,7 @@ export const sortRelationalNode = (node: any) => {
     }
 
     if (parent && parent.type === "RelationalNode" && node.args) {
-      node = s(node);
+      node = sort(node);
     }
 
     return node;
@@ -239,7 +239,7 @@ export const sortRelationalNode = (node: any) => {
   return resultNode;
 };
 
-export const s = (node: MathNode) => {
+export const sort = (node: MathNode) => {
   let resultNode = node;
 
   if (node.type === "RelationalNode") {
@@ -277,7 +277,7 @@ export const s = (node: MathNode) => {
       node.fn == "equal" ||
       node.fn == "unequal")
   ) {
-    node.args = node.args.map(s);
+    node.args = node.args.map(sort);
 
     if (node.fn === "equal" || node.fn == "unequal") {
       node.args = node.args.sort(newCompare);

@@ -1,7 +1,7 @@
 import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
 import { logger } from "../log";
-import { s } from "../node-sort";
+import { sort } from "../node-sort";
 
 const { simplify } = mathjs;
 
@@ -26,9 +26,9 @@ export const isMathEqual = (a: MathNode, b: MathNode, opts: LiteralOpts) => {
   }
 
   if (opts && opts.ignoreOrder) {
-    a = s(a);
+    a = sort(a);
 
-    b = s(b);
+    b = sort(b);
   }
 
   let equalTex;
