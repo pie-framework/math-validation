@@ -30,13 +30,13 @@ const SIMPLIFY_RULES = [
   { l: "sec(n)", r: "1/cos(n)" },
   { l: "cot(n)", r: "1/tan(n)" },
 
-  // inverse trigonometric functions -relations
-  { l: "n1 == arcsin(n)", r: "n == sin(n1)" },
-  { l: "n1 == arccos(n)", r: "n == cos(n1)" },
-  { l: "n1 == arctan(n)", r: "n == tan(n1)" },
-  { l: "n1 == arccot(n)", r: "n == cot(n1)" },
-  { l: "n1 == arcsec(n)", r: "n == sec(n1)" },
-  { l: "n1 == arccsc(n)", r: "n == csc(n1)" },
+  // inverse trigonometric functions relations
+  { l: "n1 == asin(n)", r: "n == sin(n1)" },
+  { l: "n1 == acos(n)", r: "n == cos(n1)" },
+  { l: "n1 == atan(n)", r: "n == tan(n1)" },
+  { l: "n1 == acot(n)", r: "n == cot(n1)" },
+  { l: "n1 == asec(n)", r: "n == sec(n1)" },
+  { l: "n1 == acsc(n)", r: "n == csc(n1)" },
 ];
 
 const simplify = (v) => {
@@ -85,12 +85,14 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
 
   // apply sort if we are not in a relationalNode
   as = a.conditionals ? normalize(a) : sort(normalize(a));
-  bs = b.conditionals ? normalize(b) : sort(normalize(b));
 
+  //console.log(JSON.stringify(as), "as");
+  bs = b.conditionals ? normalize(b) : sort(normalize(b));
+  console.log(JSON.stringify(bs), "bs");
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
   const isSortingEnough = sort(a).equals(sort(b));
-  const equality = as.equals(bs) || isSortingEnough;
+  const equality = sort(as).equals(sort(bs)) || isSortingEnough;
 
   return equality;
 };

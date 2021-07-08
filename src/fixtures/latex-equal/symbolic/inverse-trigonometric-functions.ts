@@ -4,7 +4,7 @@ export default {
   //skip: true,
   mode: "symbolic",
 
-  //only: true,
+  only: true,
   tests: [
     //inverse functions conversion
     {
@@ -105,7 +105,7 @@ export default {
       eq: [
         "y=\\sec x",
         "\\sec x = y",
-        "\\sec (x) = 1/\\cos (x)",
+        "y = 1/\\cos (x)",
         "y= \\sec x",
         "y=1/\\cos x",
       ],
@@ -116,8 +116,8 @@ export default {
       eq: ["\\frac{1}{n}=\\csc x", "\\csc x = \\frac{1}{n}", "1/n = \\csc x"],
     },
     {
-      target: "x=\\sin^{-1}\\left(y\\right)",
-      eq: ["y=\\sin x", "\\sin x = y", "y= \\sin x"],
+      target: "x=\\csc^{-1}\\left(y\\right)",
+      eq: ["y=\\csc x", "\\csc x = y", "y= \\csc x"],
       ne: ["\\cos x=y", "y=x"],
     },
   ],

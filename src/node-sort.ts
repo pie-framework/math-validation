@@ -58,6 +58,15 @@ const newCompare = (a: MathNode, b: MathNode): number => {
 
     return -localeCompareResult;
   }
+
+  // operator node before function node
+  if (a.isOperatorNode && b.isFunctionNode) {
+    return -1;
+  }
+
+  if (b.isFunctionNode && a.isOperatorNode) {
+    return 1;
+  }
 };
 
 const applySort = (node: MathNode) => {
