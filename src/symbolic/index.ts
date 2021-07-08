@@ -98,7 +98,7 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
   const isSortingEnough = sort(a).equals(sort(b));
-  const equality = sort(as).equals(sort(bs)) || isSortingEnough;
+  const equality = as.equals(bs) || isSortingEnough;
 
   return equality;
 };

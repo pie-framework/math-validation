@@ -255,7 +255,7 @@ export const latex_rules = [
   ["\\\\cot\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\acot"],
   ["\\\\sec\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\asec"],
   ["\\\\csc\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\acsc"],
-  
+
   ["\\\\arsin(?![a-zA-Z])", "LATEXCOMMAND", "\\asin"],
   ["\\\\arcsin(?![a-zA-Z])", "LATEXCOMMAND", "\\asin"],
   ["\\\\arcos(?![a-zA-Z])", "LATEXCOMMAND", "\\acos"],
@@ -974,11 +974,6 @@ export class LatexToAst {
 
     if (this.token.token_type === "FRAC") {
       return this.fraction({});
-    }
-
-    if (this.token.token_type === "inverse") {
-      console.log(this.token, "inverse group------------------");
-      // return this.fraction({});
     }
 
     if (this.token.token_type === "TEXT") {
