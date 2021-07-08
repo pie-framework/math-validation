@@ -1100,22 +1100,19 @@ export class LatexToAst {
       const numberWithThousandSeparator =
         /^(?!0+\.00)(?=.{1,9}(\.|$))(?!0(?!\.))\d{1,3}(,\d{3})*(\.\d+)?$/;
 
-      numberWithThousandSeparator.test(this.token.token_text)
-        ? // @ts-ignore
-          (result = this.token.token_text.replace(/,/g, ""))
+      // @ts-ignore
+      result = numberWithThousandSeparator.test(this.token.token_text)
+        ? this.token.token_text.replace(/,/g, "")
         : // @ts-ignore
-          (result = this.token.token_text);
+          this.token.token_text;
 
       let removeLeadingZeros = (result) =>
         result.indexOf(".") >= 0
           ? result.replace(/^[0]*([0-9])(.*)/, "$1$2")
           : result.replace(/0*([1-9]*)/, "$1");
 
-      let parsedNumber;
       // @ts-ignore
-      result === "0"
-        ? (parsedNumber = result)
-        : (parsedNumber = removeLeadingZeros(result));
+      let parsedNumber = result === "0" ? result : removeLeadingZeros(result);
 
       if (parsedNumber.startsWith(".")) {
         parsedNumber = "0" + parsedNumber;
