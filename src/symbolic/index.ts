@@ -37,6 +37,14 @@ const SIMPLIFY_RULES = [
   { l: "n1 == acot(n)", r: "n == cot(n1)" },
   { l: "n1 == asec(n)", r: "n == sec(n1)" },
   { l: "n1 == acsc(n)", r: "n == csc(n1)" },
+
+  // relationships between trigonometric functions and inverse trigonometric functions
+  { l: "sin(asin(n))", r: "n" },
+  { l: "cos(acos(n))", r: "n" },
+  { l: "tan(atan(n))", r: "n" },
+  { l: "sin(acsc(n))", r: "1/n" },
+  { l: "cos(asec(n))", r: "1/n" },
+  { l: "tan(acot(n))", r: "1/n" },
 ];
 
 const simplify = (v) => {
@@ -86,9 +94,7 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   // apply sort if we are not in a relationalNode
   as = a.conditionals ? normalize(a) : sort(normalize(a));
 
-  //console.log(JSON.stringify(as), "as");
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
-  console.log(JSON.stringify(bs), "bs");
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
   const isSortingEnough = sort(a).equals(sort(b));

@@ -4,7 +4,7 @@ export default {
   //skip: true,
   mode: "symbolic",
 
-  only: true,
+  // only: true,
   tests: [
     //inverse functions conversion
     {
@@ -119,6 +119,40 @@ export default {
       target: "x=\\csc^{-1}\\left(y\\right)",
       eq: ["y=\\csc x", "\\csc x = y", "y= \\csc x"],
       ne: ["\\cos x=y", "y=x"],
+    },
+
+    // relationships between trigonometric functions and inverse trigonometric functions
+    {
+      target: "x",
+      eq: [
+        "\\sin\\left(\\arcsin x\\right)",
+        "\\cos\\left(\\arccos x\\right)",
+        "\\tan\\left(\\arctan x\\right)",
+      ],
+    },
+    {
+      target: "(b+a)",
+      eq: [
+        "\\sin\\left(\\arcsin (a+b)\\right)",
+        "\\cos\\left(\\arccos (a+b)\\right)",
+        "\\tan\\left(\\arctan (a+b)\\right)",
+      ],
+    },
+    {
+      target: "1/x",
+      eq: [
+        "\\sin\\left(\\arccsc x\\right)",
+        "\\cos\\left(\\arcsec x\\right)",
+        "\\tan\\left(\\arccot x\\right)",
+      ],
+    },
+    {
+      target: "1/(b+a)",
+      eq: [
+        "\\sin\\left(\\arccsc (a+b)\\right)",
+        "\\cos\\left(\\arcsec (a+b)\\right)",
+        "\\tan\\left(\\arccot (a+b)\\right)",
+      ],
     },
   ],
 };
