@@ -133,7 +133,7 @@ const fixtures = [
 
 const lta = new LatexToAst();
 
-describe.only("bugs in lta", () => {
+describe("bugs in lta", () => {
   // @ts-ignore
   it.each(fixtures)("%s => %s", (input, expected) => {
     // console.time("l-u");
