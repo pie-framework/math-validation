@@ -24,6 +24,27 @@ const SIMPLIFY_RULES = [
   // { l: "(n^2) + 4n + 4", r: "(n^2) + (2n * 2) + (2^2)" },
   { l: "tzn(n1, n2)", r: "n1" },
   { l: "n1/(-n2)", r: "-(n1/n2)" },
+
+  // trigonometry: alternate forms for cotangent, secant and cosecant
+  { l: "csc(n)", r: "1/sin(n)" },
+  { l: "sec(n)", r: "1/cos(n)" },
+  { l: "cot(n)", r: "1/tan(n)" },
+
+  // inverse trigonometric functions relations
+  { l: "n1 == asin(n)", r: "n == sin(n1)" },
+  { l: "n1 == acos(n)", r: "n == cos(n1)" },
+  { l: "n1 == atan(n)", r: "n == tan(n1)" },
+  { l: "n1 == acot(n)", r: "n == cot(n1)" },
+  { l: "n1 == asec(n)", r: "n == sec(n1)" },
+  { l: "n1 == acsc(n)", r: "n == csc(n1)" },
+
+  // relationships between trigonometric functions and inverse trigonometric functions
+  { l: "sin(asin(n))", r: "n" },
+  { l: "cos(acos(n))", r: "n" },
+  { l: "tan(atan(n))", r: "n" },
+  { l: "sin(acsc(n))", r: "1/n" },
+  { l: "cos(asec(n))", r: "1/n" },
+  { l: "tan(acot(n))", r: "1/n" },
 ];
 
 const simplify = (v) => {
@@ -72,8 +93,8 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
 
   // apply sort if we are not in a relationalNode
   as = a.conditionals ? normalize(a) : sort(normalize(a));
-  bs = b.conditionals ? normalize(b) : sort(normalize(b));
 
+  bs = b.conditionals ? normalize(b) : sort(normalize(b));
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
   const isSortingEnough = sort(a).equals(sort(b));

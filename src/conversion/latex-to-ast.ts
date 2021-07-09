@@ -244,12 +244,30 @@ export const latex_rules = [
 
   ["\\\\infty(?![a-zA-Z])", "INFINITY"],
 
-  ["\\\\asin(?![a-zA-Z])", "LATEXCOMMAND", "\\arcsin"],
-  ["\\\\acos(?![a-zA-Z])", "LATEXCOMMAND", "\\arccos"],
-  ["\\\\atan(?![a-zA-Z])", "LATEXCOMMAND", "\\arctan"],
   ["\\\\sqrt(?![a-zA-Z])", "SQRT"],
   ["\\\\log(?![a-zA-Z])", "LOG"],
   ["\\\\ln(?![a-zA-Z])", "LN"],
+
+  // inverse trigonometric functions
+  ["\\\\sin\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\asin"],
+  ["\\\\cos\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\acos"],
+  ["\\\\tan\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\atan"],
+  ["\\\\cot\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\acot"],
+  ["\\\\sec\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\asec"],
+  ["\\\\csc\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\acsc"],
+
+  ["\\\\arsin(?![a-zA-Z])", "LATEXCOMMAND", "\\asin"],
+  ["\\\\arcsin(?![a-zA-Z])", "LATEXCOMMAND", "\\asin"],
+  ["\\\\arcos(?![a-zA-Z])", "LATEXCOMMAND", "\\acos"],
+  ["\\\\arccos(?![a-zA-Z])", "LATEXCOMMAND", "\\acos"],
+  ["\\\\artan(?![a-zA-Z])", "LATEXCOMMAND", "\\atan"],
+  ["\\\\arctan(?![a-zA-Z])", "LATEXCOMMAND", "\\atan"],
+  ["\\\\arcot(?![a-zA-Z])", "LATEXCOMMAND", "\\acot"],
+  ["\\\\arccot(?![a-zA-Z])", "LATEXCOMMAND", "\\acot"],
+  ["\\\\arsec(?![a-zA-Z])", "LATEXCOMMAND", "\\asec"],
+  ["\\\\arcsec(?![a-zA-Z])", "LATEXCOMMAND", "\\asec"],
+  ["\\\\arcsc(?![a-zA-Z])", "LATEXCOMMAND", "\\acsc"],
+  ["\\\\arccsc(?![a-zA-Z])", "LATEXCOMMAND", "\\acsc"],
 
   ["\\\\land(?![a-zA-Z])", "AND"],
   ["\\\\wedge(?![a-zA-Z])", "AND"],
@@ -302,6 +320,10 @@ export const latex_rules = [
   // is not congurent to
   ["\\\\ncong", "≆"],
   ["≆", "≆"],
+
+  // inverse f and g functions are treated as text
+  ["f\\^\\{-1}", "TEXT"],
+  ["g\\^\\{-1}", "TEXT"],
 
   ["\\\\in(?![a-zA-Z])", "IN"],
 
@@ -424,13 +446,6 @@ const appliedFunctionSymbolsDefault = [
   "sinh",
   "tan",
   "tanh",
-  "arcsin",
-  "arccos",
-  "arctan",
-  "arccsc",
-  "arcsec",
-  "arccot",
-  "cosec",
   "arg",
 ];
 
@@ -1086,18 +1101,18 @@ export class LatexToAst {
         /^(?!0+\.00)(?=.{1,9}(\.|$))(?!0(?!\.))\d{1,3}(,\d{3})*(\.\d+)?$/;
 
       // @ts-ignore
-      numberWithThousandSeparator.test(this.token.token_text)? result = this.token.token_text.replace(/,/g, "") : result = this.token.token_text;
+      result = numberWithThousandSeparator.test(this.token.token_text)
+        ? this.token.token_text.replace(/,/g, "")
+        : // @ts-ignore
+          this.token.token_text;
 
       let removeLeadingZeros = (result) =>
         result.indexOf(".") >= 0
           ? result.replace(/^[0]*([0-9])(.*)/, "$1$2")
           : result.replace(/0*([1-9]*)/, "$1");
 
-      let parsedNumber;
       // @ts-ignore
-      result === "0"
-        ? (parsedNumber = result)
-        : (parsedNumber = removeLeadingZeros(result));
+      let parsedNumber = result === "0" ? result : removeLeadingZeros(result);
 
       if (parsedNumber.startsWith(".")) {
         parsedNumber = "0" + parsedNumber;

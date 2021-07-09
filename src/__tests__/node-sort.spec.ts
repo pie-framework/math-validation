@@ -106,6 +106,11 @@ const fixtures: Fixture[] = [
     ["(4 + 1 + z) + (3 + 2 * x)", "(2 * x + 3) + (z + 4 + 1)"],
     ["+", 1, 3, 4, "z", ["*", 2, "x"]],
   ],
+
+  // function node vs non function node
+  [["sin (x) == a+b", "b+a == sin (x)"], " a+b ==sin (x)"],
+  [["f (x) == 15", "15 == f (x)"], " 15 ==f (x)"],
+  [["abs(n) == 1989", "1989 == abs(n)"], " 1989 == abs(n)"],
 ];
 const ff = [];
 

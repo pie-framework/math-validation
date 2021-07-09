@@ -65,7 +65,6 @@ export default {
     {
       target: "f^{-1}\\left(x\\right)=\\sqrt{x-1}+3",
       eq: "f^{-1}\\left(x\\right)=\\sqrt{x-1}+4-1",
-      triage: Triage.INVERSE_FUNCTIONS,
     },
     {
       target: "72\\div12=6\\text{eggs}",
@@ -98,7 +97,6 @@ export default {
     {
       target: "f^{-1}\\left(x\\right)=\\left(x-1\\right)^{\\frac{1}{2}}+3",
       eq: "f^{-1}\\left(x\\right)=\\sqrt{x-1}+3",
-      triage: Triage.INVERSE_FUNCTIONS,
     },
   ],
 };

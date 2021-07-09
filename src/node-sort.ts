@@ -58,6 +58,10 @@ const newCompare = (a: MathNode, b: MathNode): number => {
 
     return -localeCompareResult;
   }
+
+  if (!a.isFunctionNode && b.isFunctionNode) {
+    return -1;
+  }
 };
 
 const applySort = (node: MathNode) => {
@@ -262,8 +266,6 @@ export const sort = (node: MathNode) => {
 
   if (
     node.isFunctionNode &&
-    // @ts-ignore
-
     // @ts-ignore
     node.fn.name.match(relationOperators)
   ) {
