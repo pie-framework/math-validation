@@ -1,8 +1,7 @@
-import { Triage } from "../../triage";
-
 export default {
   mode: "symbolic",
   //skip: true,
+  //only: true,
   tests: [
     {
       // this is not a fraction conversion error, this is because we do not treat correctly expressions like (expression1, expression2)
@@ -15,6 +14,27 @@ export default {
       ],
     },
     {
+      target: "(x,y)",
+      eq: "(y,x)",
+    },
+    {
+      only: true,
+      target: "f\\left[\\left(x,y\\right)\\right]=y",
+      eq: [
+        // PASSING
+        "f\\left[\\left(x,y\\right)\\right]=x",
+        // "f\\left[\\left(x,y\\right)\\right]=(\\frac{1}{3}\\left(-3+x\\right),\\frac{1}{3}\\left(-2+y\\right))",
+        // "f\\left[\\left(x,y\\right)\\right]=(\\frac{-3+x}{3},\\frac{-2+y}{3})",
+
+        // // NON_EQUAL
+        // "f\\left[\\left(x,y\\right)\\right]=(\\frac{x}{3}-1,\\frac{y-2}{3})",
+
+        // // PASSING
+        // "f\\left[\\left(x,y\\right)\\right]=(\\frac{-3+x}{3},\\frac{-2+y}{3})",
+      ],
+    },
+    {
+      // only: true,
       target:
         "f\\left[\\left(x,y\\right)\\right]=\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right)",
       eq: [

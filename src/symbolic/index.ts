@@ -64,7 +64,7 @@ const normalize = (a: string | MathNode | any) => {
 
   if (r.fn === "equal") {
     r.args = r.args.map((arg) => {
-      if (!arg.isFunctionNode) {
+      if (!arg.isFunctionNode && !arg.isArrayNode) {
         try {
           arg = rationalize(arg, {}, true).expression;
         } catch (e) {
@@ -79,6 +79,9 @@ const normalize = (a: string | MathNode | any) => {
   // for relationalNode apply sort & simplify for all params
   if (r.conditionals && r.params) {
     r.params = r.params.map((param) => sort(simplify(param)));
+  } else if (r.isArrayNode) {
+    r.items = r.items.map((item) => (item = simplify(item)));
+    console.log("isArraynode");
   } else {
     r = simplify(r);
   }

@@ -286,6 +286,14 @@ export const sort = (node: MathNode) => {
     }
   }
 
+  if (node.isArrayNode) {
+    // @ts-ignore
+    console.log(node.items, "items");
+    // @ts-ignore
+    node.items = node.items.sort(newCompare);
+    // @ts-ignore
+    return node;
+  }
   const flattened = flattenNode(node);
 
   resultNode = flattened.transform(applySort);

@@ -160,6 +160,7 @@ const measurmentUnit = lengthUnit + volumeUnit + "{1}";
 
 // const latex_rules = [["\\\\neq(?![a-zA-Z])", "NE"]];
 export const latex_rules = [
+  [",", ","],
   [measurmentUnit, "UNIT"],
   ["\\\\text{[a-zA-Z0-9\\s\\\\,\\\\.]+?}", "TEXT"],
   ["[0-9]+\\s*\\\\frac(?![a-zA-Z])", "MIXED_NUMBER"],
@@ -233,7 +234,7 @@ export const latex_rules = [
   ["\\\\div(?![a-zA-Z])", "/"],
   ["\\\\times(?![a-zA-Z])", "*"],
   ["\\\\frac(?![a-zA-Z])", "FRAC"],
-  [",", ","],
+
   [":", ":"],
   ["\\\\mid", "MID"],
 
