@@ -1365,6 +1365,9 @@ export class LatexToAst {
             parameters[0] = "tuple";
           }
 
+          console.log(result, "result");
+          console.log(parameters, "params");
+
           // @ts-ignore
           result = ["apply", result, parameters];
         } else {

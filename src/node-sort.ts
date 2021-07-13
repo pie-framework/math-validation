@@ -113,7 +113,10 @@ export const flattenNode = (node: MathNode) => {
   let resultNode = node;
 
   resultNode = resultNode.transform((currentNode, path, parent) => {
-    while (firstChildOperator(currentNode, currentNode.fn)) {
+    while (
+      firstChildOperator(currentNode, currentNode.fn) &&
+      !currentNode.isArrayNode
+    ) {
       const flatten = currentNode;
 
       flatten.traverse((node, path, parent) => {
@@ -288,12 +291,10 @@ export const sort = (node: MathNode) => {
 
   if (node.isArrayNode) {
     // @ts-ignore
-    console.log(node.items, "items");
-    // @ts-ignore
     node.items = node.items.sort(newCompare);
-    // @ts-ignore
     return node;
   }
+
   const flattened = flattenNode(node);
 
   resultNode = flattened.transform(applySort);

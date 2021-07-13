@@ -45,8 +45,6 @@ const operators = {
   },
   //"prime": function(operands) { return operands[0] + "'"; },
   tuple: function (operands) {
-    console.log(operands, "operands from tuple");
-
     return new m.ArrayNode(operands);
   },
   //"array": function(operands) { return '\\left[ ' + operands.join( ', ' ) + ' \\right]';},

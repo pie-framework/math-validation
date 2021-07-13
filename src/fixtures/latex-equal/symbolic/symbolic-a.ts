@@ -18,23 +18,20 @@ export default {
       eq: "(y,x)",
     },
     {
-      only: true,
-      target: "f\\left[\\left(x,y\\right)\\right]=y",
-      eq: [
-        // PASSING
-        "f\\left[\\left(x,y\\right)\\right]=x",
-        // "f\\left[\\left(x,y\\right)\\right]=(\\frac{1}{3}\\left(-3+x\\right),\\frac{1}{3}\\left(-2+y\\right))",
-        // "f\\left[\\left(x,y\\right)\\right]=(\\frac{-3+x}{3},\\frac{-2+y}{3})",
-
-        // // NON_EQUAL
-        // "f\\left[\\left(x,y\\right)\\right]=(\\frac{x}{3}-1,\\frac{y-2}{3})",
-
-        // // PASSING
-        // "f\\left[\\left(x,y\\right)\\right]=(\\frac{-3+x}{3},\\frac{-2+y}{3})",
-      ],
+      // only: true,
+      target: "f\\left(y,x\\right)=(y,z)",
+      eq: "f\\left(y,x\\right)=(z,y)",
     },
     {
       // only: true,
+      target: "\\frac{x-3}{3}",
+      eq: "\\frac{x}{3}-1",
+    },
+    {
+      target: "\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right)",
+      eq: "\\left(\\frac{x}{3}-1,\\frac{y-2}{3}\\right)",
+    },
+    {
       target:
         "f\\left[\\left(x,y\\right)\\right]=\\left(\\frac{x-3}{3},\\frac{y-2}{3}\\right)",
       eq: [
@@ -44,7 +41,7 @@ export default {
         "f\\left[\\left(x,y\\right)\\right]=(\\frac{-3+x}{3},\\frac{-2+y}{3})",
 
         // NON_EQUAL
-        "f\\left[\\left(x,y\\right)\\right]=(\\frac{x}{3}-1,\\frac{y-2}{3})",
+        "f\\left[\\left(x,y\\right)\\right]=\\left(\\frac{x}{3}-1,\\frac{y-2}{3}\\roght)",
 
         // PASSING
         "f\\left[\\left(x,y\\right)\\right]=(\\frac{-3+x}{3},\\frac{-2+y}{3})",
