@@ -1100,10 +1100,6 @@ export class LatexToAst {
     }
 
     if (this.token.token_type === "NUMBER") {
-      /** TODO: this is a bit primitive, should try and parse commas in numbers correctly */
-      // const numberWithThousandSeparator =
-      //   /^(?!0+\.00)(?=.{1,9}(\.|$))(?!0(?!\.))\d{1,3}(,\d{3})*(\.\d+)?$/;
-
       // @ts-ignore
       result = this.token.token_text.replace(/,/g, "");
 
