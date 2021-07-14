@@ -157,20 +157,18 @@ const sci_notat_exp_regex =
 const lengthUnit = "(mm|cm|km|ft|yd|mi|mmi|li|rd|angstrom|mil";
 const volumeUnit = "|mL|ml|L|m3|in3|ft3|pt|qt|gal|bbl)";
 const measurmentUnit = lengthUnit + volumeUnit + "{1}";
+const numberWithCommasAsThousandsSeparator =
+  "[0-9]{1,3}(\\,[0-9]{3})+(\\.[0-9]+)*";
 
 // const latex_rules = [["\\\\neq(?![a-zA-Z])", "NE"]];
 export const latex_rules = [
   [measurmentUnit, "UNIT"],
   ["\\\\text{[a-zA-Z0-9\\s\\\\,\\\\.]+?}", "TEXT"],
   ["[0-9]+\\s*\\\\frac(?![a-zA-Z])", "MIXED_NUMBER"],
-  ["[0-9]{1,3}(\\,[0-9]{3})+(\\.[0-9]+)*" + sci_notat_exp_regex, "NUMBER"],
+  [numberWithCommasAsThousandsSeparator + sci_notat_exp_regex, "NUMBER"],
   ["[0-9]+(\\.[0-9]*)?" + sci_notat_exp_regex, "NUMBER"],
   ["\\.[0-9]+" + sci_notat_exp_regex, "NUMBER"],
   [",", ","],
-
-  // ["[0-9]+(\\.[0-9]*)?" + sci_notat_exp_regex, "NUMBER"],
-  // ["\\.[0-9]+" + sci_notat_exp_regex, "NUMBER"],
-  // ["^(?!0+\.00)(?=.{1,9}(\.|$))(?!0(?!\.))\d{1,3}(,\d{3})*(\.\d+)?$", "NUMBER"],
   ["\\*", "*"],
   ["\\×", "*"],
   ["\\•", "*"],
@@ -1366,9 +1364,6 @@ export class LatexToAst {
             // rename from list to tuple
             parameters[0] = "tuple";
           }
-
-          console.log(result, "result");
-          console.log(parameters, "params");
 
           // @ts-ignore
           result = ["apply", result, parameters];

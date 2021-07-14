@@ -1,8 +1,5 @@
-import { Triage } from "../../triage";
-
 export default {
   mode: "symbolic",
-  // skip: true,
   tests: [
     {
       target: "100",

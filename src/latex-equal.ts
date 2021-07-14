@@ -33,20 +33,16 @@ export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {
   }
 
   const al = lta.convert(a);
-  console.log(al, "a lta converted");
 
   const bl = lta.convert(b);
-  console.log(bl, "b lta converted");
 
   if (differenceIsTooGreat(al, bl)) {
     return false;
   }
 
   const amo = atm.convert(al);
-  console.log(amo, " a math node converted");
 
   const bmo = atm.convert(bl);
-  console.log(bmo, " b math node converted");
 
   if (opts.mode === "literal") {
     return isLiteralEqual(amo, bmo, opts.literal);

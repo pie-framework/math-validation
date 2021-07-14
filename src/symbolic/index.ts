@@ -84,17 +84,15 @@ const normalize = (a: string | MathNode | any) => {
       containsArrayNode = true;
       node.items = node.items.map((item) => (item = simplify(item)));
     }
+
     return node;
   });
-
-  console.log(r, "r");
 
   // for relationalNode apply sort & simplify for all params
   if (r.conditionals && r.params) {
     r.params = r.params.map((param) => sort(simplify(param)));
   } else if (r.isArrayNode) {
     r.items = r.items.map((item) => (item = simplify(item)));
-    console.log("isArraynode");
   } else if (containsArrayNode === false) {
     r = simplify(r);
   }
@@ -110,12 +108,8 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   // apply sort if we are not in a relationalNode
   as = a.conditionals ? normalize(a) : sort(normalize(a));
 
-  console.log(JSON.stringify(as), "As");
-  console.log(as, "as");
-
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
-  console.log(JSON.stringify(bs), "bs");
-  console.log(bs, "bs");
+
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
   const isSortingEnough = sort(a).equals(sort(b));
