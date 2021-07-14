@@ -47,6 +47,9 @@ const operators = {
   tuple: function (operands) {
     return new m.ArrayNode(operands);
   },
+  list: function (operands) {
+    return new m.ArrayNode(operands);
+  },
   //"array": function(operands) { return '\\left[ ' + operands.join( ', ' ) + ' \\right]';},
   //"set": function(operands) { return '\\left\\{ ' + operands.join( ', ' ) + ' \\right\\}';},
   vector: function (operands) {

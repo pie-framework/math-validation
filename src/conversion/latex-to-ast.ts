@@ -160,12 +160,17 @@ const measurmentUnit = lengthUnit + volumeUnit + "{1}";
 
 // const latex_rules = [["\\\\neq(?![a-zA-Z])", "NE"]];
 export const latex_rules = [
-  [",", ","],
   [measurmentUnit, "UNIT"],
   ["\\\\text{[a-zA-Z0-9\\s\\\\,\\\\.]+?}", "TEXT"],
   ["[0-9]+\\s*\\\\frac(?![a-zA-Z])", "MIXED_NUMBER"],
-  ["[0-9|,]+(\\.[0-9]*)?" + sci_notat_exp_regex, "NUMBER"],
-  ["\\.[0-9|,]+" + sci_notat_exp_regex, "NUMBER"],
+  ["[0-9]{1,3}(\\,[0-9]{3})+(\\.[0-9]+)*" + sci_notat_exp_regex, "NUMBER"],
+  ["[0-9]+(\\.[0-9]*)?" + sci_notat_exp_regex, "NUMBER"],
+  ["\\.[0-9]+" + sci_notat_exp_regex, "NUMBER"],
+  [",", ","],
+
+  // ["[0-9]+(\\.[0-9]*)?" + sci_notat_exp_regex, "NUMBER"],
+  // ["\\.[0-9]+" + sci_notat_exp_regex, "NUMBER"],
+  // ["^(?!0+\.00)(?=.{1,9}(\.|$))(?!0(?!\.))\d{1,3}(,\d{3})*(\.\d+)?$", "NUMBER"],
   ["\\*", "*"],
   ["\\×", "*"],
   ["\\•", "*"],
@@ -1098,14 +1103,11 @@ export class LatexToAst {
 
     if (this.token.token_type === "NUMBER") {
       /** TODO: this is a bit primitive, should try and parse commas in numbers correctly */
-      const numberWithThousandSeparator =
-        /^(?!0+\.00)(?=.{1,9}(\.|$))(?!0(?!\.))\d{1,3}(,\d{3})*(\.\d+)?$/;
+      // const numberWithThousandSeparator =
+      //   /^(?!0+\.00)(?=.{1,9}(\.|$))(?!0(?!\.))\d{1,3}(,\d{3})*(\.\d+)?$/;
 
       // @ts-ignore
-      result = numberWithThousandSeparator.test(this.token.token_text)
-        ? this.token.token_text.replace(/,/g, "")
-        : // @ts-ignore
-          this.token.token_text;
+      result = this.token.token_text.replace(/,/g, "");
 
       let removeLeadingZeros = (result) =>
         result.indexOf(".") >= 0
