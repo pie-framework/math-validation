@@ -22,8 +22,8 @@ const fixtures = [
   // list of elements
   ["1,0,0,0", ["list", 1, 0, 0, 0]],
   ["a,b,c,d,e", ["list", "a", "b", "c", "d", "e"]],
-  ["(x,y)", ["tuple", "x", "y"]],
-  ["(1,000,-20)", ["tuple", 1000, ["-", 20]]],
+  ["(x,y)", ["list", "x", "y"]],
+  ["(1,000,-20)", ["list", 1000, ["-", 20]]],
 
   // treat × as multiplication operator
   ["a×b", ["*", "a", "b"]],

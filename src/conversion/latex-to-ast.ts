@@ -1356,11 +1356,6 @@ export class LatexToAst {
           }
           this.advance();
 
-          if (parameters[0] === "list") {
-            // rename from list to tuple
-            parameters[0] = "tuple";
-          }
-
           // @ts-ignore
           result = ["apply", result, parameters];
         } else {
@@ -1430,19 +1425,19 @@ export class LatexToAst {
         }
 
         // half-open interval
-        result[0] = "tuple";
+        result[0] = "list";
         // @ts-ignore
         result = ["interval", result];
         let closed;
-        if (token_left === "(") closed = ["tuple", false, true];
-        else closed = ["tuple", true, false];
+        if (token_left === "(") closed = ["list", false, true];
+        else closed = ["list", true, false];
         // @ts-ignore
         result.push(closed);
       } else if (n_elements >= 2) {
         if (token_left === "(" || token_left === "{") {
-          result[0] = "tuple";
+          result[0] = "list";
         } else if (token_left === "[") {
-          result[0] = "array";
+          result[0] = "list";
         } else {
           result[0] = "set";
         }

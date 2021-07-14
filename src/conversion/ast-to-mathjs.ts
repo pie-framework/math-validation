@@ -44,9 +44,9 @@ const operators = {
     return new m.OperatorNode("^", "pow", operands);
   },
   //"prime": function(operands) { return operands[0] + "'"; },
-  tuple: function (operands) {
-    return new m.ArrayNode(operands);
-  },
+  // tuple: function (operands) {
+  //   return new m.ArrayNode(operands);
+  // },
   list: function (operands) {
     return new m.ArrayNode(operands);
   },
