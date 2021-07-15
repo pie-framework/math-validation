@@ -1,6 +1,5 @@
 export default {
   mode: "symbolic",
-  //only: true,
   tests: [
     {
       target: "9x^2-24xy+16y^2",

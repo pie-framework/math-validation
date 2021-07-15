@@ -17,6 +17,7 @@ const SIMPLIFY_RULES = [
   { l: "((n^n1) + n)/n", r: "n^(n1-1)+1" },
   { l: "(n^2) + 2n", r: "n * (n + 2)" },
   { l: "(v1-v2)/n", r: "v1/n-v2/n" },
+  { l: "(v1-n)/n", r: "v1/n-1" },
   // { l: "(n/n1) * n2", r: "t" },
 
   // perfect square formula:
@@ -64,7 +65,7 @@ const normalize = (a: string | MathNode | any) => {
 
   if (r.fn === "equal") {
     r.args = r.args.map((arg) => {
-      if (!arg.isFunctionNode) {
+      if (!arg.isFunctionNode && !arg.isArrayNode) {
         try {
           arg = rationalize(arg, {}, true).expression;
         } catch (e) {
@@ -76,10 +77,21 @@ const normalize = (a: string | MathNode | any) => {
     });
   }
 
+  let containsArrayNode = false;
+
+  r.traverse(function (node, path, parent) {
+    if (node.isArrayNode) {
+      containsArrayNode = true;
+      node.items = node.items.map((item) => (item = simplify(item)));
+    }
+
+    return node;
+  });
+
   // for relationalNode apply sort & simplify for all params
   if (r.conditionals && r.params) {
     r.params = r.params.map((param) => sort(simplify(param)));
-  } else {
+  } else if (!containsArrayNode) {
     r = simplify(r);
   }
 
@@ -95,6 +107,7 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   as = a.conditionals ? normalize(a) : sort(normalize(a));
 
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
+
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
   const isSortingEnough = sort(a).equals(sort(b));

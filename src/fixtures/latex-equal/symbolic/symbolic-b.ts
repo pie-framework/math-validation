@@ -1,6 +1,5 @@
 export default {
   mode: "symbolic",
-  //skip: true,
   tests: [
     {
       target: "m=50\\cos\\left(\\frac{2\\pi}{30}d\\right)+50",

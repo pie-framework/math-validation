@@ -135,7 +135,6 @@ export default {
       eq: "0.75",
     },
     {
-      // only: true,
       opts: {
         literal: { allowTrailingZeros: false },
       },

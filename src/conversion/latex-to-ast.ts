@@ -157,14 +157,18 @@ const sci_notat_exp_regex =
 const lengthUnit = "(mm|cm|km|ft|yd|mi|mmi|li|rd|angstrom|mil";
 const volumeUnit = "|mL|ml|L|m3|in3|ft3|pt|qt|gal|bbl)";
 const measurmentUnit = lengthUnit + volumeUnit + "{1}";
+const numberWithCommasAsThousandsSeparator =
+  "[0-9]{1,3}(\\,[0-9]{3})+(\\.[0-9]+)*";
 
 // const latex_rules = [["\\\\neq(?![a-zA-Z])", "NE"]];
 export const latex_rules = [
   [measurmentUnit, "UNIT"],
   ["\\\\text{[a-zA-Z0-9\\s\\\\,\\\\.]+?}", "TEXT"],
   ["[0-9]+\\s*\\\\frac(?![a-zA-Z])", "MIXED_NUMBER"],
-  ["[0-9|,]+(\\.[0-9]*)?" + sci_notat_exp_regex, "NUMBER"],
-  ["\\.[0-9|,]+" + sci_notat_exp_regex, "NUMBER"],
+  [numberWithCommasAsThousandsSeparator + sci_notat_exp_regex, "NUMBER"],
+  ["[0-9]+(\\.[0-9]*)?" + sci_notat_exp_regex, "NUMBER"],
+  ["\\.[0-9]+" + sci_notat_exp_regex, "NUMBER"],
+  [",", ","],
   ["\\*", "*"],
   ["\\×", "*"],
   ["\\•", "*"],
@@ -233,7 +237,7 @@ export const latex_rules = [
   ["\\\\div(?![a-zA-Z])", "/"],
   ["\\\\times(?![a-zA-Z])", "*"],
   ["\\\\frac(?![a-zA-Z])", "FRAC"],
-  [",", ","],
+
   [":", ":"],
   ["\\\\mid", "MID"],
 
@@ -1096,15 +1100,8 @@ export class LatexToAst {
     }
 
     if (this.token.token_type === "NUMBER") {
-      /** TODO: this is a bit primitive, should try and parse commas in numbers correctly */
-      const numberWithThousandSeparator =
-        /^(?!0+\.00)(?=.{1,9}(\.|$))(?!0(?!\.))\d{1,3}(,\d{3})*(\.\d+)?$/;
-
       // @ts-ignore
-      result = numberWithThousandSeparator.test(this.token.token_text)
-        ? this.token.token_text.replace(/,/g, "")
-        : // @ts-ignore
-          this.token.token_text;
+      result = this.token.token_text.replace(/,/g, "");
 
       let removeLeadingZeros = (result) =>
         result.indexOf(".") >= 0
@@ -1359,11 +1356,6 @@ export class LatexToAst {
           }
           this.advance();
 
-          if (parameters[0] === "list") {
-            // rename from list to tuple
-            parameters[0] = "tuple";
-          }
-
           // @ts-ignore
           result = ["apply", result, parameters];
         } else {
@@ -1433,19 +1425,19 @@ export class LatexToAst {
         }
 
         // half-open interval
-        result[0] = "tuple";
+        result[0] = "list";
         // @ts-ignore
         result = ["interval", result];
         let closed;
-        if (token_left === "(") closed = ["tuple", false, true];
-        else closed = ["tuple", true, false];
+        if (token_left === "(") closed = ["list", false, true];
+        else closed = ["list", true, false];
         // @ts-ignore
         result.push(closed);
       } else if (n_elements >= 2) {
         if (token_left === "(" || token_left === "{") {
-          result[0] = "tuple";
+          result[0] = "list";
         } else if (token_left === "[") {
-          result[0] = "array";
+          result[0] = "list";
         } else {
           result[0] = "set";
         }

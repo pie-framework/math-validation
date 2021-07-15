@@ -1,7 +1,5 @@
-import { Triage } from "../../triage";
 export default {
   mode: "symbolic",
-  //skip: true,
   tests: [
     {
       target: "a_n=3a_{n-1}",

@@ -1,5 +1,4 @@
 export default {
-  //skip: true,
   mode: "symbolic",
 
   // only: true,
