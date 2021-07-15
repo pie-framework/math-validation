@@ -117,7 +117,6 @@ export default {
       ne: ["y=4+3x", "3x+4=y", "4+3x=y"],
     },
     {
-      // allow the order of an inequality to be reversed, provided the signs of the operators are reversed
       opts: {
         literal: { ignoreOrder: true },
       },

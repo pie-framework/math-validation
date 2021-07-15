@@ -1,6 +1,5 @@
 export default {
   mode: "symbolic",
-  // skip: true,
   tests: [
     {
       target: "\\frac{x}{12}\\times7\\text{dollars}",

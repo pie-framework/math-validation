@@ -1,7 +1,6 @@
 export default {
   mode: "symbolic",
   label: "CH6456",
-  //skip: true,
   tests: [
     {
       target: "-12.5%",
