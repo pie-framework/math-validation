@@ -525,7 +525,6 @@ export class LatexToAst {
   }
 
   public convert(input, pars?: any) {
-    console.time("conversion:latex-to-ast");
     this.lexer.set_input(input);
     this.advance();
 
@@ -848,8 +847,7 @@ export class LatexToAst {
     }
 
     var result = this.nonMinusFactor(params);
-  
-    console.timeEnd("conversion:latex-to-ast");
+
     if (result === false) {
       if (this.token.token_type === "EOF") {
         throw new ParseError("Unexpected end of input", this.lexer.location);

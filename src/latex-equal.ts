@@ -24,6 +24,7 @@ const lta = new LatexToAst();
 const atm = new AstToMathJs();
 
 export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {
+  console.time("latexEqual");
   if (!a || !b) {
     return false;
   }
@@ -32,22 +33,31 @@ export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {
     return true;
   }
 
+  console.time("convert:lta:a");
   const al = lta.convert(a);
+  console.timeEnd("convert:lta:a");
 
+  console.time("convert:lta:b");
   const bl = lta.convert(b);
+  console.timeEnd("convert:lta:b");
 
   if (differenceIsTooGreat(al, bl)) {
     return false;
   }
 
+  console.time("conversion:ast-to-mathjs:a");
   const amo = atm.convert(al);
-  console.timeEnd("conversion:ast-to-mathjs");
+  console.timeEnd("conversion:ast-to-mathjs:a");
 
+  console.time("conversion:ast-to-mathjs:b");
   const bmo = atm.convert(bl);
+  console.timeEnd("conversion:ast-to-mathjs:b");
 
   if (opts.mode === "literal") {
     return isLiteralEqual(amo, bmo, opts.literal);
   } else {
-    return isSymbolicEqual(amo, bmo, opts.symbolic);
+    const out = isSymbolicEqual(amo, bmo, opts.symbolic);
+    console.timeEnd("latexEqual");
+    return out;
   }
 };

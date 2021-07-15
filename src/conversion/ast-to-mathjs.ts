@@ -125,7 +125,6 @@ export class AstToMathJs {
   constructor(private opts: AstToMathJsOpts = { number: "Fraction" }) {}
 
   convert(tree) {
-    console.time("conversion:ast-to-mathjs")
     if (typeof tree === "number") {
       if (Number.isFinite(tree)) {
         if (this.opts.number === "Fraction") {
