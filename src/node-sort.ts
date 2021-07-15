@@ -90,6 +90,7 @@ const firstChildOperator = (args: any, operator: string) => {
 };
 
 export const flattenNode = (node: MathNode) => {
+  console.time("flatten node");
   while (node.isParenthesisNode && node.content) {
     node = node.content;
   }
@@ -189,6 +190,7 @@ export const flattenNode = (node: MathNode) => {
     return currentNode;
   });
 
+  console.timeEnd("flatten node");
   return resultNode;
 };
 
@@ -247,6 +249,7 @@ export const sortRelationalNode = (node: any) => {
 };
 
 export const sort = (node: MathNode) => {
+  console.time("sort");
   let resultNode = node;
 
   if (node.type === "RelationalNode") {
@@ -292,9 +295,11 @@ export const sort = (node: MathNode) => {
   if (node.isArrayNode) {
     // @ts-ignore
     node.items = node.items.sort(newCompare);
+    console.timeEnd("sort");
     return node;
   }
 
+  console.timeEnd("sort");
   const flattened = flattenNode(node);
 
   resultNode = flattened.transform(applySort);

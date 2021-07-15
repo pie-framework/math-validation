@@ -49,11 +49,14 @@ const SIMPLIFY_RULES = [
 ];
 
 const simplify = (v) => {
+  console.time("simplify");
   const rules = SIMPLIFY_RULES.concat((ms as any).rules);
+ 
   return ms(v, rules); //.concat(SIMPLIFY_RULES));
 };
 
 const normalize = (a: string | MathNode | any) => {
+  console.time("normalize");
   let r: string | MathNode | any = a;
 
   try {
@@ -96,6 +99,7 @@ const normalize = (a: string | MathNode | any) => {
   }
 
   log("[normalize] input: ", a.toString(), "output: ", r.toString());
+  console.timeEnd("normalize");
   return r;
 };
 
@@ -110,8 +114,12 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
 
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
+  console.time("check equality after sort");
   const isSortingEnough = sort(a).equals(sort(b));
-  const equality = as.equals(bs) || isSortingEnough;
+  console.timeEnd("check equality after sort");
 
+  console.time("check equality");
+  const equality = as.equals(bs) || isSortingEnough;
+  console.timeEnd("check equality");
   return equality;
 };
