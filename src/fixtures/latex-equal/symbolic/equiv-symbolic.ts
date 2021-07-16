@@ -89,7 +89,7 @@ export default {
     },
     {
       target: "0",
-      only: true,
+      // only: true,
       eq: [
         // validation handles radians
         "\\sin(2\\pi)",
