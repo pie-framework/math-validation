@@ -242,6 +242,7 @@ export const latex_rules = [
   ["\\\\mid", "MID"],
 
   ["\\\\vartheta(?![a-zA-Z])", "LATEXCOMMAND", "\\theta"],
+  ["\\\\π", "LATEXCOMMAND", "\\pi"],
   ["\\\\varepsilon(?![a-zA-Z])", "LATEXCOMMAND", "\\epsilon"],
   ["\\\\varrho(?![a-zA-Z])", "LATEXCOMMAND", "\\rho"],
   ["\\\\varphi(?![a-zA-Z])", "LATEXCOMMAND", "\\phi"],

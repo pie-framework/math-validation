@@ -18,6 +18,7 @@ const SIMPLIFY_RULES = [
   { l: "(n^2) + 2n", r: "n * (n + 2)" },
   { l: "(v1-v2)/n", r: "v1/n-v2/n" },
   { l: "(v1-n)/n", r: "v1/n-1" },
+  //{ l: "1/(n1/n2)", r: "1*(n2/n1)" },
   // { l: "(n/n1) * n2", r: "t" },
 
   // perfect square formula:
@@ -26,10 +27,15 @@ const SIMPLIFY_RULES = [
   { l: "tzn(n1, n2)", r: "n1" },
   { l: "n1/(-n2)", r: "-(n1/n2)" },
 
-  // trigonometry: alternate forms for cotangent, secant and cosecant
+  // trigonometry: defining relations for tangent, cotangent, secant, and cosecant in terms of sine and cosine
+  { l: "sin(n)/cos(n)", r: "tan(n)" },
   { l: "csc(n)", r: "1/sin(n)" },
   { l: "sec(n)", r: "1/cos(n)" },
-  { l: "cot(n)", r: "1/tan(n)" },
+  { l: "cot(n)", r: "1/tan(n)", r1: "cos(n)/sin(n)" },
+  { l: "1/tan(n)", r: "cos(n)/sin(n)" },
+  { l: "sin(2pi)", r: "0" },
+
+  // the Pythagorean formula for sines and cosines.
 
   // inverse trigonometric functions relations
   { l: "n1 == asin(n)", r: "n == sin(n1)" },
@@ -105,8 +111,10 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
 
   // apply sort if we are not in a relationalNode
   as = a.conditionals ? normalize(a) : sort(normalize(a));
+  console.log(as, "as");
 
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
+  console.log(JSON.stringify(bs), "bs");
 
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
