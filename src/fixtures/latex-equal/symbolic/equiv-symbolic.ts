@@ -3,6 +3,7 @@ export default {
 
   tests: [
     {
+      // only: true,
       // equation with variable
       target: "y= \\frac{1}{2}x +5",
 
@@ -30,13 +31,13 @@ export default {
         // Combine several of the above
         "x-2y+z=z-10",
       ],
-      ne: [
-        "\\frac{1}{2}x +5 = x",
-        "y=6+ \\frac{1}{2}x",
-        "y=\\frac{x+1}{2}+5",
-        "y = 0.45x+5 ",
-        "y =x÷2.1 +5",
-      ],
+      // ne: [
+      //   "\\frac{1}{2}x +5 = x",
+      //   "y=6+ \\frac{1}{2}x",
+      //   "y=\\frac{x+1}{2}+5",
+      //   "y = 0.45x+5 ",
+      //   "y =x÷2.1 +5",
+      // ],
     },
     {
       // equation with no variable
@@ -89,7 +90,7 @@ export default {
     },
     {
       target: "0",
-      // only: true,
+
       eq: [
         // validation handles radians
         "\\sin(2\\pi)",

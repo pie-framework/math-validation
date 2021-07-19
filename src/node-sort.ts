@@ -2,7 +2,7 @@ import { logger } from "./log";
 
 import { mathjs as mjs } from "./mathjs";
 
-import { MathNode } from "mathjs";
+import { MathNode, subtract } from "mathjs";
 
 const m: any = mjs;
 
@@ -68,7 +68,7 @@ const applySort = (node: MathNode) => {
   // log("node: ", node.toString());
   // log("path: ", path);
   // log("parent: ", parent);
-  if (node.fn === "add" || node.fn === "multiply") {
+  if (node.fn === "add" || node.fn === "multiply" || node.fn === "subtract") {
     node.args = node.args.sort(newCompare);
     node.args = node.args.map(applySort);
   }
