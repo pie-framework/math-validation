@@ -43,7 +43,7 @@ export default {
       // equation with no variable
       target: "2+2=4",
       // they should not be equal
-      eq: ["1=1", "0.5=1/2", "9x=3(3x)"],
+      ne: ["1=1", "0.5=1/2", "9x=3(3x)"],
     },
     {
       // 2-way inequality with variable(s)
