@@ -19,7 +19,7 @@ const SIMPLIFY_RULES = [
   { l: "(n^2) + 2n", r: "n * (n + 2)" },
   { l: "(v1-v2)/n", r: "v1/n-v2/n" },
   { l: "(v1-n)/n", r: "v1/n-1" },
-  { l: "n1-n1", r: "0" },
+
   //{ l: "1/(n1/n2)", r: "1*(n2/n1)" },
   // { l: "(n/n1) * n2", r: "t" },
 
@@ -103,61 +103,64 @@ const normalize = (a: string | MathNode | any) => {
     r = simplify(r);
   }
 
-  console.log("[normalize] input: ", a.toString(), "output: ", r.toString());
+  //console.log("[normalize] input: ", a.toString(), "output: ", r.toString());
   return r;
 };
 
 export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
-  let as: MathNode = a;
-  let bs: MathNode = b;
-  let af: MathNode;
-  let bf: MathNode;
-
-  let noFunctionOrArray = true;
-
-  if (a.fn === "equal") {
-    a.args = a.args.map((arg) => {
-      if (arg.isFunctionNode || arg.isArrayNode) {
-        noFunctionOrArray = false;
-      }
-
-      return arg;
-    });
-
-    if (noFunctionOrArray) as = new m.OperatorNode("-", "subtract", a.args);
-
-    // let evalated = m.evaluate(bs.toString())
-    // console.log(evalated, "==========");
-  }
-
-  if (b.fn === "equal") {
-    b.args = b.args.map((arg) => {
-      if (arg.isFunctionNode || arg.isArrayNode) {
-        noFunctionOrArray = false;
-      }
-
-      return arg;
-    });
-
-    if (noFunctionOrArray) bs = new m.OperatorNode("-", "subtract", b.args);
-
-    // let evalated = m.evaluate(bs.toString())
-    // console.log(evalated, "==========");
-  }
+  let as: MathNode;
+  let bs: MathNode;
 
   // apply sort if we are not in a relationalNode
-  // @ts-ignore
-  af = as.conditionals ? normalize(as) : sort(normalize(as));
-  console.log(JSON.stringify(af), "af");
+  as = a.conditionals ? normalize(a) : sort(normalize(a));
 
-  //@ts-ignore
-  bf = bs.conditionals ? normalize(bs) : sort(normalize(bs));
-  console.log(JSON.stringify(bf), "bf");
+  bs = b.conditionals ? normalize(b) : sort(normalize(b));
 
-  console.log("[isMathEqual]", af.toString(), "==?", bf.toString());
+  log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
-  const isSortingEnough = sort(as).equals(sort(bs));
-  const equality = af.equals(bf) || isSortingEnough;
+  const isSortingEnough = sort(a).equals(sort(b));
+  let equality = as.equals(bs) || isSortingEnough;
+
+  if (!equality && as.fn === "equal" && bs.fn === "equal") {
+    let noFunctionOrArray = true;
+
+    as.args = as.args.map((arg) => {
+      if (arg.isFunctionNode || arg.isArrayNode) {
+        noFunctionOrArray = false;
+      }
+      return arg;
+    });
+
+    bs.args = bs.args.map((arg) => {
+      if (arg.isFunctionNode || arg.isArrayNode) {
+        noFunctionOrArray = false;
+      }
+      return arg;
+    });
+
+    if (noFunctionOrArray) {
+      let ae = new m.OperatorNode("-", "subtract", as.args);
+      let be = new m.OperatorNode("-", "subtract", bs.args);
+
+      let af = sort(normalize(ae));
+      let bf = sort(normalize(be));
+
+      let eq = new m.OperatorNode("-", "subtract", [af, bf]);
+      let simp = sort(normalize(eq));
+      let trys = new m.OperatorNode("/", "divde", [simp, ae]);
+      let simpt = sort(simplify(trys));
+      console.log(simpt.toString(), "trys");
+
+      console.log(eq.toString(), "eq");
+      console.log(simp.toString(), "simp");
+      equality = isMathEqual(af, bf);
+      console.log(equality, "equality");
+      console.log(JSON.stringify(ae), "ae");
+      console.log(JSON.stringify(be), "be");
+
+      console.log("[isMathEqual]", ae.toString(), "==?", be.toString());
+    }
+  }
 
   return equality;
 };

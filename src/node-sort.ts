@@ -68,7 +68,7 @@ const applySort = (node: MathNode) => {
   // log("node: ", node.toString());
   // log("path: ", path);
   // log("parent: ", parent);
-  if (node.fn === "add" || node.fn === "multiply" || node.fn === "subtract") {
+  if (node.fn === "add" || node.fn === "multiply") {
     node.args = node.args.sort(newCompare);
     node.args = node.args.map(applySort);
   }
@@ -284,7 +284,7 @@ export const sort = (node: MathNode) => {
   ) {
     node.args = node.args.map(sort);
 
-    if (node.fn === "equal" || node.fn == "unequal") {
+    if (node.fn === "equal" || node.fn === "unequal") {
       node.args = node.args.sort(newCompare);
     }
   }
