@@ -154,7 +154,7 @@ const sci_notat_exp_regex =
 
 // TO-DO: ADD all mathjs built-in units?
 
-const lengthUnit = "(mm|cm|km|ft|yd|mi|mmi|li|rd|angstrom|mil";
+const lengthUnit = "(mm|cm|km|ft|yd|mi|mmi|li|rd|angstrom|mil|°";
 const volumeUnit = "|mL|ml|L|m3|in3|ft3|pt|qt|gal|bbl)";
 const measurmentUnit = lengthUnit + volumeUnit + "{1}";
 const numberWithCommasAsThousandsSeparator =
@@ -169,6 +169,7 @@ export const latex_rules = [
   ["[0-9]+(\\.[0-9]*)?" + sci_notat_exp_regex, "NUMBER"],
   ["\\.[0-9]+" + sci_notat_exp_regex, "NUMBER"],
   [",", ","],
+  ["°", "°"],
   ["\\*", "*"],
   ["\\×", "*"],
   ["\\•", "*"],
