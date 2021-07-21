@@ -1,6 +1,6 @@
 import { logger } from "../log";
 import { mathjs } from "../mathjs";
-import { evaluate, MathNode } from "mathjs";
+import { MathNode } from "mathjs";
 import { sort } from "../node-sort";
 
 const m: any = mathjs;
@@ -21,7 +21,6 @@ const SIMPLIFY_RULES = [
   { l: "(v1-n)/n", r: "v1/n-1" },
   { l: "n/n1-c1", r: "(n-c1*n1)/n1" },
   { l: "i^2", r: "-1" },
-  { l: "n/n", r: "1" },
 
   //{ l: "1/(n1/n2)", r: "1*(n2/n1)" },
   // { l: "(n/n1) * n2", r: "t" },
@@ -38,8 +37,11 @@ const SIMPLIFY_RULES = [
   { l: "sec(n)", r: "1/cos(n)" },
   { l: "cot(n)", r: "1/tan(n)", r1: "cos(n)/sin(n)" },
   { l: "1/tan(n)", r: "cos(n)/sin(n)" },
-  { l: "sin(n*pi)", r: "0" },
   { l: "sin(pi)", r: "0" },
+  { l: "sin(n*pi)", r: "0" },
+  { l: "sin(pi/4)", r: "(sqrt2)/2" },
+
+  { l: "pi", r: "3.141592653589793" },
 
   // the Pythagorean formula for sines and cosines.
 
@@ -107,6 +109,9 @@ const normalize = (a: string | MathNode | any) => {
     r = simplify(r);
   }
 
+  console.log(m.pi, "pi");
+  console.log(m.pi, "pi");
+
   console.log("[normalize] input: ", a.toString(), "output: ", r.toString());
   return r;
 };
@@ -119,6 +124,11 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   as = a.conditionals ? normalize(a) : sort(normalize(a));
 
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
+  console.log(bs, "-----bs");
+
+  if (bs.value && bs.value == 1.2246467991473532e-16) {
+    bs.value = 0;
+  }
 
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 

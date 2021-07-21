@@ -154,7 +154,7 @@ const sci_notat_exp_regex =
 
 // TO-DO: ADD all mathjs built-in units?
 
-const lengthUnit = "(mm|cm|km|ft|yd|mi|mmi|li|rd|angstrom|mil|°";
+const lengthUnit = "(mm|cm|km|ft|yd|mi|mmi|li|rd|angstrom|mil";
 const volumeUnit = "|mL|ml|L|m3|in3|ft3|pt|qt|gal|bbl)";
 const measurmentUnit = lengthUnit + volumeUnit + "{1}";
 const numberWithCommasAsThousandsSeparator =
@@ -169,7 +169,6 @@ export const latex_rules = [
   ["[0-9]+(\\.[0-9]*)?" + sci_notat_exp_regex, "NUMBER"],
   ["\\.[0-9]+" + sci_notat_exp_regex, "NUMBER"],
   [",", ","],
-  ["°", "°"],
   ["\\*", "*"],
   ["\\×", "*"],
   ["\\•", "*"],
@@ -238,6 +237,13 @@ export const latex_rules = [
   ["\\\\div(?![a-zA-Z])", "/"],
   ["\\\\times(?![a-zA-Z])", "*"],
   ["\\\\frac(?![a-zA-Z])", "FRAC"],
+
+  ["°", "deg"],
+  ["°", "deg"],
+  ["\\deg", "deg"],
+  //["g", "grad"],
+  ["gon", "grad"],
+  ["\\grad", "grad"],
 
   [":", ":"],
   ["\\\\mid", "MID"],
@@ -1143,6 +1149,11 @@ export class LatexToAst {
     } else if (this.token.token_type === "INFINITY") {
       // @ts-ignore
       result = Infinity;
+
+      this.advance();
+    } else if (this.token.token_type === "deg") {
+      // @ts-ignore
+      result = ["*", ["/", 1, 360], 2, "pi"];
 
       this.advance();
     } else if (this.token.token_type === "UNIT") {

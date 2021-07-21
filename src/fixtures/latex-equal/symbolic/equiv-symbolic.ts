@@ -89,7 +89,7 @@ export default {
       eq: ["\\frac{1}{\\frac{\\sin x}{\\cos x}} ", "\\frac{\\cos x}{\\sin x} "],
     },
     {
-      only: true,
+      // only: true,
       target: "0",
 
       eq: [
@@ -97,8 +97,19 @@ export default {
         "\\sin(2\\pi)",
         "\\sin(2\\π)",
         // validation handles degrees
-        "\\sin(180/360*2*\\pi)",
+        "\\sin(180°)",
       ],
+    },
+    {
+      target: "1",
+
+      eq: ["\\sin(90°)"],
+    },
+    {
+      only: true,
+      target: "\\frac{\\sqrt2}{2}",
+
+      eq: ["\\sin(45°)"],
     },
     {
       target: "2",
