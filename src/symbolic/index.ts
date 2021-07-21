@@ -37,11 +37,12 @@ const SIMPLIFY_RULES = [
   { l: "sec(n)", r: "1/cos(n)" },
   { l: "cot(n)", r: "1/tan(n)", r1: "cos(n)/sin(n)" },
   { l: "1/tan(n)", r: "cos(n)/sin(n)" },
-  { l: "sin(pi)", r: "0" },
-  { l: "sin(n*pi)", r: "0" },
-  { l: "sin(pi/4)", r: "(sqrt2)/2" },
+  // { l: "sin(pi)", r: "0" },
+  // { l: "sin(n*pi)", r: "0" },
+  // { l: "sin(pi/4)", r: "(sqrt2)/2" },
 
-  { l: "pi", r: "3.141592653589793" },
+  // \\
+  { l: "pi", r: "3.1415926535897932384626433" },
 
   // the Pythagorean formula for sines and cosines.
 
@@ -109,10 +110,17 @@ const normalize = (a: string | MathNode | any) => {
     r = simplify(r);
   }
 
-  console.log(m.pi, "pi");
-  console.log(m.pi, "pi");
-
   console.log("[normalize] input: ", a.toString(), "output: ", r.toString());
+  if (r.value && r.value <= 6.432490598706546e-16) {
+    r.value = 0;
+  } else if (
+    r.fn &&
+    r.fn === "unaryMinus" &&
+    r.args[0] &&
+    r.args[0] <= 6.432490598706546e-16
+  ) {
+    r = new m.ConstantNode(0);
+  }
   return r;
 };
 
@@ -122,11 +130,18 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
 
   // apply sort if we are not in a relationalNode
   as = a.conditionals ? normalize(a) : sort(normalize(a));
+  if (as.value && as.value <= 6.432490598706546e-16) {
+    as.value = 0;
+  }
+
+  //console.log(m.evaluate("sin(45 )"), "-----------------");
+  console.log(Math.round(6.432490598706546e-16));
+  console.log(Math.round((0.145 + Number.EPSILON) * 100) / 100);
 
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
   console.log(bs, "-----bs");
 
-  if (bs.value && bs.value == 1.2246467991473532e-16) {
+  if (bs.value && bs.value <= 6.432490598706546e-16) {
     bs.value = 0;
   }
 

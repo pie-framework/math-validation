@@ -89,7 +89,7 @@ export default {
       eq: ["\\frac{1}{\\frac{\\sin x}{\\cos x}} ", "\\frac{\\cos x}{\\sin x} "],
     },
     {
-      // only: true,
+      //   only: true,
       target: "0",
 
       eq: [
@@ -106,7 +106,13 @@ export default {
       eq: ["\\sin(90°)"],
     },
     {
-      only: true,
+      // only: true,
+      target: "-1",
+
+      eq: ["\\cos(180°)"],
+    },
+    {
+      //only: true,
       target: "\\frac{\\sqrt2}{2}",
 
       eq: ["\\sin(45°)"],

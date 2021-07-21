@@ -2,6 +2,9 @@ import { ParseError } from "./error";
 import lexer, { Token } from "./lexer";
 import { flatten } from "./flatten";
 import { logger } from "../log";
+import { mathjs } from "../mathjs";
+
+const m: any = mathjs;
 
 const log = logger("mv:latex-to-ast");
 // UPDATETHIS: Delete or change to new license & package name
@@ -241,8 +244,8 @@ export const latex_rules = [
   ["°", "deg"],
   ["°", "deg"],
   ["\\deg", "deg"],
-  //["g", "grad"],
-  ["gon", "grad"],
+  ["\\grade", "grad"],
+  ["\\gon", "grad"],
   ["\\grad", "grad"],
 
   [":", ":"],
@@ -1154,6 +1157,11 @@ export class LatexToAst {
     } else if (this.token.token_type === "deg") {
       // @ts-ignore
       result = ["*", ["/", 1, 360], 2, "pi"];
+
+      this.advance();
+    } else if (this.token.token_type === "grad") {
+      // @ts-ignore
+      result = ["*", ["/", 1, 400], 2, "pi"];
 
       this.advance();
     } else if (this.token.token_type === "UNIT") {
