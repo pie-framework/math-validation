@@ -263,6 +263,8 @@ export const latex_rules = [
   ["\\\\log(?![a-zA-Z])", "LOG"],
   ["\\\\ln(?![a-zA-Z])", "LN"],
 
+  ["\\\\cosec", "LATEXCOMMAND", "\\csc"],
+
   // inverse trigonometric functions
   ["\\\\sin\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\asin"],
   ["\\\\cos\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\acos"],

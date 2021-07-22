@@ -42,7 +42,7 @@ const SIMPLIFY_RULES = [
   // { l: "sin(pi/4)", r: "(sqrt2)/2" },
 
   // \\
-  { l: "pi", r: "3.1415926535897932384626433" },
+  { l: "pi", r: "3.14159265358979323846264338327950288419716939937510" },
 
   // the Pythagorean formula for sines and cosines.
 
@@ -111,13 +111,13 @@ const normalize = (a: string | MathNode | any) => {
   }
 
   console.log("[normalize] input: ", a.toString(), "output: ", r.toString());
-  if (r.value && r.value <= 6.432490598706546e-16) {
+  if (r.value && r.value <= 10.432490598706546e-16) {
     r.value = 0;
   } else if (
     r.fn &&
     r.fn === "unaryMinus" &&
     r.args[0] &&
-    r.args[0] <= 6.432490598706546e-16
+    r.args[0] <= 10.432490598706546e-16
   ) {
     r = new m.ConstantNode(0);
   }
@@ -130,20 +130,8 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
 
   // apply sort if we are not in a relationalNode
   as = a.conditionals ? normalize(a) : sort(normalize(a));
-  if (as.value && as.value <= 6.432490598706546e-16) {
-    as.value = 0;
-  }
-
-  //console.log(m.evaluate("sin(45 )"), "-----------------");
-  console.log(Math.round(6.432490598706546e-16));
-  console.log(Math.round((0.145 + Number.EPSILON) * 100) / 100);
 
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
-  console.log(bs, "-----bs");
-
-  if (bs.value && bs.value <= 6.432490598706546e-16) {
-    bs.value = 0;
-  }
 
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
