@@ -1158,7 +1158,7 @@ export class LatexToAst {
       this.advance();
     } else if (this.token.token_type === "deg") {
       // @ts-ignore
-      result = ["*", ["/", 1, 360], 2, "pi"];
+      result = ["*", ["/", 1, 360], 2, ["/", 355, 113]];
 
       this.advance();
     } else if (this.token.token_type === "grad") {

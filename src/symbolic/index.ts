@@ -37,11 +37,7 @@ const SIMPLIFY_RULES = [
   { l: "sec(n)", r: "1/cos(n)" },
   { l: "cot(n)", r: "1/tan(n)", r1: "cos(n)/sin(n)" },
   { l: "1/tan(n)", r: "cos(n)/sin(n)" },
-  // { l: "sin(pi)", r: "0" },
-  // { l: "sin(n*pi)", r: "0" },
-  // { l: "sin(pi/4)", r: "(sqrt2)/2" },
 
-  // \\
   { l: "pi", r: "3.14159265358979323846264338327950288419716939937510" },
 
   // the Pythagorean formula for sines and cosines.
@@ -111,13 +107,13 @@ const normalize = (a: string | MathNode | any) => {
   }
 
   console.log("[normalize] input: ", a.toString(), "output: ", r.toString());
-  if (r.value && r.value <= 10.432490598706546e-16) {
-    r.value = 0;
+  if (r.value) {
+    r.value = Math.round(r.value * 100000) / 100000;
   } else if (
     r.fn &&
     r.fn === "unaryMinus" &&
     r.args[0] &&
-    r.args[0] <= 10.432490598706546e-16
+    r.args[0] <= 10.4324905987546e-7
   ) {
     r = new m.ConstantNode(0);
   }

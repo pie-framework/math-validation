@@ -1,8 +1,9 @@
 export default {
-  //only: true,
+  // only: true,
   mode: "symbolic",
   tests: [
     {
+      //only: true,
       target: "0",
       eq: [
         "\\sin (2\\pi)",
