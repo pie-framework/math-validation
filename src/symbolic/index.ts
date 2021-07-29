@@ -56,12 +56,12 @@ const simplify = (v) => {
 const normalize = (a: string | MathNode | any) => {
   let r: string | MathNode | any = a;
 
-  try {
-    r = rationalize(a, {}, true).expression;
-  } catch (e) {
-    // ok;
-    //console.log(e, "failed to rationalize");
-  }
+  // try {
+  //   r = rationalize(a, {}, true).expression;
+  // } catch (e) {
+  //   // ok;
+  //   //console.log(e, "failed to rationalize");
+  // }
 
   if (r.fn === "equal") {
     r.args = r.args.map((arg) => {

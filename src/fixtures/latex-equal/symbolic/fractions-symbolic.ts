@@ -30,6 +30,12 @@ export default {
       ne: ["a * \\frac{1}{2}"],
     },
     {
+      only: true,
+      target: "2=2",
+      eq: ["1=1"],
+      ne: ["a * \\frac{1}{2}"],
+    },
+    {
       target: "a\\frac{1}{4}",
       eq: ["a * \\frac{1}{4}"],
       ne: ["a + \\frac{1}{2}"],

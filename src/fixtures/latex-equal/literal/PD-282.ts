@@ -17,5 +17,11 @@ export default {
       eq: ["1"],
       ne: ["1.0"],
     },
+    {
+      only: true,
+      target: "2=2",
+      eq: ["1=1"],
+      ne: ["a * \\frac{1}{2}"],
+    },
   ],
 };
