@@ -1157,8 +1157,11 @@ export class LatexToAst {
 
       this.advance();
     } else if (this.token.token_type === "deg") {
+      let degree = 355 / (180 * 113);
+
       // @ts-ignore
-      result = ["*", ["/", 1, 360], 2, ["/", 355, 113]];
+      result = ["*", degree];
+      //  }
 
       this.advance();
     } else if (this.token.token_type === "grad") {

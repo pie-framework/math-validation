@@ -106,17 +106,23 @@ const normalize = (a: string | MathNode | any) => {
     r = simplify(r);
   }
 
-  console.log("[normalize] input: ", a.toString(), "output: ", r.toString());
-  if (r.value) {
-    r.value = Math.round(r.value * 100000) / 100000;
-  } else if (
-    r.fn &&
-    r.fn === "unaryMinus" &&
-    r.args[0] &&
-    r.args[0] <= 10.4324905987546e-7
-  ) {
-    r = new m.ConstantNode(0);
-  }
+  // if (!isFinite(r)) {
+  //   console.log(r, "is not finite????????");
+  //   return new m.SymbolNode("Infinity");
+  // }
+
+  // console.log("[normalize] input: ", a.toString(), "output: ", r.toString());
+
+  // if (r.value) {
+  //   r.value = new m.Fraction(Math.round(r.value * 10000) / 10000);
+  // } else if (
+  //   r.fn &&
+  //   r.fn === "unaryMinus" &&
+  //   r.args[0] &&
+  //   r.args[0] <= 10.4324905987546e-7
+  // ) {
+  //   r = new m.ConstantNode(0);
+  // }
   return r;
 };
 
@@ -129,51 +135,65 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
 
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
 
-  log("[isMathEqual]", as.toString(), "==?", bs.toString());
+  if (
+    bs.fn &&
+    bs.fn === "unaryMinus" &&
+    bs.args[0] &&
+    //@ts-ignore
+    bs.args[0] < 1.00000000001 &&
+    //@ts-ignore
+    bs.args[0] > 0.999999
+  ) {
+    bs.args[0] = new m.ConstantNode(1);
+  }
+
+  if (as.toTex().trim() === bs.toTex().trim()) {
+    console.log("true");
+    return true;
+  }
+  console.log(as, "as");
+  console.log(bs, "bs");
+
+  console.log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
   const isSortingEnough = sort(a).equals(sort(b));
   let equality = as.equals(bs) || isSortingEnough;
 
-  if (!equality && as.fn === "equal" && bs.fn === "equal") {
-    let noFunctionOrArray = true;
+  // if (!equality && as.fn === "equal" && bs.fn === "equal") {
+  //   let noFunctionOrArray = true;
+  //   let symbolNode = false;
 
-    as.args = as.args.map((arg) => {
-      if (arg.isFunctionNode || arg.isArrayNode) {
-        noFunctionOrArray = false;
-      }
-      return arg;
-    });
+  //   as.args = as.args.map((arg) => {
+  //     if (arg.isFunctionNode || arg.isArrayNode) {
+  //       noFunctionOrArray = false;
+  //     }
+  //     if (arg.isSymbolNode) {
+  //       symbolNode = true;
+  //     }
+  //     return arg;
+  //   });
 
-    bs.args = bs.args.map((arg) => {
-      if (arg.isFunctionNode || arg.isArrayNode) {
-        noFunctionOrArray = false;
-      }
-      return arg;
-    });
+  //   bs.args = bs.args.map((arg) => {
+  //     if (arg.isFunctionNode || arg.isArrayNode) {
+  //       noFunctionOrArray = false;
+  //     }
+  //     if (arg.isSymbolNode) {
+  //       symbolNode = true;
+  //     }
+  //     return arg;
+  //   });
 
-    if (noFunctionOrArray) {
-      let ae = new m.OperatorNode("-", "subtract", as.args);
-      let be = new m.OperatorNode("-", "subtract", bs.args);
+  //   if (noFunctionOrArray && symbolNode) {
+  //     let ae = new m.OperatorNode("-", "subtract", as.args);
+  //     let be = new m.OperatorNode("-", "subtract", bs.args);
 
-      let af = sort(normalize(ae));
-      let bf = sort(normalize(be));
+  //     let af = sort(normalize(ae));
+  //     let bf = sort(normalize(be));
+  //     equality = isMathEqual(af, bf);
 
-      let eq = new m.OperatorNode("-", "subtract", [af, bf]);
-      let simp = sort(normalize(eq));
-      let trys = new m.OperatorNode("/", "divde", [simp, ae]);
-      let simpt = sort(simplify(trys));
-      console.log(simpt.toString(), "trys");
-
-      console.log(eq.toString(), "eq");
-      console.log(simp.toString(), "simp");
-      equality = isMathEqual(af, bf);
-      console.log(equality, "equality");
-      console.log(JSON.stringify(ae), "ae");
-      console.log(JSON.stringify(be), "be");
-
-      console.log("[isMathEqual]", ae.toString(), "==?", be.toString());
-    }
-  }
+  //     console.log("[isMathEqual]", ae.toString(), "==?", be.toString());
+  //   }
+  // }
 
   return equality;
 };

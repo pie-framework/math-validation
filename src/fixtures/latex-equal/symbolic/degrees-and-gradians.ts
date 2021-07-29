@@ -21,8 +21,14 @@ export default {
       ne: ["0.000000001"],
     },
     {
+      //only: true,
       target: "\\frac{1}{2}",
-      eq: ["\\sin(30°)"],
+      eq: ["\\sin(30°)", "\\cos(60°)"],
+    },
+    {
+      //only: true,
+      target: "1/2",
+      eq: ["0.5"],
     },
     {
       target: "1",
@@ -50,8 +56,40 @@ export default {
       eq: ["\\csc (60°)", "\\sec(30°)"],
     },
     {
+      target: "\\sqrt(2)",
+      eq: ["\\csc (45°)", "\\sec(45°)"],
+    },
+    {
       target: "\\sqrt(3)",
       eq: ["\\tan (60°)", "\\cot(30°)"],
+    },
+    {
+      target: "\\frac{\\sqrt(3)}{2}",
+      eq: ["\\sin (60°)", "\\cos(30°)"],
+    },
+    {
+      target: "-1",
+      eq: ["\\sin (270°)", "\\cos(180°)", "\\csc(270°)", "\\sec(180°)"],
+    },
+    {
+      target: "2",
+      eq: ["\\csc (30°)", "\\sec(60°)"],
+    },
+    {
+      //only: true,
+      target: "\\Infinity",
+      eq: [
+        "\\tan(90°)",
+        "\\tan(270°)",
+        "\\cot(0°)",
+        "\\cot(180°)",
+        "\\cot(360°)",
+        "\\csc(0°)",
+        "\\csc(180°)",
+        "\\csc(360°)",
+        "\\sec(90°)",
+        "\\sec(270°)",
+      ],
     },
   ],
 };

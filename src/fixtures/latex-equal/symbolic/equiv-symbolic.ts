@@ -40,8 +40,17 @@ export default {
       ],
     },
     {
+      only: true,
       // equation with no variable
       target: "2+2=4",
+      // they should not be equal
+      ne: ["1=1", "0.5=1/2", "9x=3(3x)"],
+    },
+    {
+      only: true,
+      // equation with no variable
+      target: "4=4",
+      eq: ["2=2"],
       // they should not be equal
       ne: ["1=1", "0.5=1/2", "9x=3(3x)"],
     },
@@ -53,7 +62,7 @@ export default {
     {
       // 3-way inequality with variable(s)
       target: "1<2x ≤ 3",
-      eq: ["3 ≥ 2x>1", "x/x<x+x≤1.5*2", "1/2<x ≤1.5"],
+      eq: ["3 ≥ 2x>1", "x/x<x+x≤1.5*2", "1/2<x ≤1.5"], //
     },
     {
       // inequality with no variable(s)
