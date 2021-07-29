@@ -56,32 +56,66 @@ const simplify = (v) => {
 const normalize = (a: string | MathNode | any) => {
   let r: string | MathNode | any = a;
 
-  try {
-    r = rationalize(a, {}, true).expression;
-  } catch (e) {
-    // ok;
-    //console.log(e, "failed to rationalize");
-  }
-
-  if (r.fn === "equal") {
-    r.args = r.args.map((arg) => {
-      if (!arg.isFunctionNode && !arg.isArrayNode) {
-        try {
-          arg = rationalize(arg, {}, true).expression;
-        } catch (e) {
-          // ok;
-        }
-      }
-
-      return arg;
-    });
-  }
-
+  let onlyConstant = true;
   let containsArrayNode = false;
 
   r.traverse(function (node, path, parent) {
     if (node.isArrayNode) {
       containsArrayNode = true;
+    }
+
+    return node;
+  });
+
+  if (r.fn === "equal") {
+    r.args = r.args.map((arg) => {
+      if (!arg.isFunctionNode && !arg.isArrayNode) {
+        //noSimplify = true;
+        console.log(arg, "arg");
+        try {
+          arg = rationalize(arg, {}, true).expression;
+        } catch (e) {
+          // ok;
+        }
+        if (!containsArrayNode) {
+          arg = simplify(arg);
+        }
+      }
+      if (!arg.isConstantNode) {
+        onlyConstant = false;
+      }
+
+      return arg;
+    });
+  } else {
+    onlyConstant = false;
+    try {
+      r = rationalize(a, {}, true).expression;
+    } catch (e) {
+      // ok;
+      //console.log(e, "failed to rationalize");
+    }
+  }
+
+  // if (r.args) {
+  //   r.args = r.args.map((arg) => {
+  //     if (!arg.isConstantNode) {
+  //       onlyConstant = false;
+  //     }
+  //   });
+  // }
+
+  if (!onlyConstant) {
+    try {
+      r = rationalize(a, {}, true).expression;
+    } catch (e) {
+      // ok;
+      //console.log(e, "failed to rationalize");
+    }
+  }
+
+  r.traverse(function (node, path, parent) {
+    if (node.isArrayNode) {
       node.items = node.items.map((item) => (item = simplify(item)));
     }
 
@@ -91,7 +125,7 @@ const normalize = (a: string | MathNode | any) => {
   // for relationalNode apply sort & simplify for all params
   if (r.conditionals && r.params) {
     r.params = r.params.map((param) => sort(simplify(param)));
-  } else if (!containsArrayNode) {
+  } else if (!containsArrayNode && !onlyConstant) {
     r = simplify(r);
   }
 
