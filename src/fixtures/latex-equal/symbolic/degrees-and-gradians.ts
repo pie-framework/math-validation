@@ -3,7 +3,6 @@ export default {
   mode: "symbolic",
   tests: [
     {
-      //only: true,
       target: "0",
       eq: [
         "\\sin (2\\pi)",
@@ -21,12 +20,10 @@ export default {
       ne: ["0.000000001"],
     },
     {
-      //only: true,
       target: "\\frac{1}{2}",
       eq: ["\\sin(30°)", "\\cos(60°)"],
     },
     {
-      //only: true,
       target: "1/2",
       eq: ["0.5"],
     },
@@ -76,7 +73,7 @@ export default {
       eq: ["\\csc (30°)", "\\sec(60°)"],
     },
     {
-      //only: true,
+      // only: true,
       target: "\\Infinity",
       eq: [
         "\\tan(90°)",

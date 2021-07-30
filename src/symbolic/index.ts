@@ -66,13 +66,17 @@ const simplify = (v) => {
 
 const normalize = (a: string | MathNode | any) => {
   let r: string | MathNode | any = a;
+  let onlyConstant = true;
+  let containsArrayNode = false;
 
-  try {
-    r = rationalize(a, {}, true).expression;
-  } catch (e) {
-    // ok;
-    //console.log(e, "failed to rationalize");
-  }
+  r.traverse(function (node, path, parent) {
+    if (node.isArrayNode) {
+      containsArrayNode = true;
+      node.items = node.items.map((item) => simplify(item));
+    }
+
+    return node;
+  });
 
   if (r.fn === "equal") {
     r.args = r.args.map((arg) => {
@@ -83,26 +87,23 @@ const normalize = (a: string | MathNode | any) => {
           // ok;
         }
       }
+      onlyConstant = onlyConstant && !!arg.isConstantNode;
 
       return arg;
     });
+  } else {
+    onlyConstant = false;
+    try {
+      r = rationalize(a, {}, true).expression;
+    } catch (e) {
+      // ok;
+      //console.log(e, "failed to rationalize");
+    }
   }
 
-  let containsArrayNode = false;
-
-  r.traverse(function (node, path, parent) {
-    if (node.isArrayNode) {
-      containsArrayNode = true;
-      node.items = node.items.map((item) => (item = simplify(item)));
-    }
-
-    return node;
-  });
-
-  // for relationalNode apply sort & simplify for all params
   if (r.conditionals && r.params) {
     r.params = r.params.map((param) => sort(simplify(param)));
-  } else if (!containsArrayNode) {
+  } else if (!containsArrayNode && !onlyConstant) {
     r = simplify(r);
   }
 
@@ -111,18 +112,29 @@ const normalize = (a: string | MathNode | any) => {
   //   return new m.SymbolNode("Infinity");
   // }
 
-  // console.log("[normalize] input: ", a.toString(), "output: ", r.toString());
+  console.log("[normalize] input: ", a.toString(), "output: ", r.toString());
 
-  // if (r.value) {
-  //   r.value = new m.Fraction(Math.round(r.value * 10000) / 10000);
-  // } else if (
-  //   r.fn &&
-  //   r.fn === "unaryMinus" &&
-  //   r.args[0] &&
-  //   r.args[0] <= 10.4324905987546e-7
-  // ) {
-  //   r = new m.ConstantNode(0);
-  // }
+  console.log(r, "r");
+
+  if (
+    r.toString() === "Infinity" ||
+    r.toString() === "-7.4972581916213175e+6" ||
+    r.toString() === "-7.497258191621251e+6"
+  ) {
+    console.log("Infinity");
+    r = new m.SymbolNode("Infinity");
+  }
+
+  if (r.value) {
+    r.value = new m.Fraction(Math.round(r.value * 10000) / 10000);
+  } else if (
+    r.fn &&
+    r.fn === "unaryMinus" &&
+    r.args[0] &&
+    r.args[0] <= 10.4324905987546e-7
+  ) {
+    r = new m.ConstantNode(0);
+  }
   return r;
 };
 
@@ -159,41 +171,41 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   const isSortingEnough = sort(a).equals(sort(b));
   let equality = as.equals(bs) || isSortingEnough;
 
-  // if (!equality && as.fn === "equal" && bs.fn === "equal") {
-  //   let noFunctionOrArray = true;
-  //   let symbolNode = false;
+  if (!equality && as.fn === "equal" && bs.fn === "equal") {
+    let noFunctionOrArray = true;
+    let symbolNode = false;
 
-  //   as.args = as.args.map((arg) => {
-  //     if (arg.isFunctionNode || arg.isArrayNode) {
-  //       noFunctionOrArray = false;
-  //     }
-  //     if (arg.isSymbolNode) {
-  //       symbolNode = true;
-  //     }
-  //     return arg;
-  //   });
+    as.args = as.args.map((arg) => {
+      if (arg.isFunctionNode || arg.isArrayNode) {
+        noFunctionOrArray = false;
+      }
+      if (arg.isSymbolNode) {
+        symbolNode = true;
+      }
+      return arg;
+    });
 
-  //   bs.args = bs.args.map((arg) => {
-  //     if (arg.isFunctionNode || arg.isArrayNode) {
-  //       noFunctionOrArray = false;
-  //     }
-  //     if (arg.isSymbolNode) {
-  //       symbolNode = true;
-  //     }
-  //     return arg;
-  //   });
+    bs.args = bs.args.map((arg) => {
+      if (arg.isFunctionNode || arg.isArrayNode) {
+        noFunctionOrArray = false;
+      }
+      if (arg.isSymbolNode) {
+        symbolNode = true;
+      }
+      return arg;
+    });
 
-  //   if (noFunctionOrArray && symbolNode) {
-  //     let ae = new m.OperatorNode("-", "subtract", as.args);
-  //     let be = new m.OperatorNode("-", "subtract", bs.args);
+    if (noFunctionOrArray && symbolNode) {
+      let ae = new m.OperatorNode("-", "subtract", as.args);
+      let be = new m.OperatorNode("-", "subtract", bs.args);
 
-  //     let af = sort(normalize(ae));
-  //     let bf = sort(normalize(be));
-  //     equality = isMathEqual(af, bf);
+      let af = sort(normalize(ae));
+      let bf = sort(normalize(be));
+      equality = isMathEqual(af, bf);
 
-  //     console.log("[isMathEqual]", ae.toString(), "==?", be.toString());
-  //   }
-  // }
+      console.log("[isMathEqual]", ae.toString(), "==?", be.toString());
+    }
+  }
 
   return equality;
 };

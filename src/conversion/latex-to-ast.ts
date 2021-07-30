@@ -258,6 +258,7 @@ export const latex_rules = [
   ["\\\\varphi(?![a-zA-Z])", "LATEXCOMMAND", "\\phi"],
 
   ["\\\\infty(?![a-zA-Z])", "INFINITY"],
+  ["\\\\Infinity(?![a-zA-Z])", "INFINITY"],
 
   ["\\\\sqrt(?![a-zA-Z])", "SQRT"],
   ["\\\\log(?![a-zA-Z])", "LOG"],
