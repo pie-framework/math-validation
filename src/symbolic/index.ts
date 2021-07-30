@@ -62,7 +62,7 @@ const normalize = (a: string | MathNode | any) => {
   r.traverse(function (node, path, parent) {
     if (node.isArrayNode) {
       containsArrayNode = true;
-      node.items = node.items.map((item) => (item = simplify(item)));
+      node.items = node.items.map((item) => simplify(item));
     }
 
     return node;
@@ -77,14 +77,14 @@ const normalize = (a: string | MathNode | any) => {
           // ok;
         }
       }
-      if (!arg.isConstantNode) {
-        onlyConstant = false;
-      }
+
+      onlyConstant = onlyConstant && !!arg.isConstantNode;
 
       return arg;
     });
   } else {
     onlyConstant = false;
+
     try {
       r = rationalize(a, {}, true).expression;
     } catch (e) {
