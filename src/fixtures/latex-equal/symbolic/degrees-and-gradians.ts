@@ -1,5 +1,4 @@
 export default {
-  // only: true,
   mode: "symbolic",
   tests: [
     {
@@ -73,7 +72,6 @@ export default {
       eq: ["\\csc (30°)", "\\sec(60°)"],
     },
     {
-      // only: true,
       target: "\\Infinity",
       eq: [
         "\\tan(90°)",

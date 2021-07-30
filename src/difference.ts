@@ -6,7 +6,7 @@ const log = debug("difference");
 export const differenceIsTooGreat = (a: RawAst, b: RawAst) => {
   const smallest = Math.min(a.toString().length, b.toString().length);
   const biggest = Math.max(a.toString().length, b.toString().length);
-  const errorAcceptance = 5;
+  const errorAcceptance = 6;
   const limit = (1 / smallest) * 100 + 10 + errorAcceptance;
   const diff = biggest - smallest;
 

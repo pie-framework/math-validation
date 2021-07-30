@@ -5,6 +5,11 @@ import { sort } from "../node-sort";
 
 const m: any = mathjs;
 const log = logger("mv:symbolic");
+const positiveInfinity = 1.497258191621251e6;
+const negativeInfinity = -1.497258191621251e6;
+const almostZero = 10.4324905987546e-7;
+const almostOneMin = 0.9999999999999999;
+const almostOneMax = 1.0000000000000001;
 
 export type SymbolicOpts = {};
 
@@ -21,8 +26,6 @@ const SIMPLIFY_RULES = [
   { l: "(v1-n)/n", r: "v1/n-1" },
   { l: "n/n1-c1", r: "(n-c1*n1)/n1" },
   { l: "i^2", r: "-1" },
-
-  //{ l: "1/(n1/n2)", r: "1*(n2/n1)" },
   // { l: "(n/n1) * n2", r: "t" },
 
   // perfect square formula:
@@ -38,7 +41,7 @@ const SIMPLIFY_RULES = [
   { l: "cot(n)", r: "1/tan(n)", r1: "cos(n)/sin(n)" },
   { l: "1/tan(n)", r: "cos(n)/sin(n)" },
 
-  { l: "pi", r: "3.14159265358979323846264338327950288419716939937510" },
+  { l: "pi", r: "3.141592653589793238462643" },
 
   // the Pythagorean formula for sines and cosines.
 
@@ -107,19 +110,15 @@ const normalize = (a: string | MathNode | any) => {
     r = simplify(r);
   }
 
-  // if (!isFinite(r)) {
-  //   console.log(r, "is not finite????????");
-  //   return new m.SymbolNode("Infinity");
-  // }
-
   console.log("[normalize] input: ", a.toString(), "output: ", r.toString());
 
   console.log(r, "r");
 
+  // check for infinity
   if (
     r.toString() === "Infinity" ||
-    r.toString() === "-7.4972581916213175e+6" ||
-    r.toString() === "-7.497258191621251e+6"
+    +r.toString() >= positiveInfinity ||
+    +r.toString() <= negativeInfinity
   ) {
     console.log("Infinity");
     r = new m.SymbolNode("Infinity");
@@ -127,14 +126,12 @@ const normalize = (a: string | MathNode | any) => {
 
   if (r.value) {
     r.value = new m.Fraction(Math.round(r.value * 10000) / 10000);
-  } else if (
-    r.fn &&
-    r.fn === "unaryMinus" &&
-    r.args[0] &&
-    r.args[0] <= 10.4324905987546e-7
-  ) {
+  } else if (+r.toString() <= almostZero) {
     r = new m.ConstantNode(0);
+  } else if (+r.toString() <= almostOneMax && +r.toString() > almostOneMin) {
+    r = new m.ConstantNode(1);
   }
+
   return r;
 };
 
@@ -147,30 +144,17 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
 
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
 
-  if (
-    bs.fn &&
-    bs.fn === "unaryMinus" &&
-    bs.args[0] &&
-    //@ts-ignore
-    bs.args[0] < 1.00000000001 &&
-    //@ts-ignore
-    bs.args[0] > 0.999999
-  ) {
-    bs.args[0] = new m.ConstantNode(1);
-  }
-
-  if (as.toTex().trim() === bs.toTex().trim()) {
-    console.log("true");
-    return true;
-  }
   console.log(as, "as");
   console.log(bs, "bs");
 
   console.log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
   const isSortingEnough = sort(a).equals(sort(b));
-  let equality = as.equals(bs) || isSortingEnough;
+  const isTexEnough = as.toTex().trim() === bs.toTex().trim();
 
+  let equality = isTexEnough || as.equals(bs) || isSortingEnough;
+
+  // if both expressions are equations
   if (!equality && as.fn === "equal" && bs.fn === "equal") {
     let noFunctionOrArray = true;
     let symbolNode = false;
