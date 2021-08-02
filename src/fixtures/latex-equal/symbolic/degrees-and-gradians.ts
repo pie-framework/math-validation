@@ -21,7 +21,18 @@ export default {
     },
     {
       target: "\\frac{1}{2}",
-      eq: ["\\sin(30°)", "\\cos(60°)", "\\sin (\\pi/6)", "\\cos (\\pi/3)"],
+      eq: [
+        "\\sin(30°)",
+        "\\sin(150°)",
+        "\\cos(60°)",
+        "\\sin (\\pi/6)",
+        "\\sin (5\\pi/6)",
+        "\\cos (\\pi/3)",
+      ],
+    },
+    {
+      target: "-\\frac{1}{2}",
+      eq: ["\\cos(120°)", "\\cos(2\\pi/3)"],
     },
     {
       target: "1/2",
@@ -64,7 +75,14 @@ export default {
     },
     {
       target: "\\frac{\\sqrt(3)}{2}",
-      eq: ["\\sin (60°)", "\\cos(30°)", "\\cos (\\pi/6)", "\\sin (\\pi/3)"],
+      eq: [
+        "\\sin (60°)",
+        "\\sin (120°)",
+        "\\cos(30°)",
+        "\\cos (\\pi/6)",
+        "\\sin (\\pi/3)",
+        "\\sin (2\\pi/3)",
+      ],
     },
     {
       target: "\\frac{\\sqrt(3)}{3}",
@@ -72,11 +90,39 @@ export default {
     },
     {
       target: "\\frac{\\sqrt(2)}{2}",
-      eq: ["\\sin(45°)", "\\sin (\\pi/4)", "\\cos(45°)", "\\cos (\\pi/4)"],
+      eq: [
+        "\\sin(45°)",
+        "\\sin(135°)",
+        "\\sin (\\pi/4)",
+        "\\sin (3\\pi/4)",
+        "\\cos(45°)",
+        "\\cos (\\pi/4)",
+      ],
+    },
+    {
+      target: "-\\frac{1}{\\sqrt(3)}",
+      eq: ["\\tan (5\\pi/6)", "\\cot(120°)", "\\cot(2\\pi/3)"],
+    },
+    {
+      target: "-\\frac{\\sqrt(2)}{2}",
+      eq: ["\\cos(135°)", "\\cos (3\\pi/4)"],
+    },
+    {
+      target: "-\\frac{\\sqrt(3)}{2}",
+      eq: ["\\cos(150°)", "\\cos (5\\pi/6)"],
     },
     {
       target: "-1",
-      eq: ["\\sin (270°)", "\\cos(180°)", "\\csc(270°)", "\\sec(180°)"],
+      eq: [
+        "\\sin (270°)",
+        "\\tan (135°)",
+        "\\cot (135°)",
+        "\\tan (3\\pi/4)",
+        "\\cot (3\\pi/4)",
+        "\\cos(180°)",
+        "\\csc(270°)",
+        "\\sec(180°)",
+      ],
     },
     {
       target: "2",

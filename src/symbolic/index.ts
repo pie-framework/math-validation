@@ -124,6 +124,11 @@ const normalize = (a: string | MathNode | any) => {
 
   if (r.value) {
     r.value = new m.Fraction(Math.round(r.value * 10000) / 10000);
+  } else if (r.fn === "unaryMinus") {
+    r.args[0].value = new m.Fraction(
+      Math.round(r.args[0].value * 10000) / 10000
+    );
+    r = simplify(r);
   } else if (+r.toString() <= almostZero) {
     r = new m.ConstantNode(0);
   } else if (+r.toString() <= almostOneMax && +r.toString() > almostOneMin) {
