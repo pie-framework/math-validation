@@ -26,22 +26,20 @@ const SIMPLIFY_RULES = [
   { l: "(v1-n)/n", r: "v1/n-1" },
   { l: "n/n1-c1", r: "(n-c1*n1)/n1" },
   { l: "i^2", r: "-1" },
-  // { l: "(n/n1) * n2", r: "t" },
+  { l: "pi", r: "3.141592653589793" },
 
   // perfect square formula:
   { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
   // { l: "(n^2) + 4n + 4", r: "(n^2) + (2n * 2) + (2^2)" },
   { l: "tzn(n1, n2)", r: "n1" },
   { l: "n1/(-n2)", r: "-(n1/n2)" },
-
+  { l: "sin(n*pi)", r: "0" },
   // trigonometry: defining relations for tangent, cotangent, secant, and cosecant in terms of sine and cosine
   { l: "sin(n)/cos(n)", r: "tan(n)" },
   { l: "csc(n)", r: "1/sin(n)" },
   { l: "sec(n)", r: "1/cos(n)" },
   { l: "cot(n)", r: "1/tan(n)", r1: "cos(n)/sin(n)" },
   { l: "1/tan(n)", r: "cos(n)/sin(n)" },
-
-  { l: "pi", r: "3.141592653589793238462643" },
 
   // the Pythagorean formula for sines and cosines.
 
@@ -160,19 +158,19 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
     let symbolNode = false;
 
     as.args = as.args.map((arg) => {
-      if (arg.isFunctionNode || arg.isArrayNode) {
-        noFunctionOrArray = false;
-      }
+      noFunctionOrArray =
+        !!noFunctionOrArray && (!arg.isFunctionNode || !arg.isArrayNode);
       if (arg.isSymbolNode) {
         symbolNode = true;
       }
+
       return arg;
     });
 
     bs.args = bs.args.map((arg) => {
-      if (arg.isFunctionNode || arg.isArrayNode) {
-        noFunctionOrArray = false;
-      }
+      noFunctionOrArray =
+        !!noFunctionOrArray && (!arg.isFunctionNode || !arg.isArrayNode);
+
       if (arg.isSymbolNode) {
         symbolNode = true;
       }
@@ -183,10 +181,16 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
       let ae = new m.OperatorNode("-", "subtract", as.args);
       let be = new m.OperatorNode("-", "subtract", bs.args);
 
-      let af = sort(normalize(ae));
-      let bf = sort(normalize(be));
-      equality = isMathEqual(af, bf);
+      // let af = sort(normalize(ae));
+      // let bf = sort(normalize(be));
+      equality = isMathEqual(ae, be);
 
+      let minus = new m.ConstantNode(-1);
+      if (!equality && noFunctionOrArray && symbolNode) {
+        be = new m.OperatorNode("*", "multiply", [minus, be]);
+      }
+
+      equality = isMathEqual(ae, be);
       console.log("[isMathEqual]", ae.toString(), "==?", be.toString());
     }
   }

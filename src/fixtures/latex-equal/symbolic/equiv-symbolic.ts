@@ -3,7 +3,11 @@ export default {
 
   tests: [
     {
-      // only: true,
+      target: " \\frac{1}{2}x +5-y",
+      eq: ["-y+ \\frac{1}{2}x +5"],
+    },
+    {
+      //only: true,
       // equation with variable
       target: "y= \\frac{1}{2}x +5",
 
@@ -22,9 +26,10 @@ export default {
         "-2y =-x -10",
         // Add a number to both sides of the equation
         "y-5 =\\frac{x}{2}",
+        "-5 =\\frac{1}{2}x-y",
         // Subtract one of the variables from both sides of the equation
         "0=x/2-y+5",
-        //Add a new variable to both sides of the equation
+        // Add a new variable to both sides of the equation
         "z=x/2-y+5 +z",
         // Divide both sides of the equation by y
         "1=\\frac{x}{2y}+\\frac{5}{y}",
@@ -86,11 +91,6 @@ export default {
       target: "\\tan x",
       eq: ["\\frac{\\sin x}{\\cos x} "],
     },
-    // the Pythagorean formula for sines and cosines.
-    // {
-    //   target: "1",
-    //   eq: ["\\sin^{2}x + \\cos^{2}x "],
-    // },
     {
       target: "\\cot x",
       eq: ["\\frac{1}{\\frac{\\sin x}{\\cos x}} ", "\\frac{\\cos x}{\\sin x} "],
@@ -109,7 +109,6 @@ export default {
     },
     {
       target: "1",
-
       eq: ["\\sin(90°)"],
     },
     {
@@ -121,7 +120,6 @@ export default {
     {
       //only: true,
       target: "\\frac{\\sqrt2}{2}",
-
       eq: ["\\sin(45°)"],
     },
     {

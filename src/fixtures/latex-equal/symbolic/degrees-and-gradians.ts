@@ -15,12 +15,13 @@ export default {
         "\\tan(360°)",
         "\\cot(90°)",
         "\\cot(270°)",
+        "\\cos (\\pi/2)",
       ],
       ne: ["0.000000001"],
     },
     {
       target: "\\frac{1}{2}",
-      eq: ["\\sin(30°)", "\\cos(60°)"],
+      eq: ["\\sin(30°)", "\\cos(60°)", "\\sin (\\pi/6)", "\\cos (\\pi/3)"],
     },
     {
       target: "1/2",
@@ -37,6 +38,8 @@ export default {
         "\\csc(90°)",
         "\\sec(0°)",
         "\\sec(360°)",
+        "\\tan (\\pi/4)",
+        "\\sin (\\pi/2)",
       ],
     },
     {
@@ -57,11 +60,19 @@ export default {
     },
     {
       target: "\\sqrt(3)",
-      eq: ["\\tan (60°)", "\\cot(30°)"],
+      eq: ["\\tan (60°)", "\\cot(30°)", "\\tan (\\pi/3)"],
     },
     {
       target: "\\frac{\\sqrt(3)}{2}",
-      eq: ["\\sin (60°)", "\\cos(30°)"],
+      eq: ["\\sin (60°)", "\\cos(30°)", "\\cos (\\pi/6)", "\\sin (\\pi/3)"],
+    },
+    {
+      target: "\\frac{\\sqrt(3)}{3}",
+      eq: ["\\tan(30°)", "\\tan (\\pi/6)"],
+    },
+    {
+      target: "\\frac{\\sqrt(2)}{2}",
+      eq: ["\\sin(45°)", "\\sin (\\pi/4)", "\\cos(45°)", "\\cos (\\pi/4)"],
     },
     {
       target: "-1",
@@ -84,6 +95,7 @@ export default {
         "\\csc(360°)",
         "\\sec(90°)",
         "\\sec(270°)",
+        "\\tan (\\pi/2)",
       ],
     },
   ],
