@@ -2,9 +2,6 @@ import { ParseError } from "./error";
 import lexer, { Token } from "./lexer";
 import { flatten } from "./flatten";
 import { logger } from "../log";
-import { mathjs } from "../mathjs";
-
-const m: any = mathjs;
 
 const log = logger("mv:latex-to-ast");
 // UPDATETHIS: Delete or change to new license & package name
@@ -243,10 +240,10 @@ export const latex_rules = [
 
   ["°", "deg"],
   ["°", "deg"],
-  ["\\deg", "deg"],
-  ["\\grade", "grad"],
-  ["\\gon", "grad"],
-  ["\\grad", "grad"],
+  ["\\\\deg", "deg"],
+  ["\\\\grade", "grad"],
+  ["\\\\gon", "grad"],
+  ["\\\\grad", "grad"],
 
   [":", ":"],
   ["\\\\mid", "MID"],
@@ -1158,17 +1155,17 @@ export class LatexToAst {
 
       this.advance();
     } else if (this.token.token_type === "deg") {
-      let degree = 355 / (180 * 113);
+      const degree = 355 / (180 * 113);
 
       // @ts-ignore
       result = ["*", degree];
-      //  }
 
       this.advance();
     } else if (this.token.token_type === "grad") {
-      // @ts-ignore
-      result = ["*", ["/", 1, 400], 2, "pi"];
+      const gradian = 355 / (200 * 113);
 
+      // @ts-ignore
+      result = ["*", gradian];
       this.advance();
     } else if (this.token.token_type === "UNIT") {
       // @ts-ignore

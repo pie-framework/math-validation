@@ -2,6 +2,9 @@ import { LatexToAst } from "../latex-to-ast";
 // const k = require("katex");
 // import { latexParser } from "latex-utensils";
 
+const degree = 355 / (180 * 113);
+const gradian = 355 / (200 * 113);
+
 const fixtures = [
   //parentheses are stripped!
   ["(1 + (1 + 1))", ["+", 1, 1, 1]],
@@ -110,6 +113,21 @@ const fixtures = [
   ["f^{-1}(x) = x+5", ["=", ["*", "f^{-1}", "x"], ["+", "x", 5]]],
   ["g^{-1}(y)", ["*", "g^{-1}", "y"]],
   ["g^{-1}(y) = y-5", ["=", ["*", "g^{-1}", "y"], ["+", "y", ["-", 5]]]],
+
+  ["\\cos\\pi", ["apply", "cos", "pi"]],
+  ["\\cos \\π", ["apply", "cos", "pi"]],
+
+  // degrees
+  ["\\sin180°", ["*", ["apply", "sin", 180], degree]],
+  ["\\sin90°", ["*", ["apply", "sin", 90], degree]],
+  ["\\tan90\\deg", ["*", ["apply", "tan", 90], degree]],
+
+  // grades
+  ["\\sin100\\grad", ["*", ["apply", "sin", 100], gradian]],
+  ["\\cos90\\grade", ["*", ["apply", "cos", 90], gradian]],
+  ["\\tan90\\gon", ["*", ["apply", "tan", 90], gradian]],
+
+  ["\\cosec(x)", ["apply", "csc", "x"]],
 
   // inverse trigonometric functions
   ["\\sin^{-1}(x)", ["apply", "asin", "x"]],

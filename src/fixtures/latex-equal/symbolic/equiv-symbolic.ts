@@ -7,7 +7,6 @@ export default {
       eq: ["-y+ \\frac{1}{2}x +5"],
     },
     {
-      //only: true,
       // equation with variable
       target: "y= \\frac{1}{2}x +5",
 
@@ -45,6 +44,7 @@ export default {
       ],
     },
     {
+      only: true,
       // equation with no variable
       target: "2+2=4",
       // they should not be equal
@@ -96,7 +96,6 @@ export default {
       eq: ["\\frac{1}{\\frac{\\sin x}{\\cos x}} ", "\\frac{\\cos x}{\\sin x} "],
     },
     {
-      //   only: true,
       target: "0",
 
       eq: [
@@ -112,13 +111,10 @@ export default {
       eq: ["\\sin(90°)"],
     },
     {
-      // only: true,
       target: "-1",
-
       eq: ["\\cos(180°)"],
     },
     {
-      //only: true,
       target: "\\frac{\\sqrt2}{2}",
       eq: ["\\sin(45°)"],
     },
