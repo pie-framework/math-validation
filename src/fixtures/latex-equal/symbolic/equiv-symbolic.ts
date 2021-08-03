@@ -44,7 +44,6 @@ export default {
       ],
     },
     {
-      only: true,
       // equation with no variable
       target: "2+2=4",
       // they should not be equal

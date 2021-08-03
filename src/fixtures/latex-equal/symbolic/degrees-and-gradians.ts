@@ -35,6 +35,7 @@ export default {
       eq: ["\\cos(120°)", "\\cos(2\\pi/3)"],
     },
     {
+      only: true,
       target: "1/2",
       eq: ["0.5"],
     },

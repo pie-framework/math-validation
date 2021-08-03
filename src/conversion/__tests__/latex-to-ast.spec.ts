@@ -2,7 +2,10 @@ import { LatexToAst } from "../latex-to-ast";
 // const k = require("katex");
 // import { latexParser } from "latex-utensils";
 
+// conversion of degrees in radians - angle configuration
 const degree = 355 / (180 * 113);
+
+//conversion of gradians in radians - angle configuration
 const gradian = 355 / (200 * 113);
 
 const fixtures = [
@@ -153,6 +156,24 @@ const fixtures = [
   ["\\csc^{-1}(x)", ["apply", "acsc", "x"]],
   ["\\arcsc(x)", ["apply", "acsc", "x"]],
   ["\\arccsc(x)", ["apply", "acsc", "x"]],
+
+  // geometry
+  ["\\nparallel x", ["*", "nparallel", "x"]],
+  ["\\overrightarrow x", ["*", "overrightarrow", "x"]],
+  ["\\overleftrightarrow x", ["*", "overleftrightarrow", "x"]],
+  ["\\perp x", ["*", "perp", "x"]],
+  ["\\angle x", ["*", "angle", "x"]],
+  ["\\measuredangle x", ["*", "measuredangle", "x"]],
+  ["\\triangle x", ["*", "triangle", "x"]],
+  ["\\parallelogram x", ["*", "parallelogram", "x"]],
+  ["\\odot x", ["*", "odot", "x"]],
+  ["\\degree x", ["*", degree, "x"]],
+  ["a\\sim x", ["~", "a", "x"]],
+  ["z\\cong x", ["≅", "z", "x"]],
+  ["y\\ncong x", ["≆", "y", "x"]],
+  [" x\\napprox y", ["≉", "x", "y"]],
+  ["\\nim x", ["*", "nim", "x"]],
+  ["\\angle x", ["*", "angle", "x"]],
 ];
 
 const lta = new LatexToAst();

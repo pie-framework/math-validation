@@ -43,7 +43,6 @@ export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {
   const amo = atm.convert(al);
 
   const bmo = atm.convert(bl);
-  console.log(JSON.stringify(bmo), "bmo");
 
   if (opts.mode === "literal") {
     return isLiteralEqual(amo, bmo, opts.literal);

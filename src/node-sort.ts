@@ -2,7 +2,7 @@ import { logger } from "./log";
 
 import { mathjs as mjs } from "./mathjs";
 
-import { MathNode, subtract } from "mathjs";
+import { MathNode } from "mathjs";
 
 const m: any = mjs;
 

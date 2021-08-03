@@ -240,7 +240,9 @@ export const latex_rules = [
 
   ["°", "deg"],
   ["°", "deg"],
+  ["\\\\degree", "deg"],
   ["\\\\deg", "deg"],
+
   ["\\\\grade", "grad"],
   ["\\\\gon", "grad"],
   ["\\\\grad", "grad"],
@@ -1155,6 +1157,7 @@ export class LatexToAst {
 
       this.advance();
     } else if (this.token.token_type === "deg") {
+      // conversion of degrees in radians - angle configuration
       const degree = 355 / (180 * 113);
 
       // @ts-ignore
@@ -1162,6 +1165,7 @@ export class LatexToAst {
 
       this.advance();
     } else if (this.token.token_type === "grad") {
+      //conversion of gradians in radians - angle configuration
       const gradian = 355 / (200 * 113);
 
       // @ts-ignore

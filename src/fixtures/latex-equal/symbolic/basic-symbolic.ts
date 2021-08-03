@@ -40,6 +40,14 @@ export default {
     },
     {
       target: "(x + 2)^2",
+      eq: [
+        /** when simplified w/ perfect square formula - should be this */
+        "(x + 2)^2",
+        "(2 + x)^2",
+        "x^2 + 4x + 4",
+        "x^2 + 4(x+1)",
+        "x^2 + 8 ((x+1) / 2)",
+      ],
       ne: ["x^3 + 4x + 4"],
     },
 
@@ -47,10 +55,14 @@ export default {
       target: "y^(2 x)",
       eq: ["y^(x+x)"],
     },
+    {
+      target: "(2 + x)^2x",
+      eq: ["(x + 2)^2x"],
+    },
 
     {
       target: "\\sqrt{4x}",
-      eq: ["\\sqrt{3x + 1x}"],
+      eq: ["\\sqrt{3x + 1x}", "\\sqrt(2x+2x)"],
     },
     {
       target: "1000",
