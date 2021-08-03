@@ -56,12 +56,17 @@ const simplify = (v) => {
 const normalize = (a: string | MathNode | any) => {
   let r: string | MathNode | any = a;
 
-  try {
-    r = rationalize(a, {}, true).expression;
-  } catch (e) {
-    // ok;
-    //console.log(e, "failed to rationalize");
-  }
+  let onlyConstant = true;
+  let containsArrayNode = false;
+
+  r.traverse(function (node, path, parent) {
+    if (node.isArrayNode) {
+      containsArrayNode = true;
+      node.items = node.items.map((item) => simplify(item));
+    }
+
+    return node;
+  });
 
   if (r.fn === "equal") {
     r.args = r.args.map((arg) => {
@@ -73,25 +78,24 @@ const normalize = (a: string | MathNode | any) => {
         }
       }
 
+      onlyConstant = onlyConstant && !!arg.isConstantNode;
+
       return arg;
     });
+  } else {
+    onlyConstant = false;
+
+    try {
+      r = rationalize(a, {}, true).expression;
+    } catch (e) {
+      // ok;
+      //console.log(e, "failed to rationalize");
+    }
   }
 
-  let containsArrayNode = false;
-
-  r.traverse(function (node, path, parent) {
-    if (node.isArrayNode) {
-      containsArrayNode = true;
-      node.items = node.items.map((item) => (item = simplify(item)));
-    }
-
-    return node;
-  });
-
-  // for relationalNode apply sort & simplify for all params
   if (r.conditionals && r.params) {
     r.params = r.params.map((param) => sort(simplify(param)));
-  } else if (!containsArrayNode) {
+  } else if (!containsArrayNode && !onlyConstant) {
     r = simplify(r);
   }
 
