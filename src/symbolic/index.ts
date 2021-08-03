@@ -41,7 +41,7 @@ const SIMPLIFY_RULES = [
   { l: "cot(n)", r: "1/tan(n)", r1: "cos(n)/sin(n)" },
   { l: "1/tan(n)", r: "cos(n)/sin(n)" },
 
-  // the Pythagorean formula for sines and cosines.
+  // TO DO: the Pythagorean formula for sines and cosines.
 
   // inverse trigonometric functions relations
   { l: "n1 == asin(n)", r: "n == sin(n1)" },
@@ -108,9 +108,7 @@ const normalize = (a: string | MathNode | any) => {
     r = simplify(r);
   }
 
-  console.log("[normalize] input: ", a.toString(), "output: ", r.toString());
-
-  console.log(r, "r");
+  log("[normalize] input: ", a.toString(), "output: ", r.toString());
 
   // check for infinity
   if (
@@ -118,7 +116,6 @@ const normalize = (a: string | MathNode | any) => {
     +r.toString() >= positiveInfinity ||
     +r.toString() <= negativeInfinity
   ) {
-    console.log("Infinity");
     r = new m.SymbolNode("Infinity");
   }
 
@@ -147,10 +144,7 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
 
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
 
-  console.log(as, "as");
-  console.log(bs, "bs");
-
-  console.log("[isMathEqual]", as.toString(), "==?", bs.toString());
+  log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
   const isSortingEnough = sort(a).equals(sort(b));
   const isTexEnough = as.toTex().trim() === bs.toTex().trim();
@@ -185,18 +179,16 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
     if (noFunctionOrArray && symbolNode) {
       let ae = new m.OperatorNode("-", "subtract", as.args);
       let be = new m.OperatorNode("-", "subtract", bs.args);
+      let minus = new m.ConstantNode(-1);
 
-      // let af = sort(normalize(ae));
-      // let bf = sort(normalize(be));
       equality = isMathEqual(ae, be);
 
-      let minus = new m.ConstantNode(-1);
       if (!equality && noFunctionOrArray && symbolNode) {
         be = new m.OperatorNode("*", "multiply", [minus, be]);
+        equality = isMathEqual(ae, be);
       }
 
-      equality = isMathEqual(ae, be);
-      console.log("[isMathEqual]", ae.toString(), "==?", be.toString());
+      log("[isMathEqual]", ae.toString(), "==?", be.toString());
     }
   }
 
