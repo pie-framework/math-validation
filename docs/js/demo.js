@@ -373,14 +373,18 @@ const sci_notat_exp_regex =
 const lengthUnit = "(mm|cm|km|ft|yd|mi|mmi|li|rd|angstrom|mil";
 const volumeUnit = "|mL|ml|L|m3|in3|ft3|pt|qt|gal|bbl)";
 const measurmentUnit = lengthUnit + volumeUnit + "{1}";
+const numberWithCommasAsThousandsSeparator =
+  "[0-9]{1,3}(\\,[0-9]{3})+(\\.[0-9]+)*";
 
 // const latex_rules = [["\\\\neq(?![a-zA-Z])", "NE"]];
 const latex_rules = [
   [measurmentUnit, "UNIT"],
   ["\\\\text{[a-zA-Z0-9\\s\\\\,\\\\.]+?}", "TEXT"],
   ["[0-9]+\\s*\\\\frac(?![a-zA-Z])", "MIXED_NUMBER"],
-  ["[0-9|,]+(\\.[0-9]*)?" + sci_notat_exp_regex, "NUMBER"],
-  ["\\.[0-9|,]+" + sci_notat_exp_regex, "NUMBER"],
+  [numberWithCommasAsThousandsSeparator + sci_notat_exp_regex, "NUMBER"],
+  ["[0-9]+(\\.[0-9]*)?" + sci_notat_exp_regex, "NUMBER"],
+  ["\\.[0-9]+" + sci_notat_exp_regex, "NUMBER"],
+  [",", ","],
   ["\\*", "*"],
   ["\\×", "*"],
   ["\\•", "*"],
@@ -449,7 +453,7 @@ const latex_rules = [
   ["\\\\div(?![a-zA-Z])", "/"],
   ["\\\\times(?![a-zA-Z])", "*"],
   ["\\\\frac(?![a-zA-Z])", "FRAC"],
-  [",", ","],
+
   [":", ":"],
   ["\\\\mid", "MID"],
 
@@ -460,12 +464,30 @@ const latex_rules = [
 
   ["\\\\infty(?![a-zA-Z])", "INFINITY"],
 
-  ["\\\\asin(?![a-zA-Z])", "LATEXCOMMAND", "\\arcsin"],
-  ["\\\\acos(?![a-zA-Z])", "LATEXCOMMAND", "\\arccos"],
-  ["\\\\atan(?![a-zA-Z])", "LATEXCOMMAND", "\\arctan"],
   ["\\\\sqrt(?![a-zA-Z])", "SQRT"],
   ["\\\\log(?![a-zA-Z])", "LOG"],
   ["\\\\ln(?![a-zA-Z])", "LN"],
+
+  // inverse trigonometric functions
+  ["\\\\sin\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\asin"],
+  ["\\\\cos\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\acos"],
+  ["\\\\tan\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\atan"],
+  ["\\\\cot\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\acot"],
+  ["\\\\sec\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\asec"],
+  ["\\\\csc\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\acsc"],
+
+  ["\\\\arsin(?![a-zA-Z])", "LATEXCOMMAND", "\\asin"],
+  ["\\\\arcsin(?![a-zA-Z])", "LATEXCOMMAND", "\\asin"],
+  ["\\\\arcos(?![a-zA-Z])", "LATEXCOMMAND", "\\acos"],
+  ["\\\\arccos(?![a-zA-Z])", "LATEXCOMMAND", "\\acos"],
+  ["\\\\artan(?![a-zA-Z])", "LATEXCOMMAND", "\\atan"],
+  ["\\\\arctan(?![a-zA-Z])", "LATEXCOMMAND", "\\atan"],
+  ["\\\\arcot(?![a-zA-Z])", "LATEXCOMMAND", "\\acot"],
+  ["\\\\arccot(?![a-zA-Z])", "LATEXCOMMAND", "\\acot"],
+  ["\\\\arsec(?![a-zA-Z])", "LATEXCOMMAND", "\\asec"],
+  ["\\\\arcsec(?![a-zA-Z])", "LATEXCOMMAND", "\\asec"],
+  ["\\\\arcsc(?![a-zA-Z])", "LATEXCOMMAND", "\\acsc"],
+  ["\\\\arccsc(?![a-zA-Z])", "LATEXCOMMAND", "\\acsc"],
 
   ["\\\\land(?![a-zA-Z])", "AND"],
   ["\\\\wedge(?![a-zA-Z])", "AND"],
@@ -479,6 +501,7 @@ const latex_rules = [
   ["\\\\neq(?![a-zA-Z])", "NE"],
   ["\\\\ne(?![a-zA-Z])", "NE"],
   ["\\\\not\\s*=", "NE"],
+  ["≠", "NE"],
   ["\\\\leq(?![a-zA-Z])", "LE"],
   ["\\\\le(?![a-zA-Z])", "LE"],
   ["\\\\geq(?![a-zA-Z])", "GE"],
@@ -489,6 +512,38 @@ const latex_rules = [
   [">", ">"],
   ["≥", "GE"],
   ["\\\\gt(?![a-zA-Z])", ">"],
+
+  // is approximately
+  ["\\\\approx", "≈"],
+  ["≈", "≈"],
+
+  // not almost equal to
+  ["\\\\napprox", "≉"],
+  ["≉", "≉"],
+
+  // is similar or equal to
+  ["\\\\simeq", "≃"],
+  ["≃", "≃"],
+
+  // is similar to
+  ["\\\\sim", "~"],
+  ["~", "~"],
+
+  // is not similar to
+  ["\\\\nsim", "≁"],
+  ["≁", "≁"],
+
+  // is congruent to
+  ["\\\\cong", "≅"],
+  ["≅", "≅"],
+
+  // is not congurent to
+  ["\\\\ncong", "≆"],
+  ["≆", "≆"],
+
+  // inverse f and g functions are treated as text
+  ["f\\^\\{-1}", "TEXT"],
+  ["g\\^\\{-1}", "TEXT"],
 
   ["\\\\in(?![a-zA-Z])", "IN"],
 
@@ -524,8 +579,9 @@ const latex_rules = [
   ["\\\\end\\s*{\\s*[a-zA-Z0-9]+\\s*}", "ENDENVIRONMENT"],
 
   ["\\\\var\\s*{\\s*[a-zA-Z0-9]+\\s*}", "VARMULTICHAR"],
-  ["[a-zA-Z]", "VAR"],
+
   ["\\\\[a-zA-Z]+(?![a-zA-Z])", "LATEXCOMMAND"],
+  ["[a-zA-Z]", "VAR"],
 ];
 
 // defaults for parsers if not overridden by context
@@ -610,13 +666,6 @@ const appliedFunctionSymbolsDefault = [
   "sinh",
   "tan",
   "tanh",
-  "arcsin",
-  "arccos",
-  "arctan",
-  "arccsc",
-  "arcsec",
-  "arccot",
-  "cosec",
   "arg",
 ];
 
@@ -856,7 +905,14 @@ class LatexToAst {
       this.token.token_type === "SUBSET" ||
       this.token.token_type === "NOTSUBSET" ||
       this.token.token_type === "SUPERSET" ||
-      this.token.token_type === "NOTSUPERSET"
+      this.token.token_type === "NOTSUPERSET" ||
+      this.token.token_type === "≈" ||
+      this.token.token_type === "≉" ||
+      this.token.token_type === "~" ||
+      this.token.token_type === "≃" ||
+      this.token.token_type === "≁" ||
+      this.token.token_type === "≅" ||
+      this.token.token_type === "≆"
     ) {
       let operation = this.token.token_type.toLowerCase();
 
@@ -894,7 +950,7 @@ class LatexToAst {
 
         lhs = ["relational", args, strict];
       } else if (operation === "=") {
-        lhs = ["=", lhs, rhs];
+        lhs = [operation, lhs, rhs];
 
         // check for sequence of multiple =
         while (this.token.token_type === "=") {
@@ -1024,7 +1080,7 @@ class LatexToAst {
   }
 
   nonMinusFactor(params) {
-    var result = this.baseFactor(params);
+    let result = this.baseFactor(params);
 
     // allow arbitrary sequence of factorials
     if (this.token.token_type === "!" || this.token.token_type === "'") {
@@ -1132,7 +1188,6 @@ class LatexToAst {
         // this is correct, to convert a mixed number to an improper fraction we have to multiply the demoninator by the whole number and add the result to the numerator
         return ["+", number, f];
       } catch (e) {
-        console.log("errror");
         throw new ParseError(`Mixed number parsing failed: ${e.message}`);
       }
     }
@@ -1261,15 +1316,27 @@ class LatexToAst {
     }
 
     if (this.token.token_type === "NUMBER") {
-      /** TODO: this is a bit primitive, should try and parse commas in numbers correctly */
       // @ts-ignore
       result = this.token.token_text.replace(/,/g, "");
+
+      let removeLeadingZeros = (result) =>
+        result.indexOf(".") >= 0
+          ? result.replace(/^[0]*([0-9])(.*)/, "$1$2")
+          : result.replace(/0*([1-9]*)/, "$1");
+
       // @ts-ignore
-      const number = parseFloat(result);
+      let parsedNumber = result === "0" ? result : removeLeadingZeros(result);
+
+      if (parsedNumber.startsWith(".")) {
+        parsedNumber = "0" + parsedNumber;
+      }
+
+      const number = parseFloat(parsedNumber);
 
       /** trailing zero number ['tzn', number, countOfZeros] */
+
       // @ts-ignore
-      if (result !== number.toString()) {
+      if (parsedNumber !== number.toString()) {
         const p = number.toString();
         // @ts-ignore
         const sub = result
@@ -1505,11 +1572,6 @@ class LatexToAst {
           }
           this.advance();
 
-          if (parameters[0] === "list") {
-            // rename from list to tuple
-            parameters[0] = "tuple";
-          }
-
           // @ts-ignore
           result = ["apply", result, parameters];
         } else {
@@ -1579,19 +1641,19 @@ class LatexToAst {
         }
 
         // half-open interval
-        result[0] = "tuple";
+        result[0] = "list";
         // @ts-ignore
         result = ["interval", result];
         let closed;
-        if (token_left === "(") closed = ["tuple", false, true];
-        else closed = ["tuple", true, false];
+        if (token_left === "(") closed = ["list", false, true];
+        else closed = ["list", true, false];
         // @ts-ignore
         result.push(closed);
       } else if (n_elements >= 2) {
         if (token_left === "(" || token_left === "{") {
-          result[0] = "tuple";
+          result[0] = "list";
         } else if (token_left === "[") {
-          result[0] = "array";
+          result[0] = "list";
         } else {
           result[0] = "set";
         }
@@ -55385,15 +55447,14 @@ function createComplexEigs(_ref) {
     diag,
     inv,
     qr,
+    usolve,
     usolveAll,
     equal,
     complex,
     larger,
     smaller,
-    round,
-    log10,
-    transpose,
-    matrixFromColumns
+    matrixFromColumns,
+    dot
   } = _ref;
 
   /**
@@ -55436,7 +55497,7 @@ function createComplexEigs(_ref) {
     var vectors;
 
     if (findVectors) {
-      vectors = findEigenvectors(arr, N, C, values, prec);
+      vectors = findEigenvectors(arr, N, C, values, prec, type);
       vectors = matrixFromColumns(...vectors);
     }
 
@@ -55769,13 +55830,18 @@ function createComplexEigs(_ref) {
    * @param {number} N size of A
    * @param {Matrix} C column transformation matrix that turns A into upper triangular
    * @param {number[]} values array of eigenvalues of A
+   * @param {'number'|'BigNumber'|'Complex'} type
    * @returns {number[][]} eigenvalues
    */
 
 
-  function findEigenvectors(A, N, C, values, prec) {
+  function findEigenvectors(A, N, C, values, prec, type) {
     var Cinv = inv(C);
-    var U = multiply(Cinv, A, C); // turn values into a kind of "multiset"
+    var U = multiply(Cinv, A, C);
+    var big = type === 'BigNumber';
+    var cplx = type === 'Complex';
+    var zero = big ? bignumber(0) : cplx ? complex(0) : 0;
+    var one = big ? bignumber(1) : cplx ? complex(1) : 1; // turn values into a kind of "multiset"
     // this way it is easier to find eigenvectors
 
     var uniqueValues = [];
@@ -55785,11 +55851,7 @@ function createComplexEigs(_ref) {
       var i = indexOf(uniqueValues, λ, equal);
 
       if (i === -1) {
-        // a dirty trick that helps us find more vectors
-        // TODO with iterative algorithm this can be removed
-        // Note: the round around log10 is needed to prevent rounding off errors in IE
-        var rounded = round(λ, subtract(-1, round(log10(prec))));
-        uniqueValues.push(rounded);
+        uniqueValues.push(λ);
         multiplicities.push(1);
       } else {
         multiplicities[i] += 1;
@@ -55801,20 +55863,32 @@ function createComplexEigs(_ref) {
 
     var vectors = [];
     var len = uniqueValues.length;
-    var b = Array(N).fill(0);
-    var E = diag(Array(N).fill(1)); // eigenvalues for which usolve failed (due to numerical error)
+    var b = Array(N).fill(zero);
+    var E = diag(Array(N).fill(one)); // eigenvalues for which usolve failed (due to numerical error)
 
     var failedLambdas = [];
 
     for (var _i4 = 0; _i4 < len; _i4++) {
       var _λ = uniqueValues[_i4];
-      var solutions = usolveAll(subtract(U, multiply(_λ, E)), b);
+
+      var _A = subtract(U, multiply(_λ, E)); // the characteristic matrix
+
+
+      var solutions = usolveAll(_A, b);
       solutions = solutions.map(v => multiply(C, v));
       solutions.shift(); // ignore the null vector
-      // looks like we missed something
+      // looks like we missed something, try inverse iteration
 
-      if (solutions.length < multiplicities[_i4]) {
-        failedLambdas.push(_λ);
+      while (solutions.length < multiplicities[_i4]) {
+        var approxVec = inverseIterate(_A, N, solutions, prec, type);
+
+        if (approxVec == null) {
+          // no more vectors were found
+          failedLambdas.push(_λ);
+          break;
+        }
+
+        solutions.push(approxVec);
       }
 
       vectors.push(...solutions.map(v => flatten(v)));
@@ -55952,6 +56026,128 @@ function createComplexEigs(_ref) {
     }
 
     return -1;
+  }
+  /**
+   * Provided a near-singular upper-triangular matrix A and a list of vectors,
+   * finds an eigenvector of A with the smallest eigenvalue, which is orthogonal
+   * to each vector in the list
+   * @template T
+   * @param {T[][]} A near-singular square matrix
+   * @param {number} N dimension
+   * @param {T[][]} orthog list of vectors
+   * @param {number} prec epsilon
+   * @param {'number'|'BigNumber'|'Complex'} type
+   * @return {T[] | null} eigenvector
+   *
+   * @see Numerical Recipes for Fortran 77 – 11.7 Eigenvalues or Eigenvectors by Inverse Iteration
+   */
+
+
+  function inverseIterate(A, N, orthog, prec, type) {
+    var largeNum = type === 'BigNumber' ? bignumber(1000) : 1000;
+    var b; // the vector
+    // you better choose a random vector before I count to five
+
+    var i = 0;
+
+    while (true) {
+      b = randomOrthogonalVector(N, orthog, type);
+      b = usolve(A, b);
+
+      if (larger(norm(b), largeNum)) {
+        break;
+      }
+
+      if (++i >= 5) {
+        return null;
+      }
+    } // you better converge before I count to ten
+
+
+    i = 0;
+
+    while (true) {
+      var c = usolve(A, b);
+
+      if (smaller(norm(orthogonalComplement(b, [c])), prec)) {
+        break;
+      }
+
+      if (++i >= 10) {
+        return null;
+      }
+
+      b = normalize(c);
+    }
+
+    return b;
+  }
+  /**
+   * Generates a random unit vector of dimension N, orthogonal to each vector in the list
+   * @template T
+   * @param {number} N dimension
+   * @param {T[][]} orthog list of vectors
+   * @param {'number'|'BigNumber'|'Complex'} type
+   * @returns {T[]} random vector
+   */
+
+
+  function randomOrthogonalVector(N, orthog, type) {
+    var big = type === 'BigNumber';
+    var cplx = type === 'Complex'; // generate random vector with the correct type
+
+    var v = Array(N).fill(0).map(_ => 2 * Math.random() - 1);
+
+    if (big) {
+      v = v.map(n => bignumber(n));
+    }
+
+    if (cplx) {
+      v = v.map(n => complex(n));
+    } // project to orthogonal complement
+
+
+    v = orthogonalComplement(v, orthog); // normalize
+
+    return normalize(v, type);
+  }
+  /**
+   * Project vector v to the orthogonal complement of an array of vectors
+   */
+
+
+  function orthogonalComplement(v, orthog) {
+    for (var w of orthog) {
+      // v := v − (w, v)/∥w∥² w
+      v = subtract(v, multiply(divideScalar(dot(w, v), dot(w, w)), w));
+    }
+
+    return v;
+  }
+  /**
+   * Calculate the norm of a vector.
+   * We can't use math.norm because factory can't handle circular dependency.
+   * Seriously, I'm really fed up with factory.
+   */
+
+
+  function norm(v) {
+    return abs(sqrt(dot(v, v)));
+  }
+  /**
+   * Normalize a vector
+   * @template T
+   * @param {T[]} v
+   * @param {'number'|'BigNumber'|'Complex'} type
+   * @returns {T[]} normalized vec
+   */
+
+
+  function normalize(v, type) {
+    var big = type === 'BigNumber';
+    var cplx = type === 'Complex';
+    var one = big ? bignumber(1) : cplx ? complex(1) : 1;
+    return multiply(divideScalar(one, norm(v)), v);
   }
 
   return complexEigs;
@@ -56294,7 +56490,7 @@ function createRealSymmetric(_ref) {
 
 var name$Q = 'eigs'; // The absolute state of math.js's dependency system:
 
-var dependencies$Q = ['config', 'typed', 'matrix', 'addScalar', 'equal', 'subtract', 'abs', 'atan', 'cos', 'sin', 'multiplyScalar', 'divideScalar', 'inv', 'bignumber', 'multiply', 'add', 'larger', 'column', 'flatten', 'number', 'complex', 'sqrt', 'diag', 'qr', 'usolveAll', 'im', 're', 'smaller', 'round', 'log10', 'transpose', 'matrixFromColumns'];
+var dependencies$Q = ['config', 'typed', 'matrix', 'addScalar', 'equal', 'subtract', 'abs', 'atan', 'cos', 'sin', 'multiplyScalar', 'divideScalar', 'inv', 'bignumber', 'multiply', 'add', 'larger', 'column', 'flatten', 'number', 'complex', 'sqrt', 'diag', 'qr', 'usolve', 'usolveAll', 'im', 're', 'smaller', 'matrixFromColumns', 'dot'];
 var createEigs = /* #__PURE__ */factory(name$Q, dependencies$Q, _ref => {
   var {
     config,
@@ -56321,14 +56517,13 @@ var createEigs = /* #__PURE__ */factory(name$Q, dependencies$Q, _ref => {
     sqrt,
     diag,
     qr,
+    usolve,
     usolveAll,
     im,
     re,
     smaller,
-    round,
-    log10,
-    transpose,
-    matrixFromColumns
+    matrixFromColumns,
+    dot
   } = _ref;
   var doRealSymetric = createRealSymmetric({
     config,
@@ -56362,15 +56557,14 @@ var createEigs = /* #__PURE__ */factory(name$Q, dependencies$Q, _ref => {
     diag,
     qr,
     inv,
+    usolve,
     usolveAll,
     equal,
     complex,
     larger,
     smaller,
-    round,
-    log10,
-    transpose,
-    matrixFromColumns
+    matrixFromColumns,
+    dot
   });
   /**
    * Compute eigenvalues and eigenvectors of a matrix. The eigenvalues are sorted by their absolute value, ascending.
@@ -63502,7 +63696,7 @@ var createReplacer = /* #__PURE__ */factory(name$h, dependencies$h, () => {
   };
 });
 
-var version = '9.4.1'; // Note: This file is automatically generated when building math.js.
+var version = '9.4.2'; // Note: This file is automatically generated when building math.js.
 // Changes made in this file will be overwritten.
 
 var createTrue = /* #__PURE__ */factory('true', [], () => true);
@@ -65591,7 +65785,12 @@ const operators = {
     return new m$2.OperatorNode("^", "pow", operands);
   },
   //"prime": function(operands) { return operands[0] + "'"; },
-  //"tuple": function(operands) { return '\\left( ' + operands.join( ', ' ) + ' \\right)';},
+  // tuple: function (operands) {
+  //   return new m.ArrayNode(operands);
+  // },
+  list: function (operands) {
+    return new m$2.ArrayNode(operands);
+  },
   //"array": function(operands) { return '\\left[ ' + operands.join( ', ' ) + ' \\right]';},
   //"set": function(operands) { return '\\left\\{ ' + operands.join( ', ' ) + ' \\right\\}';},
   vector: function (operands) {
@@ -65631,6 +65830,27 @@ const operators = {
   //"intersect": function (operands) { return operands.join(' \\cap '); },
   tzn: function (operands) {
     return new m$2.FunctionNode("tzn", operands);
+  },
+  "≈": function (operands) {
+    return new m$2.FunctionNode("≈", operands);
+  },
+  "≉": function (operands) {
+    return new m$2.FunctionNode("≉", operands);
+  },
+  "~": function (operands) {
+    return new m$2.FunctionNode("~", operands);
+  },
+  "≃": function (operands) {
+    return new m$2.FunctionNode("≃", operands);
+  },
+  "≁": function (operands) {
+    return new m$2.FunctionNode("≁", operands);
+  },
+  "≅": function (operands) {
+    return new m$2.FunctionNode("≅", operands);
+  },
+  "≆": function (operands) {
+    return new m$2.FunctionNode("≆", operands);
   },
 };
 
@@ -65955,11 +66175,11 @@ const newCompare = (a, b) => {
   }
 
   // symbolNode before operatorNode
-  if (a.isSymbolNode && b.isOperatorNode) {
+  if (a.isSymbolNode && (b.isOperatorNode || b.isFunctionNode)) {
     return -1;
   }
 
-  if (b.isSymbolNode && a.isOperatorNode) {
+  if (b.isSymbolNode && (a.isOperatorNode || b.isFunctionNode)) {
     return 1;
   }
 
@@ -65969,6 +66189,10 @@ const newCompare = (a, b) => {
       .localeCompare(b.args.toString());
 
     return -localeCompareResult;
+  }
+
+  if (!a.isFunctionNode && b.isFunctionNode) {
+    return -1;
   }
 };
 
@@ -66021,7 +66245,10 @@ const flattenNode = (node) => {
   let resultNode = node;
 
   resultNode = resultNode.transform((currentNode, path, parent) => {
-    while (firstChildOperator(currentNode, currentNode.fn)) {
+    while (
+      firstChildOperator(currentNode, currentNode.fn) &&
+      !currentNode.isArrayNode
+    ) {
       const flatten = currentNode;
 
       flatten.traverse((node, path, parent) => {
@@ -66140,7 +66367,7 @@ const sortRelationalNode = (node) => {
     }
 
     if (parent && parent.type === "RelationalNode" && node.args) {
-      node = s$1(node);
+      node = sort(node);
     }
 
     return node;
@@ -66151,7 +66378,7 @@ const sortRelationalNode = (node) => {
   return resultNode;
 };
 
-const s$1 = (node) => {
+const sort = (node) => {
   let resultNode = node;
 
   if (node.type === "RelationalNode") {
@@ -66170,15 +66397,34 @@ const s$1 = (node) => {
     node.args = node.args.reverse();
   }
 
+  const relationOperators = "=|NE|≃|≈|≈|≉|~|≃|≁|≅|≆";
+
+  if (
+    node.isFunctionNode &&
+    // @ts-ignore
+    node.fn.name.match(relationOperators)
+  ) {
+    node.args = node.args.sort(newCompare);
+  }
+
   if (
     node.isOperatorNode &&
-    (node.fn === "larger" || node.fn === "largerEq" || node.fn == "equal")
+    (node.fn == "larger" ||
+      node.fn == "largerEq" ||
+      node.fn == "equal" ||
+      node.fn == "unequal")
   ) {
-    node.args = node.args.map(s$1);
+    node.args = node.args.map(sort);
 
-    if (node.fn == "equal") {
+    if (node.fn === "equal" || node.fn == "unequal") {
       node.args = node.args.sort(newCompare);
     }
+  }
+
+  if (node.isArrayNode) {
+    // @ts-ignore
+    node.items = node.items.sort(newCompare);
+    return node;
   }
 
   const flattened = flattenNode(node);
@@ -66201,12 +66447,36 @@ const SIMPLIFY_RULES = [
   { l: "(n^2) + n", r: "n * (n + 1)" },
   { l: "((n^n1) + n)/n", r: "n^(n1-1)+1" },
   { l: "(n^2) + 2n", r: "n * (n + 2)" },
+  { l: "(v1-v2)/n", r: "v1/n-v2/n" },
+  { l: "(v1-n)/n", r: "v1/n-1" },
   // { l: "(n/n1) * n2", r: "t" },
+
   // perfect square formula:
   { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
   // { l: "(n^2) + 4n + 4", r: "(n^2) + (2n * 2) + (2^2)" },
   { l: "tzn(n1, n2)", r: "n1" },
   { l: "n1/(-n2)", r: "-(n1/n2)" },
+
+  // trigonometry: alternate forms for cotangent, secant and cosecant
+  { l: "csc(n)", r: "1/sin(n)" },
+  { l: "sec(n)", r: "1/cos(n)" },
+  { l: "cot(n)", r: "1/tan(n)" },
+
+  // inverse trigonometric functions relations
+  { l: "n1 == asin(n)", r: "n == sin(n1)" },
+  { l: "n1 == acos(n)", r: "n == cos(n1)" },
+  { l: "n1 == atan(n)", r: "n == tan(n1)" },
+  { l: "n1 == acot(n)", r: "n == cot(n1)" },
+  { l: "n1 == asec(n)", r: "n == sec(n1)" },
+  { l: "n1 == acsc(n)", r: "n == csc(n1)" },
+
+  // relationships between trigonometric functions and inverse trigonometric functions
+  { l: "sin(asin(n))", r: "n" },
+  { l: "cos(acos(n))", r: "n" },
+  { l: "tan(atan(n))", r: "n" },
+  { l: "sin(acsc(n))", r: "1/n" },
+  { l: "cos(asec(n))", r: "1/n" },
+  { l: "tan(acot(n))", r: "1/n" },
 ];
 
 const simplify$1 = (v) => {
@@ -66216,24 +66486,52 @@ const simplify$1 = (v) => {
 
 const normalize = (a) => {
   let r = a;
-  try {
-    r = rationalize(a, {}, true).expression;
-  } catch (e) {
-    // ok;
-    //console.log(e, "failed to rationalize");
-  }
 
-  let s = r;
+  let onlyConstant = true;
+  let containsArrayNode = false;
 
-  // for relationalNode apply sort & simplify for all params
-  if (r.conditionals && r.params) {
-    s.params = r.params.map((param) => s$1(simplify$1(param)));
+  r.traverse(function (node, path, parent) {
+    if (node.isArrayNode) {
+      containsArrayNode = true;
+      node.items = node.items.map((item) => simplify$1(item));
+    }
+
+    return node;
+  });
+
+  if (r.fn === "equal") {
+    r.args = r.args.map((arg) => {
+      if (!arg.isFunctionNode && !arg.isArrayNode) {
+        try {
+          arg = rationalize(arg, {}, true).expression;
+        } catch (e) {
+          // ok;
+        }
+      }
+
+      onlyConstant = onlyConstant && !!arg.isConstantNode;
+
+      return arg;
+    });
   } else {
-    s = simplify$1(r);
+    onlyConstant = false;
+
+    try {
+      r = rationalize(a, {}, true).expression;
+    } catch (e) {
+      // ok;
+      //console.log(e, "failed to rationalize");
+    }
   }
 
-  log$1("[normalize] input: ", a.toString(), "output: ", s.toString());
-  return s;
+  if (r.conditionals && r.params) {
+    r.params = r.params.map((param) => sort(simplify$1(param)));
+  } else if (!containsArrayNode && !onlyConstant) {
+    r = simplify$1(r);
+  }
+
+  log$1("[normalize] input: ", a.toString(), "output: ", r.toString());
+  return r;
 };
 
 const isMathEqual$1 = (a, b, opts) => {
@@ -66241,23 +66539,16 @@ const isMathEqual$1 = (a, b, opts) => {
   let bs;
 
   // apply sort if we are not in a relationalNode
-  if (!a.conditionals) {
-    as = s$1(normalize(a));
-  } else {
-    as = normalize(a);
-  }
+  as = a.conditionals ? normalize(a) : sort(normalize(a));
 
-  if (!b.conditionals) {
-    bs = s$1(normalize(b));
-  } else {
-    bs = normalize(b);
-  }
+  bs = b.conditionals ? normalize(b) : sort(normalize(b));
 
   log$1("[isMathEqual]", as.toString(), "==?", bs.toString());
 
-  console.log(as, "as");
-  console.log(bs, "bs");
-  return as.equals(bs);
+  const isSortingEnough = sort(a).equals(sort(b));
+  const equality = as.equals(bs) || isSortingEnough;
+
+  return equality;
 };
 
 const { simplify } = mathjs;
@@ -66283,11 +66574,9 @@ const isMathEqual = (a, b, opts) => {
   }
 
   if (opts && opts.ignoreOrder) {
-    a = s$1(a);
-    //console.log("sorted a", JSON.stringify(a));
+    a = sort(a);
 
-    b = s$1(b);
-    //console.log("sorted b", JSON.stringify(b));
+    b = sort(b);
   }
 
   let equalTex;
@@ -66999,20 +67288,10 @@ formatters.j = function (v) {
 const log = browser("difference");
 
 const differenceIsTooGreat = (a, b) => {
-  // remove spaces, trailing zeros & left & right parenthesis before counting length
-  // const STRIP_LR = /(\\left\()|(\\right\))|( )|([.](0+))/g;
-  // const aLength = a.replace(STRIP_LR, "").length;
-  // const bLength = b.replace(STRIP_LR, "").length;
-
-  // const lta = new LatexToAst();
-  // const al = lta.convert(a);
-  // const bl = lta.convert(b);
-
-  // log("al", al.toString());
-  // log("bl", bl.toString());
   const smallest = Math.min(a.toString().length, b.toString().length);
   const biggest = Math.max(a.toString().length, b.toString().length);
-  const limit = (1 / smallest) * 100 + 10;
+  const errorAcceptance = 5;
+  const limit = (1 / smallest) * 100 + 10 + errorAcceptance;
   const diff = biggest - smallest;
 
   log("a:", a.toString(), "b:", b.toString(), "limit:", limit, "diff:", diff);
@@ -67045,7 +67324,9 @@ const latexEqual$1 = (a, b, opts) => {
   }
 
   const amo = atm.convert(al);
+
   const bmo = atm.convert(bl);
+
   if (opts.mode === "literal") {
     return isMathEqual(amo, bmo, opts.literal);
   } else {

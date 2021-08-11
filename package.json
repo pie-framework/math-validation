@@ -4,7 +4,10 @@
   "description": "New math validation",
   "module": "src/index.ts",
   "main": "lib/index.js",
+  "files": ["lib"],
   "scripts": {
+     "build": "rollup -c",
+    "watch": "rollup -cw",
     "test": "jest",
     "test:report": "jest --config jest-stare.config.js",
     "build:demo": "tsc && yarn rollup -c rollup.config.js",
