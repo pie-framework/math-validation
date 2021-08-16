@@ -1,5 +1,4 @@
 import { LatexToAst } from "../latex-to-ast";
-// const k = require("katex");
 // import { latexParser } from "latex-utensils";
 
 const fixtures = [
@@ -155,10 +154,6 @@ describe("bugs in lta", () => {
     // console.time("latex.js");
     // let doc = parse(input, { generator: generator });
     // console.timeEnd("latex.js");
-
-    // console.time("katexParse");
-    // const kt = k.__parse(input);
-    // console.timeEnd("katexParse");
 
     console.time("lta");
     const out = lta.convert(input);

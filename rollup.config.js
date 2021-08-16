@@ -10,7 +10,6 @@ const rollupConfig = {
     dir: "docs/js",
     name: "Demo",
   },
-  external: ["@pie-framework/math-expressions"],
   plugins: [
     resolve({ browser: true, mainFields: ["module"] }),
     commonjs({}),
