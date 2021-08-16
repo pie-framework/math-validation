@@ -4,9 +4,11 @@
   "description": "New math validation",
   "module": "src/index.ts",
   "main": "lib/index.js",
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "scripts": {
-     "build": "rollup -c",
+    "build": "rollup -c",
     "watch": "rollup -cw",
     "test": "jest",
     "test:report": "jest --config jest-stare.config.js",
@@ -16,6 +18,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@rollup/plugin-strip": "^2.1.0",
     "lodash": "^4.17.21",
     "mathjs": "^9.4.2"
   },
@@ -44,6 +47,7 @@
     "latex.js": "^0.12.4",
     "minimist": "^1.2.5",
     "rollup": "^2.50.2",
+    "rollup-plugin-cleanup": "^3.2.1",
     "serve": "^11.3.2",
     "ts-jest": "^26.3.0",
     "ts-node": "^9.0.0",
