@@ -379,6 +379,7 @@ const numberWithCommasAsThousandsSeparator =
 // const latex_rules = [["\\\\neq(?![a-zA-Z])", "NE"]];
 const latex_rules = [
   [measurmentUnit, "UNIT"],
+  ["\\\\" + "\\$", "TEXT"],
   ["\\\\text{[a-zA-Z0-9\\s\\\\,\\\\.]+?}", "TEXT"],
   ["[0-9]+\\s*\\\\frac(?![a-zA-Z])", "MIXED_NUMBER"],
   [numberWithCommasAsThousandsSeparator + sci_notat_exp_regex, "NUMBER"],
@@ -593,6 +594,7 @@ const allowSimplifiedFunctionApplicationDefault = true;
 // allowed multicharacter latex symbols
 // in addition to the below applied function symbols
 const allowedLatexSymbolsDefault = [
+  "$",
   "alpha",
   "beta",
   "gamma",
@@ -67334,10 +67336,6 @@ const latexEqual$1 = (a, b, opts) => {
   }
 };
 
-/**
- * For dev purposes allow legacy to be called for comparison.
- * Eventually we'll remove this.
- */
 const latexEqual = (a, b, opts) => {
   return latexEqual$1(a, b, opts);
 };
