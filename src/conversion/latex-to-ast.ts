@@ -163,6 +163,7 @@ const numberWithCommasAsThousandsSeparator =
 // const latex_rules = [["\\\\neq(?![a-zA-Z])", "NE"]];
 export const latex_rules = [
   [measurmentUnit, "UNIT"],
+  ["\\$", "TEXT"],
   ["\\\\" + "\\$", "TEXT"],
   ["\\\\text{[a-zA-Z0-9\\s\\\\,\\\\.]+?}", "TEXT"],
   ["[0-9]+\\s*\\\\frac(?![a-zA-Z])", "MIXED_NUMBER"],
@@ -378,7 +379,6 @@ const allowSimplifiedFunctionApplicationDefault = true;
 // allowed multicharacter latex symbols
 // in addition to the below applied function symbols
 const allowedLatexSymbolsDefault = [
-  "$",
   "alpha",
   "beta",
   "gamma",

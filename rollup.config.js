@@ -17,8 +17,7 @@ const rollupConfig = {
     sucrase({ transforms: ["typescript"] }),
     cleanup({ extensions: ["js", "ts"], compactComments: true }),
     strip({
-      functions: ["console.*", 'debug',],
-      extensions: ["js", "ts"]
+      functions: ["console.*", 'debug',]
     }),
   ],
 

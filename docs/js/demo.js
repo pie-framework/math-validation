@@ -1700,7 +1700,9 @@ function contains$1(array, item) {
   return array.indexOf(item) !== -1;
 }
 function validateOption(options, name, values) {
-  if (options[name] !== undefined && !contains$1(values, options[name])) ;
+  if (options[name] !== undefined && !contains$1(values, options[name])) {
+    console.warn('Warning: Unknown value "' + options[name] + '" for configuration option "' + name + '". ' + 'Available options: ' + values.map(value => JSON.stringify(value)).join(', ') + '.');
+  }
 }
 
 var typedFunction = createCommonjsModule(function (module, exports) {
@@ -33331,6 +33333,9 @@ var createEigs = factory(name$Q, dependencies$Q, _ref => {
         }
       }
     }
+    if (hasBig && hasComplex) {
+      console.warn('Complex BigNumbers not supported, this operation will lose precission.');
+    }
     if (hasComplex) {
       for (var _i = 0; _i < N; _i++) {
         for (var _j = 0; _j < N; _j++) {
@@ -35736,6 +35741,7 @@ var createUtil = factory(name$p, dependencies$p, _ref => {
         try {
           return new OperatorNode(node.op, node.fn, args, node.implicit);
         } catch (err) {
+          console.error(err);
           return [];
         }
       };
@@ -39147,6 +39153,7 @@ function create(factories, config) {
       return firstProperty(math);
     }
     if (!isLegacyFactory(factory)) {
+      console.warn('Factory object with properties `type`, `name`, and `factory` expected', factory);
       throw new Error('Factory object with properties `type`, `name`, and `factory` expected');
     }
     var index = legacyFactories.indexOf(factory);
@@ -40067,6 +40074,7 @@ function setup(env) {
 		return val;
 	}
 	function destroy() {
+		console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
 	}
 	createDebug.enable(createDebug.load());
 	return createDebug;
@@ -40080,7 +40088,12 @@ exports.load = load;
 exports.useColors = useColors;
 exports.storage = localstorage();
 exports.destroy = (() => {
+	let warned = false;
 	return () => {
+		if (!warned) {
+			warned = true;
+			console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
+		}
 	};
 })();
 exports.colors = [
