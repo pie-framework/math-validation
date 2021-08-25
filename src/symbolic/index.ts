@@ -8,10 +8,16 @@ const log = logger("mv:symbolic");
 const positiveInfinity = 1.497258191621251e6;
 const negativeInfinity = -1.497258191621251e6;
 const almostZero = 10.4324905987546e-7;
-const almostOneMin = 0.9999999999999999;
-const almostOneMax = 1.0000000000000001;
 
 export type SymbolicOpts = {};
+
+export const closeTo = (input, closestWanted, precision) => {
+  precision = precision || 5;
+  const expectedDiff = Math.pow(10, -precision) / 2;
+  const receivedDiff = Math.abs(input - closestWanted);
+  const close = receivedDiff <= expectedDiff;
+  return close;
+};
 
 const { simplify: ms, rationalize } = mathjs;
 
@@ -128,7 +134,7 @@ const normalize = (a: string | MathNode | any) => {
     r = simplify(r);
   } else if (+r.toString() <= almostZero) {
     r = new m.ConstantNode(0);
-  } else if (+r.toString() <= almostOneMax && +r.toString() > almostOneMin) {
+  } else if (closeTo(+r.toString(), 1, 7)) {
     r = new m.ConstantNode(1);
   }
 
