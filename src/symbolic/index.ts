@@ -10,18 +10,6 @@ const negativeInfinity = -1.497258191621251e6;
 
 export type SymbolicOpts = {};
 
-export const closeTo = (
-  input: number,
-  closestWanted: number,
-  precision: number
-) => {
-  precision = precision || 5;
-  const expectedDiff = Math.pow(10, -precision) / 2;
-  const receivedDiff = Math.abs(input - closestWanted);
-  const close = receivedDiff <= expectedDiff;
-  return close;
-};
-
 const { simplify: ms, rationalize } = mathjs;
 
 const SIMPLIFY_RULES = [
