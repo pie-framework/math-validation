@@ -7,7 +7,6 @@ const m: any = mathjs;
 const log = logger("mv:symbolic");
 const positiveInfinity = 1.497258191621251e6;
 const negativeInfinity = -1.497258191621251e6;
-// const almostZero = 10.4324905987546e-7;
 
 export type SymbolicOpts = {};
 
@@ -40,7 +39,6 @@ const SIMPLIFY_RULES = [
 
   // perfect square formula:
   { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
-  // { l: "(n^2) + 4n + 4", r: "(n^2) + (2n * 2) + (2^2)" },
   { l: "tzn(n1, n2)", r: "n1" },
   { l: "n1/(-n2)", r: "-(n1/n2)" },
   { l: "sin(n*pi)", r: "0" },
@@ -137,13 +135,6 @@ const normalize = (a: string | MathNode | any) => {
     );
     r = simplify(r);
   }
-
-  //this conditions are not used at this point
-  // else if (+r.toString() <= almostZero) {
-  //   r = new m.ConstantNode(0);
-  // } else if (closeTo(+r.toString(), 1, 7)) {
-  //   r = new m.ConstantNode(1);
-  // }
 
   return r;
 };
