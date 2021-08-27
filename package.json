@@ -4,9 +4,14 @@
   "description": "New math validation",
   "module": "src/index.ts",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "prepublish": "tsc",
   "files": [
     "lib"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -cw",
