@@ -8,11 +8,7 @@
   "prepublish": "tsc",
   "files": [
     "lib"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "scripts": {
+  ],  "scripts": {
     "build": "rollup -c",
     "watch": "rollup -cw",
     "test": "jest",
