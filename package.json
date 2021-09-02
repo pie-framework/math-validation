@@ -10,7 +10,7 @@
     "lib"
   ],  "scripts": {
     "build": "rollup -c",
-    "release": "scripts/build release",
+    "release": "build release",
     "watch": "rollup -cw",
     "test": "jest",
     "test:report": "jest --config jest-stare.config.js",
