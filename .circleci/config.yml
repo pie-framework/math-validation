@@ -1,70 +1,58 @@
 version: 2.1
-# jobs:
-#   build:
-#     docker:
-#       - image: 'circleci/node:latest'
-#     steps:
-#       - checkout
-#       - run:
-#           name: install
-#           command: npm install
-#       - run:
-#           name: release
-#           command: npm run semantic-release || true
-​
-defaults: &defaults
-working_directory: ~/repo
-  docker:
-- image: circleci/node:latest
 
-​
+defaults: &defaults
+  docker:
+    -image: circleci/node:latest
+
+    working_directory: ~/repo
+
 reg_auth: &reg_auth
   name: Authenticate with registry
   command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
-​
+
 restore_src_cache: &restore_src_cache
   keys:
     - source-v1-{{ .Branch }}-{{ .Revision }} # cache hit from the current git revision
     - source-v1-{{ .Branch }}- # cache hit from the current branch
     - source-v1- # any cache hit
-​
+
 save_src_cache: &save_src_cache
   key: source-v1-{{ .Branch }}-{{ .Revision }}
   paths:
     - ~/repo
-​
+
 restore_npm_cache: &restore_npm_cache
   keys:
     - npm-deps-v1-{{ checksum "package.json" }}
     # fallback to using the latest cache if no exact match is found
     - npm-deps-v1-
-​
+
 save_npm_cache: &save_npm_cache
   key: npm-deps-v1-{{ checksum "package.json" }}
   paths:
     - node_modules
-​
+
 # save_build_cache: &save_build_cache
 #   key: build-v1-{{ .Branch }}-{{ .Revision }}
 #   paths:
 #     - ~/repo/packages/**/lib
-​
+
 # restore_build_cache: &restore_build_cache
 #   keys:
 #     - build-v1-{{ .Branch }}-{{ .Revision }}
-​
+
 avoid_hosts_unkown_github: &avoid_hosts_unknown_github
   name: Avoid hosts unknown for github
   command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-​
+
 configure_git_email: &configure_git_email
   name: 'configure git email'
   command: git config user.email "circleci@key-data-systems.com"
-​
+
 configure_git_user: &configure_git_user
   name: 'configure git user'
   command: git config user.name "Circle ci"
-​
+
 jobs:
   install:
     <<: *defaults
@@ -75,14 +63,14 @@ jobs:
       - restore_cache: *restore_npm_cache
       - run: yarn install
       - save_cache: *save_npm_cache
-​
+
   test:
     <<: *defaults
     steps:
       - restore_cache: *restore_src_cache
       - restore_cache: *restore_npm_cache
       - run: yarn test
-​
+
   release:
     <<: *defaults
     steps:
@@ -96,7 +84,7 @@ jobs:
       - run:
           name: release
           command: yarn release
-​
+
 workflows:
   version: 2
   main:
