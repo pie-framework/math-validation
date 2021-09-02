@@ -238,16 +238,26 @@ const latex_rules = [
   ["\\\\div(?![a-zA-Z])", "/"],
   ["\\\\times(?![a-zA-Z])", "*"],
   ["\\\\frac(?![a-zA-Z])", "FRAC"],
+  ["°", "deg"],
+  ["°", "deg"],
+  ["\\\\degree", "deg"],
+  ["\\\\deg", "deg"],
+  ["\\\\grade", "grad"],
+  ["\\\\gon", "grad"],
+  ["\\\\grad", "grad"],
   [":", ":"],
   ["\\\\mid", "MID"],
   ["\\\\vartheta(?![a-zA-Z])", "LATEXCOMMAND", "\\theta"],
+  ["\\\\π", "LATEXCOMMAND", "\\pi"],
   ["\\\\varepsilon(?![a-zA-Z])", "LATEXCOMMAND", "\\epsilon"],
   ["\\\\varrho(?![a-zA-Z])", "LATEXCOMMAND", "\\rho"],
   ["\\\\varphi(?![a-zA-Z])", "LATEXCOMMAND", "\\phi"],
   ["\\\\infty(?![a-zA-Z])", "INFINITY"],
+  ["\\\\Infinity(?![a-zA-Z])", "INFINITY"],
   ["\\\\sqrt(?![a-zA-Z])", "SQRT"],
   ["\\\\log(?![a-zA-Z])", "LOG"],
   ["\\\\ln(?![a-zA-Z])", "LN"],
+  ["\\\\cosec", "LATEXCOMMAND", "\\csc"],
   ["\\\\sin\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\asin"],
   ["\\\\cos\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\acos"],
   ["\\\\tan\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\atan"],
@@ -906,6 +916,14 @@ class LatexToAst {
       this.advance();
     } else if (this.token.token_type === "INFINITY") {
       result = Infinity;
+      this.advance();
+    } else if (this.token.token_type === "deg") {
+      const degree = 355 / (180 * 113);
+      result = ["*", degree];
+      this.advance();
+    } else if (this.token.token_type === "grad") {
+      const gradian = 355 / (200 * 113);
+      result = ["*", gradian];
       this.advance();
     } else if (this.token.token_type === "UNIT") {
       result = ["unit", this.token.token_text];
@@ -39196,84 +39214,84 @@ const mathjs = create(all, { number: "Fraction" });
 mathjs.replacer;
 
 const log$3 = logger("mv:ast-to-math");
-const m$2 = mathjs;
+const m$3 = mathjs;
 const operators = {
   "+": function (operands) {
-    return new m$2.OperatorNode("+", "add", operands);
+    return new m$3.OperatorNode("+", "add", operands);
   },
   "*": function (operands) {
     if (operands[1] && operands[1].isUnit) {
-      return m$2.multiply(operands[0].value, operands[1]);
+      return m$3.multiply(operands[0].value, operands[1]);
     }
-    return new m$2.OperatorNode("*", "multiply", operands);
+    return new m$3.OperatorNode("*", "multiply", operands);
   },
   "/": function (operands) {
-    return new m$2.OperatorNode("/", "divide", operands);
+    return new m$3.OperatorNode("/", "divide", operands);
   },
   "-": function (operands) {
-    return new m$2.OperatorNode("-", "unaryMinus", [operands[0]]);
+    return new m$3.OperatorNode("-", "unaryMinus", [operands[0]]);
   },
   "^": function (operands) {
-    return new m$2.OperatorNode("^", "pow", operands);
+    return new m$3.OperatorNode("^", "pow", operands);
   },
   list: function (operands) {
-    return new m$2.ArrayNode(operands);
+    return new m$3.ArrayNode(operands);
   },
   vector: function (operands) {
-    return new m$2.ArrayNode(operands);
+    return new m$3.ArrayNode(operands);
   },
   and: function (operands) {
-    return new m$2.OperatorNode("and", "and", operands);
+    return new m$3.OperatorNode("and", "and", operands);
   },
   or: function (operands) {
-    return new m$2.OperatorNode("or", "or", operands);
+    return new m$3.OperatorNode("or", "or", operands);
   },
   not: function (operands) {
-    return new m$2.OperatorNode("not", "not", [operands[0]]);
+    return new m$3.OperatorNode("not", "not", [operands[0]]);
   },
   "<": function (operands) {
-    return new m$2.OperatorNode("<", "smaller", operands);
+    return new m$3.OperatorNode("<", "smaller", operands);
   },
   ">": function (operands) {
-    return new m$2.OperatorNode(">", "larger", operands);
+    return new m$3.OperatorNode(">", "larger", operands);
   },
   le: function (operands) {
-    return new m$2.OperatorNode("<=", "smallerEq", operands);
+    return new m$3.OperatorNode("<=", "smallerEq", operands);
   },
   ge: function (operands) {
-    return new m$2.OperatorNode(">=", "largerEq", operands);
+    return new m$3.OperatorNode(">=", "largerEq", operands);
   },
   _: function (operands) {
     const [arrayName, ...position] = operands;
-    const result = new m$2.SymbolNode(`${arrayName}[${position}]`);
+    const result = new m$3.SymbolNode(`${arrayName}[${position}]`);
     return result;
   },
   ne: function (operands) {
-    return new m$2.OperatorNode("!=", "unequal", operands);
+    return new m$3.OperatorNode("!=", "unequal", operands);
   },
   tzn: function (operands) {
-    return new m$2.FunctionNode("tzn", operands);
+    return new m$3.FunctionNode("tzn", operands);
   },
   "≈": function (operands) {
-    return new m$2.FunctionNode("≈", operands);
+    return new m$3.FunctionNode("≈", operands);
   },
   "≉": function (operands) {
-    return new m$2.FunctionNode("≉", operands);
+    return new m$3.FunctionNode("≉", operands);
   },
   "~": function (operands) {
-    return new m$2.FunctionNode("~", operands);
+    return new m$3.FunctionNode("~", operands);
   },
   "≃": function (operands) {
-    return new m$2.FunctionNode("≃", operands);
+    return new m$3.FunctionNode("≃", operands);
   },
   "≁": function (operands) {
-    return new m$2.FunctionNode("≁", operands);
+    return new m$3.FunctionNode("≁", operands);
   },
   "≅": function (operands) {
-    return new m$2.FunctionNode("≅", operands);
+    return new m$3.FunctionNode("≅", operands);
   },
   "≆": function (operands) {
-    return new m$2.FunctionNode("≆", operands);
+    return new m$3.FunctionNode("≆", operands);
   },
 };
 class AstToMathJs {
@@ -39282,21 +39300,21 @@ class AstToMathJs {
     if (typeof tree === "number") {
       if (Number.isFinite(tree)) {
         if (this.opts.number === "Fraction") {
-          const f = new m$2.Fraction([
-            new m$2.ConstantNode(tree),
-            new m$2.ConstantNode(1),
+          const f = new m$3.Fraction([
+            new m$3.ConstantNode(tree),
+            new m$3.ConstantNode(1),
           ]);
-          return new m$2.ConstantNode(f);
+          return new m$3.ConstantNode(f);
         } else {
-          return new m$2.ConstantNode(tree);
+          return new m$3.ConstantNode(tree);
         }
       }
-      if (Number.isNaN(tree)) return new m$2.SymbolNode("NaN");
-      if (tree < 0) return operators["-"]([new m$2.SymbolNode("Infinity")]);
-      return new m$2.SymbolNode("Infinity");
+      if (Number.isNaN(tree)) return new m$3.SymbolNode("NaN");
+      if (tree < 0) return operators["-"]([new m$3.SymbolNode("Infinity")]);
+      return new m$3.SymbolNode("Infinity");
     }
     if (typeof tree === "string") {
-      return new m$2.SymbolNode(tree);
+      return new m$3.SymbolNode(tree);
     }
     if (typeof tree === "boolean") throw Error("no support for boolean");
     if (!Array.isArray(tree)) throw Error("Invalid ast");
@@ -39310,10 +39328,10 @@ class AstToMathJs {
           "Non string functions not implemented for conversion to mathjs"
         );
       if (operands[0] === "factorial")
-        return new m$2.OperatorNode("!", "factorial", [
+        return new m$3.OperatorNode("!", "factorial", [
           this.convert(operands[1]),
         ]);
-      const f = new m$2.SymbolNode(operands[0]);
+      const f = new m$3.SymbolNode(operands[0]);
       const args = operands[1];
       let f_args;
       if (args[0] === "tuple")
@@ -39323,10 +39341,10 @@ class AstToMathJs {
           }.bind(this)
         );
       else f_args = [this.convert(args)];
-      return new m$2.FunctionNode(f, f_args);
+      return new m$3.FunctionNode(f, f_args);
     }
     if (operator === "unit") {
-      const unit = new m$2.Unit(1, operands[0]);
+      const unit = new m$3.Unit(1, operands[0]);
       return unit;
     }
     if (operator === "relational") {
@@ -39345,7 +39363,7 @@ class AstToMathJs {
       for (let i = 0; i < params.length - 1; i++) {
         comparisons.push(strict[i]);
       }
-      let result = new m$2.RelationalNode(comparisons, arg_nodes);
+      let result = new m$3.RelationalNode(comparisons, arg_nodes);
       return result;
     }
     if (operator === "=") {
@@ -39359,8 +39377,8 @@ class AstToMathJs {
         comparisons.push("equal");
       }
       if (comparisons.length === 1)
-        return new m$2.OperatorNode("==", "equal", arg_nodes);
-      let result = new m$2.RelationalNode(comparisons, arg_nodes);
+        return new m$3.OperatorNode("==", "equal", arg_nodes);
+      let result = new m$3.RelationalNode(comparisons, arg_nodes);
       return result;
     }
     if (
@@ -39394,14 +39412,14 @@ class AstToMathJs {
       let b = this.convert(args[2]);
       let comparisons = [];
       if (closed[1])
-        comparisons.push(new m$2.OperatorNode(">=", "largerEq", [x, a]));
-      else comparisons.push(new m$2.OperatorNode(">", "larger", [x, a]));
+        comparisons.push(new m$3.OperatorNode(">=", "largerEq", [x, a]));
+      else comparisons.push(new m$3.OperatorNode(">", "larger", [x, a]));
       if (closed[2])
-        comparisons.push(new m$2.OperatorNode("<=", "smallerEq", [x, b]));
-      else comparisons.push(new m$2.OperatorNode("<", "smaller", [x, b]));
-      let result = new m$2.OperatorNode("and", "and", comparisons);
+        comparisons.push(new m$3.OperatorNode("<=", "smallerEq", [x, b]));
+      else comparisons.push(new m$3.OperatorNode("<", "smaller", [x, b]));
+      let result = new m$3.OperatorNode("and", "and", comparisons);
       if (operator === "notin" || operator === "notni")
-        result = new m$2.OperatorNode("not", "not", [result]);
+        result = new m$3.OperatorNode("not", "not", [result]);
       return result;
     }
     if (
@@ -39439,20 +39457,20 @@ class AstToMathJs {
       let big_b = this.convert(big_args[2]);
       let comparisons = [];
       if (small_closed[1] && !big_closed[1])
-        comparisons.push(new m$2.OperatorNode(">", "larger", [small_a, big_a]));
+        comparisons.push(new m$3.OperatorNode(">", "larger", [small_a, big_a]));
       else
         comparisons.push(
-          new m$2.OperatorNode(">=", "largerEq", [small_a, big_a])
+          new m$3.OperatorNode(">=", "largerEq", [small_a, big_a])
         );
       if (small_closed[2] && !big_closed[2])
-        comparisons.push(new m$2.OperatorNode("<", "smaller", [small_b, big_b]));
+        comparisons.push(new m$3.OperatorNode("<", "smaller", [small_b, big_b]));
       else
         comparisons.push(
-          new m$2.OperatorNode("<=", "smallerEq", [small_b, big_b])
+          new m$3.OperatorNode("<=", "smallerEq", [small_b, big_b])
         );
-      let result = new m$2.OperatorNode("and", "and", comparisons);
+      let result = new m$3.OperatorNode("and", "and", comparisons);
       if (operator === "notsubset" || operator === "notsuperset")
-        result = new m$2.OperatorNode("not", "not", [result]);
+        result = new m$3.OperatorNode("not", "not", [result]);
       return result;
     }
     if (operator === "matrix") {
@@ -39468,14 +39486,14 @@ class AstToMathJs {
         for (let j = 1; j <= ncols; j++) {
           row.push(this.convert(entries[i][j]));
         }
-        result.push(new m$2.ArrayNode(row));
+        result.push(new m$3.ArrayNode(row));
       }
-      return new m$2.ArrayNode(result);
+      return new m$3.ArrayNode(result);
     }
     if (operator == "%") {
       const dividend = this.convert(operands[0]);
-      const divisor = new m$2.ConstantNode(100);
-      const result = new m$2.OperatorNode("/", "divide", [dividend, divisor]);
+      const divisor = new m$3.ConstantNode(100);
+      const result = new m$3.OperatorNode("/", "divide", [dividend, divisor]);
       return result;
     }
     if (operator in operators) {
@@ -39493,7 +39511,7 @@ class AstToMathJs {
   }
 }
 
-function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }const m$1 = mathjs;
+function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }const m$2 = mathjs;
 const log$2 = logger("mv:node-sort");
 const newCompare = (a, b) => {
   log$2("[compareNodes]: a:", a.toString(), a.type);
@@ -39577,7 +39595,7 @@ const flattenNode = (node) => {
           node.args.forEach((arg) => {
             argstoAdd.push(arg);
           });
-          node = new m$1.OperatorNode(node.op, node.fn, argstoAdd);
+          node = new m$2.OperatorNode(node.op, node.fn, argstoAdd);
           if (node.fn === "multiply" && node["implicit"]) {
             node["implicit"] = false;
           }
@@ -39614,7 +39632,7 @@ const flattenNode = (node) => {
                   newArgs.push(arg);
                 }
               });
-              node.args[0] = new m$1.OperatorNode("*", "multiply", newArgs);
+              node.args[0] = new m$2.OperatorNode("*", "multiply", newArgs);
             }
             newNode = node;
           }
@@ -39701,7 +39719,7 @@ const sort = (node) => {
       node.fn == "unequal")
   ) {
     node.args = node.args.map(sort);
-    if (node.fn === "equal" || node.fn == "unequal") {
+    if (node.fn === "equal" || node.fn === "unequal") {
       node.args = node.args.sort(newCompare);
     }
   }
@@ -39714,7 +39732,10 @@ const sort = (node) => {
   return resultNode;
 };
 
+const m$1 = mathjs;
 const log$1 = logger("mv:symbolic");
+const positiveInfinity = 1.497258191621251e6;
+const negativeInfinity = -1.497258191621251e6;
 const { simplify: ms$1, rationalize } = mathjs;
 const SIMPLIFY_RULES = [
   { l: "n1^(1/n2)", r: "nthRoot(n1, n2)" },
@@ -39725,12 +39746,18 @@ const SIMPLIFY_RULES = [
   { l: "(n^2) + 2n", r: "n * (n + 2)" },
   { l: "(v1-v2)/n", r: "v1/n-v2/n" },
   { l: "(v1-n)/n", r: "v1/n-1" },
+  { l: "n/n1-c1", r: "(n-c1*n1)/n1" },
+  { l: "i^2", r: "-1" },
+  { l: "pi", r: "3.141592653589793" },
   { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
   { l: "tzn(n1, n2)", r: "n1" },
   { l: "n1/(-n2)", r: "-(n1/n2)" },
+  { l: "sin(n*pi)", r: "0" },
+  { l: "sin(n)/cos(n)", r: "tan(n)" },
   { l: "csc(n)", r: "1/sin(n)" },
   { l: "sec(n)", r: "1/cos(n)" },
-  { l: "cot(n)", r: "1/tan(n)" },
+  { l: "cot(n)", r: "1/tan(n)", r1: "cos(n)/sin(n)" },
+  { l: "1/tan(n)", r: "cos(n)/sin(n)" },
   { l: "n1 == asin(n)", r: "n == sin(n1)" },
   { l: "n1 == acos(n)", r: "n == cos(n1)" },
   { l: "n1 == atan(n)", r: "n == tan(n1)" },
@@ -39783,6 +39810,21 @@ const normalize = (a) => {
     r = simplify$1(r);
   }
   log$1("[normalize] input: ", a.toString(), "output: ", r.toString());
+  if (
+    r.toString() === "Infinity" ||
+    +r.toString() >= positiveInfinity ||
+    +r.toString() <= negativeInfinity
+  ) {
+    r = new m$1.SymbolNode("Infinity");
+  }
+  if (r.value) {
+    r.value = new m$1.Fraction(Math.round(r.value * 10000) / 10000);
+  } else if (r.fn === "unaryMinus") {
+    r.args[0].value = new m$1.Fraction(
+      Math.round(r.args[0].value * 10000) / 10000
+    );
+    r = simplify$1(r);
+  }
   return r;
 };
 const isMathEqual$1 = (a, b, opts) => {
@@ -39792,7 +39834,39 @@ const isMathEqual$1 = (a, b, opts) => {
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
   log$1("[isMathEqual]", as.toString(), "==?", bs.toString());
   const isSortingEnough = sort(a).equals(sort(b));
-  const equality = as.equals(bs) || isSortingEnough;
+  const isTexEnough = as.toTex().trim() === bs.toTex().trim();
+  let equality = isTexEnough || as.equals(bs) || isSortingEnough;
+  if (!equality && as.fn === "equal" && bs.fn === "equal") {
+    let noFunctionOrArray = true;
+    let symbolNode = false;
+    as.args = as.args.map((arg) => {
+      noFunctionOrArray =
+        !!noFunctionOrArray && (!arg.isFunctionNode || !arg.isArrayNode);
+      if (arg.isSymbolNode) {
+        symbolNode = true;
+      }
+      return arg;
+    });
+    bs.args = bs.args.map((arg) => {
+      noFunctionOrArray =
+        !!noFunctionOrArray && (!arg.isFunctionNode || !arg.isArrayNode);
+      if (arg.isSymbolNode) {
+        symbolNode = true;
+      }
+      return arg;
+    });
+    if (noFunctionOrArray && symbolNode) {
+      let ae = new m$1.OperatorNode("-", "subtract", as.args);
+      let be = new m$1.OperatorNode("-", "subtract", bs.args);
+      let minus = new m$1.ConstantNode(-1);
+      equality = isMathEqual$1(ae, be);
+      if (!equality && noFunctionOrArray && symbolNode) {
+        be = new m$1.OperatorNode("*", "multiply", [minus, be]);
+        equality = isMathEqual$1(ae, be);
+      }
+      log$1("[isMathEqual]", ae.toString(), "==?", be.toString());
+    }
+  }
   return equality;
 };
 
@@ -40242,7 +40316,7 @@ const log = browser("difference");
 const differenceIsTooGreat = (a, b) => {
   const smallest = Math.min(a.toString().length, b.toString().length);
   const biggest = Math.max(a.toString().length, b.toString().length);
-  const errorAcceptance = 5;
+  const errorAcceptance = 6;
   const limit = (1 / smallest) * 100 + 10 + errorAcceptance;
   const diff = biggest - smallest;
   log("a:", a.toString(), "b:", b.toString(), "limit:", limit, "diff:", diff);
