@@ -3,7 +3,10 @@ import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
 import { sort } from "../node-sort";
 
+const m: any = mathjs;
 const log = logger("mv:symbolic");
+const positiveInfinity = 1.497258191621251e6;
+const negativeInfinity = -1.497258191621251e6;
 
 export type SymbolicOpts = {};
 
@@ -18,18 +21,23 @@ const SIMPLIFY_RULES = [
   { l: "(n^2) + 2n", r: "n * (n + 2)" },
   { l: "(v1-v2)/n", r: "v1/n-v2/n" },
   { l: "(v1-n)/n", r: "v1/n-1" },
-  // { l: "(n/n1) * n2", r: "t" },
+  { l: "n/n1-c1", r: "(n-c1*n1)/n1" },
+  { l: "i^2", r: "-1" },
+  { l: "pi", r: "3.141592653589793" },
 
   // perfect square formula:
   { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
-  // { l: "(n^2) + 4n + 4", r: "(n^2) + (2n * 2) + (2^2)" },
   { l: "tzn(n1, n2)", r: "n1" },
   { l: "n1/(-n2)", r: "-(n1/n2)" },
-
-  // trigonometry: alternate forms for cotangent, secant and cosecant
+  { l: "sin(n*pi)", r: "0" },
+  // trigonometry: defining relations for tangent, cotangent, secant, and cosecant in terms of sine and cosine
+  { l: "sin(n)/cos(n)", r: "tan(n)" },
   { l: "csc(n)", r: "1/sin(n)" },
   { l: "sec(n)", r: "1/cos(n)" },
-  { l: "cot(n)", r: "1/tan(n)" },
+  { l: "cot(n)", r: "1/tan(n)", r1: "cos(n)/sin(n)" },
+  { l: "1/tan(n)", r: "cos(n)/sin(n)" },
+
+  // TO DO: the Pythagorean formula for sines and cosines.
 
   // inverse trigonometric functions relations
   { l: "n1 == asin(n)", r: "n == sin(n1)" },
@@ -55,7 +63,6 @@ const simplify = (v) => {
 
 const normalize = (a: string | MathNode | any) => {
   let r: string | MathNode | any = a;
-
   let onlyConstant = true;
   let containsArrayNode = false;
 
@@ -77,14 +84,12 @@ const normalize = (a: string | MathNode | any) => {
           // ok;
         }
       }
-
       onlyConstant = onlyConstant && !!arg.isConstantNode;
 
       return arg;
     });
   } else {
     onlyConstant = false;
-
     try {
       r = rationalize(a, {}, true).expression;
     } catch (e) {
@@ -100,6 +105,25 @@ const normalize = (a: string | MathNode | any) => {
   }
 
   log("[normalize] input: ", a.toString(), "output: ", r.toString());
+
+  // check for infinity
+  if (
+    r.toString() === "Infinity" ||
+    +r.toString() >= positiveInfinity ||
+    +r.toString() <= negativeInfinity
+  ) {
+    r = new m.SymbolNode("Infinity");
+  }
+
+  if (r.value) {
+    r.value = new m.Fraction(Math.round(r.value * 10000) / 10000);
+  } else if (r.fn === "unaryMinus") {
+    r.args[0].value = new m.Fraction(
+      Math.round(r.args[0].value * 10000) / 10000
+    );
+    r = simplify(r);
+  }
+
   return r;
 };
 
@@ -115,7 +139,50 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
   const isSortingEnough = sort(a).equals(sort(b));
-  const equality = as.equals(bs) || isSortingEnough;
+  const isTexEnough = as.toTex().trim() === bs.toTex().trim();
+
+  let equality = isTexEnough || as.equals(bs) || isSortingEnough;
+
+  // if both expressions are equations
+  if (!equality && as.fn === "equal" && bs.fn === "equal") {
+    let noFunctionOrArray = true;
+    let symbolNode = false;
+
+    as.args = as.args.map((arg) => {
+      noFunctionOrArray =
+        !!noFunctionOrArray && (!arg.isFunctionNode || !arg.isArrayNode);
+      if (arg.isSymbolNode) {
+        symbolNode = true;
+      }
+
+      return arg;
+    });
+
+    bs.args = bs.args.map((arg) => {
+      noFunctionOrArray =
+        !!noFunctionOrArray && (!arg.isFunctionNode || !arg.isArrayNode);
+
+      if (arg.isSymbolNode) {
+        symbolNode = true;
+      }
+      return arg;
+    });
+
+    if (noFunctionOrArray && symbolNode) {
+      let ae = new m.OperatorNode("-", "subtract", as.args);
+      let be = new m.OperatorNode("-", "subtract", bs.args);
+      let minus = new m.ConstantNode(-1);
+
+      equality = isMathEqual(ae, be);
+
+      if (!equality && noFunctionOrArray && symbolNode) {
+        be = new m.OperatorNode("*", "multiply", [minus, be]);
+        equality = isMathEqual(ae, be);
+      }
+
+      log("[isMathEqual]", ae.toString(), "==?", be.toString());
+    }
+  }
 
   return equality;
 };

@@ -1,6 +1,5 @@
 export default {
   mode: "symbolic",
-  //only: true,
   tests: [
     { target: "2+2=4", ne: ["1", "2=2"] },
     {

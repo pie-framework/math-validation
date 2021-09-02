@@ -284,7 +284,7 @@ export const sort = (node: MathNode) => {
   ) {
     node.args = node.args.map(sort);
 
-    if (node.fn === "equal" || node.fn == "unequal") {
+    if (node.fn === "equal" || node.fn === "unequal") {
       node.args = node.args.sort(newCompare);
     }
   }

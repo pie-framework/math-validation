@@ -1,6 +1,12 @@
 import { LatexToAst } from "../latex-to-ast";
 // import { latexParser } from "latex-utensils";
 
+// conversion of degrees in radians - angle configuration
+const degree = 355 / (180 * 113);
+
+//conversion of gradians in radians - angle configuration
+const gradian = 355 / (200 * 113);
+
 const fixtures = [
   //parentheses are stripped!
   ["(1 + (1 + 1))", ["+", 1, 1, 1]],
@@ -115,6 +121,21 @@ const fixtures = [
   ["g^{-1}(y)", ["*", "g^{-1}", "y"]],
   ["g^{-1}(y) = y-5", ["=", ["*", "g^{-1}", "y"], ["+", "y", ["-", 5]]]],
 
+  ["\\cos\\pi", ["apply", "cos", "pi"]],
+  ["\\cos \\π", ["apply", "cos", "pi"]],
+
+  // degrees
+  ["\\sin180°", ["*", ["apply", "sin", 180], degree]],
+  ["\\sin90°", ["*", ["apply", "sin", 90], degree]],
+  ["\\tan90\\deg", ["*", ["apply", "tan", 90], degree]],
+
+  // grades
+  ["\\sin100\\grad", ["*", ["apply", "sin", 100], gradian]],
+  ["\\cos90\\grade", ["*", ["apply", "cos", 90], gradian]],
+  ["\\tan90\\gon", ["*", ["apply", "tan", 90], gradian]],
+
+  ["\\cosec(x)", ["apply", "csc", "x"]],
+
   // inverse trigonometric functions
   ["\\sin^{-1}(x)", ["apply", "asin", "x"]],
   ["\\arcsin(x)", ["apply", "asin", "x"]],
@@ -139,6 +160,24 @@ const fixtures = [
   ["\\csc^{-1}(x)", ["apply", "acsc", "x"]],
   ["\\arcsc(x)", ["apply", "acsc", "x"]],
   ["\\arccsc(x)", ["apply", "acsc", "x"]],
+
+  // geometry
+  ["\\nparallel x", ["*", "nparallel", "x"]],
+  ["\\overrightarrow x", ["*", "overrightarrow", "x"]],
+  ["\\overleftrightarrow x", ["*", "overleftrightarrow", "x"]],
+  ["\\perp x", ["*", "perp", "x"]],
+  ["\\angle x", ["*", "angle", "x"]],
+  ["\\measuredangle x", ["*", "measuredangle", "x"]],
+  ["\\triangle x", ["*", "triangle", "x"]],
+  ["\\parallelogram x", ["*", "parallelogram", "x"]],
+  ["\\odot x", ["*", "odot", "x"]],
+  ["\\degree x", ["*", degree, "x"]],
+  ["a\\sim x", ["~", "a", "x"]],
+  ["z\\cong x", ["≅", "z", "x"]],
+  ["y\\ncong x", ["≆", "y", "x"]],
+  [" x\\napprox y", ["≉", "x", "y"]],
+  ["\\nim x", ["*", "nim", "x"]],
+  ["\\angle x", ["*", "angle", "x"]],
 ];
 
 const lta = new LatexToAst();

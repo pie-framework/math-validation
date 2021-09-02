@@ -241,19 +241,32 @@ export const latex_rules = [
   ["\\\\times(?![a-zA-Z])", "*"],
   ["\\\\frac(?![a-zA-Z])", "FRAC"],
 
+  ["°", "deg"],
+  ["°", "deg"],
+  ["\\\\degree", "deg"],
+  ["\\\\deg", "deg"],
+
+  ["\\\\grade", "grad"],
+  ["\\\\gon", "grad"],
+  ["\\\\grad", "grad"],
+
   [":", ":"],
   ["\\\\mid", "MID"],
 
   ["\\\\vartheta(?![a-zA-Z])", "LATEXCOMMAND", "\\theta"],
+  ["\\\\π", "LATEXCOMMAND", "\\pi"],
   ["\\\\varepsilon(?![a-zA-Z])", "LATEXCOMMAND", "\\epsilon"],
   ["\\\\varrho(?![a-zA-Z])", "LATEXCOMMAND", "\\rho"],
   ["\\\\varphi(?![a-zA-Z])", "LATEXCOMMAND", "\\phi"],
 
   ["\\\\infty(?![a-zA-Z])", "INFINITY"],
+  ["\\\\Infinity(?![a-zA-Z])", "INFINITY"],
 
   ["\\\\sqrt(?![a-zA-Z])", "SQRT"],
   ["\\\\log(?![a-zA-Z])", "LOG"],
   ["\\\\ln(?![a-zA-Z])", "LN"],
+
+  ["\\\\cosec", "LATEXCOMMAND", "\\csc"],
 
   // inverse trigonometric functions
   ["\\\\sin\\^\\{-1}(?![a-zA-Z])", "LATEXCOMMAND", "\\asin"],
@@ -1145,6 +1158,21 @@ export class LatexToAst {
       // @ts-ignore
       result = Infinity;
 
+      this.advance();
+    } else if (this.token.token_type === "deg") {
+      // conversion of degrees in radians - angle configuration
+      const degree = 355 / (180 * 113);
+
+      // @ts-ignore
+      result = ["*", degree];
+
+      this.advance();
+    } else if (this.token.token_type === "grad") {
+      //conversion of gradians in radians - angle configuration
+      const gradian = 355 / (200 * 113);
+
+      // @ts-ignore
+      result = ["*", gradian];
       this.advance();
     } else if (this.token.token_type === "UNIT") {
       // @ts-ignore

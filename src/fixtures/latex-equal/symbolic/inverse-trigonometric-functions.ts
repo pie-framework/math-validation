@@ -1,7 +1,5 @@
 export default {
   mode: "symbolic",
-
-  // only: true,
   tests: [
     //inverse functions conversion
     {
