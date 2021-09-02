@@ -46,7 +46,7 @@ yarn jest src/__tests__/latex-equal.spec.ts -t src/fixtures/latex-equal/7119.ts 
 
 ## Goals
 
-* we parse from latex -> ast -> mathjs, legacy was latex -> ast -> math_string -> mathjs (done)
+* we parse from latex -> ast -> mathjs
 * clean up symbolic evaluation (in progress)
 * avoid the use of string manipulation/regex (in progress)
 * more advanced literal validation (todo)
@@ -64,12 +64,6 @@ There are 2 modes - literal and symbolic
 Literal: needs to more advanced than the legacy literal implementation which was essentially a string check.
 
 Symbolic:
-
-
-### legacy tests comparison
-
-We have the old math validation logic in the repo, so we can compare speed and results if needs be. To include them in the test run  set `LEGACY` env var to `true`.
-
 
 ### Notes
 

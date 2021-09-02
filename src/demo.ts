@@ -2,10 +2,6 @@ import { latexEqual as le, Opts } from "./latex-equal";
 
 export type Latex = string;
 
-/**
- * For dev purposes allow legacy to be called for comparison.
- * Eventually we'll remove this.
- */
 export const latexEqual = (a: Latex, b: Latex, opts: Opts): boolean => {
   return le(a, b, opts);
 };

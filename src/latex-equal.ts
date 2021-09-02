@@ -11,13 +11,6 @@ export type Opts = {
   mode?: "symbolic" | "literal";
   literal?: LiteralOpts;
   symbolic?: SymbolicOpts;
-
-  /**
-   *  this is to be removed - no point adding it: https://illuminate.atlassian.net/browse/PD-1031
-   * allowThousandsSeparator?: boolean;
-   */
-  /** only for development - to be removed */
-  legacy?: boolean;
 };
 
 const lta = new LatexToAst();

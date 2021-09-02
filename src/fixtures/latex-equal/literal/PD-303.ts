@@ -12,6 +12,14 @@ export default {
       opts: {
         literal: { ignoreOrder: true },
       },
+      target: "\\$410 ",
+      eq: ["\\$410"],
+      ne: ["\\$420"],
+    },
+    {
+      opts: {
+        literal: { ignoreOrder: true },
+      },
       target: "sin x",
       eq: ["sin(x)"],
       ne: ["1.0"],

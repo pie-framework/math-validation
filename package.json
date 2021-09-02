@@ -4,7 +4,13 @@
   "description": "New math validation",
   "module": "src/index.ts",
   "main": "lib/index.js",
-  "scripts": {
+  "types": "lib/index.d.ts",
+  "prepublish": "tsc",
+  "files": [
+    "lib"
+  ],  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -cw",
     "test": "jest",
     "test:report": "jest --config jest-stare.config.js",
     "build:demo": "tsc && yarn rollup -c rollup.config.js",
@@ -18,9 +24,9 @@
   },
   "devDependencies": {
     "@babel/runtime": "^7.13.10",
-    "@pie-framework/math-expressions": "^3.1.0",
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
+     "@rollup/plugin-strip": "^2.1.0",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@types/fs-extra": "^9.0.1",
     "@types/glob": "^7.1.3",
@@ -36,11 +42,11 @@
     "jest-diff": "^26.4.2",
     "jest-silent-reporter": "^0.2.1",
     "jest-stare": "^2.2.1",
-    "katex": "^0.13.0",
     "latex-utensils": "^2.0.3",
     "latex.js": "^0.12.4",
     "minimist": "^1.2.5",
     "rollup": "^2.50.2",
+    "rollup-plugin-cleanup": "^3.2.1",
     "serve": "^11.3.2",
     "ts-jest": "^26.3.0",
     "ts-node": "^9.0.0",
