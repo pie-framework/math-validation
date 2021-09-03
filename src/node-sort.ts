@@ -241,8 +241,6 @@ export const sortRelationalNode = (node: any) => {
     return node;
   });
 
-  //log("THIS IS THE END ++++", JSON.stringify(node));
-
   return resultNode;
 };
 
