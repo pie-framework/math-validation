@@ -1,6 +1,6 @@
 {
   "name": "@pie-framework/math-validation",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "New math validation",
   "module": "src/index.ts",
   "main": "lib/index.js",
@@ -8,7 +8,8 @@
   "prepublish": "tsc",
   "files": [
     "lib"
-  ],  "scripts": {
+  ],
+  "scripts": {
     "build": "rollup -c",
     "release": "build release",
     "watch": "rollup -cw",
@@ -27,8 +28,15 @@
     "@babel/runtime": "^7.13.10",
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
-     "@rollup/plugin-strip": "^2.1.0",
+    "@rollup/plugin-strip": "^2.1.0",
     "@rollup/plugin-sucrase": "^3.1.0",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/github": "^7.2.3",
+    "@semantic-release/npm": "^7.1.3",
+    "@semantic-release/release-notes-generator": "^9.0.3",
+    "prettier": "^2.3.2",
     "@types/fs-extra": "^9.0.1",
     "@types/glob": "^7.1.3",
     "@types/jest": "^26.0.14",
@@ -36,7 +44,6 @@
     "@types/mathjs": "^6.0.11",
     "@types/minimist": "^1.2.0",
     "debug": "^4.3.1",
-    "deep-diff": "^1.0.2",
     "fs-extra": "^9.0.1",
     "glob": "^7.1.6",
     "jest": "^26.4.2",
@@ -48,6 +55,7 @@
     "minimist": "^1.2.5",
     "rollup": "^2.50.2",
     "rollup-plugin-cleanup": "^3.2.1",
+    "semantic-release": "^17.4.7",
     "serve": "^11.3.2",
     "ts-jest": "^26.3.0",
     "ts-node": "^9.0.0",
