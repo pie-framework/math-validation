@@ -45,11 +45,11 @@ avoid_hosts_unkown_github: &avoid_hosts_unknown_github
   command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
 
 configure_git_email: &configure_git_email
-  name: 'configure git email'
+  name: "configure git email"
   command: git config user.email "circleci@key-data-systems.com"
 
 configure_git_user: &configure_git_user
-  name: 'configure git user'
+  name: "configure git user"
   command: git config user.name "Circle ci"
 
 jobs:
@@ -100,4 +100,5 @@ workflows:
           requires:
             - test
           context:
-            - org-tokens
+            - npm
+            - github
