@@ -2,9 +2,8 @@ version: 2.1
 
 defaults: &defaults
   docker:
-    -image: circleci/node:latest
-
-    working_directory: ~/repo
+    - image: circleci/node:latest
+  working_directory: ~/repo
 
 reg_auth: &reg_auth
   name: Authenticate with registry
