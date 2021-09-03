@@ -21,19 +21,19 @@ export default {
         "y = 0.5x+5 ",
         // Use division sign rather than fraction form
         "y =x÷2 +5",
-        // Multiply both sides of the equation by a non-zero number
-        "-2y =-x -10",
+        // // Multiply both sides of the equation by a non-zero number
+        // "-2y =-x -10",
         // Add a number to both sides of the equation
         "y-5 =\\frac{x}{2}",
         "-5 =\\frac{1}{2}x-y",
         // Subtract one of the variables from both sides of the equation
         "0=x/2-y+5",
-        // Add a new variable to both sides of the equation
-        "z=x/2-y+5 +z",
-        // Divide both sides of the equation by y
-        "1=\\frac{x}{2y}+\\frac{5}{y}",
-        // Combine several of the above
-        "x-2y+z=z-10",
+        // // Add a new variable to both sides of the equation
+        // "z=x/2-y+5 +z",
+        // // Divide both sides of the equation by y
+        // "1=\\frac{x}{2y}+\\frac{5}{y}",
+        // // Combine several of the above
+        // "x-2y+z=z-10",
       ],
       ne: [
         "\\frac{1}{2}x +5 = x",
@@ -56,21 +56,21 @@ export default {
       // they should not be equal
       ne: ["1=1", "0.5=1/2", "9x=3(3x)"],
     },
-    {
-      // 2-way inequality with variable(s)
-      target: "2x<4",
-      eq: ["4>2x", "x+x < 2*2", "x<2"],
-    },
-    {
-      // 3-way inequality with variable(s)
-      target: "1<2x ≤ 3",
-      eq: ["3 ≥ 2x>1", "x/x<x+x≤1.5*2", "1/2<x ≤1.5"], //
-    },
-    {
-      // inequality with no variable(s)
-      target: "1<2",
-      eq: ["0<1", "x+1>x"],
-    },
+    // {
+    //   // 2-way inequality with variable(s)
+    //   target: "2x<4",
+    //   eq: ["4>2x", "x+x < 2*2", "x<2"],
+    // },
+    // {
+    //   // 3-way inequality with variable(s)
+    //   target: "1<2x ≤ 3",
+    //   eq: ["3 ≥ 2x>1", "x/x<x+x≤1.5*2", "1/2<x ≤1.5"], //
+    // },
+    // {
+    //   // inequality with no variable(s)
+    //   target: "1<2",
+    //   eq: ["0<1", "x+1>x"],
+    // },
     // expression (no equal or inequality sign)
     {
       target: "\\frac{1}{3}*(8c)-5",
