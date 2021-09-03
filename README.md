@@ -75,6 +75,9 @@ Symbolic:
 * start going through the tests, build up literal + symbolic a bit att the start
 * derivatives kind of work and kind of not - how to use?
 
+### CI
+
+We use circleci - see .circleci/config.yml
 
 ### debugging tests
 
