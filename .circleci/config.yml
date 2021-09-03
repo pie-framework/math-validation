@@ -97,6 +97,7 @@ workflows:
             branches:
               only:
                 - master
+                - beta
           requires:
             - test
           context:
