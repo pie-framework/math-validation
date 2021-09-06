@@ -1,4 +1,5 @@
 {
+   "private": true,
   "name": "@pie-framework/math-validation",
   "version": "1.0.1",
   "description": "New math validation",
