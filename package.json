@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "release": "semantic-release",
+    "release": "yarn tsc && semantic-release",
     "watch": "rollup -cw",
     "test": "jest",
     "test:report": "jest --config jest-stare.config.js",
