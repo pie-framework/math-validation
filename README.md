@@ -99,3 +99,5 @@ add the following to `configurations` array in launch.json
 node --inspect-brk ./node_modules/.bin/jest --runInBand #and any other flags you want
 ```
 The launch debug using 'Attach' command above.
+
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
