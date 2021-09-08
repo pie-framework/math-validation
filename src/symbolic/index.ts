@@ -3,6 +3,7 @@ import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
 import { sort } from "../node-sort";
 
+var algebra = require("algebra.js");
 const m: any = mathjs;
 const log = logger("mv:symbolic");
 const positiveInfinity = 1.497258191621251e6;
@@ -158,6 +159,8 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
       return arg;
     });
 
+    console.log(as.toString(), "as expression");
+
     bs.args = bs.args.map((arg) => {
       noFunctionOrArray =
         !!noFunctionOrArray && (!arg.isFunctionNode || !arg.isArrayNode);
@@ -168,6 +171,7 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
       return arg;
     });
 
+    console.log(bs.toString(), "bs expression");
     if (noFunctionOrArray && symbolNode) {
       let ae = new m.OperatorNode("-", "subtract", as.args);
       let be = new m.OperatorNode("-", "subtract", bs.args);
@@ -180,7 +184,78 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
         equality = isMathEqual(ae, be);
       }
 
-      log("[isMathEqual]", ae.toString(), "==?", be.toString());
+      if (equality) {
+        return true;
+      }
+
+      console.log("[isMathEqual]", ae.toString(), "==?", be.toString());
+
+      const a = [
+        [1, -0.5],
+        [-2, 0],
+      ];
+      const b = [5, -10];
+      const x = m.usolveAll(a, b);
+      console.log(x);
+
+      let node = m.parse(ae.toString());
+      const code = node.compile();
+      console.log(code.evaluate, "code");
+
+      console.log(ae.toString());
+      const transformed = node.transform(function (node, path, parent) {
+        if (node.isSymbolNode && node.name === "x") {
+          return new m.ConstantNode(0);
+        } else {
+          return node;
+        }
+      });
+
+      const transformedbe = be.transform(function (node, path, parent) {
+        if (node.isSymbolNode && node.name === "x") {
+          return new m.ConstantNode(0);
+        } else {
+          return node;
+        }
+      });
+
+      const zero = new m.ConstantNode(0);
+      const evaluate = transformed.evaluate({ y: 5 });
+      const evaluatebe = transformedbe.evaluate({ y: 5 });
+      console.log(transformed.toString(), "filtered");
+      console.log(transformedbe.toString(), "transformed be");
+      console.log(evaluate, "evaluate");
+      console.log(evaluatebe, "evaluatebe");
+
+      ae = transformed;
+      be = transformedbe;
+      console.log(
+        "[simplify]",
+        m.simplify(ae).toString(),
+        "==?",
+        m.simplify(be).toString()
+      );
+
+      var expr1a = algebra.parse(ae.toString());
+      var expr2 = algebra.parse(zero.toString());
+
+      var expr1b = algebra.parse(be.toString());
+      var eqA = new algebra.Equation(expr1a, expr2);
+      var eqB = new algebra.Equation(expr1b, expr2);
+
+      console.log(eqA.toString());
+      console.log(eqB.toString());
+
+      var yAnswerA = eqA.solveFor("y");
+      var yAnswerB = eqB.solveFor("y");
+
+      console.log(yAnswerA, "yanswerA");
+      console.log(yAnswerB, "yAnswerB");
+
+      console.log(yAnswerA.toTex());
+      console.log(yAnswerB.toTex());
+
+      equality = yAnswerA.toTex() == yAnswerB.toTex();
     }
   }
 
