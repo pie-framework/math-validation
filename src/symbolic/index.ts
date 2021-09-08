@@ -3,7 +3,12 @@ import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
 import { sort } from "../node-sort";
 
-var algebra = require("algebra.js");
+// const cannot be used since nerdamer gets modified when other modules are loaded
+var nerdamer = require("nerdamer");
+// Load additional modules. Algebra aand Calculus are required in order to use Solve.
+require("nerdamer/Algebra");
+require("nerdamer/Calculus");
+require("nerdamer/Solve");
 const m: any = mathjs;
 const log = logger("mv:symbolic");
 const positiveInfinity = 1.497258191621251e6;
@@ -190,72 +195,50 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
 
       console.log("[isMathEqual]", ae.toString(), "==?", be.toString());
 
-      const a = [
-        [1, -0.5],
-        [-2, 0],
-      ];
-      const b = [5, -10];
-      const x = m.usolveAll(a, b);
-      console.log(x);
+      // const a = [
+      //   [1, -0.5],
+      //   [-2, 0],
+      // ];
+      // const b = [5, -10];
+      // const x = m.usolveAll(a, b);
+      // console.log(x);
 
-      let node = m.parse(ae.toString());
-      const code = node.compile();
-      console.log(code.evaluate, "code");
+      // let node = m.parse(ae.toString());
+      // const code = node.compile();
+      // console.log(code.evaluate, "code");
 
-      console.log(ae.toString());
-      const transformed = node.transform(function (node, path, parent) {
-        if (node.isSymbolNode && node.name === "x") {
-          return new m.ConstantNode(0);
-        } else {
-          return node;
-        }
+      // console.log(
+      //   "[simplify]",
+      //   m.simplify(ae).toString(),
+      //   "==?",
+      //   m.simplify(be).toString()
+      // );
+
+      const filtered = ae.filter(function (node) {
+        return node.isSymbolNode && node.name === "x";
       });
 
-      const transformedbe = be.transform(function (node, path, parent) {
-        if (node.isSymbolNode && node.name === "x") {
-          return new m.ConstantNode(0);
-        } else {
-          return node;
-        }
-      });
+      console.log(filtered, "filtered");
+      // solve expression for x=1
+      let expraNoX = nerdamer(ae.toString(), { x: 1 });
+      let exprA = nerdamer.solve(expraNoX.toString(), "y");
 
-      const zero = new m.ConstantNode(0);
-      const evaluate = transformed.evaluate({ y: 5 });
-      const evaluatebe = transformedbe.evaluate({ y: 5 });
-      console.log(transformed.toString(), "filtered");
-      console.log(transformedbe.toString(), "transformed be");
-      console.log(evaluate, "evaluate");
-      console.log(evaluatebe, "evaluatebe");
+      console.log(expraNoX.toString(), "first expression, solved for x=1");
 
-      ae = transformed;
-      be = transformedbe;
-      console.log(
-        "[simplify]",
-        m.simplify(ae).toString(),
-        "==?",
-        m.simplify(be).toString()
-      );
+      console.log(exprA.toString(), "exprA");
 
-      var expr1a = algebra.parse(ae.toString());
-      var expr2 = algebra.parse(zero.toString());
+      // solve expression for x=1
+      let exprbNoX = nerdamer(be.toString(), { x: 1 });
+      let exprB = nerdamer.solve(exprbNoX.toString(), "y");
 
-      var expr1b = algebra.parse(be.toString());
-      var eqA = new algebra.Equation(expr1a, expr2);
-      var eqB = new algebra.Equation(expr1b, expr2);
+      console.log(exprbNoX.toString(), "second expression, solved for x=1");
 
-      console.log(eqA.toString());
-      console.log(eqB.toString());
+      console.log(exprB.toString(), "exprB");
 
-      var yAnswerA = eqA.solveFor("y");
-      var yAnswerB = eqB.solveFor("y");
-
-      console.log(yAnswerA, "yanswerA");
-      console.log(yAnswerB, "yAnswerB");
-
-      console.log(yAnswerA.toTex());
-      console.log(yAnswerB.toTex());
-
-      equality = yAnswerA.toTex() == yAnswerB.toTex();
+      if (filtered.length != 0) {
+        // if y is the same, for the same x then the expressions should be equivalent
+        equality = exprA.toString() == exprB.toString();
+      }
     }
   }
 

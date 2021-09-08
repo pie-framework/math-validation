@@ -21,19 +21,19 @@ export default {
         "y = 0.5x+5 ",
         // Use division sign rather than fraction form
         "y =x÷2 +5",
-        // // Multiply both sides of the equation by a non-zero number
-        // "-2y =-x -10",
+        // Multiply both sides of the equation by a non-zero number
+        "-2y =-x -10",
         // Add a number to both sides of the equation
         "y-5 =\\frac{x}{2}",
         "-5 =\\frac{1}{2}x-y",
         // Subtract one of the variables from both sides of the equation
         "0=x/2-y+5",
-        // // Add a new variable to both sides of the equation
-        // "z=x/2-y+5 +z",
-        // // Divide both sides of the equation by y
-        // "1=\\frac{x}{2y}+\\frac{5}{y}",
-        // // Combine several of the above
-        // "x-2y+z=z-10",
+        // Add a new variable to both sides of the equation
+        "z=x/2-y+5 +z",
+        // Divide both sides of the equation by y
+        "1=\\frac{x}{2y}+\\frac{5}{y}",
+        // Combine several of the above
+        "x-2y+z=z-10",
       ],
       ne: [
         "\\frac{1}{2}x +5 = x",

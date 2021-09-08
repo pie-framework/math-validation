@@ -21,9 +21,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "algebra.js": "^0.2.6",
     "lodash": "^4.17.21",
-    "mathjs": "^9.4.2"
+    "mathjs": "^9.4.2",
+    "nerdamer": "^1.1.12"
   },
   "devDependencies": {
     "@babel/runtime": "^7.13.10",

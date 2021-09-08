@@ -1,5 +1,6 @@
 export default {
   mode: "symbolic",
+  //only: true,
   tests: [
     {
       target: "a_n=3a_{n-1}",
