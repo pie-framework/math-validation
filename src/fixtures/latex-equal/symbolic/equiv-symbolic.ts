@@ -9,7 +9,6 @@ export default {
     {
       // equation with variable
       target: "y= \\frac{1}{2}x +5",
-
       eq: [
         // flip sides of equation
         "\\frac{1}{2}x +5 = y",
@@ -61,17 +60,16 @@ export default {
     //   target: "2x<4",
     //   eq: ["4>2x", "x+x < 2*2", "x<2"],
     // },
-    // {
-    //   // 3-way inequality with variable(s)
-    //   target: "1<2x ≤ 3",
-    //   eq: ["3 ≥ 2x>1", "x/x<x+x≤1.5*2", "1/2<x ≤1.5"], //
-    // },
-    // {
-    //   // inequality with no variable(s)
-    //   target: "1<2",
-    //   eq: ["0<1", "x+1>x"],
-    // },
-    // expression (no equal or inequality sign)
+    {
+      // 3-way inequality with variable(s)
+      target: "1<2x ≤ 3",
+      eq: [
+        "3 ≥ 2x>1",
+        "x/x<x+x≤1.5*2",
+        // "1/2<x ≤1.5"
+      ],
+    },
+    // expressions (no equal or inequality sign)
     {
       target: "\\frac{1}{3}*(8c)-5",
       eq: [

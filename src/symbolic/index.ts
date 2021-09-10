@@ -2,13 +2,8 @@ import { logger } from "../log";
 import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
 import { sort } from "../node-sort";
+import { compareEquations } from "./compare-equations";
 
-// const cannot be used since nerdamer gets modified when other modules are loaded
-var nerdamer = require("nerdamer");
-// Load additional modules. Algebra aand Calculus are required in order to use Solve.
-require("nerdamer/Algebra");
-require("nerdamer/Calculus");
-require("nerdamer/Solve");
 const m: any = mathjs;
 const log = logger("mv:symbolic");
 const positiveInfinity = 1.497258191621251e6;
@@ -133,88 +128,7 @@ const normalize = (a: string | MathNode | any) => {
   return r;
 };
 
-export const compareEquations = (firstEquation: any, secondEquation: any) => {
-  let noFunctionOrArray = true;
-  let symbolNode = false;
-  let equivalence = false;
-
-  console.log(firstEquation.toTex(), "first");
-  console.log(secondEquation.toTex(), "second");
-
-  firstEquation.args = firstEquation.args.map((arg) => {
-    noFunctionOrArray =
-      !!noFunctionOrArray && (!arg.isFunctionNode || !arg.isArrayNode);
-    if (arg.isSymbolNode) {
-      symbolNode = true;
-    }
-
-    return arg;
-  });
-
-  console.log(firstEquation.toString(), "firstEquation");
-
-  secondEquation.args = secondEquation.args.map((arg) => {
-    noFunctionOrArray =
-      !!noFunctionOrArray && (!arg.isFunctionNode || !arg.isArrayNode);
-
-    if (arg.isSymbolNode) {
-      symbolNode = true && symbolNode;
-    }
-    return arg;
-  });
-
-  console.log(secondEquation.toString(), "secondEquation");
-
-  if (noFunctionOrArray && symbolNode) {
-    let ae = new m.OperatorNode("-", "subtract", firstEquation.args);
-    let be = new m.OperatorNode("-", "subtract", secondEquation.args);
-    let minus = new m.ConstantNode(-1);
-    if (equivalence) {
-      return true;
-    }
-    equivalence = isMathEqual(ae, be);
-
-    if (!equivalence && noFunctionOrArray && symbolNode) {
-      be = new m.OperatorNode("*", "multiply", [minus, be]);
-      equivalence = isMathEqual(ae, be);
-    }
-
-    if (equivalence) {
-      return true;
-    }
-
-    console.log("[isMathEqual]", ae.toString(), "==?", be.toString());
-
-    const filtered = firstEquation.filter(function (node) {
-      return node.isSymbolNode && node.name === "x";
-    });
-
-    console.log(filtered, "filtered");
-    // solve expression for x=1
-    let expraNoX = nerdamer(ae.toString(), { x: 1 });
-    let exprA = nerdamer.solve(expraNoX.toString(), "y");
-
-    console.log(expraNoX.toString(), "first expression, solved for x=1");
-
-    console.log(exprA.toString(), "exprA");
-
-    // solve expression for x=1
-    let exprbNoX = nerdamer(be.toString(), { x: 1 });
-    let exprB = nerdamer.solve(exprbNoX.toString(), "y");
-
-    console.log(exprbNoX.toString(), "second expression, solved for x=1");
-
-    console.log(exprB.toString(), "exprB");
-
-    if (filtered.length != 0) {
-      // if y is the same, for the same x then the expressions should be equivalent
-      return exprA.toString() == exprB.toString();
-    }
-  }
-  return equivalence;
-};
-
-export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
+export const isMathEqual = (a: any, b: any) => {
   let as: MathNode;
   let bs: MathNode;
 
@@ -223,9 +137,7 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
 
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
 
-  console.log(typeof bs, "type -----------");
-
-  console.log("[isMathEqual]", as.toString(), "==?", bs.toString());
+  log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
   const isSortingEnough = sort(a).equals(sort(b));
   const isTexEnough = as.toTex().trim() === bs.toTex().trim();
@@ -235,9 +147,8 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   if (equality) {
     return true;
   }
-
   // if both expressions are equations
-  if (!equality && as.fn === "equal" && bs.fn === "equal") {
+  if (as.fn === "equal" && bs.fn === "equal") {
     equality = compareEquations(as, bs);
   }
 
