@@ -133,6 +133,87 @@ const normalize = (a: string | MathNode | any) => {
   return r;
 };
 
+export const compareEquations = (firstEquation: any, secondEquation: any) => {
+  let noFunctionOrArray = true;
+  let symbolNode = false;
+  let equivalence = false;
+
+  console.log(firstEquation.toTex(), "first");
+  console.log(secondEquation.toTex(), "second");
+
+  firstEquation.args = firstEquation.args.map((arg) => {
+    noFunctionOrArray =
+      !!noFunctionOrArray && (!arg.isFunctionNode || !arg.isArrayNode);
+    if (arg.isSymbolNode) {
+      symbolNode = true;
+    }
+
+    return arg;
+  });
+
+  console.log(firstEquation.toString(), "firstEquation");
+
+  secondEquation.args = secondEquation.args.map((arg) => {
+    noFunctionOrArray =
+      !!noFunctionOrArray && (!arg.isFunctionNode || !arg.isArrayNode);
+
+    if (arg.isSymbolNode) {
+      symbolNode = true && symbolNode;
+    }
+    return arg;
+  });
+
+  console.log(secondEquation.toString(), "secondEquation");
+
+  if (noFunctionOrArray && symbolNode) {
+    let ae = new m.OperatorNode("-", "subtract", firstEquation.args);
+    let be = new m.OperatorNode("-", "subtract", secondEquation.args);
+    let minus = new m.ConstantNode(-1);
+    if (equivalence) {
+      return true;
+    }
+    equivalence = isMathEqual(ae, be);
+
+    if (!equivalence && noFunctionOrArray && symbolNode) {
+      be = new m.OperatorNode("*", "multiply", [minus, be]);
+      equivalence = isMathEqual(ae, be);
+    }
+
+    if (equivalence) {
+      return true;
+    }
+
+    console.log("[isMathEqual]", ae.toString(), "==?", be.toString());
+
+    const filtered = firstEquation.filter(function (node) {
+      return node.isSymbolNode && node.name === "x";
+    });
+
+    console.log(filtered, "filtered");
+    // solve expression for x=1
+    let expraNoX = nerdamer(ae.toString(), { x: 1 });
+    let exprA = nerdamer.solve(expraNoX.toString(), "y");
+
+    console.log(expraNoX.toString(), "first expression, solved for x=1");
+
+    console.log(exprA.toString(), "exprA");
+
+    // solve expression for x=1
+    let exprbNoX = nerdamer(be.toString(), { x: 1 });
+    let exprB = nerdamer.solve(exprbNoX.toString(), "y");
+
+    console.log(exprbNoX.toString(), "second expression, solved for x=1");
+
+    console.log(exprB.toString(), "exprB");
+
+    if (filtered.length != 0) {
+      // if y is the same, for the same x then the expressions should be equivalent
+      return exprA.toString() == exprB.toString();
+    }
+  }
+  return equivalence;
+};
+
 export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
   let as: MathNode;
   let bs: MathNode;
@@ -142,104 +223,22 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
 
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
 
-  log("[isMathEqual]", as.toString(), "==?", bs.toString());
+  console.log(typeof bs, "type -----------");
+
+  console.log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
   const isSortingEnough = sort(a).equals(sort(b));
   const isTexEnough = as.toTex().trim() === bs.toTex().trim();
 
   let equality = isTexEnough || as.equals(bs) || isSortingEnough;
 
+  if (equality) {
+    return true;
+  }
+
   // if both expressions are equations
   if (!equality && as.fn === "equal" && bs.fn === "equal") {
-    let noFunctionOrArray = true;
-    let symbolNode = false;
-
-    as.args = as.args.map((arg) => {
-      noFunctionOrArray =
-        !!noFunctionOrArray && (!arg.isFunctionNode || !arg.isArrayNode);
-      if (arg.isSymbolNode) {
-        symbolNode = true;
-      }
-
-      return arg;
-    });
-
-    console.log(as.toString(), "as expression");
-
-    bs.args = bs.args.map((arg) => {
-      noFunctionOrArray =
-        !!noFunctionOrArray && (!arg.isFunctionNode || !arg.isArrayNode);
-
-      if (arg.isSymbolNode) {
-        symbolNode = true;
-      }
-      return arg;
-    });
-
-    console.log(bs.toString(), "bs expression");
-    if (noFunctionOrArray && symbolNode) {
-      let ae = new m.OperatorNode("-", "subtract", as.args);
-      let be = new m.OperatorNode("-", "subtract", bs.args);
-      let minus = new m.ConstantNode(-1);
-
-      equality = isMathEqual(ae, be);
-
-      if (!equality && noFunctionOrArray && symbolNode) {
-        be = new m.OperatorNode("*", "multiply", [minus, be]);
-        equality = isMathEqual(ae, be);
-      }
-
-      if (equality) {
-        return true;
-      }
-
-      console.log("[isMathEqual]", ae.toString(), "==?", be.toString());
-
-      // const a = [
-      //   [1, -0.5],
-      //   [-2, 0],
-      // ];
-      // const b = [5, -10];
-      // const x = m.usolveAll(a, b);
-      // console.log(x);
-
-      // let node = m.parse(ae.toString());
-      // const code = node.compile();
-      // console.log(code.evaluate, "code");
-
-      // console.log(
-      //   "[simplify]",
-      //   m.simplify(ae).toString(),
-      //   "==?",
-      //   m.simplify(be).toString()
-      // );
-
-      const filtered = ae.filter(function (node) {
-        return node.isSymbolNode && node.name === "x";
-      });
-
-      console.log(filtered, "filtered");
-      // solve expression for x=1
-      let expraNoX = nerdamer(ae.toString(), { x: 1 });
-      let exprA = nerdamer.solve(expraNoX.toString(), "y");
-
-      console.log(expraNoX.toString(), "first expression, solved for x=1");
-
-      console.log(exprA.toString(), "exprA");
-
-      // solve expression for x=1
-      let exprbNoX = nerdamer(be.toString(), { x: 1 });
-      let exprB = nerdamer.solve(exprbNoX.toString(), "y");
-
-      console.log(exprbNoX.toString(), "second expression, solved for x=1");
-
-      console.log(exprB.toString(), "exprB");
-
-      if (filtered.length != 0) {
-        // if y is the same, for the same x then the expressions should be equivalent
-        equality = exprA.toString() == exprB.toString();
-      }
-    }
+    equality = compareEquations(as, bs);
   }
 
   return equality;
