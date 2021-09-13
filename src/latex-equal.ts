@@ -40,6 +40,6 @@ export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {
   if (opts.mode === "literal") {
     return isLiteralEqual(amo, bmo, opts.literal);
   } else {
-    return isSymbolicEqual(amo, bmo, opts.symbolic);
+    return isSymbolicEqual(amo, bmo);
   }
 };

@@ -1,5 +1,5 @@
 import { mathjs } from "../mathjs";
-import { isMathEqual } from ".";
+import { isMathEqual, simplify } from ".";
 
 const m: any = mathjs;
 // const cannot be used since nerdamer gets modified when other modules are loaded
@@ -9,13 +9,48 @@ require("nerdamer/Algebra");
 require("nerdamer/Calculus");
 require("nerdamer/Solve");
 
-export const compareEquations = (firstEquation: any, secondEquation: any) => {
-  let noFunctionOrArray = true;
-  let symbolNode = false;
-  let equivalence = false;
+// check if equation is valid and find out the number of unknowns and their name
+const getUnknowns = (equation: any) => {
+  let variablesNumber: number = 0;
+  let variableNames: string[] = [];
 
-  console.log(firstEquation.toTex(), "first");
-  console.log(secondEquation.toTex(), "second");
+  equation.traverse(function (node, path, parent) {
+    if (
+      node.isSymbolNode &&
+      node?.name.length === 1 &&
+      !variableNames.includes(node.name)
+    ) {
+      variableNames.push(node.name);
+      variablesNumber++;
+    }
+  });
+
+  variableNames.sort();
+
+  return {
+    variablesNumber,
+    variableNames,
+  };
+};
+
+const equationsHaveTheSameUnknowns = (
+  firstEquationUnknowns: string[],
+  secondEquationUnknowns: string[]
+) => {
+  return (
+    Array.isArray(firstEquationUnknowns) &&
+    Array.isArray(secondEquationUnknowns) &&
+    firstEquationUnknowns.length === secondEquationUnknowns.length &&
+    firstEquationUnknowns.every(
+      (unknonwn, index) => unknonwn === secondEquationUnknowns[index]
+    )
+  );
+};
+
+export const compareEquations = (firstEquation: any, secondEquation: any) => {
+  let noFunctionOrArray: boolean = true;
+  let symbolNode: boolean = false;
+  let equivalence: boolean = false;
 
   firstEquation.args = firstEquation.args.map((arg) => {
     noFunctionOrArray =
@@ -27,8 +62,6 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
     return arg;
   });
 
-  console.log(firstEquation.toString(), "firstEquation");
-
   secondEquation.args = secondEquation.args.map((arg) => {
     noFunctionOrArray =
       !!noFunctionOrArray && (!arg.isFunctionNode || !arg.isArrayNode);
@@ -36,68 +69,69 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
     if (arg.isSymbolNode) {
       symbolNode = true && symbolNode;
     }
+
     return arg;
   });
 
-  console.log(secondEquation.toString(), "secondEquation");
-
+  // move the terms of the equations to the left hand side
   if (noFunctionOrArray && symbolNode) {
-    let ae = new m.OperatorNode("-", "subtract", firstEquation.args);
-    let be = new m.OperatorNode("-", "subtract", secondEquation.args);
-    let minus = new m.ConstantNode(-1);
+    let firstExpression = new m.OperatorNode(
+      "-",
+      "subtract",
+      firstEquation.args
+    );
+    let secondExpression = new m.OperatorNode(
+      "-",
+      "subtract",
+      secondEquation.args
+    );
 
-    equivalence = isMathEqual(ae, be);
+    // remove added/subtracted numbers/variables from both sides of the equation
+    firstExpression = simplify(firstExpression);
+    secondExpression = simplify(secondExpression);
 
-    if (equivalence) {
+    if (isMathEqual(firstExpression, secondExpression)) {
       return true;
     }
 
-    if (noFunctionOrArray && symbolNode) {
-      be = new m.OperatorNode("*", "multiply", [minus, be]);
-      equivalence = isMathEqual(ae, be);
+    let firstEquationUnknowns = getUnknowns(firstExpression);
+    let secondEquationUnknowns = getUnknowns(secondExpression);
+
+    if (
+      !equationsHaveTheSameUnknowns(
+        firstEquationUnknowns.variableNames,
+        secondEquationUnknowns.variableNames
+      )
+    ) {
+      return false;
     }
 
-    if (equivalence) {
-      return true;
-    }
+    if (firstEquationUnknowns.variablesNumber === 1) {
+      let x = firstEquationUnknowns.variableNames[0];
 
-    console.log("[isMathEqual]", ae.toString(), "==?", be.toString());
-
-    const filteredX = firstEquation.filter(function (node) {
-      return node.isSymbolNode && node.name === "x";
-    });
-
-    const filteredY = firstEquation.filter(function (node) {
-      return node.isSymbolNode && node.name === "y";
-    });
-
-    // if equations have 2 variables
-    if (filteredX.length !== 0 && filteredY.length !== 0) {
-      // solve expression for x=1
-      let expraNoX = nerdamer(ae.toString(), { x: 1 });
-      let exprA = nerdamer.solve(expraNoX.toString(), "y");
-
-      console.log(expraNoX.toString(), "first expression, solved for x=1");
-
-      console.log(exprA.toString(), "exprA");
-
-      // solve expression for x=1
-      let exprbNoX = nerdamer(be.toString(), { x: 1 });
-      let exprB = nerdamer.solve(exprbNoX.toString(), "y");
-
-      console.log(exprbNoX.toString(), "second expression, solved for x=1");
-
-      console.log(exprB.toString(), "exprB");
-
-      // if y is the same, for the same x then the expressions should be equivalent
-      equivalence = exprA.toString() == exprB.toString();
-    } else if (filteredX.length !== 0) {
-      console.log(nerdamer.solve(ae.toString(), "x").toString(), "rezolva x a");
-      console.log(nerdamer.solve(be.toString(), "x").toString(), "rezolva x b");
       equivalence =
-        nerdamer.solve(ae.toString(), "x").toString() ===
-        nerdamer.solve(be.toString(), "x").toString();
+        nerdamer.solve(firstExpression.toString(), x).toString() ===
+        nerdamer.solve(secondExpression.toString(), x).toString();
+    }
+
+    if (firstEquationUnknowns.variablesNumber === 2) {
+      let x = firstEquationUnknowns.variableNames[0];
+      let y = firstEquationUnknowns.variableNames[1];
+
+      // solve expression for x=1
+      // work in progress - it does not work with other variables
+      let expraNoX = nerdamer(firstExpression.toString(), { x: 1 });
+      let exprbNoX = nerdamer(secondExpression.toString(), { x: 1 });
+
+      // find y for both equations, where x equals 1
+      let yFromFirstExpression = nerdamer.solve(expraNoX.toString(), y);
+      let yFromSecondExpression = nerdamer.solve(exprbNoX.toString(), y);
+
+      // if y has the same value, for the same x then the expressions should be equivalent
+      equivalence =
+        yFromFirstExpression.toString() == yFromSecondExpression.toString();
     }
   }
+
   return equivalence;
 };

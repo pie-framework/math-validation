@@ -17,6 +17,7 @@ const SIMPLIFY_RULES = [
   { l: "n1^(1/n2)", r: "nthRoot(n1, n2)" },
   { l: "sqrt(n1)", r: "nthRoot(n1, 2)" },
   { l: "(n^2)/n", r: "n" },
+  { l: "n-n", r: "0" },
   { l: "(n^2) + n", r: "n * (n + 1)" },
   { l: "((n^n1) + n)/n", r: "n^(n1-1)+1" },
   { l: "(n^2) + 2n", r: "n * (n + 2)" },
@@ -31,6 +32,7 @@ const SIMPLIFY_RULES = [
   { l: "tzn(n1, n2)", r: "n1" },
   { l: "n1/(-n2)", r: "-(n1/n2)" },
   { l: "sin(n*pi)", r: "0" },
+
   // trigonometry: defining relations for tangent, cotangent, secant, and cosecant in terms of sine and cosine
   { l: "sin(n)/cos(n)", r: "tan(n)" },
   { l: "csc(n)", r: "1/sin(n)" },
@@ -57,7 +59,7 @@ const SIMPLIFY_RULES = [
   { l: "tan(acot(n))", r: "1/n" },
 ];
 
-const simplify = (v) => {
+export const simplify = (v) => {
   const rules = SIMPLIFY_RULES.concat((ms as any).rules);
   return ms(v, rules); //.concat(SIMPLIFY_RULES));
 };
