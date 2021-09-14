@@ -46,8 +46,6 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
   let symbolNode: boolean = false;
   let equivalence: boolean = false;
 
-  console.log(firstEquation.toTex(), "firstEquation");
-
   firstEquation.traverse(function (node, path, parent) {
     noFunctionOrArray =
       !!noFunctionOrArray && (!node.isFunctionNode || !node.isArrayNode);
@@ -68,9 +66,6 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
     return node;
   });
 
-  console.log(noFunctionOrArray, "noFunctionArray");
-  console.log(symbolNode, "symbol node");
-
   // move the terms of the equations to the left hand side
   if (noFunctionOrArray && symbolNode) {
     let firstExpression = new m.OperatorNode(
@@ -84,21 +79,16 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
       secondEquation.args
     );
 
-    console.log(firstExpression, "firstExpression");
     // remove added/subtracted numbers/variables from both sides of the equation
     firstExpression = simplify(firstExpression);
     secondExpression = simplify(secondExpression);
 
-    console.log(firstExpression, "firstExpression after simplify");
     if (isMathEqual(firstExpression, secondExpression)) {
       return true;
     }
 
     let firstEquationUnknownsName = getUnknowns(firstExpression);
     let secondEquationUnknownsName = getUnknowns(secondExpression);
-
-    console.log(firstEquationUnknownsName, "firstEquationUnknownsName");
-    console.log(secondEquationUnknownsName, "secondEquationUnknownsName");
 
     if (
       !equationsHaveTheSameUnknowns(
@@ -112,7 +102,6 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
     if (firstEquationUnknownsName.length === 1) {
       let x = firstEquationUnknownsName[0];
 
-      console.log(x, "x");
       equivalence =
         nerdamer.solve(firstExpression.toString(), x).toString() ===
         nerdamer.solve(secondExpression.toString(), x).toString();
