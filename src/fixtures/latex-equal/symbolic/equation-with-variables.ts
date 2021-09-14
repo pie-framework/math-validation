@@ -21,7 +21,6 @@ export default {
       eq: ["-2a =-b -10", "1=\\frac{b}{2a}+\\frac{5}{a}", "b-2a+c=c-10"],
     },
     {
-      // only: true,
       // linear equation in one variable
       target: "x=9",
       eq: ["30-2x=12"],

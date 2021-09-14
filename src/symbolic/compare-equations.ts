@@ -3,10 +3,7 @@ import { isMathEqual, simplify } from ".";
 
 const m: any = mathjs;
 // const cannot be used since nerdamer gets modified when other modules are loaded
-var nerdamer = require("nerdamer");
-// Load additional modules. Algebra aand Calculus are required in order to use Solve.
-require("nerdamer/Algebra");
-require("nerdamer/Calculus");
+let nerdamer = require("nerdamer");
 require("nerdamer/Solve");
 
 // check if equation is valid and find out the number of unknowns and their name
@@ -27,10 +24,7 @@ const getUnknowns = (equation: any) => {
 
   variableNames.sort();
 
-  return {
-    variablesNumber,
-    variableNames,
-  };
+  return variableNames;
 };
 
 const equationsHaveTheSameUnknowns = (
@@ -94,29 +88,29 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
       return true;
     }
 
-    let firstEquationUnknowns = getUnknowns(firstExpression);
-    let secondEquationUnknowns = getUnknowns(secondExpression);
+    let firstEquationUnknownsName = getUnknowns(firstExpression);
+    let secondEquationUnknownsName = getUnknowns(secondExpression);
 
     if (
       !equationsHaveTheSameUnknowns(
-        firstEquationUnknowns.variableNames,
-        secondEquationUnknowns.variableNames
+        firstEquationUnknownsName,
+        secondEquationUnknownsName
       )
     ) {
       return false;
     }
 
-    if (firstEquationUnknowns.variablesNumber === 1) {
-      let x = firstEquationUnknowns.variableNames[0];
+    if (firstEquationUnknownsName.length === 1) {
+      let x = firstEquationUnknownsName[0];
 
       equivalence =
         nerdamer.solve(firstExpression.toString(), x).toString() ===
         nerdamer.solve(secondExpression.toString(), x).toString();
     }
 
-    if (firstEquationUnknowns.variablesNumber === 2) {
-      let x = firstEquationUnknowns.variableNames[0];
-      let y = firstEquationUnknowns.variableNames[1];
+    if (secondEquationUnknownsName.length === 2) {
+      let x = firstEquationUnknownsName[0];
+      let y = secondEquationUnknownsName[1];
 
       interface makeXProp {
         [key: string]: number;
@@ -125,8 +119,8 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
       let valueForX: makeXProp = {};
       const definedPropertyX: string = x;
       valueForX[definedPropertyX] = 1;
+
       // solve expression for x=1
-     
       let expraNoX = nerdamer(firstExpression.toString(), valueForX);
       let exprbNoX = nerdamer(secondExpression.toString(), valueForX);
 
