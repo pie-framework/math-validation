@@ -118,10 +118,17 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
       let x = firstEquationUnknowns.variableNames[0];
       let y = firstEquationUnknowns.variableNames[1];
 
+      interface makeXProp {
+        [key: string]: number;
+      }
+
+      let valueForX: makeXProp = {};
+      const definedPropertyX: string = x;
+      valueForX[definedPropertyX] = 1;
       // solve expression for x=1
-      // work in progress - it does not work with other variables
-      let expraNoX = nerdamer(firstExpression.toString(), { x: 1 });
-      let exprbNoX = nerdamer(secondExpression.toString(), { x: 1 });
+     
+      let expraNoX = nerdamer(firstExpression.toString(), valueForX);
+      let exprbNoX = nerdamer(secondExpression.toString(), valueForX);
 
       // find y for both equations, where x equals 1
       let yFromFirstExpression = nerdamer.solve(expraNoX.toString(), y);

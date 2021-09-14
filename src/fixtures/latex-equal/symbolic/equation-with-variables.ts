@@ -4,7 +4,7 @@ export default {
   tests: [
     {
       //only: true,
-      // linear equations
+      // linear equations with 2 unknowns
       target: "y= \\frac{1}{2}x +5",
       eq: [
         // Multiply both sides of the equation by a non-zero number
@@ -15,19 +15,11 @@ export default {
         "x-2y+z=z-10",
       ],
     },
-    // {
-    //   only: true,
-    //   // linear equations
-    //   target: "a= \\frac{1}{2}b +5",
-    //   eq: [
-    //     // Multiply both sides of the equation by a non-zero number
-    //     "-2a =-b -10",
-    //     // Divide both sides of the equation by y
-    //     "1=\\frac{b}{2a}+\\frac{5}{a}",
-    //     // Combine several of the above
-    //     "b-2a+c=c-10",
-    //   ],
-    // },
+    {
+      // linear equations with 2 unknowns that are not x or y
+      target: "a= \\frac{1}{2}b +5",
+      eq: ["-2a =-b -10", "1=\\frac{b}{2a}+\\frac{5}{a}", "b-2a+c=c-10"],
+    },
     {
       // only: true,
       // linear equation in one variable
