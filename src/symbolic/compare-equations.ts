@@ -8,7 +8,6 @@ require("nerdamer/Solve");
 
 // check if equation is valid and find out the number of unknowns and their name
 const getUnknowns = (equation: any) => {
-  let variablesNumber: number = 0;
   let variableNames: string[] = [];
 
   equation.traverse(function (node, path, parent) {
@@ -18,7 +17,6 @@ const getUnknowns = (equation: any) => {
       !variableNames.includes(node.name)
     ) {
       variableNames.push(node.name);
-      variablesNumber++;
     }
   });
 
@@ -49,9 +47,8 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
   firstEquation.traverse(function (node, path, parent) {
     noFunctionOrArray =
       !!noFunctionOrArray && (!node.isFunctionNode || !node.isArrayNode);
-    if (node.isSymbolNode) {
-      symbolNode = true;
-    }
+
+    symbolNode = symbolNode || node.isSymbolNode;
 
     return node;
   });
@@ -59,8 +56,9 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
   secondEquation.traverse(function (node, path, parent) {
     noFunctionOrArray =
       !!noFunctionOrArray && (!node.isFunctionNode || !node.isArrayNode);
+
     if (node.isSymbolNode) {
-      symbolNode = true && symbolNode;
+      symbolNode = symbolNode && true;
     }
 
     return node;
@@ -99,6 +97,7 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
       return false;
     }
 
+    // if both equations are linear in one variable then we solve "x" for both. If x has the same value then equations are equivalent
     if (firstEquationUnknownsName.length === 1) {
       let x = firstEquationUnknownsName[0];
 
@@ -107,6 +106,7 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
         nerdamer.solve(secondExpression.toString(), x).toString();
     }
 
+    // if both equations are linear in two variabled then we give value "1" for both "x". Doing this we get a linear equation in one variable "y". Then we solve "y" for both. If y has the same value then equations are equivalent
     if (secondEquationUnknownsName.length === 2) {
       let x = firstEquationUnknownsName[0];
       let y = secondEquationUnknownsName[1];
