@@ -1,10 +1,10 @@
 export default {
   mode: "symbolic",
-
+ //  only: true,
   tests: [
     {
       target: "x=9",
-      eq: ["30-2x=12"],
+      eq: ["30-2x=12", "10+10-3x+x+10=12", "\\frac{1}{x}=\\frac{1}{9}"],
       ne: ["31-2x=12"],
     },
     {

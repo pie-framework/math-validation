@@ -2,9 +2,6 @@ import { mathjs } from "../mathjs";
 import { isMathEqual, simplify } from ".";
 
 const m: any = mathjs;
-// const cannot be used since nerdamer gets modified when other modules are loaded
-let nerdamer = require("nerdamer");
-require("nerdamer/Solve");
 
 // check if equation is valid and find out the number of unknowns and their name
 const getUnknowns = (equation: any) => {
@@ -23,6 +20,20 @@ const getUnknowns = (equation: any) => {
   variableNames.sort();
 
   return variableNames;
+};
+
+// solve x
+const solveEquation = (equation: any) => {
+  const rationalizedEquation = m.rationalize(equation, {}, true);
+  const coefficients: number[] = rationalizedEquation.coefficients;
+
+  let result: number;
+
+  if (coefficients) {
+    result = m.divide(coefficients[0], -1 * coefficients[1]);
+  }
+
+  return result;
 };
 
 const equationsHaveTheSameUnknowns = (
@@ -46,16 +57,16 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
 
   firstEquation.traverse(function (node, path, parent) {
     noFunctionOrArray =
-      !!noFunctionOrArray && (!node.isFunctionNode || !node.isArrayNode);
-
+      noFunctionOrArray || node.isFunctionNode || node.isArrayNode;
     symbolNode = symbolNode || node.isSymbolNode;
 
     return node;
   });
 
   secondEquation.traverse(function (node, path, parent) {
-    noFunctionOrArray =
-      !!noFunctionOrArray && (!node.isFunctionNode || !node.isArrayNode);
+    if (node.isFunctionNode || node.isArrayNode) {
+      noFunctionOrArray = false;
+    }
 
     if (node.isSymbolNode) {
       symbolNode = symbolNode && true;
@@ -102,8 +113,7 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
       let x = firstEquationUnknownsName[0];
 
       equivalence =
-        nerdamer.solve(firstExpression.toString(), x).toString() ===
-        nerdamer.solve(secondExpression.toString(), x).toString();
+        solveEquation(firstExpression) === solveEquation(secondExpression);
     }
 
     // if both equations are linear in two variabled then we give value "1" for both "x". Doing this we get a linear equation in one variable "y". Then we solve "y" for both. If y has the same value then equations are equivalent
@@ -119,17 +129,17 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
       const definedPropertyX: string = x;
       valueForX[definedPropertyX] = 1;
 
-      // solve expression for x=1
-      let expraNoX = nerdamer(firstExpression.toString(), valueForX);
-      let exprbNoX = nerdamer(secondExpression.toString(), valueForX);
+      // // solve expression for x=1
+      let expraNoX = m.rationalize(firstExpression, valueForX);
+
+      let exprbNoX = m.rationalize(secondExpression, valueForX);
 
       // find y for both equations, where x equals 1
-      let yFromFirstExpression = nerdamer.solve(expraNoX.toString(), y);
-      let yFromSecondExpression = nerdamer.solve(exprbNoX.toString(), y);
+      let yFromFirstExpression = solveEquation(expraNoX);
+      let yFromSecondExpression = solveEquation(exprbNoX);
 
       // if y has the same value, for the same x then the expressions should be equivalent
-      equivalence =
-        yFromFirstExpression.toString() == yFromSecondExpression.toString();
+      equivalence = yFromFirstExpression === yFromSecondExpression;
     }
   }
 
