@@ -3,17 +3,17 @@ export default {
   //only: true,
   tests: [
     {
-      //only: true,
+      only: true,
       target: "y= \\frac{1}{2}x +5",
       eq: [
         // Multiply both sides of the equation by a non-zero number
-        "-2y =-x -10",
-        // Divide both sides of the equation by y
-        //"1=\\frac{x}{2y}+\\frac{5}{y}",
-        // Combine several of the above
-        "x-2y+z=z-10",
+        // "-2y =-x -10",
+        // // Divide both sides of the equation by y
+        // //"1=\\frac{x}{2y}+\\frac{5}{y}",
+        // // Combine several of the above
+        // "x-2y+z=z-10",
         // Multiply both sides of the equation by a variable TO DO- equation is transformed in a quadratic eequation
-        // "y^2=\\frac{xy}{2}+5y",
+         "y^2=\\frac{xy}{2}+5y",
       ],
     },
     {
