@@ -30,7 +30,7 @@ export default {
         // Add a new variable to both sides of the equation
         "z=x/2-y+5 +z",
         // Divide both sides of the equation by y TO DO- equation is transformed in a quadratic eequation
-        // "1=\\frac{x}{2y}+\\frac{5}{y}",
+         "1=\\frac{x}{2y}+\\frac{5}{y}",
         // Combine several of the above
         "x-2y+z=z-10",
       ],

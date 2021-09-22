@@ -23,14 +23,20 @@ const getUnknowns = (equation: any) => {
 };
 
 const getCoefficients = (equation: any) => {
+  console.log(equation.toTex(), "equation in function")
   const rationalizedEquation = m.rationalize(equation, {}, true);
+  console.log(rationalizedEquation.coefficients)
 
-  return rationalizedEquation.coefficients || [];
+  return rationalizedEquation.coefficients;
 };
 
 // solve x
 const solveLinearEquation = (coefficients: number[]) => {
   let result: number;
+
+  if (coefficients.length === 3 && coefficients[0] === 0) {
+    coefficients = coefficients.splice(1, 2)
+  }
 
   if (coefficients.length === 2) {
     result = m.divide(coefficients[0], -1 * coefficients[1]);
@@ -116,12 +122,13 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
       return false;
     }
 
-    let firstEquationCoefficients = getCoefficients(firstExpression);
-    let secondEquationCoefficients = getCoefficients(secondExpression);
+    let firstEquationCoefficients: number[];
+    let secondEquationCoefficients: number[];
 
     // if both equations are linear in one variable then we solve "x" for both. If x has the same value then equations are equivalent
     if (firstEquationUnknownsName.length === 1) {
-      let x = firstEquationUnknownsName[0];
+      firstEquationCoefficients = getCoefficients(firstExpression);
+      secondEquationCoefficients = getCoefficients(secondExpression);
 
       equivalence =
         solveLinearEquation(firstEquationCoefficients) ===
@@ -143,14 +150,23 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
 
       // // solve expression for x=1
       let expraNoX = m.rationalize(firstExpression, valueForX);
+      firstEquationCoefficients = getCoefficients(expraNoX);
+
+      console.log(expraNoX.coefficients, "expranox coefficients")
+
 
       let exprbNoX = m.rationalize(secondExpression, valueForX);
+      secondEquationCoefficients = getCoefficients(exprbNoX);
+
+      console.log(exprbNoX.coefficients, "exprbnox coefficients")
 
       console.log(expraNoX.toTex(), "equation solved for x = 1");
       console.log(exprbNoX.toTex(), "equation solved for x = 1");
 
       console.log(firstEquationCoefficients, "firstEquationCoefficients");
       console.log(secondEquationCoefficients, "secondEquationCoefficients");
+
+
       // find y for both equations, where x equals 1
       let yFromFirstExpression = solveLinearEquation(firstEquationCoefficients);
       let yFromSecondExpression = solveLinearEquation(
