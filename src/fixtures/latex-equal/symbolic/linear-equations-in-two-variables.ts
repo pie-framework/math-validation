@@ -11,7 +11,7 @@ export default {
         // Combine several of the above
         "x-2y+z=z-10",
         // Multiply both sides of the equation by a variable
-         "y^2=\\frac{xy}{2}+5y",
+        "y^2=\\frac{xy}{2}+5y",
       ],
     },
     {
@@ -19,7 +19,7 @@ export default {
       target: "a=\\frac{1}{2}b +5",
       eq: [
         "-2a =-b -10",
-        //"1=\\frac{b}{2a}+\\frac{5}{a}", - TO DO: INVALID PLACING
+        "1=\\frac{b}{2a}+\\frac{5}{a}",
         "b-2a+c=c-10",
       ],
     },
@@ -27,8 +27,8 @@ export default {
       // linear equations with 2 unknowns that are not x or y
       target: "a=\\frac{1}{2}b +5",
       eq: [
-      //  "-2a =-b -10",
-    //"1=\\frac{b}{2a}+\\frac{5}{a}", - TO DO: INVALID PLACING
+        "-2a =-b -10",
+        "1=\\frac{b}{2a}+\\frac{5}{a}",
         "b-2a+c=c-10",
       ],
     },
