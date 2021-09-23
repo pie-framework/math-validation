@@ -1,10 +1,11 @@
 import { mathjs } from "../mathjs";
+import { MathNode } from "mathjs";
 import { isMathEqual, simplify } from ".";
 
 const m: any = mathjs;
 
 // check if equation is valid and find out the number of unknowns and their name
-const getUnknowns = (equation: any) => {
+const getUnknowns = (equation: MathNode) => {
   let variableNames: string[] = [];
 
   equation.traverse(function (node, path, parent) {
@@ -22,20 +23,20 @@ const getUnknowns = (equation: any) => {
   return variableNames;
 };
 
-const getCoefficients = (equation: any) => {
-  let result: number[] =[]
+const getCoefficients = (equation: MathNode) => {
+  let result: number[] = []
 
   try {
     const rationalizedEquation = m.rationalize(equation, {}, true);
-    result=  rationalizedEquation.coefficients
-  } catch (e){
+    result = rationalizedEquation.coefficients
+  } catch (e) {
   }
-  
+
   return result;
 };
 
-const setXToOne=(equation: any, unknownName: string) => {
-  let result;
+const setXToOne = (equation: any, unknownName: string) => {
+  let result: MathNode;
 
   result = equation.transform(function (node, path, parent) {
     if (node.isSymbolNode && node.name === unknownName) {
@@ -78,15 +79,16 @@ const equationsHaveTheSameUnknowns = (
   );
 };
 
-export const compareEquations = (firstEquation: any, secondEquation: any) => {
+export const compareEquations = (firstEquation: MathNode, secondEquation: MathNode) => {
   let noFunctionOrArray: boolean = true;
+  let firstSymbolNode: boolean = false;
   let symbolNode: boolean = false;
   let equivalence: boolean = false;
 
   firstEquation.traverse(function (node, path, parent) {
     noFunctionOrArray =
       noFunctionOrArray || node.isFunctionNode || node.isArrayNode;
-    symbolNode = symbolNode || node.isSymbolNode;
+    firstSymbolNode = firstSymbolNode || node.isSymbolNode;
 
     return node;
   });
@@ -96,9 +98,8 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
       noFunctionOrArray = false;
     }
 
-    if (node.isSymbolNode) {
-      symbolNode = symbolNode && true;
-    }
+    if (node.isSymbolNode && firstSymbolNode)
+      symbolNode = true;
 
     return node;
   });
@@ -139,6 +140,7 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
     let firstEquationCoefficients: number[];
     let secondEquationCoefficients: number[];
 
+
     // if both equations are linear in one variable then we solve "x" for both. If x has the same value then equations are equivalent
     if (firstEquationUnknownsName.length === 1) {
       firstEquationCoefficients = getCoefficients(firstExpression);
@@ -150,11 +152,11 @@ export const compareEquations = (firstEquation: any, secondEquation: any) => {
     }
 
     // if both equations are linear in two variabled then we give value "1" for both "x". Doing this we get a linear equation in one variable "y". Then we solve "y" for both. If y has the same value then equations are equivalent
-    if (secondEquationUnknownsName.length === 2) {
+    if (firstEquationUnknownsName.length === 2) {
       let x = firstEquationUnknownsName[0];
 
       // solve expression for x=1
-      let expraNoX =setXToOne(firstExpression, x);
+      let expraNoX = setXToOne(firstExpression, x);
       firstEquationCoefficients = getCoefficients(expraNoX);
 
       // let exprbNoX = m.rationalize(secondExpression, valueForX);

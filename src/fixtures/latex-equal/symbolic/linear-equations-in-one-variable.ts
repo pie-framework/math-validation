@@ -1,6 +1,5 @@
 export default {
   mode: "symbolic",
- //  only: true,
   tests: [
     {
       target: "x=9",
@@ -11,6 +10,23 @@ export default {
       target: "a=9",
       eq: ["30-2a=12"],
       ne: ["31-2x=12", "b=9"],
+    },
+    {
+      // infinite solutions equations
+      target: "a=a",
+      eq: ["2a=2a"],
+      ne: ["12=12"],
+    },
+    {
+      // infinite solutions equations
+      target: "5c+5c=5c+5c",
+      eq: ["10c=10c", "c=c"],
+      ne: ["12=12"],
+    },
+    {
+      // if equations have no solutions they will not be equivalent
+      target: "x=x+2",
+      ne: ["2x=2x+4"],
     },
     {
       target: "q=9",
