@@ -41,8 +41,10 @@ export const setXToOne = (equation: any, unknownName: string) => {
 
   result = equation.transform(function (node, path, parent) {
     if (node.isSymbolNode && node.name === unknownName) {
+
       return new m.ConstantNode(1);
     } else {
+
       return node;
     }
   });
@@ -57,12 +59,6 @@ export const solveLinearEquation = (coefficients: number[]) => {
   // TO DO: solve quadratic equation
   if (coefficients.length === 3 && coefficients[0] === 0 ) {
     coefficients = coefficients.splice(1, 2);
-
-    // if (coefficients[1] === 0) {
-    //   result = 0;
-    // }
-
-    
   }
 
   if (coefficients.length === 2) {
@@ -71,7 +67,7 @@ export const solveLinearEquation = (coefficients: number[]) => {
     } else if (coefficients[0] === 0) {
       result = 0;
     } else {
-      // equation with no solution - if coefficient for x is 0 => division by zero => result == -Infinity
+      // equation with no solution : if coefficient for x is 0 => division by zero => result == -Infinity
       result = m.divide(coefficients[0], -1 * coefficients[1]);
     }
   }
@@ -174,7 +170,6 @@ export const compareEquations = (
       let expraNoX = setXToOne(firstExpression, x);
       firstEquationCoefficients = getCoefficients(expraNoX);
 
-      // let exprbNoX = m.rationalize(secondExpression, valueForX);
       let exprbNoX = setXToOne(secondExpression, x);
       secondEquationCoefficients = getCoefficients(exprbNoX);
 

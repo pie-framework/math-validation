@@ -134,8 +134,15 @@ describe("solveLinearEquation", () => {
     expect(result).toEqual(0);
   });
 
-  it('equation: "x = x + 2" - has no solution', () => {
+  it('equation: "x = x + 2" - if equation has no solution it will return - Infinity', () => {
     const coefficients = [2, 0];
+    const result = solveLinearEquation(coefficients);
+
+    expect(result).toEqual(-Infinity);
+  });
+
+  it('equation: "3x - 2x  = x + 7 + 9" - if equation has no solution it will return - Infinity', () => {
+    const coefficients = [16, 0];
     const result = solveLinearEquation(coefficients);
 
     expect(result).toEqual(-Infinity);
