@@ -15,7 +15,7 @@ export default {
       // infinite solutions equations
       target: "a=a",
       eq: ["2a=2a"],
-      ne: ["12=12"],
+      ne: ["12=12", "a=0"],
     },
     {
       // infinite solutions equations
@@ -27,6 +27,10 @@ export default {
       // if equations have no solutions they will not be equivalent
       target: "x=x+2",
       ne: ["2x=2x+4"],
+    },
+    {
+      target: "((x^2 + x) / x) - 1=0",
+      eq: ["3x=0", "109x=0"],
     },
     {
       target: "q=9",
@@ -49,6 +53,10 @@ export default {
     {
       target: "4x+2=6x-4",
       eq: ["-2x+6=0"],
+    },
+    {
+      target: "y^2+5y - 1=0",
+      ne: ["y^2+5y +1=0"],
     },
   ],
 };

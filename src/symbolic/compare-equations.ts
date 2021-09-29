@@ -5,7 +5,7 @@ import { isMathEqual, simplify } from ".";
 const m: any = mathjs;
 
 // check if equation is valid and find out the number of unknowns and their name
-const getUnknowns = (equation: MathNode) => {
+export const getUnknowns = (equation: MathNode) => {
   let variableNames: string[] = [];
 
   equation.traverse(function (node, path, parent) {
@@ -23,49 +23,63 @@ const getUnknowns = (equation: MathNode) => {
   return variableNames;
 };
 
-const getCoefficients = (equation: MathNode) => {
-  let result: number[] = []
+export const getCoefficients = (equation: MathNode) => {
+  let result: number[] = [];
 
   try {
     const rationalizedEquation = m.rationalize(equation, {}, true);
-    result = rationalizedEquation.coefficients
-  } catch (e) {
-  }
+    result = rationalizedEquation.coefficients;
+  } catch (e) {}
+
+  result = result.length === 0 ? [1, 0] : result;
 
   return result;
 };
 
-const setXToOne = (equation: any, unknownName: string) => {
+export const setXToOne = (equation: any, unknownName: string) => {
   let result: MathNode;
 
   result = equation.transform(function (node, path, parent) {
     if (node.isSymbolNode && node.name === unknownName) {
-      return new m.ConstantNode(1)
-    }
-    else {
-      return node
+      return new m.ConstantNode(1);
+    } else {
+      return node;
     }
   });
 
   return result;
-}
+};
 
 // solve x
-const solveLinearEquation = (coefficients: number[]) => {
+export const solveLinearEquation = (coefficients: number[]) => {
   let result: number;
 
-  if (coefficients.length === 3 && coefficients[0] === 0) {
-    coefficients = coefficients.splice(1, 2)
+  // TO DO: solve quadratic equation
+  if (coefficients.length === 3 && coefficients[0] === 0 ) {
+    coefficients = coefficients.splice(1, 2);
+
+    // if (coefficients[1] === 0) {
+    //   result = 0;
+    // }
+
+    
   }
 
   if (coefficients.length === 2) {
-    result = m.divide(coefficients[0], -1 * coefficients[1]);
+    if (coefficients[0] === 0 && coefficients[1] === 0) {
+      result = Infinity;
+    } else if (coefficients[0] === 0) {
+      result = 0;
+    } else {
+      // equation with no solution - if coefficient for x is 0 => division by zero => result == -Infinity
+      result = m.divide(coefficients[0], -1 * coefficients[1]);
+    }
   }
 
   return result;
 };
 
-const equationsHaveTheSameUnknowns = (
+export const equationsHaveTheSameUnknowns = (
   firstEquationUnknowns: string[],
   secondEquationUnknowns: string[]
 ) => {
@@ -79,7 +93,10 @@ const equationsHaveTheSameUnknowns = (
   );
 };
 
-export const compareEquations = (firstEquation: MathNode, secondEquation: MathNode) => {
+export const compareEquations = (
+  firstEquation: MathNode,
+  secondEquation: MathNode
+) => {
   let noFunctionOrArray: boolean = true;
   let firstSymbolNode: boolean = false;
   let symbolNode: boolean = false;
@@ -98,8 +115,7 @@ export const compareEquations = (firstEquation: MathNode, secondEquation: MathNo
       noFunctionOrArray = false;
     }
 
-    if (node.isSymbolNode && firstSymbolNode)
-      symbolNode = true;
+    if (node.isSymbolNode && firstSymbolNode) symbolNode = true;
 
     return node;
   });
@@ -140,7 +156,6 @@ export const compareEquations = (firstEquation: MathNode, secondEquation: MathNo
     let firstEquationCoefficients: number[];
     let secondEquationCoefficients: number[];
 
-
     // if both equations are linear in one variable then we solve "x" for both. If x has the same value then equations are equivalent
     if (firstEquationUnknownsName.length === 1) {
       firstEquationCoefficients = getCoefficients(firstExpression);
@@ -160,7 +175,7 @@ export const compareEquations = (firstEquation: MathNode, secondEquation: MathNo
       firstEquationCoefficients = getCoefficients(expraNoX);
 
       // let exprbNoX = m.rationalize(secondExpression, valueForX);
-      let exprbNoX = setXToOne(secondExpression, x)
+      let exprbNoX = setXToOne(secondExpression, x);
       secondEquationCoefficients = getCoefficients(exprbNoX);
 
       // find y for both equations, where x equals 1
