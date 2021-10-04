@@ -31,5 +31,5 @@ export const isMathEqual = (a: MathNode, b: MathNode, opts: LiteralOpts) => {
     b = sort(b);
   }
 
-  return a.equals(b)
+  return a.equals(b);
 };

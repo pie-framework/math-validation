@@ -2,6 +2,7 @@ import { logger } from "../log";
 import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
 import { sort } from "../node-sort";
+import { compareEquations } from "./compare-equations";
 
 const m: any = mathjs;
 const log = logger("mv:symbolic");
@@ -16,6 +17,7 @@ const SIMPLIFY_RULES = [
   { l: "n1^(1/n2)", r: "nthRoot(n1, n2)" },
   { l: "sqrt(n1)", r: "nthRoot(n1, 2)" },
   { l: "(n^2)/n", r: "n" },
+  { l: "n-n", r: "0" },
   { l: "(n^2) + n", r: "n * (n + 1)" },
   { l: "((n^n1) + n)/n", r: "n^(n1-1)+1" },
   { l: "(n^2) + 2n", r: "n * (n + 2)" },
@@ -30,6 +32,7 @@ const SIMPLIFY_RULES = [
   { l: "tzn(n1, n2)", r: "n1" },
   { l: "n1/(-n2)", r: "-(n1/n2)" },
   { l: "sin(n*pi)", r: "0" },
+
   // trigonometry: defining relations for tangent, cotangent, secant, and cosecant in terms of sine and cosine
   { l: "sin(n)/cos(n)", r: "tan(n)" },
   { l: "csc(n)", r: "1/sin(n)" },
@@ -56,7 +59,7 @@ const SIMPLIFY_RULES = [
   { l: "tan(acot(n))", r: "1/n" },
 ];
 
-const simplify = (v) => {
+export const simplify = (v) => {
   const rules = SIMPLIFY_RULES.concat((ms as any).rules);
   return ms(v, rules); //.concat(SIMPLIFY_RULES));
 };
@@ -127,7 +130,7 @@ const normalize = (a: string | MathNode | any) => {
   return r;
 };
 
-export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
+export const isMathEqual = (a: any, b: any) => {
   let as: MathNode;
   let bs: MathNode;
 
@@ -143,45 +146,12 @@ export const isMathEqual = (a: any, b: any, opts?: SymbolicOpts) => {
 
   let equality = isTexEnough || as.equals(bs) || isSortingEnough;
 
+  if (equality) {
+    return true;
+  }
   // if both expressions are equations
-  if (!equality && as.fn === "equal" && bs.fn === "equal") {
-    let noFunctionOrArray = true;
-    let symbolNode = false;
-
-    as.args = as.args.map((arg) => {
-      noFunctionOrArray =
-        !!noFunctionOrArray && (!arg.isFunctionNode || !arg.isArrayNode);
-      if (arg.isSymbolNode) {
-        symbolNode = true;
-      }
-
-      return arg;
-    });
-
-    bs.args = bs.args.map((arg) => {
-      noFunctionOrArray =
-        !!noFunctionOrArray && (!arg.isFunctionNode || !arg.isArrayNode);
-
-      if (arg.isSymbolNode) {
-        symbolNode = true;
-      }
-      return arg;
-    });
-
-    if (noFunctionOrArray && symbolNode) {
-      let ae = new m.OperatorNode("-", "subtract", as.args);
-      let be = new m.OperatorNode("-", "subtract", bs.args);
-      let minus = new m.ConstantNode(-1);
-
-      equality = isMathEqual(ae, be);
-
-      if (!equality && noFunctionOrArray && symbolNode) {
-        be = new m.OperatorNode("*", "multiply", [minus, be]);
-        equality = isMathEqual(ae, be);
-      }
-
-      log("[isMathEqual]", ae.toString(), "==?", be.toString());
-    }
+  if (as.fn === "equal" && bs.fn === "equal") {
+    equality = compareEquations(as, bs);
   }
 
   return equality;
