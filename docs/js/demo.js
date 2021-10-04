@@ -39686,7 +39686,6 @@ const sortRelationalNode = (node) => {
     }
     return node;
   });
-  log$2("THIS IS THE END ++++", JSON.stringify(node));
   return resultNode;
 };
 const sort = (node) => {

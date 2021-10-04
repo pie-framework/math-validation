@@ -31,12 +31,5 @@ export const isMathEqual = (a: MathNode, b: MathNode, opts: LiteralOpts) => {
     b = sort(b);
   }
 
-  let equalTex;
-
-  // @ts-ignore
-  if (!a.isUnit) {
-    equalTex = a.toTex().trim() === b.toTex().trim();
-  }
-
-  return a.equals(b) || equalTex;
+  return a.equals(b);
 };
