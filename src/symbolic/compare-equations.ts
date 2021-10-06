@@ -41,10 +41,8 @@ export const setXToOne = (equation: any, unknownName: string) => {
 
   result = equation.transform(function (node, path, parent) {
     if (node.isSymbolNode && node.name === unknownName) {
-
       return new m.ConstantNode(1);
     } else {
-
       return node;
     }
   });
@@ -57,7 +55,7 @@ export const solveLinearEquation = (coefficients: number[]) => {
   let result: number;
 
   // TO DO: solve quadratic equation
-  if (coefficients.length === 3 && coefficients[0] === 0 ) {
+  if (coefficients.length === 3 && coefficients[0] === 0) {
     coefficients = coefficients.splice(1, 2);
   }
 
@@ -89,9 +87,24 @@ export const equationsHaveTheSameUnknowns = (
   );
 };
 
+export const constructInequality = ( inequality:MathNode, unknownName:String, solution: Number) => {
+  let result: MathNode;
+
+  result = inequality.transform(function (node, path, parent) {
+    if (node.isSymbolNode && node.name === unknownName) {
+      return new m.ConstantNode(solution);
+    } else {
+      return node;
+    }
+  });
+
+  return result;
+}
+
 export const compareEquations = (
   firstEquation: MathNode,
-  secondEquation: MathNode
+  secondEquation: MathNode,
+  isInequality: boolean
 ) => {
   let noFunctionOrArray: boolean = true;
   let firstSymbolNode: boolean = false;
@@ -157,9 +170,19 @@ export const compareEquations = (
       firstEquationCoefficients = getCoefficients(firstExpression);
       secondEquationCoefficients = getCoefficients(secondExpression);
 
-      equivalence =
-        solveLinearEquation(firstEquationCoefficients) ===
-        solveLinearEquation(secondEquationCoefficients);
+      const solutionForFirstEquation = solveLinearEquation(
+        firstEquationCoefficients
+      );
+      const solutionForSecondEquation = solveLinearEquation(
+        secondEquationCoefficients
+      );
+
+      equivalence = solutionForFirstEquation === solutionForSecondEquation;
+
+      if (equivalence && isInequality) {
+        let firstInequality = constructInequality(firstEquation, firstEquationUnknownsName[0], solutionForFirstEquation);
+        console.log(firstInequality.toTex())
+      }
     }
 
     // if both equations are linear in two variabled then we give value "1" for both "x". Doing this we get a linear equation in one variable "y". Then we solve "y" for both. If y has the same value then equations are equivalent

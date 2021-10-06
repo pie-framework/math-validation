@@ -28,6 +28,7 @@ export default {
          ],
        },
        {
+        only:true,
         target: "2x<4",
         eq: [
           "4>2x",

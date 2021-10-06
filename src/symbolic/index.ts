@@ -152,7 +152,7 @@ export const isMathEqual = (a: any, b: any) => {
 
   // if both expressions are equations
   if (as.fn === "equal" && bs.fn === "equal") {
-    equality = compareEquations(as, bs);
+    equality = compareEquations(as, bs, false);
 
     if (equality) {
       return true;
@@ -175,7 +175,7 @@ export const isMathEqual = (a: any, b: any) => {
     bs.op= "="
   //  equality = compareEquations(as, bs);
   console.log(as.toTex())
-  equality = compareEquations(as, bs);
+  equality = compareEquations(as, bs, true);
 
   }
 
