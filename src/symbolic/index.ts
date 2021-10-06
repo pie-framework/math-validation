@@ -149,9 +149,34 @@ export const isMathEqual = (a: any, b: any) => {
   if (equality) {
     return true;
   }
+
   // if both expressions are equations
   if (as.fn === "equal" && bs.fn === "equal") {
     equality = compareEquations(as, bs);
+
+    if (equality) {
+      return true;
+    }
+  }
+
+  // if both expressions are inequalities
+  if (
+    (as.fn === "larger" && bs.fn === "larger") ||
+    (as.fn === "largerEq" && bs.fn === "largerEq")
+  ) {
+    // at this point this is an ideea, it must be tested 
+    // solving a 2 way inequality is the same as solving an equation, we can treat the greater sign as an equal sign
+    //  the diffrence is that the solution should be plotet on a number line 
+    // since we have the same signs and the same direction, the interval will always be the same, starting with the solution
+    console.log(as.fn, "asfn")
+    as.fn = "equal"
+    bs.fn ="equal"
+    as.op= "="
+    bs.op= "="
+  //  equality = compareEquations(as, bs);
+  console.log(as.toTex())
+  equality = compareEquations(as, bs);
+
   }
 
   return equality;

@@ -55,20 +55,6 @@ export default {
       // they should not be equal
       ne: ["1=1", "0.5=1/2", "9x=3(3x)"],
     },
-    // {
-    //   // 2-way inequality with variable(s)
-    //   target: "2x<4",
-    //   eq: ["4>2x", "x+x < 2*2", "x<2"],
-    // },
-    {
-      // 3-way inequality with variable(s)
-      target: "1<2x ≤ 3",
-      eq: [
-        "3 ≥ 2x>1",
-        "x/x<x+x≤1.5*2",
-        // "1/2<x ≤1.5"
-      ],
-    },
     // expressions (no equal or inequality sign)
     {
       target: "\\frac{1}{3}*(8c)-5",
