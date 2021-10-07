@@ -26,5 +26,13 @@ export default {
         "\\frac{10}{2} - 0.5",
       ],
     },
+    {
+      // only:true,
+      target: "4\\frac{1}{2} + b + ca",
+      eq: [
+        "\\frac{10}{2} + ac + b- 0.5"
+      ],
+      // ne: ["\\frac{10}{2} + ac + b + 0.5"],
+    },
   ],
 };

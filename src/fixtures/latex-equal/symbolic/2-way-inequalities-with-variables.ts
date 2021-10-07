@@ -28,7 +28,7 @@ export default {
          ],
        },
        {
-        only:true,
+      // only:true,
         target: "2x<4",
         eq: [
           "4>2x",
@@ -37,6 +37,16 @@ export default {
         // this is a problem, when multiplying both parts with a negative number, direction should be changed, expressions should not be equivalent anymore  
         ne: ["x*(-1)<2*(-1)"]
       },
+      {
+        // only:true,
+          target: "2x>4",
+          eq: [
+            "4<2x",
+            "x+x > 2*2",      
+          ],
+          // this is a problem, when multiplying both parts with a negative number, direction should be changed, expressions should not be equivalent anymore  
+          ne: ["x*(-1)>2*(-1)"]
+        },
        {
          target: "2x+y≤4+y",
          eq: [

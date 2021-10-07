@@ -87,19 +87,20 @@ export const equationsHaveTheSameUnknowns = (
   );
 };
 
-export const constructInequality = ( inequality:MathNode, unknownName:String, solution: Number) => {
-  let result: MathNode;
+// export const constructInequality = ( inequality:MathNode, unknownName:String, solution: Number) => {
+//   let result: MathNode;
 
-  result = inequality.transform(function (node, path, parent) {
-    if (node.isSymbolNode && node.name === unknownName) {
-      return new m.ConstantNode(solution);
-    } else {
-      return node;
-    }
-  });
+//   result = inequality.transform(function (node, path, parent) {
+//     if (node.isSymbolNode && node.name === unknownName) {
+//       return new m.ConstantNode(solution);
+//     } else {
+//       return node;
+//     }
+//   });
 
-  return result;
-}
+  
+//   return result;
+// }
 
 export const compareEquations = (
   firstEquation: MathNode,
@@ -180,8 +181,13 @@ export const compareEquations = (
       equivalence = solutionForFirstEquation === solutionForSecondEquation;
 
       if (equivalence && isInequality) {
-        let firstInequality = constructInequality(firstEquation, firstEquationUnknownsName[0], solutionForFirstEquation);
-        console.log(firstInequality.toTex())
+        // check if direction should be changed
+        if (firstEquationCoefficients[0]> 0 && firstEquationCoefficients[1] <0 && secondEquationCoefficients[0]<0 && secondEquationCoefficients[1]>0 ){
+          equivalence= false;
+        }
+        if (firstEquationCoefficients[0]< 0 && firstEquationCoefficients[1] >0 && secondEquationCoefficients[0]>0 && secondEquationCoefficients[1]<0 ){
+          equivalence= false;
+        }
       }
     }
 
