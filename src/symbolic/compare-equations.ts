@@ -206,6 +206,26 @@ export const compareEquations = (
       // if y has the same value, for the same x then the expressions should be equivalent
       equivalence = yFromFirstExpression === yFromSecondExpression;
     }
+
+    if (equivalence && isInequality) {
+      // check if direction should be changed
+      if (
+        m.isPositive(firstEquationCoefficients[0]) &&
+        m.isNegative(firstEquationCoefficients[1]) &&
+        m.isNegative(secondEquationCoefficients[0]) &&
+        m.isPositive(secondEquationCoefficients[1])
+      ) {
+        equivalence = false;
+      }
+      if (
+        m.isNegative(firstEquationCoefficients[0]) &&
+        m.isPositive(firstEquationCoefficients[1]) &&
+        m.isPositive(secondEquationCoefficients[0]) &&
+        m.isNegative(secondEquationCoefficients[1])
+      ) {
+        equivalence = false;
+      }
+    }
   }
 
   return equivalence;
