@@ -159,22 +159,21 @@ export const isMathEqual = (a: any, b: any) => {
     }
   }
 
-  // if both expressions are inequalities
+  // at this point this is an ideea, it must be tested
+  // if both expressions are inequalities treat greater sign as equal sign
   if (
     (as.fn === "larger" && bs.fn === "larger") ||
     (as.fn === "largerEq" && bs.fn === "largerEq")
   ) {
-    // at this point this is an ideea, it must be tested 
     // solving a 2 way inequality is the same as solving an equation, we can treat the greater sign as an equal sign
-    //  the difference is that the solution should be plotted on a number line (or interval)
-    // since we have the same signs and the same direction, the interval will always be the same, starting with the solution
-    as.fn = "equal"
-    bs.fn ="equal"
-    as.op= "="
-    bs.op= "="
+    // the difference is that solution should be plotted on a number line (or interval)
+    // if we have the same signs and the same direction, the interval will always be the same, starting with the solution
+    as.fn = "equal";
+    bs.fn = "equal";
+    as.op = "=";
+    bs.op = "=";
 
-  equality = compareEquations(as, bs, true);
-
+    equality = compareEquations(as, bs, true);
   }
 
   return equality;
