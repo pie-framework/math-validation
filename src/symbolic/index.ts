@@ -3,6 +3,7 @@ import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
 import { sort } from "../node-sort";
 import { compareEquations } from "./compare-equations";
+import { compareCompoundInequations } from "./compare-compound-inequations";
 
 const m: any = mathjs;
 const log = logger("mv:symbolic");
@@ -130,6 +131,25 @@ const normalize = (a: string | MathNode | any) => {
   return r;
 };
 
+const operation = (signName:string) => {
+  if (signName === 'larger'){
+    return ">"
+  } 
+
+  return "≥"
+}
+
+const breakInequalities = (compoundInequality: any) => {
+  let firstInequality: MathNode;
+  let secondInequality: MathNode;
+
+  if(compoundInequality.conditionals?.length === 2 && compoundInequality.params?.length === 3 ){
+    firstInequality = new m.OperatorNode(operation(compoundInequality.conditionals[0]),compoundInequality.conditionals[0],[compoundInequality.params[0],compoundInequality.params[1]] )
+  }
+
+  console.log(firstInequality, "first ine")
+};
+
 export const isMathEqual = (a: any, b: any) => {
   let as: MathNode;
   let bs: MathNode;
@@ -159,7 +179,6 @@ export const isMathEqual = (a: any, b: any) => {
     }
   }
 
-  // at this point this is an ideea, it must be tested
   // if both expressions are inequalities treat greater sign as equal sign
   if (
     (as.fn === "larger" && bs.fn === "larger") ||
@@ -174,6 +193,33 @@ export const isMathEqual = (a: any, b: any) => {
     bs.op = "=";
 
     equality = compareEquations(as, bs, true);
+  }
+
+  // at this point this is an ideea, it must be tested
+  // check for compound inequalities
+  
+  if (
+    //@ts-ignore
+    as?.conditionals.length === bs?.conditionals.length &&
+    //@ts-ignore
+    as?.conditionals.length === 2
+  ) {
+
+    return compareCompoundInequations(as,bs)
+    //@ts-ignore
+    const result = as.conditionals.every((relation: string) =>
+      //@ts-ignore
+      bs.conditionals.includes(relation)
+    );
+
+    if (!result) {
+      equality = false;
+    } else {
+      const firstInequalities = breakInequalities(as);
+      const secondInequalities = breakInequalities(bs);
+    }
+
+    console.log(result, "result");
   }
 
   return equality;
