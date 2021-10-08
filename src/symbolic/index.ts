@@ -139,17 +139,6 @@ const operation = (signName:string) => {
   return "≥"
 }
 
-const breakInequalities = (compoundInequality: any) => {
-  let firstInequality: MathNode;
-  let secondInequality: MathNode;
-
-  if(compoundInequality.conditionals?.length === 2 && compoundInequality.params?.length === 3 ){
-    firstInequality = new m.OperatorNode(operation(compoundInequality.conditionals[0]),compoundInequality.conditionals[0],[compoundInequality.params[0],compoundInequality.params[1]] )
-  }
-
-  console.log(firstInequality, "first ine")
-};
-
 export const isMathEqual = (a: any, b: any) => {
   let as: MathNode;
   let bs: MathNode;
@@ -200,26 +189,13 @@ export const isMathEqual = (a: any, b: any) => {
   
   if (
     //@ts-ignore
-    as?.conditionals.length === bs?.conditionals.length &&
+    as?.conditionals?.length === bs?.conditionals?.length &&
     //@ts-ignore
-    as?.conditionals.length === 2
+    as?.conditionals?.length === 2
   ) {
 
-    return compareCompoundInequations(as,bs)
-    //@ts-ignore
-    const result = as.conditionals.every((relation: string) =>
-      //@ts-ignore
-      bs.conditionals.includes(relation)
-    );
-
-    if (!result) {
-      equality = false;
-    } else {
-      const firstInequalities = breakInequalities(as);
-      const secondInequalities = breakInequalities(bs);
-    }
-
-    console.log(result, "result");
+    equality=  compareCompoundInequations(as,bs)
+    
   }
 
   return equality;
