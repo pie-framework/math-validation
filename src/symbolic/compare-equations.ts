@@ -22,10 +22,8 @@ export const compareEquations = (
 
   if (equationsCanBeCompared(firstEquation,secondEquation)) {
     let firstExpression = transformEqualityInExpression(firstEquation);
-    console.log (firstExpression, "firstexpression")
-
     let secondExpression = transformEqualityInExpression(secondEquation);
-    console.log (secondEquation, "secondexpression")
+
     if (isMathEqual(firstExpression, secondExpression)) {
       return true;
     }
