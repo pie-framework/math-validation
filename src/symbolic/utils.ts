@@ -1,8 +1,42 @@
 import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
-import { isMathEqual, simplify } from ".";
+import { simplify } from ".";
 
 const m: any = mathjs;
+
+export const equationsCanBeCompared = (firstEquation: MathNode, secondEquation: MathNode):boolean => {
+  let noFunctionOrArray: boolean = true;
+  let firstSymbolNode: boolean = false;
+  let symbolNode: boolean = false;
+
+  firstEquation.traverse(function (node, path, parent) {
+    noFunctionOrArray =
+      noFunctionOrArray || node.isFunctionNode || node.isArrayNode;
+    firstSymbolNode = firstSymbolNode || node.isSymbolNode;
+
+    return node;
+  });
+
+  secondEquation.traverse(function (node, path, parent) {
+    if (node.isFunctionNode || node.isArrayNode) {
+      noFunctionOrArray = false;
+    }
+
+    if (node.isSymbolNode && firstSymbolNode) symbolNode = true;
+
+    return node;
+  });  
+
+  return noFunctionOrArray && symbolNode;
+}
+
+// move the terms of the equations to the left hand side
+export const transformEqualityInExpression = (equality: MathNode) => {
+  const expression = new m.OperatorNode("-", "subtract", equality.args);
+
+  // remove added/subtracted numbers/variables from both sides of the equation
+  return simplify(expression);
+};
 
 // check if equation is valid and find out the number of unknowns and their name
 export const getUnknowns = (equation: MathNode) => {

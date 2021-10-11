@@ -193,9 +193,7 @@ export const isMathEqual = (a: any, b: any) => {
     //@ts-ignore
     as?.conditionals?.length === 2
   ) {
-
     equality=  compareCompoundInequations(as,bs)
-    
   }
 
   return equality;

@@ -5,7 +5,7 @@ import {
   getCoefficients,
   setXToOne,
   solveLinearEquation,
-} from "../symbolic/compare-equations";
+} from "../symbolic/utils";
 
 const lta = new LatexToAst();
 const atm = new AstToMathJs();

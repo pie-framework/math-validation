@@ -2,7 +2,7 @@ export default {
   mode: "symbolic",
   tests: [
     {
-     only:true,
+     // only:true,
       // 3-way inequality with variable(s)
       target: "1<2x ≤ 3",
       eq: [
