@@ -17,10 +17,8 @@ const operation = (signName: string) => {
   return "≥";
 };
 
-const breakInequality = (compoundInequality: any) => {
-  let inequalities: InequalitiesPairs;
-
-   inequalities= {
+const breakInequality = (compoundInequality: any): InequalitiesPairs  => {
+  return {
     leftHandInequality: new m.OperatorNode(
       operation(compoundInequality.conditionals[0]),
       compoundInequality.conditionals[0],
@@ -31,17 +29,7 @@ const breakInequality = (compoundInequality: any) => {
       compoundInequality.conditionals[0],
       [compoundInequality.params[1], compoundInequality.params[2]]
     ),
-  };
-
-  console.log(compoundInequality.conditionals, "conditionals");
-
-  console.log(
-    inequalities.leftHandInequality,
-    inequalities.rightHandInequality,
-    "first inequality"
-  );
-
-  return inequalities;
+  }
 };
 
 export const compareCompoundInequations = (
@@ -50,20 +38,19 @@ export const compareCompoundInequations = (
 ) => {
   let equality: boolean = false;
 
-  //@ts-ignore
   const result = firstInequation.conditionals.every((relation: string) =>
-    //@ts-ignore
-    secondInequation.conditionals.includes(relation)
+    secondInequation.conditionals.includes(relation) && firstInequation.conditionals?.length === 2 &&
+    firstInequation.params?.length === 3
   );
 
   if (!result) {
     equality = false;
-  } else if (
-    firstInequation.conditionals?.length === 2 &&
-    firstInequation.params?.length === 3
-  ) {
+  } else {
     const firstInequalities = breakInequality(firstInequation);
     const secondInequalities = breakInequality(secondInequation);
+
+    console.log(firstInequalities, "firstInequalities")
+    console.log(secondInequalities, "secondInequalities")
   }
 
   console.log(result, "result");
