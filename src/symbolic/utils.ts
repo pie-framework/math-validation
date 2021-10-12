@@ -59,6 +59,7 @@ export const getUnknowns = (equation: MathNode) => {
 
 export const getCoefficients = (equation: MathNode) => {
   let result: number[] = [];
+  // coefficients will be determined if equation has only one unknown
 
   try {
     const rationalizedEquation = m.rationalize(equation, {}, true);
@@ -84,11 +85,16 @@ export const setXToOne = (equation: any, unknownName: string) => {
   return result;
 };
 
+ // TO DO: solve quadratic equation
+ 
 // solve x
 export const solveLinearEquation = (coefficients: number[]) => {
   let result: number;
 
-  // TO DO: solve quadratic equation
+  if (!coefficients) {
+    return undefined;
+  }
+
   if (coefficients.length === 3 && coefficients[0] === 0) {
     coefficients = coefficients.splice(1, 2);
   }

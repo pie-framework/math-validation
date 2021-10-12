@@ -1,6 +1,6 @@
 import { mathjs } from "../mathjs";
 import { MathNode, number } from "mathjs";
-import { equationsCanBeCompared, getCoefficients, getUnknowns, solveLinearEquation, transformEqualityInExpression } from "./utils";
+import { equationsCanBeCompared, equationsHaveTheSameUnknowns, getCoefficients, getUnknowns, solveLinearEquation, transformEqualityInExpression } from "./utils";
 
 const m: any = mathjs;
 
@@ -31,8 +31,7 @@ const breakInequality = (compoundInequality: any): InequalitiesPairs => {
   };
 };
 
-const findX = (inequality): number => {
-  let x: number;
+const findX = (inequality: MathNode): number => {
   // TO DO: sanity checks
   let expression = transformEqualityInExpression(inequality);
   // TO DO: must chek if we have the same unknowns
@@ -44,13 +43,9 @@ const findX = (inequality): number => {
     equationCoefficients = getCoefficients(expression);
   }
 
-  x = solveLinearEquation(
+  return solveLinearEquation(
     equationCoefficients
   );
-
-  console.log(x, "x")
-
-  return x;
 };
 
 export const compareCompoundInequations = (
@@ -69,11 +64,27 @@ export const compareCompoundInequations = (
   if (!result) {
     return false;
   } else {
+    const firstInequalityUnknownsName = getUnknowns(firstInequation);
+    const secondInequalityUnknownsName = getUnknowns(secondInequation);
+
+    console.log(firstInequalityUnknownsName, secondInequalityUnknownsName)
+    
+    if (
+      !equationsHaveTheSameUnknowns(
+        firstInequalityUnknownsName,
+        secondInequalityUnknownsName
+      )
+    ) {
+      return false;
+    }
+
+
+
     const firstInequalities = breakInequality(firstInequation);
     const secondInequalities = breakInequality(secondInequation);
 
-    console.log(firstInequalities, "firstInequalities");
-    console.log(secondInequalities, "secondInequalities");
+    // console.log(firstInequalities, "firstInequalities");
+    // console.log(secondInequalities, "secondInequalities");
 
     let firstInequalitiesSolution: xRange = {
       inferiorLimit: findX(firstInequalities.rightHandInequality),

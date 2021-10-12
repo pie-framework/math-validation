@@ -184,6 +184,10 @@ export const isMathEqual = (a: any, b: any) => {
     equality = compareEquations(as, bs, true);
   }
 
+  if (equality) {
+    return true;
+  }
+  
   // at this point this is an ideea, it must be tested
   // check for compound inequalities
   
