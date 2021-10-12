@@ -111,13 +111,13 @@ const normalize = (a: string | MathNode | any) => {
   log("[normalize] input: ", a.toString(), "output: ", r.toString());
 
   // check for infinity
-  if (
-    r.toString() === "Infinity" ||
-    +r.toString() >= positiveInfinity ||
-    +r.toString() <= negativeInfinity
-  ) {
-    r = new m.SymbolNode("Infinity");
-  }
+  // if (
+  //   r.toString() === "Infinity" ||
+  //   +r.toString() >= positiveInfinity ||
+  //   +r.toString() <= negativeInfinity
+  // ) {
+  //   r = new m.SymbolNode("Infinity");
+  // }
 
   if (r.value) {
     r.value = new m.Fraction(Math.round(r.value * 10000) / 10000);
@@ -130,14 +130,6 @@ const normalize = (a: string | MathNode | any) => {
 
   return r;
 };
-
-const operation = (signName:string) => {
-  if (signName === 'larger'){
-    return ">"
-  } 
-
-  return "≥"
-}
 
 export const isMathEqual = (a: any, b: any) => {
   let as: MathNode;

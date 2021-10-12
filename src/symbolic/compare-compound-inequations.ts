@@ -34,6 +34,7 @@ const breakInequality = (compoundInequality: any): InequalitiesPairs => {
 const findX = (inequality: MathNode): number => {
   // TO DO: sanity checks
   let expression = transformEqualityInExpression(inequality);
+  let result: number;
   // TO DO: must chek if we have the same unknowns
 
   let equationUnknownsName = getUnknowns(expression);
@@ -43,9 +44,12 @@ const findX = (inequality: MathNode): number => {
     equationCoefficients = getCoefficients(expression);
   }
 
-  return solveLinearEquation(
+  result = solveLinearEquation(
     equationCoefficients
   );
+
+  console.log(result, "x")
+  return result
 };
 
 export const compareCompoundInequations = (
@@ -68,7 +72,7 @@ export const compareCompoundInequations = (
     const secondInequalityUnknownsName = getUnknowns(secondInequation);
 
     console.log(firstInequalityUnknownsName, secondInequalityUnknownsName)
-    
+
     if (
       !equationsHaveTheSameUnknowns(
         firstInequalityUnknownsName,
