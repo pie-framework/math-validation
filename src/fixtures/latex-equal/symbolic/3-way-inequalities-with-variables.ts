@@ -17,12 +17,12 @@ export default {
       ne: ["0 < 4x ≤ 22", "66 ≥ 6x>1"],
     },
     {
-      only:true,
+    // only:true,
       // 3-way inequality with variable(s)
       target: "-4 < 2x - 8 ≤ 10",
       eq: [
         //"-2 < x - 4 ≤ 5", 
-        "-4/4 < (2x - 8)/4 ≤ 10/4",
+      //  "-4/4 < (2x - 8)/4 ≤ 10/4",
         "-1 < x/2 - 2 ≤ 5/2",
         //" 5 ≥ -4 + x > -1 - 1"
       ],

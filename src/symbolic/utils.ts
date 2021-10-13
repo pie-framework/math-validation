@@ -1,10 +1,14 @@
 import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
-import { simplify } from ".";
+import {simplify as customSimplify} from "./"
+const { simplify } = mathjs;
 
 const m: any = mathjs;
 
-export const equationsCanBeCompared = (firstEquation: MathNode, secondEquation: MathNode):boolean => {
+export const equationsCanBeCompared = (
+  firstEquation: MathNode,
+  secondEquation: MathNode
+): boolean => {
   let noFunctionOrArray: boolean = true;
   let firstSymbolNode: boolean = false;
   let symbolNode: boolean = false;
@@ -25,17 +29,18 @@ export const equationsCanBeCompared = (firstEquation: MathNode, secondEquation: 
     if (node.isSymbolNode && firstSymbolNode) symbolNode = true;
 
     return node;
-  });  
+  });
 
   return noFunctionOrArray && symbolNode;
-}
+};
 
 // move the terms of the equations to the left hand side
 export const transformEqualityInExpression = (equality: MathNode) => {
   const expression = new m.OperatorNode("-", "subtract", equality.args);
 
   // remove added/subtracted numbers/variables from both sides of the equation
-  return simplify(expression);
+  // @ts-ignore
+  return customSimplify(expression);
 };
 
 // check if equation is valid and find out the number of unknowns and their name
@@ -58,14 +63,26 @@ export const getUnknowns = (equation: MathNode) => {
 };
 
 export const getCoefficients = (equation: MathNode) => {
+  // add sanity check: rationalize is possible if we have only one unknown
   let result: number[] = [];
   // coefficients will be determined if equation has only one unknown
 
-  console.log(equation.toTex(), "equation in get coefficients")
+  console.log(equation.toTex(), "equation in get coefficients");
   try {
     const rationalizedEquation = m.rationalize(equation, {}, true);
+    console.log(rationalizedEquation, "rationalizes");
     result = rationalizedEquation.coefficients;
-  } catch (e) {}
+  } catch (e) {
+    equation = simplify(equation, [
+      { l: "(n1-n2)/n3", r: "n1/n3-n2/n3" },
+      { l: "(n1+n2)/n3", r: "n1/n3+n2/n3" },
+      { l: "(n1-n2)*n3/n4", r: "(n1*n3)/n4-(n2*n3)/n4" },
+    ]);
+    try {
+      const rat = m.rationalize(equation, {}, true);
+      result = rat.coefficients;
+    } catch(e) {}
+  }
 
   result = result.length === 0 ? [1, 0] : result;
 
@@ -86,7 +103,7 @@ export const setXToOne = (equation: any, unknownName: string) => {
   return result;
 };
 
- // TO DO: solve quadratic equation
+// TO DO: solve quadratic equation
 
 // solve x
 export const solveLinearEquation = (coefficients: number[]) => {
