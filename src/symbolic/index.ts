@@ -140,10 +140,14 @@ export const isMathEqual = (a: any, b: any) => {
 
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
 
-  log("[isMathEqual]", as.toString(), "==?", bs.toString());
+  console.log("[isMathEqual]", as.toString(), "==?", bs.toString());
+  
 
   const isSortingEnough = sort(a).equals(sort(b));
+  console.log(isSortingEnough, "isSortingEnough")
   const isTexEnough = as.toTex().trim() === bs.toTex().trim();
+  console.log(isTexEnough, "isTexEnough")
+console.log(as.equals(bs), "equality")
 
   let equality = isTexEnough || as.equals(bs) || isSortingEnough;
 
@@ -157,6 +161,8 @@ export const isMathEqual = (a: any, b: any) => {
 
     if (equality) {
       return true;
+    } else {
+      return false
     }
   }
 
@@ -174,11 +180,15 @@ export const isMathEqual = (a: any, b: any) => {
     bs.op = "=";
 
     equality = compareEquations(as, bs, true);
+
+    if (equality) {
+      return true;
+    } else {
+      return false
+    }
   }
 
-  if (equality) {
-    return true;
-  }
+
   
   // at this point this is an ideea, it must be tested
   // check for compound inequalities

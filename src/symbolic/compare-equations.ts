@@ -1,6 +1,6 @@
 import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
-import { isMathEqual } from ".";
+import { isMathEqual, simplify } from ".";
 import {
   getUnknowns,
   equationsHaveTheSameUnknowns,

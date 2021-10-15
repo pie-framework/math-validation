@@ -67,17 +67,19 @@ export const getCoefficients = (equation: MathNode) => {
   let result: number[] = [];
   // coefficients will be determined if equation has only one unknown
 
-  console.log(equation.toTex(), "equation in get coefficients");
+  console.log(equation.toString(), "equation in get coefficients")
   try {
     const rationalizedEquation = m.rationalize(equation, {}, true);
-    console.log(rationalizedEquation, "rationalizes");
     result = rationalizedEquation.coefficients;
   } catch (e) {
     equation = simplify(equation, [
       { l: "(n1-n2)/n3", r: "n1/n3-n2/n3" },
       { l: "(n1+n2)/n3", r: "n1/n3+n2/n3" },
       { l: "(n1-n2)*n3/n4", r: "(n1*n3)/n4-(n2*n3)/n4" },
+      { l: "(n1+n2)*n3/n4", r: "(n1*n3)/n4+(n2*n3)/n4" },
     ]);
+
+    console.log(equation.toString(), "after simplify")
     try {
       const rat = m.rationalize(equation, {}, true);
       result = rat.coefficients;

@@ -48,7 +48,6 @@ const findX = (inequality: MathNode): number => {
     equationCoefficients
   );
 
-  console.log(result, "x")
   return result
 };
 
@@ -71,8 +70,6 @@ export const compareCompoundInequations = (
     const firstInequalityUnknownsName = getUnknowns(firstInequation);
     const secondInequalityUnknownsName = getUnknowns(secondInequation);
 
-    console.log(firstInequalityUnknownsName, secondInequalityUnknownsName)
-
     if (
       !equationsHaveTheSameUnknowns(
         firstInequalityUnknownsName,
@@ -82,13 +79,9 @@ export const compareCompoundInequations = (
       return false;
     }
 
-
-
     const firstInequalities = breakInequality(firstInequation);
     const secondInequalities = breakInequality(secondInequation);
 
-    // console.log(firstInequalities, "firstInequalities");
-    // console.log(secondInequalities, "secondInequalities");
 
     let firstInequalitiesSolution: xRange = {
       inferiorLimit: findX(firstInequalities.rightHandInequality),
