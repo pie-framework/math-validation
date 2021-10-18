@@ -1,5 +1,5 @@
 import { mathjs } from "../mathjs";
-import { MathNode, number } from "mathjs";
+import math, { MathNode, number } from "mathjs";
 import { equationsCanBeCompared, equationsHaveTheSameUnknowns, getCoefficients, getUnknowns, solveLinearEquation, transformEqualityInExpression } from "./utils";
 
 const m: any = mathjs;
@@ -51,6 +51,19 @@ const findX = (inequality: MathNode): number => {
   return result
 };
 
+
+export const getLimit = (expressionsPair :InequalitiesPairs, limitType:string):number => {
+  const xFirstInequality = findX(expressionsPair.rightHandInequality);
+  const xSecondInequality = findX(expressionsPair.leftHandInequality);
+
+  if (limitType === "inferior") {
+    return Math.min(xFirstInequality,xSecondInequality)
+  } else {
+    return Math.max(xFirstInequality,xSecondInequality)
+  }
+}
+
+
 export const compareCompoundInequations = (
   firstInequation: any,
   secondInequation: any
@@ -79,18 +92,25 @@ export const compareCompoundInequations = (
       return false;
     }
 
+    console.log(firstInequation.toString(), "first inequation")
+    console.log(secondInequation.toString(), "second inequation")
+
     const firstInequalities = breakInequality(firstInequation);
     const secondInequalities = breakInequality(secondInequation);
+    console.log(secondInequalities.leftHandInequality, secondInequalities.rightHandInequality, "second inequalities")
+
 
 
     let firstInequalitiesSolution: xRange = {
-      inferiorLimit: findX(firstInequalities.rightHandInequality),
-      superiorLimit: findX(firstInequalities.leftHandInequality),
+      inferiorLimit: getLimit(firstInequalities, "inferior"),
+      superiorLimit:getLimit(firstInequalities, "superior"),
     };
+    console.log(firstInequalitiesSolution)
     let secondInequalitiesSolution: xRange = {
-      inferiorLimit: findX(secondInequalities.rightHandInequality),
-      superiorLimit: findX(secondInequalities.leftHandInequality),
+      inferiorLimit:getLimit(secondInequalities, "inferior"),
+      superiorLimit: getLimit(secondInequalities, "superior"),
     };
+    console.log(secondInequalitiesSolution)
 
     equality = firstInequalitiesSolution.inferiorLimit === secondInequalitiesSolution.inferiorLimit && firstInequalitiesSolution.superiorLimit === secondInequalitiesSolution.superiorLimit
   }

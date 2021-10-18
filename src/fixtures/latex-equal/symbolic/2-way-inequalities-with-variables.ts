@@ -76,7 +76,6 @@ export default {
       ne: ["x>-1", "x≥-2"],
     },
     {
-    //  only:true, 
       target: "\\frac{-3}{4}m-\\frac{1}{8} ≤ - \\frac{1}{4}",
       eq: [
         "8*(-\\frac{3}{4}m-\\frac{1}{8}) ≤ - \\frac{1}{4} * 8",
