@@ -88,6 +88,8 @@ export const getCoefficients = (equation: MathNode) => {
   }
 
   result = result.length === 0 ? [1, 0] : result;
+
+  
 console.log(result, "result")
 
   return result;
@@ -128,7 +130,8 @@ export const solveLinearEquation = (coefficients: number[]) => {
       result = 0;
     } else {
       // equation with no solution : if coefficient for x is 0 => division by zero => result == -Infinity
-      result = m.divide(coefficients[0], -1 * coefficients[1]);
+     // Math.round(coefficient * 100000) / 100000)
+      result = Math.round(m.divide(coefficients[0], -1 * coefficients[1]) * 10000) / 10000;
     }
   }
 

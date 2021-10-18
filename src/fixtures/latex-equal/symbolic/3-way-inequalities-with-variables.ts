@@ -43,15 +43,14 @@ export default {
       eq: [
         "-8 ≤ -2z ≤ 2", 
         // not validating
-        "4 ≥ z ≥ -1"
+       "4 ≥ z ≥ -1"
       ],
     },
     {
-      only: true,
       target: "57.06 ≤ 24.74 + 1.54b ≤ 171.02",
       eq: [
-         // increase error acceptance in difference for this:
-        "57.06 - 24.74 ≤ 24.74 - 24.74 + 1.54b ≤ 171.02- 24.74",
+       "57.06 - 24.74 ≤ 24.74 - 24.74 + 1.54b ≤ 171.02- 24.74",
+        "32.32 ≤1.54b ≤146.28 "
       ],
     },
   ],
