@@ -92,25 +92,18 @@ export const compareCompoundInequations = (
       return false;
     }
 
-    console.log(firstInequation.toString(), "first inequation")
-    console.log(secondInequation.toString(), "second inequation")
-
     const firstInequalities = breakInequality(firstInequation);
     const secondInequalities = breakInequality(secondInequation);
-    console.log(secondInequalities.leftHandInequality, secondInequalities.rightHandInequality, "second inequalities")
-
-
 
     let firstInequalitiesSolution: xRange = {
       inferiorLimit: getLimit(firstInequalities, "inferior"),
       superiorLimit:getLimit(firstInequalities, "superior"),
     };
-    console.log(firstInequalitiesSolution)
+
     let secondInequalitiesSolution: xRange = {
       inferiorLimit:getLimit(secondInequalities, "inferior"),
       superiorLimit: getLimit(secondInequalities, "superior"),
     };
-    console.log(secondInequalitiesSolution)
 
     equality = firstInequalitiesSolution.inferiorLimit === secondInequalitiesSolution.inferiorLimit && firstInequalitiesSolution.superiorLimit === secondInequalitiesSolution.superiorLimit
   }
