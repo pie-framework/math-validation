@@ -30,7 +30,6 @@ export default {
       ],
     },
     {
-      only: true,
       target: "-3 < 2x +5 < 17",
       eq: [
         "-3-5 < 2x +5-5 < 17-5",
@@ -39,20 +38,20 @@ export default {
       ],
     },
     {
-      only: true,
+      //only: true,
       target: "-5 ≤ 3 - 2z ≤ 5",
       eq: [
         "-8 ≤ -2z ≤ 2", 
         // not validating
-        //"4 ≥ z ≥ -1"
+        "4 ≥ z ≥ -1"
       ],
     },
     {
       only: true,
       target: "57.06 ≤ 24.74 + 1.54b ≤ 171.02",
       eq: [
-         // not validating
-        // "57.06 - 24.74 ≤ 24.74 - 24.74 + 1.54b ≤ 171.02- 24.74",
+         // increase error acceptance in difference for this:
+        "57.06 - 24.74 ≤ 24.74 - 24.74 + 1.54b ≤ 171.02- 24.74",
       ],
     },
   ],

@@ -67,6 +67,7 @@ export const getCoefficients = (equation: MathNode) => {
   let result: number[] = [];
   // coefficients will be determined if equation has only one unknown
 
+
   console.log(equation.toString(), "equation in get coefficients")
   try {
     const rationalizedEquation = m.rationalize(equation, {}, true);
@@ -87,6 +88,7 @@ export const getCoefficients = (equation: MathNode) => {
   }
 
   result = result.length === 0 ? [1, 0] : result;
+console.log(result, "result")
 
   return result;
 };
