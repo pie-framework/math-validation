@@ -1,5 +1,5 @@
 import { mathjs } from "../mathjs";
-import math, { MathNode, number } from "mathjs";
+import  { MathNode } from "mathjs";
 import { equationsCanBeCompared, equationsHaveTheSameUnknowns, getCoefficients, getUnknowns, solveLinearEquation, transformEqualityInExpression } from "./utils";
 
 const m: any = mathjs;
@@ -32,10 +32,8 @@ const breakInequality = (compoundInequality: any): InequalitiesPairs => {
 };
 
 const findX = (inequality: MathNode): number => {
-  // TO DO: sanity checks
   let expression = transformEqualityInExpression(inequality);
   let result: number;
-  // TO DO: must chek if we have the same unknowns
 
   let equationUnknownsName = getUnknowns(expression);
   let equationCoefficients: number[];
@@ -51,7 +49,6 @@ const findX = (inequality: MathNode): number => {
   return result
 };
 
-
 export const getLimit = (expressionsPair :InequalitiesPairs, limitType:string):number => {
   const xFirstInequality = findX(expressionsPair.rightHandInequality);
   const xSecondInequality = findX(expressionsPair.leftHandInequality);
@@ -63,7 +60,6 @@ export const getLimit = (expressionsPair :InequalitiesPairs, limitType:string):n
   }
 }
 
-
 export const compareCompoundInequations = (
   firstInequation: any,
   secondInequation: any
@@ -74,7 +70,7 @@ export const compareCompoundInequations = (
     (relation: string) =>
       secondInequation.conditionals.includes(relation) &&
       firstInequation.conditionals?.length === 2 &&
-      firstInequation.params?.length === 3 && equationsCanBeCompared (firstInequation,secondInequation)
+      firstInequation.params?.length === 3 && equationsCanBeCompared(firstInequation,secondInequation)
   );
 
   if (!result) {

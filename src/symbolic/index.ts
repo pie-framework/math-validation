@@ -155,11 +155,7 @@ export const isMathEqual = (a: any, b: any) => {
   if (as.fn === "equal" && bs.fn === "equal") {
     equality = compareEquations(as, bs, false);
 
-    if (equality) {
-      return true;
-    } else {
-      return false;
-    }
+   return equality;
   }
 
   // if both expressions are inequalities treat greater sign as equal sign
@@ -177,11 +173,7 @@ export const isMathEqual = (a: any, b: any) => {
 
     equality = compareEquations(as, bs, true);
 
-    if (equality) {
-      return true;
-    } else {
-      return false;
-    }
+    return equality;
   }
 
   // check for compound inequalities

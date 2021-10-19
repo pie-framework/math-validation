@@ -1,6 +1,6 @@
 import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
-import { isMathEqual, simplify } from ".";
+import { isMathEqual } from ".";
 import {
   getUnknowns,
   equationsHaveTheSameUnknowns,
@@ -24,7 +24,7 @@ export const compareEquations = (
     let firstExpression = transformEqualityInExpression(firstEquation);
     let secondExpression = transformEqualityInExpression(secondEquation);
 
-    if (isMathEqual(firstExpression, secondExpression)) {
+    if (firstExpression.equals(secondExpression)) {
       return true;
     }
 
@@ -57,6 +57,7 @@ export const compareEquations = (
 
       equivalence = solutionForFirstEquation === solutionForSecondEquation;
 
+      // 2-way inequality
       if (equivalence && isInequality) {
         // check if direction should be changed
         if (

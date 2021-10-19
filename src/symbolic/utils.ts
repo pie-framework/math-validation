@@ -39,7 +39,6 @@ export const transformEqualityInExpression = (equality: MathNode) => {
   const expression = new m.OperatorNode("-", "subtract", equality.args);
 
   // remove added/subtracted numbers/variables from both sides of the equation
-  // @ts-ignore
   return customSimplify(expression);
 };
 
@@ -124,7 +123,6 @@ export const solveLinearEquation = (coefficients: number[]) => {
       result = 0;
     } else {
       // equation with no solution : if coefficient for x is 0 => division by zero => result == -Infinity
-     // Math.round(coefficient * 100000) / 100000)
       result = Math.round(m.divide(coefficients[0], -1 * coefficients[1]) * 10000) / 10000;
     }
   }

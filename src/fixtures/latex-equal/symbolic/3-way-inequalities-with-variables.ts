@@ -38,11 +38,9 @@ export default {
       ],
     },
     {
-    //  only: true,
       target: "-5 ≤ 3 - 2z ≤ 5",
       eq: [
        "-8 ≤ -2z ≤ 2", 
-      //  not validating
        "4 ≥ z ≥ -1"
       ],
     },
