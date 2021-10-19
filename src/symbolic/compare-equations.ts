@@ -1,6 +1,5 @@
 import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
-import { isMathEqual } from ".";
 import {
   getUnknowns,
   equationsHaveTheSameUnknowns,
@@ -8,7 +7,7 @@ import {
   solveLinearEquation,
   setXToOne,
   transformEqualityInExpression,
-  equationsCanBeCompared,
+  expressionsCanBeCompared,
 } from "./utils";
 
 const m: any = mathjs;
@@ -20,7 +19,7 @@ export const compareEquations = (
 ) => {
   let equivalence: boolean = false;
 
-  if (equationsCanBeCompared(firstEquation,secondEquation)) {
+  if (expressionsCanBeCompared(firstEquation,secondEquation)) {
     let firstExpression = transformEqualityInExpression(firstEquation);
     let secondExpression = transformEqualityInExpression(secondEquation);
 

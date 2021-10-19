@@ -5,7 +5,7 @@ const { simplify } = mathjs;
 
 const m: any = mathjs;
 
-export const equationsCanBeCompared = (
+export const expressionsCanBeCompared = (
   firstEquation: MathNode,
   secondEquation: MathNode
 ): boolean => {
@@ -142,4 +142,23 @@ export const equationsHaveTheSameUnknowns = (
       (unknonwn, index) => unknonwn === secondEquationUnknowns[index]
     )
   );
+};
+
+//solve unknown for linear equation/inequality in one variable
+export const findX = (inequality: MathNode): number => {
+  let expression = transformEqualityInExpression(inequality);
+  let result: number;
+
+  let equationUnknownsName = getUnknowns(expression);
+  let equationCoefficients: number[];
+
+  if (equationUnknownsName.length === 1) {
+    equationCoefficients = getCoefficients(expression);
+  }
+
+  result = solveLinearEquation(
+    equationCoefficients
+  );
+
+  return result
 };
