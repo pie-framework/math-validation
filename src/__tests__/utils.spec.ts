@@ -93,6 +93,7 @@ describe("getCoefficients", () => {
   it.each`
     expression                     | coefficients
     ${"x+0"}                       | ${[0, 1]}
+    ${"2x^2 = 2x"}                      | ${[1, 0]}
     ${"x +1"}                      | ${[1, 1]}
     ${"((x^2 + x) / x) - 1"}       | ${[0, 0, 1]}
     ${"1+2"}                       | ${[1, 0]}
@@ -208,11 +209,18 @@ describe("solveLinearEquation", () => {
     expect(result).toEqual(-Infinity);
   });
 
-  it('equation: "2x^2 = 2x" - has no solution', () => {
+  it('equation: "2y^2+4y" - solution is -2', () => {
     const coefficients = [0, 4, 2];
     const result = solveLinearEquation(coefficients);
 
     expect(result).toEqual(-2);
+  });
+
+  it('equation: "2x^2 = 2x" - solution is 1', () => {
+    const coefficients = [1, 0];
+    const result = solveLinearEquation(coefficients);
+
+    expect(result).toEqual(1);
   });
 
   it('equation: "y^2+5y - 1" - if equation is quadratic, result is undefined', () => {
@@ -231,79 +239,21 @@ describe("solveLinearEquation", () => {
 });
 
 describe("findX", () => {
-    it.each`
-      equation  | unknownValue
-      ${"x = x"}     | ${Infinity}
-      ${"x + 5 - 3 + x = 6 + x - 2"}     | ${2}
-      ${"2x = x"}  | ${0}
-      ${"x = x + 2"}         | ${undefined}
-      ${"3x - 2x  = x + 7 + 9"} | ${undefined}
-      ${"2x^2 = 2x"}   | ${0}
-      ${"y^2+5y - 1"}   | ${0}
-      ${"y^2+5y + 1"}   | ${0}
-    `("$equation => $unknownValue", ({ equation, unknownValue }) => {
-        const nodeEquation = atm.convert(lta.convert(equation));
-      const result = findX(nodeEquation);
-  
-      expect(result).toEqual(unknownValue);
-    });
+  it.each`
+    equation                       | unknownValue
+    ${"x = x"}                     | ${Infinity}
+    ${"x + 5 - 3 + x = 6 + x - 2"} | ${2}
+    ${"2x = x"}                    | ${0}
+    ${"x = x + 2"}                 | ${undefined}
+    ${"3x - 2x  = x + 7 + 9"}      | ${undefined}
+    ${"2x^2 = 2x"}                 | ${1}
+    ${"y^2+5y - 1 = 0"}                | ${undefined}
+    ${"y^2+5y + 1 =0 "}                | ${undefined}
+    ${"2y^2+4y = 0"}                | ${-2}
+  `("$equation => $unknownValue", ({ equation, unknownValue }) => {
+    const nodeEquation = atm.convert(lta.convert(equation));
+    const result = findX(nodeEquation);
+
+    expect(result).toEqual(unknownValue);
   });
-  
-  describe("solveLinearEquation", () => {
-    it('equation: "x = x" - has infinite solutions', () => {
-      const coefficients = [0, 0];
-      const result = solveLinearEquation(coefficients);
-  
-      expect(result).toEqual(Infinity);
-    });
-  
-    it('equation: "x + 5 - 3 + x = 6 + x - 2" - solution should be 2', () => {
-      const coefficients = [-2, 1];
-      const result = solveLinearEquation(coefficients);
-  
-      expect(result).toEqual(2);
-    });
-  
-    it('equation: "2x = x" - solution should be 0', () => {
-      const coefficients = [0, 1];
-      const result = solveLinearEquation(coefficients);
-  
-      expect(result).toEqual(0);
-    });
-  
-    it('equation: "x = x + 2" - if equation has no solution it will return - Infinity', () => {
-      const coefficients = [2, 0];
-      const result = solveLinearEquation(coefficients);
-  
-      expect(result).toEqual(-Infinity);
-    });
-  
-    it('equation: "3x - 2x  = x + 7 + 9" - if equation has no solution it will return - Infinity', () => {
-      const coefficients = [16, 0];
-      const result = solveLinearEquation(coefficients);
-  
-      expect(result).toEqual(-Infinity);
-    });
-  
-    it('equation: "2x^2 = 2x" - has no solution', () => {
-      const coefficients = [0, 4, 2];
-      const result = solveLinearEquation(coefficients);
-  
-      expect(result).toEqual(-2);
-    });
-  
-    it('equation: "y^2+5y - 1" - if equation is quadratic, result is undefined', () => {
-      const coefficients = [-1, 5, 1];
-      const result = solveLinearEquation(coefficients);
-  
-      expect(result).toEqual(undefined);
-    });
-  
-    it('equation: "y^2+5y + 1" - if equation is quadratic, result is undefined', () => {
-      const coefficients = [1, 5, 1];
-      const result = solveLinearEquation(coefficients);
-  
-      expect(result).toEqual(undefined);
-    });
-  });
-  
+});
