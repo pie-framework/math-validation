@@ -1,6 +1,6 @@
 import { mathjs } from "../mathjs";
-import  { MathNode } from "mathjs";
-import { expressionsCanBeCompared, equationsHaveTheSameUnknowns, getUnknowns, findX } from "./utils";
+import  { expression, MathNode } from "mathjs";
+import { expressionsCanBeCompared, equationsHaveTheSameUnknowns, getUnknowns, transformEqualityInExpression, getCoefficients, solveLinearEquation } from "./utils";
 
 const m: any = mathjs;
 
@@ -32,8 +32,11 @@ const breakInequality = (compoundInequality: any): InequalitiesPairs => {
 };
 
 export const getLimit = (expressionsPair :InequalitiesPairs, limitType:string):number => {
-  const xFirstInequality = findX(expressionsPair.rightHandInequality);
-  const xSecondInequality = findX(expressionsPair.leftHandInequality);
+  const expressionR = transformEqualityInExpression(expressionsPair.rightHandInequality);
+  const expressionL = transformEqualityInExpression(expressionsPair.leftHandInequality);
+
+  const xFirstInequality = solveLinearEquation(getCoefficients(expressionR));
+  const xSecondInequality =solveLinearEquation(getCoefficients(expressionL));
 
   if (limitType === "inferior") {
     return Math.min(xFirstInequality,xSecondInequality)
@@ -57,7 +60,7 @@ export const compareCompoundInequations = (
 
   if (!result) {
     return false;
-  } else {
+  } 
     const firstInequalityUnknownsName = getUnknowns(firstInequation);
     const secondInequalityUnknownsName = getUnknowns(secondInequation);
 
@@ -84,7 +87,7 @@ export const compareCompoundInequations = (
     };
 
     equality = firstInequalitiesSolution.inferiorLimit === secondInequalitiesSolution.inferiorLimit && firstInequalitiesSolution.superiorLimit === secondInequalitiesSolution.superiorLimit
-  }
+  
 
   return equality;
 };

@@ -55,7 +55,6 @@ export const compareEquations = (
       );
 
       equivalence = solutionForFirstEquation === solutionForSecondEquation;
-
     }
 
     // if both equations are linear in two variabled then we give value "1" for both "x". Doing this we get a linear equation in one variable "y". Then we solve "y" for both. If y has the same value then equations are equivalent
@@ -84,22 +83,17 @@ export const compareEquations = (
     // we have one distinct case, when multiplying both parts of an inequality with a negative number, the sign must change direction
     if (equivalence && isInequality) {
       // check if direction should be changed
-      if (
-        m.isPositive(firstEquationCoefficients[0]) &&
-        m.isNegative(firstEquationCoefficients[1]) &&
-        m.isNegative(secondEquationCoefficients[0]) &&
-        m.isPositive(secondEquationCoefficients[1])
-      ) {
-        equivalence = false;
-      }
-      if (
-        m.isNegative(firstEquationCoefficients[0]) &&
-        m.isPositive(firstEquationCoefficients[1]) &&
-        m.isPositive(secondEquationCoefficients[0]) &&
-        m.isNegative(secondEquationCoefficients[1])
-      ) {
-        equivalence = false;
-      }
+      let signShouldBeChanged =
+        (m.isPositive(firstEquationCoefficients[0]) &&
+          m.isNegative(firstEquationCoefficients[1]) &&
+          m.isNegative(secondEquationCoefficients[0]) &&
+          m.isPositive(secondEquationCoefficients[1])) ||
+        (m.isNegative(firstEquationCoefficients[0]) &&
+          m.isPositive(firstEquationCoefficients[1]) &&
+          m.isPositive(secondEquationCoefficients[0]) &&
+          m.isNegative(secondEquationCoefficients[1]));
+
+      return !signShouldBeChanged;
     }
   }
 

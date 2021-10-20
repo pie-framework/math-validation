@@ -1,6 +1,6 @@
 import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
-import {simplify as customSimplify} from "./"
+import { simplify as customSimplify } from "./";
 const { simplify } = mathjs;
 
 const m: any = mathjs;
@@ -80,7 +80,7 @@ export const getCoefficients = (equation: MathNode) => {
     try {
       const rat = m.rationalize(equation, {}, true);
       result = rat.coefficients;
-    } catch(e) {}
+    } catch (e) {}
   }
 
   result = result.length === 0 ? [1, 0] : result;
@@ -118,13 +118,17 @@ export const solveLinearEquation = (coefficients: number[]) => {
 
   if (coefficients.length === 2) {
     if (coefficients[0] === 0 && coefficients[1] === 0) {
-      result = Infinity;
-    } else if (coefficients[0] === 0) {
-      result = 0;
-    } else {
-      // equation with no solution : if coefficient for x is 0 => division by zero => result == -Infinity
-      result = Math.round(m.divide(coefficients[0], -1 * coefficients[1]) * 10000) / 10000;
+      return Infinity;
     }
+
+    if (coefficients[0] === 0) {
+      return 0;
+    }
+    
+    // equation with no solution : if coefficient for x is 0 => division by zero => result == -Infinity
+    result =
+      Math.round(m.divide(coefficients[0], -1 * coefficients[1]) * 10000) /
+      10000;
   }
 
   return result;
@@ -141,14 +145,5 @@ export const equationsHaveTheSameUnknowns = (
     firstEquationUnknowns.every(
       (unknonwn, index) => unknonwn === secondEquationUnknowns[index]
     )
-  );
-};
-
-//solve unknown for linear equation/inequality in one variable
-export const findX = (inequality: MathNode): number => {
-  let expression = transformEqualityInExpression(inequality);
-
-  return solveLinearEquation(
-    getCoefficients(expression)
   );
 };

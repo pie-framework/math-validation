@@ -230,22 +230,3 @@ describe("solveLinearEquation", () => {
     expect(result).toEqual(undefined);
   });
 });
-
-describe("findX", () => {
-  it.each`
-    equation                       | unknownValue
-    ${"x = x"}                     | ${Infinity}
-    ${"x + 5 - 3 + x = 6 + x - 2"} | ${2}
-    ${"2x = x"}                    | ${0}
-    ${"x = x + 2"}                 | ${undefined}
-    ${"3x - 2x  = x + 7 + 9"}      | ${undefined}
-    ${"y^2+5y - 1 = 0"}                | ${undefined}
-    ${"y^2+5y + 1 =0 "}                | ${undefined}
-    ${"2y^2+4y = 0"}                | ${-2}
-  `("$equation => $unknownValue", ({ equation, unknownValue }) => {
-    const nodeEquation = atm.convert(lta.convert(equation));
-    const result = findX(nodeEquation);
-
-    expect(result).toEqual(unknownValue);
-  });
-});

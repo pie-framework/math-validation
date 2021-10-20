@@ -153,9 +153,7 @@ export const isMathEqual = (a: any, b: any) => {
 
   // if both expressions are equations
   if (as.fn === "equal" && bs.fn === "equal") {
-    equality = compareEquations(as, bs, false);
-
-   return equality;
+   return compareEquations(as, bs, false);
   }
 
   // if both expressions are inequalities treat greater sign as equal sign
@@ -171,9 +169,7 @@ export const isMathEqual = (a: any, b: any) => {
     as.op = "=";
     bs.op = "=";
 
-    equality = compareEquations(as, bs, true);
-
-    return equality;
+    return compareEquations(as, bs, true);
   }
 
   // check for compound inequalities
@@ -183,7 +179,7 @@ export const isMathEqual = (a: any, b: any) => {
     //@ts-ignore
     as?.conditionals?.length === 2
   ) {
-    equality = compareCompoundInequations(as, bs);
+    return compareCompoundInequations(as, bs);
   }
 
   return equality;
