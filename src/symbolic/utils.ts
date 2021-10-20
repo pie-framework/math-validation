@@ -62,7 +62,6 @@ export const getUnknowns = (equation: MathNode) => {
 };
 
 export const getCoefficients = (equation: MathNode) => {
-  // add sanity check: rationalize is possible if we have only one unknown
   let result: number[] = [];
   // coefficients will be determined if equation has only one unknown
 
@@ -70,6 +69,8 @@ export const getCoefficients = (equation: MathNode) => {
     const rationalizedEquation = m.rationalize(equation, {}, true);
     result = rationalizedEquation.coefficients;
   } catch (e) {
+    // rationalize may fail if unknown is isolated in a fraction
+    // we give it another try to rationalize after applying a new round of simplify to separate the unknown
     equation = simplify(equation, [
       { l: "(n1-n2)/n3", r: "n1/n3-n2/n3" },
       { l: "(n1+n2)/n3", r: "n1/n3+n2/n3" },

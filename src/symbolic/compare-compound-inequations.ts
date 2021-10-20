@@ -86,8 +86,5 @@ export const compareCompoundInequations = (
       superiorLimit: getLimit(secondInequalities, "superior"),
     };
 
-    equality = firstInequalitiesSolution.inferiorLimit === secondInequalitiesSolution.inferiorLimit && firstInequalitiesSolution.superiorLimit === secondInequalitiesSolution.superiorLimit
-  
-
-  return equality;
+  return firstInequalitiesSolution.inferiorLimit === secondInequalitiesSolution.inferiorLimit && firstInequalitiesSolution.superiorLimit === secondInequalitiesSolution.superiorLimit
 };
