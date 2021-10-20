@@ -1,5 +1,5 @@
 import { mathjs } from "../mathjs";
-import  { expression, MathNode } from "mathjs";
+import  {  MathNode } from "mathjs";
 import { expressionsCanBeCompared, equationsHaveTheSameUnknowns, getUnknowns, transformEqualityInExpression, getCoefficients, solveLinearEquation } from "./utils";
 
 const m: any = mathjs;

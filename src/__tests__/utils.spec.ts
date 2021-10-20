@@ -8,8 +8,7 @@ import {
   setXToOne,
   solveLinearEquation,
   expressionsCanBeCompared,
-  transformEqualityInExpression,
-  findX,
+  transformEqualityInExpression
 } from "../symbolic/utils";
 
 const lta = new LatexToAst();
