@@ -19,7 +19,7 @@ export const compareEquations = (
 ) => {
   let equivalence: boolean = false;
 
-  if (expressionsCanBeCompared(firstEquation,secondEquation)) {
+  if (expressionsCanBeCompared(firstEquation, secondEquation)) {
     let firstExpression = transformEqualityInExpression(firstEquation);
     let secondExpression = transformEqualityInExpression(secondEquation);
 
@@ -56,26 +56,6 @@ export const compareEquations = (
 
       equivalence = solutionForFirstEquation === solutionForSecondEquation;
 
-      // 2-way inequality
-      if (equivalence && isInequality) {
-        // check if direction should be changed
-        if (
-          m.isPositive(firstEquationCoefficients[0]) &&
-          m.isNegative(firstEquationCoefficients[1]) &&
-          m.isNegative(secondEquationCoefficients[0]) &&
-          m.isPositive(secondEquationCoefficients[1])
-        ) {
-          equivalence = false;
-        }
-        if (
-          m.isNegative(firstEquationCoefficients[0]) &&
-          m.isPositive(firstEquationCoefficients[1]) &&
-          m.isPositive(secondEquationCoefficients[0]) &&
-          m.isNegative(secondEquationCoefficients[1])
-        ) {
-          equivalence = false;
-        }
-      }
     }
 
     // if both equations are linear in two variabled then we give value "1" for both "x". Doing this we get a linear equation in one variable "y". Then we solve "y" for both. If y has the same value then equations are equivalent
@@ -99,6 +79,9 @@ export const compareEquations = (
       equivalence = yFromFirstExpression === yFromSecondExpression;
     }
 
+    // determine equivalence between 2-way inequalities with 1 or 2 variables:
+    // we treat 2-way inequalities the same way as linear equations in 1 or 2 variables; we find out the solutions that solve the inequality then compare them
+    // we have one distinct case, when multiplying both parts of an inequality with a negative number, the sign must change direction
     if (equivalence && isInequality) {
       // check if direction should be changed
       if (

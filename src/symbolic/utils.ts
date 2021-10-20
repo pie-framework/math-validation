@@ -147,18 +147,8 @@ export const equationsHaveTheSameUnknowns = (
 //solve unknown for linear equation/inequality in one variable
 export const findX = (inequality: MathNode): number => {
   let expression = transformEqualityInExpression(inequality);
-  let result: number;
 
-  let equationUnknownsName = getUnknowns(expression);
-  let equationCoefficients: number[];
-
-  if (equationUnknownsName.length === 1) {
-    equationCoefficients = getCoefficients(expression);
-  }
-
-  result = solveLinearEquation(
-    equationCoefficients
+  return solveLinearEquation(
+    getCoefficients(expression)
   );
-
-  return result
 };

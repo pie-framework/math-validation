@@ -216,13 +216,6 @@ describe("solveLinearEquation", () => {
     expect(result).toEqual(-2);
   });
 
-  it('equation: "2x^2 = 2x" - solution is 1', () => {
-    const coefficients = [1, 0];
-    const result = solveLinearEquation(coefficients);
-
-    expect(result).toEqual(1);
-  });
-
   it('equation: "y^2+5y - 1" - if equation is quadratic, result is undefined', () => {
     const coefficients = [-1, 5, 1];
     const result = solveLinearEquation(coefficients);
@@ -246,7 +239,6 @@ describe("findX", () => {
     ${"2x = x"}                    | ${0}
     ${"x = x + 2"}                 | ${undefined}
     ${"3x - 2x  = x + 7 + 9"}      | ${undefined}
-    ${"2x^2 = 2x"}                 | ${1}
     ${"y^2+5y - 1 = 0"}                | ${undefined}
     ${"y^2+5y + 1 =0 "}                | ${undefined}
     ${"2y^2+4y = 0"}                | ${-2}

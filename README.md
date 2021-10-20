@@ -14,6 +14,7 @@ yarn demo
 
 Then go to `http://localhost:$PORT/demo`
 
+
 ## tests
 
 ```shell
@@ -27,6 +28,7 @@ There is one test that runs fixture data located here: `src/fixtures/latex-equal
 ```shell
 yarn jest src/__tests__/latex-equal.spec.ts -t src/fixtures/latex-equal/7119.ts --reporters default
 ```
+
 
 ## Next Steps
 
@@ -52,6 +54,7 @@ yarn jest src/__tests__/latex-equal.spec.ts -t src/fixtures/latex-equal/7119.ts 
 * more advanced literal validation (todo)
 * block input that is clearly too large/unrelated (eg: a user can type in gobbledy-gook - we should just abort if we see that)
 
+
 ## Capabilities
 
 - comparing linear equations in one variable
@@ -69,28 +72,25 @@ yarn jest src/__tests__/latex-equal.spec.ts -t src/fixtures/latex-equal/7119.ts 
 * a faster latex parser
 * faster math evaluation
 
+
 ## modes
 
 There are 2 modes - literal and symbolic
 
-Literal: is at its most basic form very similar to a string validation
+Literal: is at its most basic a tuned version of a string validation
 
-Literal will ignore spaces and parentheses as long as they do not change the meaning of operations
-
-For example “a+7 +b” will not validate against “7 + a+b” but will validate against “  ((a)    + (7))+b ”. 
-It will accept commas for decimal marks. For example “1,000” will be equivalent with 1000.
-Validation will ignore leading zeros: “0.1” will validate against “.1”
+By default - ignores spaces and parentheses as long as they do not change the meaning of operations (ex. “a+7 +b” will validate against “  ((a)    + (7))+b ”)
+           - ignores leading zeros: “0.1” will validate against “.1”
+           - accepts commas for decimal marks. For example “1,000” will be equivalent with 1000
 
 Literal Validation offers two configuration options that can be used to validate some variety of forms for an expression:
 
 Ignore trailing zeros option; allows the evaluation to accept zeros to the right of the decimal place “4.5” will validate against “4.50000000000000”
-Ignore order option; makes validation indifferent to the variables order, as long as it does not change operations meaning. In this case “a+7 +b*c” will validate against “7 + a+bc”, but not against “ac+7+b” 
-
+Ignore order option; makes validation indifferent to the variables order, as long as it does not change operations meaning. In this case “a+7 +b*c” will validate against “7 + a+bc”, but not against “ac+7+b”; without it “a+7 +b” will not validate against “7 + a+b”
 
 Symbolic: attempts to decide if expressions are mathematically equivalent or not
 
-The second type of validation, and the most relevant in mathematics, is symbolic validation. By default, it offers all configurations presented for literal validation and is more relevant in mathematics
-
+By default, it offers all configurations presented for literal validation, exceeding it by quite a lot
 In order to check equivalence between 2 expressions, we have to reduce both expressions to the simplest one. Then distribute all coefficients, combine any like terms on each side of the expression, and arrange them in the same order. 
 
 

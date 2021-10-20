@@ -1,6 +1,6 @@
 import { mathjs } from "../mathjs";
 import  { MathNode } from "mathjs";
-import { expressionsCanBeCompared, equationsHaveTheSameUnknowns, getCoefficients, getUnknowns, solveLinearEquation, transformEqualityInExpression, findX } from "./utils";
+import { expressionsCanBeCompared, equationsHaveTheSameUnknowns, getUnknowns, findX } from "./utils";
 
 const m: any = mathjs;
 
@@ -65,7 +65,7 @@ export const compareCompoundInequations = (
       !equationsHaveTheSameUnknowns(
         firstInequalityUnknownsName,
         secondInequalityUnknownsName
-      )
+      ) && firstInequalityUnknownsName?.length === 1
     ) {
       return false;
     }
