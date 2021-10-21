@@ -23,6 +23,7 @@ export type xRange = {
 
 const operation = (signName: string) => (signName === "larger" ? ">" : "≥");
 
+// break 3-way inequality in two 2-way inequalities; input a > b > c, output a > b and b > c
 const breakInequality = (compoundInequality: any): InequalitiesPairs => ({
   leftHandInequality: new m.OperatorNode(
     operation(compoundInequality.conditionals[0]),
@@ -52,17 +53,16 @@ export const getLimit = (
 
   if (limitType === "inferior") {
     return Math.min(xFirstInequality, xSecondInequality);
-  } else {
-    return Math.max(xFirstInequality, xSecondInequality);
   }
+
+    return Math.max(xFirstInequality, xSecondInequality);
+  
 };
 
 export const compareCompoundInequations = (
   firstInequation: any,
   secondInequation: any
 ) => {
-  let equality: boolean = false;
-
   const result = firstInequation.conditionals.every(
     (relation: string) =>
       secondInequation.conditionals.includes(relation) &&
@@ -74,6 +74,7 @@ export const compareCompoundInequations = (
   if (!result) {
     return false;
   }
+
   const firstInequalityUnknownsName = getUnknowns(firstInequation);
   const secondInequalityUnknownsName = getUnknowns(secondInequation);
 
@@ -90,6 +91,8 @@ export const compareCompoundInequations = (
   const firstInequalities = breakInequality(firstInequation);
   const secondInequalities = breakInequality(secondInequation);
 
+  // find out interval for inequality solution; 
+  // it does not matter whether we have an open, or half-open/half-close interval, the signs are already compared and at this point they match
   let firstInequalitiesSolution: xRange = {
     inferiorLimit: getLimit(firstInequalities, "inferior"),
     superiorLimit: getLimit(firstInequalities, "superior"),
@@ -100,6 +103,7 @@ export const compareCompoundInequations = (
     superiorLimit: getLimit(secondInequalities, "superior"),
   };
 
+  // if interval limits are the same for both inequalities then we can say that inequalities are equivalent
   return (
     firstInequalitiesSolution.inferiorLimit ===
       secondInequalitiesSolution.inferiorLimit &&

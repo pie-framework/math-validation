@@ -5,6 +5,7 @@ const { simplify } = mathjs;
 
 const m: any = mathjs;
 
+// expressions can be compared if we have at least one symbol node and has no function node or array
 export const expressionsCanBeCompared = (
   firstEquation: MathNode,
   secondEquation: MathNode
@@ -17,8 +18,6 @@ export const expressionsCanBeCompared = (
     noFunctionOrArray =
       noFunctionOrArray || node.isFunctionNode || node.isArrayNode;
     firstSymbolNode = firstSymbolNode || node.isSymbolNode;
-
-    return node;
   });
 
   secondEquation.traverse(function (node, path, parent) {
@@ -27,8 +26,6 @@ export const expressionsCanBeCompared = (
     }
 
     if (node.isSymbolNode && firstSymbolNode) symbolNode = true;
-
-    return node;
   });
 
   return noFunctionOrArray && symbolNode;
@@ -89,19 +86,14 @@ export const getCoefficients = (equation: MathNode) => {
   return result;
 };
 
-export const setXToOne = (equation: any, unknownName: string) => {
-  let result: MathNode;
-
-  result = equation.transform(function (node, path, parent) {
+export const setXToOne = (equation: any, unknownName: string) =>
+  equation.transform(function (node, path, parent) {
     if (node.isSymbolNode && node.name === unknownName) {
       return new m.ConstantNode(1);
-    } else {
-      return node;
     }
-  });
 
-  return result;
-};
+    return node;
+  });
 
 // TO DO: solve quadratic equation
 
@@ -125,7 +117,7 @@ export const solveLinearEquation = (coefficients: number[]) => {
     if (coefficients[0] === 0) {
       return 0;
     }
-    
+
     // equation with no solution : if coefficient for x is 0 => division by zero => result == -Infinity
     result =
       Math.round(m.divide(coefficients[0], -1 * coefficients[1]) * 10000) /

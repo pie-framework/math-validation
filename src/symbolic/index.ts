@@ -75,8 +75,6 @@ const normalize = (a: string | MathNode | any) => {
       containsArrayNode = true;
       node.items = node.items.map((item) => simplify(item));
     }
-
-    return node;
   });
 
   if (r.fn === "equal") {
@@ -172,7 +170,7 @@ export const isMathEqual = (a: any, b: any) => {
     return compareEquations(as, bs, true);
   }
 
-  // check for compound inequalities
+  // check for compound inequalities/3-way inequalities
   if (
     //@ts-ignore
     as?.conditionals?.length === bs?.conditionals?.length &&
