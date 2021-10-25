@@ -2,8 +2,8 @@ import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
 import {
   expressionsCanBeCompared,
-  equationsHaveTheSameUnknowns,
-  getUnknowns,
+  equationsHaveTheSameVariables,
+  getVariables,
   transformEqualityInExpression,
   getCoefficients,
   solveLinearEquation,
@@ -11,42 +11,54 @@ import {
 
 const m: any = mathjs;
 
-export type InequalitiesPairs = {
-  leftHandInequality: MathNode;
-  rightHandInequality: MathNode;
+export type NodePair = {
+  left: MathNode;
+  right: MathNode;
 };
 
-export type xRange = {
-  inferiorLimit: number;
-  superiorLimit: number;
+export type Range = {
+  min: number;
+  max: number;
 };
 
-const operation = (signName: string) => (signName === "larger" ? ">" : "≥");
+const operation = (signName: string) => {
+  switch (signName) {
+    case "smaller":
+      return "<";
+    case "smallerEq":
+      return "<=";
+    case "larger":
+      return ">";
+    case "largerEq":
+      return ">=";
+    case "equal":
+      return "==";
+    default:
+      return "!=";
+  }
+};
 
-// break 3-way inequality in two 2-way inequalities; input a > b > c, output a > b and b > c
-const breakInequality = (compoundInequality: any): InequalitiesPairs => ({
-  leftHandInequality: new m.OperatorNode(
+// splitInequality takes in a RelationalNode with 2 conditionals and 3 params and returns 2 operatorNodes each containing a 2-way inequality
+export const splitInequality = (compoundInequality: any): NodePair => ({
+  left: new m.OperatorNode(
     operation(compoundInequality.conditionals[0]),
     compoundInequality.conditionals[0],
     [compoundInequality.params[0], compoundInequality.params[1]]
   ),
-  rightHandInequality: new m.OperatorNode(
+  right: new m.OperatorNode(
     operation(compoundInequality.conditionals[1]),
-    compoundInequality.conditionals[0],
+    compoundInequality.conditionals[1],
     [compoundInequality.params[1], compoundInequality.params[2]]
   ),
 });
 
+// get interval inferior/superior limits
 export const getLimit = (
-  expressionsPair: InequalitiesPairs,
+  expressionsPair: NodePair,
   limitType: string
 ): number => {
-  const expressionR = transformEqualityInExpression(
-    expressionsPair.rightHandInequality
-  );
-  const expressionL = transformEqualityInExpression(
-    expressionsPair.leftHandInequality
-  );
+  const expressionR = transformEqualityInExpression(expressionsPair.right);
+  const expressionL = transformEqualityInExpression(expressionsPair.left);
 
   const xFirstInequality = solveLinearEquation(getCoefficients(expressionR));
   const xSecondInequality = solveLinearEquation(getCoefficients(expressionL));
@@ -55,59 +67,50 @@ export const getLimit = (
     return Math.min(xFirstInequality, xSecondInequality);
   }
 
-    return Math.max(xFirstInequality, xSecondInequality);
-  
+  return Math.max(xFirstInequality, xSecondInequality);
 };
 
 export const compareCompoundInequations = (
   firstInequation: any,
   secondInequation: any
 ) => {
-  const result = firstInequation.conditionals.every(
-    (relation: string) =>
-      secondInequation.conditionals.includes(relation) &&
-      firstInequation.conditionals?.length === 2 &&
-      firstInequation.params?.length === 3 &&
-      expressionsCanBeCompared(firstInequation, secondInequation)
-  );
 
-  if (!result) {
+
+  if (!expressionsCanBeCompared(firstInequation, secondInequation)) {
     return false;
   }
 
-  const firstInequalityUnknownsName = getUnknowns(firstInequation);
-  const secondInequalityUnknownsName = getUnknowns(secondInequation);
+  const firstInequalityVariablesName = getVariables(firstInequation);
+  const secondInequalityVariablesName = getVariables(secondInequation);
 
   if (
-    !equationsHaveTheSameUnknowns(
-      firstInequalityUnknownsName,
-      secondInequalityUnknownsName
+    !equationsHaveTheSameVariables(
+      firstInequalityVariablesName,
+      secondInequalityVariablesName
     ) &&
-    firstInequalityUnknownsName?.length === 1
+    firstInequalityVariablesName?.length === 1
   ) {
     return false;
   }
 
-  const firstInequalities = breakInequality(firstInequation);
-  const secondInequalities = breakInequality(secondInequation);
+  const firstInequalities = splitInequality(firstInequation);
+  const secondInequalities = splitInequality(secondInequation);
 
-  // find out interval for inequality solution; 
+  // find out interval for inequality solution;
   // it does not matter whether we have an open, or half-open/half-close interval, the signs are already compared and at this point they match
-  let firstInequalitiesSolution: xRange = {
-    inferiorLimit: getLimit(firstInequalities, "inferior"),
-    superiorLimit: getLimit(firstInequalities, "superior"),
+  let firstInequalitiesSolution: Range = {
+    min: getLimit(firstInequalities, "inferior"),
+    max: getLimit(firstInequalities, "superior"),
   };
 
-  let secondInequalitiesSolution: xRange = {
-    inferiorLimit: getLimit(secondInequalities, "inferior"),
-    superiorLimit: getLimit(secondInequalities, "superior"),
+  let secondInequalitiesSolution: Range = {
+    min: getLimit(secondInequalities, "inferior"),
+    max: getLimit(secondInequalities, "superior"),
   };
 
   // if interval limits are the same for both inequalities then we can say that inequalities are equivalent
   return (
-    firstInequalitiesSolution.inferiorLimit ===
-      secondInequalitiesSolution.inferiorLimit &&
-    firstInequalitiesSolution.superiorLimit ===
-      secondInequalitiesSolution.superiorLimit
+    firstInequalitiesSolution.min === secondInequalitiesSolution.min &&
+    firstInequalitiesSolution.max === secondInequalitiesSolution.max
   );
 };
