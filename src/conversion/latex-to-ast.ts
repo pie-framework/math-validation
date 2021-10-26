@@ -302,7 +302,6 @@ export const latex_rules = [
   ["\\\\neq(?![a-zA-Z])", "NE"],
   ["\\\\ne(?![a-zA-Z])", "NE"],
   ["\\\\not\\s*=", "NE"],
-
   ["\\\\leq(?![a-zA-Z])", "LE"],
   ["\\\\le(?![a-zA-Z])", "LE"],
   ["\\\\geq(?![a-zA-Z])", "GE"],
@@ -739,7 +738,6 @@ export class LatexToAst {
           case "ge":
             return "largerEq";
           case "NE":
-            return "unequal";
           case "ne":
             return "unequal";
         }

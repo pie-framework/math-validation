@@ -32,12 +32,9 @@ export const expressionsCanBeCompared = (
 };
 
 // move the terms of the equations to the left hand side
-export const transformEqualityInExpression = (equality: MathNode) => {
-  const expression = new m.OperatorNode("-", "subtract", equality.args);
-
+export const transformEqualityInExpression = (equality: MathNode) =>
   // remove added/subtracted numbers/variables from both sides of the equation
-  return customSimplify(expression);
-};
+  customSimplify(new m.OperatorNode("-", "subtract", equality.args));
 
 // check if equation is valid and find out the number of variables and their name
 export const getVariables = (equation: MathNode) => {
@@ -53,9 +50,7 @@ export const getVariables = (equation: MathNode) => {
     }
   });
 
-  variableNames.sort();
-
-  return variableNames;
+  return variableNames.sort();
 };
 
 export const getCoefficients = (equation: MathNode) => {

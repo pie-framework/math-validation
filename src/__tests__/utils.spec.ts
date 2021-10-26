@@ -8,7 +8,7 @@ import {
   setXToOne,
   solveLinearEquation,
   expressionsCanBeCompared,
-  transformEqualityInExpression
+  transformEqualityInExpression,
 } from "../symbolic/utils";
 
 const lta = new LatexToAst();
@@ -92,7 +92,7 @@ describe("getCoefficients", () => {
   it.each`
     expression                     | coefficients
     ${"x+0"}                       | ${[0, 1]}
-    ${"2x^2 = 2x"}                      | ${[1, 0]}
+    ${"2x^2 = 2x"}                 | ${[1, 0]}
     ${"x +1"}                      | ${[1, 1]}
     ${"((x^2 + x) / x) - 1"}       | ${[0, 0, 1]}
     ${"1+2"}                       | ${[]}

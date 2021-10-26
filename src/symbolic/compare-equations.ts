@@ -83,7 +83,7 @@ export const compareEquations = (
     // we have one distinct case, when multiplying both parts of an inequality with a negative number, the sign must change direction
     if (equivalence && isInequality) {
       // check if direction should be changed
-      let signShouldBeChanged =
+      return !(
         (m.isPositive(firstEquationCoefficients[0]) &&
           m.isNegative(firstEquationCoefficients[1]) &&
           m.isNegative(secondEquationCoefficients[0]) &&
@@ -91,9 +91,8 @@ export const compareEquations = (
         (m.isNegative(firstEquationCoefficients[0]) &&
           m.isPositive(firstEquationCoefficients[1]) &&
           m.isPositive(secondEquationCoefficients[0]) &&
-          m.isNegative(secondEquationCoefficients[1]));
-
-      return !signShouldBeChanged;
+          m.isNegative(secondEquationCoefficients[1]))
+      );
     }
   }
 

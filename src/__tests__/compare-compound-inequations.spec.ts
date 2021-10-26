@@ -8,27 +8,27 @@ const atm = new AstToMathJs();
 
 describe("splitInequality", () => {
   it.each`
-    compoundInequality | leftPart  | rightPart
-    ${"20>x>7"}        | ${"20>x"} | ${"x>7"}
-    ${" 5 ≥ -4 + x > -1 - 1"}        | ${" 5 ≥ -4 + x"} | ${"-4 + x > -1 - 1"}
-    ${"x/x<x+y≤1.5*2"}        | ${"x/x<x+y"} | ${"x+y≤1.5*2"}
-    ${ "2 < 4x > 20"}        | ${"2<4x"} | ${"4x>20"}
-    ${ "-3 < 2x+5 < 17"}        | ${"-3<2x+5"} | ${"2x+5 < 17"}
-    ${ "-3 = 6x = -3"}        | ${"-3 = 6x"} | ${"6x = -3"}
-    ${ "a≥b≥c "}        | ${"a≥b"} | ${"b≥c"}
-    ${ "a+2≥b-10≥c-100 "}        | ${"a+2≥b-10"} | ${"b-10≥c-100"}
-    ${ "a≠b≠c "}        | ${"a≠b"} | ${"b≠c"}
+    compoundInequality        | leftPart         | rightPart
+    ${"20>x>7"}               | ${"20>x"}        | ${"x>7"}
+    ${" 5 ≥ -4 + x > -1 - 1"} | ${" 5 ≥ -4 + x"} | ${"-4 + x > -1 - 1"}
+    ${"x/x<x+y≤1.5*2"}        | ${"x/x<x+y"}     | ${"x+y≤1.5*2"}
+    ${"2 < 4x > 20"}          | ${"2<4x"}        | ${"4x>20"}
+    ${"-3 < 2x+5 < 17"}       | ${"-3<2x+5"}     | ${"2x+5 < 17"}
+    ${"-3 = 6x = -3"}         | ${"-3 = 6x"}     | ${"6x = -3"}
+    ${"a≥b≥c "}               | ${"a≥b"}         | ${"b≥c"}
+    ${"a+2≥b-10≥c-100 "}      | ${"a+2≥b-10"}    | ${"b-10≥c-100"}
+    ${"a≠b≠c "}               | ${"a≠b"}         | ${"b≠c"}
   `(
     "$compoundInequality => $leftPart, $rightPart",
     ({ compoundInequality, leftPart, rightPart }) => {
-      const equation = atm.convert(lta.convert(compoundInequality));
-      const broken = splitInequality(equation);
+      const inequality = atm.convert(lta.convert(compoundInequality));
+      const broken = splitInequality(inequality);
 
-      const leftPartExpression = atm.convert(lta.convert(leftPart));
-      const rightPartExpression = atm.convert(lta.convert(rightPart));
+      const leftSide = atm.convert(lta.convert(leftPart));
+      const rightSide = atm.convert(lta.convert(rightPart));
 
-      expect(broken.left).toEqual(leftPartExpression);
-      expect(broken.right).toEqual(rightPartExpression);
+      expect(broken.left).toEqual(leftSide);
+      expect(broken.right).toEqual(rightSide);
     }
   );
 });

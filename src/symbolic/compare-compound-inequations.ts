@@ -1,5 +1,5 @@
 import { mathjs } from "../mathjs";
-import { MathNode, unequal } from "mathjs";
+import { MathNode } from "mathjs";
 import {
   expressionsCanBeCompared,
   equationsHaveTheSameVariables,
@@ -74,7 +74,6 @@ export const compareCompoundInequations = (
   firstInequation: any,
   secondInequation: any
 ) => {
-
 
   if (!expressionsCanBeCompared(firstInequation, secondInequation)) {
     return false;

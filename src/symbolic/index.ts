@@ -175,7 +175,9 @@ export const isMathEqual = (a: any, b: any) => {
     //@ts-ignore
     as?.conditionals?.length === bs?.conditionals?.length &&
     //@ts-ignore
-    as?.conditionals?.length === 2 && as?.conditionals?.toString() === bs?.conditionals?.toString()
+    as?.conditionals?.length === 2 &&
+     //@ts-ignore
+    as?.conditionals?.toString() === bs?.conditionals?.toString()
   ) {
     const params = [
       "smaller",
