@@ -1,5 +1,5 @@
 import { mathjs } from "../mathjs";
-import { MathNode } from "mathjs";
+import { MathNode, unequal } from "mathjs";
 import {
   expressionsCanBeCompared,
   equationsHaveTheSameVariables,
@@ -33,7 +33,7 @@ const operation = (signName: string) => {
       return ">=";
     case "equal":
       return "==";
-    default:
+    case "unequal":
       return "!=";
   }
 };

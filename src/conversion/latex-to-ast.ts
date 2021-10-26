@@ -298,10 +298,11 @@ export const latex_rules = [
   ["\\\\lnot(?![a-zA-Z])", "NOT"],
 
   ["=", "="],
+  ["≠", "NE"],
   ["\\\\neq(?![a-zA-Z])", "NE"],
   ["\\\\ne(?![a-zA-Z])", "NE"],
   ["\\\\not\\s*=", "NE"],
-  ["≠", "NE"],
+
   ["\\\\leq(?![a-zA-Z])", "LE"],
   ["\\\\le(?![a-zA-Z])", "LE"],
   ["\\\\geq(?![a-zA-Z])", "GE"],
@@ -689,7 +690,11 @@ export class LatexToAst {
     var lhs = this.expression(params);
 
     let relationalToken = (token) =>
-      token === "<" || token === "LE" || token === ">" || token === "GE";
+      token === "<" ||
+      token === "LE" ||
+      token === ">" ||
+      token === "GE" ||
+      token === "NE";
 
     while (
       this.token.token_type === "=" ||
@@ -733,6 +738,10 @@ export class LatexToAst {
           case "GE":
           case "ge":
             return "largerEq";
+          case "NE":
+            return "unequal";
+          case "ne":
+            return "unequal";
         }
       };
 
