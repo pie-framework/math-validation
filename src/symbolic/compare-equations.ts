@@ -1,8 +1,8 @@
 import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
 import {
-  getUnknowns,
-  equationsHaveTheSameUnknowns,
+  getVariables,
+  equationsHaveTheSameVariables,
   getCoefficients,
   solveLinearEquation,
   setXToOne,
@@ -27,13 +27,13 @@ export const compareEquations = (
       return true;
     }
 
-    let firstEquationUnknownsName = getUnknowns(firstExpression);
-    let secondEquationUnknownsName = getUnknowns(secondExpression);
+    let firstEquationVariablesName = getVariables(firstExpression);
+    let secondEquationVariablesName = getVariables(secondExpression);
 
     if (
-      !equationsHaveTheSameUnknowns(
-        firstEquationUnknownsName,
-        secondEquationUnknownsName
+      !equationsHaveTheSameVariables(
+        firstEquationVariablesName,
+        secondEquationVariablesName
       )
     ) {
       return false;
@@ -43,7 +43,7 @@ export const compareEquations = (
     let secondEquationCoefficients: number[];
 
     // if both equations are linear in one variable then we solve "x" for both. If x has the same value then equations are equivalent
-    if (firstEquationUnknownsName.length === 1) {
+    if (firstEquationVariablesName.length === 1) {
       firstEquationCoefficients = getCoefficients(firstExpression);
       secondEquationCoefficients = getCoefficients(secondExpression);
 
@@ -58,8 +58,8 @@ export const compareEquations = (
     }
 
     // if both equations are linear in two variabled then we give value "1" for both "x". Doing this we get a linear equation in one variable "y". Then we solve "y" for both. If y has the same value then equations are equivalent
-    if (firstEquationUnknownsName.length === 2) {
-      let x = firstEquationUnknownsName[0];
+    if (firstEquationVariablesName.length === 2) {
+      let x = firstEquationVariablesName[0];
 
       // solve expression for x=1
       let expraNoX = setXToOne(firstExpression, x);
@@ -83,7 +83,7 @@ export const compareEquations = (
     // we have one distinct case, when multiplying both parts of an inequality with a negative number, the sign must change direction
     if (equivalence && isInequality) {
       // check if direction should be changed
-      let signShouldBeChanged =
+      return !(
         (m.isPositive(firstEquationCoefficients[0]) &&
           m.isNegative(firstEquationCoefficients[1]) &&
           m.isNegative(secondEquationCoefficients[0]) &&
@@ -91,9 +91,8 @@ export const compareEquations = (
         (m.isNegative(firstEquationCoefficients[0]) &&
           m.isPositive(firstEquationCoefficients[1]) &&
           m.isPositive(secondEquationCoefficients[0]) &&
-          m.isNegative(secondEquationCoefficients[1]));
-
-      return !signShouldBeChanged;
+          m.isNegative(secondEquationCoefficients[1]))
+      );
     }
   }
 

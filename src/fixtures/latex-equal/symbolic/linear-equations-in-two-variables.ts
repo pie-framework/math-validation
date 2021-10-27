@@ -15,7 +15,7 @@ export default {
       ],
     },
     {
-      // linear equations with 2 unknowns that are not x or y
+      // linear equations with 2 variables that are not x or y
       target: "a=\\frac{1}{2}b +5",
       eq: [
         "-2a =-b -10",
@@ -24,7 +24,7 @@ export default {
       ],
     },
     {
-      // linear equations with 2 unknowns that are not x or y
+      // linear equations with 2 variables that are not x or y
       target: "a=\\frac{1}{2}b +5",
       eq: [
         "-2a =-b -10",

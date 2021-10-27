@@ -57,14 +57,17 @@ yarn jest src/__tests__/latex-equal.spec.ts -t src/fixtures/latex-equal/7119.ts 
 
 ## Capabilities
 
-- comparing linear equations in one variable
+It can determine mathematical equivalence between: 
+
+- linear equations in one variable
 - linear equations in two variables
-- 2-way inequalities with one or two unknown variables
+- 2-way inequalities in one or two variables
 - compound inequalities in one variable
-- trigonometric identities or functions
+- trigonometric identities and functions
 - inverse trigonometric functions
-- it can also handle degrees, radians and gradians
-- recognises similar notation for logarithms and based logarithms
+- similar notation for logarithms and based logarithms
+
+It can also handle degrees, radians and gradians
 
 
 ### things that'd be great (but we may have to park until we have more time)

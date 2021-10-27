@@ -32,15 +32,12 @@ export const expressionsCanBeCompared = (
 };
 
 // move the terms of the equations to the left hand side
-export const transformEqualityInExpression = (equality: MathNode) => {
-  const expression = new m.OperatorNode("-", "subtract", equality.args);
-
+export const transformEqualityInExpression = (equality: MathNode) =>
   // remove added/subtracted numbers/variables from both sides of the equation
-  return customSimplify(expression);
-};
+  customSimplify(new m.OperatorNode("-", "subtract", equality.args));
 
-// check if equation is valid and find out the number of unknowns and their name
-export const getUnknowns = (equation: MathNode) => {
+// check if equation is valid and find out the number of variables and their name
+export const getVariables = (equation: MathNode) => {
   let variableNames: string[] = [];
 
   equation.traverse(function (node, path, parent) {
@@ -53,21 +50,18 @@ export const getUnknowns = (equation: MathNode) => {
     }
   });
 
-  variableNames.sort();
-
-  return variableNames;
+  return variableNames.sort();
 };
 
 export const getCoefficients = (equation: MathNode) => {
-  let result: number[] = [];
-  // coefficients will be determined if equation has only one unknown
+  // coefficients will be determined if equation has only one variable
 
   try {
     const rationalizedEquation = m.rationalize(equation, {}, true);
-    result = rationalizedEquation.coefficients;
+    return rationalizedEquation.coefficients;
   } catch (e) {
-    // rationalize may fail if unknown is isolated in a fraction
-    // we give it another try to rationalize after applying a new round of simplify to separate the unknown
+    // rationalize may fail if variable is isolated in a fraction
+    // we give it another try to rationalize after applying a new round of simplify to separate the variable
     equation = simplify(equation, [
       { l: "(n1-n2)/n3", r: "n1/n3-n2/n3" },
       { l: "(n1+n2)/n3", r: "n1/n3+n2/n3" },
@@ -76,19 +70,17 @@ export const getCoefficients = (equation: MathNode) => {
     ]);
 
     try {
-      const rat = m.rationalize(equation, {}, true);
-      result = rat.coefficients;
+      const rationalizedEquation = m.rationalize(equation, {}, true);
+      return rationalizedEquation.coefficients;
     } catch (e) {}
   }
 
-  result = result.length === 0 ? [1, 0] : result;
-
-  return result;
+  return [1, 0];
 };
 
-export const setXToOne = (equation: any, unknownName: string) =>
+export const setXToOne = (equation: any, variableName: string) =>
   equation.transform(function (node, path, parent) {
-    if (node.isSymbolNode && node.name === unknownName) {
+    if (node.isSymbolNode && node.name === variableName) {
       return new m.ConstantNode(1);
     }
 
@@ -127,16 +119,16 @@ export const solveLinearEquation = (coefficients: number[]) => {
   return result;
 };
 
-export const equationsHaveTheSameUnknowns = (
-  firstEquationUnknowns: string[],
-  secondEquationUnknowns: string[]
+export const equationsHaveTheSameVariables = (
+  firstEquationVariables: string[],
+  secondEquationVariables: string[]
 ) => {
   return (
-    Array.isArray(firstEquationUnknowns) &&
-    Array.isArray(secondEquationUnknowns) &&
-    firstEquationUnknowns.length === secondEquationUnknowns.length &&
-    firstEquationUnknowns.every(
-      (unknonwn, index) => unknonwn === secondEquationUnknowns[index]
+    Array.isArray(firstEquationVariables) &&
+    Array.isArray(secondEquationVariables) &&
+    firstEquationVariables.length === secondEquationVariables.length &&
+    firstEquationVariables.every(
+      (variable, index) => variable === secondEquationVariables[index]
     )
   );
 };
