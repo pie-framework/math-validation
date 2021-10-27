@@ -1,6 +1,6 @@
 export default {
   mode: "symbolic",
-  only: true,
+//only: true,
   // equivalence is true when it should not be for for quadratic equations
   tests: [
     {
@@ -8,8 +8,12 @@ export default {
       eq: ["2x^2-14x+20=0"],
     },
     {
+    //  only:true,
       target: "x^2 + 3x +2 = 5x +10",
-      eq: ["(x+2)(x-4)=0", "x^2-4x+2x-8=0"],
+      eq: [
+        "(x+2)(x-4)=0",
+         "x^2-4x+2x-8=0"
+        ],
       ne: [
         "(x+1)(x-4)=0",
         "(x)(x-4)=0",

@@ -8,6 +8,7 @@ import {
   setXToOne,
   transformEqualityInExpression,
   expressionsCanBeCompared,
+  solveQuadraticEquation,
 } from "./utils";
 
 const m: any = mathjs;
@@ -47,14 +48,28 @@ export const compareEquations = (
       firstEquationCoefficients = getCoefficients(firstExpression);
       secondEquationCoefficients = getCoefficients(secondExpression);
 
-      const solutionForFirstEquation = solveLinearEquation(
+      // check for second-order polynomial equation such as ax^2 + bx + c = 0 for x, where a is not zero
+      if ( firstEquationCoefficients.length === 3 && secondEquationCoefficients.length === 3 && !isInequality && firstEquationCoefficients[0] !== 0 ) {
+        const rootsFirstEquation = solveQuadraticEquation(
+          firstEquationCoefficients
+        );
+
+         const rootsSecondEquation = solveQuadraticEquation(
+          secondEquationCoefficients
+        );
+
+        return rootsFirstEquation.toString() === rootsSecondEquation.toString()
+      }
+
+      // solve linear equations
+       const solutionForFirstEquation = solveLinearEquation(
         firstEquationCoefficients
       );
-      const solutionForSecondEquation = solveLinearEquation(
+       const solutionForSecondEquation = solveLinearEquation(
         secondEquationCoefficients
       );
 
-      equivalence = solutionForFirstEquation === solutionForSecondEquation;
+      equivalence = solutionForFirstEquation === solutionForSecondEquation && solutionForFirstEquation !== undefined;
     }
 
     // if both equations are linear in two variabled then we give value "1" for both "x". Doing this we get a linear equation in one variable "y". Then we solve "y" for both. If y has the same value then equations are equivalent
