@@ -88,12 +88,13 @@ export const setXToOne = (equation: any, variableName: string) =>
   });
 
 // quadratic equation solver for a second-order polynomial equation such as ax^2 + bx + c = 0 for x, where a is not zero
+// quadratic formula
 export const solveQuadraticEquation = (coefficients: number[]) => {
-  const [a,b,c] = coefficients;
-  const root = Math.sqrt(b * b - (4 * a * c));
-  
-return [(-b + root) / (2 * a), (-b - root) / (2 * a)].sort()
-}
+  const [a, b, c] = coefficients;
+  const root = Math.sqrt(b * b - 4 * a * c);
+
+  return [(-b + root) / (2 * a), (-b - root) / (2 * a)].sort();
+};
 
 // solve x
 export const solveLinearEquation = (coefficients: number[]) => {
