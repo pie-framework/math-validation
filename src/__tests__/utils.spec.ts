@@ -1,3 +1,4 @@
+import math from "mathjs";
 import { AstToMathJs } from "../conversion/ast-to-mathjs";
 import { LatexToAst } from "../conversion/latex-to-ast";
 import { simplify } from "../symbolic";
@@ -7,6 +8,7 @@ import {
   getCoefficients,
   setXToOne,
   solveLinearEquation,
+  solveQuadraticEquation,
   expressionsCanBeCompared,
   transformEqualityInExpression,
 } from "../symbolic/utils";
@@ -169,6 +171,27 @@ describe("solveLinearEquation", () => {
     const result = solveLinearEquation(coefficients);
 
     expect(result).toEqual(xValue);
+  });
+});
+
+describe.only("solveQuadraticEquation", () => {
+  it.each`
+    coefficients  | roots
+    ${[14, -9, 1]}     | ${[2, 7]}
+    ${[-3, 2, 8]}     | ${[-3/4, 1/2]}
+    ${[8, 6, 2]}  | ${[NaN,NaN]}
+    ${[6, 5, 1]}         | ${[-2,-3]}
+    ${[3, -7, 2]} | ${[1/2,3]}
+    ${[1, 3, 2]}   | ${[-0.5, -1]}
+    ${[-3, 2, 1]}   | ${[-3, 1]}
+    ${[-9, 0, 1 ]}   | ${[-3, 3]}
+    ${[-8, -5, 3 ]}   | ${[(5-Math.sqrt(25-12*(-8)))/6, (5+Math.sqrt(25-12*(-8)))/6]}
+
+    ${[17, -5, 4 ]}   | ${[]}
+  `("$coefficients => $roots", ({ coefficients, roots }) => {
+    const result = solveQuadraticEquation(coefficients);
+
+    expect(result.toString()).toEqual(roots.toString());
   });
 });
 

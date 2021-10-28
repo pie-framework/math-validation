@@ -74,10 +74,14 @@ export default {
         // distributive property
         "z(z-1)-1(z-1)=0",
         "z*z+z*(-1)-1(z-1)=0",
-        "z*z+z*(-1)(-1z)-1*(-1)=0",
+        "z*z+z*(-1)-1z-1*(-1)=0",
         "z^2-2z+1=0"
       ],
-    
+    },
+    {
+      // they both have complex solutions but they should not be equal
+      target: "4x^2-5x+17=0",
+      ne: [ "2x^2+6x+8=0"],
     },
   ],
 };
