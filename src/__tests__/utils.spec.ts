@@ -1,18 +1,77 @@
 import { AstToMathJs } from "../conversion/ast-to-mathjs";
 import { LatexToAst } from "../conversion/latex-to-ast";
+import { simplify } from "../symbolic";
+
 import {
-  getUnknowns,
+  getVariables,
   getCoefficients,
   setXToOne,
   solveLinearEquation,
-} from "../symbolic/compare-equations";
+  expressionsCanBeCompared,
+  transformEqualityInExpression,
+} from "../symbolic/utils";
 
 const lta = new LatexToAst();
 const atm = new AstToMathJs();
 
-describe("getUnknowns", () => {
+describe("expressionsCanBeCompared", () => {
+  it('equations: "x = x" and "2=2" - should return false: equations can not be compared because second equation does not have a variable', () => {
+    const firstEquation = atm.convert(lta.convert("x=x"));
+    const secondEquation = atm.convert(lta.convert("2=2"));
+    const result = expressionsCanBeCompared(firstEquation, secondEquation);
+
+    expect(result).toEqual(false);
+  });
+
+  it('equations: "x = x" and "\\log x=2" - should return false: equations can not be compared because second equation contains a function', () => {
+    const firstEquation = atm.convert(lta.convert("x=x"));
+    const secondEquation = atm.convert(lta.convert("\\log x=2"));
+    const result = expressionsCanBeCompared(firstEquation, secondEquation);
+
+    expect(result).toEqual(false);
+  });
+
+  it('equations: "5z = 0" and "2y+3=m" - should return true: both equations have variables and does not contain functions', () => {
+    const firstEquation = atm.convert(lta.convert("x=x"));
+    const secondEquation = atm.convert(lta.convert("2y+3=m"));
+    const result = expressionsCanBeCompared(firstEquation, secondEquation);
+
+    expect(result).toEqual(true);
+  });
+
+  it('equations: "x" and "y" - should return true: both expressions have variables and does not contain functions', () => {
+    const firstEquation = atm.convert(lta.convert("x"));
+    const secondEquation = atm.convert(lta.convert("y"));
+    const result = expressionsCanBeCompared(firstEquation, secondEquation);
+
+    expect(result).toEqual(true);
+  });
+});
+
+describe("transformEqualityInExpression", () => {
   it.each`
-    expression               | unknowns
+    equation             | transformedExpression
+    ${"x+5= 2x+3"}       | ${"2-x"}
+    ${"5-2(3-m)= 4m+10"} | ${"-5-4m-2(3-m)"}
+    ${"a=2b+3"}          | ${"a-2b-3"}
+  `(
+    "$equation => $transformedExpression",
+    ({ equation, transformedExpression }) => {
+      const equationToTransform = atm.convert(lta.convert(equation));
+      const expression = simplify(
+        atm.convert(lta.convert(transformedExpression))
+      );
+
+      const result = transformEqualityInExpression(equationToTransform);
+
+      expect(result.equals(expression)).toEqual(true);
+    }
+  );
+});
+
+describe("getVariables", () => {
+  it.each`
+    expression               | variables
     ${"x"}                   | ${["x"]}
     ${"x +1"}                | ${["x"]}
     ${"((x^2 + x) / x) - 1"} | ${["x"]}
@@ -21,11 +80,11 @@ describe("getUnknowns", () => {
     ${"((y^2 + z) / x) - 1"} | ${["x", "y", "z"]}
     ${"109h"}                | ${["h"]}
     ${"m+n+10"}              | ${["m", "n"]}
-  `("$expression => $unknowns", ({ expression, unknowns }) => {
+  `("$expression => $variables", ({ expression, variables }) => {
     const equation = atm.convert(lta.convert(expression));
-    const unknownsName = getUnknowns(equation);
+    const variablesName = getVariables(equation);
 
-    expect(unknownsName).toEqual(unknowns);
+    expect(variablesName).toEqual(variables);
   });
 });
 
@@ -33,18 +92,19 @@ describe("getCoefficients", () => {
   it.each`
     expression                     | coefficients
     ${"x+0"}                       | ${[0, 1]}
+    ${"2x^2 = 2x"}                 | ${[1, 0]}
     ${"x +1"}                      | ${[1, 1]}
     ${"((x^2 + x) / x) - 1"}       | ${[0, 0, 1]}
-    ${"1+2"}                       | ${[1, 0]}
-    ${"a +1+c"}                    | ${[1, 0]}
+    ${"1+2"}                       | ${[]}
+    ${"a +1+c"}                    | ${[]}
     ${"y^2+5y - 1"}                | ${[-1, 5, 1]}
     ${"2y^2+4y"}                   | ${[0, 4, 2]}
     ${"109h"}                      | ${[0, 109]}
-    ${"m+n+10"}                    | ${[1, 0]}
+    ${"m+n+10"}                    | ${[]}
     ${"x-x"}                       | ${[0, 0]}
     ${"x + 5 - 3 + x - 6 - x + 2"} | ${[-2, 1]}
     ${"2x-x"}                      | ${[0, 1]}
-    ${"x - x - 2"}                 | ${[1, 0]}
+    ${"x - x - 2"}                 | ${[]}
   `("$expression => $coefficients", ({ expression, coefficients }) => {
     const equation = atm.convert(lta.convert(expression));
     const coefficientsList = getCoefficients(equation);
@@ -61,11 +121,11 @@ describe("getCoefficients", () => {
     expect(coefficientsList).toEqual([0, 0]);
   });
 
-  it('equation: "1 = -2" - if equation has no coefficient for x it will return coefficients [1, 0]', () => {
+  it('equation: "1 = -2" - if equation has no coefficient for x but can be rationalized it will return an empty array', () => {
     const equation = atm.convert(lta.convert("1+2"));
     const coefficientsList = getCoefficients(equation);
 
-    expect(coefficientsList).toEqual([1, 0]);
+    expect(coefficientsList).toEqual([]);
   });
 
   it('equation: "m + n = - 2" - if equation has more than one variable, will return coefficients [1, 0]', () => {
@@ -148,7 +208,7 @@ describe("solveLinearEquation", () => {
     expect(result).toEqual(-Infinity);
   });
 
-  it('equation: "2x^2 = 2x" - has no solution', () => {
+  it('equation: "2y^2+4y" - solution is -2', () => {
     const coefficients = [0, 4, 2];
     const result = solveLinearEquation(coefficients);
 

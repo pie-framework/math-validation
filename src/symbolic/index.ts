@@ -3,6 +3,7 @@ import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
 import { sort } from "../node-sort";
 import { compareEquations } from "./compare-equations";
+import { compareCompoundInequations } from "./compare-compound-inequations";
 
 const m: any = mathjs;
 const log = logger("mv:symbolic");
@@ -74,8 +75,6 @@ const normalize = (a: string | MathNode | any) => {
       containsArrayNode = true;
       node.items = node.items.map((item) => simplify(item));
     }
-
-    return node;
   });
 
   if (r.fn === "equal") {
@@ -149,9 +148,59 @@ export const isMathEqual = (a: any, b: any) => {
   if (equality) {
     return true;
   }
+
   // if both expressions are equations
   if (as.fn === "equal" && bs.fn === "equal") {
-    equality = compareEquations(as, bs);
+    return compareEquations(as, bs, false);
+  }
+
+  // if both expressions are inequalities treat greater sign as equal sign
+  if (
+    (as.fn === "larger" && bs.fn === "larger") ||
+    (as.fn === "largerEq" && bs.fn === "largerEq")
+  ) {
+    // solving a 2 way inequality is the same as solving an equation, we can treat the greater sign as an equal sign
+    // the difference is that solution should be plotted on a number line (or interval)
+    // if we have the same signs and the same direction, the interval will always be the same, starting with the solution
+    as.fn = "equal";
+    bs.fn = "equal";
+    as.op = "=";
+    bs.op = "=";
+
+    return compareEquations(as, bs, true);
+  }
+
+  // check for compound inequalities/3-way inequalities
+  if (
+    //@ts-ignore
+    as?.conditionals?.length === bs?.conditionals?.length &&
+    //@ts-ignore
+    as?.conditionals?.length === 2 &&
+     //@ts-ignore
+    as?.conditionals?.toString() === bs?.conditionals?.toString()
+  ) {
+    const params = [
+      "smaller",
+      "smallerEq",
+      "larger",
+      "largerEq",
+      "equal",
+      "unequal",
+    ];
+
+    const paramsIncludedA = params.some((param) =>
+      //@ts-ignore
+      as.conditionals.includes(param)
+    );
+
+    const paramsIncludedB = params.some((param) =>
+      //@ts-ignore
+      bs.conditionals.includes(param)
+    );
+
+    if (paramsIncludedA && paramsIncludedB) {
+      return compareCompoundInequations(as, bs);
+    }
   }
 
   return equality;
