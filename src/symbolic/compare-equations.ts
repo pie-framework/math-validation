@@ -1,149 +1,39 @@
 import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
-import { isMathEqual, simplify } from ".";
+import {
+  getVariables,
+  equationsHaveTheSameVariables,
+  getCoefficients,
+  solveLinearEquation,
+  setXToOne,
+  transformEqualityInExpression,
+  expressionsCanBeCompared,
+} from "./utils";
 
 const m: any = mathjs;
 
-// check if equation is valid and find out the number of unknowns and their name
-export const getUnknowns = (equation: MathNode) => {
-  let variableNames: string[] = [];
-
-  equation.traverse(function (node, path, parent) {
-    if (
-      node.isSymbolNode &&
-      node?.name.length === 1 &&
-      !variableNames.includes(node.name)
-    ) {
-      variableNames.push(node.name);
-    }
-  });
-
-  variableNames.sort();
-
-  return variableNames;
-};
-
-export const getCoefficients = (equation: MathNode) => {
-  let result: number[] = [];
-
-  try {
-    const rationalizedEquation = m.rationalize(equation, {}, true);
-    result = rationalizedEquation.coefficients;
-  } catch (e) {}
-
-  result = result.length === 0 ? [1, 0] : result;
-
-  return result;
-};
-
-export const setXToOne = (equation: any, unknownName: string) => {
-  let result: MathNode;
-
-  result = equation.transform(function (node, path, parent) {
-    if (node.isSymbolNode && node.name === unknownName) {
-
-      return new m.ConstantNode(1);
-    } else {
-
-      return node;
-    }
-  });
-
-  return result;
-};
-
-// solve x
-export const solveLinearEquation = (coefficients: number[]) => {
-  let result: number;
-
-  // TO DO: solve quadratic equation
-  if (coefficients.length === 3 && coefficients[0] === 0 ) {
-    coefficients = coefficients.splice(1, 2);
-  }
-
-  if (coefficients.length === 2) {
-    if (coefficients[0] === 0 && coefficients[1] === 0) {
-      result = Infinity;
-    } else if (coefficients[0] === 0) {
-      result = 0;
-    } else {
-      // equation with no solution : if coefficient for x is 0 => division by zero => result == -Infinity
-      result = m.divide(coefficients[0], -1 * coefficients[1]);
-    }
-  }
-
-  return result;
-};
-
-export const equationsHaveTheSameUnknowns = (
-  firstEquationUnknowns: string[],
-  secondEquationUnknowns: string[]
-) => {
-  return (
-    Array.isArray(firstEquationUnknowns) &&
-    Array.isArray(secondEquationUnknowns) &&
-    firstEquationUnknowns.length === secondEquationUnknowns.length &&
-    firstEquationUnknowns.every(
-      (unknonwn, index) => unknonwn === secondEquationUnknowns[index]
-    )
-  );
-};
-
 export const compareEquations = (
   firstEquation: MathNode,
-  secondEquation: MathNode
+  secondEquation: MathNode,
+  isInequality: boolean
 ) => {
-  let noFunctionOrArray: boolean = true;
-  let firstSymbolNode: boolean = false;
-  let symbolNode: boolean = false;
   let equivalence: boolean = false;
 
-  firstEquation.traverse(function (node, path, parent) {
-    noFunctionOrArray =
-      noFunctionOrArray || node.isFunctionNode || node.isArrayNode;
-    firstSymbolNode = firstSymbolNode || node.isSymbolNode;
+  if (expressionsCanBeCompared(firstEquation, secondEquation)) {
+    let firstExpression = transformEqualityInExpression(firstEquation);
+    let secondExpression = transformEqualityInExpression(secondEquation);
 
-    return node;
-  });
-
-  secondEquation.traverse(function (node, path, parent) {
-    if (node.isFunctionNode || node.isArrayNode) {
-      noFunctionOrArray = false;
-    }
-
-    if (node.isSymbolNode && firstSymbolNode) symbolNode = true;
-
-    return node;
-  });
-
-  // move the terms of the equations to the left hand side
-  if (noFunctionOrArray && symbolNode) {
-    let firstExpression = new m.OperatorNode(
-      "-",
-      "subtract",
-      firstEquation.args
-    );
-    let secondExpression = new m.OperatorNode(
-      "-",
-      "subtract",
-      secondEquation.args
-    );
-
-    // remove added/subtracted numbers/variables from both sides of the equation
-    firstExpression = simplify(firstExpression);
-    secondExpression = simplify(secondExpression);
-
-    if (isMathEqual(firstExpression, secondExpression)) {
+    if (firstExpression.equals(secondExpression)) {
       return true;
     }
 
-    let firstEquationUnknownsName = getUnknowns(firstExpression);
-    let secondEquationUnknownsName = getUnknowns(secondExpression);
+    let firstEquationVariablesName = getVariables(firstExpression);
+    let secondEquationVariablesName = getVariables(secondExpression);
 
     if (
-      !equationsHaveTheSameUnknowns(
-        firstEquationUnknownsName,
-        secondEquationUnknownsName
+      !equationsHaveTheSameVariables(
+        firstEquationVariablesName,
+        secondEquationVariablesName
       )
     ) {
       return false;
@@ -153,18 +43,23 @@ export const compareEquations = (
     let secondEquationCoefficients: number[];
 
     // if both equations are linear in one variable then we solve "x" for both. If x has the same value then equations are equivalent
-    if (firstEquationUnknownsName.length === 1) {
+    if (firstEquationVariablesName.length === 1) {
       firstEquationCoefficients = getCoefficients(firstExpression);
       secondEquationCoefficients = getCoefficients(secondExpression);
 
-      equivalence =
-        solveLinearEquation(firstEquationCoefficients) ===
-        solveLinearEquation(secondEquationCoefficients);
+      const solutionForFirstEquation = solveLinearEquation(
+        firstEquationCoefficients
+      );
+      const solutionForSecondEquation = solveLinearEquation(
+        secondEquationCoefficients
+      );
+
+      equivalence = solutionForFirstEquation === solutionForSecondEquation;
     }
 
     // if both equations are linear in two variabled then we give value "1" for both "x". Doing this we get a linear equation in one variable "y". Then we solve "y" for both. If y has the same value then equations are equivalent
-    if (firstEquationUnknownsName.length === 2) {
-      let x = firstEquationUnknownsName[0];
+    if (firstEquationVariablesName.length === 2) {
+      let x = firstEquationVariablesName[0];
 
       // solve expression for x=1
       let expraNoX = setXToOne(firstExpression, x);
@@ -181,6 +76,23 @@ export const compareEquations = (
 
       // if y has the same value, for the same x then the expressions should be equivalent
       equivalence = yFromFirstExpression === yFromSecondExpression;
+    }
+
+    // determine equivalence between 2-way inequalities with 1 or 2 variables:
+    // we treat 2-way inequalities the same way as linear equations in 1 or 2 variables; we find out the solutions that solve the inequality then compare them
+    // we have one distinct case, when multiplying both parts of an inequality with a negative number, the sign must change direction
+    if (equivalence && isInequality) {
+      // check if direction should be changed
+      return !(
+        (m.isPositive(firstEquationCoefficients[0]) &&
+          m.isNegative(firstEquationCoefficients[1]) &&
+          m.isNegative(secondEquationCoefficients[0]) &&
+          m.isPositive(secondEquationCoefficients[1])) ||
+        (m.isNegative(firstEquationCoefficients[0]) &&
+          m.isPositive(firstEquationCoefficients[1]) &&
+          m.isPositive(secondEquationCoefficients[0]) &&
+          m.isNegative(secondEquationCoefficients[1]))
+      );
     }
   }
 
