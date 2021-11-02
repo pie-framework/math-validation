@@ -1,9 +1,10 @@
 import { mathjs } from "../mathjs";
-import { MathNode } from "mathjs";
+import { MathNode, sec, sqrt } from "mathjs";
 import { simplify as customSimplify } from "./";
 const { simplify } = mathjs;
 
 const m: any = mathjs;
+const complex = m.complex;
 
 // expressions can be compared if we have at least one symbol node and has no function node or array
 export const expressionsCanBeCompared = (
@@ -91,9 +92,24 @@ export const setXToOne = (equation: any, variableName: string) =>
 // quadratic formula
 export const solveQuadraticEquation = (coefficients: number[]) => {
   const [c, b, a] = coefficients;
-  const root = Math.sqrt(b * b - 4 * a * c);
+  const discriminant = (b*b) - 4 * a * c
 
-  return [(-b + root) / (2 * a), (-b - root) / (2 * a)].sort();
+  const addDiscriminant =  m.compile('(-b+sqrt(discriminant))/(2*a)')
+  const subtractDiscriminant = m.compile('(-b-sqrt(discriminant))/(2*a)')
+
+ const firstRoot = addDiscriminant.evaluate({discriminant:discriminant, a:a, b:b})
+ const secondRoot = subtractDiscriminant.evaluate({discriminant:discriminant, a:a, b:b})
+
+ console.log(firstRoot, "first root")
+ console.log(secondRoot, "second Root")
+
+ console.log(!firstRoot.im, "no imag")
+
+ if (!firstRoot.im) {
+   return[{re:firstRoot, im:0},{re:secondRoot, im:0}].sort()
+ }
+
+  return [{re:firstRoot.re, im:firstRoot.im},{re:secondRoot.re,im:secondRoot.im}].sort();
 };
 
 // solve x

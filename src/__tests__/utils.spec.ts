@@ -174,23 +174,22 @@ describe("solveLinearEquation", () => {
   });
 });
 
-describe.only("solveQuadraticEquation", () => {
+describe("solveQuadraticEquation", () => {
   it.each`
-    coefficients  | roots
-    ${[14, -9, 1]}     | ${[2, 7]}
-    ${[-3, 2, 8]}     | ${[-3/4, 1/2]}
-    ${[8, 6, 2]}  | ${[NaN,NaN]}
-    ${[6, 5, 1]}         | ${[-2,-3]}
-    ${[3, -7, 2]} | ${[1/2,3]}
-    ${[1, 3, 2]}   | ${[-0.5, -1]}
-    ${[-3, 2, 1]}   | ${[-3, 1]}
-    ${[-9, 0, 1 ]}   | ${[-3, 3]}
-    ${[-8, -5, 3 ]}   | ${[(5-Math.sqrt(25-12*(-8)))/6, (5+Math.sqrt(25-12*(-8)))/6]}
-
-    ${[17, -5, 4 ]}   | ${[]}
+    coefficients   | roots
+    ${[14, -9, 1]} | ${[{ re: 2, im: 0 }, { re: 7, im: 0 }]}
+    ${[-3, 2, 8]}  | ${[{ re: -3 / 4, im: 0 }, { re: 1 / 2, im: 0 }]}
+    ${[8, 6, 2]}   | ${[{ re: -1.5, im: 5.291502622129181 }, { re: -1.5, im: 5.291502622129181 }]}
+    ${[6, 5, 1]}   | ${[{ re: -2, im: 0 }, { re: -3, im: 0 }]}
+    ${[3, -7, 2]}  | ${[{ re: 1 / 2, im: 0 }, { re: 3, im: 0 }]}
+    ${[1, 3, 2]}   | ${[{ re: -0.5, im: 0 }, { re: -1, im: 0 }]}
+    ${[-3, 2, 1]}  | ${[{ re: -3, im: 0 }, { re: 0, im: 1 }]}
+    ${[-9, 0, 1]}  | ${[{ re: -3, im: 0 }, { re: 3, im: 0 }]}
+    ${[-8, -5, 3]} | ${[{ re: (5 - Math.sqrt(25 - 12 * -8)) / 6, im: 0 }, { re: (5 + Math.sqrt(25 - 12 * -8)) / 6, im: 0 }]}
+    ${[17, -5, 4]} | ${[{ re: 0.625, im: 15.716233645501712 }, { re: 0.625, im: 15.716233645501712 }]}
   `("$coefficients => $roots", ({ coefficients, roots }) => {
     const result = solveQuadraticEquation(coefficients);
-
+    
     expect(result.toString()).toEqual(roots.toString());
   });
 });

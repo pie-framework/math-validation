@@ -1,5 +1,5 @@
 import { mathjs } from "../mathjs";
-import { MathNode } from "mathjs";
+import  {   MathNode } from "mathjs";
 import {
   getVariables,
   equationsHaveTheSameVariables,
@@ -54,15 +54,49 @@ export const compareEquations = (
         !isInequality &&
         firstEquationCoefficients[0] !== 0
       ) {
-        const rootsFirstEquation = solveQuadraticEquation(
+        let rootsFirstEquation = solveQuadraticEquation(
           firstEquationCoefficients
         );
 
-        const rootsSecondEquation = solveQuadraticEquation(
+        
+
+        let rootsSecondEquation = solveQuadraticEquation(
           secondEquationCoefficients
         );
 
-        return rootsFirstEquation.toString() === rootsSecondEquation.toString();
+
+    
+        let firstRoot: MathNode= m.complex(rootsFirstEquation);
+
+        let secondRoot: MathNode = m.complex(rootsSecondEquation)
+
+       console.log(rootsFirstEquation, "first rots")
+       console.log(rootsSecondEquation, "second roots")
+
+     if(rootsFirstEquation[0].im === 0 && rootsFirstEquation[1].im === 0) {
+       console.log("imaginary is 0")
+       return firstRoot[0].equals(secondRoot[0]) && firstRoot[1].equals(secondRoot[1]) || firstRoot[0].equals(secondRoot[1]) && firstRoot[1].equals(secondRoot[0]);
+     }
+
+        console.log(rootsFirstEquation[0].re, "-----root1")
+        console.log(rootsSecondEquation[0].re, "------rooooot2")
+        console.log((rootsFirstEquation[0].re)===(rootsSecondEquation[0].re))
+
+        console.log(rootsFirstEquation[1].re, "-----root1")
+        console.log(rootsSecondEquation[1].re, "------rooooot2")
+        console.log((rootsFirstEquation[1].re)===(rootsSecondEquation[1].re))
+
+        console.log(rootsFirstEquation[0].im, "-----root1")
+        console.log(rootsSecondEquation[0].im, "------rooooot2")
+        console.log((rootsFirstEquation[0].im)===(rootsSecondEquation[0].im))
+
+        console.log(rootsFirstEquation[1].im, "-----root1")
+        console.log(rootsSecondEquation[1].im, "------rooooot2")
+        console.log((rootsFirstEquation[1].im)===(rootsSecondEquation[1].im))
+
+        
+         //@ts-ignore
+        return (rootsFirstEquation[0].re)===(rootsSecondEquation[0].re) && (rootsFirstEquation[1].re)===(rootsSecondEquation[1].re) && (rootsFirstEquation[0].im.toFixed(13))===(rootsSecondEquation[0].im.toFixed(13)) && (rootsFirstEquation[1].im.toFixed(13))===(rootsSecondEquation[1].im.toFixed(13));
       }
 
       // if both equations are linear in one variable then we solve "x" for both. If x has the same value then equations are equivalent
