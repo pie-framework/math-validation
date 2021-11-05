@@ -47,25 +47,37 @@ export const compareEquations = (
       firstEquationCoefficients = getCoefficients(firstExpression);
       secondEquationCoefficients = getCoefficients(secondExpression);
 
+
+      console.log(firstEquationCoefficients, "first coefficients")
+      console.log(secondEquationCoefficients, "secondEquationCoefficients coefficients")
+
+
+
       // check for second-order polynomial equation such as ax^2 + bx + c = 0 where a is not zero
       if (
         firstEquationCoefficients.length === 3 &&
         secondEquationCoefficients.length === 3 &&
         !isInequality &&
-        firstEquationCoefficients[0] !== 0
+        firstEquationCoefficients[0] !== 0 || (firstEquationCoefficients.length === 4 && firstEquationCoefficients[0]===0 && secondEquationCoefficients[0] ===0)
       ) {
+        console.log(firstEquationCoefficients,"firstEquationCoefficients")
+        console.log(secondEquationCoefficients,"secondEquationCoefficients")
+        if (firstEquationCoefficients[0]===0){
+          firstEquationCoefficients=firstEquationCoefficients.splice(1,3)
+          secondEquationCoefficients=secondEquationCoefficients.splice(1,3)
+        }
+
+        console.log(firstEquationCoefficients,"firstEquationCoefficients")
+        console.log(secondEquationCoefficients,"secondEquationCoefficients")
+
         let rootsFirstEquation = solveQuadraticEquation(
           firstEquationCoefficients
         );
-
-        
 
         let rootsSecondEquation = solveQuadraticEquation(
           secondEquationCoefficients
         );
 
-
-    
         let firstRoot: MathNode= m.complex(rootsFirstEquation);
 
         let secondRoot: MathNode = m.complex(rootsSecondEquation)

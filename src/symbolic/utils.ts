@@ -1,10 +1,9 @@
 import { mathjs } from "../mathjs";
-import { MathNode, sec, sqrt } from "mathjs";
+import { MathNode } from "mathjs";
 import { simplify as customSimplify } from "./";
 const { simplify } = mathjs;
 
 const m: any = mathjs;
-const complex = m.complex;
 
 // expressions can be compared if we have at least one symbol node and has no function node or array
 export const expressionsCanBeCompared = (
@@ -63,6 +62,8 @@ export const getCoefficients = (equation: MathNode) => {
   } catch (e) {
     // rationalize may fail if variable is isolated in a fraction
     // we give it another try to rationalize after applying a new round of simplify to separate the variable
+
+    console.log(equation.toString(), "equation before simplify");
     equation = simplify(equation, [
       { l: "(n1-n2)/n3", r: "n1/n3-n2/n3" },
       { l: "(n1+n2)/n3", r: "n1/n3+n2/n3" },
@@ -70,6 +71,13 @@ export const getCoefficients = (equation: MathNode) => {
       { l: "(n1+n2)*n3/n4", r: "(n1*n3)/n4+(n2*n3)/n4" },
     ]);
 
+    //   console.log(equation.toString(), "equation at firts")
+    //   const node = new m.SymbolNode("x")
+    //   const squareNode = new m.OperatorNode("*", "multiply", [node,node])
+    //   equation = new m.OperatorNode("*","multiply",[equation,squareNode])
+    //   console.log(equation.toString(), "constructed equation")
+    //  equation = customSimplify(equation)
+    //   console.log(equation.toString(), "result")
     try {
       const rationalizedEquation = m.rationalize(equation, {}, true);
       return rationalizedEquation.coefficients;
@@ -91,25 +99,35 @@ export const setXToOne = (equation: any, variableName: string) =>
 // quadratic equation solver for a second-order polynomial equation such as ax^2 + bx + c = 0 for x, where a is not zero
 // quadratic formula
 export const solveQuadraticEquation = (coefficients: number[]) => {
+  console.log(coefficients, "coefficients");
   const [c, b, a] = coefficients;
-  const discriminant = (b*b) - 4 * a * c
+  const discriminant = b * b - 4 * a * c;
 
-  const addDiscriminant =  m.compile('(-b+sqrt(discriminant))/(2*a)')
-  const subtractDiscriminant = m.compile('(-b-sqrt(discriminant))/(2*a)')
+  const addDiscriminant = m.compile("(-b+sqrt(discriminant))/(2*a)");
+  const subtractDiscriminant = m.compile("(-b-sqrt(discriminant))/(2*a)");
 
- const firstRoot = addDiscriminant.evaluate({discriminant:discriminant, a:a, b:b})
- const secondRoot = subtractDiscriminant.evaluate({discriminant:discriminant, a:a, b:b})
+  const firstRoot = addDiscriminant.evaluate({
+    discriminant: discriminant,
+    a: a,
+    b: b,
+  });
+  const secondRoot = subtractDiscriminant.evaluate({
+    discriminant: discriminant,
+    a: a,
+    b: b,
+  });
 
- console.log(firstRoot, "first root")
- console.log(secondRoot, "second Root")
+  if (!firstRoot.im) {
+    return [
+      { re: firstRoot, im: 0 },
+      { re: secondRoot, im: 0 },
+    ].sort();
+  }
 
- console.log(!firstRoot.im, "no imag")
-
- if (!firstRoot.im) {
-   return[{re:firstRoot, im:0},{re:secondRoot, im:0}].sort()
- }
-
-  return [{re:firstRoot.re, im:firstRoot.im},{re:secondRoot.re,im:secondRoot.im}].sort();
+  return [
+    { re: firstRoot.re, im: firstRoot.im },
+    { re: secondRoot.re, im: secondRoot.im },
+  ].sort();
 };
 
 // solve x
