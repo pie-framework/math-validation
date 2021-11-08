@@ -1,7 +1,6 @@
 export default {
   mode: "symbolic",
 // only: true,
-  // equivalence is true when it should not be for for quadratic equations
   tests: [
     {
       target: "x^2-7x+10=0",
@@ -9,7 +8,10 @@ export default {
     },
     {
       target: "5x^2+20x+32=0",
-      eq: ["10x^2+40x+64=0", "15x^2+60x+96=0"],
+      eq: [
+        "10x^2+40x+64=0", 
+        "15x^2+60x+96=0"
+      ],
     },
     {
       target: "x^2 + 3x +2 = 5x +10",
@@ -40,10 +42,11 @@ export default {
       ],
     },
     {
+    //  only:true,
       target: "3x^2-18x+14=0",
       eq: [
         "3(x^2-6x)+14=0",
-        //"3(x^2-6x +3^2-3^2)=-14",
+        "3(x^2-6x +3^2-3^2)=-14",
         "3(x^2-6x+3^2)-3(9)+14=0",
         "3(x-3)^2-13=0",
       ],
@@ -78,7 +81,7 @@ export default {
       eq: [
         // expand square
         "(u+1)(u+1)=0",
-        // distribute
+         // distributive property
         "u(u+1)+1(u+1)=0",
         "u^2+u+1(u+1)=0",
       ],

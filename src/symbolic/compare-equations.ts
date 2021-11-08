@@ -24,6 +24,10 @@ export const compareEquations = (
     let firstExpression = transformEqualityInExpression(firstEquation);
     let secondExpression = transformEqualityInExpression(secondEquation);
 
+    console.log(firstExpression.toString(), "firstExpression")
+    console.log(secondExpression.toString(), "secondExpression")
+
+
     if (firstExpression.equals(secondExpression)) {
       return true;
     }
@@ -47,11 +51,8 @@ export const compareEquations = (
       firstEquationCoefficients = getCoefficients(firstExpression);
       secondEquationCoefficients = getCoefficients(secondExpression);
 
-
       console.log(firstEquationCoefficients, "first coefficients")
       console.log(secondEquationCoefficients, "secondEquationCoefficients coefficients")
-
-
 
       // check for second-order polynomial equation such as ax^2 + bx + c = 0 where a is not zero
       if (
@@ -67,8 +68,8 @@ export const compareEquations = (
           secondEquationCoefficients=secondEquationCoefficients.splice(1,3)
         }
 
-        console.log(firstEquationCoefficients,"firstEquationCoefficients")
-        console.log(secondEquationCoefficients,"secondEquationCoefficients")
+        console.log(firstEquationCoefficients,"firstEquationCoefficients if spliced")
+        console.log(secondEquationCoefficients,"secondEquationCoefficients if spliced")
 
         let rootsFirstEquation = solveQuadraticEquation(
           firstEquationCoefficients

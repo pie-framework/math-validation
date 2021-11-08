@@ -135,10 +135,10 @@ export const isMathEqual = (a: any, b: any) => {
 
   // apply sort if we are not in a relationalNode
   as = a.conditionals ? normalize(a) : sort(normalize(a));
-  //console.log(as.toString(), "as")
+  console.log(as.toString(), "as")
 
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
-  //console.log(bs.toString(), "bs")
+  console.log(bs.toString(), "bs")
 
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 

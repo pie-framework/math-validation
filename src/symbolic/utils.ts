@@ -102,31 +102,53 @@ export const solveQuadraticEquation = (coefficients: number[]) => {
   console.log(coefficients, "coefficients");
   const [c, b, a] = coefficients;
   const discriminant = b * b - 4 * a * c;
+  console.log(discriminant, "discriminant")
+// console.log((-b+m.sqrt(discriminant))/(2*a))
+let addDiscriminant;
+try {
+   addDiscriminant = m.compile(m.fraction((-b+m.sqrt(discriminant)))/(2*a));
+}catch{
+   addDiscriminant = m.compile("(-b+sqrt(discriminant))/(2*a)");
+}
+ 
+  console.log(addDiscriminant, "add discriminant")
 
-  const addDiscriminant = m.compile("(-b+sqrt(discriminant))/(2*a)");
-  const subtractDiscriminant = m.compile("(-b-sqrt(discriminant))/(2*a)");
+  let subtractDiscriminant
 
-  const firstRoot = addDiscriminant.evaluate({
+  try {
+    subtractDiscriminant= m.compile(m.fraction((-b-m.sqrt(discriminant)))/(2*a));
+  } catch {
+    subtractDiscriminant= m.compile("(-b-sqrt(discriminant))/(2*a)");
+  }
+
+  let firstRoot = addDiscriminant.evaluate({
     discriminant: discriminant,
     a: a,
     b: b,
   });
-  const secondRoot = subtractDiscriminant.evaluate({
+
+  console.log(firstRoot, "firstRoot")
+  let secondRoot = subtractDiscriminant.evaluate({
     discriminant: discriminant,
     a: a,
     b: b,
   });
+  console.log(secondRoot, "firstRoot")
 
   if (!firstRoot.im) {
+    firstRoot = Math.round(firstRoot*10000000000)/1000000000000
+    console.log(firstRoot)
+    secondRoot =  Math.round(secondRoot*10000000000)/1000000000000
+    console.log(secondRoot)
     return [
       { re: firstRoot, im: 0 },
-      { re: secondRoot, im: 0 },
+      { re:secondRoot, im: 0 },
     ].sort();
   }
 
   return [
-    { re: firstRoot.re, im: firstRoot.im },
-    { re: secondRoot.re, im: secondRoot.im },
+    { re: Math.round(firstRoot.re*10000000000)/1000000000000, im: Math.round(firstRoot.im*10000000000)/1000000000000 },
+    { re: Math.round(secondRoot.re*10000000000)/1000000000000, im: Math.round(firstRoot.im*10000000000)/1000000000000 },
   ].sort();
 };
 

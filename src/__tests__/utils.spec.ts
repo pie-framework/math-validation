@@ -1,4 +1,3 @@
-import math from "mathjs";
 import { AstToMathJs } from "../conversion/ast-to-mathjs";
 import { LatexToAst } from "../conversion/latex-to-ast";
 import { simplify } from "../symbolic";
