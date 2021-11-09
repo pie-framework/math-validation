@@ -28,7 +28,9 @@ const SIMPLIFY_RULES = [
   { l: "i^2", r: "-1" },
   { l: "pi", r: "3.141592653589793" },
 
-  // perfect square formula:
+  // perfect square formula
+  {l:"n/(n*n1)",r:"1/n1"},
+  {l:"n1/(n(n+1)+1(n+1))", r:"n1/((n+1)^2)"},
   { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
   { l: "tzn(n1, n2)", r: "n1" },
   { l: "n1/(-n2)", r: "-(n1/n2)" },
@@ -81,6 +83,7 @@ const normalize = (a: string | MathNode | any) => {
     r.args = r.args.map((arg) => {
       if (!arg.isFunctionNode && !arg.isArrayNode) {
         try {
+          arg = simplify(arg)
           arg = rationalize(arg, {}, true).expression;
         } catch (e) {
           // ok;

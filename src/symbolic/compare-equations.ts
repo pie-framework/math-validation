@@ -44,8 +44,42 @@ export const compareEquations = (
       return false;
     }
 
+// try {
+//   firstExpression = m.rationalize(firstExpression, {}, true).expression;
+//   secondExpression = m.rationalize(secondExpression, {}, true).expression;
+// } catch {
+
+// }
+    console.log(firstExpression, "firstexpression")
+    console.log(secondExpression, "secondExpression")
+
+let insideExpression: MathNode;
+
+    // if equality is a fraction, use only the nominator 
+    if (firstExpression.fn === "divide") {
+
+     insideExpression = firstExpression.args[0]  
+    console.log(insideExpression, "insideExpression")
+    }
+
+    let testExpression2: MathNode;
+    let insideExpression2: MathNode;
+    if (secondExpression.fn === "divide") {
+       insideExpression2 = secondExpression.args[0]
+      console.log(insideExpression2, "insideExpression2")
+      }
+
+      if (insideExpression && insideExpression2) {
+        firstExpression = insideExpression
+        secondExpression = insideExpression2
+      }
+  
+
     let firstEquationCoefficients: number[];
     let secondEquationCoefficients: number[];
+
+    console.log(firstExpression.toString(), "firstexpresiion")
+    console.log(secondExpression.toString(), "secondExpression")
 
     if (firstEquationVariablesName.length === 1) {
       firstEquationCoefficients = getCoefficients(firstExpression);
@@ -80,7 +114,6 @@ export const compareEquations = (
         );
 
         let firstRoot: MathNode= m.complex(rootsFirstEquation);
-
         let secondRoot: MathNode = m.complex(rootsSecondEquation)
 
        console.log(rootsFirstEquation, "first rots")
@@ -91,23 +124,6 @@ export const compareEquations = (
        return firstRoot[0].equals(secondRoot[0]) && firstRoot[1].equals(secondRoot[1]) || firstRoot[0].equals(secondRoot[1]) && firstRoot[1].equals(secondRoot[0]);
      }
 
-        console.log(rootsFirstEquation[0].re, "-----root1")
-        console.log(rootsSecondEquation[0].re, "------rooooot2")
-        console.log((rootsFirstEquation[0].re)===(rootsSecondEquation[0].re))
-
-        console.log(rootsFirstEquation[1].re, "-----root1")
-        console.log(rootsSecondEquation[1].re, "------rooooot2")
-        console.log((rootsFirstEquation[1].re)===(rootsSecondEquation[1].re))
-
-        console.log(rootsFirstEquation[0].im, "-----root1")
-        console.log(rootsSecondEquation[0].im, "------rooooot2")
-        console.log((rootsFirstEquation[0].im)===(rootsSecondEquation[0].im))
-
-        console.log(rootsFirstEquation[1].im, "-----root1")
-        console.log(rootsSecondEquation[1].im, "------rooooot2")
-        console.log((rootsFirstEquation[1].im)===(rootsSecondEquation[1].im))
-
-        
          //@ts-ignore
         return (rootsFirstEquation[0].re)===(rootsSecondEquation[0].re) && (rootsFirstEquation[1].re)===(rootsSecondEquation[1].re) && (rootsFirstEquation[0].im.toFixed(13))===(rootsSecondEquation[0].im.toFixed(13)) && (rootsFirstEquation[1].im.toFixed(13))===(rootsSecondEquation[1].im.toFixed(13));
       }
