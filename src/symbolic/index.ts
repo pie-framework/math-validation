@@ -17,11 +17,6 @@ const { simplify: ms, rationalize } = mathjs;
 const SIMPLIFY_RULES = [
   { l: "n1^(1/n2)", r: "nthRoot(n1, n2)" },
   { l: "sqrt(n1)", r: "nthRoot(n1, 2)" },
-  { l: "(n^2)/n", r: "n" },
-  { l: "n-n", r: "0" },
-  { l: "(n^2) + n", r: "n * (n + 1)" },
-  { l: "((n^n1) + n)/n", r: "n^(n1-1)+1" },
-  { l: "(n^2) + 2n", r: "n * (n + 2)" },
   { l: "(v1-v2)/n", r: "v1/n-v2/n" },
   { l: "(v1-n)/n", r: "v1/n-1" },
   { l: "n/n1-c1", r: "(n-c1*n1)/n1" },
