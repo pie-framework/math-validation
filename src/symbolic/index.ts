@@ -29,8 +29,8 @@ const SIMPLIFY_RULES = [
   { l: "pi", r: "3.141592653589793" },
 
   // perfect square formula
-  {l:"n/(n*n1)",r:"1/n1"},
-  {l:"n1/(n(n+1)+1(n+1))", r:"n1/((n+1)^2)"},
+  { l: "n/(n*n1)", r: "1/n1" },
+  { l: "n1/(n(n+1)+1(n+1))", r: "n1/((n+1)^2)" },
   { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
   { l: "tzn(n1, n2)", r: "n1" },
   { l: "n1/(-n2)", r: "-(n1/n2)" },
@@ -71,11 +71,16 @@ const normalize = (a: string | MathNode | any) => {
   let r: string | MathNode | any = a;
   let onlyConstant = true;
   let containsArrayNode = false;
+  let pi = false;
 
   r.traverse(function (node, path, parent) {
     if (node.isArrayNode) {
       containsArrayNode = true;
       node.items = node.items.map((item) => simplify(item));
+    }
+
+    if (node.isSymbolNode && node.name === "pi") {
+      pi = true;
     }
   });
 
@@ -83,19 +88,28 @@ const normalize = (a: string | MathNode | any) => {
     r.args = r.args.map((arg) => {
       if (!arg.isFunctionNode && !arg.isArrayNode) {
         try {
-          arg = simplify(arg)
-          arg = rationalize(arg, {}, true).expression;
+          // simplify is needed in case we have arguments that contain OperatorNode with fn = 'divide' (operations with fractions)
+          arg = rationalize(simplify(arg), {}, true).expression;
         } catch (e) {
           // ok;
         }
       }
-      onlyConstant = onlyConstant && !!arg.isConstantNode;
+     onlyConstant = onlyConstant && !!arg.isConstantNode;
 
       return arg;
     });
   } else {
-    onlyConstant = false;
     try {
+      r.args = r.args.map((arg) => {
+        if (arg.isOperatorNode && arg.fn === "divide" && !pi) {
+          // simplify is needed in case we have arguments that contain OperatorNode with fn = 'divide' (operations with fractions)
+          arg = simplify(arg);
+        }
+
+        return arg;
+      });
+
+      onlyConstant = false;
       r = rationalize(a, {}, true).expression;
     } catch (e) {
       // ok;
@@ -106,7 +120,10 @@ const normalize = (a: string | MathNode | any) => {
   if (r.conditionals && r.params) {
     r.params = r.params.map((param) => sort(simplify(param)));
   } else if (!containsArrayNode && !onlyConstant) {
-    r = simplify(r);
+    // overcome TypeError
+    try {
+      r = simplify(r);
+    } catch (e) {}
   }
 
   log("[normalize] input: ", a.toString(), "output: ", r.toString());
@@ -138,10 +155,10 @@ export const isMathEqual = (a: any, b: any) => {
 
   // apply sort if we are not in a relationalNode
   as = a.conditionals ? normalize(a) : sort(normalize(a));
-  console.log(as.toString(), "as")
+  console.log(as.toString(), "as");
 
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
-  console.log(bs.toString(), "bs")
+  console.log(bs.toString(), "bs");
 
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
@@ -181,7 +198,7 @@ export const isMathEqual = (a: any, b: any) => {
     as?.conditionals?.length === bs?.conditionals?.length &&
     //@ts-ignore
     as?.conditionals?.length === 2 &&
-     //@ts-ignore
+    //@ts-ignore
     as?.conditionals?.toString() === bs?.conditionals?.toString()
   ) {
     const params = [

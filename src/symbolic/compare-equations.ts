@@ -1,5 +1,5 @@
 import { mathjs } from "../mathjs";
-import  {   MathNode } from "mathjs";
+import { MathNode } from "mathjs";
 import {
   getVariables,
   equationsHaveTheSameVariables,
@@ -24,9 +24,8 @@ export const compareEquations = (
     let firstExpression = transformEqualityInExpression(firstEquation);
     let secondExpression = transformEqualityInExpression(secondEquation);
 
-    console.log(firstExpression.toString(), "firstExpression")
-    console.log(secondExpression.toString(), "secondExpression")
-
+    console.log(firstExpression.toString(), "firstExpression");
+    console.log(secondExpression.toString(), "secondExpression");
 
     if (firstExpression.equals(secondExpression)) {
       return true;
@@ -44,66 +43,47 @@ export const compareEquations = (
       return false;
     }
 
-// try {
-//   firstExpression = m.rationalize(firstExpression, {}, true).expression;
-//   secondExpression = m.rationalize(secondExpression, {}, true).expression;
-// } catch {
-
-// }
-    console.log(firstExpression, "firstexpression")
-    console.log(secondExpression, "secondExpression")
-
-let insideExpression: MathNode;
-
-    // if equality is a fraction, use only the nominator 
-    if (firstExpression.fn === "divide") {
-
-     insideExpression = firstExpression.args[0]  
-    console.log(insideExpression, "insideExpression")
-    }
-
-    let testExpression2: MathNode;
-    let insideExpression2: MathNode;
-    if (secondExpression.fn === "divide") {
-       insideExpression2 = secondExpression.args[0]
-      console.log(insideExpression2, "insideExpression2")
-      }
-
-      if (insideExpression && insideExpression2) {
-        firstExpression = insideExpression
-        secondExpression = insideExpression2
-      }
-  
-
     let firstEquationCoefficients: number[];
     let secondEquationCoefficients: number[];
 
-    console.log(firstExpression.toString(), "firstexpresiion")
-    console.log(secondExpression.toString(), "secondExpression")
+    console.log(firstExpression.toString(), "firstexpresiion");
+    console.log(secondExpression.toString(), "secondExpression");
 
     if (firstEquationVariablesName.length === 1) {
       firstEquationCoefficients = getCoefficients(firstExpression);
       secondEquationCoefficients = getCoefficients(secondExpression);
 
-      console.log(firstEquationCoefficients, "first coefficients")
-      console.log(secondEquationCoefficients, "secondEquationCoefficients coefficients")
+      console.log(firstEquationCoefficients, "first coefficients");
+      console.log(
+        secondEquationCoefficients,
+        "secondEquationCoefficients coefficients"
+      );
 
       // check for second-order polynomial equation such as ax^2 + bx + c = 0 where a is not zero
       if (
-        firstEquationCoefficients.length === 3 &&
-        secondEquationCoefficients.length === 3 &&
-        !isInequality &&
-        firstEquationCoefficients[0] !== 0 || (firstEquationCoefficients.length === 4 && firstEquationCoefficients[0]===0 && secondEquationCoefficients[0] ===0)
+        (firstEquationCoefficients.length === 3 &&
+          secondEquationCoefficients.length === 3 &&
+          !isInequality &&
+          firstEquationCoefficients[0] !== 0) ||
+        (firstEquationCoefficients.length === 4 &&
+          firstEquationCoefficients[0] === 0 &&
+          secondEquationCoefficients[0] === 0)
       ) {
-        console.log(firstEquationCoefficients,"firstEquationCoefficients")
-        console.log(secondEquationCoefficients,"secondEquationCoefficients")
-        if (firstEquationCoefficients[0]===0){
-          firstEquationCoefficients=firstEquationCoefficients.splice(1,3)
-          secondEquationCoefficients=secondEquationCoefficients.splice(1,3)
+        console.log(firstEquationCoefficients, "firstEquationCoefficients");
+        console.log(secondEquationCoefficients, "secondEquationCoefficients");
+        if (firstEquationCoefficients[0] === 0) {
+          firstEquationCoefficients = firstEquationCoefficients.splice(1, 3);
+          secondEquationCoefficients = secondEquationCoefficients.splice(1, 3);
         }
 
-        console.log(firstEquationCoefficients,"firstEquationCoefficients if spliced")
-        console.log(secondEquationCoefficients,"secondEquationCoefficients if spliced")
+        console.log(
+          firstEquationCoefficients,
+          "firstEquationCoefficients if spliced"
+        );
+        console.log(
+          secondEquationCoefficients,
+          "secondEquationCoefficients if spliced"
+        );
 
         let rootsFirstEquation = solveQuadraticEquation(
           firstEquationCoefficients
@@ -113,19 +93,31 @@ let insideExpression: MathNode;
           secondEquationCoefficients
         );
 
-        let firstRoot: MathNode= m.complex(rootsFirstEquation);
-        let secondRoot: MathNode = m.complex(rootsSecondEquation)
+        let firstRoot: MathNode = m.complex(rootsFirstEquation);
+        let secondRoot: MathNode = m.complex(rootsSecondEquation);
 
-       console.log(rootsFirstEquation, "first rots")
-       console.log(rootsSecondEquation, "second roots")
+        console.log(rootsFirstEquation, "first rots");
+        console.log(rootsSecondEquation, "second roots");
 
-     if(rootsFirstEquation[0].im === 0 && rootsFirstEquation[1].im === 0) {
-       console.log("imaginary is 0")
-       return firstRoot[0].equals(secondRoot[0]) && firstRoot[1].equals(secondRoot[1]) || firstRoot[0].equals(secondRoot[1]) && firstRoot[1].equals(secondRoot[0]);
-     }
+        if (rootsFirstEquation[0].im === 0 && rootsFirstEquation[1].im === 0) {
+          console.log("imaginary is 0");
+          return (
+            (firstRoot[0].equals(secondRoot[0]) &&
+              firstRoot[1].equals(secondRoot[1])) ||
+            (firstRoot[0].equals(secondRoot[1]) &&
+              firstRoot[1].equals(secondRoot[0]))
+          );
+        }
 
-         //@ts-ignore
-        return (rootsFirstEquation[0].re)===(rootsSecondEquation[0].re) && (rootsFirstEquation[1].re)===(rootsSecondEquation[1].re) && (rootsFirstEquation[0].im.toFixed(13))===(rootsSecondEquation[0].im.toFixed(13)) && (rootsFirstEquation[1].im.toFixed(13))===(rootsSecondEquation[1].im.toFixed(13));
+        //@ts-ignore
+        return (
+          rootsFirstEquation[0].re === rootsSecondEquation[0].re &&
+          rootsFirstEquation[1].re === rootsSecondEquation[1].re &&
+          rootsFirstEquation[0].im.toFixed(13) ===
+            rootsSecondEquation[0].im.toFixed(13) &&
+          rootsFirstEquation[1].im.toFixed(13) ===
+            rootsSecondEquation[1].im.toFixed(13)
+        );
       }
 
       // if both equations are linear in one variable then we solve "x" for both. If x has the same value then equations are equivalent
