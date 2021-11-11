@@ -1,6 +1,7 @@
 import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
 import { simplify as customSimplify } from "./";
+import { normalize } from "./";
 const { simplify } = mathjs;
 
 const m: any = mathjs;
@@ -64,6 +65,8 @@ export const getCoefficients = (equation: MathNode) => {
     // we give it another try to rationalize after applying a new round of simplify to separate the variable
 
     console.log(equation.toString(), "equation before simplify");
+
+    console.log(equation.toString(), "equation after custom simplify")
     equation = simplify(equation, [
       { l: "(n1-n2)/n3", r: "n1/n3-n2/n3" },
       { l: "(n1+n2)/n3", r: "n1/n3+n2/n3" },
@@ -71,13 +74,8 @@ export const getCoefficients = (equation: MathNode) => {
       { l: "(n1+n2)*n3/n4", r: "(n1*n3)/n4+(n2*n3)/n4" },
     ]);
 
-    //   console.log(equation.toString(), "equation at firts")
-    //   const node = new m.SymbolNode("x")
-    //   const squareNode = new m.OperatorNode("*", "multiply", [node,node])
-    //   equation = new m.OperatorNode("*","multiply",[equation,squareNode])
-    //   console.log(equation.toString(), "constructed equation")
-    //  equation = customSimplify(equation)
-    //   console.log(equation.toString(), "result")
+    console.log(equation.toString(), "equation after simplify")
+
     try {
       const rationalizedEquation = m.rationalize(equation, {}, true);
       return rationalizedEquation.coefficients;

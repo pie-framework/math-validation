@@ -46,18 +46,12 @@ export const compareEquations = (
     let firstEquationCoefficients: number[];
     let secondEquationCoefficients: number[];
 
-    console.log(firstExpression.toString(), "firstexpresiion");
-    console.log(secondExpression.toString(), "secondExpression");
-
     if (firstEquationVariablesName.length === 1) {
       firstEquationCoefficients = getCoefficients(firstExpression);
       secondEquationCoefficients = getCoefficients(secondExpression);
 
       console.log(firstEquationCoefficients, "first coefficients");
-      console.log(
-        secondEquationCoefficients,
-        "secondEquationCoefficients coefficients"
-      );
+      console.log(secondEquationCoefficients, "second coefficients");
 
       // check for second-order polynomial equation such as ax^2 + bx + c = 0 where a is not zero
       if (
@@ -69,21 +63,10 @@ export const compareEquations = (
           firstEquationCoefficients[0] === 0 &&
           secondEquationCoefficients[0] === 0)
       ) {
-        console.log(firstEquationCoefficients, "firstEquationCoefficients");
-        console.log(secondEquationCoefficients, "secondEquationCoefficients");
         if (firstEquationCoefficients[0] === 0) {
           firstEquationCoefficients = firstEquationCoefficients.splice(1, 3);
           secondEquationCoefficients = secondEquationCoefficients.splice(1, 3);
         }
-
-        console.log(
-          firstEquationCoefficients,
-          "firstEquationCoefficients if spliced"
-        );
-        console.log(
-          secondEquationCoefficients,
-          "secondEquationCoefficients if spliced"
-        );
 
         let rootsFirstEquation = solveQuadraticEquation(
           firstEquationCoefficients
@@ -96,7 +79,7 @@ export const compareEquations = (
         let firstRoot: MathNode = m.complex(rootsFirstEquation);
         let secondRoot: MathNode = m.complex(rootsSecondEquation);
 
-        console.log(rootsFirstEquation, "first rots");
+        console.log(rootsFirstEquation, "first r0ots");
         console.log(rootsSecondEquation, "second roots");
 
         if (rootsFirstEquation[0].im === 0 && rootsFirstEquation[1].im === 0) {
