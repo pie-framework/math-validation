@@ -1,5 +1,5 @@
 import { mathjs } from "../mathjs";
-import { MathNode } from "mathjs";
+import { Complex, MathNode } from "mathjs";
 import { simplify as customSimplify } from "./";
 const { simplify } = mathjs;
 
@@ -63,16 +63,13 @@ export const getCoefficients = (equation: MathNode) => {
     // rationalize may fail if variable is isolated in a fraction
     // we give it another try to rationalize after applying a new round of simplify to separate the variable
 
-    console.log(equation.toString(), "equation after custom simplify")
     equation = simplify(equation, [
-      {l:"-((n1)*(n2))", r:"(n1)*(n2)"},
+      { l: "-((n1)*(n2))", r: "(n1)*(n2)" },
       { l: "(n1-n2)/n3", r: "n1/n3-n2/n3" },
       { l: "(n1+n2)/n3", r: "n1/n3+n2/n3" },
       { l: "(n1-n2)*n3/n4", r: "(n1*n3)/n4-(n2*n3)/n4" },
       { l: "(n1+n2)*n3/n4", r: "(n1*n3)/n4+(n2*n3)/n4" },
     ]);
-
-    console.log(equation.toString(), "equation after simplify")
 
     try {
       const rationalizedEquation = m.rationalize(equation, {}, true);
@@ -95,26 +92,26 @@ export const setXToOne = (equation: any, variableName: string) =>
 // quadratic equation solver for a second-order polynomial equation such as ax^2 + bx + c = 0 for x, where a is not zero
 // quadratic formula
 export const solveQuadraticEquation = (coefficients: number[]) => {
-  console.log(coefficients, "coefficients");
   const [c, b, a] = coefficients;
   const discriminant = b * b - 4 * a * c;
-  console.log(discriminant, "discriminant")
-// console.log((-b+m.sqrt(discriminant))/(2*a))
-let addDiscriminant;
-try {
-   addDiscriminant = m.compile(m.fraction((-b+m.sqrt(discriminant)))/(2*a));
-}catch{
-   addDiscriminant = m.compile("(-b+sqrt(discriminant))/(2*a)");
-}
- 
-  console.log(addDiscriminant, "add discriminant")
 
-  let subtractDiscriminant
+  let addDiscriminant: any;
+  let subtractDiscriminant: any;
 
   try {
-    subtractDiscriminant= m.compile(m.fraction((-b-m.sqrt(discriminant)))/(2*a));
+    addDiscriminant = m.compile(
+      m.fraction(-b + m.sqrt(discriminant)) / (2 * a)
+    );
   } catch {
-    subtractDiscriminant= m.compile("(-b-sqrt(discriminant))/(2*a)");
+    addDiscriminant = m.compile("(-b+sqrt(discriminant))/(2*a)");
+  }
+
+  try {
+    subtractDiscriminant = m.compile(
+      m.fraction(-b - m.sqrt(discriminant)) / (2 * a)
+    );
+  } catch {
+    subtractDiscriminant = m.compile("(-b-sqrt(discriminant))/(2*a)");
   }
 
   let firstRoot = addDiscriminant.evaluate({
@@ -123,28 +120,30 @@ try {
     b: b,
   });
 
-  console.log(firstRoot, "firstRoot")
   let secondRoot = subtractDiscriminant.evaluate({
     discriminant: discriminant,
     a: a,
     b: b,
   });
-  console.log(secondRoot, "firstRoot")
 
   if (!firstRoot.im) {
-    firstRoot = Math.round(firstRoot*10000000000)/1000000000000
-    console.log(firstRoot)
-    secondRoot =  Math.round(secondRoot*10000000000)/1000000000000
-    console.log(secondRoot)
+    firstRoot = Math.round(firstRoot * 10000000000) / 1000000000000;
+    secondRoot = Math.round(secondRoot * 10000000000) / 1000000000000;
     return [
       { re: firstRoot, im: 0 },
-      { re:secondRoot, im: 0 },
+      { re: secondRoot, im: 0 },
     ].sort();
   }
 
   return [
-    { re: Math.round(firstRoot.re*10000000000)/1000000000000, im: Math.round(firstRoot.im*10000000000)/1000000000000 },
-    { re: Math.round(secondRoot.re*10000000000)/1000000000000, im: Math.round(firstRoot.im*10000000000)/1000000000000 },
+    {
+      re: Math.round(firstRoot.re * 10000000000) / 1000000000000,
+      im: Math.round(firstRoot.im * 10000000000) / 1000000000000,
+    },
+    {
+      re: Math.round(secondRoot.re * 10000000000) / 1000000000000,
+      im: Math.round(firstRoot.im * 10000000000) / 1000000000000,
+    },
   ].sort();
 };
 

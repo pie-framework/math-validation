@@ -10,8 +10,6 @@ const log = logger("mv:symbolic");
 const positiveInfinity = 1.497258191621251e6;
 const negativeInfinity = -1.497258191621251e6;
 
-export type SymbolicOpts = {};
-
 const { simplify: ms, rationalize } = mathjs;
 
 const SIMPLIFY_RULES = [
@@ -77,18 +75,15 @@ const normalize = (a: string | MathNode | any) => {
       node.items = node.items.map((item) => simplify(item));
     }
 
-    if (node.isSymbolNode && node.name === "pi") {
-      pi = true;
-    }
-
-    if (node.isSymbolNode && node.name === "f^{-1}"){
-      containsInverseFlag = true;
+    if (node.isSymbolNode) {
+      pi = pi || node.name === "pi";
+      containsInverseFlag = containsInverseFlag || node.name === "f^{-1}";
     }
   });
 
-  if (r.fn === "equal") {
+ if (r.args) {
     r.args = r.args.map((arg) => {
-      if (!arg.isFunctionNode && !arg.isArrayNode && !containsInverseFlag) {
+      if (!arg.isFunctionNode && !arg.isArrayNode && !containsInverseFlag && !pi) {
         try {
           arg= simplify(arg)
         } catch (e) {
@@ -96,9 +91,7 @@ const normalize = (a: string | MathNode | any) => {
         }
       }
 
-      if (arg.isFunctionNode) {
-        containsFunctionNode = true
-      }
+        containsFunctionNode = containsFunctionNode || arg.isFunctionNode
 
      onlyConstant = onlyConstant && !!arg.isConstantNode;
 
@@ -118,27 +111,22 @@ const normalize = (a: string | MathNode | any) => {
         return arg;
       });
     }
-  } else {
+} 
+
+  if (r.fn !== "equal") {
     try {
-      r.args = r.args.map((arg) => {
-        if (arg.isOperatorNode && arg.fn === "divide" && !pi) {
-          arg = simplify(arg);
-        }
-
-        return arg;
-      });
-
       onlyConstant = false;
       r = rationalize(a, {}, true).expression;
-    } catch (e) {
-      // ok;
-      //console.log(e, "failed to rationalize");
+    } catch {
+
     }
   }
 
   if (r.conditionals && r.params) {
     r.params = r.params.map((param) => sort(simplify(param)));
-  } else if (!containsArrayNode && !onlyConstant) {
+  } 
+  
+  if (!containsArrayNode && !onlyConstant) {
     // overcome TypeError
     try {
       r = simplify(r);
@@ -173,11 +161,10 @@ export const isMathEqual = (a: any, b: any) => {
   let bs: MathNode;
 
   // apply sort if we are not in a relationalNode
+  
   as = a.conditionals ? normalize(a) : sort(normalize(a));
-  console.log(as.toString(), "as");
 
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
-  console.log(bs.toString(), "bs");
 
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 

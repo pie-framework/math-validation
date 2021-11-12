@@ -1,5 +1,5 @@
 import { mathjs } from "../mathjs";
-import { all, MathNode } from "mathjs";
+import { MathNode } from "mathjs";
 import {
   getVariables,
   equationsHaveTheSameVariables,
@@ -23,9 +23,6 @@ export const compareEquations = (
   if (expressionsCanBeCompared(firstEquation, secondEquation)) {
     let firstExpression = transformEqualityInExpression(firstEquation);
     let secondExpression = transformEqualityInExpression(secondEquation);
-
-    console.log(firstExpression.toString(), "firstExpression");
-    console.log(secondExpression.toString(), "secondExpression");
 
     if (firstExpression.equals(secondExpression)) {
       return true;
@@ -62,10 +59,6 @@ export const compareEquations = (
         secondEquationCoefficients = secondEquationCoefficients.map(coefficient => Math.abs(coefficient))
       }
 
-      console.log(firstEquationCoefficients, "first coefficients");
-      console.log(secondEquationCoefficients, "second coefficients");
-
-
       const compareCoefficients = (firstEqCoeff, secondEqCoeff) =>
        Array.isArray(firstEqCoeff) &&
         Array.isArray(secondEqCoeff) &&
@@ -73,9 +66,6 @@ export const compareEquations = (
         firstEqCoeff.every((val, index) => val === secondEqCoeff[index]);
 
         if (firstEquationCoefficients.length === 4 && compareCoefficients(firstEquationCoefficients, secondEquationCoefficients)){
-
-          console.log(firstEquationCoefficients)
-          console.log("sameCoeff")
           return true
         }
 
@@ -105,11 +95,8 @@ export const compareEquations = (
         let firstRoot: MathNode = m.complex(rootsFirstEquation);
         let secondRoot: MathNode = m.complex(rootsSecondEquation);
 
-        console.log(rootsFirstEquation, "first roots");
-        console.log(rootsSecondEquation, "second roots");
-
         if (rootsFirstEquation[0].im === 0 && rootsFirstEquation[1].im === 0) {
-          console.log("imaginary is 0");
+
           return (
             (firstRoot[0].equals(secondRoot[0]) &&
               firstRoot[1].equals(secondRoot[1])) ||
