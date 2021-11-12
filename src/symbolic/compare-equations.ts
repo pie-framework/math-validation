@@ -1,5 +1,5 @@
 import { mathjs } from "../mathjs";
-import { MathNode } from "mathjs";
+import { all, MathNode } from "mathjs";
 import {
   getVariables,
   equationsHaveTheSameVariables,
@@ -50,8 +50,34 @@ export const compareEquations = (
       firstEquationCoefficients = getCoefficients(firstExpression);
       secondEquationCoefficients = getCoefficients(secondExpression);
 
+      let allNegatives1 = firstEquationCoefficients.every(coefficient => coefficient < 0)
+
+      if (allNegatives1) {
+        firstEquationCoefficients = firstEquationCoefficients.map(coefficient => Math.abs(coefficient))
+      }
+
+      let allNegatives2 = secondEquationCoefficients.every(coefficient => coefficient < 0)
+
+      if (allNegatives2) {
+        secondEquationCoefficients = secondEquationCoefficients.map(coefficient => Math.abs(coefficient))
+      }
+
       console.log(firstEquationCoefficients, "first coefficients");
       console.log(secondEquationCoefficients, "second coefficients");
+
+
+      const compareCoefficients = (firstEqCoeff, secondEqCoeff) =>
+       Array.isArray(firstEqCoeff) &&
+        Array.isArray(secondEqCoeff) &&
+        firstEqCoeff.length === secondEqCoeff.length &&
+        firstEqCoeff.every((val, index) => val === secondEqCoeff[index]);
+
+        if (firstEquationCoefficients.length === 4 && compareCoefficients(firstEquationCoefficients, secondEquationCoefficients)){
+
+          console.log(firstEquationCoefficients)
+          console.log("sameCoeff")
+          return true
+        }
 
       // check for second-order polynomial equation such as ax^2 + bx + c = 0 where a is not zero
       if (
@@ -79,7 +105,7 @@ export const compareEquations = (
         let firstRoot: MathNode = m.complex(rootsFirstEquation);
         let secondRoot: MathNode = m.complex(rootsSecondEquation);
 
-        console.log(rootsFirstEquation, "first r0ots");
+        console.log(rootsFirstEquation, "first roots");
         console.log(rootsSecondEquation, "second roots");
 
         if (rootsFirstEquation[0].im === 0 && rootsFirstEquation[1].im === 0) {

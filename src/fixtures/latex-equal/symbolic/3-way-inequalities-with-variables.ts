@@ -21,6 +21,7 @@ export default {
       ne: ["0 < 4x ≤ 22", "66 ≥ 6x>1"],
     },
     {
+      //only:true,
       target: "-4 < 2x - 8 ≤ 10",
       eq: [
         "-2 < x - 4 ≤ 5",

@@ -1,7 +1,6 @@
 import { mathjs } from "../mathjs";
 import { MathNode } from "mathjs";
 import { simplify as customSimplify } from "./";
-import { normalize } from "./";
 const { simplify } = mathjs;
 
 const m: any = mathjs;
@@ -64,10 +63,9 @@ export const getCoefficients = (equation: MathNode) => {
     // rationalize may fail if variable is isolated in a fraction
     // we give it another try to rationalize after applying a new round of simplify to separate the variable
 
-    console.log(equation.toString(), "equation before simplify");
-
     console.log(equation.toString(), "equation after custom simplify")
     equation = simplify(equation, [
+      {l:"-((n1)*(n2))", r:"(n1)*(n2)"},
       { l: "(n1-n2)/n3", r: "n1/n3-n2/n3" },
       { l: "(n1+n2)/n3", r: "n1/n3+n2/n3" },
       { l: "(n1-n2)*n3/n4", r: "(n1*n3)/n4-(n2*n3)/n4" },

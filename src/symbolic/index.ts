@@ -22,11 +22,12 @@ const SIMPLIFY_RULES = [
   { l: "n/n1-c1", r: "(n-c1*n1)/n1" },
   { l: "i^2", r: "-1" },
   { l: "pi", r: "3.141592653589793" },
-
-  // perfect square formula
   { l: "n/(n*n1)", r: "1/n1" },
   { l: "n1/(n(n+1)+1(n+1))", r: "n1/((n+1)^2)" },
+
+  // perfect square formula
   { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
+
   { l: "tzn(n1, n2)", r: "n1" },
   { l: "n1/(-n2)", r: "-(n1/n2)" },
   { l: "sin(n*pi)", r: "0" },
@@ -62,13 +63,13 @@ export const simplify = (v) => {
   return ms(v, rules); //.concat(SIMPLIFY_RULES));
 };
 
-export const normalize = (a: string | MathNode | any) => {
+const normalize = (a: string | MathNode | any) => {
   let r: string | MathNode | any = a;
   let onlyConstant = true;
-  let flagFunctionNode = false;
+  let containsFunctionNode = false;
   let containsArrayNode = false;
   let pi = false;
-  let inverseFlag = false;
+  let containsInverseFlag = false;
 
   r.traverse(function (node, path, parent) {
     if (node.isArrayNode) {
@@ -81,16 +82,14 @@ export const normalize = (a: string | MathNode | any) => {
     }
 
     if (node.isSymbolNode && node.name === "f^{-1}"){
-      inverseFlag = true;
+      containsInverseFlag = true;
     }
   });
 
   if (r.fn === "equal") {
     r.args = r.args.map((arg) => {
-      if (!arg.isFunctionNode && !arg.isArrayNode && !inverseFlag) {
+      if (!arg.isFunctionNode && !arg.isArrayNode && !containsInverseFlag) {
         try {
-          // simplify is needed in case we have arguments that contain OperatorNode with fn = 'divide' (operations with fractions)
-        //  arg = rationalize(simplify(arg), {}, true).expression;
           arg= simplify(arg)
         } catch (e) {
           // ok;
@@ -98,7 +97,7 @@ export const normalize = (a: string | MathNode | any) => {
       }
 
       if (arg.isFunctionNode) {
-        flagFunctionNode = true
+        containsFunctionNode = true
       }
 
      onlyConstant = onlyConstant && !!arg.isConstantNode;
@@ -106,13 +105,11 @@ export const normalize = (a: string | MathNode | any) => {
       return arg;
     });
 
-    if (flagFunctionNode || inverseFlag) {
+    if (containsFunctionNode || containsInverseFlag) {
       r.args = r.args.map((arg) => {
         if (!arg.isFunctionNode && !arg.isArrayNode) {
           try {
-            // simplify is needed in case we have arguments that contain OperatorNode with fn = 'divide' (operations with fractions)
           arg = rationalize(simplify(arg), {}, true).expression;
-          //  arg= simplify(arg)
           } catch (e) {
             // ok;
           }
@@ -125,7 +122,6 @@ export const normalize = (a: string | MathNode | any) => {
     try {
       r.args = r.args.map((arg) => {
         if (arg.isOperatorNode && arg.fn === "divide" && !pi) {
-          // simplify is needed in case we have arguments that contain OperatorNode with fn = 'divide' (operations with fractions)
           arg = simplify(arg);
         }
 

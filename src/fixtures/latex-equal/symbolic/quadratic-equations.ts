@@ -1,6 +1,5 @@
 export default {
   mode: "symbolic",
-// only: true,
   tests: [
     {
       target: "x^2-7x+10=0",
@@ -8,15 +7,16 @@ export default {
     },
     {
       target: "5x^2+20x+32=0",
-      eq: [
-        "10x^2+40x+64=0", 
-        "15x^2+60x+96=0"
-      ],
+      eq: ["10x^2+40x+64=0", "15x^2+60x+96=0"],
     },
     {
+     // only:true,
       target: "x^2 + 3x +2 = 5x +10",
-      eq: ["(x+2)(x-4)=0", "x^2-4x+2x-8=0"],
-      ne: ["(x+1)(x-4)=0", "(x)(x-4)=0", "x^2-4x+2x-8"],
+      eq: [
+        "(x+2)(x-4)=0", 
+      //  "x^2-4x+2x-8=0"
+      ],
+    //  ne: ["(x+1)(x-4)=0", "(x)(x-4)=0", "x^2-4x+2x-8"],
     },
     {
       target: "x^2 = 5x - 6",
@@ -24,7 +24,7 @@ export default {
       ne: ["(x-3)(x-1)=0", "(x)(x-3)=0", "x^2-5x - 6 = 0"],
     },
     {
-     // only:true,
+      // only:true,
       target: "6x^2-3x-2x +1 =0",
       eq: ["3x(2x-1)-1(2x-1)=0", "(3x-1)(2x-1)=0"],
       ne: ["3x(2x)-1(2x-1)=0", "(3x-1)(2x)=0"],
@@ -43,7 +43,6 @@ export default {
       ],
     },
     {
-    //  only:true,
       target: "3x^2-18x+14=0",
       eq: [
         "3(x^2-6x)+14=0",
@@ -58,21 +57,20 @@ export default {
       ne: ["(t-5)^3=9", "(x-5)^2=9", "(t-4)^2=9"],
     },
     {
-    //only:true,
-      target:  "\\frac{6}{(x+1)^2}+\\frac{2}{2x}+2=0",
+     // only:true,
+      target: "\\frac{6}{(x+1)^2}+\\frac{2}{2x}+2=0",
       eq: [
-      "\\frac{6}{(x+1)(x+1)}+\\frac{2}{2x}+2=0",
+     //   "\\frac{6}{(x+1)(x+1)}+\\frac{2}{2x}+2=0",
         "\\frac{6}{(x+1)(x+1)}+\\frac{2}{2x}=-2",
-       "\\frac{6}{(x+1)(x+1)}+\\frac{2}{2x}+6-4=0",
-       "\\frac{6}{(x+1)(x+1)}+\\frac{2}{2x}+6=+4",
-       "\\frac{6}{(x+1)(x+1)}+\\frac{2}{2x}+6=+4",
-       "\\frac{6}{(x+1)(x+1)}+\\frac{2}{2x}+4=+6-2",
-       "\\frac{6}{(x+1)(x+1)}+\\frac{3}{3x}+2=0",
-        "\\frac{6}{x(x+1)+1(x+1)}+\\frac{5}{5(x)}+2=0",
+        "\\frac{6}{(x+1)(x+1)}+\\frac{2}{2x}+6-4=0",
+        "\\frac{6}{(x+1)(x+1)}+\\frac{2}{2x}+6=+4",
+        "\\frac{6}{(x+1)(x+1)}+\\frac{2}{2x}+6=+4",
+        "\\frac{6}{(x+1)(x+1)}+\\frac{2}{2x}+4=+6-4",
+        // "\\frac{6}{(x+1)(x+1)}+\\frac{3}{3x}+2=0",
+        // "\\frac{6}{x(x+1)+1(x+1)}+\\frac{5}{5(x)}+2=0",
       ],
     },
     {
-    //only:true,
       target: "\\frac{6}{(x+1)^2}+\\frac{1}{x+1}=1",
       eq: [
         "\\frac{6}{(x+1)^2}+\\frac{5}{5(x+1)}=1",
@@ -87,7 +85,7 @@ export default {
       eq: [
         // expand square
         "(u+1)(u+1)=0",
-         // distributive property
+        // distributive property
         "u(u+1)+1(u+1)=0",
         "u^2+u+1(u+1)=0",
       ],
