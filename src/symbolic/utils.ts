@@ -68,7 +68,6 @@ export const getCoefficients = (equation: MathNode, isInequality: boolean) => {
   } catch (e) {
     // rationalize may fail if variable is isolated in a fraction
     // we give it another try to rationalize after applying a new round of simplify to separate the variable
-    console.log(isInequality, "isInequality")
     if (!isInequality) {
       equation = simplify(equation, [
         { l: "-(n)", r: "n" },
