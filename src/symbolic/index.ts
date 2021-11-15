@@ -10,6 +10,8 @@ const log = logger("mv:symbolic");
 const positiveInfinity = 1.497258191621251e6;
 const negativeInfinity = -1.497258191621251e6;
 
+export type SymbolicOpts = {};
+
 const { simplify: ms, rationalize } = mathjs;
 
 const SIMPLIFY_RULES = [
