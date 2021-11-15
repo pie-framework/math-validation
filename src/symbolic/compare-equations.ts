@@ -28,6 +28,8 @@ export const compareEquations = (
       return true;
     }
 
+    console.log(firstExpression.toString(), "firstExression")
+    console.log(secondExpression.toString(), "secondExpression")
     let firstEquationVariablesName = getVariables(firstExpression);
     let secondEquationVariablesName = getVariables(secondExpression);
 
@@ -44,8 +46,11 @@ export const compareEquations = (
     let secondEquationCoefficients: number[];
 
     if (firstEquationVariablesName.length === 1) {
-      firstEquationCoefficients = getCoefficients(firstExpression);
-      secondEquationCoefficients = getCoefficients(secondExpression);
+      firstEquationCoefficients = getCoefficients(firstExpression, isInequality);
+      secondEquationCoefficients = getCoefficients(secondExpression, isInequality);
+
+      console.log(firstEquationCoefficients, "firstEquationCoefficients")
+      console.log(secondEquationCoefficients, "secondEquationCoefficients")
 
       let allNegatives1 = firstEquationCoefficients.every(coefficient => coefficient < 0)
 
@@ -136,10 +141,10 @@ export const compareEquations = (
 
       // solve expression for x=1
       let expraNoX = setXToOne(firstExpression, x);
-      firstEquationCoefficients = getCoefficients(expraNoX);
+      firstEquationCoefficients = getCoefficients(expraNoX, isInequality);
 
       let exprbNoX = setXToOne(secondExpression, x);
-      secondEquationCoefficients = getCoefficients(exprbNoX);
+      secondEquationCoefficients = getCoefficients(exprbNoX, isInequality);
 
       // find y for both equations, where x equals 1
       let yFromFirstExpression = solveLinearEquation(firstEquationCoefficients);

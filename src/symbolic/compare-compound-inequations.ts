@@ -60,8 +60,8 @@ export const getLimit = (
   const expressionR = transformEqualityInExpression(expressionsPair.right);
   const expressionL = transformEqualityInExpression(expressionsPair.left);
 
-  const xFirstInequality = solveLinearEquation(getCoefficients(expressionR));
-  const xSecondInequality = solveLinearEquation(getCoefficients(expressionL));
+  const xFirstInequality = solveLinearEquation(getCoefficients(expressionR, true));
+  const xSecondInequality = solveLinearEquation(getCoefficients(expressionL, true));
 
   if (limitType === "inferior") {
     return Math.min(xFirstInequality, xSecondInequality);
