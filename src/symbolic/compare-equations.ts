@@ -49,22 +49,7 @@ export const compareEquations = (
       firstEquationCoefficients = getCoefficients(firstExpression, isInequality);
       secondEquationCoefficients = getCoefficients(secondExpression, isInequality);
 
-      console.log(firstEquationCoefficients, "firstEquationCoefficients")
-      console.log(secondEquationCoefficients, "secondEquationCoefficients")
-
-      let allNegatives1 = firstEquationCoefficients.every(coefficient => coefficient < 0)
-
-      if (allNegatives1) {
-        firstEquationCoefficients = firstEquationCoefficients.map(coefficient => Math.abs(coefficient))
-      }
-
-      let allNegatives2 = secondEquationCoefficients.every(coefficient => coefficient < 0)
-
-      if (allNegatives2) {
-        secondEquationCoefficients = secondEquationCoefficients.map(coefficient => Math.abs(coefficient))
-      }
-
-      const compareCoefficients = (firstEqCoeff, secondEqCoeff) =>
+      const compareCoefficients = (firstEqCoeff: number[], secondEqCoeff: number[]) =>
        Array.isArray(firstEqCoeff) &&
         Array.isArray(secondEqCoeff) &&
         firstEqCoeff.length === secondEqCoeff.length &&

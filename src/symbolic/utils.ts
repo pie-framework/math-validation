@@ -58,7 +58,13 @@ export const getCoefficients = (equation: MathNode, isInequality: boolean) => {
 
   try {
     const rationalizedEquation = m.rationalize(equation, {}, true);
-    return rationalizedEquation.coefficients;
+    let coefficients = rationalizedEquation.coefficients
+     let allNegatives1 = coefficients.every(coefficient => coefficient < 0)
+
+      if (allNegatives1) {
+        coefficients = coefficients.map(coefficient => Math.abs(coefficient))
+      }
+    return coefficients;
   } catch (e) {
     // rationalize may fail if variable is isolated in a fraction
     // we give it another try to rationalize after applying a new round of simplify to separate the variable
