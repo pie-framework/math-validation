@@ -23,6 +23,7 @@ const SIMPLIFY_RULES = [
   { l: "i^2", r: "-1" },
   { l: "pi", r: "3.141592653589793" },
   { l: "n/(n*n1)", r: "1/n1" },
+  { l: "c1/(c2*(n3))", r: "(c1/c2)*(1/n3)" },
   { l: "n1/(n(n+1)+1(n+1))", r: "n1/((n+1)^2)" },
 
   // perfect square formula
@@ -83,19 +84,24 @@ const normalize = (a: string | MathNode | any) => {
     }
   });
 
- if (r.args) {
+  if (r.args) {
     r.args = r.args.map((arg) => {
-      if (!arg.isFunctionNode && !arg.isArrayNode && !containsInverseFlag && !pi) {
+      if (
+        !arg.isFunctionNode &&
+        !arg.isArrayNode &&
+        !containsInverseFlag &&
+        !pi
+      ) {
         try {
-          arg= simplify(arg)
+          arg = simplify(arg);
         } catch (e) {
           // ok;
         }
       }
 
-        containsFunctionNode = containsFunctionNode || arg.isFunctionNode
+      containsFunctionNode = containsFunctionNode || arg.isFunctionNode;
 
-     onlyConstant = onlyConstant && !!arg.isConstantNode;
+      onlyConstant = onlyConstant && !!arg.isConstantNode;
 
       return arg;
     });
@@ -104,30 +110,28 @@ const normalize = (a: string | MathNode | any) => {
       r.args = r.args.map((arg) => {
         if (!arg.isFunctionNode && !arg.isArrayNode) {
           try {
-          arg = rationalize(simplify(arg), {}, true).expression;
+            arg = rationalize(simplify(arg), {}, true).expression;
           } catch (e) {
             // ok;
           }
         }
-  
+
         return arg;
       });
     }
-} 
+  }
 
   if (r.fn !== "equal") {
     try {
       onlyConstant = false;
-      r = rationalize(a, {}, true).expression;
-    } catch {
-
-    }
+      r = rationalize(r, {}, true).expression;
+    } catch {}
   }
 
   if (r.conditionals && r.params) {
     r.params = r.params.map((param) => sort(simplify(param)));
-  } 
-  
+  }
+
   if (!containsArrayNode && !onlyConstant) {
     // overcome TypeError
     try {
@@ -163,10 +167,12 @@ export const isMathEqual = (a: any, b: any) => {
   let bs: MathNode;
 
   // apply sort if we are not in a relationalNode
-  
+
   as = a.conditionals ? normalize(a) : sort(normalize(a));
+  console.log(as.toString(), "as");
 
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
+  console.log(bs.toString());
 
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
 
