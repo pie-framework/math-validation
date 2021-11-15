@@ -13,6 +13,15 @@ import {
 
 const m: any = mathjs;
 
+const compareCoefficients = (
+  firstEqCoeff: number[],
+  secondEqCoeff: number[]
+) =>
+  Array.isArray(firstEqCoeff) &&
+  Array.isArray(secondEqCoeff) &&
+  firstEqCoeff.length === secondEqCoeff.length && firstEqCoeff.length === 4 &&
+  firstEqCoeff.every((val, index) => val === secondEqCoeff[index]);
+
 export const compareEquations = (
   firstEquation: MathNode,
   secondEquation: MathNode,
@@ -28,8 +37,6 @@ export const compareEquations = (
       return true;
     }
 
-    console.log(firstExpression.toString(), "firstExression")
-    console.log(secondExpression.toString(), "secondExpression")
     let firstEquationVariablesName = getVariables(firstExpression);
     let secondEquationVariablesName = getVariables(secondExpression);
 
@@ -46,18 +53,24 @@ export const compareEquations = (
     let secondEquationCoefficients: number[];
 
     if (firstEquationVariablesName.length === 1) {
-      firstEquationCoefficients = getCoefficients(firstExpression, isInequality);
-      secondEquationCoefficients = getCoefficients(secondExpression, isInequality);
+      firstEquationCoefficients = getCoefficients(
+        firstExpression,
+        isInequality
+      );
+      secondEquationCoefficients = getCoefficients(
+        secondExpression,
+        isInequality
+      );
 
-      const compareCoefficients = (firstEqCoeff: number[], secondEqCoeff: number[]) =>
-       Array.isArray(firstEqCoeff) &&
-        Array.isArray(secondEqCoeff) &&
-        firstEqCoeff.length === secondEqCoeff.length &&
-        firstEqCoeff.every((val, index) => val === secondEqCoeff[index]);
 
-        if (firstEquationCoefficients.length === 4 && compareCoefficients(firstEquationCoefficients, secondEquationCoefficients)){
-          return true
-        }
+      // if coefficients are equal, there is no need for further calculations => equations are equivalent
+      if (compareCoefficients(
+        firstEquationCoefficients,
+        secondEquationCoefficients
+      )
+      ) {
+        return true;
+      }
 
       // check for second-order polynomial equation such as ax^2 + bx + c = 0 where a is not zero
       if (
@@ -86,7 +99,6 @@ export const compareEquations = (
         let secondRoot: MathNode = m.complex(rootsSecondEquation);
 
         if (rootsFirstEquation[0].im === 0 && rootsFirstEquation[1].im === 0) {
-
           return (
             (firstRoot[0].equals(secondRoot[0]) &&
               firstRoot[1].equals(secondRoot[1])) ||
@@ -100,9 +112,9 @@ export const compareEquations = (
           rootsFirstEquation[0].re === rootsSecondEquation[0].re &&
           rootsFirstEquation[1].re === rootsSecondEquation[1].re &&
           rootsFirstEquation[0].im.toFixed(13) ===
-            rootsSecondEquation[0].im.toFixed(13) &&
+          rootsSecondEquation[0].im.toFixed(13) &&
           rootsFirstEquation[1].im.toFixed(13) ===
-            rootsSecondEquation[1].im.toFixed(13)
+          rootsSecondEquation[1].im.toFixed(13)
         );
       }
 

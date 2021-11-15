@@ -1,9 +1,20 @@
 import { mathjs } from "../mathjs";
-import { MathNode } from "mathjs";
+import { MathNode, number } from "mathjs";
 import { simplify as customSimplify } from "./";
 const { simplify } = mathjs;
 
 const m: any = mathjs;
+
+let simplifyRules = [
+  { l: "-((n1)*(n2))", r: "(n1)*(n2)" },
+  { l: "(n1-n2)/n3", r: "n1/n3-n2/n3" },
+  { l: "(n1+n2)/n3", r: "n1/n3+n2/n3" },
+  { l: "(n1-n2)*n3/n4", r: "(n1*n3)/n4-(n2*n3)/n4" },
+  { l: "(n1+n2)*n3/n4", r: "(n1*n3)/n4+(n2*n3)/n4" },
+];
+
+let customRound = (number: number) =>
+  Math.round(number * 10000000000) / 1000000000000;
 
 // expressions can be compared if we have at least one symbol node and has no function node or array
 export const expressionsCanBeCompared = (
@@ -58,39 +69,27 @@ export const getCoefficients = (equation: MathNode, isInequality: boolean) => {
 
   try {
     const rationalizedEquation = m.rationalize(equation, {}, true);
-    let coefficients = rationalizedEquation.coefficients
-     let allNegatives1 = coefficients.every(coefficient => coefficient < 0)
 
-      if (allNegatives1) {
-        coefficients = coefficients.map(coefficient => Math.abs(coefficient))
-      }
-    return coefficients;
+    let coefficients = rationalizedEquation.coefficients;
+    let allNegatives = coefficients.every((coefficient) => coefficient < 0);
+
+    return allNegatives
+      ? coefficients.map((coefficient) => Math.abs(coefficient))
+      : coefficients;
   } catch (e) {
     // rationalize may fail if variable is isolated in a fraction
     // we give it another try to rationalize after applying a new round of simplify to separate the variable
-    if (!isInequality) {
-      equation = simplify(equation, [
-        { l: "-(n)", r: "n" },
-        { l: "-((n1)*(n2))", r: "(n1)*(n2)" },
-        { l: "(n1-n2)/n3", r: "n1/n3-n2/n3" },
-        { l: "(n1+n2)/n3", r: "n1/n3+n2/n3" },
-        { l: "(n1-n2)*n3/n4", r: "(n1*n3)/n4-(n2*n3)/n4" },
-        { l: "(n1+n2)*n3/n4", r: "(n1*n3)/n4+(n2*n3)/n4" },
-      ]);
+    if (isInequality) {
+      equation = simplify(equation, simplifyRules);
     } else {
-      equation = simplify(equation, [
-        { l: "-((n1)*(n2))", r: "(n1)*(n2)" },
-        { l: "(n1-n2)/n3", r: "n1/n3-n2/n3" },
-        { l: "(n1+n2)/n3", r: "n1/n3+n2/n3" },
-        { l: "(n1-n2)*n3/n4", r: "(n1*n3)/n4-(n2*n3)/n4" },
-        { l: "(n1+n2)*n3/n4", r: "(n1*n3)/n4+(n2*n3)/n4" },
-      ]);
+      simplifyRules.push({ l: "-(n)", r: "n" });
+      equation = simplify(equation, simplifyRules);
     }
 
     try {
       const rationalizedEquation = m.rationalize(equation, {}, true);
       return rationalizedEquation.coefficients;
-    } catch (e) {}
+    } catch (e) { }
   }
 
   return [1, 0];
@@ -142,25 +141,26 @@ export const solveQuadraticEquation = (coefficients: number[]) => {
     b: b,
   });
 
+  // roots are real numbers
   if (!firstRoot.im) {
-    firstRoot = Math.round(firstRoot * 10000000000) / 1000000000000;
-    secondRoot = Math.round(secondRoot * 10000000000) / 1000000000000;
+    firstRoot = customRound(firstRoot);
+    secondRoot = customRound(secondRoot);
     return [
       { re: firstRoot, im: 0 },
       { re: secondRoot, im: 0 },
-    ].sort();
+    ]
   }
 
   return [
     {
-      re: Math.round(firstRoot.re * 10000000000) / 1000000000000,
-      im: Math.round(firstRoot.im * 10000000000) / 1000000000000,
+      re: customRound(firstRoot.re),
+      im: customRound(firstRoot.im)
     },
     {
-      re: Math.round(secondRoot.re * 10000000000) / 1000000000000,
-      im: Math.round(firstRoot.im * 10000000000) / 1000000000000,
+      re: customRound(secondRoot.re),
+      im: customRound(secondRoot.im),
     },
-  ].sort();
+  ]
 };
 
 // solve x

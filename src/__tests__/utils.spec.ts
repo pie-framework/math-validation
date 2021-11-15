@@ -108,7 +108,7 @@ describe("getCoefficients", () => {
     ${"x - x - 2"}                 | ${[]}
   `("$expression => $coefficients", ({ expression, coefficients }) => {
     const equation = atm.convert(lta.convert(expression));
-    const coefficientsList = getCoefficients(equation, true);
+    const coefficientsList = getCoefficients(equation, false);
 
     expect(coefficientsList).toEqual(coefficients);
   });
@@ -117,21 +117,21 @@ describe("getCoefficients", () => {
 describe("getCoefficients", () => {
   it('equation: "x = x" - has coefficients [0, 0]', () => {
     const equation = atm.convert(lta.convert("x-x"));
-    const coefficientsList = getCoefficients(equation, true);
+    const coefficientsList = getCoefficients(equation, false);
 
     expect(coefficientsList).toEqual([0, 0]);
   });
 
   it('equation: "1 = -2" - if equation has no coefficient for x but can be rationalized it will return an empty array', () => {
     const equation = atm.convert(lta.convert("1+2"));
-    const coefficientsList = getCoefficients(equation, true);
+    const coefficientsList = getCoefficients(equation, false);
 
     expect(coefficientsList).toEqual([]);
   });
 
   it('equation: "m + n = - 2" - if equation has more than one variable, will return coefficients [1, 0]', () => {
     const equation = atm.convert(lta.convert("m+n = - 2"));
-    const coefficientsList = getCoefficients(equation, true);
+    const coefficientsList = getCoefficients(equation, false);
 
     expect(coefficientsList).toEqual([1, 0]);
   });
