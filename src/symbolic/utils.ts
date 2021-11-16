@@ -16,7 +16,7 @@ let simplifyRules = [
 const customRound = (number: number) =>
   Math.round(number * 10000000000000) / 10000000000000;
 
-// expressions can be compared if we have at least one symbol node and has no function node or array
+// expressions can be compared if we have at least one symbol node and has no function node or array; do not treat math series as equations
 export const expressionsCanBeCompared = (
   firstEquation: MathNode,
   secondEquation: MathNode
@@ -24,11 +24,15 @@ export const expressionsCanBeCompared = (
   let noFunctionOrArray: boolean = true;
   let firstSymbolNode: boolean = false;
   let symbolNode: boolean = false;
+  let seriesNode: boolean = false;
 
   firstEquation.traverse(function (node, path, parent) {
+    if (node.isSymbolNode) {
+      firstSymbolNode = true
+      seriesNode = seriesNode || node.name.includes("[")
+    }
     noFunctionOrArray =
       noFunctionOrArray || node.isFunctionNode || node.isArrayNode;
-    firstSymbolNode = firstSymbolNode || node.isSymbolNode;
   });
 
   secondEquation.traverse(function (node, path, parent) {
@@ -39,7 +43,7 @@ export const expressionsCanBeCompared = (
     if (node.isSymbolNode && firstSymbolNode) symbolNode = true;
   });
 
-  return noFunctionOrArray && symbolNode;
+  return noFunctionOrArray && symbolNode && !seriesNode;
 };
 
 // move the terms of the equations to the left hand side

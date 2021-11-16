@@ -13,10 +13,7 @@ import {
 
 const m: any = mathjs;
 
-const compareCoefficients = (
-  firstEqCoeff: number[],
-  secondEqCoeff: number[]
-) =>
+const compareCoefficients = (firstEqCoeff: number[], secondEqCoeff: number[]) =>
   Array.isArray(firstEqCoeff) &&
   Array.isArray(secondEqCoeff) &&
   firstEqCoeff.length === secondEqCoeff.length &&
@@ -62,12 +59,12 @@ export const compareEquations = (
         isInequality
       );
 
-
       // if coefficients are equal, there is no need for further calculations => equations are equivalent
-      if (compareCoefficients(
-        firstEquationCoefficients,
-        secondEquationCoefficients
-      )
+      if (
+        compareCoefficients(
+          firstEquationCoefficients,
+          secondEquationCoefficients
+        )
       ) {
         return true;
       }
@@ -112,9 +109,9 @@ export const compareEquations = (
           rootsFirstEquation[0].re === rootsSecondEquation[0].re &&
           rootsFirstEquation[1].re === rootsSecondEquation[1].re &&
           rootsFirstEquation[0].im.toFixed(13) ===
-          rootsSecondEquation[0].im.toFixed(13) &&
+            rootsSecondEquation[0].im.toFixed(13) &&
           rootsFirstEquation[1].im.toFixed(13) ===
-          rootsSecondEquation[1].im.toFixed(13)
+            rootsSecondEquation[1].im.toFixed(13)
         );
       }
 
