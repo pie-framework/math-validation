@@ -19,7 +19,7 @@ const compareCoefficients = (
 ) =>
   Array.isArray(firstEqCoeff) &&
   Array.isArray(secondEqCoeff) &&
-  firstEqCoeff.length === secondEqCoeff.length && firstEqCoeff.length === 4 &&
+  firstEqCoeff.length === secondEqCoeff.length &&
   firstEqCoeff.every((val, index) => val === secondEqCoeff[index]);
 
 export const compareEquations = (

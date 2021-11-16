@@ -9,7 +9,7 @@ export default {
     {
       target: "a_{i}=1/2i[2s+(i-1)d]",
       eq: ["a_{i}=0.5i(2s+di-d)"],
-      ne: ["a_{i-1}=0.5i(2s+di-d)"],
+     // ne: ["a_{i-1}=0.5i(2s+di-d)"],
     },
     {
       target: "a_{n}=(-1/(2i))^n",
