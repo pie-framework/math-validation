@@ -1,5 +1,5 @@
 import { mathjs } from "../mathjs";
-import { MathNode, number } from "mathjs";
+import { MathNode } from "mathjs";
 import { simplify as customSimplify } from "./";
 const { simplify } = mathjs;
 
@@ -13,8 +13,8 @@ let simplifyRules = [
   { l: "(n1+n2)*n3/n4", r: "(n1*n3)/n4+(n2*n3)/n4" },
 ];
 
-let customRound = (number: number) =>
-  Math.round(number * 10000000000) / 1000000000000;
+const customRound = (number: number) =>
+  Math.round(number * 10000000000000) / 10000000000000;
 
 // expressions can be compared if we have at least one symbol node and has no function node or array
 export const expressionsCanBeCompared = (
@@ -89,7 +89,7 @@ export const getCoefficients = (equation: MathNode, isInequality: boolean) => {
     try {
       const rationalizedEquation = m.rationalize(equation, {}, true);
       return rationalizedEquation.coefficients;
-    } catch (e) { }
+    } catch (e) {}
   }
 
   return [1, 0];
@@ -148,19 +148,19 @@ export const solveQuadraticEquation = (coefficients: number[]) => {
     return [
       { re: firstRoot, im: 0 },
       { re: secondRoot, im: 0 },
-    ]
+    ];
   }
 
   return [
     {
       re: customRound(firstRoot.re),
-      im: customRound(firstRoot.im)
+      im: customRound(firstRoot.im),
     },
     {
       re: customRound(secondRoot.re),
       im: customRound(secondRoot.im),
     },
-  ]
+  ];
 };
 
 // solve x
@@ -185,9 +185,7 @@ export const solveLinearEquation = (coefficients: number[]) => {
     }
 
     // equation with no solution : if coefficient for x is 0 => division by zero => result == -Infinity
-    result =
-      Math.round(m.divide(coefficients[0], -1 * coefficients[1]) * 10000) /
-      10000;
+    result = customRound(m.divide(coefficients[0], -1 * coefficients[1]));
   }
 
   return result;
