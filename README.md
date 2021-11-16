@@ -61,6 +61,7 @@ It can determine mathematical equivalence between:
 
 - linear equations in one variable
 - linear equations in two variables
+- quadratic equations
 - 2-way inequalities in one or two variables
 - compound inequalities in one variable
 - trigonometric identities and functions

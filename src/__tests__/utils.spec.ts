@@ -7,6 +7,7 @@ import {
   getCoefficients,
   setXToOne,
   solveLinearEquation,
+  solveQuadraticEquation,
   expressionsCanBeCompared,
   transformEqualityInExpression,
 } from "../symbolic/utils";
@@ -107,7 +108,7 @@ describe("getCoefficients", () => {
     ${"x - x - 2"}                 | ${[]}
   `("$expression => $coefficients", ({ expression, coefficients }) => {
     const equation = atm.convert(lta.convert(expression));
-    const coefficientsList = getCoefficients(equation);
+    const coefficientsList = getCoefficients(equation, false);
 
     expect(coefficientsList).toEqual(coefficients);
   });
@@ -116,21 +117,21 @@ describe("getCoefficients", () => {
 describe("getCoefficients", () => {
   it('equation: "x = x" - has coefficients [0, 0]', () => {
     const equation = atm.convert(lta.convert("x-x"));
-    const coefficientsList = getCoefficients(equation);
+    const coefficientsList = getCoefficients(equation, false);
 
     expect(coefficientsList).toEqual([0, 0]);
   });
 
   it('equation: "1 = -2" - if equation has no coefficient for x but can be rationalized it will return an empty array', () => {
     const equation = atm.convert(lta.convert("1+2"));
-    const coefficientsList = getCoefficients(equation);
+    const coefficientsList = getCoefficients(equation, false);
 
     expect(coefficientsList).toEqual([]);
   });
 
   it('equation: "m + n = - 2" - if equation has more than one variable, will return coefficients [1, 0]', () => {
     const equation = atm.convert(lta.convert("m+n = - 2"));
-    const coefficientsList = getCoefficients(equation);
+    const coefficientsList = getCoefficients(equation, false);
 
     expect(coefficientsList).toEqual([1, 0]);
   });
@@ -169,6 +170,26 @@ describe("solveLinearEquation", () => {
     const result = solveLinearEquation(coefficients);
 
     expect(result).toEqual(xValue);
+  });
+});
+
+describe("solveQuadraticEquation", () => {
+  it.each`
+    coefficients   | roots
+    ${[14, -9, 1]} | ${[{ re: 7, im: 0 }, { re: 2, im: 0 }]}
+    ${[-3, 2, 8]}  | ${[{ re: 0.5, im: 0 }, { re: -0.75, im: 0 }]}
+    ${[8, 6, 2]}   | ${[{ re: -1.5, im:  1.3228756555323 }, { re: -1.5, im: -1.3228756555323 }]}
+    ${[6, 5, 1]}   | ${[{ re: -2, im: 0 }, { re: -3, im: 0 }]}
+    ${[3, -7, 2]}  | ${[{ re: 3, im: 0 }, { re: 1/2, im: 0 }]}
+    ${[1, 3, 2]}   | ${[{ re: -0.5, im: 0 }, { re: -1, im: 0 }]}
+    ${[-3, 2, 1]}  | ${[{ re: 1, im: 0 }, { re: -3, im: 0 }]}
+    ${[-9, 0, 1]}  | ${[{ re: 3, im: 0 }, { re: -3, im: 0 }]}
+    ${[-8, -5, 3]} | ${[{ re: 2.6666666666667, im: 0 }, { re: -1, im: 0 }]}
+    ${[17, -5, 4]} | ${[{ re: 0.625, im: 1.9645292056877 }, { re: 0.625, im: -1.9645292056877}]}
+  `("$coefficients => $roots", ({ coefficients, roots }) => {
+    const result = solveQuadraticEquation(coefficients);
+    
+    expect(result).toEqual(roots);
   });
 });
 

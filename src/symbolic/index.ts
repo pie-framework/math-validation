@@ -17,19 +17,18 @@ const { simplify: ms, rationalize } = mathjs;
 const SIMPLIFY_RULES = [
   { l: "n1^(1/n2)", r: "nthRoot(n1, n2)" },
   { l: "sqrt(n1)", r: "nthRoot(n1, 2)" },
-  { l: "(n^2)/n", r: "n" },
-  { l: "n-n", r: "0" },
-  { l: "(n^2) + n", r: "n * (n + 1)" },
-  { l: "((n^n1) + n)/n", r: "n^(n1-1)+1" },
-  { l: "(n^2) + 2n", r: "n * (n + 2)" },
   { l: "(v1-v2)/n", r: "v1/n-v2/n" },
   { l: "(v1-n)/n", r: "v1/n-1" },
   { l: "n/n1-c1", r: "(n-c1*n1)/n1" },
   { l: "i^2", r: "-1" },
   { l: "pi", r: "3.141592653589793" },
+  { l: "n/(n*n1)", r: "1/n1" },
+  { l: "c1/(c2*(n3))", r: "(c1/c2)*(1/n3)" },
+  { l: "n1/(n(n+1)+1(n+1))", r: "n1/((n+1)^2)" },
 
-  // perfect square formula:
+  // perfect square formula
   { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
+
   { l: "tzn(n1, n2)", r: "n1" },
   { l: "n1/(-n2)", r: "-(n1/n2)" },
   { l: "sin(n*pi)", r: "0" },
@@ -68,42 +67,76 @@ export const simplify = (v) => {
 const normalize = (a: string | MathNode | any) => {
   let r: string | MathNode | any = a;
   let onlyConstant = true;
+  let containsFunctionNode = false;
   let containsArrayNode = false;
+  let pi = false;
+  let containsInverseFlag = false;
 
   r.traverse(function (node, path, parent) {
     if (node.isArrayNode) {
       containsArrayNode = true;
       node.items = node.items.map((item) => simplify(item));
     }
+
+    if (node.isSymbolNode) {
+      pi = pi || node.name === "pi";
+      containsInverseFlag = containsInverseFlag || node.name === "f^{-1}";
+    }
   });
 
-  if (r.fn === "equal") {
+  if (r.args) {
     r.args = r.args.map((arg) => {
-      if (!arg.isFunctionNode && !arg.isArrayNode) {
+      if (
+        !arg.isFunctionNode &&
+        !arg.isArrayNode &&
+        !containsInverseFlag &&
+        !pi
+      ) {
         try {
-          arg = rationalize(arg, {}, true).expression;
+          arg = simplify(arg);
         } catch (e) {
           // ok;
         }
       }
+
+      containsFunctionNode = containsFunctionNode || arg.isFunctionNode;
+
       onlyConstant = onlyConstant && !!arg.isConstantNode;
 
       return arg;
     });
-  } else {
-    onlyConstant = false;
-    try {
-      r = rationalize(a, {}, true).expression;
-    } catch (e) {
-      // ok;
-      //console.log(e, "failed to rationalize");
+
+    if (containsFunctionNode || containsInverseFlag) {
+      r.args = r.args.map((arg) => {
+        if (!arg.isFunctionNode && !arg.isArrayNode) {
+          try {
+            arg = rationalize(simplify(arg), {}, true).expression;
+          } catch (e) {
+            // ok;
+          }
+        }
+
+        return arg;
+      });
     }
+  }
+
+  if (r.fn !== "equal") {
+    try {
+      onlyConstant = false;
+      r = rationalize(r, {}, true).expression;
+    } catch {}
   }
 
   if (r.conditionals && r.params) {
     r.params = r.params.map((param) => sort(simplify(param)));
-  } else if (!containsArrayNode && !onlyConstant) {
-    r = simplify(r);
+  }
+
+  if (!containsArrayNode && !onlyConstant) {
+    // overcome TypeError
+    try {
+      r = simplify(r);
+    } catch (e) {}
   }
 
   log("[normalize] input: ", a.toString(), "output: ", r.toString());
@@ -134,6 +167,7 @@ export const isMathEqual = (a: any, b: any) => {
   let bs: MathNode;
 
   // apply sort if we are not in a relationalNode
+
   as = a.conditionals ? normalize(a) : sort(normalize(a));
 
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
@@ -176,7 +210,7 @@ export const isMathEqual = (a: any, b: any) => {
     as?.conditionals?.length === bs?.conditionals?.length &&
     //@ts-ignore
     as?.conditionals?.length === 2 &&
-     //@ts-ignore
+    //@ts-ignore
     as?.conditionals?.toString() === bs?.conditionals?.toString()
   ) {
     const params = [

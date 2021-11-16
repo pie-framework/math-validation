@@ -5,7 +5,18 @@ const { simplify } = mathjs;
 
 const m: any = mathjs;
 
-// expressions can be compared if we have at least one symbol node and has no function node or array
+let simplifyRules = [
+  { l: "-((n1)*(n2))", r: "(n1)*(n2)" },
+  { l: "(n1-n2)/n3", r: "n1/n3-n2/n3" },
+  { l: "(n1+n2)/n3", r: "n1/n3+n2/n3" },
+  { l: "(n1-n2)*n3/n4", r: "(n1*n3)/n4-(n2*n3)/n4" },
+  { l: "(n1+n2)*n3/n4", r: "(n1*n3)/n4+(n2*n3)/n4" },
+];
+
+const customRound = (number: number) =>
+  Math.round(number * 10000000000000) / 10000000000000;
+
+// expressions can be compared if we have at least one symbol node and has no function node or array; do not treat math series as equations
 export const expressionsCanBeCompared = (
   firstEquation: MathNode,
   secondEquation: MathNode
@@ -13,11 +24,15 @@ export const expressionsCanBeCompared = (
   let noFunctionOrArray: boolean = true;
   let firstSymbolNode: boolean = false;
   let symbolNode: boolean = false;
+  let seriesNode: boolean = false;
 
   firstEquation.traverse(function (node, path, parent) {
+    if (node.isSymbolNode) {
+      firstSymbolNode = true
+      seriesNode = seriesNode || node.name.includes("[")
+    }
     noFunctionOrArray =
       noFunctionOrArray || node.isFunctionNode || node.isArrayNode;
-    firstSymbolNode = firstSymbolNode || node.isSymbolNode;
   });
 
   secondEquation.traverse(function (node, path, parent) {
@@ -28,7 +43,7 @@ export const expressionsCanBeCompared = (
     if (node.isSymbolNode && firstSymbolNode) symbolNode = true;
   });
 
-  return noFunctionOrArray && symbolNode;
+  return noFunctionOrArray && symbolNode && !seriesNode;
 };
 
 // move the terms of the equations to the left hand side
@@ -53,21 +68,27 @@ export const getVariables = (equation: MathNode) => {
   return variableNames.sort();
 };
 
-export const getCoefficients = (equation: MathNode) => {
+export const getCoefficients = (equation: MathNode, isInequality: boolean) => {
   // coefficients will be determined if equation has only one variable
 
   try {
     const rationalizedEquation = m.rationalize(equation, {}, true);
-    return rationalizedEquation.coefficients;
+
+    let coefficients = rationalizedEquation.coefficients;
+    let allNegatives = coefficients.every((coefficient) => coefficient < 0);
+
+    return allNegatives
+      ? coefficients.map((coefficient) => Math.abs(coefficient))
+      : coefficients;
   } catch (e) {
     // rationalize may fail if variable is isolated in a fraction
     // we give it another try to rationalize after applying a new round of simplify to separate the variable
-    equation = simplify(equation, [
-      { l: "(n1-n2)/n3", r: "n1/n3-n2/n3" },
-      { l: "(n1+n2)/n3", r: "n1/n3+n2/n3" },
-      { l: "(n1-n2)*n3/n4", r: "(n1*n3)/n4-(n2*n3)/n4" },
-      { l: "(n1+n2)*n3/n4", r: "(n1*n3)/n4+(n2*n3)/n4" },
-    ]);
+    if (isInequality) {
+      equation = simplify(equation, simplifyRules);
+    } else {
+      simplifyRules.push({ l: "-(n)", r: "n" });
+      equation = simplify(equation, simplifyRules);
+    }
 
     try {
       const rationalizedEquation = m.rationalize(equation, {}, true);
@@ -87,7 +108,64 @@ export const setXToOne = (equation: any, variableName: string) =>
     return node;
   });
 
-// TO DO: solve quadratic equation
+// quadratic equation solver for a second-order polynomial equation such as ax^2 + bx + c = 0 for x, where a is not zero
+// quadratic formula
+export const solveQuadraticEquation = (coefficients: number[]) => {
+  const [c, b, a] = coefficients;
+  const discriminant = b * b - 4 * a * c;
+
+  let addDiscriminant: any;
+  let subtractDiscriminant: any;
+
+  try {
+    addDiscriminant = m.compile(
+      m.fraction(-b + m.sqrt(discriminant)) / (2 * a)
+    );
+  } catch {
+    addDiscriminant = m.compile("(-b+sqrt(discriminant))/(2*a)");
+  }
+
+  try {
+    subtractDiscriminant = m.compile(
+      m.fraction(-b - m.sqrt(discriminant)) / (2 * a)
+    );
+  } catch {
+    subtractDiscriminant = m.compile("(-b-sqrt(discriminant))/(2*a)");
+  }
+
+  let firstRoot = addDiscriminant.evaluate({
+    discriminant: discriminant,
+    a: a,
+    b: b,
+  });
+
+  let secondRoot = subtractDiscriminant.evaluate({
+    discriminant: discriminant,
+    a: a,
+    b: b,
+  });
+
+  // roots are real numbers
+  if (!firstRoot.im) {
+    firstRoot = customRound(firstRoot);
+    secondRoot = customRound(secondRoot);
+    return [
+      { re: firstRoot, im: 0 },
+      { re: secondRoot, im: 0 },
+    ];
+  }
+
+  return [
+    {
+      re: customRound(firstRoot.re),
+      im: customRound(firstRoot.im),
+    },
+    {
+      re: customRound(secondRoot.re),
+      im: customRound(secondRoot.im),
+    },
+  ];
+};
 
 // solve x
 export const solveLinearEquation = (coefficients: number[]) => {
@@ -111,9 +189,7 @@ export const solveLinearEquation = (coefficients: number[]) => {
     }
 
     // equation with no solution : if coefficient for x is 0 => division by zero => result == -Infinity
-    result =
-      Math.round(m.divide(coefficients[0], -1 * coefficients[1]) * 10000) /
-      10000;
+    result = customRound(m.divide(coefficients[0], -1 * coefficients[1]));
   }
 
   return result;
