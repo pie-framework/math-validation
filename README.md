@@ -77,7 +77,7 @@ It can also handle degrees, radians and gradians
 * faster math evaluation
 
 
-## modes
+## Modes
 
 There are 2 modes - literal and symbolic
 
