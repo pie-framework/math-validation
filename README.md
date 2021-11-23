@@ -15,7 +15,7 @@ yarn demo
 Then go to `http://localhost:$PORT/demo`
 
 
-## tests
+## Tests
 
 ```shell
 yarn jest
