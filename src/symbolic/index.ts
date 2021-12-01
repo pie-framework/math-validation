@@ -17,6 +17,7 @@ const { simplify: ms, rationalize } = mathjs;
 const SIMPLIFY_RULES = [
   { l: "n1^(1/n2)", r: "nthRoot(n1, n2)" },
   { l: "sqrt(n1)", r: "nthRoot(n1, 2)" },
+  { l: "nthRoot(-1, 2)", r: "i" },
   { l: "(v1-v2)/n", r: "v1/n-v2/n" },
   { l: "(v1-n)/n", r: "v1/n-1" },
   { l: "n/n1-c1", r: "(n-c1*n1)/n1" },
@@ -32,6 +33,11 @@ const SIMPLIFY_RULES = [
   { l: "tzn(n1, n2)", r: "n1" },
   { l: "n1/(-n2)", r: "-(n1/n2)" },
   { l: "sin(n*pi)", r: "0" },
+
+  // logarithm rules
+  { l: "log(n1*n2, n3)", r: "log(n1, n3)+log(n2,n3)" },
+  { l: "log(n1/n2, n3)", r: "log(n1, n3)-log(n2,n3)" },
+  { l: "log(n1^n2, n3)", r: "n2*log(n1,n3)" },
 
   // trigonometry: defining relations for tangent, cotangent, secant, and cosecant in terms of sine and cosine
   { l: "sin(n)/cos(n)", r: "tan(n)" },
@@ -167,7 +173,6 @@ export const isMathEqual = (a: any, b: any) => {
   let bs: MathNode;
 
   // apply sort if we are not in a relationalNode
-
   as = a.conditionals ? normalize(a) : sort(normalize(a));
 
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
