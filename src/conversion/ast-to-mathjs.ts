@@ -167,7 +167,6 @@ export class AstToMathJs {
           this.convert(operands[1]),
         ]);
 
-    //  const f = new m.SymbolNode(operands[0]);
       const f = operands[0]
       const args = operands[1];
       let f_args;
