@@ -1274,6 +1274,7 @@ export class LatexToAst {
         this.advance();
       } else {
         parameter = this.token.token_text;
+        
         this.advance();
       }
 
