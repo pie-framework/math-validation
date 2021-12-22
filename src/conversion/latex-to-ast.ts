@@ -1273,11 +1273,7 @@ export class LatexToAst {
 
         this.advance();
       } else {
-        parameter = this.statement({
-          parse_absolute_value: parse_absolute_value,
-          unknownCommands: unknownCommands,
-        });
-
+        parameter = this.token.token_text;
         this.advance();
       }
 

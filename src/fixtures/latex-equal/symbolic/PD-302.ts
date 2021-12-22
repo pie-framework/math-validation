@@ -5,6 +5,7 @@ export default {
       target: "\\log(x*y)",
       eq: [
         "\\log(x)+\\log(y)",
+        "\\log x+\\log y",
         "\\log_{10}(x)+\\log_{10}(y)",
         "\\log_{10}(x*y)",
       ],
@@ -14,6 +15,7 @@ export default {
       target: "\\log(x/y)",
       eq: [
         "\\log(x)-\\log(y)",
+        "\\log x -\\log y",
         "\\log_{10}(x)-\\log_{10}(y)",
         "\\log_{10}(x/y)",
       ],
