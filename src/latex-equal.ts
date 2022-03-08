@@ -26,7 +26,6 @@ export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {
   }
 
   const al = lta.convert(a);
-
   const bl = lta.convert(b);
 
   if (differenceIsTooGreat(al, bl)) {
