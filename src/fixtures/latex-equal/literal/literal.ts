@@ -15,9 +15,20 @@ export default {
       opts: { literal: { allowTrailingZeros: true } },
     },
     {
-      only:true,
       target: "0.500",
       eq: [".500000"],
+      opts: { literal: { allowTrailingZeros: true } },
+      ne: [".5001"],
+    },
+    {
+      target: "0.500",
+      ne: [".500000"],
+      opts: { literal: { allowTrailingZeros: false } },
+    },
+    {
+      target: "0.500",
+      eq: [".500"],
+      opts: { literal: { allowTrailingZeros: true } },
       ne: [".5001"],
     },
     {
