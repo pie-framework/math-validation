@@ -1146,7 +1146,7 @@ export class LatexToAst {
       if (parsedNumber !== number.toString()) {
         const p = number.toString();
         // @ts-ignore
-        const sub = result
+        const sub = parsedNumber
           // @ts-ignore
           .substring(p.length)
           .split("")

@@ -1,4 +1,5 @@
 export default {
+
   mode: "literal",
   tests: [
     {
@@ -12,6 +13,23 @@ export default {
       eq: ["12.000000"],
       ne: ["12.001"],
       opts: { literal: { allowTrailingZeros: true } },
+    },
+    {
+      target: "0.500",
+      eq: [".500000"],
+      opts: { literal: { allowTrailingZeros: true } },
+      ne: [".5001"],
+    },
+    {
+      target: "0.500",
+      ne: [".500000"],
+      opts: { literal: { allowTrailingZeros: false } },
+    },
+    {
+      target: "0.500",
+      eq: [".500"],
+      opts: { literal: { allowTrailingZeros: true } },
+      ne: [".5001"],
     },
     {
       target: "12.00",
