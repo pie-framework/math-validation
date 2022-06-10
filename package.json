@@ -55,7 +55,7 @@
     "prettier": "^2.3.2",
     "rollup": "^2.50.2",
     "rollup-plugin-cleanup": "^3.2.1",
-    "semantic-release": "^17.4.7",
+    "semantic-release": "^19.0.3",
     "serve": "^11.3.2",
     "ts-jest": "^26.3.0",
     "ts-node": "^9.0.0",
