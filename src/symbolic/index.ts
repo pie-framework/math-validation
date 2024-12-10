@@ -71,7 +71,15 @@ export const simplify = (v) => {
 };
 
 const normalize = (a: string | MathNode | any) => {
-  let r: string | MathNode | any = a;
+
+  let r: string | MathNode | any;
+  if (a.fn && a.fn.name == 'tzn'){
+    r = a.args[0]
+  } else {
+    r = a;
+  }
+ 
+  
   let onlyConstant = true;
   let containsFunctionNode = false;
   let containsArrayNode = false;
@@ -130,7 +138,7 @@ const normalize = (a: string | MathNode | any) => {
   if (r.fn !== "equal") {
     try {
       onlyConstant = false;
-      r = rationalize(r, {}, true).expression;
+     r = rationalize(r, {}, true).expression;
     } catch {}
   }
 
