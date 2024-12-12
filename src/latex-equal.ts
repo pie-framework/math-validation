@@ -32,7 +32,7 @@ export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {
     const numB = parseFloat(b);
 
     if (numA === numB) {
-      console.log(numA, numB, "equals");
+    
       return true;
     }
   }
