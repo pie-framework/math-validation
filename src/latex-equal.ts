@@ -17,12 +17,24 @@ const lta = new LatexToAst();
 const atm = new AstToMathJs();
 
 export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {
+  const isNumeric = (str: string): boolean => /^-?\d+(\.\d+)?$/.test(str);
+
   if (!a || !b) {
     return false;
   }
 
   if (a === b) {
     return true;
+  }
+
+  if (opts.mode === "symbolic" && isNumeric(a) && isNumeric(b)) {
+    const numA = parseFloat(a);
+    const numB = parseFloat(b);
+
+    if (numA === numB) {
+    
+      return true;
+    }
   }
 
   const al = lta.convert(a);
