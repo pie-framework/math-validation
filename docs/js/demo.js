@@ -282,10 +282,10 @@ const latex_rules = [
   ["\\\\vee(?![a-zA-Z])", "OR"],
   ["\\\\lnot(?![a-zA-Z])", "NOT"],
   ["=", "="],
+  ["≠", "NE"],
   ["\\\\neq(?![a-zA-Z])", "NE"],
   ["\\\\ne(?![a-zA-Z])", "NE"],
   ["\\\\not\\s*=", "NE"],
-  ["≠", "NE"],
   ["\\\\leq(?![a-zA-Z])", "LE"],
   ["\\\\le(?![a-zA-Z])", "LE"],
   ["\\\\geq(?![a-zA-Z])", "GE"],
@@ -553,7 +553,11 @@ class LatexToAst {
     }
     var lhs = this.expression(params);
     let relationalToken = (token) =>
-      token === "<" || token === "LE" || token === ">" || token === "GE";
+      token === "<" ||
+      token === "LE" ||
+      token === ">" ||
+      token === "GE" ||
+      token === "NE";
     while (
       this.token.token_type === "=" ||
       this.token.token_type === "NE" ||
@@ -593,6 +597,9 @@ class LatexToAst {
           case "GE":
           case "ge":
             return "largerEq";
+          case "NE":
+          case "ne":
+            return "unequal";
         }
       };
       if (inequality_sequence && relationalToken(this.token.token_type)) {
@@ -904,7 +911,7 @@ class LatexToAst {
       const number = parseFloat(parsedNumber);
       if (parsedNumber !== number.toString()) {
         const p = number.toString();
-        const sub = result
+        const sub = parsedNumber
           .substring(p.length)
           .split("")
           .filter((c) => c === "0");
@@ -995,10 +1002,7 @@ class LatexToAst {
         }
         this.advance();
       } else {
-        parameter = this.statement({
-          parse_absolute_value: parse_absolute_value,
-          unknownCommands: unknownCommands,
-        });
+        parameter = this.token.token_text;
         this.advance();
       }
       if (base === 10) result = ["apply", "log", ["tuple", parameter, base]];
@@ -39214,84 +39218,84 @@ const mathjs = create(all, { number: "Fraction" });
 mathjs.replacer;
 
 const log$3 = logger("mv:ast-to-math");
-const m$3 = mathjs;
+const m$6 = mathjs;
 const operators = {
   "+": function (operands) {
-    return new m$3.OperatorNode("+", "add", operands);
+    return new m$6.OperatorNode("+", "add", operands);
   },
   "*": function (operands) {
     if (operands[1] && operands[1].isUnit) {
-      return m$3.multiply(operands[0].value, operands[1]);
+      return m$6.multiply(operands[0].value, operands[1]);
     }
-    return new m$3.OperatorNode("*", "multiply", operands);
+    return new m$6.OperatorNode("*", "multiply", operands);
   },
   "/": function (operands) {
-    return new m$3.OperatorNode("/", "divide", operands);
+    return new m$6.OperatorNode("/", "divide", operands);
   },
   "-": function (operands) {
-    return new m$3.OperatorNode("-", "unaryMinus", [operands[0]]);
+    return new m$6.OperatorNode("-", "unaryMinus", [operands[0]]);
   },
   "^": function (operands) {
-    return new m$3.OperatorNode("^", "pow", operands);
+    return new m$6.OperatorNode("^", "pow", operands);
   },
   list: function (operands) {
-    return new m$3.ArrayNode(operands);
+    return new m$6.ArrayNode(operands);
   },
   vector: function (operands) {
-    return new m$3.ArrayNode(operands);
+    return new m$6.ArrayNode(operands);
   },
   and: function (operands) {
-    return new m$3.OperatorNode("and", "and", operands);
+    return new m$6.OperatorNode("and", "and", operands);
   },
   or: function (operands) {
-    return new m$3.OperatorNode("or", "or", operands);
+    return new m$6.OperatorNode("or", "or", operands);
   },
   not: function (operands) {
-    return new m$3.OperatorNode("not", "not", [operands[0]]);
+    return new m$6.OperatorNode("not", "not", [operands[0]]);
   },
   "<": function (operands) {
-    return new m$3.OperatorNode("<", "smaller", operands);
+    return new m$6.OperatorNode("<", "smaller", operands);
   },
   ">": function (operands) {
-    return new m$3.OperatorNode(">", "larger", operands);
+    return new m$6.OperatorNode(">", "larger", operands);
   },
   le: function (operands) {
-    return new m$3.OperatorNode("<=", "smallerEq", operands);
+    return new m$6.OperatorNode("<=", "smallerEq", operands);
   },
   ge: function (operands) {
-    return new m$3.OperatorNode(">=", "largerEq", operands);
+    return new m$6.OperatorNode(">=", "largerEq", operands);
   },
   _: function (operands) {
     const [arrayName, ...position] = operands;
-    const result = new m$3.SymbolNode(`${arrayName}[${position}]`);
+    const result = new m$6.SymbolNode(`${arrayName}[${position}]`);
     return result;
   },
   ne: function (operands) {
-    return new m$3.OperatorNode("!=", "unequal", operands);
+    return new m$6.OperatorNode("!=", "unequal", operands);
   },
   tzn: function (operands) {
-    return new m$3.FunctionNode("tzn", operands);
+    return new m$6.FunctionNode("tzn", operands);
   },
   "≈": function (operands) {
-    return new m$3.FunctionNode("≈", operands);
+    return new m$6.FunctionNode("≈", operands);
   },
   "≉": function (operands) {
-    return new m$3.FunctionNode("≉", operands);
+    return new m$6.FunctionNode("≉", operands);
   },
   "~": function (operands) {
-    return new m$3.FunctionNode("~", operands);
+    return new m$6.FunctionNode("~", operands);
   },
   "≃": function (operands) {
-    return new m$3.FunctionNode("≃", operands);
+    return new m$6.FunctionNode("≃", operands);
   },
   "≁": function (operands) {
-    return new m$3.FunctionNode("≁", operands);
+    return new m$6.FunctionNode("≁", operands);
   },
   "≅": function (operands) {
-    return new m$3.FunctionNode("≅", operands);
+    return new m$6.FunctionNode("≅", operands);
   },
   "≆": function (operands) {
-    return new m$3.FunctionNode("≆", operands);
+    return new m$6.FunctionNode("≆", operands);
   },
 };
 class AstToMathJs {
@@ -39300,21 +39304,21 @@ class AstToMathJs {
     if (typeof tree === "number") {
       if (Number.isFinite(tree)) {
         if (this.opts.number === "Fraction") {
-          const f = new m$3.Fraction([
-            new m$3.ConstantNode(tree),
-            new m$3.ConstantNode(1),
+          const f = new m$6.Fraction([
+            new m$6.ConstantNode(tree),
+            new m$6.ConstantNode(1),
           ]);
-          return new m$3.ConstantNode(f);
+          return new m$6.ConstantNode(f);
         } else {
-          return new m$3.ConstantNode(tree);
+          return new m$6.ConstantNode(tree);
         }
       }
-      if (Number.isNaN(tree)) return new m$3.SymbolNode("NaN");
-      if (tree < 0) return operators["-"]([new m$3.SymbolNode("Infinity")]);
-      return new m$3.SymbolNode("Infinity");
+      if (Number.isNaN(tree)) return new m$6.SymbolNode("NaN");
+      if (tree < 0) return operators["-"]([new m$6.SymbolNode("Infinity")]);
+      return new m$6.SymbolNode("Infinity");
     }
     if (typeof tree === "string") {
-      return new m$3.SymbolNode(tree);
+      return new m$6.SymbolNode(tree);
     }
     if (typeof tree === "boolean") throw Error("no support for boolean");
     if (!Array.isArray(tree)) throw Error("Invalid ast");
@@ -39328,10 +39332,10 @@ class AstToMathJs {
           "Non string functions not implemented for conversion to mathjs"
         );
       if (operands[0] === "factorial")
-        return new m$3.OperatorNode("!", "factorial", [
+        return new m$6.OperatorNode("!", "factorial", [
           this.convert(operands[1]),
         ]);
-      const f = new m$3.SymbolNode(operands[0]);
+      const f = operands[0];
       const args = operands[1];
       let f_args;
       if (args[0] === "tuple")
@@ -39341,10 +39345,10 @@ class AstToMathJs {
           }.bind(this)
         );
       else f_args = [this.convert(args)];
-      return new m$3.FunctionNode(f, f_args);
+      return new m$6.FunctionNode(f, f_args);
     }
     if (operator === "unit") {
-      const unit = new m$3.Unit(1, operands[0]);
+      const unit = new m$6.Unit(1, operands[0]);
       return unit;
     }
     if (operator === "relational") {
@@ -39363,7 +39367,7 @@ class AstToMathJs {
       for (let i = 0; i < params.length - 1; i++) {
         comparisons.push(strict[i]);
       }
-      let result = new m$3.RelationalNode(comparisons, arg_nodes);
+      let result = new m$6.RelationalNode(comparisons, arg_nodes);
       return result;
     }
     if (operator === "=") {
@@ -39377,8 +39381,8 @@ class AstToMathJs {
         comparisons.push("equal");
       }
       if (comparisons.length === 1)
-        return new m$3.OperatorNode("==", "equal", arg_nodes);
-      let result = new m$3.RelationalNode(comparisons, arg_nodes);
+        return new m$6.OperatorNode("==", "equal", arg_nodes);
+      let result = new m$6.RelationalNode(comparisons, arg_nodes);
       return result;
     }
     if (
@@ -39412,14 +39416,14 @@ class AstToMathJs {
       let b = this.convert(args[2]);
       let comparisons = [];
       if (closed[1])
-        comparisons.push(new m$3.OperatorNode(">=", "largerEq", [x, a]));
-      else comparisons.push(new m$3.OperatorNode(">", "larger", [x, a]));
+        comparisons.push(new m$6.OperatorNode(">=", "largerEq", [x, a]));
+      else comparisons.push(new m$6.OperatorNode(">", "larger", [x, a]));
       if (closed[2])
-        comparisons.push(new m$3.OperatorNode("<=", "smallerEq", [x, b]));
-      else comparisons.push(new m$3.OperatorNode("<", "smaller", [x, b]));
-      let result = new m$3.OperatorNode("and", "and", comparisons);
+        comparisons.push(new m$6.OperatorNode("<=", "smallerEq", [x, b]));
+      else comparisons.push(new m$6.OperatorNode("<", "smaller", [x, b]));
+      let result = new m$6.OperatorNode("and", "and", comparisons);
       if (operator === "notin" || operator === "notni")
-        result = new m$3.OperatorNode("not", "not", [result]);
+        result = new m$6.OperatorNode("not", "not", [result]);
       return result;
     }
     if (
@@ -39457,20 +39461,20 @@ class AstToMathJs {
       let big_b = this.convert(big_args[2]);
       let comparisons = [];
       if (small_closed[1] && !big_closed[1])
-        comparisons.push(new m$3.OperatorNode(">", "larger", [small_a, big_a]));
+        comparisons.push(new m$6.OperatorNode(">", "larger", [small_a, big_a]));
       else
         comparisons.push(
-          new m$3.OperatorNode(">=", "largerEq", [small_a, big_a])
+          new m$6.OperatorNode(">=", "largerEq", [small_a, big_a])
         );
       if (small_closed[2] && !big_closed[2])
-        comparisons.push(new m$3.OperatorNode("<", "smaller", [small_b, big_b]));
+        comparisons.push(new m$6.OperatorNode("<", "smaller", [small_b, big_b]));
       else
         comparisons.push(
-          new m$3.OperatorNode("<=", "smallerEq", [small_b, big_b])
+          new m$6.OperatorNode("<=", "smallerEq", [small_b, big_b])
         );
-      let result = new m$3.OperatorNode("and", "and", comparisons);
+      let result = new m$6.OperatorNode("and", "and", comparisons);
       if (operator === "notsubset" || operator === "notsuperset")
-        result = new m$3.OperatorNode("not", "not", [result]);
+        result = new m$6.OperatorNode("not", "not", [result]);
       return result;
     }
     if (operator === "matrix") {
@@ -39486,14 +39490,14 @@ class AstToMathJs {
         for (let j = 1; j <= ncols; j++) {
           row.push(this.convert(entries[i][j]));
         }
-        result.push(new m$3.ArrayNode(row));
+        result.push(new m$6.ArrayNode(row));
       }
-      return new m$3.ArrayNode(result);
+      return new m$6.ArrayNode(result);
     }
     if (operator == "%") {
       const dividend = this.convert(operands[0]);
-      const divisor = new m$3.ConstantNode(100);
-      const result = new m$3.OperatorNode("/", "divide", [dividend, divisor]);
+      const divisor = new m$6.ConstantNode(100);
+      const result = new m$6.OperatorNode("/", "divide", [dividend, divisor]);
       return result;
     }
     if (operator in operators) {
@@ -39511,7 +39515,7 @@ class AstToMathJs {
   }
 }
 
-function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }const m$2 = mathjs;
+function _optionalChain$3(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }const m$5 = mathjs;
 const log$2 = logger("mv:node-sort");
 const newCompare = (a, b) => {
   log$2("[compareNodes]: a:", a.toString(), a.type);
@@ -39570,8 +39574,8 @@ const flattenNode = (node) => {
   node = node.transform((currentNode, path, parent) => {
     if (
       currentNode.isParenthesisNode &&
-      (_optionalChain([parent, 'optionalAccess', _ => _.op]) != "*" ||
-        (_optionalChain([parent, 'optionalAccess', _2 => _2.op]) == "*" && currentNode.content.op != "+"))
+      (_optionalChain$3([parent, 'optionalAccess', _ => _.op]) != "*" ||
+        (_optionalChain$3([parent, 'optionalAccess', _2 => _2.op]) == "*" && currentNode.content.op != "+"))
     ) {
       while (currentNode.isParenthesisNode) currentNode = currentNode.content;
     }
@@ -39588,14 +39592,14 @@ const flattenNode = (node) => {
     ) {
       const flatten = currentNode;
       flatten.traverse((node, path, parent) => {
-        if (_optionalChain([parent, 'optionalAccess', _3 => _3.fn]) === node.fn) {
+        if (_optionalChain$3([parent, 'optionalAccess', _3 => _3.fn]) === node.fn) {
           const indexToRemove = path.replace(/[^0-9]/g, "");
           parent.args.splice(+indexToRemove, 1) || [];
           let argstoAdd = parent.args;
           node.args.forEach((arg) => {
             argstoAdd.push(arg);
           });
-          node = new m$2.OperatorNode(node.op, node.fn, argstoAdd);
+          node = new m$5.OperatorNode(node.op, node.fn, argstoAdd);
           if (node.fn === "multiply" && node["implicit"]) {
             node["implicit"] = false;
           }
@@ -39632,7 +39636,7 @@ const flattenNode = (node) => {
                   newArgs.push(arg);
                 }
               });
-              node.args[0] = new m$2.OperatorNode("*", "multiply", newArgs);
+              node.args[0] = new m$5.OperatorNode("*", "multiply", newArgs);
             }
             newNode = node;
           }
@@ -39731,7 +39735,366 @@ const sort = (node) => {
   return resultNode;
 };
 
-const m$1 = mathjs;
+function _optionalChain$2(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }const { simplify: simplify$2 } = mathjs;
+const m$4 = mathjs;
+let simplifyRules = [
+  { l: "-((n1)*(n2))", r: "(n1)*(n2)" },
+  { l: "(n1-n2)/n3", r: "n1/n3-n2/n3" },
+  { l: "(n1+n2)/n3", r: "n1/n3+n2/n3" },
+  { l: "(n1-n2)*n3/n4", r: "(n1*n3)/n4-(n2*n3)/n4" },
+  { l: "(n1+n2)*n3/n4", r: "(n1*n3)/n4+(n2*n3)/n4" },
+];
+const customRound = (number) =>
+  Math.round(number * 10000000000000) / 10000000000000;
+const expressionsCanBeCompared = (
+  firstEquation,
+  secondEquation
+) => {
+  let noFunctionOrArray = true;
+  let firstSymbolNode = false;
+  let symbolNode = false;
+  let seriesNode = false;
+  firstEquation.traverse(function (node, path, parent) {
+    if (node.isSymbolNode) {
+      firstSymbolNode = true;
+      seriesNode = seriesNode || node.name.includes("[");
+    }
+    noFunctionOrArray =
+      noFunctionOrArray || node.isFunctionNode || node.isArrayNode;
+  });
+  secondEquation.traverse(function (node, path, parent) {
+    if (node.isFunctionNode || node.isArrayNode) {
+      noFunctionOrArray = false;
+    }
+    if (node.isSymbolNode && firstSymbolNode) symbolNode = true;
+  });
+  return noFunctionOrArray && symbolNode && !seriesNode;
+};
+const transformEqualityInExpression = (equality) =>
+  simplify$1(new m$4.OperatorNode("-", "subtract", equality.args));
+const getVariables = (equation) => {
+  let variableNames = [];
+  equation.traverse(function (node, path, parent) {
+    if (
+      node.isSymbolNode &&
+      _optionalChain$2([node, 'optionalAccess', _ => _.name, 'access', _2 => _2.length]) === 1 &&
+      !variableNames.includes(node.name)
+    ) {
+      variableNames.push(node.name);
+    }
+  });
+  return variableNames.sort();
+};
+const getCoefficients = (equation, isInequality) => {
+  try {
+    const rationalizedEquation = m$4.rationalize(equation, {}, true);
+    let coefficients = rationalizedEquation.coefficients;
+    let allNegatives = coefficients.every((coefficient) => coefficient < 0);
+    return allNegatives
+      ? coefficients.map((coefficient) => Math.abs(coefficient))
+      : coefficients;
+  } catch (e) {
+    if (isInequality) {
+      equation = simplify$2(equation, simplifyRules);
+    } else {
+      simplifyRules.push({ l: "-(n)", r: "n" });
+      equation = simplify$2(equation, simplifyRules);
+    }
+    try {
+      const rationalizedEquation = m$4.rationalize(equation, {}, true);
+      return rationalizedEquation.coefficients;
+    } catch (e) {}
+  }
+  return [1, 0];
+};
+const setXToOne = (equation, variableName) =>
+  equation.transform(function (node, path, parent) {
+    if (node.isSymbolNode && node.name === variableName) {
+      return new m$4.ConstantNode(1);
+    }
+    return node;
+  });
+const solveQuadraticEquation = (coefficients) => {
+  const [c, b, a] = coefficients;
+  const discriminant = b * b - 4 * a * c;
+  let addDiscriminant;
+  let subtractDiscriminant;
+  try {
+    addDiscriminant = m$4.compile(
+      m$4.fraction(-b + m$4.sqrt(discriminant)) / (2 * a)
+    );
+  } catch (e2) {
+    addDiscriminant = m$4.compile("(-b+sqrt(discriminant))/(2*a)");
+  }
+  try {
+    subtractDiscriminant = m$4.compile(
+      m$4.fraction(-b - m$4.sqrt(discriminant)) / (2 * a)
+    );
+  } catch (e3) {
+    subtractDiscriminant = m$4.compile("(-b-sqrt(discriminant))/(2*a)");
+  }
+  let firstRoot = addDiscriminant.evaluate({
+    discriminant: discriminant,
+    a: a,
+    b: b,
+  });
+  let secondRoot = subtractDiscriminant.evaluate({
+    discriminant: discriminant,
+    a: a,
+    b: b,
+  });
+  if (!firstRoot.im) {
+    firstRoot = customRound(firstRoot);
+    secondRoot = customRound(secondRoot);
+    return [
+      { re: firstRoot, im: 0 },
+      { re: secondRoot, im: 0 },
+    ];
+  }
+  return [
+    {
+      re: customRound(firstRoot.re),
+      im: customRound(firstRoot.im),
+    },
+    {
+      re: customRound(secondRoot.re),
+      im: customRound(secondRoot.im),
+    },
+  ];
+};
+const solveLinearEquation = (coefficients) => {
+  let result;
+  if (!coefficients) {
+    return undefined;
+  }
+  if (coefficients.length === 3 && coefficients[0] === 0) {
+    coefficients = coefficients.splice(1, 2);
+  }
+  if (coefficients.length === 2) {
+    if (coefficients[0] === 0 && coefficients[1] === 0) {
+      return Infinity;
+    }
+    if (coefficients[0] === 0) {
+      return 0;
+    }
+    result = customRound(m$4.divide(coefficients[0], -1 * coefficients[1]));
+  }
+  return result;
+};
+const equationsHaveTheSameVariables = (
+  firstEquationVariables,
+  secondEquationVariables
+) => {
+  return (
+    Array.isArray(firstEquationVariables) &&
+    Array.isArray(secondEquationVariables) &&
+    firstEquationVariables.length === secondEquationVariables.length &&
+    firstEquationVariables.every(
+      (variable, index) => variable === secondEquationVariables[index]
+    )
+  );
+};
+
+const m$3 = mathjs;
+const compareCoefficients = (firstEqCoeff, secondEqCoeff) =>
+  Array.isArray(firstEqCoeff) &&
+  Array.isArray(secondEqCoeff) &&
+  firstEqCoeff.length === secondEqCoeff.length &&
+  firstEqCoeff.every((val, index) => val === secondEqCoeff[index]);
+const compareEquations = (
+  firstEquation,
+  secondEquation,
+  isInequality
+) => {
+  let equivalence = false;
+  if (expressionsCanBeCompared(firstEquation, secondEquation)) {
+    let firstExpression = transformEqualityInExpression(firstEquation);
+    let secondExpression = transformEqualityInExpression(secondEquation);
+    if (firstExpression.equals(secondExpression)) {
+      return true;
+    }
+    let firstEquationVariablesName = getVariables(firstExpression);
+    let secondEquationVariablesName = getVariables(secondExpression);
+    if (
+      !equationsHaveTheSameVariables(
+        firstEquationVariablesName,
+        secondEquationVariablesName
+      )
+    ) {
+      return false;
+    }
+    let firstEquationCoefficients;
+    let secondEquationCoefficients;
+    if (firstEquationVariablesName.length === 1) {
+      firstEquationCoefficients = getCoefficients(
+        firstExpression,
+        isInequality
+      );
+      secondEquationCoefficients = getCoefficients(
+        secondExpression,
+        isInequality
+      );
+      if (
+        compareCoefficients(
+          firstEquationCoefficients,
+          secondEquationCoefficients
+        )
+      ) {
+        return true;
+      }
+      if (
+        (firstEquationCoefficients.length === 3 &&
+          secondEquationCoefficients.length === 3 &&
+          !isInequality &&
+          firstEquationCoefficients[0] !== 0) ||
+        (firstEquationCoefficients.length === 4 &&
+          firstEquationCoefficients[0] === 0 &&
+          secondEquationCoefficients[0] === 0)
+      ) {
+        if (firstEquationCoefficients[0] === 0) {
+          firstEquationCoefficients = firstEquationCoefficients.splice(1, 3);
+          secondEquationCoefficients = secondEquationCoefficients.splice(1, 3);
+        }
+        let rootsFirstEquation = solveQuadraticEquation(
+          firstEquationCoefficients
+        );
+        let rootsSecondEquation = solveQuadraticEquation(
+          secondEquationCoefficients
+        );
+        let firstRoot = m$3.complex(rootsFirstEquation);
+        let secondRoot = m$3.complex(rootsSecondEquation);
+        if (rootsFirstEquation[0].im === 0 && rootsFirstEquation[1].im === 0) {
+          return (
+            (firstRoot[0].equals(secondRoot[0]) &&
+              firstRoot[1].equals(secondRoot[1])) ||
+            (firstRoot[0].equals(secondRoot[1]) &&
+              firstRoot[1].equals(secondRoot[0]))
+          );
+        }
+        return (
+          rootsFirstEquation[0].re === rootsSecondEquation[0].re &&
+          rootsFirstEquation[1].re === rootsSecondEquation[1].re &&
+          rootsFirstEquation[0].im.toFixed(13) ===
+            rootsSecondEquation[0].im.toFixed(13) &&
+          rootsFirstEquation[1].im.toFixed(13) ===
+            rootsSecondEquation[1].im.toFixed(13)
+        );
+      }
+      const solutionForFirstEquation = solveLinearEquation(
+        firstEquationCoefficients
+      );
+      const solutionForSecondEquation = solveLinearEquation(
+        secondEquationCoefficients
+      );
+      equivalence =
+        solutionForFirstEquation === solutionForSecondEquation &&
+        solutionForFirstEquation !== undefined;
+    }
+    if (firstEquationVariablesName.length === 2) {
+      let x = firstEquationVariablesName[0];
+      let expraNoX = setXToOne(firstExpression, x);
+      firstEquationCoefficients = getCoefficients(expraNoX, isInequality);
+      let exprbNoX = setXToOne(secondExpression, x);
+      secondEquationCoefficients = getCoefficients(exprbNoX, isInequality);
+      let yFromFirstExpression = solveLinearEquation(firstEquationCoefficients);
+      let yFromSecondExpression = solveLinearEquation(
+        secondEquationCoefficients
+      );
+      equivalence = yFromFirstExpression === yFromSecondExpression;
+    }
+    if (equivalence && isInequality) {
+      return !(
+        (m$3.isPositive(firstEquationCoefficients[0]) &&
+          m$3.isNegative(firstEquationCoefficients[1]) &&
+          m$3.isNegative(secondEquationCoefficients[0]) &&
+          m$3.isPositive(secondEquationCoefficients[1])) ||
+        (m$3.isNegative(firstEquationCoefficients[0]) &&
+          m$3.isPositive(firstEquationCoefficients[1]) &&
+          m$3.isPositive(secondEquationCoefficients[0]) &&
+          m$3.isNegative(secondEquationCoefficients[1]))
+      );
+    }
+  }
+  return equivalence;
+};
+
+function _optionalChain$1(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }const m$2 = mathjs;
+const operation = (signName) => {
+  switch (signName) {
+    case "smaller":
+      return "<";
+    case "smallerEq":
+      return "<=";
+    case "larger":
+      return ">";
+    case "largerEq":
+      return ">=";
+    case "equal":
+      return "==";
+    case "unequal":
+      return "!=";
+  }
+};
+const splitInequality = (compoundInequality) => ({
+  left: new m$2.OperatorNode(
+    operation(compoundInequality.conditionals[0]),
+    compoundInequality.conditionals[0],
+    [compoundInequality.params[0], compoundInequality.params[1]]
+  ),
+  right: new m$2.OperatorNode(
+    operation(compoundInequality.conditionals[1]),
+    compoundInequality.conditionals[1],
+    [compoundInequality.params[1], compoundInequality.params[2]]
+  ),
+});
+const getLimit = (
+  expressionsPair,
+  limitType
+) => {
+  const expressionR = transformEqualityInExpression(expressionsPair.right);
+  const expressionL = transformEqualityInExpression(expressionsPair.left);
+  const xFirstInequality = solveLinearEquation(getCoefficients(expressionR, true));
+  const xSecondInequality = solveLinearEquation(getCoefficients(expressionL, true));
+  if (limitType === "inferior") {
+    return Math.min(xFirstInequality, xSecondInequality);
+  }
+  return Math.max(xFirstInequality, xSecondInequality);
+};
+const compareCompoundInequations = (
+  firstInequation,
+  secondInequation
+) => {
+  if (!expressionsCanBeCompared(firstInequation, secondInequation)) {
+    return false;
+  }
+  const firstInequalityVariablesName = getVariables(firstInequation);
+  const secondInequalityVariablesName = getVariables(secondInequation);
+  if (
+    !equationsHaveTheSameVariables(
+      firstInequalityVariablesName,
+      secondInequalityVariablesName
+    ) &&
+    _optionalChain$1([firstInequalityVariablesName, 'optionalAccess', _ => _.length]) === 1
+  ) {
+    return false;
+  }
+  const firstInequalities = splitInequality(firstInequation);
+  const secondInequalities = splitInequality(secondInequation);
+  let firstInequalitiesSolution = {
+    min: getLimit(firstInequalities, "inferior"),
+    max: getLimit(firstInequalities, "superior"),
+  };
+  let secondInequalitiesSolution = {
+    min: getLimit(secondInequalities, "inferior"),
+    max: getLimit(secondInequalities, "superior"),
+  };
+  return (
+    firstInequalitiesSolution.min === secondInequalitiesSolution.min &&
+    firstInequalitiesSolution.max === secondInequalitiesSolution.max
+  );
+};
+
+function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }const m$1 = mathjs;
 const log$1 = logger("mv:symbolic");
 const positiveInfinity = 1.497258191621251e6;
 const negativeInfinity = -1.497258191621251e6;
@@ -39739,19 +40102,22 @@ const { simplify: ms$1, rationalize } = mathjs;
 const SIMPLIFY_RULES = [
   { l: "n1^(1/n2)", r: "nthRoot(n1, n2)" },
   { l: "sqrt(n1)", r: "nthRoot(n1, 2)" },
-  { l: "(n^2)/n", r: "n" },
-  { l: "(n^2) + n", r: "n * (n + 1)" },
-  { l: "((n^n1) + n)/n", r: "n^(n1-1)+1" },
-  { l: "(n^2) + 2n", r: "n * (n + 2)" },
+  { l: "nthRoot(-1, 2)", r: "i" },
   { l: "(v1-v2)/n", r: "v1/n-v2/n" },
   { l: "(v1-n)/n", r: "v1/n-1" },
   { l: "n/n1-c1", r: "(n-c1*n1)/n1" },
   { l: "i^2", r: "-1" },
   { l: "pi", r: "3.141592653589793" },
+  { l: "n/(n*n1)", r: "1/n1" },
+  { l: "c1/(c2*(n3))", r: "(c1/c2)*(1/n3)" },
+  { l: "n1/(n(n+1)+1(n+1))", r: "n1/((n+1)^2)" },
   { l: "(n1 + n2) ^ 2", r: "(n1 ^ 2) + 2*n1*n2 + (n2 ^ 2)" },
   { l: "tzn(n1, n2)", r: "n1" },
   { l: "n1/(-n2)", r: "-(n1/n2)" },
   { l: "sin(n*pi)", r: "0" },
+  { l: "log(n1*n2, n3)", r: "log(n1, n3)+log(n2,n3)" },
+  { l: "log(n1/n2, n3)", r: "log(n1, n3)-log(n2,n3)" },
+  { l: "log(n1^n2, n3)", r: "n2*log(n1,n3)" },
   { l: "sin(n)/cos(n)", r: "tan(n)" },
   { l: "csc(n)", r: "1/sin(n)" },
   { l: "sec(n)", r: "1/cos(n)" },
@@ -39777,36 +40143,62 @@ const simplify$1 = (v) => {
 const normalize = (a) => {
   let r = a;
   let onlyConstant = true;
+  let containsFunctionNode = false;
   let containsArrayNode = false;
+  let pi = false;
+  let containsInverseFlag = false;
   r.traverse(function (node, path, parent) {
     if (node.isArrayNode) {
       containsArrayNode = true;
       node.items = node.items.map((item) => simplify$1(item));
     }
-    return node;
+    if (node.isSymbolNode) {
+      pi = pi || node.name === "pi";
+      containsInverseFlag = containsInverseFlag || node.name === "f^{-1}";
+    }
   });
-  if (r.fn === "equal") {
+  if (r.args) {
     r.args = r.args.map((arg) => {
-      if (!arg.isFunctionNode && !arg.isArrayNode) {
+      if (
+        !arg.isFunctionNode &&
+        !arg.isArrayNode &&
+        !containsInverseFlag &&
+        !pi
+      ) {
         try {
-          arg = rationalize(arg, {}, true).expression;
+          arg = simplify$1(arg);
         } catch (e) {
         }
       }
+      containsFunctionNode = containsFunctionNode || arg.isFunctionNode;
       onlyConstant = onlyConstant && !!arg.isConstantNode;
       return arg;
     });
-  } else {
-    onlyConstant = false;
-    try {
-      r = rationalize(a, {}, true).expression;
-    } catch (e) {
+    if (containsFunctionNode || containsInverseFlag) {
+      r.args = r.args.map((arg) => {
+        if (!arg.isFunctionNode && !arg.isArrayNode) {
+          try {
+            arg = rationalize(simplify$1(arg), {}, true).expression;
+          } catch (e) {
+          }
+        }
+        return arg;
+      });
     }
+  }
+  if (r.fn !== "equal") {
+    try {
+      onlyConstant = false;
+      r = rationalize(r, {}, true).expression;
+    } catch (e2) {}
   }
   if (r.conditionals && r.params) {
     r.params = r.params.map((param) => sort(simplify$1(param)));
-  } else if (!containsArrayNode && !onlyConstant) {
-    r = simplify$1(r);
+  }
+  if (!containsArrayNode && !onlyConstant) {
+    try {
+      r = simplify$1(r);
+    } catch (e) {}
   }
   log$1("[normalize] input: ", a.toString(), "output: ", r.toString());
   if (
@@ -39826,7 +40218,7 @@ const normalize = (a) => {
   }
   return r;
 };
-const isMathEqual$1 = (a, b, opts) => {
+const isMathEqual$1 = (a, b) => {
   let as;
   let bs;
   as = a.conditionals ? normalize(a) : sort(normalize(a));
@@ -39835,35 +40227,43 @@ const isMathEqual$1 = (a, b, opts) => {
   const isSortingEnough = sort(a).equals(sort(b));
   const isTexEnough = as.toTex().trim() === bs.toTex().trim();
   let equality = isTexEnough || as.equals(bs) || isSortingEnough;
-  if (!equality && as.fn === "equal" && bs.fn === "equal") {
-    let noFunctionOrArray = true;
-    let symbolNode = false;
-    as.args = as.args.map((arg) => {
-      noFunctionOrArray =
-        !!noFunctionOrArray && (!arg.isFunctionNode || !arg.isArrayNode);
-      if (arg.isSymbolNode) {
-        symbolNode = true;
-      }
-      return arg;
-    });
-    bs.args = bs.args.map((arg) => {
-      noFunctionOrArray =
-        !!noFunctionOrArray && (!arg.isFunctionNode || !arg.isArrayNode);
-      if (arg.isSymbolNode) {
-        symbolNode = true;
-      }
-      return arg;
-    });
-    if (noFunctionOrArray && symbolNode) {
-      let ae = new m$1.OperatorNode("-", "subtract", as.args);
-      let be = new m$1.OperatorNode("-", "subtract", bs.args);
-      let minus = new m$1.ConstantNode(-1);
-      equality = isMathEqual$1(ae, be);
-      if (!equality && noFunctionOrArray && symbolNode) {
-        be = new m$1.OperatorNode("*", "multiply", [minus, be]);
-        equality = isMathEqual$1(ae, be);
-      }
-      log$1("[isMathEqual]", ae.toString(), "==?", be.toString());
+  if (equality) {
+    return true;
+  }
+  if (as.fn === "equal" && bs.fn === "equal") {
+    return compareEquations(as, bs, false);
+  }
+  if (
+    (as.fn === "larger" && bs.fn === "larger") ||
+    (as.fn === "largerEq" && bs.fn === "largerEq")
+  ) {
+    as.fn = "equal";
+    bs.fn = "equal";
+    as.op = "=";
+    bs.op = "=";
+    return compareEquations(as, bs, true);
+  }
+  if (
+    _optionalChain([as, 'optionalAccess', _ => _.conditionals, 'optionalAccess', _2 => _2.length]) === _optionalChain([bs, 'optionalAccess', _3 => _3.conditionals, 'optionalAccess', _4 => _4.length]) &&
+    _optionalChain([as, 'optionalAccess', _5 => _5.conditionals, 'optionalAccess', _6 => _6.length]) === 2 &&
+    _optionalChain([as, 'optionalAccess', _7 => _7.conditionals, 'optionalAccess', _8 => _8.toString, 'call', _9 => _9()]) === _optionalChain([bs, 'optionalAccess', _10 => _10.conditionals, 'optionalAccess', _11 => _11.toString, 'call', _12 => _12()])
+  ) {
+    const params = [
+      "smaller",
+      "smallerEq",
+      "larger",
+      "largerEq",
+      "equal",
+      "unequal",
+    ];
+    const paramsIncludedA = params.some((param) =>
+      as.conditionals.includes(param)
+    );
+    const paramsIncludedB = params.some((param) =>
+      bs.conditionals.includes(param)
+    );
+    if (paramsIncludedA && paramsIncludedB) {
+      return compareCompoundInequations(as, bs);
     }
   }
   return equality;
@@ -39881,11 +40281,7 @@ const isMathEqual = (a, b, opts) => {
     a = sort(a);
     b = sort(b);
   }
-  let equalTex;
-  if (!a.isUnit) {
-    equalTex = a.toTex().trim() === b.toTex().trim();
-  }
-  return a.equals(b) || equalTex;
+  return a.equals(b);
 };
 
 var s = 1000;
@@ -40315,7 +40711,7 @@ const log = browser("difference");
 const differenceIsTooGreat = (a, b) => {
   const smallest = Math.min(a.toString().length, b.toString().length);
   const biggest = Math.max(a.toString().length, b.toString().length);
-  const errorAcceptance = 6;
+  const errorAcceptance = 17;
   const limit = (1 / smallest) * 100 + 10 + errorAcceptance;
   const diff = biggest - smallest;
   log("a:", a.toString(), "b:", b.toString(), "limit:", limit, "diff:", diff);
@@ -40329,11 +40725,19 @@ const differenceIsTooGreat = (a, b) => {
 const lta = new LatexToAst();
 const atm = new AstToMathJs();
 const latexEqual$1 = (a, b, opts) => {
+  const isNumeric = (str) => /^-?\d+(\.\d+)?$/.test(str);
   if (!a || !b) {
     return false;
   }
   if (a === b) {
     return true;
+  }
+  if (opts.mode === "symbolic" && isNumeric(a) && isNumeric(b)) {
+    const numA = parseFloat(a);
+    const numB = parseFloat(b);
+    if (numA === numB) {
+      return true;
+    }
   }
   const al = lta.convert(a);
   const bl = lta.convert(b);
@@ -40345,7 +40749,7 @@ const latexEqual$1 = (a, b, opts) => {
   if (opts.mode === "literal") {
     return isMathEqual(amo, bmo, opts.literal);
   } else {
-    return isMathEqual$1(amo, bmo, opts.symbolic);
+    return isMathEqual$1(amo, bmo);
   }
 };
 
