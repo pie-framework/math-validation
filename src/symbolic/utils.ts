@@ -28,8 +28,8 @@ export const expressionsCanBeCompared = (
 
   firstEquation.traverse(function (node, path, parent) {
     if (node.isSymbolNode) {
-      firstSymbolNode = true
-      seriesNode = seriesNode || node.name.includes("[")
+      firstSymbolNode = true;
+      seriesNode = seriesNode || node.name.includes("[");
     }
     noFunctionOrArray =
       noFunctionOrArray || node.isFunctionNode || node.isArrayNode;
@@ -44,6 +44,49 @@ export const expressionsCanBeCompared = (
   });
 
   return noFunctionOrArray && symbolNode && !seriesNode;
+};
+
+export const hasSymbolicExponent = (node: MathNode): boolean => {
+  let found = false;
+
+  node.traverse((n) => {
+    if (
+      n.isOperatorNode &&
+      n.op === "^" &&
+      !n.args[1]?.isConstantNode // Exponent is symbolic or compound
+    ) {
+      found = true;
+    }
+  });
+
+  return found;
+};
+
+export const areNumericallyEquivalent = (
+  exprA: MathNode,
+  exprB: MathNode,
+  variables: string[],
+  tolerance: number = 1e-10
+): boolean => {
+  const compiledA = m.compile(exprA.toString());
+  const compiledB = m.compile(exprB.toString());
+
+  const testValues = [1, 2, 3, 4, 5];
+
+  return testValues.every((val) => {
+    const scope = variables.reduce((acc, v) => {
+      acc[v] = val;
+      return acc;
+    }, {} as Record<string, number>);
+
+    try {
+      const resultA = compiledA.evaluate(scope);
+      const resultB = compiledB.evaluate(scope);
+      return Math.abs(resultA - resultB) < tolerance;
+    } catch {
+      return false;
+    }
+  });
 };
 
 // move the terms of the equations to the left hand side

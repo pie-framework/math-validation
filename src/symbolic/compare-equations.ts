@@ -9,6 +9,8 @@ import {
   transformEqualityInExpression,
   expressionsCanBeCompared,
   solveQuadraticEquation,
+  hasSymbolicExponent,
+  areNumericallyEquivalent,
 } from "./utils";
 
 const m: any = mathjs;
@@ -48,6 +50,19 @@ export const compareEquations = (
 
     let firstEquationCoefficients: number[];
     let secondEquationCoefficients: number[];
+
+    if (
+      hasSymbolicExponent(firstExpression) ||
+      hasSymbolicExponent(secondExpression)
+    ) {
+      const isEquivalent = areNumericallyEquivalent(
+        firstExpression,
+        secondExpression,
+        firstEquationVariablesName
+      );
+     
+      return isEquivalent;
+    }
 
     if (firstEquationVariablesName.length === 1) {
       firstEquationCoefficients = getCoefficients(
