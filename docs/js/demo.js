@@ -39770,6 +39770,42 @@ const expressionsCanBeCompared = (
   });
   return noFunctionOrArray && symbolNode && !seriesNode;
 };
+const hasSymbolicExponent = (node) => {
+  let found = false;
+  node.traverse((n) => {
+    if (
+      n.isOperatorNode &&
+      n.op === "^" &&
+      !_optionalChain$2([n, 'access', _ => _.args, 'access', _2 => _2[1], 'optionalAccess', _3 => _3.isConstantNode])
+    ) {
+      found = true;
+    }
+  });
+  return found;
+};
+const areNumericallyEquivalent = (
+  exprA,
+  exprB,
+  variables,
+  tolerance = 1e-10
+) => {
+  const compiledA = m$4.compile(exprA.toString());
+  const compiledB = m$4.compile(exprB.toString());
+  const testValues = [1, 2, 3, 4, 5];
+  return testValues.every((val) => {
+    const scope = variables.reduce((acc, v) => {
+      acc[v] = val;
+      return acc;
+    }, {} );
+    try {
+      const resultA = compiledA.evaluate(scope);
+      const resultB = compiledB.evaluate(scope);
+      return Math.abs(resultA - resultB) < tolerance;
+    } catch (e2) {
+      return false;
+    }
+  });
+};
 const transformEqualityInExpression = (equality) =>
   simplify$1(new m$4.OperatorNode("-", "subtract", equality.args));
 const getVariables = (equation) => {
@@ -39777,7 +39813,7 @@ const getVariables = (equation) => {
   equation.traverse(function (node, path, parent) {
     if (
       node.isSymbolNode &&
-      _optionalChain$2([node, 'optionalAccess', _ => _.name, 'access', _2 => _2.length]) === 1 &&
+      _optionalChain$2([node, 'optionalAccess', _4 => _4.name, 'access', _5 => _5.length]) === 1 &&
       !variableNames.includes(node.name)
     ) {
       variableNames.push(node.name);
@@ -39823,14 +39859,14 @@ const solveQuadraticEquation = (coefficients) => {
     addDiscriminant = m$4.compile(
       m$4.fraction(-b + m$4.sqrt(discriminant)) / (2 * a)
     );
-  } catch (e2) {
+  } catch (e3) {
     addDiscriminant = m$4.compile("(-b+sqrt(discriminant))/(2*a)");
   }
   try {
     subtractDiscriminant = m$4.compile(
       m$4.fraction(-b - m$4.sqrt(discriminant)) / (2 * a)
     );
-  } catch (e3) {
+  } catch (e4) {
     subtractDiscriminant = m$4.compile("(-b-sqrt(discriminant))/(2*a)");
   }
   let firstRoot = addDiscriminant.evaluate({
@@ -39925,6 +39961,17 @@ const compareEquations = (
     }
     let firstEquationCoefficients;
     let secondEquationCoefficients;
+    if (
+      hasSymbolicExponent(firstExpression) ||
+      hasSymbolicExponent(secondExpression)
+    ) {
+      const isEquivalent = areNumericallyEquivalent(
+        firstExpression,
+        secondExpression,
+        firstEquationVariablesName
+      );
+      return isEquivalent;
+    }
     if (firstEquationVariablesName.length === 1) {
       firstEquationCoefficients = getCoefficients(
         firstExpression,
