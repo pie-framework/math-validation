@@ -49,6 +49,68 @@ export const compareEquations = (
     let firstEquationCoefficients: number[];
     let secondEquationCoefficients: number[];
 
+    const hasSymbolicExponent = (node: MathNode): boolean => {
+      let found = false;
+
+      node.traverse((n) => {
+        if (
+          n.isOperatorNode &&
+          n.op === "^" &&
+          !n.args[1]?.isConstantNode // Exponent is symbolic or compound
+        ) {
+          found = true;
+        }
+      });
+
+      return found;
+    };
+
+    const areNumericallyEquivalent = (
+      exprA: MathNode,
+      exprB: MathNode,
+      variables: string[],
+      tolerance: number = 1e-10
+    ): boolean => {
+      const compiledA = m.compile(exprA.toString());
+      const compiledB = m.compile(exprB.toString());
+
+      const testValues = [1, 2, 3, 4, 5];
+
+      return testValues.every((val) => {
+        const scope = variables.reduce((acc, v) => {
+          acc[v] = val;
+          return acc;
+        }, {} as Record<string, number>);
+
+        try {
+          const resultA = compiledA.evaluate(scope);
+          const resultB = compiledB.evaluate(scope);
+          return Math.abs(resultA - resultB) < tolerance;
+        } catch {
+          return false;
+        }
+      });
+    };
+
+    if (
+      hasSymbolicExponent(firstExpression) ||
+      hasSymbolicExponent(secondExpression)
+    ) {
+      const isEquivalent = areNumericallyEquivalent(
+        firstExpression,
+        secondExpression,
+        firstEquationVariablesName
+      );
+      console.log(
+        "Symbolic exponent detected, fallback to numeric equivalence:",
+        firstExpression.toString(),
+        secondExpression.toString(),
+        "=>",
+        isEquivalent
+      );
+      return isEquivalent;
+    }
+
     if (firstEquationVariablesName.length === 1) {
       firstEquationCoefficients = getCoefficients(
         firstExpression,
