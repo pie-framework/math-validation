@@ -167,7 +167,7 @@ export class AstToMathJs {
           this.convert(operands[1]),
         ]);
 
-      const f = operands[0]
+      const f = operands[0];
       const args = operands[1];
       let f_args;
 
@@ -183,7 +183,10 @@ export class AstToMathJs {
     }
 
     if (operator === "unit") {
-      const unit = new m.Unit(1, operands[0]);
+      const rawUnit =
+        typeof operands[0] === "string" ? operands[0] : operands[0].name;
+      const unit = new m.Unit(1, rawUnit);
+      console.log(unit, "UNIT");
       return unit;
     }
 
