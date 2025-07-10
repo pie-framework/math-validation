@@ -78,15 +78,6 @@ const normalize = (a: string | MathNode | any) => {
   let pi = false;
   let containsInverseFlag = false;
 
-  if (r?.isUnit) {
-    // Convert unit to string or number for equality comparisons
-    return r;
-  }
-
-  if (typeof r.traverse !== "function") {
-    return r;
-  }
-
   r.traverse(function (node, path, parent) {
     if (node.isArrayNode) {
       containsArrayNode = true;
