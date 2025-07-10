@@ -39217,6 +39217,7 @@ function create(factories, config) {
 const mathjs = create(all, { number: "Fraction" });
 mathjs.replacer;
 
+function _optionalChain$4(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
 const log$3 = logger("mv:ast-to-math");
 const m$6 = mathjs;
 const operators = {
@@ -39224,8 +39225,15 @@ const operators = {
     return new m$6.OperatorNode("+", "add", operands);
   },
   "*": function (operands) {
-    if (operands[1] && operands[1].isUnit) {
-      return m$6.multiply(operands[0].value, operands[1]);
+    const [left, right] = operands;
+    if (
+      _optionalChain$4([left, 'optionalAccess', _2 => _2.type]) === "ConstantNode" &&
+      _optionalChain$4([right, 'optionalAccess', _3 => _3.isUnit]) &&
+      typeof left.value === "object"
+    ) {
+      const leftVal = left.value.valueOf();
+      const unitResult = m$6.multiply(leftVal, right);
+      return unitResult;
     }
     return new m$6.OperatorNode("*", "multiply", operands);
   },
@@ -40268,6 +40276,27 @@ const normalize = (a) => {
 const isMathEqual$1 = (a, b) => {
   let as;
   let bs;
+  if (_optionalChain([a, 'optionalAccess', _ => _.isUnit]) && _optionalChain([b, 'optionalAccess', _2 => _2.isUnit])) {
+    try {
+      return m$1.equal(a, b);
+    } catch (e) {
+      log$1(
+        "[isMathEqual] Error comparing units:",
+        _optionalChain([a, 'optionalAccess', _3 => _3.toString, 'optionalCall', _4 => _4()]),
+        _optionalChain([b, 'optionalAccess', _5 => _5.toString, 'optionalCall', _6 => _6()]),
+        e
+      );
+      return false;
+    }
+  }
+  if (_optionalChain([a, 'optionalAccess', _7 => _7.isUnit]) || _optionalChain([b, 'optionalAccess', _8 => _8.isUnit])) {
+    log$1(
+      "[isMathEqual] Mismatched unit comparison:",
+      _optionalChain([a, 'optionalAccess', _9 => _9.toString, 'optionalCall', _10 => _10()]),
+      _optionalChain([b, 'optionalAccess', _11 => _11.toString, 'optionalCall', _12 => _12()])
+    );
+    return false;
+  }
   as = a.conditionals ? normalize(a) : sort(normalize(a));
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
   log$1("[isMathEqual]", as.toString(), "==?", bs.toString());
@@ -40291,9 +40320,9 @@ const isMathEqual$1 = (a, b) => {
     return compareEquations(as, bs, true);
   }
   if (
-    _optionalChain([as, 'optionalAccess', _ => _.conditionals, 'optionalAccess', _2 => _2.length]) === _optionalChain([bs, 'optionalAccess', _3 => _3.conditionals, 'optionalAccess', _4 => _4.length]) &&
-    _optionalChain([as, 'optionalAccess', _5 => _5.conditionals, 'optionalAccess', _6 => _6.length]) === 2 &&
-    _optionalChain([as, 'optionalAccess', _7 => _7.conditionals, 'optionalAccess', _8 => _8.toString, 'call', _9 => _9()]) === _optionalChain([bs, 'optionalAccess', _10 => _10.conditionals, 'optionalAccess', _11 => _11.toString, 'call', _12 => _12()])
+    _optionalChain([as, 'optionalAccess', _13 => _13.conditionals, 'optionalAccess', _14 => _14.length]) === _optionalChain([bs, 'optionalAccess', _15 => _15.conditionals, 'optionalAccess', _16 => _16.length]) &&
+    _optionalChain([as, 'optionalAccess', _17 => _17.conditionals, 'optionalAccess', _18 => _18.length]) === 2 &&
+    _optionalChain([as, 'optionalAccess', _19 => _19.conditionals, 'optionalAccess', _20 => _20.toString, 'call', _21 => _21()]) === _optionalChain([bs, 'optionalAccess', _22 => _22.conditionals, 'optionalAccess', _23 => _23.toString, 'call', _24 => _24()])
   ) {
     const params = [
       "smaller",
