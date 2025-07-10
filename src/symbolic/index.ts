@@ -172,6 +172,29 @@ export const isMathEqual = (a: any, b: any) => {
   let as: MathNode;
   let bs: MathNode;
 
+  if (a?.isUnit && b?.isUnit) {
+    try {
+      return m.equal(a, b);
+    } catch (e) {
+      log(
+        "[isMathEqual] Error comparing units:",
+        a?.toString?.(),
+        b?.toString?.(),
+        e
+      );
+      return false;
+    }
+  }
+
+  if (a?.isUnit || b?.isUnit) {
+    log(
+      "[isMathEqual] Mismatched unit comparison:",
+      a?.toString?.(),
+      b?.toString?.()
+    );
+    return false;
+  }
+
   // apply sort if we are not in a relationalNode
   as = a.conditionals ? normalize(a) : sort(normalize(a));
 
