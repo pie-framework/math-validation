@@ -78,6 +78,15 @@ const normalize = (a: string | MathNode | any) => {
   let pi = false;
   let containsInverseFlag = false;
 
+  if (r?.isUnit) {
+    // Convert unit to string or number for equality comparisons
+    return r;
+  }
+
+  if (typeof r.traverse !== "function") {
+    return r;
+  }
+
   r.traverse(function (node, path, parent) {
     if (node.isArrayNode) {
       containsArrayNode = true;
@@ -171,6 +180,29 @@ const normalize = (a: string | MathNode | any) => {
 export const isMathEqual = (a: any, b: any) => {
   let as: MathNode;
   let bs: MathNode;
+
+  if (a?.isUnit && b?.isUnit) {
+    try {
+      return m.equal(a, b);
+    } catch (e) {
+      log(
+        "[isMathEqual] Error comparing units:",
+        a?.toString?.(),
+        b?.toString?.(),
+        e
+      );
+      return false;
+    }
+  }
+
+  if (a?.isUnit || b?.isUnit) {
+    log(
+      "[isMathEqual] Mismatched unit comparison:",
+      a?.toString?.(),
+      b?.toString?.()
+    );
+    return false;
+  }
 
   // apply sort if we are not in a relationalNode
   as = a.conditionals ? normalize(a) : sort(normalize(a));

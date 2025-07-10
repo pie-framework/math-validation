@@ -29,8 +29,16 @@ const operators = {
     return new m.OperatorNode("+", "add", operands);
   },
   "*": function (operands) {
-    if (operands[1] && operands[1].isUnit) {
-      return m.multiply(operands[0].value, operands[1]);
+    const [left, right] = operands;
+    if (
+      left?.type === "ConstantNode" &&
+      right?.isUnit &&
+      typeof left.value === "object"
+    ) {
+      const leftVal = left.value.valueOf();
+      const unitResult = m.multiply(leftVal, right);
+
+      return unitResult;
     }
     return new m.OperatorNode("*", "multiply", operands);
   },
@@ -183,10 +191,8 @@ export class AstToMathJs {
     }
 
     if (operator === "unit") {
-      const rawUnit =
-        typeof operands[0] === "string" ? operands[0] : operands[0].name;
-      const unit = new m.Unit(1, rawUnit);
-      console.log(unit, "UNIT");
+      const unit = new m.Unit(1, operands[0]);
+
       return unit;
     }
 
