@@ -17,7 +17,7 @@ const lta = new LatexToAst();
 const atm = new AstToMathJs();
 
 export const latexEqual = (a: Latex, b: Latex, opts: Opts) => {
-  const isNumeric = (str: string): boolean => /^-?\d+(\.\d+)?$/.test(str);
+  const isNumeric = (str: string): boolean => /^\s*-?\d+(\.\d+)?\s*$/.test(str);
 
   if (!a || !b) {
     return false;
