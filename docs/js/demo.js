@@ -40801,7 +40801,7 @@ const differenceIsTooGreat = (a, b) => {
 const lta = new LatexToAst();
 const atm = new AstToMathJs();
 const latexEqual$1 = (a, b, opts) => {
-  const isNumeric = (str) => /^-?\d+(\.\d+)?$/.test(str);
+  const isNumeric = (str) => /^\s*-?\d+(\.\d+)?\s*$/.test(str);
   if (!a || !b) {
     return false;
   }
