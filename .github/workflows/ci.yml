@@ -52,7 +52,7 @@ jobs:
       - run: yarn install --frozen-lockfile
         env:
           PUPPETEER_SKIP_DOWNLOAD: true
-      - run: yarn run build:dev
+      - run: yarn run build
       - run: yarn run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
