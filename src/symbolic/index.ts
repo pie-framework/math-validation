@@ -10,6 +10,9 @@ const log = logger("mv:symbolic");
 const positiveInfinity = 1.497258191621251e6;
 const negativeInfinity = -1.497258191621251e6;
 
+// relative tolerance for floating-point noise from trig functions, pi and angle conversions, e.g. sin(2pi) = -2.4e-16
+const EPSILON = 1e-12;
+
 export type SymbolicOpts = {};
 
 const { simplify: ms, rationalize } = mathjs;
@@ -156,17 +159,32 @@ const normalize = (a: string | MathNode | any) => {
     r = new m.SymbolNode("Infinity");
   }
 
-  if (r.value) {
-    r.value = new m.Fraction(Math.round(r.value * 10000) / 10000);
-  } else if (r.fn === "unaryMinus") {
-    r.args[0].value = new m.Fraction(
-      Math.round(r.args[0].value * 10000) / 10000
-    );
-    r = simplify(r);
-  }
-
   return r;
 };
+
+// numeric value of an expression without variables, such as 5, -5 or -1/2; undefined for anything else
+const constantValue = (node: any): number | undefined => {
+  if (node.filter((n) => n.isSymbolNode).length > 0) {
+    return undefined;
+  }
+
+  try {
+    const result = node.evaluate();
+
+    // equations and inequalities without variables evaluate to booleans
+    if (typeof result === "boolean") {
+      return undefined;
+    }
+
+    const value = +result;
+    return Number.isFinite(value) ? value : undefined;
+  } catch (e) {
+    return undefined;
+  }
+};
+
+const areNearlyEqual = (a: number, b: number) =>
+  Math.abs(a - b) <= EPSILON * Math.max(1, Math.abs(a), Math.abs(b));
 
 export const isMathEqual = (a: any, b: any) => {
   let as: MathNode;
@@ -209,6 +227,14 @@ export const isMathEqual = (a: any, b: any) => {
 
   if (equality) {
     return true;
+  }
+
+  // compare constant results numerically, allowing only for floating-point noise
+  const aValue = constantValue(as);
+  const bValue = constantValue(bs);
+
+  if (aValue !== undefined && bValue !== undefined) {
+    return areNearlyEqual(aValue, bValue);
   }
 
   // if both expressions are equations
