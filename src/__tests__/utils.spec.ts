@@ -10,6 +10,9 @@ import {
   solveQuadraticEquation,
   expressionsCanBeCompared,
   transformEqualityInExpression,
+  getSamplePoints,
+  areNumericallyEquivalent,
+  areEquationsNumericallyEquivalent,
 } from "../symbolic/utils";
 
 const lta = new LatexToAst();
@@ -248,5 +251,74 @@ describe("solveLinearEquation", () => {
     const result = solveLinearEquation(coefficients);
 
     expect(result).toEqual(undefined);
+  });
+});
+
+describe("getSamplePoints", () => {
+  it("gives each variable its own non-integer value, the same on every call", () => {
+    const points = getSamplePoints(["x", "y"]);
+
+    points.forEach((point) => {
+      expect(point.x).not.toEqual(point.y);
+      expect(Number.isInteger(point.x)).toEqual(false);
+      expect(Number.isInteger(point.y)).toEqual(false);
+    });
+
+    expect(getSamplePoints(["x", "y"])).toEqual(points);
+  });
+});
+
+describe("areNumericallyEquivalent", () => {
+  it('"x^2" and "y^2" are not equivalent', () => {
+    const a = atm.convert(lta.convert("x^2"));
+    const b = atm.convert(lta.convert("y^2"));
+
+    expect(areNumericallyEquivalent(a, b, ["x", "y"])).toEqual(false);
+  });
+
+  it('"(x+y)^2" and "x^2+2xy+y^2" are equivalent', () => {
+    const a = atm.convert(lta.convert("(x+y)^2"));
+    const b = atm.convert(lta.convert("x^2+2xy+y^2"));
+
+    expect(areNumericallyEquivalent(a, b, ["x", "y"])).toEqual(true);
+  });
+});
+
+describe("areEquationsNumericallyEquivalent", () => {
+  const expression = (latex: string) =>
+    transformEqualityInExpression(atm.convert(lta.convert(latex)));
+
+  it('"x^2/16+y^2/9=1" and "9x^2+16y^2=144" are equivalent: one is a constant multiple of the other', () => {
+    const result = areEquationsNumericallyEquivalent(
+      expression("\\frac{x^2}{16}+\\frac{y^2}{9}=1"),
+      expression("9x^2+16y^2=144"),
+      ["x", "y"]
+    );
+
+    expect(result).toEqual(true);
+  });
+
+  it('"x^2/16+y^2/9=1" and "x^2/17+y^2/9=1" are not equivalent', () => {
+    const result = areEquationsNumericallyEquivalent(
+      expression("\\frac{x^2}{16}+\\frac{y^2}{9}=1"),
+      expression("\\frac{x^2}{17}+\\frac{y^2}{9}=1"),
+      ["x", "y"]
+    );
+
+    expect(result).toEqual(false);
+  });
+
+  it('"x+2y=7" and "x^2+2xy-7x=0" are equivalent only when a variable factor is allowed', () => {
+    const first = expression("x+2y=7");
+    const second = expression("x^2+2xy-7x=0");
+
+    expect(areEquationsNumericallyEquivalent(first, second, ["x", "y"])).toEqual(
+      false
+    );
+    expect(
+      areEquationsNumericallyEquivalent(first, second, ["x", "y"], {
+        allowVariableFactor: true,
+      })
+    ).toEqual(true);
   });
 });
