@@ -1,14 +1,19 @@
 import { logger } from "../log";
 import { mathjs } from "../mathjs";
-import { MathNode } from "mathjs";
+import { all, create, MathNode } from "mathjs";
 import { sort } from "../node-sort";
 import { compareEquations } from "./compare-equations";
 import { compareCompoundInequations } from "./compare-compound-inequations";
 
 const m: any = mathjs;
 const log = logger("mv:symbolic");
-const positiveInfinity = 1.497258191621251e6;
-const negativeInfinity = -1.497258191621251e6;
+
+// degrees and gradians are converted with the 355/113 approximation of pi,
+// so an angle like 90° lands about 1e-7 quarter turns away from pi/2 instead of on it
+const ANGLE_TOLERANCE = 1e-5;
+
+// angles are evaluated as plain numbers, the Fraction config used elsewhere cannot represent pi
+const numeric: any = create(all);
 
 export type SymbolicOpts = {};
 
@@ -70,8 +75,87 @@ export const simplify = (v) => {
   return ms(v, rules); //.concat(SIMPLIFY_RULES));
 };
 
+// evaluates a constant expression as a plain number, undefined if it has variables
+const evaluateNumber = (node: MathNode): number | undefined => {
+  try {
+    const value = numeric.evaluate(node.toString());
+    return typeof value === "number" ? value : undefined;
+  } catch (e) {
+    return undefined;
+  }
+};
+
+// returns k when the constant angle is (within tolerance) a multiple k of pi/2
+const quarterTurns = (angle: MathNode): number | undefined => {
+  const value = evaluateNumber(angle);
+
+  if (value === undefined || !isFinite(value)) {
+    return undefined;
+  }
+
+  const turns = value / (Math.PI / 2);
+  const k = Math.round(turns);
+
+  return Math.abs(turns - k) <= ANGLE_TOLERANCE ? k : undefined;
+};
+
+// replace trigonometric functions evaluated at an angle where they are zero or undefined
+// with their exact value, so that tan(90°) becomes Infinity instead of a large finite number
+const snapTrigonometricValues = (node: MathNode) => {
+  let containsUndefinedValue = false;
+  let changed = false;
+
+  const r: MathNode | any = node.transform((n: any) => {
+    if (!n.isFunctionNode || n.args?.length !== 1) {
+      return n;
+    }
+
+    const k = quarterTurns(n.args[0]);
+
+    if (k === undefined) {
+      return n;
+    }
+
+    const odd = Math.abs(k) % 2 === 1;
+    let snapped = n;
+
+    switch (n.fn.name) {
+      case "sin":
+        snapped = odd ? n : new m.ConstantNode(0);
+        break;
+      case "cos":
+        snapped = odd ? new m.ConstantNode(0) : n;
+        break;
+      case "tan":
+      case "sec":
+        snapped = odd ? new m.SymbolNode("Infinity") : n;
+        break;
+      case "cot":
+      case "csc":
+        snapped = odd ? n : new m.SymbolNode("Infinity");
+        break;
+    }
+
+    changed = changed || snapped !== n;
+    containsUndefinedValue =
+      containsUndefinedValue || !!snapped.isSymbolNode;
+
+    return snapped;
+  });
+
+  // keep the original node when nothing was replaced, later steps rely on its identity
+  return { r: changed ? r : node, containsUndefinedValue };
+};
+
 const normalize = (a: string | MathNode | any) => {
-  let r: string | MathNode | any = a;
+  const snapped = snapTrigonometricValues(a);
+  let r: string | MathNode | any = snapped.r;
+
+  // simplify and rationalize treat Infinity as a variable (1 / Infinity + 3 becomes (1 + 3 * Infinity) / Infinity),
+  // so a constant expression with an undefined trigonometric value is evaluated before it is normalized
+  const valueWithUndefinedTrigonometry = snapped.containsUndefinedValue
+    ? evaluateNumber(r)
+    : undefined;
   let onlyConstant = true;
   let containsFunctionNode = false;
   let containsArrayNode = false;
@@ -147,12 +231,17 @@ const normalize = (a: string | MathNode | any) => {
 
   log("[normalize] input: ", a.toString(), "output: ", r.toString());
 
-  // check for infinity
+  // an undefined trigonometric value has no sign, so -tan(90°) is Infinity as well
   if (
-    r.toString() === "Infinity" ||
-    +r.toString() >= positiveInfinity ||
-    +r.toString() <= negativeInfinity
+    valueWithUndefinedTrigonometry !== undefined &&
+    !isNaN(valueWithUndefinedTrigonometry)
   ) {
+    r = isFinite(valueWithUndefinedTrigonometry)
+      ? new m.ConstantNode(valueWithUndefinedTrigonometry)
+      : new m.SymbolNode("Infinity");
+  }
+
+  if (r.toString() === "Infinity") {
     r = new m.SymbolNode("Infinity");
   }
 
