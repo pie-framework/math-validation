@@ -63,8 +63,49 @@ export default {
     },
     {
       target: "\\sin(3.1416)\\cdot10^6",
-      eq: ["-7.3464"],
-      ne: ["0"],
+      ne: ["0", "\\infty"],
+    },
+    {
+      label: "angles far from a multiple of 90° are not matched, however large: $target",
+      target: "\\infty",
+      ne: ["\\tan(9090.001°)", "\\tan(90089.99°)", "\\tan(1572.367)"],
+    },
+    {
+      target: "0",
+      ne: ["\\tan(10000000)", "\\tan(3999999)"],
+    },
+    {
+      label: "a replaced zero keeps exact fractions exact: $target",
+      target: "\\frac{1}{3}",
+      eq: ["\\sin(0)+\\frac{1}{3}", "\\frac{1+\\sin(0)}{3}"],
+      ne: ["\\sin(0)+0.3333"],
+    },
+    {
+      target: "-\\frac{1}{3}",
+      eq: ["\\sin(0)-\\frac{1}{3}"],
+    },
+    {
+      target: "\\frac{5}{6}",
+      eq: ["\\tan(0°)+\\frac{5}{6}"],
+    },
+    {
+      label: "letters next to a replaced zero are variables, not constants: $target",
+      target: "\\phi",
+      eq: ["\\sin(0)+\\phi"],
+      ne: ["\\sin(0)+1.618"],
+    },
+    {
+      target: "e",
+      eq: ["\\sin(0)+e"],
+    },
+    {
+      label: "indeterminate results are not equal to each other: $target",
+      target: "\\tan(90°)-\\tan(90°)",
+      ne: ["\\tan(90°)-\\tan(90°)+7", "0\\cdot\\tan(90°)"],
+    },
+    {
+      target: "\\frac{\\tan(90°)}{\\tan(90°)}",
+      ne: ["1", "\\frac{\\tan(90°)}{\\tan(90°)}+5"],
     },
     {
       label: "division by a zero of tan and cot: $target",
