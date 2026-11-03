@@ -2313,7 +2313,12 @@ commander@5.x:
   resolved "https://registry.yarnpkg.com/commander/-/commander-5.1.0.tgz#46abbd1652f8e059bddaef99bbdcb2ad9cf179ae"
   integrity sha512-P0CysNDQ7rtVw4QIQtm+MRxV66vKFSvlsQvGYXZWR3qFU0jlMKHZZZgw8e+8DSah4UDKMqnknRDQz+xuQXQ/Zg==
 
-commander@^2.19.0, commander@^2.20.0:
+commander@^11.0.0:
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-11.1.0.tgz#62fdce76006a68e5c1ab3314dc92e800eb83d906"
+  integrity sha512-yPVavfyCcRhmorC7rWlkHn15b4wDVgVmBA7kV4QVBsF7kv/9TKJAbAXVTxvTnwP8HHKjRCJDClKbciiYS7p0DQ==
+
+commander@^2.19.0:
   version "2.20.3"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
   integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
@@ -5007,13 +5012,13 @@ kleur@^3.0.3:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
-latex-utensils@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/latex-utensils/-/latex-utensils-2.0.3.tgz#0b855eaa93ee59503dc5d23dba9705aaa1d80245"
-  integrity sha512-vMjx8YdO4JRFzYRxoLHWwlaaFeHdaj45hJCHFSJPZBchW0NvdoX60zuVmNeA2ZA1YMDz7ztbt1aZ7rqtSgs+nQ==
+latex-utensils@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/latex-utensils/-/latex-utensils-7.0.0.tgz#b72c0e8eaa9b0da9891c8744b8f06aaf4a9c6823"
+  integrity sha512-njP9hTOoZuQlxhBoUgp0tKuqE9vwkd56LXnbm7HXxWMaS+WXfXv94Anw3SfZi/5lqP9XBwkcHt1aKKWpmmS+jQ==
   optionalDependencies:
-    commander "^2.20.0"
-    pegjs-backtrace "^0.2.0"
+    commander "^11.0.0"
+    pegjs-backtrace "^0.2.1"
 
 latex.js@^0.12.4:
   version "0.12.4"
@@ -6348,10 +6353,10 @@ path-type@^4.0.0:
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
 
-pegjs-backtrace@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/pegjs-backtrace/-/pegjs-backtrace-0.2.0.tgz#f6083d80059640af2fc96ec1541f1c640ed69512"
-  integrity sha512-wWczRCecnPlAdSc6Sfqb+3RY89Rhfcxud6+45tuN6f2BNJDd0vQaHIC4TggdlLfMrlhhy37MhznV+Axj2k7xyQ==
+pegjs-backtrace@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/pegjs-backtrace/-/pegjs-backtrace-0.2.1.tgz#1e09c1fafff37877f92aae5433a7026e03385932"
+  integrity sha512-rnVQiHyTE1wZG14Vl3Xk33ecrF7ZJ7ZW7jSgSlw4LdzBuhbyGVQ+oVApQ6tRi4QsII/xHgByHb6Ax68K6SPLhw==
 
 perf-regexes@^1.0.1:
   version "1.0.1"
