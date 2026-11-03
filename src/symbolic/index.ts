@@ -9,8 +9,9 @@ const m: any = mathjs;
 const log = logger("mv:symbolic");
 
 // degrees and gradians are converted with the 355/113 approximation of pi,
-// so an angle like 90° lands about 1e-7 quarter turns away from pi/2 instead of on it
-const ANGLE_TOLERANCE = 1e-5;
+// so an angle of k quarter turns (90°, 180°, ...) lands about k * 8.5e-8 quarter turns away from k * pi/2 instead of on it;
+// the tolerance is relative to k and leaves a small margin, so angles that are only close, like 89.9999° or 1.5708, are not matched
+const ANGLE_TOLERANCE = 2e-7;
 
 // angles are evaluated as plain numbers, the Fraction config used elsewhere cannot represent pi
 const numeric: any = create(all);
@@ -96,13 +97,14 @@ const quarterTurns = (angle: MathNode): number | undefined => {
   const turns = value / (Math.PI / 2);
   const k = Math.round(turns);
 
-  return Math.abs(turns - k) <= ANGLE_TOLERANCE ? k : undefined;
+  return Math.abs(turns - k) <= ANGLE_TOLERANCE * Math.max(1, Math.abs(k))
+    ? k
+    : undefined;
 };
 
 // replace trigonometric functions evaluated at an angle where they are zero or undefined
 // with their exact value, so that tan(90°) becomes Infinity instead of a large finite number
 const snapTrigonometricValues = (node: MathNode) => {
-  let containsUndefinedValue = false;
   let changed = false;
 
   const r: MathNode | any = node.transform((n: any) => {
@@ -127,33 +129,35 @@ const snapTrigonometricValues = (node: MathNode) => {
         snapped = odd ? new m.ConstantNode(0) : n;
         break;
       case "tan":
+        snapped = odd ? new m.SymbolNode("Infinity") : new m.ConstantNode(0);
+        break;
+      case "cot":
+        snapped = odd ? new m.ConstantNode(0) : new m.SymbolNode("Infinity");
+        break;
       case "sec":
         snapped = odd ? new m.SymbolNode("Infinity") : n;
         break;
-      case "cot":
       case "csc":
         snapped = odd ? n : new m.SymbolNode("Infinity");
         break;
     }
 
     changed = changed || snapped !== n;
-    containsUndefinedValue =
-      containsUndefinedValue || !!snapped.isSymbolNode;
 
     return snapped;
   });
 
   // keep the original node when nothing was replaced, later steps rely on its identity
-  return { r: changed ? r : node, containsUndefinedValue };
+  return { r: changed ? r : node, changed };
 };
 
 const normalize = (a: string | MathNode | any) => {
   const snapped = snapTrigonometricValues(a);
   let r: string | MathNode | any = snapped.r;
 
-  // simplify and rationalize treat Infinity as a variable (1 / Infinity + 3 becomes (1 + 3 * Infinity) / Infinity),
-  // so a constant expression with an undefined trigonometric value is evaluated before it is normalized
-  const valueWithUndefinedTrigonometry = snapped.containsUndefinedValue
+  // simplify and rationalize treat Infinity as a variable (1 / Infinity + 3 becomes (1 + 3 * Infinity) / Infinity)
+  // and keep the sign of a division by zero, so a constant expression with a replaced trigonometric value is evaluated before it is normalized
+  const valueWithSnappedTrigonometry = snapped.changed
     ? evaluateNumber(r)
     : undefined;
   let onlyConstant = true;
@@ -231,13 +235,13 @@ const normalize = (a: string | MathNode | any) => {
 
   log("[normalize] input: ", a.toString(), "output: ", r.toString());
 
-  // an undefined trigonometric value has no sign, so -tan(90°) is Infinity as well
-  if (
-    valueWithUndefinedTrigonometry !== undefined &&
-    !isNaN(valueWithUndefinedTrigonometry)
-  ) {
-    r = isFinite(valueWithUndefinedTrigonometry)
-      ? new m.ConstantNode(valueWithUndefinedTrigonometry)
+  // an undefined value has no sign, so -tan(90°) and -1/cos(90°) are Infinity as well;
+  // an indeterminate result such as tan(90°) - tan(90°) or 0 * tan(90°) is NaN and must not simplify to a number
+  if (valueWithSnappedTrigonometry !== undefined) {
+    r = isNaN(valueWithSnappedTrigonometry)
+      ? new m.SymbolNode("NaN")
+      : isFinite(valueWithSnappedTrigonometry)
+      ? new m.ConstantNode(valueWithSnappedTrigonometry)
       : new m.SymbolNode("Infinity");
   }
 
