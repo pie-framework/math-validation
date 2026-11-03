@@ -176,5 +176,11 @@ export default {
       target: "y=\\sqrt{x^2}",
       ne: ["y=x"],
     },
+    {
+      // high powers skip the numerator comparison, which would otherwise take tens of seconds
+      label: "$target",
+      target: "\\frac{(x+1)^7}{(y-1)^7}=1",
+      ne: ["(x+1)^7=2(y-1)^7"],
+    },
   ],
 };

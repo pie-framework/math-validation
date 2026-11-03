@@ -220,7 +220,32 @@ const haveProportionalValues = (
 
 // the numerator N of F written as a single fraction N/D, or undefined when F has no variable denominator;
 // F = 0 exactly where N = 0, so this undoes both sides being multiplied by an expression such as x-2
+// rationalize expands powers, which gets very slow for high powers or long expressions, so those are left as they are
+const MAX_NUMERATOR_POWER = 4;
+const MAX_NUMERATOR_NODES = 60;
+
+const isTooLargeToRationalize = (expr: MathNode) => {
+  let nodes = 0;
+  let tooLarge = false;
+
+  expr.traverse((n: any) => {
+    nodes++;
+    tooLarge =
+      tooLarge ||
+      (n.isOperatorNode &&
+        n.op === "^" &&
+        n.args[1]?.isConstantNode &&
+        Math.abs(Number(n.args[1].value)) > MAX_NUMERATOR_POWER);
+  });
+
+  return tooLarge || nodes > MAX_NUMERATOR_NODES;
+};
+
 const getNumerator = (expr: MathNode): MathNode | undefined => {
+  if (isTooLargeToRationalize(expr)) {
+    return undefined;
+  }
+
   try {
     const { numerator, denominator } = numeric.rationalize(
       expr.toString(),
