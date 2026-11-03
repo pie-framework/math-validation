@@ -199,8 +199,12 @@ const haveProportionalValues = (
     return false;
   }
 
+  // for inequalities only even powers are allowed, since an odd power of a variable can be negative and reverse the sign
   const factors = allowVariableFactor
-    ? getVariableFactors(variables, 2)
+    ? getVariableFactors(variables, 2).filter(
+        (factor) =>
+          !positiveOnly || Object.values(factor).every((power) => power % 2 === 0)
+      )
     : [{} as Record<string, number>];
 
   return factors.some((factor) => {

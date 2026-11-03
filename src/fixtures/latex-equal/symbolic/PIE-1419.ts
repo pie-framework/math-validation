@@ -60,6 +60,18 @@ export default {
       ne: ["y>\\frac{1}{x}"],
     },
     {
+      // both sides multiplied or divided by an even power of a variable, which can't reverse the sign
+      label: "$target",
+      target: "y>x^2",
+      eq: ["\\frac{y}{x^2}>1", "x^2y>x^4"],
+      ne: ["\\frac{y}{x}>x", "xy>x^3"],
+    },
+    {
+      label: "$target",
+      target: "y>2x+1",
+      eq: ["x^2y>x^2(2x+1)"],
+    },
+    {
       // with the function in the target, the numeric check decides
       label: "$target",
       target: "y>\\left|x\\right|",

@@ -345,6 +345,27 @@ describe("areEquationsNumericallyEquivalent", () => {
     ).toEqual(false);
   });
 
+  it('inequalities allow multiplying by an even power of a variable, but not an odd one', () => {
+    const options = { allowVariableFactor: true, positiveOnly: true };
+
+    expect(
+      areEquationsNumericallyEquivalent(
+        expression("y>x"),
+        expression("x^2y>x^3"),
+        ["x", "y"],
+        options
+      )
+    ).toEqual(true);
+    expect(
+      areEquationsNumericallyEquivalent(
+        expression("y>x"),
+        expression("xy>x^2"),
+        ["x", "y"],
+        options
+      )
+    ).toEqual(false);
+  });
+
   it('"y=|x|" and "y=x" are not equivalent: they differ for negative x', () => {
     const result = areEquationsNumericallyEquivalent(
       expression("y=\\left|x\\right|"),

@@ -165,7 +165,7 @@ export const compareEquations = (
         firstExpression,
         secondExpression,
         firstEquationVariablesName,
-        { allowVariableFactor: !isInequality, positiveOnly: isInequality }
+        { allowVariableFactor: true, positiveOnly: isInequality }
       );
     }
 
