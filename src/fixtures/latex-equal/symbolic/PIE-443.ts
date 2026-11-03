@@ -160,5 +160,21 @@ export default {
       eq: ["2y=2x", "y-x=0"],
       ne: ["y=\\left|x\\right|", "y=\\sqrt{x^2}", "\\left|y\\right|=x"],
     },
+    {
+      // with the function in the target, the numeric check decides
+      label: "$target",
+      target: "y=\\left|x\\right|",
+      ne: ["y=x", "y=-x"],
+    },
+    {
+      label: "$target",
+      target: "\\left|x\\right|^3=8",
+      ne: ["x^3=8"],
+    },
+    {
+      label: "$target",
+      target: "y=\\sqrt{x^2}",
+      ne: ["y=x"],
+    },
   ],
 };
