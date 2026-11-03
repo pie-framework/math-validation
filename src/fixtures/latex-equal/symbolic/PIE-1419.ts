@@ -42,5 +42,28 @@ export default {
       eq: ["2y^2>2x", "x<y^2", "y^2-x>0"],
       ne: ["y^2>2x", "y^3>x", "y^2<x"],
     },
+    {
+      // these only describe the same region where x or y is positive
+      label: "$target",
+      target: "y>x",
+      eq: ["y-x>0", "2y>2x", "x<y"],
+      ne: [
+        "\\frac{y}{x}>1",
+        "\\frac{1}{y}<\\frac{1}{x}",
+        "y\\cdot y>x\\cdot y",
+        "(y-x)x>0",
+      ],
+    },
+    {
+      label: "$target",
+      target: "xy>1",
+      ne: ["y>\\frac{1}{x}"],
+    },
+    {
+      // with the function in the target, the numeric check decides
+      label: "$target",
+      target: "y>\\left|x\\right|",
+      ne: ["y>x", "y>-x"],
+    },
   ],
 };
