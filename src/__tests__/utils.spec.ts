@@ -266,6 +266,15 @@ describe("getSamplePoints", () => {
 
     expect(getSamplePoints(["x", "y"])).toEqual(points);
   });
+
+  it("includes negative and positive values for each variable", () => {
+    const points = getSamplePoints(["x", "y"]);
+
+    ["x", "y"].forEach((v) => {
+      expect(points.some((point) => point[v] < 0)).toEqual(true);
+      expect(points.some((point) => point[v] > 0)).toEqual(true);
+    });
+  });
 });
 
 describe("areNumericallyEquivalent", () => {
@@ -320,5 +329,25 @@ describe("areEquationsNumericallyEquivalent", () => {
         allowVariableFactor: true,
       })
     ).toEqual(true);
+  });
+
+  it('"(y-1)/(x-2)=3" and "y-1=3(x-2)" are equivalent: both sides were multiplied by the denominator', () => {
+    const result = areEquationsNumericallyEquivalent(
+      expression("\\frac{y-1}{x-2}=3"),
+      expression("y-1=3(x-2)"),
+      ["x", "y"]
+    );
+
+    expect(result).toEqual(true);
+  });
+
+  it('"y=|x|" and "y=x" are not equivalent: they differ for negative x', () => {
+    const result = areEquationsNumericallyEquivalent(
+      expression("y=\\left|x\\right|"),
+      expression("y=x"),
+      ["x", "y"]
+    );
+
+    expect(result).toEqual(false);
   });
 });

@@ -124,5 +124,41 @@ export default {
         "\\frac{\\left(x+10\\right)^2}{275}+\\frac{z^2}{900}=1",
       ],
     },
+    {
+      // both sides multiplied by a denominator that contains a variable
+      label: "$target",
+      target: "\\frac{y-1}{x-2}=3",
+      eq: ["y-1=3(x-2)", "y-1=3x-6", "y=3x-5"],
+      ne: ["y-1=3(x+2)", "y-1=2(x-2)"],
+    },
+    {
+      label: "$target",
+      target: "y=\\frac{2x+1}{x-3}",
+      eq: ["y(x-3)=2x+1", "xy-3y=2x+1"],
+      ne: ["y(x-3)=2x-1", "y(x+3)=2x+1"],
+    },
+    {
+      label: "$target",
+      target: "y=\\frac{4}{x+3}",
+      eq: ["xy+3y=4", "y(x+3)=4"],
+      ne: ["xy+3y=5", "xy=4"],
+    },
+    {
+      // these only differ for negative values of x or y
+      label: "$target",
+      target: "x^3=8",
+      eq: ["2x^3=16"],
+      ne: [
+        "\\sqrt{x^6}=8",
+        "\\left|x\\right|^3=8",
+        "\\left|x^3\\right|=8",
+      ],
+    },
+    {
+      label: "$target",
+      target: "y=x",
+      eq: ["2y=2x", "y-x=0"],
+      ne: ["y=\\left|x\\right|", "y=\\sqrt{x^2}", "\\left|y\\right|=x"],
+    },
   ],
 };
