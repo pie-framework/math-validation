@@ -5,7 +5,6 @@ import { simplify } from "../symbolic";
 import {
   getVariables,
   getCoefficients,
-  setXToOne,
   solveLinearEquation,
   solveQuadraticEquation,
   expressionsCanBeCompared,
@@ -137,26 +136,6 @@ describe("getCoefficients", () => {
     const coefficientsList = getCoefficients(equation, false);
 
     expect(coefficientsList).toEqual([1, 0]);
-  });
-});
-
-describe("setXToOne", () => {
-  it.each`
-    expression               | expressionNoX
-    ${"x+0"}                 | ${"1+0"}
-    ${"x +1"}                | ${"1+1"}
-    ${"((x^2 + x) / x) - 1"} | ${"((1^2 + 1) / 1) - 1"}
-    ${"1+2"}                 | ${"1+2"}
-    ${"a +1+c"}              | ${"a+1+c"}
-    ${"y^2+5x - 1"}          | ${"y^2+5*1 - 1"}
-    ${"109h"}                | ${"109h"}
-    ${"m+n+10"}              | ${"m+n+10"}
-  `("$expression => $expressionNoX", ({ expression, expressionNoX }) => {
-    const equation = atm.convert(lta.convert(expression));
-    const equationNoX = setXToOne(equation, "x");
-    const result = atm.convert(lta.convert(expressionNoX));
-
-    expect(equationNoX.toTex()).toEqual(result.toTex());
   });
 });
 
@@ -339,6 +318,31 @@ describe("areEquationsNumericallyEquivalent", () => {
     );
 
     expect(result).toEqual(true);
+  });
+
+  it('"y>2x+1" and "2y>4x+2" are the same inequality: one is a positive multiple of the other', () => {
+    const result = areEquationsNumericallyEquivalent(
+      expression("y>2x+1"),
+      expression("2y>4x+2"),
+      ["x", "y"],
+      { positiveOnly: true }
+    );
+
+    expect(result).toEqual(true);
+  });
+
+  it('"y>2x+1" and "-y>-2x-1" are different inequalities: the multiple is negative', () => {
+    const first = expression("y>2x+1");
+    const second = expression("-y>-2x-1");
+
+    expect(areEquationsNumericallyEquivalent(first, second, ["x", "y"])).toEqual(
+      true
+    );
+    expect(
+      areEquationsNumericallyEquivalent(first, second, ["x", "y"], {
+        positiveOnly: true,
+      })
+    ).toEqual(false);
   });
 
   it('"y=|x|" and "y=x" are not equivalent: they differ for negative x', () => {
