@@ -73,14 +73,16 @@ const seededRandom = (seed: number) => () => {
   return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
 };
 
-// sample points where every variable gets its own non-integer value between 0.5 and 4.5,
-// so that expressions like x^2 and y^2 can be told apart
-export const getSamplePoints = (variables: string[], count: number = 8) => {
+// sample points where every variable gets its own non-integer value between 0.5 and 4.5 in size,
+// so that expressions like x^2 and y^2 can be told apart; the sign is random too,
+// so that expressions like |x| and x, or sqrt(x^6) and x^3, can be told apart
+export const getSamplePoints = (variables: string[], count: number = 12) => {
   const random = seededRandom(443);
 
   return Array.from({ length: count }, () =>
     variables.reduce((acc, v) => {
-      acc[v] = 0.5 + 4 * random();
+      const size = 0.5 + 4 * random();
+      acc[v] = random() < 0.5 ? -size : size;
       return acc;
     }, {} as Record<string, number>)
   );
@@ -109,6 +111,7 @@ const evaluateAtPoints = (expr: MathNode, points: Record<string, number>[]) => {
 const areClose = (a: number, b: number, tolerance: number) =>
   Math.abs(a - b) <= tolerance * Math.max(1, Math.abs(a), Math.abs(b));
 
+// points where either side can't be evaluated to a real number (e.g. sqrt of a negative number) are skipped
 export const areNumericallyEquivalent = (
   exprA: MathNode,
   exprB: MathNode,
@@ -119,11 +122,18 @@ export const areNumericallyEquivalent = (
   const valuesA = evaluateAtPoints(exprA, points);
   const valuesB = evaluateAtPoints(exprB, points);
 
-  return valuesA.every(
-    (a, i) =>
-      Number.isFinite(a) &&
-      Number.isFinite(valuesB[i]) &&
-      areClose(a, valuesB[i], tolerance)
+  const compared = valuesA.filter(
+    (a, i) => Number.isFinite(a) && Number.isFinite(valuesB[i])
+  );
+
+  return (
+    compared.length >= 3 &&
+    valuesA.every(
+      (a, i) =>
+        !Number.isFinite(a) ||
+        !Number.isFinite(valuesB[i]) ||
+        areClose(a, valuesB[i], tolerance)
+    )
   );
 };
 
@@ -144,10 +154,7 @@ const getVariableFactors = (variables: string[], maxPower: number) =>
     [{}] as Record<string, number>[]
   );
 
-// two equations F = 0 and G = 0 describe the same solutions when F is a nonzero constant multiple of G;
-// with allowVariableFactor, F may also be G multiplied by a power of each variable (e.g. both sides multiplied by x)
-// set positiveOnly for inequalities, where multiplying by a negative number reverses the sign
-export const areEquationsNumericallyEquivalent = (
+const haveProportionalValues = (
   firstExpression: MathNode,
   secondExpression: MathNode,
   variables: string[],
@@ -209,6 +216,56 @@ export const areEquationsNumericallyEquivalent = (
       scaled.every((r) => areClose(r, scaled[0], tolerance))
     );
   });
+};
+
+// the numerator N of F written as a single fraction N/D, or undefined when F has no variable denominator;
+// F = 0 exactly where N = 0, so this undoes both sides being multiplied by an expression such as x-2
+const getNumerator = (expr: MathNode): MathNode | undefined => {
+  try {
+    const { numerator, denominator } = numeric.rationalize(
+      expr.toString(),
+      {},
+      true
+    );
+
+    return denominator ? numerator : undefined;
+  } catch {
+    return undefined;
+  }
+};
+
+// two equations F = 0 and G = 0 describe the same solutions when F is a nonzero constant multiple of G;
+// with allowVariableFactor, F may also be G multiplied by a power of each variable (e.g. both sides multiplied by x)
+// set positiveOnly for inequalities, where multiplying by a negative number reverses the sign
+export const areEquationsNumericallyEquivalent = (
+  firstExpression: MathNode,
+  secondExpression: MathNode,
+  variables: string[],
+  options: { allowVariableFactor?: boolean; positiveOnly?: boolean } = {}
+): boolean => {
+  if (
+    haveProportionalValues(firstExpression, secondExpression, variables, options)
+  ) {
+    return true;
+  }
+
+  // multiplying both sides of an inequality by an expression may reverse the sign, so only equations compare numerators
+  if (options.positiveOnly) {
+    return false;
+  }
+
+  const firstNumerator = getNumerator(firstExpression);
+  const secondNumerator = getNumerator(secondExpression);
+
+  return (
+    (firstNumerator !== undefined || secondNumerator !== undefined) &&
+    haveProportionalValues(
+      firstNumerator || firstExpression,
+      secondNumerator || secondExpression,
+      variables,
+      options
+    )
+  );
 };
 
 // move the terms of the equations to the left hand side
