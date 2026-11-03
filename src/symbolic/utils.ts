@@ -321,15 +321,6 @@ export const getCoefficients = (equation: MathNode, isInequality: boolean) => {
   return [1, 0];
 };
 
-export const setXToOne = (equation: any, variableName: string) =>
-  equation.transform(function (node, path, parent) {
-    if (node.isSymbolNode && node.name === variableName) {
-      return new m.ConstantNode(1);
-    }
-
-    return node;
-  });
-
 // quadratic equation solver for a second-order polynomial equation such as ax^2 + bx + c = 0 for x, where a is not zero
 // quadratic formula
 export const solveQuadraticEquation = (coefficients: number[]) => {
