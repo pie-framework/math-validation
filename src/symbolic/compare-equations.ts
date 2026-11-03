@@ -5,7 +5,6 @@ import {
   equationsHaveTheSameVariables,
   getCoefficients,
   solveLinearEquation,
-  setXToOne,
   transformEqualityInExpression,
   expressionsCanBeCompared,
   solveQuadraticEquation,
@@ -160,36 +159,14 @@ export const compareEquations = (
 
     // equations in two variables describe the same curve when one is a multiple of the other;
     // checking a single value of x is not enough, and fails for equations that are not linear in y (PIE-443)
-    if (firstEquationVariablesName.length === 2 && !isInequality) {
+    // inequalities describe the same region only when the multiple is positive, since a negative one would flip the sign (PIE-1419)
+    if (firstEquationVariablesName.length === 2) {
       return areEquationsNumericallyEquivalent(
         firstExpression,
         secondExpression,
         firstEquationVariablesName,
-        { allowVariableFactor: true }
+        { allowVariableFactor: !isInequality, positiveOnly: isInequality }
       );
-    }
-
-    // if both inequalities are linear in two variabled then we give value "1" for both "x". Doing this we get a linear inequality in one variable "y". Then we solve "y" for both. If y has the same value then inequalities are equivalent
-    if (firstEquationVariablesName.length === 2) {
-      let x = firstEquationVariablesName[0];
-
-      // solve expression for x=1
-      let expraNoX = setXToOne(firstExpression, x);
-      firstEquationCoefficients = getCoefficients(expraNoX, isInequality);
-
-      let exprbNoX = setXToOne(secondExpression, x);
-      secondEquationCoefficients = getCoefficients(exprbNoX, isInequality);
-
-      // find y for both equations, where x equals 1
-      let yFromFirstExpression = solveLinearEquation(firstEquationCoefficients);
-      let yFromSecondExpression = solveLinearEquation(
-        secondEquationCoefficients
-      );
-
-      // if y has the same value, for the same x then the expressions should be equivalent
-      equivalence =
-        yFromFirstExpression === yFromSecondExpression &&
-        yFromFirstExpression !== undefined;
     }
 
     // determine equivalence between 2-way inequalities with 1 or 2 variables:
