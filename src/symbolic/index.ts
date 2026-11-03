@@ -10,8 +10,13 @@ const log = logger("mv:symbolic");
 const positiveInfinity = 1.497258191621251e6;
 const negativeInfinity = -1.497258191621251e6;
 
-// relative tolerance for floating-point noise from trig functions, pi and angle conversions, e.g. sin(2pi) = -2.4e-16
-const EPSILON = 1e-12;
+// tolerances for floating-point noise from trig functions, pi and angle conversions (PIE-905);
+// the noise grows with the angle, e.g. sin(2pi) = -2.4e-16, sin(200pi) = 3.9e-15, tan(36045°) - 1 = -5.4e-14,
+// so a value is accepted only when it agrees with the target to about 13 significant digits
+const RELATIVE_EPSILON = 1e-13;
+// floor for comparisons with 0, where a relative tolerance alone would require an exact match;
+// it covers residues such as sin(200pi) and cos(100.5pi) while still rejecting 0 vs 0.0000000000001
+const ABSOLUTE_EPSILON = 1e-14;
 
 export type SymbolicOpts = {};
 
@@ -184,7 +189,8 @@ const constantValue = (node: any): number | undefined => {
 };
 
 const areNearlyEqual = (a: number, b: number) =>
-  Math.abs(a - b) <= EPSILON * Math.max(1, Math.abs(a), Math.abs(b));
+  Math.abs(a - b) <
+  ABSOLUTE_EPSILON + RELATIVE_EPSILON * Math.max(Math.abs(a), Math.abs(b));
 
 export const isMathEqual = (a: any, b: any) => {
   let as: MathNode;
