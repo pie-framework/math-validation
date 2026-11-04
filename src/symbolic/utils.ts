@@ -1,9 +1,12 @@
 import { mathjs } from "../mathjs";
-import { MathNode } from "mathjs";
+import { all, create, MathNode } from "mathjs";
 import { simplify as customSimplify } from "./";
 const { simplify } = mathjs;
 
 const m: any = mathjs;
+
+// plain floating-point instance for numeric checks; the shared instance works with fractions
+const numeric: any = create(all);
 
 let simplifyRules = [
   { l: "-((n1)*(n2))", r: "(n1)*(n2)" },
@@ -62,31 +65,236 @@ export const hasSymbolicExponent = (node: MathNode): boolean => {
   return found;
 };
 
+// deterministic pseudo-random generator (mulberry32), so numeric checks give the same result on every run
+const seededRandom = (seed: number) => () => {
+  seed = (seed + 0x6d2b79f5) | 0;
+  let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+};
+
+// sample points where every variable gets its own non-integer value between 0.5 and 4.5 in size,
+// so that expressions like x^2 and y^2 can be told apart; the sign is random too,
+// so that expressions like |x| and x, or sqrt(x^6) and x^3, can be told apart
+export const getSamplePoints = (variables: string[], count: number = 12) => {
+  const random = seededRandom(443);
+
+  return Array.from({ length: count }, () =>
+    variables.reduce((acc, v) => {
+      const size = 0.5 + 4 * random();
+      acc[v] = random() < 0.5 ? -size : size;
+      return acc;
+    }, {} as Record<string, number>)
+  );
+};
+
+// evaluate an expression at each sample point; NaN where it can't be evaluated to a real number
+const evaluateAtPoints = (expr: MathNode, points: Record<string, number>[]) => {
+  let compiled: any;
+
+  try {
+    compiled = numeric.compile(expr.toString());
+  } catch {
+    return points.map(() => NaN);
+  }
+
+  return points.map((scope) => {
+    try {
+      const result = compiled.evaluate({ ...scope });
+      return typeof result === "number" ? result : NaN;
+    } catch {
+      return NaN;
+    }
+  });
+};
+
+const areClose = (a: number, b: number, tolerance: number) =>
+  Math.abs(a - b) <= tolerance * Math.max(1, Math.abs(a), Math.abs(b));
+
+// points where either side can't be evaluated to a real number (e.g. sqrt of a negative number) are skipped
 export const areNumericallyEquivalent = (
   exprA: MathNode,
   exprB: MathNode,
   variables: string[],
   tolerance: number = 1e-10
 ): boolean => {
-  const compiledA = m.compile(exprA.toString());
-  const compiledB = m.compile(exprB.toString());
+  const points = getSamplePoints(variables);
+  const valuesA = evaluateAtPoints(exprA, points);
+  const valuesB = evaluateAtPoints(exprB, points);
 
-  const testValues = [1, 2, 3, 4, 5];
+  const compared = valuesA.filter(
+    (a, i) => Number.isFinite(a) && Number.isFinite(valuesB[i])
+  );
 
-  return testValues.every((val) => {
-    const scope = variables.reduce((acc, v) => {
-      acc[v] = val;
-      return acc;
-    }, {} as Record<string, number>);
+  return (
+    compared.length >= 3 &&
+    valuesA.every(
+      (a, i) =>
+        !Number.isFinite(a) ||
+        !Number.isFinite(valuesB[i]) ||
+        areClose(a, valuesB[i], tolerance)
+    )
+  );
+};
 
-    try {
-      const resultA = compiledA.evaluate(scope);
-      const resultB = compiledB.evaluate(scope);
-      return Math.abs(resultA - resultB) < tolerance;
-    } catch {
+// exponent combinations for a factor such as x, 1/y or x*y^2, used when both sides of an equation were multiplied by variables
+const getVariableFactors = (variables: string[], maxPower: number) =>
+  variables.reduce(
+    (factors, v) =>
+      factors.reduce(
+        (acc, factor) =>
+          acc.concat(
+            Array.from({ length: 2 * maxPower + 1 }, (_, i) => ({
+              ...factor,
+              [v]: i - maxPower,
+            }))
+          ),
+        [] as Record<string, number>[]
+      ),
+    [{}] as Record<string, number>[]
+  );
+
+const haveProportionalValues = (
+  firstExpression: MathNode,
+  secondExpression: MathNode,
+  variables: string[],
+  {
+    allowVariableFactor = false,
+    positiveOnly = false,
+  }: { allowVariableFactor?: boolean; positiveOnly?: boolean } = {}
+): boolean => {
+  const tolerance = 1e-9;
+  const points = getSamplePoints(variables);
+  const firstValues = evaluateAtPoints(firstExpression, points);
+  const secondValues = evaluateAtPoints(secondExpression, points);
+
+  const ratios: { point: Record<string, number>; ratio: number }[] = [];
+
+  for (let i = 0; i < points.length; i++) {
+    const f = firstValues[i];
+    const g = secondValues[i];
+
+    if (!Number.isFinite(f) || !Number.isFinite(g)) {
+      continue;
+    }
+
+    const fIsZero = Math.abs(f) < tolerance;
+    const gIsZero = Math.abs(g) < tolerance;
+
+    // the point lies on both curves
+    if (fIsZero && gIsZero) {
+      continue;
+    }
+
+    // the point lies on only one of the curves
+    if (fIsZero || gIsZero) {
       return false;
     }
+
+    ratios.push({ point: points[i], ratio: f / g });
+  }
+
+  // not enough points to decide
+  if (ratios.length < 3) {
+    return false;
+  }
+
+  // for inequalities only even powers are allowed, since an odd power of a variable can be negative and reverse the sign
+  const factors = allowVariableFactor
+    ? getVariableFactors(variables, 2).filter(
+        (factor) =>
+          !positiveOnly || Object.values(factor).every((power) => power % 2 === 0)
+      )
+    : [{} as Record<string, number>];
+
+  return factors.some((factor) => {
+    const scaled = ratios.map(({ point, ratio }) =>
+      Object.keys(factor).reduce(
+        (acc, v) => acc / Math.pow(point[v], factor[v]),
+        ratio
+      )
+    );
+
+    return (
+      (!positiveOnly || scaled[0] > 0) &&
+      scaled.every((r) => areClose(r, scaled[0], tolerance))
+    );
   });
+};
+
+// the numerator N of F written as a single fraction N/D, or undefined when F has no variable denominator;
+// F = 0 exactly where N = 0, so this undoes both sides being multiplied by an expression such as x-2
+// rationalize expands powers, which gets very slow for high powers or long expressions, so those are left as they are
+const MAX_NUMERATOR_POWER = 4;
+const MAX_NUMERATOR_NODES = 60;
+
+const isTooLargeToRationalize = (expr: MathNode) => {
+  let nodes = 0;
+  let tooLarge = false;
+
+  expr.traverse((n: any) => {
+    nodes++;
+    tooLarge =
+      tooLarge ||
+      (n.isOperatorNode &&
+        n.op === "^" &&
+        n.args[1]?.isConstantNode &&
+        Math.abs(Number(n.args[1].value)) > MAX_NUMERATOR_POWER);
+  });
+
+  return tooLarge || nodes > MAX_NUMERATOR_NODES;
+};
+
+const getNumerator = (expr: MathNode): MathNode | undefined => {
+  if (isTooLargeToRationalize(expr)) {
+    return undefined;
+  }
+
+  try {
+    const { numerator, denominator } = numeric.rationalize(
+      expr.toString(),
+      {},
+      true
+    );
+
+    return denominator ? numerator : undefined;
+  } catch {
+    return undefined;
+  }
+};
+
+// two equations F = 0 and G = 0 describe the same solutions when F is a nonzero constant multiple of G;
+// with allowVariableFactor, F may also be G multiplied by a power of each variable (e.g. both sides multiplied by x)
+// set positiveOnly for inequalities, where multiplying by a negative number reverses the sign
+export const areEquationsNumericallyEquivalent = (
+  firstExpression: MathNode,
+  secondExpression: MathNode,
+  variables: string[],
+  options: { allowVariableFactor?: boolean; positiveOnly?: boolean } = {}
+): boolean => {
+  if (
+    haveProportionalValues(firstExpression, secondExpression, variables, options)
+  ) {
+    return true;
+  }
+
+  // multiplying both sides of an inequality by an expression may reverse the sign, so only equations compare numerators
+  if (options.positiveOnly) {
+    return false;
+  }
+
+  const firstNumerator = getNumerator(firstExpression);
+  const secondNumerator = getNumerator(secondExpression);
+
+  return (
+    (firstNumerator !== undefined || secondNumerator !== undefined) &&
+    haveProportionalValues(
+      firstNumerator || firstExpression,
+      secondNumerator || secondExpression,
+      variables,
+      options
+    )
+  );
 };
 
 // move the terms of the equations to the left hand side
@@ -141,15 +349,6 @@ export const getCoefficients = (equation: MathNode, isInequality: boolean) => {
 
   return [1, 0];
 };
-
-export const setXToOne = (equation: any, variableName: string) =>
-  equation.transform(function (node, path, parent) {
-    if (node.isSymbolNode && node.name === variableName) {
-      return new m.ConstantNode(1);
-    }
-
-    return node;
-  });
 
 // quadratic equation solver for a second-order polynomial equation such as ax^2 + bx + c = 0 for x, where a is not zero
 // quadratic formula
