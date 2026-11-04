@@ -8,14 +8,20 @@ import { compareCompoundInequations } from "./compare-compound-inequations";
 const m: any = mathjs;
 const log = logger("mv:symbolic");
 
-// an angle counts as k quarter turns (90°, 180°, ...) only when it is one up to floating-point error;
-// degrees and gradians may have been converted with the 355/113 approximation of pi, so both values of pi are checked,
+// an angle counts as k quarter turns (90°, 180°, ...) only when it is one up to floating-point error,
 // which keeps angles that are only close, like 89.9999°, 1.5708 or 9090.001°, from being matched
 const ANGLE_TOLERANCE = 1e-9;
-const PI_APPROXIMATIONS = [Math.PI, 355 / 113];
 
 // angles are evaluated as plain numbers, the Fraction config used elsewhere cannot represent pi
 const numeric: any = create(all);
+
+// tolerances for floating-point noise from trig functions, pi and angle conversions (PIE-905);
+// the noise grows with the angle, e.g. sin(2pi) = -2.4e-16, sin(200pi) = 3.9e-15, tan(36045°) - 1 = -5.4e-14,
+// so a value is accepted only when it agrees with the target to about 13 significant digits
+const RELATIVE_EPSILON = 1e-13;
+// floor for comparisons with 0, where a relative tolerance alone would require an exact match;
+// it covers residues such as sin(200pi) and cos(100.5pi) while still rejecting 0 vs 0.0000000000001
+const ABSOLUTE_EPSILON = 1e-14;
 
 export type SymbolicOpts = {};
 
@@ -111,16 +117,12 @@ const quarterTurns = (angle: MathNode): number | undefined => {
     return undefined;
   }
 
-  for (const pi of PI_APPROXIMATIONS) {
-    const turns = value / (pi / 2);
-    const k = Math.round(turns);
+  const turns = value / (Math.PI / 2);
+  const k = Math.round(turns);
 
-    if (Math.abs(turns - k) <= ANGLE_TOLERANCE * Math.max(1, Math.abs(k))) {
-      return k;
-    }
-  }
-
-  return undefined;
+  return Math.abs(turns - k) <= ANGLE_TOLERANCE * Math.max(1, Math.abs(k))
+    ? k
+    : undefined;
 };
 
 // replace trigonometric functions evaluated at an angle where they are zero or undefined
@@ -274,17 +276,33 @@ const normalize = (a: string | MathNode | any) => {
     r = new m.SymbolNode("Infinity");
   }
 
-  if (r.value) {
-    r.value = new m.Fraction(Math.round(r.value * 10000) / 10000);
-  } else if (r.fn === "unaryMinus") {
-    r.args[0].value = new m.Fraction(
-      Math.round(r.args[0].value * 10000) / 10000
-    );
-    r = simplify(r);
-  }
-
   return r;
 };
+
+// numeric value of an expression without variables, such as 5, -5 or -1/2; undefined for anything else
+const constantValue = (node: any): number | undefined => {
+  if (node.filter((n) => n.isSymbolNode).length > 0) {
+    return undefined;
+  }
+
+  try {
+    const result = node.evaluate();
+
+    // equations and inequalities without variables evaluate to booleans
+    if (typeof result === "boolean") {
+      return undefined;
+    }
+
+    const value = +result;
+    return Number.isFinite(value) ? value : undefined;
+  } catch (e) {
+    return undefined;
+  }
+};
+
+const areNearlyEqual = (a: number, b: number) =>
+  Math.abs(a - b) <
+  ABSOLUTE_EPSILON + RELATIVE_EPSILON * Math.max(Math.abs(a), Math.abs(b));
 
 const isIndeterminate = (node: any) => node?.isSymbolNode && node.name === "NaN";
 
@@ -334,6 +352,14 @@ export const isMathEqual = (a: any, b: any) => {
 
   if (equality) {
     return true;
+  }
+
+  // compare constant results numerically, allowing only for floating-point noise
+  const aValue = constantValue(as);
+  const bValue = constantValue(bs);
+
+  if (aValue !== undefined && bValue !== undefined) {
+    return areNearlyEqual(aValue, bValue);
   }
 
   // if both expressions are equations
