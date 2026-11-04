@@ -2,10 +2,10 @@ import { LatexToAst } from "../latex-to-ast";
 // import { latexParser } from "latex-utensils";
 
 // conversion of degrees in radians - angle configuration
-const degree = 355 / (180 * 113);
+const degree = Math.PI / 180;
 
 //conversion of gradians in radians - angle configuration
-const gradian = 355 / (200 * 113);
+const gradian = Math.PI / 200;
 
 const fixtures = [
   //parentheses are stripped!

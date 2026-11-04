@@ -925,11 +925,11 @@ class LatexToAst {
       result = Infinity;
       this.advance();
     } else if (this.token.token_type === "deg") {
-      const degree = 355 / (180 * 113);
+      const degree = Math.PI / 180;
       result = ["*", degree];
       this.advance();
     } else if (this.token.token_type === "grad") {
-      const gradian = 355 / (200 * 113);
+      const gradian = Math.PI / 200;
       result = ["*", gradian];
       this.advance();
     } else if (this.token.token_type === "UNIT") {
@@ -1723,7 +1723,9 @@ function contains$1(array, item) {
   return array.indexOf(item) !== -1;
 }
 function validateOption(options, name, values) {
-  if (options[name] !== undefined && !contains$1(values, options[name])) ;
+  if (options[name] !== undefined && !contains$1(values, options[name])) {
+    console.warn('Warning: Unknown value "' + options[name] + '" for configuration option "' + name + '". ' + 'Available options: ' + values.map(value => JSON.stringify(value)).join(', ') + '.');
+  }
 }
 
 var typedFunction = createCommonjsModule(function (module, exports) {
@@ -33354,6 +33356,9 @@ var createEigs = factory(name$Q, dependencies$Q, _ref => {
         }
       }
     }
+    if (hasBig && hasComplex) {
+      console.warn('Complex BigNumbers not supported, this operation will lose precission.');
+    }
     if (hasComplex) {
       for (var _i = 0; _i < N; _i++) {
         for (var _j = 0; _j < N; _j++) {
@@ -35759,6 +35764,7 @@ var createUtil = factory(name$p, dependencies$p, _ref => {
         try {
           return new OperatorNode(node.op, node.fn, args, node.implicit);
         } catch (err) {
+          console.error(err);
           return [];
         }
       };
@@ -39170,6 +39176,7 @@ function create(factories, config) {
       return firstProperty(math);
     }
     if (!isLegacyFactory(factory)) {
+      console.warn('Factory object with properties `type`, `name`, and `factory` expected', factory);
       throw new Error('Factory object with properties `type`, `name`, and `factory` expected');
     }
     var index = legacyFactories.indexOf(factory);
@@ -39745,6 +39752,7 @@ const sort = (node) => {
 
 function _optionalChain$2(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }const { simplify: simplify$2 } = mathjs;
 const m$4 = mathjs;
+const numeric$1 = create(all);
 let simplifyRules = [
   { l: "-((n1)*(n2))", r: "(n1)*(n2)" },
   { l: "(n1-n2)/n3", r: "n1/n3-n2/n3" },
@@ -39784,35 +39792,192 @@ const hasSymbolicExponent = (node) => {
     if (
       n.isOperatorNode &&
       n.op === "^" &&
-      !_optionalChain$2([n, 'access', _ => _.args, 'access', _2 => _2[1], 'optionalAccess', _3 => _3.isConstantNode])
+      !_optionalChain$2([n, 'access', _2 => _2.args, 'access', _3 => _3[1], 'optionalAccess', _4 => _4.isConstantNode])
     ) {
       found = true;
     }
   });
   return found;
 };
+const seededRandom = (seed) => () => {
+  seed = (seed + 0x6d2b79f5) | 0;
+  let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+};
+const getSamplePoints = (variables, count = 12) => {
+  const random = seededRandom(443);
+  return Array.from({ length: count }, () =>
+    variables.reduce((acc, v) => {
+      const size = 0.5 + 4 * random();
+      acc[v] = random() < 0.5 ? -size : size;
+      return acc;
+    }, {} )
+  );
+};
+const evaluateAtPoints = (expr, points) => {
+  let compiled;
+  try {
+    compiled = numeric$1.compile(expr.toString());
+  } catch (e2) {
+    return points.map(() => NaN);
+  }
+  return points.map((scope) => {
+    try {
+      const result = compiled.evaluate({ ...scope });
+      return typeof result === "number" ? result : NaN;
+    } catch (e3) {
+      return NaN;
+    }
+  });
+};
+const areClose = (a, b, tolerance) =>
+  Math.abs(a - b) <= tolerance * Math.max(1, Math.abs(a), Math.abs(b));
 const areNumericallyEquivalent = (
   exprA,
   exprB,
   variables,
   tolerance = 1e-10
 ) => {
-  const compiledA = m$4.compile(exprA.toString());
-  const compiledB = m$4.compile(exprB.toString());
-  const testValues = [1, 2, 3, 4, 5];
-  return testValues.every((val) => {
-    const scope = variables.reduce((acc, v) => {
-      acc[v] = val;
-      return acc;
-    }, {} );
-    try {
-      const resultA = compiledA.evaluate(scope);
-      const resultB = compiledB.evaluate(scope);
-      return Math.abs(resultA - resultB) < tolerance;
-    } catch (e2) {
+  const points = getSamplePoints(variables);
+  const valuesA = evaluateAtPoints(exprA, points);
+  const valuesB = evaluateAtPoints(exprB, points);
+  const compared = valuesA.filter(
+    (a, i) => Number.isFinite(a) && Number.isFinite(valuesB[i])
+  );
+  return (
+    compared.length >= 3 &&
+    valuesA.every(
+      (a, i) =>
+        !Number.isFinite(a) ||
+        !Number.isFinite(valuesB[i]) ||
+        areClose(a, valuesB[i], tolerance)
+    )
+  );
+};
+const getVariableFactors = (variables, maxPower) =>
+  variables.reduce(
+    (factors, v) =>
+      factors.reduce(
+        (acc, factor) =>
+          acc.concat(
+            Array.from({ length: 2 * maxPower + 1 }, (_, i) => ({
+              ...factor,
+              [v]: i - maxPower,
+            }))
+          ),
+        []
+      ),
+    [{}]
+  );
+const haveProportionalValues = (
+  firstExpression,
+  secondExpression,
+  variables,
+  {
+    allowVariableFactor = false,
+    positiveOnly = false,
+  } = {}
+) => {
+  const tolerance = 1e-9;
+  const points = getSamplePoints(variables);
+  const firstValues = evaluateAtPoints(firstExpression, points);
+  const secondValues = evaluateAtPoints(secondExpression, points);
+  const ratios = [];
+  for (let i = 0; i < points.length; i++) {
+    const f = firstValues[i];
+    const g = secondValues[i];
+    if (!Number.isFinite(f) || !Number.isFinite(g)) {
+      continue;
+    }
+    const fIsZero = Math.abs(f) < tolerance;
+    const gIsZero = Math.abs(g) < tolerance;
+    if (fIsZero && gIsZero) {
+      continue;
+    }
+    if (fIsZero || gIsZero) {
       return false;
     }
+    ratios.push({ point: points[i], ratio: f / g });
+  }
+  if (ratios.length < 3) {
+    return false;
+  }
+  const factors = allowVariableFactor
+    ? getVariableFactors(variables, 2).filter(
+        (factor) =>
+          !positiveOnly || Object.values(factor).every((power) => power % 2 === 0)
+      )
+    : [{} ];
+  return factors.some((factor) => {
+    const scaled = ratios.map(({ point, ratio }) =>
+      Object.keys(factor).reduce(
+        (acc, v) => acc / Math.pow(point[v], factor[v]),
+        ratio
+      )
+    );
+    return (
+      (!positiveOnly || scaled[0] > 0) &&
+      scaled.every((r) => areClose(r, scaled[0], tolerance))
+    );
   });
+};
+const MAX_NUMERATOR_POWER = 4;
+const MAX_NUMERATOR_NODES = 60;
+const isTooLargeToRationalize = (expr) => {
+  let nodes = 0;
+  let tooLarge = false;
+  expr.traverse((n) => {
+    nodes++;
+    tooLarge =
+      tooLarge ||
+      (n.isOperatorNode &&
+        n.op === "^" &&
+        _optionalChain$2([n, 'access', _5 => _5.args, 'access', _6 => _6[1], 'optionalAccess', _7 => _7.isConstantNode]) &&
+        Math.abs(Number(n.args[1].value)) > MAX_NUMERATOR_POWER);
+  });
+  return tooLarge || nodes > MAX_NUMERATOR_NODES;
+};
+const getNumerator = (expr) => {
+  if (isTooLargeToRationalize(expr)) {
+    return undefined;
+  }
+  try {
+    const { numerator, denominator } = numeric$1.rationalize(
+      expr.toString(),
+      {},
+      true
+    );
+    return denominator ? numerator : undefined;
+  } catch (e4) {
+    return undefined;
+  }
+};
+const areEquationsNumericallyEquivalent = (
+  firstExpression,
+  secondExpression,
+  variables,
+  options = {}
+) => {
+  if (
+    haveProportionalValues(firstExpression, secondExpression, variables, options)
+  ) {
+    return true;
+  }
+  if (options.positiveOnly) {
+    return false;
+  }
+  const firstNumerator = getNumerator(firstExpression);
+  const secondNumerator = getNumerator(secondExpression);
+  return (
+    (firstNumerator !== undefined || secondNumerator !== undefined) &&
+    haveProportionalValues(
+      firstNumerator || firstExpression,
+      secondNumerator || secondExpression,
+      variables,
+      options
+    )
+  );
 };
 const transformEqualityInExpression = (equality) =>
   simplify$1(new m$4.OperatorNode("-", "subtract", equality.args));
@@ -39821,7 +39986,7 @@ const getVariables = (equation) => {
   equation.traverse(function (node, path, parent) {
     if (
       node.isSymbolNode &&
-      _optionalChain$2([node, 'optionalAccess', _4 => _4.name, 'access', _5 => _5.length]) === 1 &&
+      _optionalChain$2([node, 'optionalAccess', _8 => _8.name, 'access', _9 => _9.length]) === 1 &&
       !variableNames.includes(node.name)
     ) {
       variableNames.push(node.name);
@@ -39851,13 +40016,6 @@ const getCoefficients = (equation, isInequality) => {
   }
   return [1, 0];
 };
-const setXToOne = (equation, variableName) =>
-  equation.transform(function (node, path, parent) {
-    if (node.isSymbolNode && node.name === variableName) {
-      return new m$4.ConstantNode(1);
-    }
-    return node;
-  });
 const solveQuadraticEquation = (coefficients) => {
   const [c, b, a] = coefficients;
   const discriminant = b * b - 4 * a * c;
@@ -39867,14 +40025,14 @@ const solveQuadraticEquation = (coefficients) => {
     addDiscriminant = m$4.compile(
       m$4.fraction(-b + m$4.sqrt(discriminant)) / (2 * a)
     );
-  } catch (e3) {
+  } catch (e5) {
     addDiscriminant = m$4.compile("(-b+sqrt(discriminant))/(2*a)");
   }
   try {
     subtractDiscriminant = m$4.compile(
       m$4.fraction(-b - m$4.sqrt(discriminant)) / (2 * a)
     );
-  } catch (e4) {
+  } catch (e6) {
     subtractDiscriminant = m$4.compile("(-b-sqrt(discriminant))/(2*a)");
   }
   let firstRoot = addDiscriminant.evaluate({
@@ -40044,18 +40202,25 @@ const compareEquations = (
       equivalence =
         solutionForFirstEquation === solutionForSecondEquation &&
         solutionForFirstEquation !== undefined;
+      if (
+        !isInequality &&
+        (solutionForFirstEquation === undefined ||
+          solutionForSecondEquation === undefined)
+      ) {
+        return areEquationsNumericallyEquivalent(
+          firstExpression,
+          secondExpression,
+          firstEquationVariablesName
+        );
+      }
     }
     if (firstEquationVariablesName.length === 2) {
-      let x = firstEquationVariablesName[0];
-      let expraNoX = setXToOne(firstExpression, x);
-      firstEquationCoefficients = getCoefficients(expraNoX, isInequality);
-      let exprbNoX = setXToOne(secondExpression, x);
-      secondEquationCoefficients = getCoefficients(exprbNoX, isInequality);
-      let yFromFirstExpression = solveLinearEquation(firstEquationCoefficients);
-      let yFromSecondExpression = solveLinearEquation(
-        secondEquationCoefficients
+      return areEquationsNumericallyEquivalent(
+        firstExpression,
+        secondExpression,
+        firstEquationVariablesName,
+        { allowVariableFactor: true, positiveOnly: isInequality }
       );
-      equivalence = yFromFirstExpression === yFromSecondExpression;
     }
     if (equivalence && isInequality) {
       return !(
@@ -40151,8 +40316,10 @@ const compareCompoundInequations = (
 
 function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }const m$1 = mathjs;
 const log$1 = logger("mv:symbolic");
-const positiveInfinity = 1.497258191621251e6;
-const negativeInfinity = -1.497258191621251e6;
+const ANGLE_TOLERANCE = 1e-9;
+const numeric = create(all);
+const RELATIVE_EPSILON = 1e-13;
+const ABSOLUTE_EPSILON = 1e-14;
 const { simplify: ms$1, rationalize } = mathjs;
 const SIMPLIFY_RULES = [
   { l: "n1^(1/n2)", r: "nthRoot(n1, n2)" },
@@ -40195,8 +40362,81 @@ const simplify$1 = (v) => {
   const rules = SIMPLIFY_RULES.concat((ms$1 ).rules);
   return ms$1(v, rules);
 };
+const hasSymbol = (node, matches) => {
+  let found = false;
+  node.traverse((n, path) => {
+    found = found || (n.isSymbolNode && path !== "fn" && matches(n.name));
+  });
+  return found;
+};
+const evaluateNumber = (node) => {
+  if (hasSymbol(node, (name) => name !== "pi" && name !== "Infinity")) {
+    return undefined;
+  }
+  try {
+    const value = numeric.evaluate(node.toString());
+    return typeof value === "number" ? value : undefined;
+  } catch (e) {
+    return undefined;
+  }
+};
+const quarterTurns = (angle) => {
+  const value = evaluateNumber(angle);
+  if (value === undefined || !isFinite(value)) {
+    return undefined;
+  }
+  const turns = value / (Math.PI / 2);
+  const k = Math.round(turns);
+  return Math.abs(turns - k) <= ANGLE_TOLERANCE * Math.max(1, Math.abs(k))
+    ? k
+    : undefined;
+};
+const snapTrigonometricValues = (node) => {
+  let changed = false;
+  const r = node.transform((n) => {
+    if (!n.isFunctionNode || _optionalChain([n, 'access', _ => _.args, 'optionalAccess', _2 => _2.length]) !== 1) {
+      return n;
+    }
+    const k = quarterTurns(n.args[0]);
+    if (k === undefined) {
+      return n;
+    }
+    const odd = Math.abs(k) % 2 === 1;
+    let snapped = n;
+    switch (n.fn.name) {
+      case "sin":
+        snapped = odd ? n : new m$1.ConstantNode(0);
+        break;
+      case "cos":
+        snapped = odd ? new m$1.ConstantNode(0) : n;
+        break;
+      case "tan":
+        snapped = odd ? new m$1.SymbolNode("Infinity") : new m$1.ConstantNode(0);
+        break;
+      case "cot":
+        snapped = odd ? new m$1.ConstantNode(0) : new m$1.SymbolNode("Infinity");
+        break;
+      case "sec":
+        snapped = odd ? new m$1.SymbolNode("Infinity") : n;
+        break;
+      case "csc":
+        snapped = odd ? n : new m$1.SymbolNode("Infinity");
+        break;
+    }
+    changed = changed || snapped !== n;
+    return snapped;
+  });
+  return { r: changed ? r : node, changed };
+};
 const normalize = (a) => {
-  let r = a;
+  const snapped = snapTrigonometricValues(a);
+  let r = snapped.r;
+  const snappedValue = snapped.changed ? evaluateNumber(r) : undefined;
+  const valueWithSnappedTrigonometry =
+    snappedValue !== undefined &&
+    (!isFinite(snappedValue) || hasSymbol(r, (name) => name === "Infinity"))
+      ? snappedValue
+      : undefined;
   let onlyConstant = true;
   let containsFunctionNode = false;
   let containsArrayNode = false;
@@ -40256,55 +40496,77 @@ const normalize = (a) => {
     } catch (e) {}
   }
   log$1("[normalize] input: ", a.toString(), "output: ", r.toString());
-  if (
-    r.toString() === "Infinity" ||
-    +r.toString() >= positiveInfinity ||
-    +r.toString() <= negativeInfinity
-  ) {
-    r = new m$1.SymbolNode("Infinity");
+  if (valueWithSnappedTrigonometry !== undefined) {
+    r = isNaN(valueWithSnappedTrigonometry)
+      ? new m$1.SymbolNode("NaN")
+      : isFinite(valueWithSnappedTrigonometry)
+      ? new m$1.ConstantNode(valueWithSnappedTrigonometry)
+      : new m$1.SymbolNode("Infinity");
   }
-  if (r.value) {
-    r.value = new m$1.Fraction(Math.round(r.value * 10000) / 10000);
-  } else if (r.fn === "unaryMinus") {
-    r.args[0].value = new m$1.Fraction(
-      Math.round(r.args[0].value * 10000) / 10000
-    );
-    r = simplify$1(r);
+  if (r.toString() === "Infinity") {
+    r = new m$1.SymbolNode("Infinity");
   }
   return r;
 };
+const constantValue = (node) => {
+  if (node.filter((n) => n.isSymbolNode).length > 0) {
+    return undefined;
+  }
+  try {
+    const result = node.evaluate();
+    if (typeof result === "boolean") {
+      return undefined;
+    }
+    const value = +result;
+    return Number.isFinite(value) ? value : undefined;
+  } catch (e) {
+    return undefined;
+  }
+};
+const areNearlyEqual = (a, b) =>
+  Math.abs(a - b) <
+  ABSOLUTE_EPSILON + RELATIVE_EPSILON * Math.max(Math.abs(a), Math.abs(b));
+const isIndeterminate = (node) => _optionalChain([node, 'optionalAccess', _3 => _3.isSymbolNode]) && node.name === "NaN";
 const isMathEqual$1 = (a, b) => {
   let as;
   let bs;
-  if (_optionalChain([a, 'optionalAccess', _ => _.isUnit]) && _optionalChain([b, 'optionalAccess', _2 => _2.isUnit])) {
+  if (_optionalChain([a, 'optionalAccess', _4 => _4.isUnit]) && _optionalChain([b, 'optionalAccess', _5 => _5.isUnit])) {
     try {
       return m$1.equal(a, b);
     } catch (e) {
       log$1(
         "[isMathEqual] Error comparing units:",
-        _optionalChain([a, 'optionalAccess', _3 => _3.toString, 'optionalCall', _4 => _4()]),
-        _optionalChain([b, 'optionalAccess', _5 => _5.toString, 'optionalCall', _6 => _6()]),
+        _optionalChain([a, 'optionalAccess', _6 => _6.toString, 'optionalCall', _7 => _7()]),
+        _optionalChain([b, 'optionalAccess', _8 => _8.toString, 'optionalCall', _9 => _9()]),
         e
       );
       return false;
     }
   }
-  if (_optionalChain([a, 'optionalAccess', _7 => _7.isUnit]) || _optionalChain([b, 'optionalAccess', _8 => _8.isUnit])) {
+  if (_optionalChain([a, 'optionalAccess', _10 => _10.isUnit]) || _optionalChain([b, 'optionalAccess', _11 => _11.isUnit])) {
     log$1(
       "[isMathEqual] Mismatched unit comparison:",
-      _optionalChain([a, 'optionalAccess', _9 => _9.toString, 'optionalCall', _10 => _10()]),
-      _optionalChain([b, 'optionalAccess', _11 => _11.toString, 'optionalCall', _12 => _12()])
+      _optionalChain([a, 'optionalAccess', _12 => _12.toString, 'optionalCall', _13 => _13()]),
+      _optionalChain([b, 'optionalAccess', _14 => _14.toString, 'optionalCall', _15 => _15()])
     );
     return false;
   }
   as = a.conditionals ? normalize(a) : sort(normalize(a));
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
   log$1("[isMathEqual]", as.toString(), "==?", bs.toString());
+  if (isIndeterminate(as) || isIndeterminate(bs)) {
+    return false;
+  }
   const isSortingEnough = sort(a).equals(sort(b));
   const isTexEnough = as.toTex().trim() === bs.toTex().trim();
   let equality = isTexEnough || as.equals(bs) || isSortingEnough;
   if (equality) {
     return true;
+  }
+  const aValue = constantValue(as);
+  const bValue = constantValue(bs);
+  if (aValue !== undefined && bValue !== undefined) {
+    return areNearlyEqual(aValue, bValue);
   }
   if (as.fn === "equal" && bs.fn === "equal") {
     return compareEquations(as, bs, false);
@@ -40320,9 +40582,9 @@ const isMathEqual$1 = (a, b) => {
     return compareEquations(as, bs, true);
   }
   if (
-    _optionalChain([as, 'optionalAccess', _13 => _13.conditionals, 'optionalAccess', _14 => _14.length]) === _optionalChain([bs, 'optionalAccess', _15 => _15.conditionals, 'optionalAccess', _16 => _16.length]) &&
-    _optionalChain([as, 'optionalAccess', _17 => _17.conditionals, 'optionalAccess', _18 => _18.length]) === 2 &&
-    _optionalChain([as, 'optionalAccess', _19 => _19.conditionals, 'optionalAccess', _20 => _20.toString, 'call', _21 => _21()]) === _optionalChain([bs, 'optionalAccess', _22 => _22.conditionals, 'optionalAccess', _23 => _23.toString, 'call', _24 => _24()])
+    _optionalChain([as, 'optionalAccess', _16 => _16.conditionals, 'optionalAccess', _17 => _17.length]) === _optionalChain([bs, 'optionalAccess', _18 => _18.conditionals, 'optionalAccess', _19 => _19.length]) &&
+    _optionalChain([as, 'optionalAccess', _20 => _20.conditionals, 'optionalAccess', _21 => _21.length]) === 2 &&
+    _optionalChain([as, 'optionalAccess', _22 => _22.conditionals, 'optionalAccess', _23 => _23.toString, 'call', _24 => _24()]) === _optionalChain([bs, 'optionalAccess', _25 => _25.conditionals, 'optionalAccess', _26 => _26.toString, 'call', _27 => _27()])
   ) {
     const params = [
       "smaller",
@@ -40613,6 +40875,7 @@ function setup(env) {
 		return val;
 	}
 	function destroy() {
+		console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
 	}
 	createDebug.enable(createDebug.load());
 	return createDebug;
@@ -40626,7 +40889,12 @@ exports.load = load;
 exports.useColors = useColors;
 exports.storage = localstorage();
 exports.destroy = (() => {
+	let warned = false;
 	return () => {
+		if (!warned) {
+			warned = true;
+			console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
+		}
 	};
 })();
 exports.colors = [
