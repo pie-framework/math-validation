@@ -1,14 +1,19 @@
 import { logger } from "../log";
 import { mathjs } from "../mathjs";
-import { MathNode } from "mathjs";
+import { all, create, MathNode } from "mathjs";
 import { sort } from "../node-sort";
 import { compareEquations } from "./compare-equations";
 import { compareCompoundInequations } from "./compare-compound-inequations";
 
 const m: any = mathjs;
 const log = logger("mv:symbolic");
-const positiveInfinity = 1.497258191621251e6;
-const negativeInfinity = -1.497258191621251e6;
+
+// an angle counts as k quarter turns (90°, 180°, ...) only when it is one up to floating-point error,
+// which keeps angles that are only close, like 89.9999°, 1.5708 or 9090.001°, from being matched
+const ANGLE_TOLERANCE = 1e-9;
+
+// angles are evaluated as plain numbers, the Fraction config used elsewhere cannot represent pi
+const numeric: any = create(all);
 
 // tolerances for floating-point noise from trig functions, pi and angle conversions (PIE-905);
 // the noise grows with the angle, e.g. sin(2pi) = -2.4e-16, sin(200pi) = 3.9e-15, tan(36045°) - 1 = -5.4e-14,
@@ -78,8 +83,110 @@ export const simplify = (v) => {
   return ms(v, rules); //.concat(SIMPLIFY_RULES));
 };
 
+const hasSymbol = (node: MathNode, matches: (name: string) => boolean) => {
+  let found = false;
+
+  // the name of a function such as sqrt is a symbol too, under the path "fn"
+  node.traverse((n: any, path: string) => {
+    found = found || (n.isSymbolNode && path !== "fn" && matches(n.name));
+  });
+
+  return found;
+};
+
+// evaluates a constant expression as a plain number, undefined if it has variables;
+// any symbol other than pi and Infinity is a variable, even names mathjs knows as constants such as e, E or phi
+const evaluateNumber = (node: MathNode): number | undefined => {
+  if (hasSymbol(node, (name) => name !== "pi" && name !== "Infinity")) {
+    return undefined;
+  }
+
+  try {
+    const value = numeric.evaluate(node.toString());
+    return typeof value === "number" ? value : undefined;
+  } catch (e) {
+    return undefined;
+  }
+};
+
+// returns k when the constant angle is (within tolerance) a multiple k of pi/2
+const quarterTurns = (angle: MathNode): number | undefined => {
+  const value = evaluateNumber(angle);
+
+  if (value === undefined || !isFinite(value)) {
+    return undefined;
+  }
+
+  const turns = value / (Math.PI / 2);
+  const k = Math.round(turns);
+
+  return Math.abs(turns - k) <= ANGLE_TOLERANCE * Math.max(1, Math.abs(k))
+    ? k
+    : undefined;
+};
+
+// replace trigonometric functions evaluated at an angle where they are zero or undefined
+// with their exact value, so that tan(90°) becomes Infinity instead of a large finite number
+const snapTrigonometricValues = (node: MathNode) => {
+  let changed = false;
+
+  const r: MathNode | any = node.transform((n: any) => {
+    if (!n.isFunctionNode || n.args?.length !== 1) {
+      return n;
+    }
+
+    const k = quarterTurns(n.args[0]);
+
+    if (k === undefined) {
+      return n;
+    }
+
+    const odd = Math.abs(k) % 2 === 1;
+    let snapped = n;
+
+    switch (n.fn.name) {
+      case "sin":
+        snapped = odd ? n : new m.ConstantNode(0);
+        break;
+      case "cos":
+        snapped = odd ? new m.ConstantNode(0) : n;
+        break;
+      case "tan":
+        snapped = odd ? new m.SymbolNode("Infinity") : new m.ConstantNode(0);
+        break;
+      case "cot":
+        snapped = odd ? new m.ConstantNode(0) : new m.SymbolNode("Infinity");
+        break;
+      case "sec":
+        snapped = odd ? new m.SymbolNode("Infinity") : n;
+        break;
+      case "csc":
+        snapped = odd ? n : new m.SymbolNode("Infinity");
+        break;
+    }
+
+    changed = changed || snapped !== n;
+
+    return snapped;
+  });
+
+  // keep the original node when nothing was replaced, later steps rely on its identity
+  return { r: changed ? r : node, changed };
+};
+
 const normalize = (a: string | MathNode | any) => {
-  let r: string | MathNode | any = a;
+  const snapped = snapTrigonometricValues(a);
+  let r: string | MathNode | any = snapped.r;
+
+  // simplify and rationalize treat Infinity as a variable (1 / Infinity + 3 becomes (1 + 3 * Infinity) / Infinity)
+  // and keep the sign of a division by zero, so a constant expression with an Infinity or a division by zero is evaluated before it is normalized;
+  // other constant expressions keep their exact value, such as 1/3 in sin(0) + 1/3
+  const snappedValue = snapped.changed ? evaluateNumber(r) : undefined;
+  const valueWithSnappedTrigonometry =
+    snappedValue !== undefined &&
+    (!isFinite(snappedValue) || hasSymbol(r, (name) => name === "Infinity"))
+      ? snappedValue
+      : undefined;
   let onlyConstant = true;
   let containsFunctionNode = false;
   let containsArrayNode = false;
@@ -155,12 +262,17 @@ const normalize = (a: string | MathNode | any) => {
 
   log("[normalize] input: ", a.toString(), "output: ", r.toString());
 
-  // check for infinity
-  if (
-    r.toString() === "Infinity" ||
-    +r.toString() >= positiveInfinity ||
-    +r.toString() <= negativeInfinity
-  ) {
+  // an undefined value has no sign, so -tan(90°) and -1/cos(90°) are Infinity as well;
+  // an indeterminate result such as tan(90°) - tan(90°) or 0 * tan(90°) is NaN and must not simplify to a number
+  if (valueWithSnappedTrigonometry !== undefined) {
+    r = isNaN(valueWithSnappedTrigonometry)
+      ? new m.SymbolNode("NaN")
+      : isFinite(valueWithSnappedTrigonometry)
+      ? new m.ConstantNode(valueWithSnappedTrigonometry)
+      : new m.SymbolNode("Infinity");
+  }
+
+  if (r.toString() === "Infinity") {
     r = new m.SymbolNode("Infinity");
   }
 
@@ -191,6 +303,8 @@ const constantValue = (node: any): number | undefined => {
 const areNearlyEqual = (a: number, b: number) =>
   Math.abs(a - b) <
   ABSOLUTE_EPSILON + RELATIVE_EPSILON * Math.max(Math.abs(a), Math.abs(b));
+
+const isIndeterminate = (node: any) => node?.isSymbolNode && node.name === "NaN";
 
 export const isMathEqual = (a: any, b: any) => {
   let as: MathNode;
@@ -225,6 +339,11 @@ export const isMathEqual = (a: any, b: any) => {
   bs = b.conditionals ? normalize(b) : sort(normalize(b));
 
   log("[isMathEqual]", as.toString(), "==?", bs.toString());
+
+  // an indeterminate result such as tan(90°) - tan(90°) is not equal to anything, not even another indeterminate result
+  if (isIndeterminate(as) || isIndeterminate(bs)) {
+    return false;
+  }
 
   const isSortingEnough = sort(a).equals(sort(b));
   const isTexEnough = as.toTex().trim() === bs.toTex().trim();
