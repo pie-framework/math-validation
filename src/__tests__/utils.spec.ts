@@ -5,11 +5,13 @@ import { simplify } from "../symbolic";
 import {
   getVariables,
   getCoefficients,
-  setXToOne,
   solveLinearEquation,
   solveQuadraticEquation,
   expressionsCanBeCompared,
   transformEqualityInExpression,
+  getSamplePoints,
+  areNumericallyEquivalent,
+  areEquationsNumericallyEquivalent,
 } from "../symbolic/utils";
 
 const lta = new LatexToAst();
@@ -137,26 +139,6 @@ describe("getCoefficients", () => {
   });
 });
 
-describe("setXToOne", () => {
-  it.each`
-    expression               | expressionNoX
-    ${"x+0"}                 | ${"1+0"}
-    ${"x +1"}                | ${"1+1"}
-    ${"((x^2 + x) / x) - 1"} | ${"((1^2 + 1) / 1) - 1"}
-    ${"1+2"}                 | ${"1+2"}
-    ${"a +1+c"}              | ${"a+1+c"}
-    ${"y^2+5x - 1"}          | ${"y^2+5*1 - 1"}
-    ${"109h"}                | ${"109h"}
-    ${"m+n+10"}              | ${"m+n+10"}
-  `("$expression => $expressionNoX", ({ expression, expressionNoX }) => {
-    const equation = atm.convert(lta.convert(expression));
-    const equationNoX = setXToOne(equation, "x");
-    const result = atm.convert(lta.convert(expressionNoX));
-
-    expect(equationNoX.toTex()).toEqual(result.toTex());
-  });
-});
-
 describe("solveLinearEquation", () => {
   it.each`
     coefficients  | xValue
@@ -248,5 +230,149 @@ describe("solveLinearEquation", () => {
     const result = solveLinearEquation(coefficients);
 
     expect(result).toEqual(undefined);
+  });
+});
+
+describe("getSamplePoints", () => {
+  it("gives each variable its own non-integer value, the same on every call", () => {
+    const points = getSamplePoints(["x", "y"]);
+
+    points.forEach((point) => {
+      expect(point.x).not.toEqual(point.y);
+      expect(Number.isInteger(point.x)).toEqual(false);
+      expect(Number.isInteger(point.y)).toEqual(false);
+    });
+
+    expect(getSamplePoints(["x", "y"])).toEqual(points);
+  });
+
+  it("includes negative and positive values for each variable", () => {
+    const points = getSamplePoints(["x", "y"]);
+
+    ["x", "y"].forEach((v) => {
+      expect(points.some((point) => point[v] < 0)).toEqual(true);
+      expect(points.some((point) => point[v] > 0)).toEqual(true);
+    });
+  });
+});
+
+describe("areNumericallyEquivalent", () => {
+  it('"x^2" and "y^2" are not equivalent', () => {
+    const a = atm.convert(lta.convert("x^2"));
+    const b = atm.convert(lta.convert("y^2"));
+
+    expect(areNumericallyEquivalent(a, b, ["x", "y"])).toEqual(false);
+  });
+
+  it('"(x+y)^2" and "x^2+2xy+y^2" are equivalent', () => {
+    const a = atm.convert(lta.convert("(x+y)^2"));
+    const b = atm.convert(lta.convert("x^2+2xy+y^2"));
+
+    expect(areNumericallyEquivalent(a, b, ["x", "y"])).toEqual(true);
+  });
+});
+
+describe("areEquationsNumericallyEquivalent", () => {
+  const expression = (latex: string) =>
+    transformEqualityInExpression(atm.convert(lta.convert(latex)));
+
+  it('"x^2/16+y^2/9=1" and "9x^2+16y^2=144" are equivalent: one is a constant multiple of the other', () => {
+    const result = areEquationsNumericallyEquivalent(
+      expression("\\frac{x^2}{16}+\\frac{y^2}{9}=1"),
+      expression("9x^2+16y^2=144"),
+      ["x", "y"]
+    );
+
+    expect(result).toEqual(true);
+  });
+
+  it('"x^2/16+y^2/9=1" and "x^2/17+y^2/9=1" are not equivalent', () => {
+    const result = areEquationsNumericallyEquivalent(
+      expression("\\frac{x^2}{16}+\\frac{y^2}{9}=1"),
+      expression("\\frac{x^2}{17}+\\frac{y^2}{9}=1"),
+      ["x", "y"]
+    );
+
+    expect(result).toEqual(false);
+  });
+
+  it('"x+2y=7" and "x^2+2xy-7x=0" are equivalent only when a variable factor is allowed', () => {
+    const first = expression("x+2y=7");
+    const second = expression("x^2+2xy-7x=0");
+
+    expect(areEquationsNumericallyEquivalent(first, second, ["x", "y"])).toEqual(
+      false
+    );
+    expect(
+      areEquationsNumericallyEquivalent(first, second, ["x", "y"], {
+        allowVariableFactor: true,
+      })
+    ).toEqual(true);
+  });
+
+  it('"(y-1)/(x-2)=3" and "y-1=3(x-2)" are equivalent: both sides were multiplied by the denominator', () => {
+    const result = areEquationsNumericallyEquivalent(
+      expression("\\frac{y-1}{x-2}=3"),
+      expression("y-1=3(x-2)"),
+      ["x", "y"]
+    );
+
+    expect(result).toEqual(true);
+  });
+
+  it('"y>2x+1" and "2y>4x+2" are the same inequality: one is a positive multiple of the other', () => {
+    const result = areEquationsNumericallyEquivalent(
+      expression("y>2x+1"),
+      expression("2y>4x+2"),
+      ["x", "y"],
+      { positiveOnly: true }
+    );
+
+    expect(result).toEqual(true);
+  });
+
+  it('"y>2x+1" and "-y>-2x-1" are different inequalities: the multiple is negative', () => {
+    const first = expression("y>2x+1");
+    const second = expression("-y>-2x-1");
+
+    expect(areEquationsNumericallyEquivalent(first, second, ["x", "y"])).toEqual(
+      true
+    );
+    expect(
+      areEquationsNumericallyEquivalent(first, second, ["x", "y"], {
+        positiveOnly: true,
+      })
+    ).toEqual(false);
+  });
+
+  it('inequalities allow multiplying by an even power of a variable, but not an odd one', () => {
+    const options = { allowVariableFactor: true, positiveOnly: true };
+
+    expect(
+      areEquationsNumericallyEquivalent(
+        expression("y>x"),
+        expression("x^2y>x^3"),
+        ["x", "y"],
+        options
+      )
+    ).toEqual(true);
+    expect(
+      areEquationsNumericallyEquivalent(
+        expression("y>x"),
+        expression("xy>x^2"),
+        ["x", "y"],
+        options
+      )
+    ).toEqual(false);
+  });
+
+  it('"y=|x|" and "y=x" are not equivalent: they differ for negative x', () => {
+    const result = areEquationsNumericallyEquivalent(
+      expression("y=\\left|x\\right|"),
+      expression("y=x"),
+      ["x", "y"]
+    );
+
+    expect(result).toEqual(false);
   });
 });

@@ -5,12 +5,12 @@ import {
   equationsHaveTheSameVariables,
   getCoefficients,
   solveLinearEquation,
-  setXToOne,
   transformEqualityInExpression,
   expressionsCanBeCompared,
   solveQuadraticEquation,
   hasSymbolicExponent,
   areNumericallyEquivalent,
+  areEquationsNumericallyEquivalent,
 } from "./utils";
 
 const m: any = mathjs;
@@ -142,27 +142,31 @@ export const compareEquations = (
       equivalence =
         solutionForFirstEquation === solutionForSecondEquation &&
         solutionForFirstEquation !== undefined;
+
+      // equations that are neither linear nor quadratic can't be solved above; compare them numerically instead
+      if (
+        !isInequality &&
+        (solutionForFirstEquation === undefined ||
+          solutionForSecondEquation === undefined)
+      ) {
+        return areEquationsNumericallyEquivalent(
+          firstExpression,
+          secondExpression,
+          firstEquationVariablesName
+        );
+      }
     }
 
-    // if both equations are linear in two variabled then we give value "1" for both "x". Doing this we get a linear equation in one variable "y". Then we solve "y" for both. If y has the same value then equations are equivalent
+    // equations in two variables describe the same curve when one is a multiple of the other;
+    // checking a single value of x is not enough, and fails for equations that are not linear in y (PIE-443)
+    // inequalities describe the same region only when the multiple is positive, since a negative one would flip the sign (PIE-1419)
     if (firstEquationVariablesName.length === 2) {
-      let x = firstEquationVariablesName[0];
-
-      // solve expression for x=1
-      let expraNoX = setXToOne(firstExpression, x);
-      firstEquationCoefficients = getCoefficients(expraNoX, isInequality);
-
-      let exprbNoX = setXToOne(secondExpression, x);
-      secondEquationCoefficients = getCoefficients(exprbNoX, isInequality);
-
-      // find y for both equations, where x equals 1
-      let yFromFirstExpression = solveLinearEquation(firstEquationCoefficients);
-      let yFromSecondExpression = solveLinearEquation(
-        secondEquationCoefficients
+      return areEquationsNumericallyEquivalent(
+        firstExpression,
+        secondExpression,
+        firstEquationVariablesName,
+        { allowVariableFactor: true, positiveOnly: isInequality }
       );
-
-      // if y has the same value, for the same x then the expressions should be equivalent
-      equivalence = yFromFirstExpression === yFromSecondExpression;
     }
 
     // determine equivalence between 2-way inequalities with 1 or 2 variables:
